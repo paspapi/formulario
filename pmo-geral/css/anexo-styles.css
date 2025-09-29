@@ -1,0 +1,639 @@
+/* CSS específico para o Anexo de Produção Primária Vegetal - PMO ANC */
+
+/* Seções principais */
+.form-section {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid var(--primary-color);
+}
+
+.form-section h2 {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Blocos de práticas */
+.practice-block {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.practice-block:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.practice-header {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: #f3f4f6;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    user-select: none;
+}
+
+.practice-header:hover {
+    background: #e5e7eb;
+}
+
+.practice-header input[type="checkbox"] {
+    margin-right: 0.75rem;
+    transform: scale(1.2);
+}
+
+.practice-details {
+    padding: 1rem;
+    background: #f9fafb;
+    border-top: 1px solid #e5e7eb;
+    display: none;
+}
+
+.practice-details.active {
+    display: block;
+}
+
+/* Blocos de fertilizantes */
+.fertilizer-block {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border: 2px solid #86efac;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.fertilizer-block:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(134, 239, 172, 0.3);
+}
+
+.fertilizer-header {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.fertilizer-header input[type="checkbox"] {
+    margin-right: 0.75rem;
+    transform: scale(1.3);
+}
+
+.fertilizer-details {
+    display: none;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #86efac;
+}
+
+/* Cartões de receitas */
+.recipe-card {
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.recipe-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.recipe-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.recipe-header h3 {
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.btn-remove {
+    background: var(--danger-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-remove:hover {
+    background: #c82333;
+    transform: scale(1.1);
+}
+
+/* Avaliação de riscos */
+.risk-block {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.risk-options {
+    display: flex;
+    gap: 2rem;
+    margin: 1rem 0;
+}
+
+.risk-options label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.risk-options label:hover {
+    background: #f8f9fa;
+}
+
+.risk-yes {
+    color: #dc2626;
+    font-weight: bold;
+    border: 2px solid #fca5a5;
+}
+
+.risk-no {
+    color: #16a34a;
+    font-weight: bold;
+    border: 2px solid #86efac;
+}
+
+.risk-details {
+    background: #fef2f2;
+    border: 2px solid #fca5a5;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+    display: none;
+}
+
+/* Análise de vizinhos */
+.neighbor-analysis table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.neighbor-analysis th {
+    background: #f3f4f6;
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    border: 1px solid #e5e7eb;
+}
+
+.neighbor-analysis td {
+    padding: 0.5rem;
+    border: 1px solid #e5e7eb;
+    vertical-align: top;
+}
+
+.neighbor-analysis input,
+.neighbor-analysis select {
+    width: 100%;
+    padding: 0.25rem;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+/* Checkboxes aprimorados */
+.checkbox-enhanced {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+}
+
+.checkbox-enhanced:hover {
+    background: #f9fafb;
+}
+
+.checkbox-enhanced input {
+    margin-right: 0.5rem;
+    transform: scale(1.1);
+}
+
+.detail-field {
+    margin-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    display: none;
+}
+
+.detail-field input,
+.detail-field select,
+.detail-field textarea {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+}
+
+/* Destaque para checkboxes importantes */
+.highlight-check {
+    background: #f0fdf4;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 2px solid #16a34a;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.highlight-check input {
+    margin-right: 0.75rem;
+    transform: scale(1.3);
+}
+
+/* Informações e alertas */
+.section-info {
+    background: #e0f2fe;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border-left: 4px solid #0ea5e9;
+}
+
+.alert {
+    background: #fff3cd;
+    padding: 0.75rem;
+    border-radius: 6px;
+    border-left: 4px solid #ffc107;
+    margin: 0.5rem 0;
+}
+
+.instruction {
+    background: #d1ecf1;
+    padding: 0.75rem;
+    border-radius: 6px;
+    border-left: 4px solid #17a2b8;
+    margin: 0.5rem 0;
+}
+
+.success {
+    background: #d4edda;
+    padding: 0.75rem;
+    border-radius: 6px;
+    border-left: 4px solid #28a745;
+    margin: 0.5rem 0;
+    color: #155724;
+}
+
+.error {
+    background: #f8d7da;
+    padding: 0.75rem;
+    border-radius: 6px;
+    border-left: 4px solid #dc3545;
+    margin: 0.5rem 0;
+    color: #721c24;
+}
+
+/* Grids para layouts */
+.species-checklist {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.manure-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.manure-item {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+}
+
+.application-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+/* Métodos de controle */
+.control-method {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.method-header {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: #f8f9fa;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.method-header:hover {
+    background: #e9ecef;
+}
+
+.method-details {
+    padding: 1rem;
+    background: white;
+    border-top: 1px solid #e5e7eb;
+    display: none;
+}
+
+/* Validação visual */
+.field-valid {
+    border-left: 3px solid #28a745;
+}
+
+.field-invalid {
+    border-left: 3px solid #dc3545;
+}
+
+.field-warning {
+    border-left: 3px solid #ffc107;
+}
+
+/* Botões */
+.btn-add,
+.btn-add-recipe {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.btn-add:hover,
+.btn-add-recipe:hover {
+    background: #218838;
+    transform: translateY(-2px);
+}
+
+/* Navegação entre seções */
+.navigation {
+    background: var(--secondary-color);
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Ações do formulário */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    padding: 2rem 0;
+    border-top: 2px solid var(--border-color);
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.form-actions .btn {
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-actions .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Notificações */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s ease;
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.notification.success {
+    background: #28a745;
+}
+
+.notification.error {
+    background: #dc3545;
+}
+
+.notification.warning {
+    background: #ffc107;
+    color: #212529;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .practice-block,
+    .fertilizer-block,
+    .recipe-card {
+        padding: 1rem;
+    }
+
+    .neighbor-analysis {
+        overflow-x: auto;
+    }
+
+    .neighbor-analysis table {
+        min-width: 600px;
+    }
+
+    .nav-menu {
+        justify-content: center;
+    }
+
+    .nav-link {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form-actions .btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+
+    .risk-options {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .species-checklist {
+        grid-template-columns: 1fr;
+    }
+
+    .manure-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .application-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-section {
+        padding: 1rem;
+    }
+
+    .recipe-header {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+
+    .highlight-check {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}
+
+/* Animações */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.practice-details,
+.fertilizer-details,
+.method-details,
+.risk-details {
+    animation: slideIn 0.3s ease;
+}
+
+/* Estados de hover para melhor UX */
+.form-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Indicadores visuais para campos obrigatórios */
+input[required],
+select[required],
+textarea[required] {
+    border-left: 3px solid var(--warning-color);
+}
+
+input[required]:valid,
+select[required]:valid,
+textarea[required]:valid {
+    border-left: 3px solid var(--success-color);
+}
+
+/* Melhorias na tipografia */
+.form-section h3 {
+    color: var(--primary-light);
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.form-section h4 {
+    color: var(--text-primary);
+    margin-top: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.form-section h5 {
+    color: var(--text-secondary);
+    margin-top: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Espaçamento consistente */
+.form-section > *:last-child {
+    margin-bottom: 0;
+}
+
+.practice-details > *:last-child,
+.fertilizer-details > *:last-child,
+.method-details > *:last-child {
+    margin-bottom: 0;
+}

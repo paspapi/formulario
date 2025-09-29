@@ -1,0 +1,29 @@
+services:
+  # Nginx to serve static HTML
+  nginx:
+    image: nginx:alpine
+    container_name: anc-pmo-geral
+    restart: always
+    volumes:
+      - .:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    labels:
+      - "traefik.enable=true"
+      # HTTP router for Cloudflare Flexible mode traffic
+      - "traefik.http.routers.anc-pmo-http.rule=Host(`anc.yuuki.eco.br`)"
+      - "traefik.http.routers.anc-pmo-http.entrypoints=web"
+      - "traefik.http.routers.anc-pmo-http.service=anc-pmo"
+      - "traefik.http.routers.anc-pmo-http.priority=100"
+      # HTTPS router with SSL certificate
+      - "traefik.http.routers.anc-pmo-https.rule=Host(`anc.yuuki.eco.br`)"
+      - "traefik.http.routers.anc-pmo-https.entrypoints=websecure"
+      - "traefik.http.routers.anc-pmo-https.tls.certresolver=cloudflare"
+      - "traefik.http.routers.anc-pmo-https.service=anc-pmo"
+      - "traefik.http.routers.anc-pmo-https.priority=100"
+      - "traefik.http.services.anc-pmo.loadbalancer.server.port=80"
+    networks:
+      - farmsys-shared-network
+
+networks:
+  farmsys-shared-network:
+    external: true

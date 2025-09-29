@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anexo Produção Primária Vegetal - PMO ANC</title>
+
+    <!-- CSS do PMO-Geral -->
+    <link rel="stylesheet" href="../pmo-geral/css/style.css">
+
+    <!-- CSS específico do anexo -->
+    <style>
+        /* Estilos específicos para o anexo de produção vegetal */
+        .practice-block {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .practice-header {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: #f3f4f6;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .practice-header:hover {
+            background: #e5e7eb;
+        }
+
+        .practice-details {
+            padding: 1rem;
+            background: #f9fafb;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .fertilizer-block {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 2px solid #86efac;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .recipe-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .risk-yes {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .risk-no {
+            color: #16a34a;
+            font-weight: bold;
+        }
+
+        .risk-details {
+            background: #fef2f2;
+            border: 2px solid #fca5a5;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .neighbor-analysis table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .neighbor-analysis th {
+            background: #f3f4f6;
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .neighbor-analysis td {
+            padding: 0.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .checkbox-enhanced {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .checkbox-enhanced input {
+            margin-right: 0.5rem;
+        }
+
+        .detail-field {
+            margin-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-check {
+            background: #f0fdf4;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 2px solid #16a34a;
+            margin: 1rem 0;
+        }
+
+        .section-info {
+            background: #e0f2fe;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .alert {
+            background: #fff3cd;
+            padding: 0.75rem;
+            border-radius: 6px;
+            border-left: 4px solid #ffc107;
+            margin: 0.5rem 0;
+        }
+
+        .instruction {
+            background: #d1ecf1;
+            padding: 0.75rem;
+            border-radius: 6px;
+            border-left: 4px solid #17a2b8;
+            margin: 0.5rem 0;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .practice-block,
+            .fertilizer-block,
+            .recipe-card {
+                padding: 1rem;
+            }
+
+            .neighbor-analysis {
+                overflow-x: auto;
+            }
+
+            table {
+                min-width: 600px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>PMO - ANC</h1>
+                    <p>Anexo Produção Primária Vegetal</p>
+                </div>
+                <div class="header-info">
+                    <p><strong>Associação de Agricultura Natural de Campinas</strong></p>
+                    <p>Organismo Participativo de Avaliação da Conformidade</p>
+                    <p>Credenciado MAPA: BR-SP-001-OPAC</p>
+                </div>
+            </div>
+
+            <!-- Barra de Progresso -->
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                </div>
+                <p class="progress-text" id="progress-text">0% concluído</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navegação -->
+    <nav class="navigation">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="../pmo-geral/index.html">Formulário Principal</a></li>
+                <li><a href="#preparo-solo" class="nav-link active">Preparo do Solo</a></li>
+                <li><a href="#praticas-conservacionistas" class="nav-link">Práticas Conservacionistas</a></li>
+                <li><a href="#barreiras-riscos" class="nav-link">Barreiras e Riscos</a></li>
+                <li><a href="#controle-formigas" class="nav-link">Controle de Formigas</a></li>
+                <li><a href="#adubacao-nutricao" class="nav-link">Adubação</a></li>
+                <li><a href="#substrato-mudas" class="nav-link">Substrato</a></li>
+                <li><a href="#receitas-proprias" class="nav-link">Receitas</a></li>
+                <li><a href="#produtos-comerciais" class="nav-link">Produtos</a></li>
+                <li><a href="#equipamentos" class="nav-link">Equipamentos</a></li>
+                <li><a href="#armazenamento" class="nav-link">Armazenamento</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Container Principal -->
+    <div class="container">
+        <form id="anexo-producao-vegetal" class="form-container">
+
+            <!-- SEÇÃO 1: PREPARO DO SOLO -->
+            <section id="preparo-solo" class="form-section">
+                <h2>1. Preparo do Solo para Plantio</h2>
+
+                <div class="section-info">
+                    <p class="instruction">ℹ️ Descreva todas as práticas utilizadas no preparo do solo</p>
+                    <p class="alert">⚠️ Práticas não declaradas podem resultar em não-conformidade</p>
+                </div>
+
+                <div class="preparo-opcoes">
+                    <h3>Métodos de Preparo Utilizados:</h3>
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="preparo_rocada" onchange="showDetails(this)">
+                        <span>Roçada</span>
+                    </label>
+                    <div class="detail-field" style="display:none;">
+                        <input type="text" placeholder="Frequência e equipamento utilizado">
+                    </div>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="preparo_aracao" onchange="showDetails(this)">
+                        <span>Aração</span>
+                    </label>
+                    <div class="detail-field" style="display:none;">
+                        <select name="aracao_tipo">
+                            <option value="">Selecione o tipo...</option>
+                            <option>Aração profunda (>20cm)</option>
+                            <option>Aração média (10-20cm)</option>
+                            <option>Aração superficial (<10cm)</option>
+                        </select>
+                        <input type="text" placeholder="Equipamento e época do ano">
+                    </div>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="preparo_gradagem" onchange="showDetails(this)">
+                        <span>Gradagem</span>
+                    </label>
+                    <div class="detail-field" style="display:none;">
+                        <select name="gradagem_tipo">
+                            <option>Grade leve</option>
+                            <option>Grade pesada</option>
+                            <option>Grade niveladora</option>
+                        </select>
+                    </div>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="preparo_outros" onchange="showOthers(this)">
+                        <span>Outros métodos</span>
+                    </label>
+                    <div id="outros-preparo" style="display:none;">
+                        <textarea name="preparo_outros_desc"
+                                  placeholder="Descreva outros métodos de preparo (ex: subsolagem, escarificação, preparo mínimo, plantio direto)"
+                                  rows="3"></textarea>
+                    </div>
+                </div>
+
+                <div class="plantio-direto-check">
+                    <label class="highlight-check">
+                        <input type="checkbox" name="plantio_direto" onchange="togglePlantioDetails(this)">
+                        <span>🌱 Utilizo Sistema de Plantio Direto</span>
+                    </label>
+                    <div id="plantio-direto-details" style="display:none;">
+                        <input type="number" name="plantio_direto_anos" min="0" placeholder="Há quantos anos?">
+                        <input type="number" name="plantio_direto_area" min="0" step="0.01" placeholder="Área em hectares">
+                        <textarea name="plantio_direto_culturas" placeholder="Quais culturas em plantio direto?"></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 2: PRÁTICAS CONSERVACIONISTAS -->
+            <section id="praticas-conservacionistas" class="form-section">
+                <h2>2. Práticas Conservacionistas</h2>
+
+                <div class="conservation-practices">
+                    <!-- Rotação de Culturas -->
+                    <div class="practice-block">
+                        <label class="practice-header">
+                            <input type="checkbox" name="rotacao_culturas" onchange="togglePractice(this)">
+                            <span>ROTAÇÃO DE CULTURAS</span>
+                        </label>
+                        <div class="practice-details" style="display:none;">
+                            <textarea name="rotacao_descricao"
+                                      placeholder="Descreva o sistema de rotação (ex: Hortaliças → Leguminosas → Gramíneas → Pousio)"
+                                      rows="3"></textarea>
+                            <div class="rotation-cycle">
+                                <label>Ciclo de rotação (meses):</label>
+                                <input type="number" name="rotacao_ciclo" min="1" max="48">
+                            </div>
+                            <div class="rotation-benefits">
+                                <p>Benefícios observados:</p>
+                                <label><input type="checkbox" name="rotacao_pragas"> Redução de pragas</label>
+                                <label><input type="checkbox" name="rotacao_doencas"> Redução de doenças</label>
+                                <label><input type="checkbox" name="rotacao_fertilidade"> Melhoria da fertilidade</label>
+                                <label><input type="checkbox" name="rotacao_ervas"> Controle de ervas espontâneas</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Adubação Verde -->
+                    <div class="practice-block">
+                        <label class="practice-header">
+                            <input type="checkbox" name="adubacao_verde" onchange="togglePractice(this)">
+                            <span>ADUBAÇÃO VERDE</span>
+                        </label>
+                        <div class="practice-details" style="display:none;">
+                            <div class="green-manure-list">
+                                <h4>Espécies utilizadas:</h4>
+                                <div id="adubos-verdes-container">
+                                    <div class="adubo-verde-item">
+                                        <select name="adubo_verde_especie[]">
+                                            <option value="">Selecione...</option>
+                                            <optgroup label="Leguminosas">
+                                                <option>Crotalária juncea</option>
+                                                <option>Crotalária spectabilis</option>
+                                                <option>Feijão de porco</option>
+                                                <option>Feijão guandu</option>
+                                                <option>Mucuna preta</option>
+                                                <option>Mucuna cinza</option>
+                                                <option>Lab-lab</option>
+                                                <option>Amendoim forrageiro</option>
+                                            </optgroup>
+                                            <optgroup label="Gramíneas">
+                                                <option>Aveia preta</option>
+                                                <option>Aveia branca</option>
+                                                <option>Milheto</option>
+                                                <option>Sorgo</option>
+                                            </optgroup>
+                                            <optgroup label="Outras">
+                                                <option>Nabo forrageiro</option>
+                                                <option>Girassol</option>
+                                                <option>Tremoço</option>
+                                            </optgroup>
+                                        </select>
+                                        <input type="text" name="adubo_verde_epoca[]" placeholder="Época de plantio">
+                                        <input type="text" name="adubo_verde_area[]" placeholder="Área (ha)">
+                                        <button type="button" onclick="removeItem(this)">❌</button>
+                                    </div>
+                                </div>
+                                <button type="button" onclick="addAduboVerde()">➕ Adicionar espécie</button>
+                            </div>
+                            <textarea name="adubacao_verde_manejo"
+                                      placeholder="Como faz o manejo? (incorporação, roçada, época de corte)"
+                                      rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Botões de Ação -->
+            <div class="form-actions">
+                <button type="button" onclick="saveForm()" class="btn btn-secondary">💾 Salvar Rascunho</button>
+                <button type="button" onclick="validateForm()" class="btn btn-primary">✅ Validar Formulário</button>
+                <button type="button" onclick="exportForm()" class="btn btn-success">📄 Exportar PDF</button>
+                <button type="submit" class="btn btn-primary">📨 Enviar Anexo</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Scripts do PMO-Geral -->
+    <script src="../pmo-geral/js/app.js"></script>
+    <script src="../pmo-geral/js/form-validation.js"></script>
+    <script src="../pmo-geral/js/dynamic-fields.js"></script>
+    <script src="../pmo-geral/js/export.js"></script>
+
+    <!-- Script específico do anexo -->
+    <script>
+        // Funcionalidades específicas do anexo de produção vegetal
+        function showDetails(checkbox) {
+            const detailField = checkbox.parentElement.nextElementSibling;
+            if (checkbox.checked) {
+                detailField.style.display = 'block';
+            } else {
+                detailField.style.display = 'none';
+                // Limpar campos quando desmarcar
+                const inputs = detailField.querySelectorAll('input, select, textarea');
+                inputs.forEach(input => input.value = '');
+            }
+        }
+
+        function showOthers(checkbox) {
+            const otherField = document.getElementById('outros-preparo');
+            if (checkbox.checked) {
+                otherField.style.display = 'block';
+            } else {
+                otherField.style.display = 'none';
+                otherField.querySelector('textarea').value = '';
+            }
+        }
+
+        function togglePlantioDetails(checkbox) {
+            const details = document.getElementById('plantio-direto-details');
+            if (checkbox.checked) {
+                details.style.display = 'block';
+            } else {
+                details.style.display = 'none';
+                const inputs = details.querySelectorAll('input, textarea');
+                inputs.forEach(input => input.value = '');
+            }
+        }
+
+        function togglePractice(checkbox) {
+            const details = checkbox.parentElement.nextElementSibling;
+            if (checkbox.checked) {
+                details.style.display = 'block';
+            } else {
+                details.style.display = 'none';
+                // Limpar campos quando desmarcar
+                const inputs = details.querySelectorAll('input, select, textarea');
+                inputs.forEach(input => {
+                    if (input.type === 'checkbox') {
+                        input.checked = false;
+                    } else {
+                        input.value = '';
+                    }
+                });
+            }
+        }
+
+        function addAduboVerde() {
+            const container = document.getElementById('adubos-verdes-container');
+            const template = container.querySelector('.adubo-verde-item');
+            const newItem = template.cloneNode(true);
+
+            // Limpar valores do novo item
+            newItem.querySelectorAll('input, select').forEach(field => {
+                field.value = '';
+            });
+
+            container.appendChild(newItem);
+        }
+
+        function removeItem(button) {
+            const item = button.parentElement;
+            const container = item.parentElement;
+
+            // Só remove se não for o último item
+            if (container.children.length > 2) { // 1 item + 1 botão adicionar
+                item.remove();
+            }
+        }
+
+        function saveForm() {
+            const formData = new FormData(document.getElementById('anexo-producao-vegetal'));
+            const data = Object.fromEntries(formData);
+
+            localStorage.setItem('anexo_vegetal_draft', JSON.stringify(data));
+
+            // Mostrar feedback
+            showNotification('Rascunho salvo com sucesso!', 'success');
+        }
+
+        function validateForm() {
+            // Implementar validações específicas
+            let valid = true;
+            const errors = [];
+
+            // Verificar se pelo menos um método de preparo foi selecionado
+            const preparoMethods = document.querySelectorAll('[name^="preparo_"]:checked');
+            if (preparoMethods.length === 0) {
+                errors.push('Selecione pelo menos um método de preparo do solo');
+                valid = false;
+            }
+
+            if (valid) {
+                showNotification('Formulário válido! ✅', 'success');
+            } else {
+                showNotification('Erros encontrados: ' + errors.join(', '), 'error');
+            }
+
+            return valid;
+        }
+
+        function exportForm() {
+            if (validateForm()) {
+                // Usar função de export do PMO-Geral
+                exportToPDF('anexo-producao-vegetal', 'Anexo_Producao_Vegetal_PMO.pdf');
+            }
+        }
+
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 1rem;
+                border-radius: 8px;
+                color: white;
+                font-weight: bold;
+                z-index: 1000;
+                ${type === 'success' ? 'background: #28a745;' : 'background: #dc3545;'}
+            `;
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Carregamento inicial
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carregar rascunho salvo se existir
+            const savedDraft = localStorage.getItem('anexo_vegetal_draft');
+            if (savedDraft) {
+                const data = JSON.parse(savedDraft);
+                // Preencher campos com dados salvos
+                Object.keys(data).forEach(key => {
+                    const field = document.querySelector(`[name="${key}"]`);
+                    if (field) {
+                        if (field.type === 'checkbox') {
+                            field.checked = data[key] === 'on';
+                        } else {
+                            field.value = data[key];
+                        }
+                    }
+                });
+
+                showNotification('Rascunho carregado', 'success');
+            }
+        });
+    </script>
+</body>
+</html>
