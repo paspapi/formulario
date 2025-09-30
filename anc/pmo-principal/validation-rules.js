@@ -1,616 +1,549 @@
 /**
- * PMO Principal - Regras de ValidaÁ„o
- * Regras especÌficas de validaÁ„o conforme Portaria 52/2021 MAPA
+ * PMO Principal - Regras de Valida√ß√£o
+ * Regras espec√≠ficas de valida√ß√£o conforme Portaria 52/2021 MAPA
  * @version 2.0
- * @author ANC - AssociaÁ„o de Agricultura Natural de Campinas e Regi„o
+ * @author ANC - Associa√ß√£o de Agricultura Natural de Campinas e Regi√£o
  */
 
 const PMOValidationRules = {
     /**
-     * Validar seÁ„o de identificaÁ„o
+     * Valida√ß√£o completa do formul√°rio
+     */
+    validateComplete() {
+        const errors = [];
+        const warnings = [];
+
+        // Validar cada se√ß√£o
+        const sections = [
+            this.validateIdentificacao,
+            this.validateContato,
+            this.validateEndereco,
+            this.validatePropriedade,
+            this.validateManejoOrganico,
+            this.validateResponsaveis,
+            this.validateAtividades,
+            this.validateHistoricoAplicacoes,
+            this.validateProdutosCertificar,
+            this.validatePreservacaoAmbiental,
+            this.validateRecursosHidricos,
+            this.validateComercializacao,
+            this.validateControles,
+            this.validateSubsistencia,
+            this.validateProducaoParalela,
+            this.validateDocumentos,
+            this.validateDeclaracoes
+        ];
+
+        sections.forEach(validateFn => {
+            const result = validateFn.call(this);
+            errors.push(...result.errors);
+            warnings.push(...result.warnings);
+        });
+
+        return { errors, warnings };
+    },
+
+    /**
+     * Validar Se√ß√£o 1: Identifica√ß√£o
      */
     validateIdentificacao() {
         const errors = [];
         const warnings = [];
 
-        const tipoPessoa = document.getElementById('tipo_pessoa').value;
-        const nomeCompleto = document.getElementById('nome_completo').value;
+        const tipoPessoa = document.getElementById('tipo_pessoa')?.value;
+        const nomeCompleto = document.getElementById('nome_completo')?.value;
         const cpf = document.getElementById('cpf')?.value;
         const cnpj = document.getElementById('cnpj')?.value;
 
-        // Validar tipo de pessoa
         if (!tipoPessoa) {
-            errors.push('SeÁ„o 1: Tipo de pessoa n„o selecionado');
+            errors.push('Se√ß√£o 1: Selecione o tipo de pessoa (F√≠sica ou Jur√≠dica)');
         }
 
-        // Validar documento correspondente
         if (tipoPessoa === 'fisica' && !cpf) {
-            errors.push('SeÁ„o 1: CPF obrigatÛrio para pessoa fÌsica');
+            errors.push('Se√ß√£o 1: CPF obrigat√≥rio para pessoa f√≠sica');
+        } else if (cpf && !this.validarCPF(cpf)) {
+            errors.push('Se√ß√£o 1: CPF inv√°lido');
         }
 
         if (tipoPessoa === 'juridica' && !cnpj) {
-            errors.push('SeÁ„o 1: CNPJ obrigatÛrio para pessoa jurÌdica');
+            errors.push('Se√ß√£o 1: CNPJ obrigat√≥rio para pessoa jur√≠dica');
+        } else if (cnpj && !this.validarCNPJ(cnpj)) {
+            errors.push('Se√ß√£o 1: CNPJ inv√°lido');
         }
 
-        // Validar nome completo
-        if (nomeCompleto.length < 3) {
-            errors.push('SeÁ„o 1: Nome completo deve ter pelo menos 3 caracteres');
+        if (!nomeCompleto || nomeCompleto.length < 3) {
+            errors.push('Se√ß√£o 1: Nome completo deve ter pelo menos 3 caracteres');
         }
 
         return { errors, warnings };
     },
 
     /**
-     * Validar seÁ„o de contato
+     * Validar Se√ß√£o 2: Contato
      */
     validateContato() {
         const errors = [];
         const warnings = [];
 
-        const telefone = document.getElementById('telefone').value;
-        const email = document.getElementById('email').value;
+        const telefone = document.getElementById('telefone')?.value;
+        const email = document.getElementById('email')?.value;
 
-        // Validar telefone (mÌnimo 10 dÌgitos)
-        const telefoneDigits = telefone.replace(/\D/g, '');
-        if (telefoneDigits.length < 10) {
-            errors.push('SeÁ„o 2: Telefone inv·lido (mÌnimo 10 dÌgitos)');
+        if (!telefone) {
+            errors.push('Se√ß√£o 2: Telefone √© obrigat√≥rio');
         }
 
-        // Validar email (regex b·sico)
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            errors.push('SeÁ„o 2: E-mail inv·lido');
+        if (!email) {
+            errors.push('Se√ß√£o 2: E-mail √© obrigat√≥rio');
+        } else if (!this.validarEmail(email)) {
+            errors.push('Se√ß√£o 2: E-mail inv√°lido');
         }
 
         return { errors, warnings };
     },
 
     /**
-     * Validar seÁ„o de endereÁo
+     * Validar Se√ß√£o 3: Endere√ßo
      */
     validateEndereco() {
         const errors = [];
         const warnings = [];
 
-        const cep = document.getElementById('cep').value;
-        const endereco = document.getElementById('endereco').value;
-        const bairro = document.getElementById('bairro').value;
-        const municipio = document.getElementById('municipio').value;
-        const uf = document.getElementById('uf').value;
+        const cep = document.getElementById('cep')?.value;
+        const logradouro = document.getElementById('logradouro')?.value;
+        const cidade = document.getElementById('cidade')?.value;
+        const estado = document.getElementById('estado')?.value;
 
-        // Validar CEP
-        const cepDigits = cep.replace(/\D/g, '');
-        if (cepDigits.length !== 8) {
-            errors.push('SeÁ„o 3: CEP inv·lido (deve ter 8 dÌgitos)');
+        if (!cep) {
+            errors.push('Se√ß√£o 3: CEP √© obrigat√≥rio');
         }
 
-        // Validar campos obrigatÛrios
-        if (!endereco || endereco.length < 5) {
-            errors.push('SeÁ„o 3: EndereÁo incompleto');
+        if (!logradouro) {
+            errors.push('Se√ß√£o 3: Logradouro √© obrigat√≥rio');
         }
 
-        if (!bairro) {
-            errors.push('SeÁ„o 3: Bairro n„o informado');
+        if (!cidade) {
+            errors.push('Se√ß√£o 3: Cidade √© obrigat√≥ria');
         }
 
-        if (!municipio) {
-            errors.push('SeÁ„o 3: MunicÌpio n„o informado');
+        if (!estado) {
+            errors.push('Se√ß√£o 3: Estado √© obrigat√≥rio');
         }
 
-        if (!uf) {
-            errors.push('SeÁ„o 3: UF n„o selecionada');
-        }
-
-        // Avisos
-        const latitude = document.getElementById('latitude').value;
-        const longitude = document.getElementById('longitude').value;
+        const latitude = document.getElementById('latitude')?.value;
+        const longitude = document.getElementById('longitude')?.value;
 
         if (!latitude || !longitude) {
-            warnings.push('SeÁ„o 3: Coordenadas geogr·ficas n„o informadas (recomendado)');
+            warnings.push('Se√ß√£o 3: Coordenadas GPS recomendadas para localiza√ß√£o precisa');
         }
 
         return { errors, warnings };
     },
 
     /**
-     * Validar seÁ„o de propriedade
+     * Validar Se√ß√£o 4: Propriedade
      */
     validatePropriedade() {
         const errors = [];
         const warnings = [];
 
-        const posseTerra = document.getElementById('posse_terra').value;
-        const areaTotal = parseFloat(document.getElementById('area_total_ha').value);
-        const cafNumero = document.getElementById('caf_numero').value;
-        const cafNaoPossui = document.getElementById('caf_nao_possui').checked;
-        const terraFamiliar = document.getElementById('terra_familiar').checked;
+        const posseTerra = document.getElementById('posse_terra')?.value;
+        const areaTotal = document.getElementById('area_total')?.value;
 
-        // Validar posse da terra
         if (!posseTerra) {
-            errors.push('SeÁ„o 4: SituaÁ„o da posse da terra n„o informada');
+            errors.push('Se√ß√£o 4: Tipo de posse da terra √© obrigat√≥rio');
         }
 
-        // Validar ·rea total
-        if (isNaN(areaTotal) || areaTotal <= 0) {
-            errors.push('SeÁ„o 4: ¡rea total inv·lida');
-        }
-
-        // Validar CAF para agricultura familiar
-        if (terraFamiliar && !cafNumero && !cafNaoPossui) {
-            warnings.push('SeÁ„o 4: Recomenda-se informar o CAF para agricultura familiar');
-        }
-
-        // Alertar sobre ·rea muito pequena ou muito grande
-        if (areaTotal < 0.5) {
-            warnings.push('SeÁ„o 4: ¡rea muito pequena (< 0.5 ha). Verificar se est· correto.');
-        } else if (areaTotal > 1000) {
-            warnings.push('SeÁ„o 4: ¡rea muito grande (> 1000 ha). Verificar se est· correto.');
+        if (!areaTotal || parseFloat(areaTotal) <= 0) {
+            errors.push('Se√ß√£o 4: √Årea total deve ser maior que zero');
         }
 
         return { errors, warnings };
     },
 
     /**
-     * Validar seÁ„o de manejo org‚nico
+     * Validar Se√ß√£o 5: Manejo Org√¢nico
      */
     validateManejoOrganico() {
         const errors = [];
         const warnings = [];
 
-        const anosManejo = parseInt(document.getElementById('anos_manejo_organico').value);
-        const situacaoManejo = document.getElementById('situacao_manejo').value;
+        const tempoOrganico = document.getElementById('tempo_organico')?.value;
 
-        // Validar anos de manejo
-        if (isNaN(anosManejo) || anosManejo < 0) {
-            errors.push('SeÁ„o 5: Anos de manejo org‚nico inv·lido');
-        }
-
-        // Validar situaÁ„o do manejo
-        if (!situacaoManejo) {
-            errors.push('SeÁ„o 5: SituaÁ„o do manejo n„o informada');
-        }
-
-        // Avisos sobre perÌodo de convers„o
-        if (situacaoManejo === 'em_conversao' && anosManejo < 1) {
-            warnings.push('SeÁ„o 5: PerÌodo de convers„o mÌnimo de 12 meses conforme legislaÁ„o');
-        }
-
-        if (situacaoManejo === 'convencional') {
-            warnings.push('SeÁ„o 5: ProduÁ„o convencional em convers„o. CertificaÁ„o sÛ apÛs perÌodo de convers„o completo.');
+        if (!tempoOrganico) {
+            warnings.push('Se√ß√£o 5: Informe h√° quanto tempo pratica manejo org√¢nico');
+        } else if (parseInt(tempoOrganico) < 1) {
+            warnings.push('Se√ß√£o 5: Per√≠odo de convers√£o org√¢nica m√≠nimo √© 12 meses (Portaria 52/2021)');
         }
 
         return { errors, warnings };
     },
 
     /**
-     * Validar seÁ„o de respons·veis
+     * Validar Se√ß√£o 6: Respons√°veis pela Produ√ß√£o
      */
     validateResponsaveis() {
         const errors = [];
         const warnings = [];
 
-        const tbody = document.getElementById('tbody-responsaveis');
-        const rows = tbody.querySelectorAll('tr');
+        const table = document.getElementById('tabela-responsaveis');
+        const rows = table?.querySelectorAll('tbody tr:not(template)');
 
-        if (rows.length === 0) {
-            errors.push('SeÁ„o 6: Nenhum respons·vel cadastrado');
-            return { errors, warnings };
+        if (!rows || rows.length === 0) {
+            errors.push('Se√ß√£o 6: Adicione pelo menos um respons√°vel pela produ√ß√£o');
         }
-
-        // Validar cada respons·vel
-        rows.forEach((row, index) => {
-            const nome = row.querySelector('[name="responsavel_nome[]"]')?.value;
-            const cpf = row.querySelector('[name="responsavel_cpf[]"]')?.value;
-            const funcao = row.querySelector('[name="responsavel_funcao[]"]')?.value;
-
-            if (!nome || nome.length < 3) {
-                errors.push(`SeÁ„o 6 (Linha ${index + 1}): Nome do respons·vel inv·lido`);
-            }
-
-            if (!cpf || cpf.replace(/\D/g, '').length !== 11) {
-                errors.push(`SeÁ„o 6 (Linha ${index + 1}): CPF inv·lido`);
-            }
-
-            if (!funcao) {
-                errors.push(`SeÁ„o 6 (Linha ${index + 1}): FunÁ„o n„o informada`);
-            }
-        });
 
         return { errors, warnings };
     },
 
     /**
-     * Validar seÁ„o de atividades
+     * Validar Se√ß√£o 7: Atividades Org√¢nicas
      */
     validateAtividades() {
         const errors = [];
         const warnings = [];
 
-        // Verificar se pelo menos uma atividade foi marcada
-        const atividades = [
-            'atividade_hortalicas',
-            'atividade_frutas',
-            'atividade_graos',
-            'atividade_plantas_medicinais',
-            'atividade_pecuaria',
-            'atividade_apicultura',
-            'atividade_cogumelos',
-            'atividade_processamento'
-        ];
+        const atividadesChecked = document.querySelectorAll('input[name="atividade_organica"]:checked');
 
-        const algumaMarcada = atividades.some(id =>
-            document.getElementsByName(id)[0]?.checked
-        );
-
-        if (!algumaMarcada) {
-            errors.push('SeÁ„o 7: Nenhuma atividade org‚nica selecionada');
+        if (atividadesChecked.length === 0) {
+            errors.push('Se√ß√£o 7: Selecione pelo menos uma atividade org√¢nica');
         }
-
-        // Validar ·reas informadas
-        atividades.forEach(atividade => {
-            const checkbox = document.getElementsByName(atividade)[0];
-            if (checkbox?.checked) {
-                const atividadeNome = atividade.replace('atividade_', '');
-                const areaInput = document.getElementsByName(`area_${atividadeNome}_ha`)[0] ||
-                                 document.getElementsByName(`area_${atividadeNome}_m2`)[0];
-
-                if (areaInput && (!areaInput.value || parseFloat(areaInput.value) <= 0)) {
-                    warnings.push(`SeÁ„o 7: ¡rea n„o informada para ${atividadeNome}`);
-                }
-            }
-        });
 
         return { errors, warnings };
     },
 
     /**
-     * Validar seÁ„o de histÛrico
+     * Validar Se√ß√£o 8: Hist√≥rico de Aplica√ß√µes
      */
-    validateHistorico() {
+    validateHistoricoAplicacoes() {
         const errors = [];
         const warnings = [];
 
-        const semAplicacoes = document.getElementById('sem_aplicacoes').checked;
-        const tbody = document.getElementById('tbody-historico');
-        const rows = tbody.querySelectorAll('tr');
+        const usouProibidos = document.querySelector('input[name="usou_proibidos"]:checked')?.value;
 
-        if (!semAplicacoes && rows.length === 0) {
-            warnings.push('SeÁ„o 8: HistÛrico de aplicaÁıes n„o preenchido. Se n„o houve aplicaÁıes, marque a opÁ„o correspondente.');
+        if (!usouProibidos) {
+            errors.push('Se√ß√£o 8: Informe se usou insumos n√£o permitidos nos √∫ltimos 3 anos');
         }
 
-        // Validar data das aplicaÁıes (n„o pode ser futura)
-        const hoje = new Date();
-        rows.forEach((row, index) => {
-            const dataInput = row.querySelector('[name="historico_data[]"]');
-            if (dataInput?.value) {
-                const dataAplicacao = new Date(dataInput.value);
-                if (dataAplicacao > hoje) {
-                    errors.push(`SeÁ„o 8 (Linha ${index + 1}): Data de aplicaÁ„o no futuro`);
-                }
+        if (usouProibidos === 'sim') {
+            const table = document.getElementById('tabela-historico-aplicacoes');
+            const rows = table?.querySelectorAll('tbody tr:not(template)');
 
-                // Verificar se È muito antiga (mais de 3 anos)
-                const tresAnosAtras = new Date();
-                tresAnosAtras.setFullYear(tresAnosAtras.getFullYear() - 3);
-
-                if (dataAplicacao < tresAnosAtras) {
-                    warnings.push(`SeÁ„o 8 (Linha ${index + 1}): AplicaÁ„o h· mais de 3 anos. ¡rea j· pode estar em convers„o completa.`);
-                }
+            if (!rows || rows.length === 0) {
+                errors.push('Se√ß√£o 8: Adicione os detalhes das aplica√ß√µes de insumos n√£o permitidos');
             }
-        });
+
+            // Verificar per√≠odo de convers√£o
+            warnings.push('Se√ß√£o 8: Produtos com hist√≥rico de insumos proibidos precisam de 12 meses de convers√£o (Portaria 52/2021)');
+        }
 
         return { errors, warnings };
     },
 
     /**
-     * Validar seÁ„o de produtos
+     * Validar Se√ß√£o 9: Produtos a Certificar
      */
-    validateProdutos() {
+    validateProdutosCertificar() {
         const errors = [];
         const warnings = [];
 
-        const tbody = document.getElementById('tbody-produtos');
-        const rows = tbody.querySelectorAll('tr');
+        const table = document.getElementById('tabela-produtos');
+        const rows = table?.querySelectorAll('tbody tr:not(template)');
 
-        if (rows.length === 0) {
-            errors.push('SeÁ„o 9: Nenhum produto cadastrado para certificaÁ„o (obrigatÛrio)');
-            return { errors, warnings };
+        if (!rows || rows.length === 0) {
+            errors.push('Se√ß√£o 9: Adicione pelo menos um produto para certifica√ß√£o');
         }
-
-        // Validar cada produto
-        rows.forEach((row, index) => {
-            const produto = row.querySelector('[name="produto_nome[]"]')?.value;
-            const estimativa = row.querySelector('[name="produto_estimativa[]"]')?.value;
-            const origem = row.querySelector('[name="produto_origem[]"]')?.value;
-
-            if (!produto || produto.length < 2) {
-                errors.push(`SeÁ„o 9 (Linha ${index + 1}): Nome do produto inv·lido`);
-            }
-
-            if (!estimativa) {
-                warnings.push(`SeÁ„o 9 (Linha ${index + 1}): Estimativa de produÁ„o n„o informada`);
-            }
-
-            if (origem === 'comprada_nao_organica') {
-                warnings.push(`SeÁ„o 9 (Linha ${index + 1}): Sementes/mudas n„o org‚nicas. Justificar indisponibilidade no mercado.`);
-            }
-        });
 
         return { errors, warnings };
     },
 
     /**
-     * Validar seÁ„o de preservaÁ„o ambiental
+     * Validar Se√ß√£o 10: Preserva√ß√£o Ambiental
      */
-    validatePreservacao() {
+    validatePreservacaoAmbiental() {
         const errors = [];
         const warnings = [];
 
-        const possuiCAR = document.getElementById('possui_car').value;
-        const situacaoCAR = document.getElementById('situacao_car')?.value;
+        const possuiCAR = document.querySelector('input[name="possui_car"]:checked')?.value;
 
-        // Validar CAR
         if (!possuiCAR) {
-            errors.push('SeÁ„o 10: InformaÁ„o sobre CAR n„o fornecida');
-        }
-
-        if (possuiCAR === 'sim' && !situacaoCAR) {
-            errors.push('SeÁ„o 10: SituaÁ„o do CAR n„o informada');
+            errors.push('Se√ß√£o 10: Informe se possui CAR (Cadastro Ambiental Rural)');
         }
 
         if (possuiCAR === 'nao') {
-            warnings.push('SeÁ„o 10: CAR È obrigatÛrio conforme CÛdigo Florestal (Lei 12.651/2012)');
-        }
-
-        // Validar destino de resÌduos
-        const destinoOrganico = document.getElementById('destino_lixo_organico').value;
-        const destinoNaoOrganico = document.getElementById('destino_lixo_nao_organico').value;
-
-        if (destinoOrganico === 'queima') {
-            warnings.push('SeÁ„o 10: Queima de lixo org‚nico n„o È recomendada. Prefira compostagem.');
-        }
-
-        if (destinoNaoOrganico === 'queima' || destinoNaoOrganico === 'enterro') {
-            warnings.push('SeÁ„o 10: Destino inadequado para lixo n„o org‚nico. Prefira coleta seletiva.');
+            warnings.push('Se√ß√£o 10: CAR √© obrigat√≥rio por lei (Lei 12.651/2012). Regularize o mais breve poss√≠vel.');
         }
 
         return { errors, warnings };
     },
 
     /**
-     * Validar seÁ„o de recursos hÌdricos
+     * Validar Se√ß√£o 11: Recursos H√≠dricos
      */
     validateRecursosHidricos() {
         const errors = [];
         const warnings = [];
 
-        const tbody = document.getElementById('tbody-recursos-hidricos');
-        const rows = tbody.querySelectorAll('tr');
+        const table = document.getElementById('tabela-recursos-hidricos');
+        const rows = table?.querySelectorAll('tbody tr:not(template)');
 
-        // Validar riscos de contaminaÁ„o
-        rows.forEach((row, index) => {
-            const nivelRisco = row.querySelector('[name="agua_nivel_risco[]"]')?.value;
-            const garantia = row.querySelector('[name="agua_garantia[]"]')?.value;
-
-            if (nivelRisco === 'alto' || nivelRisco === 'medio') {
-                if (!garantia || garantia.length < 5) {
-                    warnings.push(`SeÁ„o 11 (Linha ${index + 1}): Risco de contaminaÁ„o ${nivelRisco}. Descreva medidas de garantia de qualidade.`);
-                }
-            }
-        });
+        if (!rows || rows.length === 0) {
+            errors.push('Se√ß√£o 11: Adicione pelo menos uma fonte de √°gua utilizada');
+        }
 
         return { errors, warnings };
     },
 
     /**
-     * Validar seÁ„o de comercializaÁ„o
+     * Validar Se√ß√£o 12: Comercializa√ß√£o
      */
     validateComercializacao() {
         const errors = [];
         const warnings = [];
 
-        // Verificar se pelo menos um canal foi marcado
-        const canais = [
-            'comercio_feira',
-            'comercio_csa',
-            'comercio_entrega_domicilio',
-            'comercio_venda_propriedade',
-            'comercio_pnae',
-            'comercio_paa',
-            'comercio_supermercado',
-            'comercio_cooperativa',
-            'comercio_intermediario',
-            'comercio_industria'
-        ];
+        const canaisChecked = document.querySelectorAll('input[name="canal_comercializacao"]:checked');
 
-        const algumMarcado = canais.some(id =>
-            document.getElementsByName(id)[0]?.checked
-        );
-
-        if (!algumMarcado) {
-            warnings.push('SeÁ„o 12: Nenhum canal de comercializaÁ„o selecionado');
+        if (canaisChecked.length === 0) {
+            errors.push('Se√ß√£o 12: Selecione pelo menos um canal de comercializa√ß√£o');
         }
 
-        // Validar produÁ„o paralela
-        const comercializaNaoOrganicos = document.getElementById('comercializa_nao_organicos').value;
-        const separacaoProdutos = document.getElementById('separacao_produtos')?.value;
+        const vendeNaoOrganicos = document.querySelector('input[name="vende_nao_organicos"]:checked')?.value;
 
-        if (comercializaNaoOrganicos === 'sim' && (!separacaoProdutos || separacaoProdutos.length < 5)) {
-            errors.push('SeÁ„o 12: Descreva como separa produtos org‚nicos de n„o org‚nicos');
+        if (!vendeNaoOrganicos) {
+            errors.push('Se√ß√£o 12: Informe se vende produtos n√£o org√¢nicos');
+        }
+
+        const rotulagem = document.getElementById('sistema_rotulagem')?.value;
+        if (!rotulagem) {
+            errors.push('Se√ß√£o 12: Descreva o sistema de rotulagem');
+        }
+
+        const rastreabilidade = document.getElementById('sistema_rastreabilidade_comercial')?.value;
+        if (!rastreabilidade) {
+            errors.push('Se√ß√£o 12: Descreva o sistema de rastreabilidade na comercializa√ß√£o');
         }
 
         return { errors, warnings };
     },
 
     /**
-     * Validar seÁ„o de controles
+     * Validar Se√ß√£o 13: Controles e Registros
      */
     validateControles() {
         const errors = [];
         const warnings = [];
 
-        // Verificar se mantÈm pelo menos um controle
-        const controles = [
-            'controle_caderno_campo',
-            'controle_plantio',
-            'controle_colheita',
-            'controle_vendas',
-            'controle_insumos',
-            'controle_estoque',
-            'controle_rastreabilidade',
-            'controle_nao_conformidades'
-        ];
+        const registrosChecked = document.querySelectorAll('input[name="tipo_registro"]:checked');
 
-        const algumMarcado = controles.some(id =>
-            document.getElementsByName(id)[0]?.checked
-        );
-
-        if (!algumMarcado) {
-            warnings.push('SeÁ„o 13: Nenhum controle/registro marcado. Sistema de rastreabilidade È obrigatÛrio conforme IN 19/2011.');
+        if (registrosChecked.length === 0) {
+            errors.push('Se√ß√£o 13: Selecione pelo menos um tipo de registro mantido');
         }
 
-        // Rastreabilidade È obrigatÛrio
-        if (!document.getElementsByName('controle_rastreabilidade')[0]?.checked) {
-            warnings.push('SeÁ„o 13: Sistema de rastreabilidade È obrigatÛrio para certificaÁ„o org‚nica');
+        // Verificar se rastreabilidade est√° marcada
+        const rastreabilidadeChecked = document.querySelector('input[name="tipo_registro"][value="rastreabilidade"]:checked');
+        if (!rastreabilidadeChecked) {
+            errors.push('Se√ß√£o 13: Sistema de rastreabilidade √© OBRIGAT√ìRIO (IN 19/2011 MAPA)');
+        }
+
+        const cadernocampo = document.getElementById('descricao_caderno_campo')?.value;
+        if (!cadernocampo) {
+            errors.push('Se√ß√£o 13: Descreva o caderno de campo');
+        }
+
+        const rastreabilidadeInterno = document.getElementById('sistema_rastreabilidade_interno')?.value;
+        if (!rastreabilidadeInterno) {
+            errors.push('Se√ß√£o 13: Descreva o sistema de rastreabilidade interno');
         }
 
         return { errors, warnings };
     },
 
     /**
-     * Validar seÁ„o de produÁ„o paralela
+     * Validar Se√ß√£o 14: Produ√ß√£o de Subsist√™ncia
+     */
+    validateSubsistencia() {
+        const errors = [];
+        const warnings = [];
+
+        const possuiSubsistencia = document.querySelector('input[name="possui_subsistencia"]:checked')?.value;
+
+        if (!possuiSubsistencia) {
+            errors.push('Se√ß√£o 14: Informe se possui produ√ß√£o de subsist√™ncia n√£o org√¢nica');
+        }
+
+        if (possuiSubsistencia === 'sim') {
+            const separacao = document.getElementById('separacao_subsistencia')?.value;
+            if (!separacao) {
+                errors.push('Se√ß√£o 14: Descreva como separa a produ√ß√£o de subsist√™ncia da org√¢nica');
+            }
+        }
+
+        return { errors, warnings };
+    },
+
+    /**
+     * Validar Se√ß√£o 15: Produ√ß√£o Paralela
      */
     validateProducaoParalela() {
         const errors = [];
         const warnings = [];
 
-        const possuiParalela = document.getElementById('possui_paralela').value;
+        const possuiParalela = document.querySelector('input[name="possui_producao_paralela"]:checked')?.value;
+
+        if (!possuiParalela) {
+            errors.push('Se√ß√£o 15: Informe se possui produ√ß√£o paralela (org√¢nica e convencional do mesmo produto)');
+        }
 
         if (possuiParalela === 'sim') {
-            const usaNaoPermitidos = document.getElementById('paralela_usa_nao_permitidos')?.value;
-            const risco = document.getElementById('paralela_risco')?.value;
-            const bloqueios = document.getElementById('paralela_bloqueios')?.value;
+            warnings.push('Se√ß√£o 15: Produ√ß√£o paralela aumenta o risco de contamina√ß√£o e mistura. N√£o recomendada.');
 
-            if (!risco || risco.length < 5) {
-                errors.push('SeÁ„o 15: Descreva os riscos de contaminaÁ„o da produÁ„o paralela');
-            }
+            const produtos = document.getElementById('produtos_paralelos')?.value;
+            const motivo = document.getElementById('motivo_paralela')?.value;
+            const separacaoFisica = document.getElementById('separacao_fisica_paralela')?.value;
+            const separacaoEquipamentos = document.getElementById('separacao_equipamentos')?.value;
+            const separacaoColheita = document.getElementById('separacao_colheita')?.value;
+            const rastreabilidadeParalela = document.getElementById('rastreabilidade_paralela')?.value;
+            const registrosParalela = document.getElementById('registros_paralela')?.value;
 
-            if (!bloqueios || bloqueios.length < 5) {
-                errors.push('SeÁ„o 15: Descreva os manejos de bloqueio/separaÁ„o entre produÁ„o org‚nica e convencional');
-            }
-
-            if (usaNaoPermitidos === 'sim') {
-                warnings.push('SeÁ„o 15: ProduÁ„o paralela com insumos n„o permitidos requer atenÁ„o redobrada na separaÁ„o');
-            }
-
-            warnings.push('SeÁ„o 15: ProduÁ„o paralela È permitida mas n„o recomendada. Considere convers„o total.');
+            if (!produtos) errors.push('Se√ß√£o 15: Liste os produtos produzidos paralelamente');
+            if (!motivo) errors.push('Se√ß√£o 15: Explique o motivo da produ√ß√£o paralela');
+            if (!separacaoFisica) errors.push('Se√ß√£o 15: Descreva a separa√ß√£o f√≠sica das √°reas');
+            if (!separacaoEquipamentos) errors.push('Se√ß√£o 15: Descreva a separa√ß√£o de equipamentos');
+            if (!separacaoColheita) errors.push('Se√ß√£o 15: Descreva a separa√ß√£o na colheita');
+            if (!rastreabilidadeParalela) errors.push('Se√ß√£o 15: Descreva o sistema de rastreabilidade para produ√ß√£o paralela');
+            if (!registrosParalela) errors.push('Se√ß√£o 15: Descreva os registros diferenciados');
         }
 
         return { errors, warnings };
     },
 
     /**
-     * Validar seÁ„o de documentos
+     * Validar Se√ß√£o 16: Documentos
      */
     validateDocumentos() {
         const errors = [];
         const warnings = [];
 
-        // Verificar croqui (obrigatÛrio)
-        const croquiInput = document.querySelector('[name="documento_croqui"]');
-        if (!croquiInput?.files || croquiInput.files.length === 0) {
-            errors.push('SeÁ„o 16: Croqui da propriedade È obrigatÛrio');
+        const fileCroqui = document.getElementById('file-croqui');
+        if (!fileCroqui || !fileCroqui.files || fileCroqui.files.length === 0) {
+            errors.push('Se√ß√£o 16: Upload do croqui/mapa da propriedade √© OBRIGAT√ìRIO');
         }
 
-        // CAR recomendado
-        const possuiCAR = document.getElementById('possui_car').value;
-        const carInput = document.querySelector('[name="documento_car"]');
-        if (possuiCAR === 'sim' && (!carInput?.files || carInput.files.length === 0)) {
-            warnings.push('SeÁ„o 16: Recomenda-se anexar documento do CAR');
+        const fileCAR = document.getElementById('file-car');
+        if (!fileCAR || !fileCAR.files || fileCAR.files.length === 0) {
+            warnings.push('Se√ß√£o 16: Recomenda-se fazer upload do CAR');
         }
 
         return { errors, warnings };
     },
 
     /**
-     * Validar seÁ„o de declaraÁıes
+     * Validar Se√ß√£o 17: Declara√ß√µes
      */
     validateDeclaracoes() {
         const errors = [];
         const warnings = [];
 
-        const declaracoes = [
-            { name: 'declaracao_veracidade', label: 'veracidade das informaÁıes' },
-            { name: 'declaracao_normas', label: 'seguir normas de produÁ„o org‚nica' },
-            { name: 'declaracao_visitas', label: 'autorizar visitas de verificaÁ„o' },
-            { name: 'declaracao_atualizacao', label: 'comunicar mudanÁas no manejo' },
-            { name: 'declaracao_rastreabilidade', label: 'manter registros de rastreabilidade' }
-        ];
+        const declaraVeracidade = document.querySelector('input[name="declara_veracidade"]:checked');
+        const compromissoNormas = document.querySelector('input[name="compromisso_normas"]:checked');
+        const compromissoVisitas = document.querySelector('input[name="compromisso_visitas"]:checked');
+        const compromissoRegistros = document.querySelector('input[name="compromisso_registros"]:checked');
+        const compromissoRastreabilidade = document.querySelector('input[name="compromisso_rastreabilidade"]:checked');
+        const compromissoAtualizacao = document.querySelector('input[name="compromisso_atualizacao"]:checked');
+        const compromissoParticipacao = document.querySelector('input[name="compromisso_participacao"]:checked');
+        const aceitaRegrasSPG = document.querySelector('input[name="aceita_regras_spg"]:checked');
 
-        declaracoes.forEach(dec => {
-            const checkbox = document.getElementsByName(dec.name)[0];
-            if (!checkbox?.checked) {
-                errors.push(`SeÁ„o 17: … obrigatÛrio concordar com: ${dec.label}`);
-            }
-        });
+        if (!declaraVeracidade) errors.push('Se√ß√£o 17: Declara√ß√£o de veracidade √© obrigat√≥ria');
+        if (!compromissoNormas) errors.push('Se√ß√£o 17: Compromisso de seguir normas √© obrigat√≥rio');
+        if (!compromissoVisitas) errors.push('Se√ß√£o 17: Autoriza√ß√£o de visitas √© obrigat√≥ria');
+        if (!compromissoRegistros) errors.push('Se√ß√£o 17: Compromisso de manter registros √© obrigat√≥rio');
+        if (!compromissoRastreabilidade) errors.push('Se√ß√£o 17: Compromisso de rastreabilidade √© obrigat√≥rio');
+        if (!compromissoAtualizacao) errors.push('Se√ß√£o 17: Compromisso de comunicar altera√ß√µes √© obrigat√≥rio');
+        if (!compromissoParticipacao) errors.push('Se√ß√£o 17: Compromisso de participa√ß√£o √© obrigat√≥rio');
+        if (!aceitaRegrasSPG) errors.push('Se√ß√£o 17: Aceita√ß√£o das regras do SPG √© obrigat√≥ria');
 
-        // Validar data
-        const dataPreenchimento = document.getElementById('data_preenchimento').value;
-        if (!dataPreenchimento) {
-            errors.push('SeÁ„o 17: Data de preenchimento n„o informada');
-        } else {
-            const data = new Date(dataPreenchimento);
-            const hoje = new Date();
-            if (data > hoje) {
-                errors.push('SeÁ„o 17: Data de preenchimento n„o pode ser futura');
-            }
-        }
+        const nomeDeclarante = document.getElementById('nome_declarante')?.value;
+        const cpfDeclarante = document.getElementById('cpf_declarante')?.value;
+        const dataDeclaracao = document.getElementById('data_declaracao')?.value;
 
-        // Validar assinatura
-        const assinatura = document.getElementById('assinatura_responsavel').value;
-        if (!assinatura || assinatura.length < 3) {
-            errors.push('SeÁ„o 17: Nome do respons·vel n„o informado');
-        }
+        if (!nomeDeclarante) errors.push('Se√ß√£o 17: Nome do respons√°vel √© obrigat√≥rio');
+        if (!cpfDeclarante) errors.push('Se√ß√£o 17: CPF do respons√°vel √© obrigat√≥rio');
+        else if (!this.validarCPF(cpfDeclarante)) errors.push('Se√ß√£o 17: CPF do respons√°vel inv√°lido');
+        if (!dataDeclaracao) errors.push('Se√ß√£o 17: Data da declara√ß√£o √© obrigat√≥ria');
 
         return { errors, warnings };
     },
 
     /**
-     * Validar formul·rio completo
+     * Validar CPF
      */
-    validateComplete() {
-        const allErrors = [];
-        const allWarnings = [];
+    validarCPF(cpf) {
+        cpf = cpf.replace(/\D/g, '');
 
-        // Executar todas as validaÁıes
-        const validations = [
-            this.validateIdentificacao(),
-            this.validateContato(),
-            this.validateEndereco(),
-            this.validatePropriedade(),
-            this.validateManejoOrganico(),
-            this.validateResponsaveis(),
-            this.validateAtividades(),
-            this.validateHistorico(),
-            this.validateProdutos(),
-            this.validatePreservacao(),
-            this.validateRecursosHidricos(),
-            this.validateComercializacao(),
-            this.validateControles(),
-            this.validateProducaoParalela(),
-            this.validateDocumentos(),
-            this.validateDeclaracoes()
-        ];
+        if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) {
+            return false;
+        }
 
-        validations.forEach(result => {
-            allErrors.push(...result.errors);
-            allWarnings.push(...result.warnings);
-        });
+        let soma = 0;
+        for (let i = 0; i < 9; i++) {
+            soma += parseInt(cpf.charAt(i)) * (10 - i);
+        }
+        let digito1 = 11 - (soma % 11);
+        if (digito1 > 9) digito1 = 0;
 
-        return {
-            isValid: allErrors.length === 0,
-            errors: allErrors,
-            warnings: allWarnings
-        };
+        soma = 0;
+        for (let i = 0; i < 10; i++) {
+            soma += parseInt(cpf.charAt(i)) * (11 - i);
+        }
+        let digito2 = 11 - (soma % 11);
+        if (digito2 > 9) digito2 = 0;
+
+        return parseInt(cpf.charAt(9)) === digito1 && parseInt(cpf.charAt(10)) === digito2;
+    },
+
+    /**
+     * Validar CNPJ
+     */
+    validarCNPJ(cnpj) {
+        cnpj = cnpj.replace(/\D/g, '');
+
+        if (cnpj.length !== 14 || /^(\d)\1{13}$/.test(cnpj)) {
+            return false;
+        }
+
+        let tamanho = cnpj.length - 2;
+        let numeros = cnpj.substring(0, tamanho);
+        let digitos = cnpj.substring(tamanho);
+        let soma = 0;
+        let pos = tamanho - 7;
+
+        for (let i = tamanho; i >= 1; i--) {
+            soma += numeros.charAt(tamanho - i) * pos--;
+            if (pos < 2) pos = 9;
+        }
+
+        let resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+        if (resultado != digitos.charAt(0)) return false;
+
+        tamanho = tamanho + 1;
+        numeros = cnpj.substring(0, tamanho);
+        soma = 0;
+        pos = tamanho - 7;
+
+        for (let i = tamanho; i >= 1; i--) {
+            soma += numeros.charAt(tamanho - i) * pos--;
+            if (pos < 2) pos = 9;
+        }
+
+        resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+        return resultado == digitos.charAt(1);
+    },
+
+    /**
+     * Validar e-mail
+     */
+    validarEmail(email) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
     }
 };
 

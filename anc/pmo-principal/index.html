@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PMO Principal - Plano de Manejo Org�nico - ANC</title>
+    <title>PMO Principal - Plano de Manejo Orgânico - ANC</title>
 
     <!-- Framework CSS Unificado (Versão Completa) -->
     <link rel="stylesheet" href="../../framework/core/pmo-framework-full.css">
@@ -20,12 +20,12 @@
         <div class="pmo-container">
             <div class="header-content">
                 <div class="header-logo">
-                    <h1>=� PMO Principal</h1>
-                    <p>Plano de Manejo Org�nico - ANC</p>
+                    <h1>📋 PMO Principal</h1>
+                    <p>Plano de Manejo Orgânico - ANC</p>
                 </div>
                 <nav class="header-nav">
-                    <a href="../dashboard/index.html" class="btn btn-secondary"><� Dashboard</a>
-                    <a href="../relatorios/index.html" class="btn btn-secondary">=� Relat�rios</a>
+                    <a href="../dashboard/index.html" class="btn btn-secondary">🏠 Dashboard</a>
+                    <a href="../relatorios/index.html" class="btn btn-secondary">📊 Relatórios</a>
                 </nav>
             </div>
         </div>
@@ -35,7 +35,7 @@
     <div class="progress-container">
         <div class="progress-info">
             <span id="progress-text">Progresso: 0%</span>
-            <span id="auto-save-status">=� Auto-save ativo</span>
+            <span id="auto-save-status">💾 Auto-save ativo</span>
         </div>
         <div class="progress-bar">
             <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
@@ -46,25 +46,25 @@
     <main class="pmo-container">
         <form id="form-pmo-principal" novalidate>
 
-            <!-- Se��o 1: Dados Gerais - Identifica��o -->
+            <!-- Seção 1: Dados Gerais - Identificação -->
             <section id="secao-identificacao" class="form-section">
-                <h2>1. Identifica��o do Produtor/Empresa</h2>
+                <h2>1. Identificação do Produtor/Empresa</h2>
 
                 <div class="section-info">
-                    <p class="instruction">9 Preencha os dados de identifica��o do produtor ou empresa respons�vel pela unidade de produ��o org�nica.</p>
+                    <p class="instruction">ℹ️ Preencha os dados de identificação do produtor ou empresa responsável pela unidade de produção orgânica.</p>
                 </div>
 
                 <div class="form-grid">
                     <div class="field-wrapper col-span-2">
                         <label for="nome_completo">
-                            Nome Completo / Raz�o Social
+                            Nome Completo / Razão Social
                             <span class="required">*</span>
                         </label>
                         <input type="text"
                                id="nome_completo"
                                name="nome_completo"
                                required
-                               placeholder="Ex: Jo�o da Silva ou Empresa Agr�cola Ltda"
+                               placeholder="Ex: João da Silva ou Empresa Agrícola Ltda"
                                maxlength="200">
                     </div>
 
@@ -75,8 +75,8 @@
                         </label>
                         <select id="tipo_pessoa" name="tipo_pessoa" required onchange="PMOPrincipal.togglePessoaTipo()">
                             <option value="">Selecione...</option>
-                            <option value="fisica">Pessoa F�sica (CPF)</option>
-                            <option value="juridica">Pessoa Jur�dica (CNPJ)</option>
+                            <option value="fisica">Pessoa Física (CPF)</option>
+                            <option value="juridica">Pessoa Jurídica (CNPJ)</option>
                         </select>
                     </div>
 
@@ -105,7 +105,7 @@
                     </div>
 
                     <div class="field-wrapper">
-                        <label for="inscricao_estadual">Inscri��o Estadual</label>
+                        <label for="inscricao_estadual">Inscrição Estadual</label>
                         <input type="text"
                                id="inscricao_estadual"
                                name="inscricao_estadual"
@@ -113,7 +113,7 @@
                     </div>
 
                     <div class="field-wrapper">
-                        <label for="inscricao_municipal">Inscri��o Municipal</label>
+                        <label for="inscricao_municipal">Inscrição Municipal</label>
                         <input type="text"
                                id="inscricao_municipal"
                                name="inscricao_municipal"
@@ -130,19 +130,19 @@
 
                     <div class="field-wrapper col-span-2">
                         <label for="nome_unidade_producao">
-                            Nome da Unidade de Produ��o
+                            Nome da Unidade de Produção
                             <span class="required">*</span>
                         </label>
                         <input type="text"
                                id="nome_unidade_producao"
                                name="nome_unidade_producao"
                                required
-                               placeholder="Ex: S�tio Boa Vista, Fazenda Esperan�a">
+                               placeholder="Ex: Sítio Boa Vista, Fazenda Esperança">
                     </div>
                 </div>
             </section>
 
-            <!-- Se��o 2: Contato -->
+            <!-- Seção 2: Contato -->
             <section id="secao-contato" class="form-section">
                 <h2>2. Dados de Contato</h2>
 
@@ -174,9 +174,9 @@
                 </div>
             </section>
 
-            <!-- Se��o 3: Endere�o -->
+            <!-- Seção 3: Endereço -->
             <section id="secao-endereco" class="form-section">
-                <h2>3. Endere�o da Unidade de Produ��o</h2>
+                <h2>3. Endereço da Unidade de Produção</h2>
 
                 <div class="form-grid">
                     <div class="field-wrapper">
@@ -186,8 +186,8 @@
                             <button type="button"
                                     class="btn-icon-inline"
                                     onclick="PMOPrincipal.buscarCEP()"
-                                    title="Buscar endere�o">
-                                =
+                                    title="Buscar endereço">
+                                🔍
                             </button>
                         </label>
                         <input type="text"
@@ -200,14 +200,14 @@
 
                     <div class="field-wrapper col-span-3">
                         <label for="endereco">
-                            Endere�o Completo
+                            Endereço Completo
                             <span class="required">*</span>
                         </label>
                         <input type="text"
                                id="endereco"
                                name="endereco"
                                required
-                               placeholder="Rua, n�mero, complemento">
+                               placeholder="Rua, número, complemento">
                     </div>
 
                     <div class="field-wrapper col-span-2">
@@ -224,14 +224,14 @@
 
                     <div class="field-wrapper">
                         <label for="municipio">
-                            Munic�pio
+                            Município
                             <span class="required">*</span>
                         </label>
                         <input type="text"
                                id="municipio"
                                name="municipio"
                                required
-                               placeholder="Nome do munic�pio">
+                               placeholder="Nome do município">
                     </div>
 
                     <div class="field-wrapper">
@@ -303,30 +303,30 @@
 
                     <div class="field-wrapper col-span-4">
                         <label for="roteiro_acesso">
-                            Roteiro de Acesso � Propriedade
+                            Roteiro de Acesso à Propriedade
                         </label>
                         <textarea id="roteiro_acesso"
                                   name="roteiro_acesso"
                                   rows="3"
-                                  placeholder="Descreva como chegar � propriedade (pontos de refer�ncia, estradas, etc.)"></textarea>
+                                  placeholder="Descreva como chegar à propriedade (pontos de referência, estradas, etc.)"></textarea>
                     </div>
                 </div>
             </section>
 
-            <!-- Se��o 4: Dados da Propriedade -->
+            <!-- Seção 4: Dados da Propriedade -->
             <section id="secao-propriedade" class="form-section">
                 <h2>4. Dados da Propriedade</h2>
 
                 <div class="form-grid">
                     <div class="field-wrapper">
                         <label for="posse_terra">
-                            Situa��o da Posse da Terra
+                            Situação da Posse da Terra
                             <span class="required">*</span>
                         </label>
                         <select id="posse_terra" name="posse_terra" required>
                             <option value="">Selecione...</option>
-                            <option value="proprietario">Propriet�rio</option>
-                            <option value="arrendatario">Arrendat�rio</option>
+                            <option value="proprietario">Proprietário</option>
+                            <option value="arrendatario">Arrendatário</option>
                             <option value="parceiro">Parceiro</option>
                             <option value="comodato">Comodato</option>
                             <option value="posseiro">Posseiro</option>
@@ -337,7 +337,7 @@
 
                     <div class="field-wrapper">
                         <label for="area_total_ha">
-                            �rea Total (hectares)
+                            Área Total (hectares)
                             <span class="required">*</span>
                         </label>
                         <input type="number"
@@ -351,7 +351,7 @@
 
                     <div class="field-wrapper">
                         <label for="data_aquisicao">
-                            Data de Aquisi��o/Posse
+                            Data de Aquisição/Posse
                         </label>
                         <input type="date"
                                id="data_aquisicao"
@@ -370,11 +370,7 @@
 
                     <div class="field-wrapper col-span-2">
                         <label for="caf_numero">
-                            N�mero do CAF (Cadastro de Agricultor Familiar)
-                            <span class="help-tooltip">
-                                <span class="help-icon">?</span>
-                                <span class="help-text">Se n�o possuir CAF, marque a op��o abaixo</span>
-                            </span>
+                            Número do CAF (Cadastro de Agricultor Familiar)
                         </label>
                         <input type="text"
                                id="caf_numero"
@@ -389,20 +385,20 @@
                                    name="caf_nao_possui"
                                    value="sim"
                                    onchange="PMOPrincipal.toggleCAF(this)">
-                            <span>N�o possuo CAF</span>
+                            <span>Não possuo CAF</span>
                         </label>
                     </div>
                 </div>
             </section>
 
-            <!-- Se��o 5: Hist�rico de Manejo Org�nico -->
+            <!-- Seção 5: Histórico de Manejo Orgânico -->
             <section id="secao-manejo-organico" class="form-section">
-                <h2>5. Hist�rico de Manejo Org�nico</h2>
+                <h2>5. Histórico de Manejo Orgânico</h2>
 
                 <div class="form-grid">
                     <div class="field-wrapper">
                         <label for="anos_manejo_organico">
-                            H� quantos anos pratica manejo org�nico?
+                            Há quantos anos pratica manejo orgânico?
                             <span class="required">*</span>
                         </label>
                         <input type="number"
@@ -416,21 +412,21 @@
 
                     <div class="field-wrapper col-span-2">
                         <label for="situacao_manejo">
-                            Situa��o do Manejo
+                            Situação do Manejo
                             <span class="required">*</span>
                         </label>
                         <select id="situacao_manejo" name="situacao_manejo" required>
                             <option value="">Selecione...</option>
-                            <option value="em_conversao">Em convers�o</option>
-                            <option value="organico_nao_certificado">Org�nico n�o certificado</option>
+                            <option value="em_conversao">Em conversão</option>
+                            <option value="organico_nao_certificado">Orgânico não certificado</option>
                             <option value="certificado_outro_opac">Certificado por outro OPAC</option>
                             <option value="certificado_auditoria">Certificado por auditoria</option>
-                            <option value="convencional">Convencional (iniciando convers�o)</option>
+                            <option value="convencional">Convencional (iniciando conversão)</option>
                         </select>
                     </div>
 
                     <div class="field-wrapper col-span-4">
-                        <label>Comprova��o do Manejo Org�nico</label>
+                        <label>Comprovação do Manejo Orgânico</label>
                         <div class="checkbox-group">
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="comprovacao_testemunha" value="sim">
@@ -438,11 +434,11 @@
                             </label>
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="comprovacao_declaracao" value="sim">
-                                <span>Declara��o de associa��o/cooperativa</span>
+                                <span>Declaração de associação/cooperativa</span>
                             </label>
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="comprovacao_documento" value="sim">
-                                <span>Documento de certifica��o anterior</span>
+                                <span>Documento de certificação anterior</span>
                             </label>
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="comprovacao_cadernos" value="sim">
@@ -453,12 +449,12 @@
                 </div>
             </section>
 
-            <!-- Se��o 6: Respons�veis pela Produ��o -->
+            <!-- Seção 6: Responsáveis pela Produção -->
             <section id="secao-responsaveis" class="form-section">
-                <h2>6. Respons�veis pela Produ��o</h2>
+                <h2>6. Responsáveis pela Produção</h2>
 
                 <div class="section-info">
-                    <p class="instruction">9 Liste todas as pessoas respons�veis pelas atividades produtivas e decis�es t�cnicas.</p>
+                    <p class="instruction">ℹ️ Liste todas as pessoas responsáveis pelas atividades produtivas e decisões técnicas.</p>
                 </div>
 
                 <div class="table-wrapper">
@@ -469,9 +465,9 @@
                                 <th>Nome Completo <span class="required">*</span></th>
                                 <th>CPF <span class="required">*</span></th>
                                 <th>Data Nascimento</th>
-                                <th>Fun��o <span class="required">*</span></th>
+                                <th>Função <span class="required">*</span></th>
                                 <th>Telefone</th>
-                                <th>A��es</th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody id="tbody-responsaveis">
@@ -484,8 +480,8 @@
                                     <td>
                                         <select name="responsavel_funcao[]" required>
                                             <option value="">Selecione...</option>
-                                            <option value="proprietario">Propriet�rio</option>
-                                            <option value="responsavel_tecnico">Respons�vel T�cnico</option>
+                                            <option value="proprietario">Proprietário</option>
+                                            <option value="responsavel_tecnico">Responsável Técnico</option>
                                             <option value="gerente">Gerente</option>
                                             <option value="encarregado">Encarregado</option>
                                             <option value="outro">Outro</option>
@@ -493,98 +489,98 @@
                                     </td>
                                     <td><input type="tel" name="responsavel_telefone[]" data-mask="telefone" placeholder="(00) 00000-0000"></td>
                                     <td class="action-buttons">
-                                        <button type="button" onclick="PMOPrincipal.table.duplicateRow(this)" title="Duplicar">=�</button>
-                                        <button type="button" onclick="PMOPrincipal.table.removeRow(this)" title="Remover">L</button>
+                                        <button type="button" onclick="PMOPrincipal.table.duplicateRow(this)" title="Duplicar">📋</button>
+                                        <button type="button" onclick="PMOPrincipal.table.removeRow(this)" title="Remover">❌</button>
                                     </td>
                                 </tr>
                             </template>
                         </tbody>
                     </table>
-                    <button type="button" onclick="PMOPrincipal.table.addRow('tabela-responsaveis')" class="btn btn-add">� Adicionar Respons�vel</button>
+                    <button type="button" onclick="PMOPrincipal.table.addRow('tabela-responsaveis')" class="btn btn-add">➕ Adicionar Responsável</button>
                 </div>
             </section>
 
-            <!-- Se��o 7: Atividades Org�nicas -->
+            <!-- Seção 7: Atividades Orgânicas -->
             <section id="secao-atividades" class="form-section">
-                <h2>7. Atividades Org�nicas na Propriedade</h2>
+                <h2>7. Atividades Orgânicas na Propriedade</h2>
 
                 <div class="section-info">
-                    <p class="instruction">9 Marque todas as atividades org�nicas desenvolvidas e informe a �rea utilizada.</p>
+                    <p class="instruction">ℹ️ Marque todas as atividades orgânicas desenvolvidas e informe a área utilizada.</p>
                 </div>
 
                 <div class="form-grid">
                     <div class="field-wrapper col-span-4">
-                        <h4>Tipos de Produ��o</h4>
+                        <h4>Tipos de Produção</h4>
                         <div class="checkbox-grid">
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="atividade_hortalicas" value="sim" onchange="PMOPrincipal.toggleAreaInput(this, 'area_hortalicas')">
-                                <span>>l Hortali�as</span>
+                                <span>🥬 Hortaliças</span>
                             </label>
                             <div class="field-wrapper area-input" id="area_hortalicas" style="display:none;">
-                                <input type="number" name="area_hortalicas_ha" step="0.01" min="0" placeholder="�rea (ha)">
+                                <input type="number" name="area_hortalicas_ha" step="0.01" min="0" placeholder="Área (ha)">
                             </div>
 
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="atividade_frutas" value="sim" onchange="PMOPrincipal.toggleAreaInput(this, 'area_frutas')">
-                                <span><J Frutas</span>
+                                <span>🍊 Frutas</span>
                             </label>
                             <div class="field-wrapper area-input" id="area_frutas" style="display:none;">
-                                <input type="number" name="area_frutas_ha" step="0.01" min="0" placeholder="�rea (ha)">
+                                <input type="number" name="area_frutas_ha" step="0.01" min="0" placeholder="Área (ha)">
                             </div>
 
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="atividade_graos" value="sim" onchange="PMOPrincipal.toggleAreaInput(this, 'area_graos')">
-                                <span><> Gr�os</span>
+                                <span>🌾 Grãos</span>
                             </label>
                             <div class="field-wrapper area-input" id="area_graos" style="display:none;">
-                                <input type="number" name="area_graos_ha" step="0.01" min="0" placeholder="�rea (ha)">
+                                <input type="number" name="area_graos_ha" step="0.01" min="0" placeholder="Área (ha)">
                             </div>
 
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="atividade_plantas_medicinais" value="sim" onchange="PMOPrincipal.toggleAreaInput(this, 'area_medicinais')">
-                                <span><? Plantas Medicinais</span>
+                                <span>🌿 Plantas Medicinais</span>
                             </label>
                             <div class="field-wrapper area-input" id="area_medicinais" style="display:none;">
-                                <input type="number" name="area_medicinais_ha" step="0.01" min="0" placeholder="�rea (ha)">
+                                <input type="number" name="area_medicinais_ha" step="0.01" min="0" placeholder="Área (ha)">
                             </div>
 
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="atividade_pecuaria" value="sim" onchange="PMOPrincipal.toggleAreaInput(this, 'area_pecuaria')">
-                                <span>= Pecu�ria</span>
+                                <span>🐄 Pecuária</span>
                             </label>
                             <div class="field-wrapper area-input" id="area_pecuaria" style="display:none;">
-                                <input type="number" name="area_pecuaria_ha" step="0.01" min="0" placeholder="�rea (ha)">
+                                <input type="number" name="area_pecuaria_ha" step="0.01" min="0" placeholder="Área (ha)">
                             </div>
 
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="atividade_apicultura" value="sim">
-                                <span>= Apicultura</span>
+                                <span>🐝 Apicultura</span>
                             </label>
 
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="atividade_cogumelos" value="sim" onchange="PMOPrincipal.toggleAreaInput(this, 'area_cogumelos')">
-                                <span><D Cogumelos</span>
+                                <span>🍄 Cogumelos</span>
                             </label>
                             <div class="field-wrapper area-input" id="area_cogumelos" style="display:none;">
-                                <input type="number" name="area_cogumelos_m2" step="0.01" min="0" placeholder="�rea (m�)">
+                                <input type="number" name="area_cogumelos_m2" step="0.01" min="0" placeholder="Área (m²)">
                             </div>
 
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="atividade_processamento" value="sim">
-                                <span><� Processamento</span>
+                                <span>🏭 Processamento</span>
                             </label>
                         </div>
                     </div>
 
                     <div class="field-wrapper col-span-4">
-                        <h4>M�o de Obra</h4>
+                        <h4>Mão de Obra</h4>
                         <div class="form-grid">
                             <div class="field-wrapper">
-                                <label for="funcionarios_permanentes">Funcion�rios Permanentes</label>
+                                <label for="funcionarios_permanentes">Funcionários Permanentes</label>
                                 <input type="number" id="funcionarios_permanentes" name="funcionarios_permanentes" min="0" value="0">
                             </div>
                             <div class="field-wrapper">
-                                <label for="funcionarios_temporarios">Funcion�rios Tempor�rios</label>
+                                <label for="funcionarios_temporarios">Funcionários Temporários</label>
                                 <input type="number" id="funcionarios_temporarios" name="funcionarios_temporarios" min="0" value="0">
                             </div>
                             <div class="field-wrapper">
@@ -592,7 +588,7 @@
                                 <input type="number" id="funcionarios_familiares" name="funcionarios_familiares" min="0" value="0">
                             </div>
                             <div class="field-wrapper">
-                                <label for="funcionarios_voluntarios">Volunt�rios/Mutir�o</label>
+                                <label for="funcionarios_voluntarios">Voluntários/Mutirão</label>
                                 <input type="number" id="funcionarios_voluntarios" name="funcionarios_voluntarios" min="0" value="0">
                             </div>
                         </div>
@@ -600,12 +596,12 @@
                 </div>
             </section>
 
-            <!-- Se��o 8: Hist�rico de Culturas -->
+            <!-- Seção 8: Histórico de Aplicações -->
             <section id="secao-historico" class="form-section">
-                <h2>8. Hist�rico de Aplica��es na �rea (�ltimos 3 anos)</h2>
+                <h2>8. Histórico de Aplicações na Área (últimos 3 anos)</h2>
 
                 <div class="section-info">
-                    <p class="alert">� � obrigat�rio declarar todas as aplica��es de insumos n�o permitidos na produ��o org�nica nos �ltimos 3 anos.</p>
+                    <p class="alert">⚠️ É obrigatório declarar todas as aplicações de insumos não permitidos na produção orgânica nos últimos 3 anos.</p>
                 </div>
 
                 <div class="table-wrapper">
@@ -613,19 +609,19 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Cultura/�rea</th>
-                                <th>Data �ltima Aplica��o</th>
+                                <th>Cultura/Área</th>
+                                <th>Data Última Aplicação</th>
                                 <th>Insumo Utilizado</th>
                                 <th>Ingrediente Ativo</th>
-                                <th>J� era org�nico?</th>
-                                <th>A��es</th>
+                                <th>Já era orgânico?</th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody id="tbody-historico">
                             <template id="row-template-historico">
                                 <tr class="dynamic-row">
                                     <td class="row-number"></td>
-                                    <td><input type="text" name="historico_cultura[]" placeholder="Ex: Milho, Talh�o 1"></td>
+                                    <td><input type="text" name="historico_cultura[]" placeholder="Ex: Milho, Talhão 1"></td>
                                     <td><input type="date" name="historico_data[]"></td>
                                     <td><input type="text" name="historico_insumo[]" placeholder="Nome comercial"></td>
                                     <td><input type="text" name="historico_ativo[]" placeholder="Ex: Glifosato"></td>
@@ -633,34 +629,34 @@
                                         <select name="historico_organico[]">
                                             <option value="">Selecione...</option>
                                             <option value="sim">Sim</option>
-                                            <option value="nao">N�o</option>
+                                            <option value="nao">Não</option>
                                         </select>
                                     </td>
                                     <td class="action-buttons">
-                                        <button type="button" onclick="PMOPrincipal.table.duplicateRow(this)" title="Duplicar">=�</button>
-                                        <button type="button" onclick="PMOPrincipal.table.removeRow(this)" title="Remover">L</button>
+                                        <button type="button" onclick="PMOPrincipal.table.duplicateRow(this)" title="Duplicar">📋</button>
+                                        <button type="button" onclick="PMOPrincipal.table.removeRow(this)" title="Remover">❌</button>
                                     </td>
                                 </tr>
                             </template>
                         </tbody>
                     </table>
-                    <button type="button" onclick="PMOPrincipal.table.addRow('tabela-historico')" class="btn btn-add">� Adicionar Registro</button>
+                    <button type="button" onclick="PMOPrincipal.table.addRow('tabela-historico')" class="btn btn-add">➕ Adicionar Registro</button>
                 </div>
 
                 <div class="field-wrapper col-span-4">
                     <label class="checkbox-enhanced">
                         <input type="checkbox" id="sem_aplicacoes" name="sem_aplicacoes" value="sim" onchange="PMOPrincipal.toggleHistorico(this)">
-                        <span><strong>N�o houve aplica��o de insumos n�o permitidos nos �ltimos 3 anos</strong></span>
+                        <span><strong>Não houve aplicação de insumos não permitidos nos últimos 3 anos</strong></span>
                     </label>
                 </div>
             </section>
 
-            <!-- Se��o 9: Produtos a Certificar -->
+            <!-- Seção 9: Produtos a Certificar -->
             <section id="secao-produtos" class="form-section">
                 <h2>9. Lista de Produtos a Certificar</h2>
 
                 <div class="section-info">
-                    <p class="instruction">9 Liste todos os produtos que deseja certificar como org�nicos. Esta � uma se��o obrigat�ria.</p>
+                    <p class="instruction">ℹ️ Liste todos os produtos que deseja certificar como orgânicos. Esta é uma seção obrigatória.</p>
                 </div>
 
                 <div class="table-wrapper">
@@ -670,11 +666,11 @@
                                 <th>#</th>
                                 <th>Produto <span class="required">*</span></th>
                                 <th>Variedade</th>
-                                <th>Talh�o/�rea</th>
-                                <th>Estimativa Produ��o</th>
+                                <th>Talhão/Área</th>
+                                <th>Estimativa Produção</th>
                                 <th>Periodicidade</th>
                                 <th>Origem Muda/Semente</th>
-                                <th>A��es</th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody id="tbody-produtos">
@@ -683,8 +679,8 @@
                                     <td class="row-number"></td>
                                     <td><input type="text" name="produto_nome[]" required placeholder="Ex: Alface, Tomate"></td>
                                     <td><input type="text" name="produto_variedade[]" placeholder="Ex: Crespa, Cereja"></td>
-                                    <td><input type="text" name="produto_talhao[]" placeholder="Ex: Talh�o 1"></td>
-                                    <td><input type="text" name="produto_estimativa[]" placeholder="Ex: 100 kg/m�s"></td>
+                                    <td><input type="text" name="produto_talhao[]" placeholder="Ex: Talhão 1"></td>
+                                    <td><input type="text" name="produto_estimativa[]" placeholder="Ex: 100 kg/mês"></td>
                                     <td>
                                         <select name="produto_periodicidade[]">
                                             <option value="">Selecione...</option>
@@ -701,35 +697,35 @@
                                     <td>
                                         <select name="produto_origem[]">
                                             <option value="">Selecione...</option>
-                                            <option value="propria_organica">Pr�pria org�nica</option>
-                                            <option value="comprada_organica">Comprada org�nica</option>
-                                            <option value="comprada_nao_organica">Comprada n�o org�nica</option>
-                                            <option value="doacao">Doa��o</option>
+                                            <option value="propria_organica">Própria orgânica</option>
+                                            <option value="comprada_organica">Comprada orgânica</option>
+                                            <option value="comprada_nao_organica">Comprada não orgânica</option>
+                                            <option value="doacao">Doação</option>
                                         </select>
                                     </td>
                                     <td class="action-buttons">
-                                        <button type="button" onclick="PMOPrincipal.table.duplicateRow(this)" title="Duplicar">=�</button>
-                                        <button type="button" onclick="PMOPrincipal.table.removeRow(this)" title="Remover">L</button>
+                                        <button type="button" onclick="PMOPrincipal.table.duplicateRow(this)" title="Duplicar">📋</button>
+                                        <button type="button" onclick="PMOPrincipal.table.removeRow(this)" title="Remover">❌</button>
                                     </td>
                                 </tr>
                             </template>
                         </tbody>
                     </table>
-                    <button type="button" onclick="PMOPrincipal.table.addRow('tabela-produtos')" class="btn btn-add">� Adicionar Produto</button>
+                    <button type="button" onclick="PMOPrincipal.table.addRow('tabela-produtos')" class="btn btn-add">➕ Adicionar Produto</button>
                 </div>
             </section>
 
-            <!-- Se��o 10: Preserva��o Ambiental -->
+            <!-- Seção 10: Preservação Ambiental -->
             <section id="secao-preservacao" class="form-section">
-                <h2>10. Preserva��o Ambiental</h2>
+                <h2>10. Preservação Ambiental</h2>
 
                 <div class="form-grid">
                     <div class="field-wrapper col-span-4">
-                        <h4>�reas de Preserva��o na Propriedade</h4>
+                        <h4>Áreas de Preservação na Propriedade</h4>
                         <div class="checkbox-grid">
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="area_preservacao_permanente" value="sim">
-                                <span>�rea de Preserva��o Permanente (APP)</span>
+                                <span>Área de Preservação Permanente (APP)</span>
                             </label>
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="area_reserva_legal" value="sim">
@@ -754,41 +750,41 @@
                         <select id="possui_car" name="possui_car" required onchange="PMOPrincipal.toggleCAR(this)">
                             <option value="">Selecione...</option>
                             <option value="sim">Sim</option>
-                            <option value="nao">N�o</option>
+                            <option value="nao">Não</option>
                             <option value="em_processo">Em processo</option>
                         </select>
                     </div>
 
                     <div class="field-wrapper col-span-2" id="campo-situacao-car" style="display:none;">
-                        <label for="situacao_car">Situa��o do CAR</label>
+                        <label for="situacao_car">Situação do CAR</label>
                         <select id="situacao_car" name="situacao_car">
                             <option value="">Selecione...</option>
                             <option value="ativo">Ativo</option>
-                            <option value="pendente">Pendente de an�lise</option>
+                            <option value="pendente">Pendente de análise</option>
                             <option value="cancelado">Cancelado</option>
                             <option value="suspenso">Suspenso</option>
                         </select>
                     </div>
 
                     <div class="field-wrapper col-span-4">
-                        <label for="destino_lixo_organico">Destino do Lixo Org�nico</label>
+                        <label for="destino_lixo_organico">Destino do Lixo Orgânico</label>
                         <select id="destino_lixo_organico" name="destino_lixo_organico">
                             <option value="">Selecione...</option>
                             <option value="compostagem">Compostagem</option>
-                            <option value="alimentacao_animal">Alimenta��o animal</option>
+                            <option value="alimentacao_animal">Alimentação animal</option>
                             <option value="queima">Queima</option>
-                            <option value="coleta_publica">Coleta p�blica</option>
+                            <option value="coleta_publica">Coleta pública</option>
                             <option value="outro">Outro</option>
                         </select>
                     </div>
 
                     <div class="field-wrapper col-span-4">
-                        <label for="destino_lixo_nao_organico">Destino do Lixo N�o Org�nico</label>
+                        <label for="destino_lixo_nao_organico">Destino do Lixo Não Orgânico</label>
                         <select id="destino_lixo_nao_organico" name="destino_lixo_nao_organico">
                             <option value="">Selecione...</option>
                             <option value="coleta_seletiva">Coleta seletiva</option>
-                            <option value="coleta_publica">Coleta p�blica</option>
-                            <option value="reciclagem">Reciclagem pr�pria</option>
+                            <option value="coleta_publica">Coleta pública</option>
+                            <option value="reciclagem">Reciclagem própria</option>
                             <option value="queima">Queima</option>
                             <option value="enterro">Enterro</option>
                             <option value="outro">Outro</option>
@@ -796,12 +792,12 @@
                     </div>
 
                     <div class="field-wrapper col-span-4">
-                        <label for="destino_esgoto">Destino do Esgoto Dom�stico</label>
+                        <label for="destino_esgoto">Destino do Esgoto Doméstico</label>
                         <select id="destino_esgoto" name="destino_esgoto">
                             <option value="">Selecione...</option>
-                            <option value="fossa_septica">Fossa s�ptica</option>
+                            <option value="fossa_septica">Fossa séptica</option>
                             <option value="fossa_negra">Fossa negra</option>
-                            <option value="rede_publica">Rede p�blica</option>
+                            <option value="rede_publica">Rede pública</option>
                             <option value="biodigestor">Biodigestor</option>
                             <option value="outro">Outro</option>
                         </select>
@@ -809,12 +805,12 @@
                 </div>
             </section>
 
-            <!-- Se��o 11: Recursos H�dricos -->
+            <!-- Seção 11: Recursos Hídricos -->
             <section id="secao-recursos-hidricos" class="form-section">
-                <h2>11. Recursos H�dricos</h2>
+                <h2>11. Recursos Hídricos</h2>
 
                 <div class="section-info">
-                    <p class="instruction">9 Informe as fontes de �gua utilizadas na produ��o e poss�veis riscos de contamina��o.</p>
+                    <p class="instruction">ℹ️ Informe as fontes de água utilizadas na produção e possíveis riscos de contaminação.</p>
                 </div>
 
                 <div class="table-wrapper">
@@ -822,12 +818,12 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Uso da �gua</th>
+                                <th>Uso da Água</th>
                                 <th>Origem</th>
-                                <th>Risco de Contamina��o</th>
-                                <th>N�vel de Risco</th>
+                                <th>Risco de Contaminação</th>
+                                <th>Nível de Risco</th>
                                 <th>Garantia de Qualidade</th>
-                                <th>A��es</th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody id="tbody-recursos-hidricos">
@@ -837,21 +833,21 @@
                                     <td>
                                         <select name="agua_uso[]">
                                             <option value="">Selecione...</option>
-                                            <option value="irrigacao">Irriga��o</option>
-                                            <option value="pulverizacao">Pulveriza��o</option>
+                                            <option value="irrigacao">Irrigação</option>
+                                            <option value="pulverizacao">Pulverização</option>
                                             <option value="consumo_animal">Consumo animal</option>
                                             <option value="processamento">Processamento</option>
-                                            <option value="higienizacao">Higieniza��o</option>
+                                            <option value="higienizacao">Higienização</option>
                                         </select>
                                     </td>
                                     <td>
                                         <select name="agua_origem[]">
                                             <option value="">Selecione...</option>
-                                            <option value="poco">Po�o</option>
+                                            <option value="poco">Poço</option>
                                             <option value="nascente">Nascente</option>
-                                            <option value="rio">Rio/C�rrego</option>
+                                            <option value="rio">Rio/Córrego</option>
                                             <option value="represa">Represa</option>
-                                            <option value="rede_publica">Rede p�blica</option>
+                                            <option value="rede_publica">Rede pública</option>
                                             <option value="cisterna">Cisterna</option>
                                         </select>
                                     </td>
@@ -860,425 +856,564 @@
                                         <select name="agua_nivel_risco[]">
                                             <option value="">Selecione...</option>
                                             <option value="baixo">Baixo</option>
-                                            <option value="medio">M�dio</option>
+                                            <option value="medio">Médio</option>
                                             <option value="alto">Alto</option>
                                             <option value="nenhum">Nenhum</option>
                                         </select>
                                     </td>
-                                    <td><input type="text" name="agua_garantia[]" placeholder="Ex: An�lise anual"></td>
+                                    <td><input type="text" name="agua_garantia[]" placeholder="Ex: Análise anual"></td>
                                     <td class="action-buttons">
-                                        <button type="button" onclick="PMOPrincipal.table.duplicateRow(this)" title="Duplicar">=�</button>
-                                        <button type="button" onclick="PMOPrincipal.table.removeRow(this)" title="Remover">L</button>
+                                        <button type="button" onclick="PMOPrincipal.table.duplicateRow(this)" title="Duplicar">📋</button>
+                                        <button type="button" onclick="PMOPrincipal.table.removeRow(this)" title="Remover">❌</button>
                                     </td>
                                 </tr>
                             </template>
                         </tbody>
                     </table>
-                    <button type="button" onclick="PMOPrincipal.table.addRow('tabela-recursos-hidricos')" class="btn btn-add">� Adicionar Fonte de �gua</button>
+                    <button type="button" onclick="PMOPrincipal.table.addRow('tabela-recursos-hidricos')" class="btn btn-add">➕ Adicionar Fonte de Água</button>
                 </div>
             </section>
 
-            <!-- Se��o 12: Comercializa��o -->
-            <section id="secao-comercializacao" class="form-section">
-                <h2>12. Comercializa��o</h2>
+            <!-- ===== 12. COMERCIALIZAÇÃO ===== -->
+            <section class="form-section" id="secao-comercializacao">
+                <h2>12. Comercialização</h2>
 
-                <div class="form-grid">
-                    <div class="field-wrapper col-span-4">
-                        <h4>Canais de Comercializa��o</h4>
-                        <div class="checkbox-grid">
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="comercio_feira" value="sim">
-                                <span><� Feira</span>
-                            </label>
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="comercio_csa" value="sim">
-                                <span>>f CSA (Comunidade que Sustenta a Agricultura)</span>
-                            </label>
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="comercio_entrega_domicilio" value="sim">
-                                <span>=� Entrega em domic�lio</span>
-                            </label>
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="comercio_venda_propriedade" value="sim">
-                                <span><� Venda na propriedade</span>
-                            </label>
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="comercio_pnae" value="sim">
-                                <span><� PNAE (Merenda escolar)</span>
-                            </label>
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="comercio_paa" value="sim">
-                                <span><� PAA (Compras governamentais)</span>
-                            </label>
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="comercio_supermercado" value="sim">
-                                <span>=� Supermercado</span>
-                            </label>
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="comercio_cooperativa" value="sim">
-                                <span>> Cooperativa</span>
-                            </label>
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="comercio_intermediario" value="sim">
-                                <span>=d Intermedi�rio</span>
-                            </label>
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="comercio_industria" value="sim">
-                                <span><� Ind�stria</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="field-wrapper col-span-4">
-                        <label for="previsao_inicio_vendas">Previs�o de In�cio das Vendas</label>
-                        <input type="date" id="previsao_inicio_vendas" name="previsao_inicio_vendas">
-                    </div>
-
-                    <div class="field-wrapper col-span-2">
-                        <label for="comercializa_nao_organicos">
-                            Comercializa produtos N�O org�nicos?
-                            <span class="required">*</span>
+                <div class="form-group">
+                    <label class="label-title">Canais de Comercialização <span class="required">*</span></label>
+                    <div class="checkbox-grid">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="canal_comercializacao" value="feira_livre">
+                            Feira livre
                         </label>
-                        <select id="comercializa_nao_organicos" name="comercializa_nao_organicos" required onchange="PMOPrincipal.toggleNaoOrganicos(this)">
-                            <option value="">Selecione...</option>
-                            <option value="sim">Sim</option>
-                            <option value="nao">N�o</option>
-                        </select>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="canal_comercializacao" value="csa">
+                            CSA (Comunidade que Sustenta a Agricultura)
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="canal_comercializacao" value="entrega_domicilio">
+                            Entrega em domicílio
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="canal_comercializacao" value="loja_propria">
+                            Loja própria
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="canal_comercializacao" value="supermercado">
+                            Supermercado
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="canal_comercializacao" value="pnae">
+                            PNAE (Alimentação Escolar)
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="canal_comercializacao" value="paa">
+                            PAA (Programa de Aquisição de Alimentos)
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="canal_comercializacao" value="restaurantes">
+                            Restaurantes
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="canal_comercializacao" value="atacado">
+                            Atacado
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="canal_comercializacao" value="outro">
+                            Outro
+                        </label>
                     </div>
+                </div>
 
-                    <div class="field-wrapper col-span-2" id="campo-separacao-produtos" style="display:none;">
-                        <label for="separacao_produtos">Como separa os produtos?</label>
-                        <input type="text" id="separacao_produtos" name="separacao_produtos" placeholder="Descreva a separa��o">
+                <div class="form-grid grid-2">
+                    <div class="form-group">
+                        <label for="inicio_vendas">Previsão de Início das Vendas</label>
+                        <input type="date" id="inicio_vendas" name="inicio_vendas">
                     </div>
+                    <div class="form-group">
+                        <label for="percentual_venda_organica">% da Produção Vendida como Orgânica</label>
+                        <input type="number" id="percentual_venda_organica" name="percentual_venda_organica" min="0" max="100" placeholder="Ex: 100">
+                    </div>
+                </div>
 
-                    <div class="field-wrapper col-span-4">
-                        <label for="rotulagem">Sistema de Rotulagem/Identifica��o</label>
-                        <textarea id="rotulagem" name="rotulagem" rows="2" placeholder="Descreva como rotula e identifica seus produtos org�nicos"></textarea>
+                <div class="form-group">
+                    <label>Vende produtos NÃO orgânicos? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="vende_nao_organicos" value="sim" required>
+                            Sim
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="vende_nao_organicos" value="nao" required>
+                            Não
+                        </label>
                     </div>
+                    <div class="form-group" id="separacao-nao-organicos" style="display: none; margin-top: 1rem;">
+                        <label for="como_separa_comercializacao">Como separa os produtos orgânicos dos não orgânicos na comercialização? <span class="required">*</span></label>
+                        <textarea id="como_separa_comercializacao" name="como_separa_comercializacao" rows="3" placeholder="Descreva como garante que não há mistura de produtos orgânicos e não orgânicos"></textarea>
+                    </div>
+                </div>
 
-                    <div class="field-wrapper col-span-4">
-                        <label for="rastreabilidade">Sistema de Rastreabilidade</label>
-                        <textarea id="rastreabilidade" name="rastreabilidade" rows="2" placeholder="Como garante a rastreabilidade dos produtos?"></textarea>
-                    </div>
+                <div class="form-group">
+                    <label for="sistema_rotulagem">Sistema de Rotulagem e Identificação <span class="required">*</span></label>
+                    <textarea id="sistema_rotulagem" name="sistema_rotulagem" rows="3" placeholder="Descreva como os produtos são rotulados (etiquetas, selo, embalagens, etc.)" required></textarea>
+                </div>
 
-                    <div class="field-wrapper col-span-4">
-                        <label for="transporte">Transporte dos Produtos</label>
-                        <select id="transporte" name="transporte">
-                            <option value="">Selecione...</option>
-                            <option value="proprio">Transporte pr�prio</option>
-                            <option value="terceirizado">Transporte terceirizado</option>
-                            <option value="cooperativa">Cooperativa</option>
-                            <option value="comprador">O comprador busca</option>
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <label for="sistema_rastreabilidade_comercial">Sistema de Rastreabilidade na Comercialização <span class="required">*</span></label>
+                    <textarea id="sistema_rastreabilidade_comercial" name="sistema_rastreabilidade_comercial" rows="3" placeholder="Como rastreia os produtos desde a colheita até a venda?" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="transporte">Transporte e Armazenamento para Venda</label>
+                    <textarea id="transporte" name="transporte" rows="3" placeholder="Descreva como transporta e armazena os produtos até o ponto de venda"></textarea>
                 </div>
             </section>
 
-            <!-- Se��o 13: Controles e Registros -->
-            <section id="secao-controles" class="form-section">
+            <!-- ===== 13. CONTROLES E REGISTROS ===== -->
+            <section class="form-section" id="secao-controles">
                 <h2>13. Controles e Registros</h2>
 
-                <div class="section-info">
-                    <p class="instruction">9 Informe quais controles e registros s�o mantidos na propriedade.</p>
+                <div class="form-group">
+                    <label class="label-title">Tipos de Registros Mantidos <span class="required">*</span></label>
+                    <div class="checkbox-grid">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="tipo_registro" value="caderno_campo" required>
+                            Caderno de campo
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="tipo_registro" value="planilhas">
+                            Planilhas eletrônicas
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="tipo_registro" value="fichas_manejo">
+                            Fichas de manejo
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="tipo_registro" value="notas_fiscais">
+                            Notas fiscais de insumos
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="tipo_registro" value="comprovantes_venda">
+                            Comprovantes de venda
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="tipo_registro" value="rastreabilidade">
+                            Sistema de rastreabilidade (obrigatório)
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="tipo_registro" value="analises">
+                            Análises laboratoriais
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="tipo_registro" value="fotos">
+                            Fotos e registros visuais
+                        </label>
+                    </div>
                 </div>
 
-                <div class="form-grid">
-                    <div class="field-wrapper col-span-4">
-                        <div class="checkbox-grid">
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="controle_caderno_campo" value="sim">
-                                <span>=� Caderno de campo</span>
-                            </label>
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="controle_plantio" value="sim">
-                                <span><1 Registro de plantio</span>
-                            </label>
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="controle_colheita" value="sim">
-                                <span>>� Registro de colheita</span>
-                            </label>
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="controle_vendas" value="sim">
-                                <span>=� Registro de vendas</span>
-                            </label>
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="controle_insumos" value="sim">
-                                <span>=� Controle de insumos</span>
-                            </label>
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="controle_estoque" value="sim">
-                                <span>=� Controle de estoque</span>
-                            </label>
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="controle_rastreabilidade" value="sim">
-                                <span>= Rastreabilidade</span>
-                            </label>
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="controle_nao_conformidades" value="sim">
-                                <span>� N�o conformidades</span>
-                            </label>
-                        </div>
+                <div class="form-group">
+                    <label for="descricao_caderno_campo">Descrição do Caderno de Campo <span class="required">*</span></label>
+                    <textarea id="descricao_caderno_campo" name="descricao_caderno_campo" rows="4" placeholder="O que registra no caderno de campo? Ex: datas de plantio, tratos culturais, colheitas, insumos aplicados, etc." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="sistema_rastreabilidade_interno">Sistema de Rastreabilidade Interno <span class="required">*</span></label>
+                    <textarea id="sistema_rastreabilidade_interno" name="sistema_rastreabilidade_interno" rows="4" placeholder="Como rastreia internamente os produtos desde o plantio até a colheita? Ex: etiquetas por lote, numeração, códigos, etc." required></textarea>
+                    <p class="help-text">⚠️ A rastreabilidade é OBRIGATÓRIA conforme IN 19/2011 MAPA</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="controle_estoque">Controle de Estoque de Insumos</label>
+                    <textarea id="controle_estoque" name="controle_estoque" rows="3" placeholder="Como controla o estoque de sementes, insumos, fertilizantes, etc.?"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Mantém registros por quanto tempo?</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="tempo_registros" value="menos_1_ano">
+                            Menos de 1 ano
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="tempo_registros" value="1_a_3_anos">
+                            1 a 3 anos
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="tempo_registros" value="3_a_5_anos">
+                            3 a 5 anos
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="tempo_registros" value="mais_5_anos">
+                            Mais de 5 anos
+                        </label>
+                    </div>
+                    <p class="help-text">Recomendado: mínimo 5 anos para fins de auditoria</p>
+                </div>
+            </section>
+
+            <!-- ===== 14. PRODUÇÃO DE SUBSISTÊNCIA ===== -->
+            <section class="form-section" id="secao-subsistencia">
+                <h2>14. Produção de Subsistência (Consumo Próprio)</h2>
+
+                <div class="alert alert-info">
+                    <strong>ℹ️ O que é?</strong> Produção destinada ao consumo da família, que pode ser manejada de forma NÃO orgânica, desde que separada da produção orgânica certificada.
+                </div>
+
+                <div class="form-group">
+                    <label>Possui produção para consumo próprio NÃO orgânica? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="possui_subsistencia" value="sim" required>
+                            Sim
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="possui_subsistencia" value="nao" required>
+                            Não
+                        </label>
+                    </div>
+                </div>
+
+                <div id="detalhes-subsistencia" style="display: none;">
+                    <div class="form-group">
+                        <label for="produtos_subsistencia">Quais produtos produz para consumo próprio de forma não orgânica?</label>
+                        <textarea id="produtos_subsistencia" name="produtos_subsistencia" rows="3" placeholder="Ex: Milho, feijão, mandioca, galinhas caipiras, etc."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="area_subsistencia">Área destinada (hectares)</label>
+                        <input type="number" id="area_subsistencia" name="area_subsistencia" step="0.01" min="0" placeholder="Ex: 0.5">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="separacao_subsistencia">Como separa a produção de subsistência da produção orgânica certificada? <span class="required">*</span></label>
+                        <textarea id="separacao_subsistencia" name="separacao_subsistencia" rows="4" placeholder="Descreva as barreiras físicas, distâncias, épocas diferentes, etc."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="insumos_subsistencia">Quais insumos/práticas não orgânicas utiliza na produção de subsistência?</label>
+                        <textarea id="insumos_subsistencia" name="insumos_subsistencia" rows="3" placeholder="Ex: Fertilizantes químicos, agrotóxicos específicos, sementes transgênicas, etc."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="armazenamento_subsistencia">Como armazena separadamente os insumos não orgânicos?</label>
+                        <textarea id="armazenamento_subsistencia" name="armazenamento_subsistencia" rows="3" placeholder="Ex: Galpão separado, prateleira identificada, caixa específica, etc."></textarea>
                     </div>
                 </div>
             </section>
 
-            <!-- Se��o 14: Produ��o de Subsist�ncia -->
-            <section id="secao-subsistencia" class="form-section">
-                <h2>14. Produ��o de Subsist�ncia (N�o Org�nica)</h2>
+            <!-- ===== 15. PRODUÇÃO PARALELA ===== -->
+            <section class="form-section" id="secao-producao-paralela">
+                <h2>15. Produção Paralela (Orgânica e Convencional do Mesmo Produto)</h2>
 
-                <div class="section-info">
-                    <p class="instruction">9 Declare se possui produ��o para consumo pr�prio que N�O segue manejo org�nico.</p>
+                <div class="alert alert-warning">
+                    <strong>⚠️ Atenção!</strong> Produção paralela significa produzir o MESMO produto de forma orgânica E convencional simultaneamente. Esta prática é permitida mas NÃO recomendada devido aos riscos de contaminação e mistura.
                 </div>
 
-                <div class="form-grid">
-                    <div class="field-wrapper col-span-2">
-                        <label for="possui_subsistencia">
-                            Possui produ��o de subsist�ncia n�o org�nica?
-                            <span class="required">*</span>
+                <div class="form-group">
+                    <label>Produz o mesmo produto de forma orgânica E convencional? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="possui_producao_paralela" value="sim" required>
+                            Sim
                         </label>
-                        <select id="possui_subsistencia" name="possui_subsistencia" required onchange="PMOPrincipal.toggleSubsistencia(this)">
-                            <option value="">Selecione...</option>
-                            <option value="sim">Sim</option>
-                            <option value="nao">N�o</option>
-                        </select>
+                        <label class="radio-label">
+                            <input type="radio" name="possui_producao_paralela" value="nao" required>
+                            Não
+                        </label>
+                    </div>
+                </div>
+
+                <div id="detalhes-paralela" style="display: none;">
+                    <div class="alert alert-danger">
+                        <strong>⚠️ BLOQUEIO DE CERTIFICAÇÃO</strong><br>
+                        A produção paralela pode resultar em suspensão ou cancelamento da certificação se não houver separação adequada e rastreabilidade rigorosa.
                     </div>
 
-                    <div id="campos-subsistencia" style="display:none;">
-                        <div class="form-grid">
-                            <div class="field-wrapper col-span-4">
-                                <label for="subsistencia_usa_nao_permitidos">Usa insumos n�o permitidos?</label>
-                                <select id="subsistencia_usa_nao_permitidos" name="subsistencia_usa_nao_permitidos">
-                                    <option value="">Selecione...</option>
-                                    <option value="sim">Sim</option>
-                                    <option value="nao">N�o</option>
-                                </select>
-                            </div>
+                    <div class="form-group">
+                        <label for="produtos_paralelos">Quais produtos são produzidos de ambas as formas? <span class="required">*</span></label>
+                        <textarea id="produtos_paralelos" name="produtos_paralelos" rows="3" placeholder="Ex: Tomate (orgânico e convencional), Alface (orgânico e convencional)"></textarea>
+                    </div>
 
-                            <div class="field-wrapper col-span-4">
-                                <label for="subsistencia_risco">Risco de Contamina��o</label>
-                                <textarea id="subsistencia_risco" name="subsistencia_risco" rows="2" placeholder="Descreva poss�veis riscos de contamina��o"></textarea>
-                            </div>
+                    <div class="form-group">
+                        <label for="motivo_paralela">Por que mantém produção paralela? <span class="required">*</span></label>
+                        <textarea id="motivo_paralela" name="motivo_paralela" rows="3" placeholder="Ex: Transição gradual, demanda de mercado, teste de variedades, etc."></textarea>
+                    </div>
 
-                            <div class="field-wrapper col-span-4">
-                                <label for="subsistencia_bloqueios">Manejos de Bloqueio/Separa��o</label>
-                                <textarea id="subsistencia_bloqueios" name="subsistencia_bloqueios" rows="2" placeholder="Como garante a separa��o da produ��o org�nica?"></textarea>
-                            </div>
+                    <div class="form-group">
+                        <label for="separacao_fisica_paralela">Separação Física das Áreas <span class="required">*</span></label>
+                        <textarea id="separacao_fisica_paralela" name="separacao_fisica_paralela" rows="4" placeholder="Descreva as barreiras, distâncias, cercas, divisões entre áreas orgânicas e convencionais"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="separacao_equipamentos">Separação de Equipamentos e Ferramentas <span class="required">*</span></label>
+                        <textarea id="separacao_equipamentos" name="separacao_equipamentos" rows="3" placeholder="Como garante que não há contaminação cruzada via equipamentos?"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="separacao_colheita">Separação na Colheita e Pós-Colheita <span class="required">*</span></label>
+                        <textarea id="separacao_colheita" name="separacao_colheita" rows="3" placeholder="Como separa os produtos na colheita, lavagem, embalagem e transporte?"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rastreabilidade_paralela">Sistema de Rastreabilidade para Produção Paralela <span class="required">*</span></label>
+                        <textarea id="rastreabilidade_paralela" name="rastreabilidade_paralela" rows="4" placeholder="Como rastreia e identifica cada lote (orgânico vs convencional) desde o plantio até a venda?"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registros_paralela">Registros Diferenciados <span class="required">*</span></label>
+                        <textarea id="registros_paralela" name="registros_paralela" rows="3" placeholder="Como mantém registros separados para produção orgânica e convencional?"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prazo_eliminacao_paralela">Pretende eliminar a produção paralela? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="pretende_eliminar_paralela" value="sim">
+                                Sim
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="pretende_eliminar_paralela" value="nao">
+                                Não
+                            </label>
                         </div>
+                        <input type="text" id="prazo_eliminacao_paralela" name="prazo_eliminacao_paralela" placeholder="Se sim, qual o prazo? Ex: 12 meses" style="margin-top: 0.5rem;">
                     </div>
                 </div>
             </section>
 
-            <!-- Se��o 15: Produ��o Paralela -->
-            <section id="secao-paralela" class="form-section">
-                <h2>15. Produ��o Paralela (Org�nica e Convencional)</h2>
+            <!-- ===== 16. UPLOAD DE DOCUMENTOS ===== -->
+            <section class="form-section" id="secao-documentos">
+                <h2>16. Upload de Documentos</h2>
 
-                <div class="section-info">
-                    <p class="alert">� Produ��o paralela � quando voc� cultiva o MESMO produto em manejo org�nico e convencional simultaneamente.</p>
+                <div class="alert alert-info">
+                    <strong>ℹ️ Documentos Importantes:</strong>
+                    <ul style="margin: 0.5rem 0 0 1.5rem;">
+                        <li><strong>Obrigatório:</strong> Croqui/mapa da propriedade</li>
+                        <li><strong>Recomendado:</strong> CAR (Cadastro Ambiental Rural)</li>
+                        <li><strong>Opcional:</strong> Análises de solo/água, fotos da área</li>
+                    </ul>
                 </div>
 
-                <div class="form-grid">
-                    <div class="field-wrapper col-span-2">
-                        <label for="possui_paralela">
-                            Possui produ��o paralela?
-                            <span class="required">*</span>
+                <!-- Croqui da Propriedade -->
+                <div class="form-group">
+                    <label class="label-title">Croqui/Mapa da Propriedade <span class="required">*</span></label>
+                    <p class="help-text">
+                        Documento obrigatório que deve mostrar: limites da propriedade, áreas de produção orgânica,
+                        APP (Área de Preservação Permanente), Reserva Legal, fontes de água, construções, vizinhanças.
+                    </p>
+                    <div class="upload-area" id="upload-croqui">
+                        <input type="file" id="file-croqui" accept=".pdf,.jpg,.jpeg,.png" style="display: none;" required>
+                        <label for="file-croqui" style="cursor: pointer; display: block; text-align: center;">
+                            <div style="font-size: 3rem;">📄</div>
+                            <p><strong>Clique aqui</strong> ou arraste o arquivo</p>
+                            <p class="help-text">PDF, JPG ou PNG (máx. 5MB)</p>
                         </label>
-                        <select id="possui_paralela" name="possui_paralela" required onchange="PMOPrincipal.toggleParalela(this)">
-                            <option value="">Selecione...</option>
-                            <option value="sim">Sim</option>
-                            <option value="nao">N�o</option>
-                        </select>
                     </div>
+                    <div id="preview-croqui" class="file-preview"></div>
+                </div>
 
-                    <div id="campos-paralela" style="display:none;">
-                        <div class="form-grid">
-                            <div class="field-wrapper col-span-4">
-                                <label for="paralela_usa_nao_permitidos">Usa insumos n�o permitidos na produ��o convencional?</label>
-                                <select id="paralela_usa_nao_permitidos" name="paralela_usa_nao_permitidos">
-                                    <option value="">Selecione...</option>
-                                    <option value="sim">Sim</option>
-                                    <option value="nao">N�o</option>
-                                </select>
-                            </div>
-
-                            <div class="field-wrapper col-span-4">
-                                <label for="paralela_risco">Risco de Contamina��o</label>
-                                <textarea id="paralela_risco" name="paralela_risco" rows="2" placeholder="Descreva poss�veis riscos"></textarea>
-                            </div>
-
-                            <div class="field-wrapper col-span-4">
-                                <label for="paralela_bloqueios">Manejos de Bloqueio/Separa��o</label>
-                                <textarea id="paralela_bloqueios" name="paralela_bloqueios" rows="2" placeholder="Como diferencia e separa os produtos?"></textarea>
-                            </div>
-
-                            <div class="field-wrapper col-span-2">
-                                <label for="paralela_conversao_total">Pretende converter toda a produ��o?</label>
-                                <select id="paralela_conversao_total" name="paralela_conversao_total" onchange="PMOPrincipal.toggleConversaoTotal(this)">
-                                    <option value="">Selecione...</option>
-                                    <option value="sim">Sim</option>
-                                    <option value="nao">N�o</option>
-                                </select>
-                            </div>
-
-                            <div class="field-wrapper col-span-2" id="campo-tempo-conversao" style="display:none;">
-                                <label for="paralela_tempo_conversao">Em quanto tempo?</label>
-                                <input type="text" id="paralela_tempo_conversao" name="paralela_tempo_conversao" placeholder="Ex: 2 anos">
-                            </div>
-                        </div>
+                <!-- CAR -->
+                <div class="form-group">
+                    <label class="label-title">CAR - Cadastro Ambiental Rural (Recomendado)</label>
+                    <p class="help-text">
+                        O CAR é obrigatório por lei (Lei 12.651/2012) para todas as propriedades rurais.
+                        Faça o upload do comprovante de inscrição.
+                    </p>
+                    <div class="upload-area" id="upload-car">
+                        <input type="file" id="file-car" accept=".pdf,.jpg,.jpeg,.png" style="display: none;">
+                        <label for="file-car" style="cursor: pointer; display: block; text-align: center;">
+                            <div style="font-size: 3rem;">🌳</div>
+                            <p><strong>Clique aqui</strong> ou arraste o arquivo</p>
+                            <p class="help-text">PDF, JPG ou PNG (máx. 5MB)</p>
+                        </label>
                     </div>
+                    <div id="preview-car" class="file-preview"></div>
+                </div>
+
+                <!-- Análises de Solo -->
+                <div class="form-group">
+                    <label class="label-title">Análises de Solo (Opcional)</label>
+                    <p class="help-text">
+                        Laudos de análise química e física do solo das áreas de produção orgânica.
+                    </p>
+                    <div class="upload-area" id="upload-solo">
+                        <input type="file" id="file-solo" accept=".pdf,.jpg,.jpeg,.png" style="display: none;" multiple>
+                        <label for="file-solo" style="cursor: pointer; display: block; text-align: center;">
+                            <div style="font-size: 3rem;">🧪</div>
+                            <p><strong>Clique aqui</strong> ou arraste os arquivos</p>
+                            <p class="help-text">PDF, JPG ou PNG (máx. 5MB cada)</p>
+                        </label>
+                    </div>
+                    <div id="preview-solo" class="file-preview"></div>
+                </div>
+
+                <!-- Análises de Água -->
+                <div class="form-group">
+                    <label class="label-title">Análises de Água (Opcional)</label>
+                    <p class="help-text">
+                        Laudos de análise microbiológica e físico-química da água utilizada na produção.
+                    </p>
+                    <div class="upload-area" id="upload-agua">
+                        <input type="file" id="file-agua" accept=".pdf,.jpg,.jpeg,.png" style="display: none;" multiple>
+                        <label for="file-agua" style="cursor: pointer; display: block; text-align: center;">
+                            <div style="font-size: 3rem;">💧</div>
+                            <p><strong>Clique aqui</strong> ou arraste os arquivos</p>
+                            <p class="help-text">PDF, JPG ou PNG (máx. 5MB cada)</p>
+                        </label>
+                    </div>
+                    <div id="preview-agua" class="file-preview"></div>
+                </div>
+
+                <!-- Outros Documentos -->
+                <div class="form-group">
+                    <label class="label-title">Outros Documentos (Opcional)</label>
+                    <p class="help-text">
+                        Fotos da propriedade, certificados anteriores, declarações, etc.
+                    </p>
+                    <div class="upload-area" id="upload-outros">
+                        <input type="file" id="file-outros" accept=".pdf,.jpg,.jpeg,.png" style="display: none;" multiple>
+                        <label for="file-outros" style="cursor: pointer; display: block; text-align: center;">
+                            <div style="font-size: 3rem;">📎</div>
+                            <p><strong>Clique aqui</strong> ou arraste os arquivos</p>
+                            <p class="help-text">PDF, JPG ou PNG (máx. 5MB cada)</p>
+                        </label>
+                    </div>
+                    <div id="preview-outros" class="file-preview"></div>
                 </div>
             </section>
 
-            <!-- Se��o 16: Upload de Documentos -->
-            <section id="secao-documentos" class="form-section">
-                <h2>16. Documentos Anexos</h2>
+            <!-- ===== 17. DECLARAÇÕES E COMPROMISSOS ===== -->
+            <section class="form-section" id="secao-declaracoes">
+                <h2>17. Declarações e Compromissos</h2>
 
-                <div class="section-info">
-                    <p class="instruction">9 Anexe os documentos obrigat�rios. Formatos aceitos: PDF, JPG, PNG (m�x. 5MB cada)</p>
+                <div class="alert alert-warning">
+                    <strong>⚠️ Declaração de Responsabilidade</strong><br>
+                    Ao preencher e enviar este formulário, você está declarando formalmente que todas as informações
+                    são verdadeiras e assumindo compromissos legais perante o MAPA e a certificadora.
                 </div>
 
-                <div class="form-grid">
-                    <div class="field-wrapper col-span-4">
-                        <label>Croqui da Propriedade <span class="required">*</span></label>
-                        <div class="upload-area" id="upload-croqui">
-                            <p>=� Arraste o arquivo aqui ou clique para selecionar</p>
-                            <input type="file"
-                                   name="documento_croqui"
-                                   accept=".pdf,.jpg,.jpeg,.png"
-                                   onchange="PMOPrincipal.handleFileUpload(this, 'preview-croqui')">
-                        </div>
-                        <div id="preview-croqui" class="file-preview"></div>
-                    </div>
-
-                    <div class="field-wrapper col-span-4">
-                        <label>CAR - Cadastro Ambiental Rural</label>
-                        <div class="upload-area" id="upload-car">
-                            <p>=� Arraste o arquivo aqui ou clique para selecionar</p>
-                            <input type="file"
-                                   name="documento_car"
-                                   accept=".pdf,.jpg,.jpeg,.png"
-                                   onchange="PMOPrincipal.handleFileUpload(this, 'preview-car')">
-                        </div>
-                        <div id="preview-car" class="file-preview"></div>
-                    </div>
-
-                    <div class="field-wrapper col-span-4">
-                        <label>An�lise de Solo (se houver)</label>
-                        <div class="upload-area" id="upload-analise-solo">
-                            <p>=� Arraste o arquivo aqui ou clique para selecionar</p>
-                            <input type="file"
-                                   name="documento_analise_solo"
-                                   accept=".pdf,.jpg,.jpeg,.png"
-                                   onchange="PMOPrincipal.handleFileUpload(this, 'preview-analise-solo')">
-                        </div>
-                        <div id="preview-analise-solo" class="file-preview"></div>
-                    </div>
-
-                    <div class="field-wrapper col-span-4">
-                        <label>An�lise de �gua (se houver)</label>
-                        <div class="upload-area" id="upload-analise-agua">
-                            <p>=� Arraste o arquivo aqui ou clique para selecionar</p>
-                            <input type="file"
-                                   name="documento_analise_agua"
-                                   accept=".pdf,.jpg,.jpeg,.png"
-                                   onchange="PMOPrincipal.handleFileUpload(this, 'preview-analise-agua')">
-                        </div>
-                        <div id="preview-analise-agua" class="file-preview"></div>
-                    </div>
-
-                    <div class="field-wrapper col-span-4">
-                        <label>Outros Documentos</label>
-                        <div class="upload-area" id="upload-outros">
-                            <p>=� Arraste arquivos aqui ou clique para selecionar (m�ltiplos)</p>
-                            <input type="file"
-                                   name="documento_outros[]"
-                                   accept=".pdf,.jpg,.jpeg,.png"
-                                   multiple
-                                   onchange="PMOPrincipal.handleFileUpload(this, 'preview-outros')">
-                        </div>
-                        <div id="preview-outros" class="file-preview"></div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Se��o 17: Declara��es -->
-            <section id="secao-declaracoes" class="form-section">
-                <h2>17. Declara��es e Compromissos</h2>
-
-                <div class="section-info">
-                    <p class="alert">� � obrigat�rio concordar com todas as declara��es abaixo para submeter o PMO.</p>
+                <div class="form-group">
+                    <label class="checkbox-label" style="display: block; margin-bottom: 1rem; font-size: var(--text-base);">
+                        <input type="checkbox" name="declara_veracidade" value="sim" required>
+                        <strong>Declaro que todas as informações prestadas neste formulário são verdadeiras</strong> e estou ciente de que
+                        informações falsas podem resultar em suspensão ou cancelamento da certificação orgânica, além de sanções legais.
+                        <span class="required">*</span>
+                    </label>
                 </div>
 
-                <div class="form-grid">
-                    <div class="field-wrapper col-span-4">
-                        <div class="checkbox-group">
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="declaracao_veracidade" value="sim" required>
-                                <span><strong>Declaro que todas as informa��es prestadas s�o verdadeiras</strong></span>
-                            </label>
+                <div class="form-group">
+                    <label class="checkbox-label" style="display: block; margin-bottom: 1rem; font-size: var(--text-base);">
+                        <input type="checkbox" name="compromisso_normas" value="sim" required>
+                        <strong>Comprometo-me a seguir as normas de produção orgânica</strong> estabelecidas pela Lei 10.831/2003,
+                        Portaria 52/2021 MAPA e demais legislações aplicáveis, incluindo o uso exclusivo de insumos permitidos
+                        e práticas de manejo sustentáveis.
+                        <span class="required">*</span>
+                    </label>
+                </div>
 
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="declaracao_normas" value="sim" required>
-                                <span><strong>Comprometo-me a seguir as normas de produ��o org�nica (Lei 10.831/2003 e Portaria 52/2021)</strong></span>
-                            </label>
+                <div class="form-group">
+                    <label class="checkbox-label" style="display: block; margin-bottom: 1rem; font-size: var(--text-base);">
+                        <input type="checkbox" name="compromisso_visitas" value="sim" required>
+                        <strong>Autorizo visitas de verificação</strong> na minha unidade de produção por parte da certificadora
+                        e dos membros do Organismo Participativo de Avaliação da Conformidade (OPAC),
+                        sem aviso prévio, durante o horário comercial.
+                        <span class="required">*</span>
+                    </label>
+                </div>
 
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="declaracao_visitas" value="sim" required>
-                                <span><strong>Autorizo visitas de verifica��o pela ANC e pelos membros do grupo SPG</strong></span>
-                            </label>
+                <div class="form-group">
+                    <label class="checkbox-label" style="display: block; margin-bottom: 1rem; font-size: var(--text-base);">
+                        <input type="checkbox" name="compromisso_registros" value="sim" required>
+                        <strong>Comprometo-me a manter registros atualizados</strong> de todas as atividades da unidade de produção
+                        (caderno de campo, notas fiscais de insumos, comprovantes de venda) e disponibilizá-los
+                        para verificação quando solicitado.
+                        <span class="required">*</span>
+                    </label>
+                </div>
 
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="declaracao_atualizacao" value="sim" required>
-                                <span><strong>Comprometo-me a comunicar qualquer mudan�a significativa no manejo</strong></span>
-                            </label>
+                <div class="form-group">
+                    <label class="checkbox-label" style="display: block; margin-bottom: 1rem; font-size: var(--text-base);">
+                        <input type="checkbox" name="compromisso_rastreabilidade" value="sim" required>
+                        <strong>Comprometo-me a implementar sistema de rastreabilidade</strong> conforme IN 19/2011 MAPA,
+                        garantindo que todos os produtos orgânicos possam ser rastreados desde a origem até o consumidor final.
+                        <span class="required">*</span>
+                    </label>
+                </div>
 
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="declaracao_rastreabilidade" value="sim" required>
-                                <span><strong>Comprometo-me a manter registros de rastreabilidade dos produtos</strong></span>
-                            </label>
-                        </div>
+                <div class="form-group">
+                    <label class="checkbox-label" style="display: block; margin-bottom: 1rem; font-size: var(--text-base);">
+                        <input type="checkbox" name="compromisso_atualizacao" value="sim" required>
+                        <strong>Comprometo-me a comunicar imediatamente</strong> qualquer alteração significativa na unidade de produção
+                        (mudança de área, novos produtos, uso acidental de insumos proibidos, contaminação)
+                        à certificadora e ao OPAC.
+                        <span class="required">*</span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-label" style="display: block; margin-bottom: 1rem; font-size: var(--text-base);">
+                        <input type="checkbox" name="compromisso_participacao" value="sim" required>
+                        <strong>Comprometo-me a participar ativamente</strong> das reuniões e atividades do grupo de certificação
+                        participativa da ANC, contribuindo para a construção coletiva da agricultura orgânica.
+                        <span class="required">*</span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-label" style="display: block; margin-bottom: 1rem; font-size: var(--text-base);">
+                        <input type="checkbox" name="aceita_regras_spg" value="sim" required>
+                        <strong>Aceito as regras do Sistema Participativo de Garantia (SPG)</strong> da ANC e comprometo-me
+                        a seguir o regulamento interno, incluindo prazos, taxas e procedimentos estabelecidos.
+                        <span class="required">*</span>
+                    </label>
+                </div>
+
+                <div class="form-grid grid-2">
+                    <div class="form-group">
+                        <label for="nome_declarante">Nome Completo do Responsável <span class="required">*</span></label>
+                        <input type="text" id="nome_declarante" name="nome_declarante" required placeholder="Nome completo">
                     </div>
-
-                    <div class="field-wrapper col-span-2">
-                        <label for="data_preenchimento">
-                            Data de Preenchimento
-                            <span class="required">*</span>
-                        </label>
-                        <input type="date"
-                               id="data_preenchimento"
-                               name="data_preenchimento"
-                               required>
+                    <div class="form-group">
+                        <label for="cpf_declarante">CPF do Responsável <span class="required">*</span></label>
+                        <input type="text" id="cpf_declarante" name="cpf_declarante" required placeholder="000.000.000-00" maxlength="14">
                     </div>
+                </div>
 
-                    <div class="field-wrapper col-span-2">
-                        <label for="assinatura_responsavel">
-                            Nome do Respons�vel
-                            <span class="required">*</span>
-                        </label>
-                        <input type="text"
-                               id="assinatura_responsavel"
-                               name="assinatura_responsavel"
-                               required
-                               placeholder="Nome completo">
-                    </div>
+                <div class="form-group">
+                    <label for="data_declaracao">Data <span class="required">*</span></label>
+                    <input type="date" id="data_declaracao" name="data_declaracao" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="observacoes_finais">Observações Finais (Opcional)</label>
+                    <textarea id="observacoes_finais" name="observacoes_finais" rows="4" placeholder="Informações adicionais que julgar relevantes para a análise do PMO"></textarea>
+                </div>
+
+                <div class="alert alert-success">
+                    <strong>✅ Próximos Passos:</strong>
+                    <ol style="margin: 0.5rem 0 0 1.5rem;">
+                        <li>Clique em "Validar Formulário" para verificar se há erros</li>
+                        <li>Corrija qualquer problema apontado</li>
+                        <li>Salve o rascunho para segurança</li>
+                        <li>Quando tudo estiver correto, clique em "Enviar PMO"</li>
+                        <li>Aguarde o contato da certificadora para agendar a visita de verificação</li>
+                    </ol>
                 </div>
             </section>
 
             <!-- Action Buttons -->
             <div class="form-actions">
                 <button type="button" onclick="PMOPrincipal.salvar()" class="btn btn-secondary">
-                    =� Salvar Rascunho
+                    💾 Salvar Rascunho
                 </button>
                 <button type="button" onclick="PMOPrincipal.validar()" class="btn btn-info">
-                     Validar Formul�rio
+                    ✓ Validar Formulário
                 </button>
                 <button type="button" onclick="PMOPrincipal.exportarJSON()" class="btn btn-secondary">
-                    =� Exportar JSON
-                </button>
-                <button type="button" onclick="PMOPrincipal.exportarPDF()" class="btn btn-secondary">
-                    =� Exportar PDF
+                    📥 Exportar JSON
                 </button>
                 <button type="submit" class="btn btn-primary">
-                    	 Enviar PMO
+                    ✉️ Enviar PMO
                 </button>
             </div>
 
@@ -1292,7 +1427,7 @@
     <!-- Footer -->
     <footer class="pmo-footer">
         <div class="pmo-container">
-            <p>� 2024 ANC - Associa��o de Agricultura Natural de Campinas e Regi�o</p>
+            <p>© 2024 ANC - Associação de Agricultura Natural de Campinas e Região</p>
             <p>Sistema PMO Digital v2.0 | Portaria MAPA 52/2021</p>
         </div>
     </footer>
@@ -1300,7 +1435,7 @@
     <!-- Framework JS Unificado -->
     <script src="../../framework/core/pmo-framework.js"></script>
 
-    <!-- JS Espec�fico do PMO Principal -->
+    <!-- JS Específico do PMO Principal -->
     <script src="./pmo-principal.js"></script>
 
     <!-- Validation Rules -->

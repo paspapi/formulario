@@ -1,8 +1,8 @@
 /**
  * PMO Framework - Core
- * Sistema de gerenciamento de Planos de Manejo Org�nico (PMO)
+ * Sistema de gerenciamento de Planos de Manejo Orgânico (PMO)
  * @version 2.0
- * @author ANC - Associa��o de Agricultura Natural de Campinas
+ * @author ANC - Associação de Agricultura Natural de Campinas
  */
 
 class PMOFramework {
@@ -21,404 +21,271 @@ class PMOFramework {
     this.middleware = [];
     this.autoSaveTimer = null;
 
-    this.init();
+    console.log('✅ PMO Framework inicializado');
   }
 
   /**
-   * Inicializa o framework
+   * Registrar módulo
    */
-  async init() {
-    console.log('=� Iniciando PMO Framework v2.0');
-
-    // Configura event listeners
-    this.setupEventListeners();
-
-    // Inicializa router
-    this.initRouter();
-
-    // Inicia auto-save
-    this.startAutoSave();
-
-    // Carrega m�dulo inicial
-    await this.loadInitialRoute();
-
-    console.log(' PMO Framework inicializado');
+  registerModule(name, moduleInstance) {
+    this.modules.set(name, moduleInstance);
+    console.log(`Módulo registrado: ${name}`);
   }
 
   /**
-   * Configura event listeners globais
-   */
-  setupEventListeners() {
-    // Navega��o entre p�ginas
-    window.addEventListener('popstate', (e) => {
-      this.handleRouteChange(e.state);
-    });
-
-    // Previne perda de dados n�o salvos
-    window.addEventListener('beforeunload', (e) => {
-      if (this.hasUnsavedChanges()) {
-        e.preventDefault();
-        e.returnValue = '';
-      }
-    });
-
-    // Delega��o de eventos para navega��o SPA
-    document.addEventListener('click', (e) => {
-      const link = e.target.closest('[data-navigate]');
-      if (link) {
-        e.preventDefault();
-        const route = link.getAttribute('data-navigate');
-        this.navigate(route);
-      }
-    });
-
-    // Valida��o em tempo real
-    document.addEventListener('input', (e) => {
-      if (e.target.hasAttribute('data-validate')) {
-        this.validateField(e.target);
-      }
-    });
-
-    // Auto-save trigger
-    document.addEventListener('change', (e) => {
-      if (e.target.closest('form[data-auto-save]')) {
-        this.markAsChanged();
-      }
-    });
-  }
-
-  /**
-   * Inicializa o router SPA
-   */
-  initRouter() {
-    this.routes = {
-      '/': { module: 'dashboard', title: 'Dashboard - PMO' },
-      '/pmo-principal': { module: 'pmo-principal', title: 'PMO Principal' },
-      '/anexo-vegetal': { module: 'anexo-vegetal', title: 'Anexo I - Produ��o Vegetal' },
-      '/anexo-animal': { module: 'anexo-animal', title: 'Anexo III - Produ��o Animal' },
-      '/anexo-cogumelos': { module: 'anexo-cogumelos', title: 'Anexo II - Cogumelos' },
-      '/anexo-apicultura': { module: 'anexo-apicultura', title: 'Anexo IV - Apicultura' },
-      '/relatorios': { module: 'relatorios', title: 'Relat�rios e Exporta��o' }
-    };
-  }
-
-  /**
-   * Carrega rota inicial
-   */
-  async loadInitialRoute() {
-    const path = window.location.pathname.replace(this.config.basePath, '') || '/';
-    await this.navigate(path, { replace: true });
-  }
-
-  /**
-   * Navega para uma rota
-   */
-  async navigate(path, options = {}) {
-    // Verifica mudan�as n�o salvas
-    if (!options.force && this.hasUnsavedChanges()) {
-      const confirmed = await this.confirmNavigation();
-      if (!confirmed) return;
-    }
-
-    // Executa middleware
-    for (const mw of this.middleware) {
-      const result = await mw(path);
-      if (result === false) return; // Middleware bloqueou navega��o
-    }
-
-    const route = this.routes[path];
-    if (!route) {
-      console.error(`Rota n�o encontrada: ${path}`);
-      this.showNotification('P�gina n�o encontrada', 'error');
-      return;
-    }
-
-    // Atualiza hist�rico
-    if (options.replace) {
-      window.history.replaceState({ path }, '', this.config.basePath + path);
-    } else {
-      window.history.pushState({ path }, '', this.config.basePath + path);
-    }
-
-    // Atualiza t�tulo
-    document.title = route.title;
-
-    // Carrega m�dulo
-    await this.loadModule(route.module, path);
-
-    this.currentRoute = path;
-  }
-
-  /**
-   * Carrega m�dulo da aplica��o
-   */
-  async loadModule(moduleName, path) {
-    try {
-      // Mostra loading
-      this.showLoading();
-
-      // Descarrega m�dulo anterior
-      if (this.currentModule?.unload) {
-        await this.currentModule.unload();
-      }
-
-      // Verifica se m�dulo j� est� em cache
-      if (this.modules.has(moduleName)) {
-        this.currentModule = this.modules.get(moduleName);
-      } else {
-        // Carrega m�dulo dinamicamente
-        const modulePath = `${this.config.basePath}/anc/${moduleName}/${moduleName}.js`;
-        const module = await import(modulePath);
-        this.currentModule = new module.default(this);
-        this.modules.set(moduleName, this.currentModule);
-      }
-
-      // Renderiza m�dulo
-      await this.currentModule.render();
-
-      // Esconde loading
-      this.hideLoading();
-
-      // Trigger evento
-      this.emit('moduleLoaded', { moduleName, path });
-
-    } catch (error) {
-      console.error(`Erro ao carregar m�dulo ${moduleName}:`, error);
-      this.showNotification(`Erro ao carregar p�gina: ${error.message}`, 'error');
-      this.hideLoading();
-    }
-  }
-
-  /**
-   * Gerencia mudan�a de rota
-   */
-  handleRouteChange(state) {
-    if (state?.path) {
-      this.navigate(state.path, { force: true, replace: true });
-    }
-  }
-
-  /**
-   * Adiciona middleware de navega��o
-   */
-  use(fn) {
-    this.middleware.push(fn);
-  }
-
-  /**
-   * Sistema de eventos
-   */
-  events = new Map();
-
-  on(event, callback) {
-    if (!this.events.has(event)) {
-      this.events.set(event, []);
-    }
-    this.events.get(event).push(callback);
-  }
-
-  emit(event, data) {
-    if (this.events.has(event)) {
-      this.events.get(event).forEach(callback => callback(data));
-    }
-  }
-
-  /**
-   * Auto-save
-   */
-  startAutoSave() {
-    if (this.autoSaveTimer) {
-      clearInterval(this.autoSaveTimer);
-    }
-
-    this.autoSaveTimer = setInterval(() => {
-      if (this.hasUnsavedChanges()) {
-        this.autoSave();
-      }
-    }, this.config.autoSaveInterval);
-  }
-
-  stopAutoSave() {
-    if (this.autoSaveTimer) {
-      clearInterval(this.autoSaveTimer);
-      this.autoSaveTimer = null;
-    }
-  }
-
-  async autoSave() {
-    try {
-      if (this.currentModule?.save) {
-        await this.currentModule.save({ autoSave: true });
-        this.showNotification('Dados salvos automaticamente', 'success', 2000);
-      }
-    } catch (error) {
-      console.error('Erro no auto-save:', error);
-    }
-  }
-
-  markAsChanged() {
-    this._hasChanges = true;
-  }
-
-  clearChanges() {
-    this._hasChanges = false;
-  }
-
-  hasUnsavedChanges() {
-    return this._hasChanges || false;
-  }
-
-  /**
-   * Confirma��o de navega��o
-   */
-  async confirmNavigation() {
-    return confirm('Voc� tem altera��es n�o salvas. Deseja continuar?');
-  }
-
-  /**
-   * Valida��o de campo
-   */
-  validateField(field) {
-    const validateType = field.getAttribute('data-validate');
-    const value = field.value;
-
-    let isValid = true;
-    let message = '';
-
-    // Importa validators (ser� implementado)
-    if (window.PMOValidators) {
-      const result = window.PMOValidators.validate(validateType, value);
-      isValid = result.valid;
-      message = result.message;
-    }
-
-    // Atualiza UI
-    if (isValid) {
-      field.classList.remove('invalid');
-      field.classList.add('valid');
-    } else {
-      field.classList.remove('valid');
-      field.classList.add('invalid');
-    }
-
-    // Mostra mensagem de erro
-    const errorEl = field.nextElementSibling;
-    if (errorEl && errorEl.classList.contains('error-message')) {
-      errorEl.textContent = message;
-      errorEl.style.display = isValid ? 'none' : 'block';
-    }
-
-    return isValid;
-  }
-
-  /**
-   * Notifica��es
-   */
-  showNotification(message, type = 'info', duration = 3000) {
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.textContent = message;
-
-    document.body.appendChild(notification);
-
-    setTimeout(() => {
-      notification.classList.add('show');
-    }, 10);
-
-    setTimeout(() => {
-      notification.classList.remove('show');
-      setTimeout(() => notification.remove(), 300);
-    }, duration);
-  }
-
-  /**
-   * Loading
-   */
-  showLoading() {
-    let loader = document.getElementById('global-loader');
-    if (!loader) {
-      loader = document.createElement('div');
-      loader.id = 'global-loader';
-      loader.className = 'loader';
-      loader.innerHTML = '<div class="spinner"></div>';
-      document.body.appendChild(loader);
-    }
-    loader.classList.add('active');
-  }
-
-  hideLoading() {
-    const loader = document.getElementById('global-loader');
-    if (loader) {
-      loader.classList.remove('active');
-    }
-  }
-
-  /**
-   * Utilit�rios
+   * Obter módulo
    */
   getModule(name) {
     return this.modules.get(name);
   }
 
-  getCurrentModule() {
-    return this.currentModule;
+  /**
+   * Navegar para rota
+   */
+  navigate(path) {
+    this.currentRoute = path;
+    window.location.href = path;
   }
 
-  getCurrentRoute() {
-    return this.currentRoute;
-  }
-
-  getConfig() {
-    return this.config;
-  }
-}
-
-// Classe base para m�dulos
-class PMOModule {
-  constructor(framework) {
-    this.framework = framework;
-    this.container = document.getElementById('app-content') || document.body;
-  }
-
-  async render() {
-    throw new Error('M�todo render() deve ser implementado');
-  }
-
-  async save(options = {}) {
-    console.log('Save n�o implementado neste m�dulo');
-  }
-
-  async load() {
-    console.log('Load n�o implementado neste m�dulo');
-  }
-
-  async unload() {
-    console.log('Unload n�o implementado neste m�dulo');
-  }
-
-  getFormData(formElement) {
-    const formData = new FormData(formElement);
-    const data = {};
-    for (const [key, value] of formData.entries()) {
-      data[key] = value;
-    }
-    return data;
-  }
-
-  setFormData(formElement, data) {
-    for (const [key, value] of Object.entries(data)) {
-      const field = formElement.elements[key];
-      if (field) {
-        field.value = value;
+  /**
+   * Salvar no storage
+   */
+  save(key, data) {
+    try {
+      if (this.config.storageType === 'localStorage') {
+        localStorage.setItem(key, JSON.stringify(data));
+      } else if (this.config.storageType === 'sessionStorage') {
+        sessionStorage.setItem(key, JSON.stringify(data));
       }
+      return true;
+    } catch (error) {
+      console.error('Erro ao salvar:', error);
+      return false;
     }
+  }
+
+  /**
+   * Carregar do storage
+   */
+  load(key) {
+    try {
+      const data = this.config.storageType === 'localStorage' ?
+        localStorage.getItem(key) :
+        sessionStorage.getItem(key);
+
+      return data ? JSON.parse(data) : null;
+    } catch (error) {
+      console.error('Erro ao carregar:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Limpar storage
+   */
+  clear(key) {
+    if (key) {
+      localStorage.removeItem(key);
+      sessionStorage.removeItem(key);
+    } else {
+      localStorage.clear();
+      sessionStorage.clear();
+    }
+  }
+
+  /**
+   * Validar formulário
+   */
+  validateForm(formId) {
+    const form = document.getElementById(formId);
+    if (!form) return { valid: false, errors: ['Formulário não encontrado'] };
+
+    const errors = [];
+    const requiredFields = form.querySelectorAll('[required]');
+
+    requiredFields.forEach(field => {
+      if (!field.value.trim()) {
+        const label = field.closest('.form-group')?.querySelector('label')?.textContent || field.name;
+        errors.push(`Campo obrigatório: ${label}`);
+      }
+    });
+
+    return {
+      valid: errors.length === 0,
+      errors
+    };
+  }
+
+  /**
+   * Mostrar notificação
+   */
+  notify(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.textContent = message;
+    notification.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 1rem 1.5rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      z-index: 10000;
+      animation: slideInRight 0.3s ease-out;
+    `;
+
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+      notification.remove();
+    }, 5000);
+  }
+
+  /**
+   * Formatar data para pt-BR
+   */
+  formatDate(date) {
+    return new Date(date).toLocaleDateString('pt-BR');
+  }
+
+  /**
+   * Formatar moeda BRL
+   */
+  formatCurrency(value) {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(value);
+  }
+
+  /**
+   * Debounce function
+   */
+  debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
   }
 }
 
-// Exporta para uso global
-if (typeof window !== 'undefined') {
-  window.PMOFramework = PMOFramework;
-  window.PMOModule = PMOModule;
-}
+// Instância global do framework
+window.PMOFramework = new PMOFramework();
 
-export { PMOFramework, PMOModule };
+// Helper functions globais
+window.PMOHelpers = {
+  /**
+   * Validar CPF
+   */
+  validarCPF(cpf) {
+    cpf = cpf.replace(/\D/g, '');
+    if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
+
+    let soma = 0;
+    for (let i = 0; i < 9; i++) {
+      soma += parseInt(cpf.charAt(i)) * (10 - i);
+    }
+    let digito1 = 11 - (soma % 11);
+    if (digito1 > 9) digito1 = 0;
+
+    soma = 0;
+    for (let i = 0; i < 10; i++) {
+      soma += parseInt(cpf.charAt(i)) * (11 - i);
+    }
+    let digito2 = 11 - (soma % 11);
+    if (digito2 > 9) digito2 = 0;
+
+    return parseInt(cpf.charAt(9)) === digito1 && parseInt(cpf.charAt(10)) === digito2;
+  },
+
+  /**
+   * Validar CNPJ
+   */
+  validarCNPJ(cnpj) {
+    cnpj = cnpj.replace(/\D/g, '');
+    if (cnpj.length !== 14 || /^(\d)\1{13}$/.test(cnpj)) return false;
+
+    let tamanho = cnpj.length - 2;
+    let numeros = cnpj.substring(0, tamanho);
+    let digitos = cnpj.substring(tamanho);
+    let soma = 0;
+    let pos = tamanho - 7;
+
+    for (let i = tamanho; i >= 1; i--) {
+      soma += numeros.charAt(tamanho - i) * pos--;
+      if (pos < 2) pos = 9;
+    }
+
+    let resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+    if (resultado != digitos.charAt(0)) return false;
+
+    tamanho = tamanho + 1;
+    numeros = cnpj.substring(0, tamanho);
+    soma = 0;
+    pos = tamanho - 7;
+
+    for (let i = tamanho; i >= 1; i--) {
+      soma += numeros.charAt(tamanho - i) * pos--;
+      if (pos < 2) pos = 9;
+    }
+
+    resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+    return resultado == digitos.charAt(1);
+  },
+
+  /**
+   * Validar e-mail
+   */
+  validarEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  },
+
+  /**
+   * Aplicar máscara CPF
+   */
+  maskCPF(value) {
+    value = value.replace(/\D/g, '');
+    value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    return value.substring(0, 14);
+  },
+
+  /**
+   * Aplicar máscara CNPJ
+   */
+  maskCNPJ(value) {
+    value = value.replace(/\D/g, '');
+    value = value.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+    return value.substring(0, 18);
+  },
+
+  /**
+   * Aplicar máscara CEP
+   */
+  maskCEP(value) {
+    value = value.replace(/\D/g, '');
+    value = value.replace(/(\d{5})(\d{3})/, '$1-$2');
+    return value.substring(0, 9);
+  },
+
+  /**
+   * Aplicar máscara Telefone
+   */
+  maskTelefone(value) {
+    value = value.replace(/\D/g, '');
+    if (value.length <= 10) {
+      value = value.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+    } else {
+      value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+    }
+    return value.substring(0, 15);
+  }
+};
+
+console.log('✅ PMO Framework carregado com sucesso');
