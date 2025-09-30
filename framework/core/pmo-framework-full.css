@@ -1,12 +1,14 @@
+@charset "UTF-8";
 /**
- * PMO Design System - Variáveis CSS
+ * PMO Design System - VariÃ¡veis CSS
  * Baseado em Tailwind CSS e Material Design
- * Versão: 1.0.0
+ * VersÃ£o: 1.0.0
+ * @lang pt-BR
  */
 
 :root {
     /* ===== CORES PRINCIPAIS ===== */
-    /* Verde ANC (cor primária) */
+    /* Verde ANC (cor primï¿½ria) */
     --primary: #10b981;
     --primary-50: #ecfdf5;
     --primary-100: #d1fae5;
@@ -21,7 +23,7 @@
     --primary-dark: #059669;
     --primary-light: #86efac;
 
-    /* Azul (cor secundária) */
+    /* Azul (cor secundï¿½ria) */
     --secondary: #3b82f6;
     --secondary-50: #eff6ff;
     --secondary-100: #dbeafe;
@@ -67,7 +69,7 @@
     --black: #000000;
     --white: #ffffff;
 
-    /* ===== ESPAÇAMENTOS ===== */
+    /* ===== ESPAï¿½AMENTOS ===== */
     --spacing-xs: 0.25rem;    /* 4px */
     --spacing-sm: 0.5rem;     /* 8px */
     --spacing-md: 1rem;       /* 16px */
@@ -82,7 +84,7 @@
     --radius-lg: 0.5rem;      /* 8px */
     --radius-xl: 0.75rem;     /* 12px */
     --radius-2xl: 1rem;       /* 16px */
-    --radius-full: 9999px;    /* Círculo */
+    --radius-full: 9999px;    /* Cï¿½rculo */
 
     --border-width: 1px;
     --border-width-2: 2px;
@@ -118,7 +120,7 @@
     --line-height-normal: 1.5;
     --line-height-relaxed: 1.75;
 
-    /* ===== TRANSIÇÕES ===== */
+    /* ===== TRANSIï¿½ï¿½ES ===== */
     --transition-fast: 150ms ease;
     --transition-base: 300ms ease;
     --transition-slow: 500ms ease;
@@ -132,7 +134,7 @@
     --z-popover: 1060;
     --z-tooltip: 1070;
 
-    /* ===== BREAKPOINTS (para referência) ===== */
+    /* ===== BREAKPOINTS (para referï¿½ncia) ===== */
     --breakpoint-sm: 640px;
     --breakpoint-md: 768px;
     --breakpoint-lg: 1024px;
@@ -140,10 +142,10 @@
     --breakpoint-2xl: 1536px;
 }/**
  * PMO Framework - Reset e Estilos Base
- * Versão: 1.0.0
+ * Versï¿½o: 1.0.0
  */
 
-/* ===== RESET BÁSICO ===== */
+/* ===== RESET Bï¿½SICO ===== */
 *,
 *::before,
 *::after {
@@ -207,7 +209,7 @@ h6 {
     margin-bottom: var(--spacing-sm);
 }
 
-/* ===== PARÁGRAFOS ===== */
+/* ===== PARï¿½GRAFOS ===== */
 p {
     margin-bottom: var(--spacing-md);
     line-height: var(--line-height-relaxed);
@@ -291,7 +293,7 @@ pre code {
     padding: 0;
 }
 
-/* ===== FORMULÁRIOS BASE ===== */
+/* ===== FORMULï¿½RIOS BASE ===== */
 input,
 select,
 textarea,
@@ -313,7 +315,7 @@ button {
     outline-offset: 2px;
 }
 
-/* Ocultar visualmente mas manter acessível para leitores de tela */
+/* Ocultar visualmente mas manter acessï¿½vel para leitores de tela */
 .sr-only {
     position: absolute;
     width: 1px;
@@ -345,7 +347,7 @@ button {
     background: var(--gray-500);
 }
 
-/* ===== SELEÇÃO DE TEXTO ===== */
+/* ===== SELEï¿½ï¿½O DE TEXTO ===== */
 ::selection {
     background: var(--primary-200);
     color: var(--gray-900);
@@ -373,7 +375,7 @@ button {
     }
 }
 
-/* ===== UTILITÁRIOS DE DISPLAY ===== */
+/* ===== UTILITï¿½RIOS DE DISPLAY ===== */
 .hidden {
     display: none !important;
 }
@@ -397,8 +399,8 @@ button {
 .grid {
     display: grid !important;
 }/**
- * PMO Framework - Componentes Reutilizáveis
- * Versão: 1.0.0
+ * PMO Framework - Componentes Reutilizï¿½veis
+ * Versï¿½o: 1.0.0
  */
 
 /* ===== CONTAINER ===== */
@@ -497,7 +499,7 @@ button {
     }
 }
 
-/* ===== CAMPOS DE FORMULÁRIO ===== */
+/* ===== CAMPOS DE FORMULï¿½RIO ===== */
 .field-wrapper {
     margin-bottom: var(--spacing-md);
 }
@@ -556,7 +558,7 @@ textarea {
     resize: vertical;
 }
 
-/* Estados de validação */
+/* Estados de validaï¿½ï¿½o */
 .field-valid {
     border-left: 3px solid var(--success) !important;
 }
@@ -625,7 +627,7 @@ textarea {
     cursor: pointer;
 }
 
-/* ===== BOTÕES ===== */
+/* ===== BOTï¿½ES ===== */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -712,7 +714,7 @@ textarea {
     color: var(--white);
 }
 
-/* Tamanhos de botões */
+/* Tamanhos de botï¿½es */
 .btn-sm {
     padding: var(--spacing-xs) var(--spacing-md);
     font-size: var(--text-sm);
@@ -723,7 +725,7 @@ textarea {
     font-size: var(--text-lg);
 }
 
-/* ===== TABELAS DINÂMICAS ===== */
+/* ===== TABELAS DINï¿½MICAS ===== */
 .table-wrapper {
     overflow-x: auto;
     margin: var(--spacing-md) 0;
@@ -1120,8 +1122,8 @@ textarea {
     padding-top: var(--spacing-md);
     border-top: var(--border-width) solid var(--gray-200);
 }/**
- * PMO Framework - Classes Utilitárias
- * Versão: 1.0.0
+ * PMO Framework - Classes Utilitï¿½rias
+ * Versï¿½o: 1.0.0
  */
 
 /* ===== DISPLAY ===== */
@@ -1399,7 +1401,7 @@ textarea {
     -webkit-line-clamp: 3 !important;
 }
 
-/* ===== ANIMAÇÕES ===== */
+/* ===== ANIMAï¿½ï¿½ES ===== */
 @keyframes spin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
@@ -1436,7 +1438,7 @@ textarea {
     animation: bounce 1s infinite !important;
 }
 
-/* ===== TRANSIÇÕES ===== */
+/* ===== TRANSIï¿½ï¿½ES ===== */
 .transition-fast {
     transition: all var(--transition-fast) !important;
 }
@@ -1468,7 +1470,7 @@ textarea {
     .print-block { display: block !important; }
 }/**
  * PMO Framework - Media Queries Responsivas
- * Versão: 1.0.0
+ * Versï¿½o: 1.0.0
  * Mobile First Approach
  */
 
@@ -1544,7 +1546,7 @@ textarea {
     .lg\:text-3xl { font-size: var(--text-3xl) !important; }
 }
 
-/* ===== MOBILE ONLY (até 767px) ===== */
+/* ===== MOBILE ONLY (atï¿½ 767px) ===== */
 @media (max-width: 767px) {
     /* Force single column em grids */
     .form-grid,
@@ -1563,7 +1565,7 @@ textarea {
         min-width: 600px;
     }
 
-    /* Botões full-width em mobile */
+    /* Botï¿½es full-width em mobile */
     .btn-mobile-full {
         width: 100% !important;
         justify-content: center;
@@ -1595,7 +1597,7 @@ textarea {
         padding: var(--spacing-md) !important;
     }
 
-    /* File preview em coluna única */
+    /* File preview em coluna ï¿½nica */
     .file-preview {
         grid-template-columns: 1fr !important;
     }
@@ -1608,7 +1610,7 @@ textarea {
         padding: var(--spacing-sm) var(--spacing-md) !important;
     }
 
-    /* Fazer modais scrolláveis */
+    /* Fazer modais scrollï¿½veis */
     .modal-content {
         max-height: 80vh;
         overflow-y: auto;
@@ -1617,7 +1619,7 @@ textarea {
 
 /* ===== TOUCH DEVICES ===== */
 @media (hover: none) and (pointer: coarse) {
-    /* Aumentar área de toque dos botões */
+    /* Aumentar ï¿½rea de toque dos botï¿½es */
     .btn,
     button,
     a {
@@ -1640,11 +1642,11 @@ textarea {
     }
 }
 
-/* ===== DARK MODE (optional - preparado para futura implementação) ===== */
+/* ===== DARK MODE (optional - preparado para futura implementaï¿½ï¿½o) ===== */
 @media (prefers-color-scheme: dark) {
     /*
-    Preparado para futura implementação de dark mode
-    Descomentar quando necessário
+    Preparado para futura implementaï¿½ï¿½o de dark mode
+    Descomentar quando necessï¿½rio
 
     :root {
         --gray-50: #1f2937;
@@ -1679,12 +1681,12 @@ textarea {
         border-width: 2px;
     }
 }/**
- * PMO Framework - Estilos para Impressão
- * Versão: 1.0.0
+ * PMO Framework - Estilos para Impressï¿½o
+ * Versï¿½o: 1.0.0
  */
 
 @media print {
-    /* ===== RESET PARA IMPRESSÃO ===== */
+    /* ===== RESET PARA IMPRESSï¿½O ===== */
     * {
         background: transparent !important;
         color: #000 !important;
@@ -1719,7 +1721,7 @@ textarea {
         border: 1px solid #ccc;
     }
 
-    /* ===== TÍTULOS ===== */
+    /* ===== Tï¿½TULOS ===== */
     h1, h2, h3, h4, h5, h6 {
         page-break-after: avoid;
         page-break-inside: avoid;
@@ -1800,7 +1802,7 @@ textarea {
         font-style: italic;
     }
 
-    /* Não mostrar URL para links internos */
+    /* Nï¿½o mostrar URL para links internos */
     a[href^="#"]:after,
     a[href^="/"]:after {
         content: "";
@@ -1812,7 +1814,7 @@ textarea {
         page-break-inside: avoid;
     }
 
-    /* ===== CAMPOS DE FORMULÁRIO ===== */
+    /* ===== CAMPOS DE FORMULï¿½RIO ===== */
     input,
     select,
     textarea {
@@ -1865,7 +1867,7 @@ textarea {
     .message-error { border-left: 4px solid #000 !important; }
 
     .instruction:before { content: "9 "; }
-    .alert:before { content: "  "; }
+    .alert:before { content: "ï¿½ "; }
 
     /* ===== OCULTAR ELEMENTOS ===== */
     .no-print,
@@ -1886,7 +1888,7 @@ textarea {
         display: none !important;
     }
 
-    /* ===== MOSTRAR CONTEÚDO DE TABS E ACCORDIONS ===== */
+    /* ===== MOSTRAR CONTEï¿½DO DE TABS E ACCORDIONS ===== */
     .tab-content {
         display: block !important;
     }
@@ -1897,7 +1899,7 @@ textarea {
         padding: 0.2cm !important;
     }
 
-    /* ===== GRID PARA IMPRESSÃO ===== */
+    /* ===== GRID PARA IMPRESSï¿½O ===== */
     .form-grid {
         display: table !important;
         width: 100%;
@@ -1921,7 +1923,7 @@ textarea {
         page-break-inside: avoid;
     }
 
-    /* ===== CABEÇALHO E RODAPÉ ===== */
+    /* ===== CABEï¿½ALHO E RODAPï¿½ ===== */
     @page {
         margin: 2cm;
     }
@@ -1930,7 +1932,7 @@ textarea {
         margin-top: 1cm;
     }
 
-    /* Cabeçalho de página */
+    /* Cabeï¿½alho de pï¿½gina */
     header {
         position: running(header);
     }
@@ -1941,7 +1943,7 @@ textarea {
         }
     }
 
-    /* Rodapé com numeração */
+    /* Rodapï¿½ com numeraï¿½ï¿½o */
     .page-footer {
         position: fixed;
         bottom: 0;
@@ -1953,7 +1955,7 @@ textarea {
     }
 
     .page-footer:after {
-        content: "Página " counter(page) " de " counter(pages);
+        content: "Pï¿½gina " counter(page) " de " counter(pages);
     }
 
     /* ===== ASSINATURAS ===== */
@@ -1994,7 +1996,7 @@ textarea {
         background: #f9f9f9 !important;
     }
 
-    /* ===== DECLARAÇÕES ===== */
+    /* ===== DECLARAï¿½ï¿½ES ===== */
     .declaracao {
         border: 1px solid #000;
         padding: 0.3cm;
@@ -2021,7 +2023,7 @@ textarea {
         margin-bottom: 0.1cm;
     }
 
-    /* ===== QR CODE E CÓDIGOS DE BARRAS ===== */
+    /* ===== QR CODE E Cï¿½DIGOS DE BARRAS ===== */
     .qr-code,
     .barcode {
         page-break-inside: avoid;
@@ -2029,7 +2031,7 @@ textarea {
         margin: 0.3cm 0;
     }
 
-    /* ===== CORES PARA GRÁFICOS (se houver) ===== */
+    /* ===== CORES PARA GRï¿½FICOS (se houver) ===== */
     .chart-primary { fill: #000 !important; }
     .chart-secondary { fill: #666 !important; }
     .chart-success { fill: #333 !important; }

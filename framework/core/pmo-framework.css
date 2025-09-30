@@ -1,25 +1,27 @@
+@charset "UTF-8";
 /**
  * PMO Framework CSS
- * Sistema Unificado de Estilos para Formulários PMO
- * Versão: 1.0.0
+ * Sistema Unificado de Estilos para FormulÃ¡rios PMO
+ * VersÃ£o: 1.0.0
+ * @lang pt-BR
  *
- * Associação de Agricultura Natural de Campinas e Região (ANC)
- * Sistema de Plano de Manejo Orgânico
+ * AssociaÃ§Ã£o de Agricultura Natural de Campinas e RegiÃ£o (ANC)
+ * Sistema de Plano de Manejo OrgÃ¢nico
  *
  * Baseado em: Tailwind CSS, Material Design
  * Compatibilidade: Todos navegadores modernos (Chrome 90+, Firefox 88+, Safari 14+, Edge 90+)
  */
 
-/* ===== 1. VARIÁVEIS ===== */
+/* ===== 1. VARIï¿½VEIS ===== */
 /**
- * PMO Design System - Variáveis CSS
+ * PMO Design System - Variï¿½veis CSS
  * Baseado em Tailwind CSS e Material Design
- * Versão: 1.0.0
+ * Versï¿½o: 1.0.0
  */
 
 :root {
     /* ===== CORES PRINCIPAIS ===== */
-    /* Verde ANC (cor primária) */
+    /* Verde ANC (cor primï¿½ria) */
     --primary: #10b981;
     --primary-50: #ecfdf5;
     --primary-100: #d1fae5;
@@ -34,7 +36,7 @@
     --primary-dark: #059669;
     --primary-light: #86efac;
 
-    /* Azul (cor secundária) */
+    /* Azul (cor secundï¿½ria) */
     --secondary: #3b82f6;
     --secondary-50: #eff6ff;
     --secondary-100: #dbeafe;
@@ -80,7 +82,7 @@
     --black: #000000;
     --white: #ffffff;
 
-    /* ===== ESPAÇAMENTOS ===== */
+    /* ===== ESPAï¿½AMENTOS ===== */
     --spacing-xs: 0.25rem;
     --spacing-sm: 0.5rem;
     --spacing-md: 1rem;
@@ -131,7 +133,7 @@
     --line-height-normal: 1.5;
     --line-height-relaxed: 1.75;
 
-    /* ===== TRANSIÇÕES ===== */
+    /* ===== TRANSIï¿½ï¿½ES ===== */
     --transition-fast: 150ms ease;
     --transition-base: 300ms ease;
     --transition-slow: 500ms ease;
@@ -145,7 +147,7 @@
     --z-popover: 1060;
     --z-tooltip: 1070;
 
-    /* ===== BREAKPOINTS (para referência) ===== */
+    /* ===== BREAKPOINTS (para referï¿½ncia) ===== */
     --breakpoint-sm: 640px;
     --breakpoint-md: 768px;
     --breakpoint-lg: 1024px;
@@ -153,4 +155,4 @@
     --breakpoint-2xl: 1536px;
 }
 
-/* ===== FIM DAS VARIÁVEIS ===== */
+/* ===== FIM DAS VARIï¿½VEIS ===== */

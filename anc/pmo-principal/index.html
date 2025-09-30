@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PMO Principal - Plano de Manejo Orgânico - ANC</title>
+    <title>PMO Principal - Plano de Manejo Orgï¿½nico - ANC</title>
 
-    <!-- Framework CSS Unificado -->
-    <link rel="stylesheet" href="../../framework/core/pmo-framework.css">
+    <!-- Framework CSS Unificado (VersÃ£o Completa) -->
+    <link rel="stylesheet" href="../../framework/core/pmo-framework-full.css">
+
+    <!-- CSS EspecÃ­fico do PMO Principal -->
+    <link rel="stylesheet" href="./pmo-principal.css">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
@@ -17,12 +20,12 @@
         <div class="pmo-container">
             <div class="header-content">
                 <div class="header-logo">
-                    <h1>=Ë PMO Principal</h1>
-                    <p>Plano de Manejo Orgânico - ANC</p>
+                    <h1>=ï¿½ PMO Principal</h1>
+                    <p>Plano de Manejo Orgï¿½nico - ANC</p>
                 </div>
                 <nav class="header-nav">
-                    <a href="../dashboard/index.html" class="btn btn-secondary"><à Dashboard</a>
-                    <a href="../relatorios/index.html" class="btn btn-secondary">=Ê Relatórios</a>
+                    <a href="../dashboard/index.html" class="btn btn-secondary"><ï¿½ Dashboard</a>
+                    <a href="../relatorios/index.html" class="btn btn-secondary">=ï¿½ Relatï¿½rios</a>
                 </nav>
             </div>
         </div>
@@ -32,7 +35,7 @@
     <div class="progress-container">
         <div class="progress-info">
             <span id="progress-text">Progresso: 0%</span>
-            <span id="auto-save-status">=¾ Auto-save ativo</span>
+            <span id="auto-save-status">=ï¿½ Auto-save ativo</span>
         </div>
         <div class="progress-bar">
             <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
@@ -43,25 +46,25 @@
     <main class="pmo-container">
         <form id="form-pmo-principal" novalidate>
 
-            <!-- Seção 1: Dados Gerais - Identificação -->
+            <!-- Seï¿½ï¿½o 1: Dados Gerais - Identificaï¿½ï¿½o -->
             <section id="secao-identificacao" class="form-section">
-                <h2>1. Identificação do Produtor/Empresa</h2>
+                <h2>1. Identificaï¿½ï¿½o do Produtor/Empresa</h2>
 
                 <div class="section-info">
-                    <p class="instruction">9 Preencha os dados de identificação do produtor ou empresa responsável pela unidade de produção orgânica.</p>
+                    <p class="instruction">9 Preencha os dados de identificaï¿½ï¿½o do produtor ou empresa responsï¿½vel pela unidade de produï¿½ï¿½o orgï¿½nica.</p>
                 </div>
 
                 <div class="form-grid">
                     <div class="field-wrapper col-span-2">
                         <label for="nome_completo">
-                            Nome Completo / Razão Social
+                            Nome Completo / Razï¿½o Social
                             <span class="required">*</span>
                         </label>
                         <input type="text"
                                id="nome_completo"
                                name="nome_completo"
                                required
-                               placeholder="Ex: João da Silva ou Empresa Agrícola Ltda"
+                               placeholder="Ex: Joï¿½o da Silva ou Empresa Agrï¿½cola Ltda"
                                maxlength="200">
                     </div>
 
@@ -72,8 +75,8 @@
                         </label>
                         <select id="tipo_pessoa" name="tipo_pessoa" required onchange="PMOPrincipal.togglePessoaTipo()">
                             <option value="">Selecione...</option>
-                            <option value="fisica">Pessoa Física (CPF)</option>
-                            <option value="juridica">Pessoa Jurídica (CNPJ)</option>
+                            <option value="fisica">Pessoa Fï¿½sica (CPF)</option>
+                            <option value="juridica">Pessoa Jurï¿½dica (CNPJ)</option>
                         </select>
                     </div>
 
@@ -102,7 +105,7 @@
                     </div>
 
                     <div class="field-wrapper">
-                        <label for="inscricao_estadual">Inscrição Estadual</label>
+                        <label for="inscricao_estadual">Inscriï¿½ï¿½o Estadual</label>
                         <input type="text"
                                id="inscricao_estadual"
                                name="inscricao_estadual"
@@ -110,7 +113,7 @@
                     </div>
 
                     <div class="field-wrapper">
-                        <label for="inscricao_municipal">Inscrição Municipal</label>
+                        <label for="inscricao_municipal">Inscriï¿½ï¿½o Municipal</label>
                         <input type="text"
                                id="inscricao_municipal"
                                name="inscricao_municipal"
@@ -127,19 +130,19 @@
 
                     <div class="field-wrapper col-span-2">
                         <label for="nome_unidade_producao">
-                            Nome da Unidade de Produção
+                            Nome da Unidade de Produï¿½ï¿½o
                             <span class="required">*</span>
                         </label>
                         <input type="text"
                                id="nome_unidade_producao"
                                name="nome_unidade_producao"
                                required
-                               placeholder="Ex: Sítio Boa Vista, Fazenda Esperança">
+                               placeholder="Ex: Sï¿½tio Boa Vista, Fazenda Esperanï¿½a">
                     </div>
                 </div>
             </section>
 
-            <!-- Seção 2: Contato -->
+            <!-- Seï¿½ï¿½o 2: Contato -->
             <section id="secao-contato" class="form-section">
                 <h2>2. Dados de Contato</h2>
 
@@ -171,9 +174,9 @@
                 </div>
             </section>
 
-            <!-- Seção 3: Endereço -->
+            <!-- Seï¿½ï¿½o 3: Endereï¿½o -->
             <section id="secao-endereco" class="form-section">
-                <h2>3. Endereço da Unidade de Produção</h2>
+                <h2>3. Endereï¿½o da Unidade de Produï¿½ï¿½o</h2>
 
                 <div class="form-grid">
                     <div class="field-wrapper">
@@ -183,7 +186,7 @@
                             <button type="button"
                                     class="btn-icon-inline"
                                     onclick="PMOPrincipal.buscarCEP()"
-                                    title="Buscar endereço">
+                                    title="Buscar endereï¿½o">
                                 =
                             </button>
                         </label>
@@ -197,14 +200,14 @@
 
                     <div class="field-wrapper col-span-3">
                         <label for="endereco">
-                            Endereço Completo
+                            Endereï¿½o Completo
                             <span class="required">*</span>
                         </label>
                         <input type="text"
                                id="endereco"
                                name="endereco"
                                required
-                               placeholder="Rua, número, complemento">
+                               placeholder="Rua, nï¿½mero, complemento">
                     </div>
 
                     <div class="field-wrapper col-span-2">
@@ -221,14 +224,14 @@
 
                     <div class="field-wrapper">
                         <label for="municipio">
-                            Município
+                            Municï¿½pio
                             <span class="required">*</span>
                         </label>
                         <input type="text"
                                id="municipio"
                                name="municipio"
                                required
-                               placeholder="Nome do município">
+                               placeholder="Nome do municï¿½pio">
                     </div>
 
                     <div class="field-wrapper">
@@ -300,30 +303,30 @@
 
                     <div class="field-wrapper col-span-4">
                         <label for="roteiro_acesso">
-                            Roteiro de Acesso à Propriedade
+                            Roteiro de Acesso ï¿½ Propriedade
                         </label>
                         <textarea id="roteiro_acesso"
                                   name="roteiro_acesso"
                                   rows="3"
-                                  placeholder="Descreva como chegar à propriedade (pontos de referência, estradas, etc.)"></textarea>
+                                  placeholder="Descreva como chegar ï¿½ propriedade (pontos de referï¿½ncia, estradas, etc.)"></textarea>
                     </div>
                 </div>
             </section>
 
-            <!-- Seção 4: Dados da Propriedade -->
+            <!-- Seï¿½ï¿½o 4: Dados da Propriedade -->
             <section id="secao-propriedade" class="form-section">
                 <h2>4. Dados da Propriedade</h2>
 
                 <div class="form-grid">
                     <div class="field-wrapper">
                         <label for="posse_terra">
-                            Situação da Posse da Terra
+                            Situaï¿½ï¿½o da Posse da Terra
                             <span class="required">*</span>
                         </label>
                         <select id="posse_terra" name="posse_terra" required>
                             <option value="">Selecione...</option>
-                            <option value="proprietario">Proprietário</option>
-                            <option value="arrendatario">Arrendatário</option>
+                            <option value="proprietario">Proprietï¿½rio</option>
+                            <option value="arrendatario">Arrendatï¿½rio</option>
                             <option value="parceiro">Parceiro</option>
                             <option value="comodato">Comodato</option>
                             <option value="posseiro">Posseiro</option>
@@ -334,7 +337,7 @@
 
                     <div class="field-wrapper">
                         <label for="area_total_ha">
-                            Área Total (hectares)
+                            ï¿½rea Total (hectares)
                             <span class="required">*</span>
                         </label>
                         <input type="number"
@@ -348,7 +351,7 @@
 
                     <div class="field-wrapper">
                         <label for="data_aquisicao">
-                            Data de Aquisição/Posse
+                            Data de Aquisiï¿½ï¿½o/Posse
                         </label>
                         <input type="date"
                                id="data_aquisicao"
@@ -367,10 +370,10 @@
 
                     <div class="field-wrapper col-span-2">
                         <label for="caf_numero">
-                            Número do CAF (Cadastro de Agricultor Familiar)
+                            Nï¿½mero do CAF (Cadastro de Agricultor Familiar)
                             <span class="help-tooltip">
                                 <span class="help-icon">?</span>
-                                <span class="help-text">Se não possuir CAF, marque a opção abaixo</span>
+                                <span class="help-text">Se nï¿½o possuir CAF, marque a opï¿½ï¿½o abaixo</span>
                             </span>
                         </label>
                         <input type="text"
@@ -386,20 +389,20 @@
                                    name="caf_nao_possui"
                                    value="sim"
                                    onchange="PMOPrincipal.toggleCAF(this)">
-                            <span>Não possuo CAF</span>
+                            <span>Nï¿½o possuo CAF</span>
                         </label>
                     </div>
                 </div>
             </section>
 
-            <!-- Seção 5: Histórico de Manejo Orgânico -->
+            <!-- Seï¿½ï¿½o 5: Histï¿½rico de Manejo Orgï¿½nico -->
             <section id="secao-manejo-organico" class="form-section">
-                <h2>5. Histórico de Manejo Orgânico</h2>
+                <h2>5. Histï¿½rico de Manejo Orgï¿½nico</h2>
 
                 <div class="form-grid">
                     <div class="field-wrapper">
                         <label for="anos_manejo_organico">
-                            Há quantos anos pratica manejo orgânico?
+                            Hï¿½ quantos anos pratica manejo orgï¿½nico?
                             <span class="required">*</span>
                         </label>
                         <input type="number"
@@ -413,21 +416,21 @@
 
                     <div class="field-wrapper col-span-2">
                         <label for="situacao_manejo">
-                            Situação do Manejo
+                            Situaï¿½ï¿½o do Manejo
                             <span class="required">*</span>
                         </label>
                         <select id="situacao_manejo" name="situacao_manejo" required>
                             <option value="">Selecione...</option>
-                            <option value="em_conversao">Em conversão</option>
-                            <option value="organico_nao_certificado">Orgânico não certificado</option>
+                            <option value="em_conversao">Em conversï¿½o</option>
+                            <option value="organico_nao_certificado">Orgï¿½nico nï¿½o certificado</option>
                             <option value="certificado_outro_opac">Certificado por outro OPAC</option>
                             <option value="certificado_auditoria">Certificado por auditoria</option>
-                            <option value="convencional">Convencional (iniciando conversão)</option>
+                            <option value="convencional">Convencional (iniciando conversï¿½o)</option>
                         </select>
                     </div>
 
                     <div class="field-wrapper col-span-4">
-                        <label>Comprovação do Manejo Orgânico</label>
+                        <label>Comprovaï¿½ï¿½o do Manejo Orgï¿½nico</label>
                         <div class="checkbox-group">
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="comprovacao_testemunha" value="sim">
@@ -435,11 +438,11 @@
                             </label>
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="comprovacao_declaracao" value="sim">
-                                <span>Declaração de associação/cooperativa</span>
+                                <span>Declaraï¿½ï¿½o de associaï¿½ï¿½o/cooperativa</span>
                             </label>
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="comprovacao_documento" value="sim">
-                                <span>Documento de certificação anterior</span>
+                                <span>Documento de certificaï¿½ï¿½o anterior</span>
                             </label>
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="comprovacao_cadernos" value="sim">
@@ -450,12 +453,12 @@
                 </div>
             </section>
 
-            <!-- Seção 6: Responsáveis pela Produção -->
+            <!-- Seï¿½ï¿½o 6: Responsï¿½veis pela Produï¿½ï¿½o -->
             <section id="secao-responsaveis" class="form-section">
-                <h2>6. Responsáveis pela Produção</h2>
+                <h2>6. Responsï¿½veis pela Produï¿½ï¿½o</h2>
 
                 <div class="section-info">
-                    <p class="instruction">9 Liste todas as pessoas responsáveis pelas atividades produtivas e decisões técnicas.</p>
+                    <p class="instruction">9 Liste todas as pessoas responsï¿½veis pelas atividades produtivas e decisï¿½es tï¿½cnicas.</p>
                 </div>
 
                 <div class="table-wrapper">
@@ -466,9 +469,9 @@
                                 <th>Nome Completo <span class="required">*</span></th>
                                 <th>CPF <span class="required">*</span></th>
                                 <th>Data Nascimento</th>
-                                <th>Função <span class="required">*</span></th>
+                                <th>Funï¿½ï¿½o <span class="required">*</span></th>
                                 <th>Telefone</th>
-                                <th>Ações</th>
+                                <th>Aï¿½ï¿½es</th>
                             </tr>
                         </thead>
                         <tbody id="tbody-responsaveis">
@@ -481,8 +484,8 @@
                                     <td>
                                         <select name="responsavel_funcao[]" required>
                                             <option value="">Selecione...</option>
-                                            <option value="proprietario">Proprietário</option>
-                                            <option value="responsavel_tecnico">Responsável Técnico</option>
+                                            <option value="proprietario">Proprietï¿½rio</option>
+                                            <option value="responsavel_tecnico">Responsï¿½vel Tï¿½cnico</option>
                                             <option value="gerente">Gerente</option>
                                             <option value="encarregado">Encarregado</option>
                                             <option value="outro">Outro</option>
@@ -490,35 +493,35 @@
                                     </td>
                                     <td><input type="tel" name="responsavel_telefone[]" data-mask="telefone" placeholder="(00) 00000-0000"></td>
                                     <td class="action-buttons">
-                                        <button type="button" onclick="PMOPrincipal.table.duplicateRow(this)" title="Duplicar">=Ë</button>
+                                        <button type="button" onclick="PMOPrincipal.table.duplicateRow(this)" title="Duplicar">=ï¿½</button>
                                         <button type="button" onclick="PMOPrincipal.table.removeRow(this)" title="Remover">L</button>
                                     </td>
                                 </tr>
                             </template>
                         </tbody>
                     </table>
-                    <button type="button" onclick="PMOPrincipal.table.addRow('tabela-responsaveis')" class="btn btn-add">• Adicionar Responsável</button>
+                    <button type="button" onclick="PMOPrincipal.table.addRow('tabela-responsaveis')" class="btn btn-add">ï¿½ Adicionar Responsï¿½vel</button>
                 </div>
             </section>
 
-            <!-- Seção 7: Atividades Orgânicas -->
+            <!-- Seï¿½ï¿½o 7: Atividades Orgï¿½nicas -->
             <section id="secao-atividades" class="form-section">
-                <h2>7. Atividades Orgânicas na Propriedade</h2>
+                <h2>7. Atividades Orgï¿½nicas na Propriedade</h2>
 
                 <div class="section-info">
-                    <p class="instruction">9 Marque todas as atividades orgânicas desenvolvidas e informe a área utilizada.</p>
+                    <p class="instruction">9 Marque todas as atividades orgï¿½nicas desenvolvidas e informe a ï¿½rea utilizada.</p>
                 </div>
 
                 <div class="form-grid">
                     <div class="field-wrapper col-span-4">
-                        <h4>Tipos de Produção</h4>
+                        <h4>Tipos de Produï¿½ï¿½o</h4>
                         <div class="checkbox-grid">
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="atividade_hortalicas" value="sim" onchange="PMOPrincipal.toggleAreaInput(this, 'area_hortalicas')">
-                                <span>>l Hortaliças</span>
+                                <span>>l Hortaliï¿½as</span>
                             </label>
                             <div class="field-wrapper area-input" id="area_hortalicas" style="display:none;">
-                                <input type="number" name="area_hortalicas_ha" step="0.01" min="0" placeholder="Área (ha)">
+                                <input type="number" name="area_hortalicas_ha" step="0.01" min="0" placeholder="ï¿½rea (ha)">
                             </div>
 
                             <label class="checkbox-enhanced">
@@ -526,15 +529,15 @@
                                 <span><J Frutas</span>
                             </label>
                             <div class="field-wrapper area-input" id="area_frutas" style="display:none;">
-                                <input type="number" name="area_frutas_ha" step="0.01" min="0" placeholder="Área (ha)">
+                                <input type="number" name="area_frutas_ha" step="0.01" min="0" placeholder="ï¿½rea (ha)">
                             </div>
 
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="atividade_graos" value="sim" onchange="PMOPrincipal.toggleAreaInput(this, 'area_graos')">
-                                <span><> Grãos</span>
+                                <span><> Grï¿½os</span>
                             </label>
                             <div class="field-wrapper area-input" id="area_graos" style="display:none;">
-                                <input type="number" name="area_graos_ha" step="0.01" min="0" placeholder="Área (ha)">
+                                <input type="number" name="area_graos_ha" step="0.01" min="0" placeholder="ï¿½rea (ha)">
                             </div>
 
                             <label class="checkbox-enhanced">
@@ -542,15 +545,15 @@
                                 <span><? Plantas Medicinais</span>
                             </label>
                             <div class="field-wrapper area-input" id="area_medicinais" style="display:none;">
-                                <input type="number" name="area_medicinais_ha" step="0.01" min="0" placeholder="Área (ha)">
+                                <input type="number" name="area_medicinais_ha" step="0.01" min="0" placeholder="ï¿½rea (ha)">
                             </div>
 
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="atividade_pecuaria" value="sim" onchange="PMOPrincipal.toggleAreaInput(this, 'area_pecuaria')">
-                                <span>= Pecuária</span>
+                                <span>= Pecuï¿½ria</span>
                             </label>
                             <div class="field-wrapper area-input" id="area_pecuaria" style="display:none;">
-                                <input type="number" name="area_pecuaria_ha" step="0.01" min="0" placeholder="Área (ha)">
+                                <input type="number" name="area_pecuaria_ha" step="0.01" min="0" placeholder="ï¿½rea (ha)">
                             </div>
 
                             <label class="checkbox-enhanced">
@@ -563,25 +566,25 @@
                                 <span><D Cogumelos</span>
                             </label>
                             <div class="field-wrapper area-input" id="area_cogumelos" style="display:none;">
-                                <input type="number" name="area_cogumelos_m2" step="0.01" min="0" placeholder="Área (m²)">
+                                <input type="number" name="area_cogumelos_m2" step="0.01" min="0" placeholder="ï¿½rea (mï¿½)">
                             </div>
 
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="atividade_processamento" value="sim">
-                                <span><í Processamento</span>
+                                <span><ï¿½ Processamento</span>
                             </label>
                         </div>
                     </div>
 
                     <div class="field-wrapper col-span-4">
-                        <h4>Mão de Obra</h4>
+                        <h4>Mï¿½o de Obra</h4>
                         <div class="form-grid">
                             <div class="field-wrapper">
-                                <label for="funcionarios_permanentes">Funcionários Permanentes</label>
+                                <label for="funcionarios_permanentes">Funcionï¿½rios Permanentes</label>
                                 <input type="number" id="funcionarios_permanentes" name="funcionarios_permanentes" min="0" value="0">
                             </div>
                             <div class="field-wrapper">
-                                <label for="funcionarios_temporarios">Funcionários Temporários</label>
+                                <label for="funcionarios_temporarios">Funcionï¿½rios Temporï¿½rios</label>
                                 <input type="number" id="funcionarios_temporarios" name="funcionarios_temporarios" min="0" value="0">
                             </div>
                             <div class="field-wrapper">
@@ -589,7 +592,7 @@
                                 <input type="number" id="funcionarios_familiares" name="funcionarios_familiares" min="0" value="0">
                             </div>
                             <div class="field-wrapper">
-                                <label for="funcionarios_voluntarios">Voluntários/Mutirão</label>
+                                <label for="funcionarios_voluntarios">Voluntï¿½rios/Mutirï¿½o</label>
                                 <input type="number" id="funcionarios_voluntarios" name="funcionarios_voluntarios" min="0" value="0">
                             </div>
                         </div>
@@ -597,12 +600,12 @@
                 </div>
             </section>
 
-            <!-- Seção 8: Histórico de Culturas -->
+            <!-- Seï¿½ï¿½o 8: Histï¿½rico de Culturas -->
             <section id="secao-historico" class="form-section">
-                <h2>8. Histórico de Aplicações na Área (últimos 3 anos)</h2>
+                <h2>8. Histï¿½rico de Aplicaï¿½ï¿½es na ï¿½rea (ï¿½ltimos 3 anos)</h2>
 
                 <div class="section-info">
-                    <p class="alert">  É obrigatório declarar todas as aplicações de insumos não permitidos na produção orgânica nos últimos 3 anos.</p>
+                    <p class="alert">ï¿½ ï¿½ obrigatï¿½rio declarar todas as aplicaï¿½ï¿½es de insumos nï¿½o permitidos na produï¿½ï¿½o orgï¿½nica nos ï¿½ltimos 3 anos.</p>
                 </div>
 
                 <div class="table-wrapper">
@@ -610,19 +613,19 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Cultura/Área</th>
-                                <th>Data Última Aplicação</th>
+                                <th>Cultura/ï¿½rea</th>
+                                <th>Data ï¿½ltima Aplicaï¿½ï¿½o</th>
                                 <th>Insumo Utilizado</th>
                                 <th>Ingrediente Ativo</th>
-                                <th>Já era orgânico?</th>
-                                <th>Ações</th>
+                                <th>Jï¿½ era orgï¿½nico?</th>
+                                <th>Aï¿½ï¿½es</th>
                             </tr>
                         </thead>
                         <tbody id="tbody-historico">
                             <template id="row-template-historico">
                                 <tr class="dynamic-row">
                                     <td class="row-number"></td>
-                                    <td><input type="text" name="historico_cultura[]" placeholder="Ex: Milho, Talhão 1"></td>
+                                    <td><input type="text" name="historico_cultura[]" placeholder="Ex: Milho, Talhï¿½o 1"></td>
                                     <td><input type="date" name="historico_data[]"></td>
                                     <td><input type="text" name="historico_insumo[]" placeholder="Nome comercial"></td>
                                     <td><input type="text" name="historico_ativo[]" placeholder="Ex: Glifosato"></td>
@@ -630,34 +633,34 @@
                                         <select name="historico_organico[]">
                                             <option value="">Selecione...</option>
                                             <option value="sim">Sim</option>
-                                            <option value="nao">Não</option>
+                                            <option value="nao">Nï¿½o</option>
                                         </select>
                                     </td>
                                     <td class="action-buttons">
-                                        <button type="button" onclick="PMOPrincipal.table.duplicateRow(this)" title="Duplicar">=Ë</button>
+                                        <button type="button" onclick="PMOPrincipal.table.duplicateRow(this)" title="Duplicar">=ï¿½</button>
                                         <button type="button" onclick="PMOPrincipal.table.removeRow(this)" title="Remover">L</button>
                                     </td>
                                 </tr>
                             </template>
                         </tbody>
                     </table>
-                    <button type="button" onclick="PMOPrincipal.table.addRow('tabela-historico')" class="btn btn-add">• Adicionar Registro</button>
+                    <button type="button" onclick="PMOPrincipal.table.addRow('tabela-historico')" class="btn btn-add">ï¿½ Adicionar Registro</button>
                 </div>
 
                 <div class="field-wrapper col-span-4">
                     <label class="checkbox-enhanced">
                         <input type="checkbox" id="sem_aplicacoes" name="sem_aplicacoes" value="sim" onchange="PMOPrincipal.toggleHistorico(this)">
-                        <span><strong>Não houve aplicação de insumos não permitidos nos últimos 3 anos</strong></span>
+                        <span><strong>Nï¿½o houve aplicaï¿½ï¿½o de insumos nï¿½o permitidos nos ï¿½ltimos 3 anos</strong></span>
                     </label>
                 </div>
             </section>
 
-            <!-- Seção 9: Produtos a Certificar -->
+            <!-- Seï¿½ï¿½o 9: Produtos a Certificar -->
             <section id="secao-produtos" class="form-section">
                 <h2>9. Lista de Produtos a Certificar</h2>
 
                 <div class="section-info">
-                    <p class="instruction">9 Liste todos os produtos que deseja certificar como orgânicos. Esta é uma seção obrigatória.</p>
+                    <p class="instruction">9 Liste todos os produtos que deseja certificar como orgï¿½nicos. Esta ï¿½ uma seï¿½ï¿½o obrigatï¿½ria.</p>
                 </div>
 
                 <div class="table-wrapper">
@@ -667,11 +670,11 @@
                                 <th>#</th>
                                 <th>Produto <span class="required">*</span></th>
                                 <th>Variedade</th>
-                                <th>Talhão/Área</th>
-                                <th>Estimativa Produção</th>
+                                <th>Talhï¿½o/ï¿½rea</th>
+                                <th>Estimativa Produï¿½ï¿½o</th>
                                 <th>Periodicidade</th>
                                 <th>Origem Muda/Semente</th>
-                                <th>Ações</th>
+                                <th>Aï¿½ï¿½es</th>
                             </tr>
                         </thead>
                         <tbody id="tbody-produtos">
@@ -680,8 +683,8 @@
                                     <td class="row-number"></td>
                                     <td><input type="text" name="produto_nome[]" required placeholder="Ex: Alface, Tomate"></td>
                                     <td><input type="text" name="produto_variedade[]" placeholder="Ex: Crespa, Cereja"></td>
-                                    <td><input type="text" name="produto_talhao[]" placeholder="Ex: Talhão 1"></td>
-                                    <td><input type="text" name="produto_estimativa[]" placeholder="Ex: 100 kg/mês"></td>
+                                    <td><input type="text" name="produto_talhao[]" placeholder="Ex: Talhï¿½o 1"></td>
+                                    <td><input type="text" name="produto_estimativa[]" placeholder="Ex: 100 kg/mï¿½s"></td>
                                     <td>
                                         <select name="produto_periodicidade[]">
                                             <option value="">Selecione...</option>
@@ -698,35 +701,35 @@
                                     <td>
                                         <select name="produto_origem[]">
                                             <option value="">Selecione...</option>
-                                            <option value="propria_organica">Própria orgânica</option>
-                                            <option value="comprada_organica">Comprada orgânica</option>
-                                            <option value="comprada_nao_organica">Comprada não orgânica</option>
-                                            <option value="doacao">Doação</option>
+                                            <option value="propria_organica">Prï¿½pria orgï¿½nica</option>
+                                            <option value="comprada_organica">Comprada orgï¿½nica</option>
+                                            <option value="comprada_nao_organica">Comprada nï¿½o orgï¿½nica</option>
+                                            <option value="doacao">Doaï¿½ï¿½o</option>
                                         </select>
                                     </td>
                                     <td class="action-buttons">
-                                        <button type="button" onclick="PMOPrincipal.table.duplicateRow(this)" title="Duplicar">=Ë</button>
+                                        <button type="button" onclick="PMOPrincipal.table.duplicateRow(this)" title="Duplicar">=ï¿½</button>
                                         <button type="button" onclick="PMOPrincipal.table.removeRow(this)" title="Remover">L</button>
                                     </td>
                                 </tr>
                             </template>
                         </tbody>
                     </table>
-                    <button type="button" onclick="PMOPrincipal.table.addRow('tabela-produtos')" class="btn btn-add">• Adicionar Produto</button>
+                    <button type="button" onclick="PMOPrincipal.table.addRow('tabela-produtos')" class="btn btn-add">ï¿½ Adicionar Produto</button>
                 </div>
             </section>
 
-            <!-- Seção 10: Preservação Ambiental -->
+            <!-- Seï¿½ï¿½o 10: Preservaï¿½ï¿½o Ambiental -->
             <section id="secao-preservacao" class="form-section">
-                <h2>10. Preservação Ambiental</h2>
+                <h2>10. Preservaï¿½ï¿½o Ambiental</h2>
 
                 <div class="form-grid">
                     <div class="field-wrapper col-span-4">
-                        <h4>Áreas de Preservação na Propriedade</h4>
+                        <h4>ï¿½reas de Preservaï¿½ï¿½o na Propriedade</h4>
                         <div class="checkbox-grid">
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="area_preservacao_permanente" value="sim">
-                                <span>Área de Preservação Permanente (APP)</span>
+                                <span>ï¿½rea de Preservaï¿½ï¿½o Permanente (APP)</span>
                             </label>
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="area_reserva_legal" value="sim">
@@ -751,41 +754,41 @@
                         <select id="possui_car" name="possui_car" required onchange="PMOPrincipal.toggleCAR(this)">
                             <option value="">Selecione...</option>
                             <option value="sim">Sim</option>
-                            <option value="nao">Não</option>
+                            <option value="nao">Nï¿½o</option>
                             <option value="em_processo">Em processo</option>
                         </select>
                     </div>
 
                     <div class="field-wrapper col-span-2" id="campo-situacao-car" style="display:none;">
-                        <label for="situacao_car">Situação do CAR</label>
+                        <label for="situacao_car">Situaï¿½ï¿½o do CAR</label>
                         <select id="situacao_car" name="situacao_car">
                             <option value="">Selecione...</option>
                             <option value="ativo">Ativo</option>
-                            <option value="pendente">Pendente de análise</option>
+                            <option value="pendente">Pendente de anï¿½lise</option>
                             <option value="cancelado">Cancelado</option>
                             <option value="suspenso">Suspenso</option>
                         </select>
                     </div>
 
                     <div class="field-wrapper col-span-4">
-                        <label for="destino_lixo_organico">Destino do Lixo Orgânico</label>
+                        <label for="destino_lixo_organico">Destino do Lixo Orgï¿½nico</label>
                         <select id="destino_lixo_organico" name="destino_lixo_organico">
                             <option value="">Selecione...</option>
                             <option value="compostagem">Compostagem</option>
-                            <option value="alimentacao_animal">Alimentação animal</option>
+                            <option value="alimentacao_animal">Alimentaï¿½ï¿½o animal</option>
                             <option value="queima">Queima</option>
-                            <option value="coleta_publica">Coleta pública</option>
+                            <option value="coleta_publica">Coleta pï¿½blica</option>
                             <option value="outro">Outro</option>
                         </select>
                     </div>
 
                     <div class="field-wrapper col-span-4">
-                        <label for="destino_lixo_nao_organico">Destino do Lixo Não Orgânico</label>
+                        <label for="destino_lixo_nao_organico">Destino do Lixo Nï¿½o Orgï¿½nico</label>
                         <select id="destino_lixo_nao_organico" name="destino_lixo_nao_organico">
                             <option value="">Selecione...</option>
                             <option value="coleta_seletiva">Coleta seletiva</option>
-                            <option value="coleta_publica">Coleta pública</option>
-                            <option value="reciclagem">Reciclagem própria</option>
+                            <option value="coleta_publica">Coleta pï¿½blica</option>
+                            <option value="reciclagem">Reciclagem prï¿½pria</option>
                             <option value="queima">Queima</option>
                             <option value="enterro">Enterro</option>
                             <option value="outro">Outro</option>
@@ -793,12 +796,12 @@
                     </div>
 
                     <div class="field-wrapper col-span-4">
-                        <label for="destino_esgoto">Destino do Esgoto Doméstico</label>
+                        <label for="destino_esgoto">Destino do Esgoto Domï¿½stico</label>
                         <select id="destino_esgoto" name="destino_esgoto">
                             <option value="">Selecione...</option>
-                            <option value="fossa_septica">Fossa séptica</option>
+                            <option value="fossa_septica">Fossa sï¿½ptica</option>
                             <option value="fossa_negra">Fossa negra</option>
-                            <option value="rede_publica">Rede pública</option>
+                            <option value="rede_publica">Rede pï¿½blica</option>
                             <option value="biodigestor">Biodigestor</option>
                             <option value="outro">Outro</option>
                         </select>
@@ -806,12 +809,12 @@
                 </div>
             </section>
 
-            <!-- Seção 11: Recursos Hídricos -->
+            <!-- Seï¿½ï¿½o 11: Recursos Hï¿½dricos -->
             <section id="secao-recursos-hidricos" class="form-section">
-                <h2>11. Recursos Hídricos</h2>
+                <h2>11. Recursos Hï¿½dricos</h2>
 
                 <div class="section-info">
-                    <p class="instruction">9 Informe as fontes de água utilizadas na produção e possíveis riscos de contaminação.</p>
+                    <p class="instruction">9 Informe as fontes de ï¿½gua utilizadas na produï¿½ï¿½o e possï¿½veis riscos de contaminaï¿½ï¿½o.</p>
                 </div>
 
                 <div class="table-wrapper">
@@ -819,12 +822,12 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Uso da Água</th>
+                                <th>Uso da ï¿½gua</th>
                                 <th>Origem</th>
-                                <th>Risco de Contaminação</th>
-                                <th>Nível de Risco</th>
+                                <th>Risco de Contaminaï¿½ï¿½o</th>
+                                <th>Nï¿½vel de Risco</th>
                                 <th>Garantia de Qualidade</th>
-                                <th>Ações</th>
+                                <th>Aï¿½ï¿½es</th>
                             </tr>
                         </thead>
                         <tbody id="tbody-recursos-hidricos">
@@ -834,21 +837,21 @@
                                     <td>
                                         <select name="agua_uso[]">
                                             <option value="">Selecione...</option>
-                                            <option value="irrigacao">Irrigação</option>
-                                            <option value="pulverizacao">Pulverização</option>
+                                            <option value="irrigacao">Irrigaï¿½ï¿½o</option>
+                                            <option value="pulverizacao">Pulverizaï¿½ï¿½o</option>
                                             <option value="consumo_animal">Consumo animal</option>
                                             <option value="processamento">Processamento</option>
-                                            <option value="higienizacao">Higienização</option>
+                                            <option value="higienizacao">Higienizaï¿½ï¿½o</option>
                                         </select>
                                     </td>
                                     <td>
                                         <select name="agua_origem[]">
                                             <option value="">Selecione...</option>
-                                            <option value="poco">Poço</option>
+                                            <option value="poco">Poï¿½o</option>
                                             <option value="nascente">Nascente</option>
-                                            <option value="rio">Rio/Córrego</option>
+                                            <option value="rio">Rio/Cï¿½rrego</option>
                                             <option value="represa">Represa</option>
-                                            <option value="rede_publica">Rede pública</option>
+                                            <option value="rede_publica">Rede pï¿½blica</option>
                                             <option value="cisterna">Cisterna</option>
                                         </select>
                                     </td>
@@ -857,35 +860,35 @@
                                         <select name="agua_nivel_risco[]">
                                             <option value="">Selecione...</option>
                                             <option value="baixo">Baixo</option>
-                                            <option value="medio">Médio</option>
+                                            <option value="medio">Mï¿½dio</option>
                                             <option value="alto">Alto</option>
                                             <option value="nenhum">Nenhum</option>
                                         </select>
                                     </td>
-                                    <td><input type="text" name="agua_garantia[]" placeholder="Ex: Análise anual"></td>
+                                    <td><input type="text" name="agua_garantia[]" placeholder="Ex: Anï¿½lise anual"></td>
                                     <td class="action-buttons">
-                                        <button type="button" onclick="PMOPrincipal.table.duplicateRow(this)" title="Duplicar">=Ë</button>
+                                        <button type="button" onclick="PMOPrincipal.table.duplicateRow(this)" title="Duplicar">=ï¿½</button>
                                         <button type="button" onclick="PMOPrincipal.table.removeRow(this)" title="Remover">L</button>
                                     </td>
                                 </tr>
                             </template>
                         </tbody>
                     </table>
-                    <button type="button" onclick="PMOPrincipal.table.addRow('tabela-recursos-hidricos')" class="btn btn-add">• Adicionar Fonte de Água</button>
+                    <button type="button" onclick="PMOPrincipal.table.addRow('tabela-recursos-hidricos')" class="btn btn-add">ï¿½ Adicionar Fonte de ï¿½gua</button>
                 </div>
             </section>
 
-            <!-- Seção 12: Comercialização -->
+            <!-- Seï¿½ï¿½o 12: Comercializaï¿½ï¿½o -->
             <section id="secao-comercializacao" class="form-section">
-                <h2>12. Comercialização</h2>
+                <h2>12. Comercializaï¿½ï¿½o</h2>
 
                 <div class="form-grid">
                     <div class="field-wrapper col-span-4">
-                        <h4>Canais de Comercialização</h4>
+                        <h4>Canais de Comercializaï¿½ï¿½o</h4>
                         <div class="checkbox-grid">
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="comercio_feira" value="sim">
-                                <span><ê Feira</span>
+                                <span><ï¿½ Feira</span>
                             </label>
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="comercio_csa" value="sim">
@@ -893,23 +896,23 @@
                             </label>
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="comercio_entrega_domicilio" value="sim">
-                                <span>=š Entrega em domicílio</span>
+                                <span>=ï¿½ Entrega em domicï¿½lio</span>
                             </label>
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="comercio_venda_propriedade" value="sim">
-                                <span><á Venda na propriedade</span>
+                                <span><ï¿½ Venda na propriedade</span>
                             </label>
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="comercio_pnae" value="sim">
-                                <span><ë PNAE (Merenda escolar)</span>
+                                <span><ï¿½ PNAE (Merenda escolar)</span>
                             </label>
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="comercio_paa" value="sim">
-                                <span><Û PAA (Compras governamentais)</span>
+                                <span><ï¿½ PAA (Compras governamentais)</span>
                             </label>
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="comercio_supermercado" value="sim">
-                                <span>=Ò Supermercado</span>
+                                <span>=ï¿½ Supermercado</span>
                             </label>
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="comercio_cooperativa" value="sim">
@@ -917,40 +920,40 @@
                             </label>
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="comercio_intermediario" value="sim">
-                                <span>=d Intermediário</span>
+                                <span>=d Intermediï¿½rio</span>
                             </label>
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="comercio_industria" value="sim">
-                                <span><í Indústria</span>
+                                <span><ï¿½ Indï¿½stria</span>
                             </label>
                         </div>
                     </div>
 
                     <div class="field-wrapper col-span-4">
-                        <label for="previsao_inicio_vendas">Previsão de Início das Vendas</label>
+                        <label for="previsao_inicio_vendas">Previsï¿½o de Inï¿½cio das Vendas</label>
                         <input type="date" id="previsao_inicio_vendas" name="previsao_inicio_vendas">
                     </div>
 
                     <div class="field-wrapper col-span-2">
                         <label for="comercializa_nao_organicos">
-                            Comercializa produtos NÃO orgânicos?
+                            Comercializa produtos Nï¿½O orgï¿½nicos?
                             <span class="required">*</span>
                         </label>
                         <select id="comercializa_nao_organicos" name="comercializa_nao_organicos" required onchange="PMOPrincipal.toggleNaoOrganicos(this)">
                             <option value="">Selecione...</option>
                             <option value="sim">Sim</option>
-                            <option value="nao">Não</option>
+                            <option value="nao">Nï¿½o</option>
                         </select>
                     </div>
 
                     <div class="field-wrapper col-span-2" id="campo-separacao-produtos" style="display:none;">
                         <label for="separacao_produtos">Como separa os produtos?</label>
-                        <input type="text" id="separacao_produtos" name="separacao_produtos" placeholder="Descreva a separação">
+                        <input type="text" id="separacao_produtos" name="separacao_produtos" placeholder="Descreva a separaï¿½ï¿½o">
                     </div>
 
                     <div class="field-wrapper col-span-4">
-                        <label for="rotulagem">Sistema de Rotulagem/Identificação</label>
-                        <textarea id="rotulagem" name="rotulagem" rows="2" placeholder="Descreva como rotula e identifica seus produtos orgânicos"></textarea>
+                        <label for="rotulagem">Sistema de Rotulagem/Identificaï¿½ï¿½o</label>
+                        <textarea id="rotulagem" name="rotulagem" rows="2" placeholder="Descreva como rotula e identifica seus produtos orgï¿½nicos"></textarea>
                     </div>
 
                     <div class="field-wrapper col-span-4">
@@ -962,7 +965,7 @@
                         <label for="transporte">Transporte dos Produtos</label>
                         <select id="transporte" name="transporte">
                             <option value="">Selecione...</option>
-                            <option value="proprio">Transporte próprio</option>
+                            <option value="proprio">Transporte prï¿½prio</option>
                             <option value="terceirizado">Transporte terceirizado</option>
                             <option value="cooperativa">Cooperativa</option>
                             <option value="comprador">O comprador busca</option>
@@ -971,12 +974,12 @@
                 </div>
             </section>
 
-            <!-- Seção 13: Controles e Registros -->
+            <!-- Seï¿½ï¿½o 13: Controles e Registros -->
             <section id="secao-controles" class="form-section">
                 <h2>13. Controles e Registros</h2>
 
                 <div class="section-info">
-                    <p class="instruction">9 Informe quais controles e registros são mantidos na propriedade.</p>
+                    <p class="instruction">9 Informe quais controles e registros sï¿½o mantidos na propriedade.</p>
                 </div>
 
                 <div class="form-grid">
@@ -984,7 +987,7 @@
                         <div class="checkbox-grid">
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="controle_caderno_campo" value="sim">
-                                <span>=Ó Caderno de campo</span>
+                                <span>=ï¿½ Caderno de campo</span>
                             </label>
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="controle_plantio" value="sim">
@@ -992,19 +995,19 @@
                             </label>
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="controle_colheita" value="sim">
-                                <span>>ú Registro de colheita</span>
+                                <span>>ï¿½ Registro de colheita</span>
                             </label>
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="controle_vendas" value="sim">
-                                <span>=° Registro de vendas</span>
+                                <span>=ï¿½ Registro de vendas</span>
                             </label>
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="controle_insumos" value="sim">
-                                <span>=æ Controle de insumos</span>
+                                <span>=ï¿½ Controle de insumos</span>
                             </label>
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="controle_estoque" value="sim">
-                                <span>=Ê Controle de estoque</span>
+                                <span>=ï¿½ Controle de estoque</span>
                             </label>
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="controle_rastreabilidade" value="sim">
@@ -1012,107 +1015,107 @@
                             </label>
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="controle_nao_conformidades" value="sim">
-                                <span>  Não conformidades</span>
+                                <span>ï¿½ Nï¿½o conformidades</span>
                             </label>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Seção 14: Produção de Subsistência -->
+            <!-- Seï¿½ï¿½o 14: Produï¿½ï¿½o de Subsistï¿½ncia -->
             <section id="secao-subsistencia" class="form-section">
-                <h2>14. Produção de Subsistência (Não Orgânica)</h2>
+                <h2>14. Produï¿½ï¿½o de Subsistï¿½ncia (Nï¿½o Orgï¿½nica)</h2>
 
                 <div class="section-info">
-                    <p class="instruction">9 Declare se possui produção para consumo próprio que NÃO segue manejo orgânico.</p>
+                    <p class="instruction">9 Declare se possui produï¿½ï¿½o para consumo prï¿½prio que Nï¿½O segue manejo orgï¿½nico.</p>
                 </div>
 
                 <div class="form-grid">
                     <div class="field-wrapper col-span-2">
                         <label for="possui_subsistencia">
-                            Possui produção de subsistência não orgânica?
+                            Possui produï¿½ï¿½o de subsistï¿½ncia nï¿½o orgï¿½nica?
                             <span class="required">*</span>
                         </label>
                         <select id="possui_subsistencia" name="possui_subsistencia" required onchange="PMOPrincipal.toggleSubsistencia(this)">
                             <option value="">Selecione...</option>
                             <option value="sim">Sim</option>
-                            <option value="nao">Não</option>
+                            <option value="nao">Nï¿½o</option>
                         </select>
                     </div>
 
                     <div id="campos-subsistencia" style="display:none;">
                         <div class="form-grid">
                             <div class="field-wrapper col-span-4">
-                                <label for="subsistencia_usa_nao_permitidos">Usa insumos não permitidos?</label>
+                                <label for="subsistencia_usa_nao_permitidos">Usa insumos nï¿½o permitidos?</label>
                                 <select id="subsistencia_usa_nao_permitidos" name="subsistencia_usa_nao_permitidos">
                                     <option value="">Selecione...</option>
                                     <option value="sim">Sim</option>
-                                    <option value="nao">Não</option>
+                                    <option value="nao">Nï¿½o</option>
                                 </select>
                             </div>
 
                             <div class="field-wrapper col-span-4">
-                                <label for="subsistencia_risco">Risco de Contaminação</label>
-                                <textarea id="subsistencia_risco" name="subsistencia_risco" rows="2" placeholder="Descreva possíveis riscos de contaminação"></textarea>
+                                <label for="subsistencia_risco">Risco de Contaminaï¿½ï¿½o</label>
+                                <textarea id="subsistencia_risco" name="subsistencia_risco" rows="2" placeholder="Descreva possï¿½veis riscos de contaminaï¿½ï¿½o"></textarea>
                             </div>
 
                             <div class="field-wrapper col-span-4">
-                                <label for="subsistencia_bloqueios">Manejos de Bloqueio/Separação</label>
-                                <textarea id="subsistencia_bloqueios" name="subsistencia_bloqueios" rows="2" placeholder="Como garante a separação da produção orgânica?"></textarea>
+                                <label for="subsistencia_bloqueios">Manejos de Bloqueio/Separaï¿½ï¿½o</label>
+                                <textarea id="subsistencia_bloqueios" name="subsistencia_bloqueios" rows="2" placeholder="Como garante a separaï¿½ï¿½o da produï¿½ï¿½o orgï¿½nica?"></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Seção 15: Produção Paralela -->
+            <!-- Seï¿½ï¿½o 15: Produï¿½ï¿½o Paralela -->
             <section id="secao-paralela" class="form-section">
-                <h2>15. Produção Paralela (Orgânica e Convencional)</h2>
+                <h2>15. Produï¿½ï¿½o Paralela (Orgï¿½nica e Convencional)</h2>
 
                 <div class="section-info">
-                    <p class="alert">  Produção paralela é quando você cultiva o MESMO produto em manejo orgânico e convencional simultaneamente.</p>
+                    <p class="alert">ï¿½ Produï¿½ï¿½o paralela ï¿½ quando vocï¿½ cultiva o MESMO produto em manejo orgï¿½nico e convencional simultaneamente.</p>
                 </div>
 
                 <div class="form-grid">
                     <div class="field-wrapper col-span-2">
                         <label for="possui_paralela">
-                            Possui produção paralela?
+                            Possui produï¿½ï¿½o paralela?
                             <span class="required">*</span>
                         </label>
                         <select id="possui_paralela" name="possui_paralela" required onchange="PMOPrincipal.toggleParalela(this)">
                             <option value="">Selecione...</option>
                             <option value="sim">Sim</option>
-                            <option value="nao">Não</option>
+                            <option value="nao">Nï¿½o</option>
                         </select>
                     </div>
 
                     <div id="campos-paralela" style="display:none;">
                         <div class="form-grid">
                             <div class="field-wrapper col-span-4">
-                                <label for="paralela_usa_nao_permitidos">Usa insumos não permitidos na produção convencional?</label>
+                                <label for="paralela_usa_nao_permitidos">Usa insumos nï¿½o permitidos na produï¿½ï¿½o convencional?</label>
                                 <select id="paralela_usa_nao_permitidos" name="paralela_usa_nao_permitidos">
                                     <option value="">Selecione...</option>
                                     <option value="sim">Sim</option>
-                                    <option value="nao">Não</option>
+                                    <option value="nao">Nï¿½o</option>
                                 </select>
                             </div>
 
                             <div class="field-wrapper col-span-4">
-                                <label for="paralela_risco">Risco de Contaminação</label>
-                                <textarea id="paralela_risco" name="paralela_risco" rows="2" placeholder="Descreva possíveis riscos"></textarea>
+                                <label for="paralela_risco">Risco de Contaminaï¿½ï¿½o</label>
+                                <textarea id="paralela_risco" name="paralela_risco" rows="2" placeholder="Descreva possï¿½veis riscos"></textarea>
                             </div>
 
                             <div class="field-wrapper col-span-4">
-                                <label for="paralela_bloqueios">Manejos de Bloqueio/Separação</label>
+                                <label for="paralela_bloqueios">Manejos de Bloqueio/Separaï¿½ï¿½o</label>
                                 <textarea id="paralela_bloqueios" name="paralela_bloqueios" rows="2" placeholder="Como diferencia e separa os produtos?"></textarea>
                             </div>
 
                             <div class="field-wrapper col-span-2">
-                                <label for="paralela_conversao_total">Pretende converter toda a produção?</label>
+                                <label for="paralela_conversao_total">Pretende converter toda a produï¿½ï¿½o?</label>
                                 <select id="paralela_conversao_total" name="paralela_conversao_total" onchange="PMOPrincipal.toggleConversaoTotal(this)">
                                     <option value="">Selecione...</option>
                                     <option value="sim">Sim</option>
-                                    <option value="nao">Não</option>
+                                    <option value="nao">Nï¿½o</option>
                                 </select>
                             </div>
 
@@ -1125,19 +1128,19 @@
                 </div>
             </section>
 
-            <!-- Seção 16: Upload de Documentos -->
+            <!-- Seï¿½ï¿½o 16: Upload de Documentos -->
             <section id="secao-documentos" class="form-section">
                 <h2>16. Documentos Anexos</h2>
 
                 <div class="section-info">
-                    <p class="instruction">9 Anexe os documentos obrigatórios. Formatos aceitos: PDF, JPG, PNG (máx. 5MB cada)</p>
+                    <p class="instruction">9 Anexe os documentos obrigatï¿½rios. Formatos aceitos: PDF, JPG, PNG (mï¿½x. 5MB cada)</p>
                 </div>
 
                 <div class="form-grid">
                     <div class="field-wrapper col-span-4">
                         <label>Croqui da Propriedade <span class="required">*</span></label>
                         <div class="upload-area" id="upload-croqui">
-                            <p>=Á Arraste o arquivo aqui ou clique para selecionar</p>
+                            <p>=ï¿½ Arraste o arquivo aqui ou clique para selecionar</p>
                             <input type="file"
                                    name="documento_croqui"
                                    accept=".pdf,.jpg,.jpeg,.png"
@@ -1149,7 +1152,7 @@
                     <div class="field-wrapper col-span-4">
                         <label>CAR - Cadastro Ambiental Rural</label>
                         <div class="upload-area" id="upload-car">
-                            <p>=Á Arraste o arquivo aqui ou clique para selecionar</p>
+                            <p>=ï¿½ Arraste o arquivo aqui ou clique para selecionar</p>
                             <input type="file"
                                    name="documento_car"
                                    accept=".pdf,.jpg,.jpeg,.png"
@@ -1159,9 +1162,9 @@
                     </div>
 
                     <div class="field-wrapper col-span-4">
-                        <label>Análise de Solo (se houver)</label>
+                        <label>Anï¿½lise de Solo (se houver)</label>
                         <div class="upload-area" id="upload-analise-solo">
-                            <p>=Á Arraste o arquivo aqui ou clique para selecionar</p>
+                            <p>=ï¿½ Arraste o arquivo aqui ou clique para selecionar</p>
                             <input type="file"
                                    name="documento_analise_solo"
                                    accept=".pdf,.jpg,.jpeg,.png"
@@ -1171,9 +1174,9 @@
                     </div>
 
                     <div class="field-wrapper col-span-4">
-                        <label>Análise de Água (se houver)</label>
+                        <label>Anï¿½lise de ï¿½gua (se houver)</label>
                         <div class="upload-area" id="upload-analise-agua">
-                            <p>=Á Arraste o arquivo aqui ou clique para selecionar</p>
+                            <p>=ï¿½ Arraste o arquivo aqui ou clique para selecionar</p>
                             <input type="file"
                                    name="documento_analise_agua"
                                    accept=".pdf,.jpg,.jpeg,.png"
@@ -1185,7 +1188,7 @@
                     <div class="field-wrapper col-span-4">
                         <label>Outros Documentos</label>
                         <div class="upload-area" id="upload-outros">
-                            <p>=Á Arraste arquivos aqui ou clique para selecionar (múltiplos)</p>
+                            <p>=ï¿½ Arraste arquivos aqui ou clique para selecionar (mï¿½ltiplos)</p>
                             <input type="file"
                                    name="documento_outros[]"
                                    accept=".pdf,.jpg,.jpeg,.png"
@@ -1197,12 +1200,12 @@
                 </div>
             </section>
 
-            <!-- Seção 17: Declarações -->
+            <!-- Seï¿½ï¿½o 17: Declaraï¿½ï¿½es -->
             <section id="secao-declaracoes" class="form-section">
-                <h2>17. Declarações e Compromissos</h2>
+                <h2>17. Declaraï¿½ï¿½es e Compromissos</h2>
 
                 <div class="section-info">
-                    <p class="alert">  É obrigatório concordar com todas as declarações abaixo para submeter o PMO.</p>
+                    <p class="alert">ï¿½ ï¿½ obrigatï¿½rio concordar com todas as declaraï¿½ï¿½es abaixo para submeter o PMO.</p>
                 </div>
 
                 <div class="form-grid">
@@ -1210,22 +1213,22 @@
                         <div class="checkbox-group">
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="declaracao_veracidade" value="sim" required>
-                                <span><strong>Declaro que todas as informações prestadas são verdadeiras</strong></span>
+                                <span><strong>Declaro que todas as informaï¿½ï¿½es prestadas sï¿½o verdadeiras</strong></span>
                             </label>
 
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="declaracao_normas" value="sim" required>
-                                <span><strong>Comprometo-me a seguir as normas de produção orgânica (Lei 10.831/2003 e Portaria 52/2021)</strong></span>
+                                <span><strong>Comprometo-me a seguir as normas de produï¿½ï¿½o orgï¿½nica (Lei 10.831/2003 e Portaria 52/2021)</strong></span>
                             </label>
 
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="declaracao_visitas" value="sim" required>
-                                <span><strong>Autorizo visitas de verificação pela ANC e pelos membros do grupo SPG</strong></span>
+                                <span><strong>Autorizo visitas de verificaï¿½ï¿½o pela ANC e pelos membros do grupo SPG</strong></span>
                             </label>
 
                             <label class="checkbox-enhanced">
                                 <input type="checkbox" name="declaracao_atualizacao" value="sim" required>
-                                <span><strong>Comprometo-me a comunicar qualquer mudança significativa no manejo</strong></span>
+                                <span><strong>Comprometo-me a comunicar qualquer mudanï¿½a significativa no manejo</strong></span>
                             </label>
 
                             <label class="checkbox-enhanced">
@@ -1248,7 +1251,7 @@
 
                     <div class="field-wrapper col-span-2">
                         <label for="assinatura_responsavel">
-                            Nome do Responsável
+                            Nome do Responsï¿½vel
                             <span class="required">*</span>
                         </label>
                         <input type="text"
@@ -1263,16 +1266,16 @@
             <!-- Action Buttons -->
             <div class="form-actions">
                 <button type="button" onclick="PMOPrincipal.salvar()" class="btn btn-secondary">
-                    =¾ Salvar Rascunho
+                    =ï¿½ Salvar Rascunho
                 </button>
                 <button type="button" onclick="PMOPrincipal.validar()" class="btn btn-info">
-                     Validar Formulário
+                     Validar Formulï¿½rio
                 </button>
                 <button type="button" onclick="PMOPrincipal.exportarJSON()" class="btn btn-secondary">
-                    =å Exportar JSON
+                    =ï¿½ Exportar JSON
                 </button>
                 <button type="button" onclick="PMOPrincipal.exportarPDF()" class="btn btn-secondary">
-                    =Ä Exportar PDF
+                    =ï¿½ Exportar PDF
                 </button>
                 <button type="submit" class="btn btn-primary">
                     	 Enviar PMO
@@ -1289,7 +1292,7 @@
     <!-- Footer -->
     <footer class="pmo-footer">
         <div class="pmo-container">
-            <p>© 2024 ANC - Associação de Agricultura Natural de Campinas e Região</p>
+            <p>ï¿½ 2024 ANC - Associaï¿½ï¿½o de Agricultura Natural de Campinas e Regiï¿½o</p>
             <p>Sistema PMO Digital v2.0 | Portaria MAPA 52/2021</p>
         </div>
     </footer>
@@ -1297,7 +1300,7 @@
     <!-- Framework JS Unificado -->
     <script src="../../framework/core/pmo-framework.js"></script>
 
-    <!-- JS Específico do PMO Principal -->
+    <!-- JS Especï¿½fico do PMO Principal -->
     <script src="./pmo-principal.js"></script>
 
     <!-- Validation Rules -->
