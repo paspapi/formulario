@@ -1,1 +1,213 @@
-@import './_responsive.css';
+/**
+ * PMO Framework - Media Queries Responsivas
+ * Versão: 1.0.0
+ * Mobile First Approach
+ */
+
+/* ===== TABLET (768px+) ===== */
+@media (min-width: 768px) {
+    /* Layout */
+    .md\:block { display: block !important; }
+    .md\:flex { display: flex !important; }
+    .md\:grid { display: grid !important; }
+    .md\:hidden { display: none !important; }
+
+    /* Grid */
+    .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+    .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+    .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+
+    /* Width */
+    .md\:w-1\/2 { width: 50% !important; }
+    .md\:w-1\/3 { width: 33.333333% !important; }
+    .md\:w-2\/3 { width: 66.666667% !important; }
+    .md\:w-auto { width: auto !important; }
+    .md\:w-full { width: 100% !important; }
+
+    /* Padding */
+    .md\:p-4 { padding: var(--spacing-lg) !important; }
+    .md\:p-5 { padding: var(--spacing-xl) !important; }
+    .md\:px-4 { padding-left: var(--spacing-lg) !important; padding-right: var(--spacing-lg) !important; }
+    .md\:py-4 { padding-top: var(--spacing-lg) !important; padding-bottom: var(--spacing-lg) !important; }
+
+    /* Margin */
+    .md\:m-4 { margin: var(--spacing-lg) !important; }
+    .md\:m-5 { margin: var(--spacing-xl) !important; }
+    .md\:mx-auto { margin-left: auto !important; margin-right: auto !important; }
+
+    /* Text */
+    .md\:text-left { text-align: left !important; }
+    .md\:text-center { text-align: center !important; }
+    .md\:text-right { text-align: right !important; }
+    .md\:text-lg { font-size: var(--text-lg) !important; }
+    .md\:text-xl { font-size: var(--text-xl) !important; }
+    .md\:text-2xl { font-size: var(--text-2xl) !important; }
+}
+
+/* ===== DESKTOP (1024px+) ===== */
+@media (min-width: 1024px) {
+    /* Layout */
+    .lg\:block { display: block !important; }
+    .lg\:flex { display: flex !important; }
+    .lg\:grid { display: grid !important; }
+    .lg\:hidden { display: none !important; }
+
+    /* Grid */
+    .lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+    .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+    .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+    .lg\:grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)) !important; }
+
+    /* Width */
+    .lg\:w-1\/2 { width: 50% !important; }
+    .lg\:w-1\/3 { width: 33.333333% !important; }
+    .lg\:w-2\/3 { width: 66.666667% !important; }
+    .lg\:w-1\/4 { width: 25% !important; }
+    .lg\:w-3\/4 { width: 75% !important; }
+    .lg\:w-auto { width: auto !important; }
+
+    /* Padding */
+    .lg\:p-5 { padding: var(--spacing-xl) !important; }
+    .lg\:p-6 { padding: var(--spacing-2xl) !important; }
+
+    /* Text */
+    .lg\:text-xl { font-size: var(--text-xl) !important; }
+    .lg\:text-2xl { font-size: var(--text-2xl) !important; }
+    .lg\:text-3xl { font-size: var(--text-3xl) !important; }
+}
+
+/* ===== MOBILE ONLY (até 767px) ===== */
+@media (max-width: 767px) {
+    /* Force single column em grids */
+    .form-grid,
+    .form-grid-2,
+    .form-grid-3 {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Tabelas com scroll horizontal */
+    .table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .dynamic-table {
+        min-width: 600px;
+    }
+
+    /* Botões full-width em mobile */
+    .btn-mobile-full {
+        width: 100% !important;
+        justify-content: center;
+    }
+
+    /* Reduzir padding do container */
+    .pmo-container {
+        padding: var(--spacing-md) !important;
+    }
+
+    .form-section {
+        padding: var(--spacing-md) !important;
+    }
+
+    /* Tabs scroll horizontal */
+    .tabs-header {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+    }
+
+    /* Ajustar tamanho de fontes */
+    h1 { font-size: var(--text-3xl) !important; }
+    h2 { font-size: var(--text-2xl) !important; }
+    h3 { font-size: var(--text-xl) !important; }
+
+    /* Upload area mais compacta */
+    .upload-area {
+        padding: var(--spacing-md) !important;
+    }
+
+    /* File preview em coluna única */
+    .file-preview {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* ===== LANDSCAPE MOBILE (phones em landscape) ===== */
+@media (max-width: 767px) and (orientation: landscape) {
+    /* Reduzir padding vertical */
+    .form-section {
+        padding: var(--spacing-sm) var(--spacing-md) !important;
+    }
+
+    /* Fazer modais scrolláveis */
+    .modal-content {
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+}
+
+/* ===== TOUCH DEVICES ===== */
+@media (hover: none) and (pointer: coarse) {
+    /* Aumentar área de toque dos botões */
+    .btn,
+    button,
+    a {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* Checkboxes e radios maiores */
+    input[type="checkbox"],
+    input[type="radio"] {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* Remover hover effects */
+    .btn:hover,
+    .tab-button:hover,
+    .accordion-header:hover {
+        transform: none;
+    }
+}
+
+/* ===== DARK MODE (optional - preparado para futura implementação) ===== */
+@media (prefers-color-scheme: dark) {
+    /*
+    Preparado para futura implementação de dark mode
+    Descomentar quando necessário
+
+    :root {
+        --gray-50: #1f2937;
+        --gray-100: #374151;
+        --white: #111827;
+        --black: #f9fafb;
+    }
+    */
+}
+
+/* ===== REDUCED MOTION (Acessibilidade) ===== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ===== HIGH CONTRAST MODE (Acessibilidade) ===== */
+@media (prefers-contrast: high) {
+    .btn {
+        border: 2px solid currentColor;
+    }
+
+    input,
+    select,
+    textarea {
+        border-width: 2px;
+    }
+}

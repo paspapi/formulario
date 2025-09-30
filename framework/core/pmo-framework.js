@@ -1,8 +1,8 @@
 /**
  * PMO Framework - Core
- * Sistema de gerenciamento de Planos de Manejo Orgânico (PMO)
+ * Sistema de gerenciamento de Planos de Manejo Orgï¿½nico (PMO)
  * @version 2.0
- * @author ANC - Associação de Agricultura Natural de Campinas
+ * @author ANC - Associaï¿½ï¿½o de Agricultura Natural de Campinas
  */
 
 class PMOFramework {
@@ -28,7 +28,7 @@ class PMOFramework {
    * Inicializa o framework
    */
   async init() {
-    console.log('=€ Iniciando PMO Framework v2.0');
+    console.log('=ï¿½ Iniciando PMO Framework v2.0');
 
     // Configura event listeners
     this.setupEventListeners();
@@ -39,7 +39,7 @@ class PMOFramework {
     // Inicia auto-save
     this.startAutoSave();
 
-    // Carrega módulo inicial
+    // Carrega mï¿½dulo inicial
     await this.loadInitialRoute();
 
     console.log(' PMO Framework inicializado');
@@ -49,12 +49,12 @@ class PMOFramework {
    * Configura event listeners globais
    */
   setupEventListeners() {
-    // Navegação entre páginas
+    // Navegaï¿½ï¿½o entre pï¿½ginas
     window.addEventListener('popstate', (e) => {
       this.handleRouteChange(e.state);
     });
 
-    // Previne perda de dados não salvos
+    // Previne perda de dados nï¿½o salvos
     window.addEventListener('beforeunload', (e) => {
       if (this.hasUnsavedChanges()) {
         e.preventDefault();
@@ -62,7 +62,7 @@ class PMOFramework {
       }
     });
 
-    // Delegação de eventos para navegação SPA
+    // Delegaï¿½ï¿½o de eventos para navegaï¿½ï¿½o SPA
     document.addEventListener('click', (e) => {
       const link = e.target.closest('[data-navigate]');
       if (link) {
@@ -72,7 +72,7 @@ class PMOFramework {
       }
     });
 
-    // Validação em tempo real
+    // Validaï¿½ï¿½o em tempo real
     document.addEventListener('input', (e) => {
       if (e.target.hasAttribute('data-validate')) {
         this.validateField(e.target);
@@ -94,11 +94,11 @@ class PMOFramework {
     this.routes = {
       '/': { module: 'dashboard', title: 'Dashboard - PMO' },
       '/pmo-principal': { module: 'pmo-principal', title: 'PMO Principal' },
-      '/anexo-vegetal': { module: 'anexo-vegetal', title: 'Anexo I - Produção Vegetal' },
-      '/anexo-animal': { module: 'anexo-animal', title: 'Anexo III - Produção Animal' },
+      '/anexo-vegetal': { module: 'anexo-vegetal', title: 'Anexo I - Produï¿½ï¿½o Vegetal' },
+      '/anexo-animal': { module: 'anexo-animal', title: 'Anexo III - Produï¿½ï¿½o Animal' },
       '/anexo-cogumelos': { module: 'anexo-cogumelos', title: 'Anexo II - Cogumelos' },
       '/anexo-apicultura': { module: 'anexo-apicultura', title: 'Anexo IV - Apicultura' },
-      '/relatorios': { module: 'relatorios', title: 'Relatórios e Exportação' }
+      '/relatorios': { module: 'relatorios', title: 'Relatï¿½rios e Exportaï¿½ï¿½o' }
     };
   }
 
@@ -114,7 +114,7 @@ class PMOFramework {
    * Navega para uma rota
    */
   async navigate(path, options = {}) {
-    // Verifica mudanças não salvas
+    // Verifica mudanï¿½as nï¿½o salvas
     if (!options.force && this.hasUnsavedChanges()) {
       const confirmed = await this.confirmNavigation();
       if (!confirmed) return;
@@ -123,57 +123,57 @@ class PMOFramework {
     // Executa middleware
     for (const mw of this.middleware) {
       const result = await mw(path);
-      if (result === false) return; // Middleware bloqueou navegação
+      if (result === false) return; // Middleware bloqueou navegaï¿½ï¿½o
     }
 
     const route = this.routes[path];
     if (!route) {
-      console.error(`Rota não encontrada: ${path}`);
-      this.showNotification('Página não encontrada', 'error');
+      console.error(`Rota nï¿½o encontrada: ${path}`);
+      this.showNotification('Pï¿½gina nï¿½o encontrada', 'error');
       return;
     }
 
-    // Atualiza histórico
+    // Atualiza histï¿½rico
     if (options.replace) {
       window.history.replaceState({ path }, '', this.config.basePath + path);
     } else {
       window.history.pushState({ path }, '', this.config.basePath + path);
     }
 
-    // Atualiza título
+    // Atualiza tï¿½tulo
     document.title = route.title;
 
-    // Carrega módulo
+    // Carrega mï¿½dulo
     await this.loadModule(route.module, path);
 
     this.currentRoute = path;
   }
 
   /**
-   * Carrega módulo da aplicação
+   * Carrega mï¿½dulo da aplicaï¿½ï¿½o
    */
   async loadModule(moduleName, path) {
     try {
       // Mostra loading
       this.showLoading();
 
-      // Descarrega módulo anterior
+      // Descarrega mï¿½dulo anterior
       if (this.currentModule?.unload) {
         await this.currentModule.unload();
       }
 
-      // Verifica se módulo já está em cache
+      // Verifica se mï¿½dulo jï¿½ estï¿½ em cache
       if (this.modules.has(moduleName)) {
         this.currentModule = this.modules.get(moduleName);
       } else {
-        // Carrega módulo dinamicamente
-        const modulePath = `../anc/${moduleName}/${moduleName}.js`;
+        // Carrega mï¿½dulo dinamicamente
+        const modulePath = `../../anc/${moduleName}/${moduleName}.js`;
         const module = await import(modulePath);
         this.currentModule = new module.default(this);
         this.modules.set(moduleName, this.currentModule);
       }
 
-      // Renderiza módulo
+      // Renderiza mï¿½dulo
       await this.currentModule.render();
 
       // Esconde loading
@@ -183,14 +183,14 @@ class PMOFramework {
       this.emit('moduleLoaded', { moduleName, path });
 
     } catch (error) {
-      console.error(`Erro ao carregar módulo ${moduleName}:`, error);
-      this.showNotification(`Erro ao carregar página: ${error.message}`, 'error');
+      console.error(`Erro ao carregar mï¿½dulo ${moduleName}:`, error);
+      this.showNotification(`Erro ao carregar pï¿½gina: ${error.message}`, 'error');
       this.hideLoading();
     }
   }
 
   /**
-   * Gerencia mudança de rota
+   * Gerencia mudanï¿½a de rota
    */
   handleRouteChange(state) {
     if (state?.path) {
@@ -199,7 +199,7 @@ class PMOFramework {
   }
 
   /**
-   * Adiciona middleware de navegação
+   * Adiciona middleware de navegaï¿½ï¿½o
    */
   use(fn) {
     this.middleware.push(fn);
@@ -269,14 +269,14 @@ class PMOFramework {
   }
 
   /**
-   * Confirmação de navegação
+   * Confirmaï¿½ï¿½o de navegaï¿½ï¿½o
    */
   async confirmNavigation() {
-    return confirm('Você tem alterações não salvas. Deseja continuar?');
+    return confirm('Vocï¿½ tem alteraï¿½ï¿½es nï¿½o salvas. Deseja continuar?');
   }
 
   /**
-   * Validação de campo
+   * Validaï¿½ï¿½o de campo
    */
   validateField(field) {
     const validateType = field.getAttribute('data-validate');
@@ -285,7 +285,7 @@ class PMOFramework {
     let isValid = true;
     let message = '';
 
-    // Importa validators (será implementado)
+    // Importa validators (serï¿½ implementado)
     if (window.PMOValidators) {
       const result = window.PMOValidators.validate(validateType, value);
       isValid = result.valid;
@@ -312,7 +312,7 @@ class PMOFramework {
   }
 
   /**
-   * Notificações
+   * Notificaï¿½ï¿½es
    */
   showNotification(message, type = 'info', duration = 3000) {
     const notification = document.createElement('div');
@@ -354,7 +354,7 @@ class PMOFramework {
   }
 
   /**
-   * Utilitários
+   * Utilitï¿½rios
    */
   getModule(name) {
     return this.modules.get(name);
@@ -373,7 +373,7 @@ class PMOFramework {
   }
 }
 
-// Classe base para módulos
+// Classe base para mï¿½dulos
 class PMOModule {
   constructor(framework) {
     this.framework = framework;
@@ -381,19 +381,19 @@ class PMOModule {
   }
 
   async render() {
-    throw new Error('Método render() deve ser implementado');
+    throw new Error('Mï¿½todo render() deve ser implementado');
   }
 
   async save(options = {}) {
-    console.log('Save não implementado neste módulo');
+    console.log('Save nï¿½o implementado neste mï¿½dulo');
   }
 
   async load() {
-    console.log('Load não implementado neste módulo');
+    console.log('Load nï¿½o implementado neste mï¿½dulo');
   }
 
   async unload() {
-    console.log('Unload não implementado neste módulo');
+    console.log('Unload nï¿½o implementado neste mï¿½dulo');
   }
 
   getFormData(formElement) {
