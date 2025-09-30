@@ -88,6 +88,43 @@ Aplicações específicas do PMO:
 - **export-service.js**: Exportação JSON/CSV no browser
 - **storage-service.js**: Gerenciamento de localStorage/IndexedDB
 
+### 5. Integração entre Módulos 🔗
+
+**⚠️ REGRA CRÍTICA**: Todos os anexos **DEVEM** carregar dados do PMO Principal automaticamente.
+
+#### Como funciona:
+1. **PMO Principal** salva dados no localStorage com chave `'pmo_principal_data'`
+2. **Anexos** (Vegetal, Animal, Cogumelos) carregam estes dados na inicialização
+3. Campos básicos são preenchidos automaticamente:
+   - Nome do fornecedor/produtor
+   - Nome da unidade de produção
+   - Data de preenchimento
+   - Grupo SPG
+
+#### Implementação:
+```javascript
+// Em cada anexo (anexo-animal.js, anexo-vegetal.js, etc.)
+loadPMOPrincipal() {
+    const pmoPrincipal = localStorage.getItem('pmo_principal_data');
+    if (!pmoPrincipal) return;
+
+    const data = JSON.parse(pmoPrincipal);
+    // Preencher campos automaticamente
+    // Ver INTEGRACAO_PMO_PRINCIPAL.md para código completo
+}
+
+init() {
+    // ... outras inicializações ...
+    this.loadPMOPrincipal(); // OBRIGATÓRIO
+    // ...
+}
+```
+
+#### Documentação completa:
+- **Prompt Universal**: `prompt_universal_formulario_pmo.md` - Seção J
+- **Guia de Integração**: `INTEGRACAO_PMO_PRINCIPAL.md`
+- **Exemplo Completo**: `pmo/anexo-animal/anexo-animal.js`
+
 ## Fluxo de Navegação
 
 ### Menu Principal

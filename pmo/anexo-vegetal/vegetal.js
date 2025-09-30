@@ -1,0 +1,336 @@
+// Anexo I - Producao Vegetal - Sistema PMO ANC
+// ENCODING: UTF-8 (sem acentos para compatibilidade)
+
+const AnexoVegetal = {
+    config: {
+        formId: 'form-anexo-vegetal',
+        storageKey: 'anexo_vegetal_data',
+        autoSaveInterval: 30000,
+        version: '2.0'
+    },
+
+    loadPMOPrincipal() {
+        try {
+            console.log('Carregando dados do PMO Principal...');
+            const pmoPrincipal = localStorage.getItem('pmo_principal_data');
+
+            if (!pmoPrincipal) {
+                console.log('Nenhum dado do PMO Principal encontrado.');
+                this.showMessage('Aviso: Preencha o PMO Principal primeiro.', 'warning');
+                return;
+            }
+
+            const data = JSON.parse(pmoPrincipal);
+            const form = document.getElementById(this.config.formId);
+            if (!form) return;
+
+            const nomeField = form.querySelector('[name="nome_fornecedor"]');
+            if (nomeField && !nomeField.value) {
+                nomeField.value = data.nome_completo || data.razao_social || '';
+            }
+
+            const unidadeField = form.querySelector('[name="nome_unidade_producao"]');
+            if (unidadeField && !unidadeField.value) {
+                unidadeField.value = data.nome_unidade_producao || '';
+            }
+
+            const dataField = form.querySelector('[name="data_preenchimento"]');
+            if (dataField && !dataField.value) {
+                dataField.value = new Date().toISOString().split('T')[0];
+            }
+
+            const grupoField = form.querySelector('[name="grupo_spg"]');
+            if (grupoField && !grupoField.value && data.grupo_spg) {
+                grupoField.value = data.grupo_spg;
+            }
+
+            const nomeAssinatura = form.querySelector('[name="nome_completo_produtor"]');
+            if (nomeAssinatura && !nomeAssinatura.value) {
+                nomeAssinatura.value = data.nome_completo || data.razao_social || '';
+            }
+
+            const grupoAssinatura = form.querySelector('[name="grupo_spg_anc"]');
+            if (grupoAssinatura && !grupoAssinatura.value && data.grupo_spg) {
+                grupoAssinatura.value = data.grupo_spg;
+            }
+
+            const dataElaboracao = form.querySelector('[name="data_elaboracao"]');
+            if (dataElaboracao && !dataElaboracao.value) {
+                dataElaboracao.value = new Date().toISOString().split('T')[0];
+            }
+
+            this.showMessage('Dados carregados do PMO Principal!', 'success');
+        } catch (error) {
+            console.error('Erro ao carregar PMO Principal:', error);
+            this.showMessage('Erro ao carregar dados.', 'error');
+        }
+    },
+
+    init() {
+        console.log('Inicializando Anexo Vegetal...');
+        this.setupEventListeners();
+        this.loadPMOPrincipal();
+        this.loadSavedData();
+        this.setupAutoSave();
+        this.updateProgress();
+    },
+
+    setupEventListeners() {
+        const form = document.getElementById(this.config.formId);
+        if (!form) return;
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.handleSubmit();
+        });
+
+        form.addEventListener('change', () => this.updateProgress());
+        form.addEventListener('input', () => this.markAsChanged());
+    },
+
+    setupAutoSave() {
+        setInterval(() => {
+            if (this.hasChanges) {
+                this.saveForm(true);
+                this.hasChanges = false;
+            }
+        }, this.config.autoSaveInterval);
+    },
+
+    markAsChanged() {
+        this.hasChanges = true;
+    },
+
+    updateProgress() {
+        const form = document.getElementById(this.config.formId);
+        if (!form) return;
+
+        const requiredFields = form.querySelectorAll('[required]');
+        let filledFields = 0;
+
+        requiredFields.forEach(field => {
+            if (field.type === 'checkbox') {
+                if (field.checked) filledFields++;
+            } else {
+                if (field.value.trim() !== '') filledFields++;
+            }
+        });
+
+        const percentage = Math.round((filledFields / requiredFields.length) * 100);
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+
+        if (progressBar) progressBar.style.width = percentage + '%';
+        if (progressText) progressText.textContent = percentage + '% Completo';
+
+        return percentage;
+    },
+
+    collectFormData() {
+        const form = document.getElementById(this.config.formId);
+        if (!form) return null;
+
+        const formData = new FormData(form);
+        const data = {
+            metadata: {
+                versao_schema: this.config.version,
+                data_preenchimento: formData.get('data_preenchimento') || '',
+                ultima_atualizacao: new Date().toISOString()
+            },
+            dados_basicos: {
+                nome_fornecedor: formData.get('nome_fornecedor') || '',
+                nome_unidade_producao: formData.get('nome_unidade_producao') || '',
+                data_preenchimento: formData.get('data_preenchimento') || ''
+            }
+        };
+
+        return data;
+    },
+
+    saveForm(isAutoSave = false) {
+        try {
+            const data = this.collectFormData();
+            if (!data) throw new Error('Erro ao coletar dados');
+
+            localStorage.setItem(this.config.storageKey, JSON.stringify(data));
+
+            if (!isAutoSave) {
+                this.showMessage('Dados salvos com sucesso!', 'success');
+            }
+            return true;
+        } catch (error) {
+            console.error('Erro ao salvar:', error);
+            if (!isAutoSave) this.showMessage('Erro ao salvar!', 'error');
+            return false;
+        }
+    },
+
+    loadSavedData() {
+        try {
+            const savedData = localStorage.getItem(this.config.storageKey);
+            if (savedData) {
+                this.showMessage('Dados anteriores carregados', 'info');
+            }
+        } catch (error) {
+            console.error('Erro ao carregar dados:', error);
+        }
+    },
+
+    validateForm() {
+        const form = document.getElementById(this.config.formId);
+        if (!form) return false;
+
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return false;
+        }
+
+        this.showMessage('Formulario valido!', 'success');
+        return true;
+    },
+
+    exportJSON() {
+        const data = this.collectFormData();
+        if (!data) {
+            this.showMessage('Erro ao coletar dados', 'error');
+            return;
+        }
+
+        const json = JSON.stringify(data, null, 2);
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'anexo_vegetal_' + new Date().toISOString().split('T')[0] + '.json';
+        a.click();
+        URL.revokeObjectURL(url);
+
+        this.showMessage('JSON exportado com sucesso!', 'success');
+    },
+
+    exportPDF() {
+        this.showMessage('Exportacao PDF em desenvolvimento...', 'info');
+    },
+
+    handleSubmit() {
+        if (this.validateForm()) {
+            this.saveForm();
+            this.showMessage('Anexo Vegetal finalizado!', 'success');
+        }
+    },
+
+    showMessage(message, type) {
+        const messageEl = document.createElement('div');
+        messageEl.className = 'message message-' + type;
+        messageEl.textContent = message;
+        messageEl.style.cssText = 'position:fixed;top:20px;right:20px;padding:15px 20px;border-radius:8px;background:' +
+            (type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : type === 'warning' ? '#f59e0b' : '#3b82f6') +
+            ';color:white;font-weight:500;box-shadow:0 4px 6px rgba(0,0,0,0.1);z-index:10000;';
+
+        document.body.appendChild(messageEl);
+        setTimeout(function() { messageEl.remove(); }, 3000);
+    }
+};
+
+function addSubstratoRow() {
+    const tbody = document.getElementById('tbody-substrato');
+    if (!tbody) return;
+    const rowNumber = tbody.children.length + 1;
+    const row = document.createElement('tr');
+    row.innerHTML = '<td>' + rowNumber + '</td>' +
+        '<td><input type="text" name="substrato_ingrediente_' + rowNumber + '" placeholder="Ex: Humus de minhoca"></td>' +
+        '<td><input type="text" name="substrato_origem_' + rowNumber + '" placeholder="Origem"></td>' +
+        '<td><input type="number" name="substrato_proporcao_' + rowNumber + '" min="0" max="100"></td>' +
+        '<td><button type="button" onclick="removeTableRow(this)" class="btn-icon">X</button></td>';
+    tbody.appendChild(row);
+}
+
+function addReceitaRow() {
+    const tbody = document.getElementById('tbody-receitas');
+    if (!tbody) return;
+    const rowNumber = tbody.children.length + 1;
+    const row = document.createElement('tr');
+    row.innerHTML = '<td>' + rowNumber + '</td>' +
+        '<td><input type="text" name="receita_nome_' + rowNumber + '"></td>' +
+        '<td><input type="text" name="receita_ingredientes_' + rowNumber + '"></td>' +
+        '<td><input type="text" name="receita_quantidade_' + rowNumber + '"></td>' +
+        '<td><input type="text" name="receita_cultura_' + rowNumber + '"></td>' +
+        '<td><select name="receita_status_' + rowNumber + '">' +
+        '<option value="">Selecione...</option>' +
+        '<option value="JA_USA">Ja usa</option>' +
+        '<option value="PRETENDE_USAR">Pretende usar</option></select></td>' +
+        '<td><button type="button" onclick="removeTableRow(this)" class="btn-icon">X</button></td>';
+    tbody.appendChild(row);
+}
+
+function addProdutoComercialRow() {
+    const tbody = document.getElementById('tbody-produtos-comerciais');
+    if (!tbody) return;
+    const rowNumber = tbody.children.length + 1;
+    const row = document.createElement('tr');
+    row.innerHTML = '<td>' + rowNumber + '</td>' +
+        '<td><input type="text" name="produto_marca_' + rowNumber + '"></td>' +
+        '<td><input type="text" name="produto_substancia_' + rowNumber + '"></td>' +
+        '<td><input type="text" name="produto_fabricante_' + rowNumber + '"></td>' +
+        '<td><input type="text" name="produto_finalidade_' + rowNumber + '"></td>' +
+        '<td><input type="text" name="produto_culturas_' + rowNumber + '"></td>' +
+        '<td><select name="produto_status_' + rowNumber + '">' +
+        '<option value="">Selecione...</option>' +
+        '<option value="JA_USA">Ja usa</option>' +
+        '<option value="PRETENDE_USAR">Pretende usar</option></select></td>' +
+        '<td><button type="button" onclick="removeTableRow(this)" class="btn-icon">X</button></td>';
+    tbody.appendChild(row);
+}
+
+function addProdutoNaoCertificarRow() {
+    const tbody = document.getElementById('tbody-produtos-nao-certificar');
+    if (!tbody) return;
+    const rowNumber = tbody.children.length + 1;
+    const row = document.createElement('tr');
+    row.innerHTML = '<td>' + rowNumber + '</td>' +
+        '<td><input type="text" name="produto_nc_nome_' + rowNumber + '"></td>' +
+        '<td><input type="text" name="produto_nc_variedade_' + rowNumber + '"></td>' +
+        '<td><input type="text" name="produto_nc_talhao_' + rowNumber + '"></td>' +
+        '<td><input type="text" name="produto_nc_origem_muda_' + rowNumber + '"></td>' +
+        '<td><input type="text" name="produto_nc_origem_semente_' + rowNumber + '"></td>' +
+        '<td><input type="text" name="produto_nc_tipo_cultivo_' + rowNumber + '"></td>' +
+        '<td><input type="text" name="produto_nc_motivo_' + rowNumber + '"></td>' +
+        '<td><button type="button" onclick="removeTableRow(this)" class="btn-icon">X</button></td>';
+    tbody.appendChild(row);
+}
+
+function removeTableRow(button) {
+    const row = button.closest('tr');
+    if (row) row.remove();
+}
+
+function toggleConditional(fieldId, show) {
+    const field = document.getElementById(fieldId);
+    if (field) {
+        if (show) {
+            field.classList.add('show');
+        } else {
+            field.classList.remove('show');
+        }
+    }
+}
+
+function validateForm() {
+    return AnexoVegetal.validateForm();
+}
+
+function saveForm() {
+    return AnexoVegetal.saveForm(false);
+}
+
+function exportJSON() {
+    return AnexoVegetal.exportJSON();
+}
+
+function exportPDF() {
+    return AnexoVegetal.exportPDF();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    AnexoVegetal.init();
+});

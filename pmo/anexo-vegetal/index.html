@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anexo I - Produção Vegetal - PMO ANC</title>
+
+    <!-- CSS Completo Inline -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background: #f9fafb;
+            padding: 20px;
+        }
+
+        .pmo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        /* Header */
+        .pmo-header {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .header-content h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        .pmo-navigation {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .pmo-navigation a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.2);
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .pmo-navigation a:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .pmo-navigation a.active {
+            background: white;
+            color: #10b981;
+        }
+
+        /* Progress Bar */
+        .progress-bar-container {
+            background: rgba(255,255,255,0.2);
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            background: white;
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            position: absolute;
+            right: 10px;
+            top: -25px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Form */
+        .pmo-form {
+            padding: 30px;
+        }
+
+        .form-section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .form-section:last-of-type {
+            border-bottom: none;
+        }
+
+        .form-section h2 {
+            color: #10b981;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Section Info */
+        .section-info {
+            background: #f0f9ff;
+            border-left: 4px solid #3b82f6;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .section-info p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .instruction {
+            color: #1e40af;
+        }
+
+        .alert {
+            color: #92400e;
+            background: #fef3c7;
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 4px solid #f59e0b;
+            margin-top: 10px;
+        }
+
+        /* Form Grid */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .field-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .field-wrapper.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #374151;
+            font-size: 14px;
+        }
+
+        .required {
+            color: #ef4444;
+            margin-left: 4px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="number"],
+        input[type="email"],
+        select,
+        textarea {
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        input[readonly] {
+            background: #f3f4f6;
+            cursor: not-allowed;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        /* Checkboxes */
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .checkbox-enhanced {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 12px;
+            border-radius: 6px;
+            transition: background 0.2s;
+            border: 1px solid #e5e7eb;
+        }
+
+        .checkbox-enhanced:hover {
+            background: #f9fafb;
+        }
+
+        .checkbox-enhanced input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        /* Practice Items */
+        .practice-item {
+            background: #f9fafb;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #10b981;
+        }
+
+        /* Conditional Fields */
+        .conditional-field {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .conditional-field.show {
+            display: block;
+        }
+
+        /* Tables */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table.dynamic-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #e5e7eb;
+        }
+
+        table.dynamic-table th,
+        table.dynamic-table td {
+            padding: 12px;
+            border: 1px solid #e5e7eb;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        table.dynamic-table th {
+            background: #f3f4f6;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        table.dynamic-table tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        table.dynamic-table input,
+        table.dynamic-table select {
+            width: 100%;
+            padding: 6px 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #059669;
+        }
+
+        .btn-secondary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #2563eb;
+        }
+
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #047857;
+        }
+
+        .btn-add {
+            background: #10b981;
+            color: white;
+            margin-top: 10px;
+        }
+
+        .btn-add:hover {
+            background: #059669;
+        }
+
+        .btn-icon {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .btn-icon:hover {
+            background: #dc2626;
+        }
+
+        /* Form Actions */
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 30px;
+            background: #f9fafb;
+            border-top: 2px solid #e5e7eb;
+            border-radius: 0 0 8px 8px;
+        }
+
+        /* Footer */
+        .pmo-footer {
+            text-align: center;
+            padding: 20px;
+            color: #6b7280;
+            font-size: 14px;
+            margin-top: 40px;
+        }
+
+        .pmo-footer p {
+            margin: 5px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .pmo-form {
+                padding: 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .form-actions button {
+                width: 100%;
+            }
+
+            table.dynamic-table {
+                font-size: 12px;
+            }
+
+            table.dynamic-table th,
+            table.dynamic-table td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pmo-container">
+        <!-- Cabeçalho -->
+        <header class="pmo-header">
+            <div class="header-content">
+                <h1>🌱 Anexo I - Produção Vegetal</h1>
+                <p class="subtitle">Plano de Manejo Orgânico - ANC</p>
+            </div>
+
+            <!-- Navegação -->
+            <nav class="pmo-navigation">
+                <a href="../dashboard/index.html">🏠 Dashboard</a>
+                <a href="../pmo-principal/index.html">📋 PMO Principal</a>
+                <a href="../anexo-vegetal/index.html" class="active">🌱 Anexo Vegetal</a>
+                <a href="../anexo-animal/index.html">🐄 Anexo Animal</a>
+                <a href="../relatorios/index.html">📊 Relatórios</a>
+            </nav>
+
+            <!-- Barra de Progresso -->
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+                <span class="progress-text" id="progress-text">0% Completo</span>
+            </div>
+        </header>
+
+        <!-- Formulário Principal -->
+        <form id="form-anexo-vegetal" class="pmo-form">
+
+            <!-- SEÇÃO 1: DADOS BÁSICOS (Carregados do PMO Principal) -->
+            <section id="secao-dados-basicos" class="form-section">
+                <h2>1. Dados Básicos</h2>
+
+                <div class="section-info">
+                    <p class="instruction">ℹ️ Estes dados são carregados automaticamente do PMO Principal</p>
+                </div>
+
+                <div class="form-grid">
+                    <div class="field-wrapper">
+                        <label for="nome_fornecedor">
+                            Nome do Fornecedor/Produtor
+                            <span class="required">*</span>
+                        </label>
+                        <input type="text"
+                               id="nome_fornecedor"
+                               name="nome_fornecedor"
+                               required
+                               placeholder="Nome completo ou razão social"
+                               readonly>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="nome_unidade_producao">
+                            Nome da Unidade de Produção
+                            <span class="required">*</span>
+                        </label>
+                        <input type="text"
+                               id="nome_unidade_producao"
+                               name="nome_unidade_producao"
+                               required
+                               placeholder="Nome da propriedade"
+                               readonly>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="data_preenchimento">
+                            Data de Preenchimento
+                            <span class="required">*</span>
+                        </label>
+                        <input type="date"
+                               id="data_preenchimento"
+                               name="data_preenchimento"
+                               required>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="grupo_spg">
+                            Grupo SPG
+                        </label>
+                        <input type="text"
+                               id="grupo_spg"
+                               name="grupo_spg"
+                               placeholder="Ex: ANC-Campinas"
+                               readonly>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 2: PREPARO DO SOLO -->
+            <section id="secao-preparo-solo" class="form-section">
+                <h2>2. Preparo do Solo</h2>
+
+                <div class="section-info">
+                    <p class="instruction">ℹ️ Selecione os tipos de preparo de solo utilizados</p>
+                </div>
+
+                <div class="checkbox-group" id="preparo-solo-group">
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="preparo_rocada" value="true">
+                        <span>Roçada</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="preparo_aracao" value="true">
+                        <span>Aração</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="preparo_gradagem" value="true">
+                        <span>Gradagem</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="preparo_coveamento" value="true">
+                        <span>Coveamento</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="preparo_subsolagem" value="true">
+                        <span>Subsolagem</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="preparo_escarificacao" value="true">
+                        <span>Escarificação</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="preparo_outros" value="true">
+                        <span>Outros</span>
+                    </label>
+                </div>
+
+                <div id="preparo-outros-field" class="conditional-field">
+                    <label for="preparo_outros_descricao">Especifique outros tipos de preparo:</label>
+                    <textarea id="preparo_outros_descricao"
+                              name="preparo_outros_descricao"
+                              rows="3"
+                              placeholder="Descreva outros tipos de preparo..."></textarea>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 3: PRÁTICAS CONSERVACIONISTAS -->
+            <section id="secao-praticas-conservacionistas" class="form-section">
+                <h2>3. Práticas Conservacionistas</h2>
+
+                <div class="section-info">
+                    <p class="instruction">ℹ️ Marque as práticas utilizadas e descreva como são realizadas</p>
+                    <p class="alert">⚠️ Práticas conservacionistas são fundamentais para certificação orgânica</p>
+                </div>
+
+                <div id="praticas-container">
+                    <!-- Rotação de Culturas -->
+                    <div class="practice-item">
+                        <label class="checkbox-enhanced">
+                            <input type="checkbox"
+                                   name="pratica_rotacao"
+                                   value="true"
+                                   onchange="toggleConditional('rotacao-desc', this.checked)">
+                            <span><strong>Rotação de Culturas</strong></span>
+                        </label>
+                        <div id="rotacao-desc" class="conditional-field">
+                            <label for="rotacao_descricao">Descreva o processo:</label>
+                            <textarea id="rotacao_descricao"
+                                      name="rotacao_descricao"
+                                      rows="3"
+                                      placeholder="Ex: Rotaciono alface com cenoura e beterraba..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Adubação Verde -->
+                    <div class="practice-item">
+                        <label class="checkbox-enhanced">
+                            <input type="checkbox"
+                                   name="pratica_adubacao_verde"
+                                   value="true"
+                                   onchange="toggleConditional('adubacao-desc', this.checked)">
+                            <span><strong>Adubação Verde</strong></span>
+                        </label>
+                        <div id="adubacao-desc" class="conditional-field">
+                            <label for="adubacao_verde_descricao">Descreva o processo:</label>
+                            <textarea id="adubacao_verde_descricao"
+                                      name="adubacao_verde_descricao"
+                                      rows="3"
+                                      placeholder="Ex: Planto crotalária e mucuna-preta entre os ciclos..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Consórcios -->
+                    <div class="practice-item">
+                        <label class="checkbox-enhanced">
+                            <input type="checkbox"
+                                   name="pratica_consorcios"
+                                   value="true"
+                                   onchange="toggleConditional('consorcios-desc', this.checked)">
+                            <span><strong>Consórcios</strong></span>
+                        </label>
+                        <div id="consorcios-desc" class="conditional-field">
+                            <label for="consorcios_descricao">Descreva o processo:</label>
+                            <textarea id="consorcios_descricao"
+                                      name="consorcios_descricao"
+                                      rows="3"
+                                      placeholder="Ex: Consorcio milho com feijão e abóbora..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Quebra-ventos -->
+                    <div class="practice-item">
+                        <label class="checkbox-enhanced">
+                            <input type="checkbox"
+                                   name="pratica_quebra_ventos"
+                                   value="true"
+                                   onchange="toggleConditional('quebra-ventos-desc', this.checked)">
+                            <span><strong>Quebra-ventos / Cortinas Vegetais / Faixas / Aleias</strong></span>
+                        </label>
+                        <div id="quebra-ventos-desc" class="conditional-field">
+                            <label for="quebra_ventos_descricao">Descreva o processo:</label>
+                            <textarea id="quebra_ventos_descricao"
+                                      name="quebra_ventos_descricao"
+                                      rows="3"
+                                      placeholder="Ex: Plantei faixas de leucena e capim-elefante..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Cobertura de Solo -->
+                    <div class="practice-item">
+                        <label class="checkbox-enhanced">
+                            <input type="checkbox"
+                                   name="pratica_cobertura_solo"
+                                   value="true"
+                                   onchange="toggleConditional('cobertura-desc', this.checked)">
+                            <span><strong>Cobertura de Solo</strong></span>
+                        </label>
+                        <div id="cobertura-desc" class="conditional-field">
+                            <label for="cobertura_solo_descricao">Descreva o processo:</label>
+                            <textarea id="cobertura_solo_descricao"
+                                      name="cobertura_solo_descricao"
+                                      rows="3"
+                                      placeholder="Ex: Uso palha de arroz e capim seco..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Proteção contra Erosão -->
+                    <div class="practice-item">
+                        <label class="checkbox-enhanced">
+                            <input type="checkbox"
+                                   name="pratica_protecao_erosao"
+                                   value="true"
+                                   onchange="toggleConditional('erosao-desc', this.checked)">
+                            <span><strong>Proteção contra Erosão</strong></span>
+                        </label>
+                        <div id="erosao-desc" class="conditional-field">
+                            <label for="protecao_erosao_descricao">Descreva o processo:</label>
+                            <textarea id="protecao_erosao_descricao"
+                                      name="protecao_erosao_descricao"
+                                      rows="3"
+                                      placeholder="Ex: Curvas de nível, terraços..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Manejo do Mato -->
+                    <div class="practice-item">
+                        <label class="checkbox-enhanced">
+                            <input type="checkbox"
+                                   name="pratica_manejo_mato"
+                                   value="true"
+                                   onchange="toggleConditional('mato-desc', this.checked)">
+                            <span><strong>Manejo do Mato</strong></span>
+                        </label>
+                        <div id="mato-desc" class="conditional-field">
+                            <label for="manejo_mato_descricao">Descreva o processo:</label>
+                            <textarea id="manejo_mato_descricao"
+                                      name="manejo_mato_descricao"
+                                      rows="3"
+                                      placeholder="Ex: Roçada manual, cobertura viva..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Outras Práticas -->
+                    <div class="practice-item">
+                        <label class="checkbox-enhanced">
+                            <input type="checkbox"
+                                   name="pratica_outras"
+                                   value="true"
+                                   onchange="toggleConditional('outras-desc', this.checked)">
+                            <span><strong>Outras Práticas</strong></span>
+                        </label>
+                        <div id="outras-desc" class="conditional-field">
+                            <label for="outras_praticas_descricao">Descreva o processo:</label>
+                            <textarea id="outras_praticas_descricao"
+                                      name="outras_praticas_descricao"
+                                      rows="3"
+                                      placeholder="Descreva outras práticas conservacionistas..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 4: BARREIRAS DE PROTEÇÃO -->
+            <section id="secao-barreiras-protecao" class="form-section">
+                <h2>4. Barreiras de Proteção</h2>
+
+                <div class="section-info">
+                    <p class="alert">⚠️ Importante para evitar contaminação por deriva de agrotóxicos e transgênicos</p>
+                </div>
+
+                <div class="form-grid">
+                    <div class="field-wrapper full-width">
+                        <label for="estado_conservacao_barreiras">
+                            Estado de Conservação das Barreiras
+                            <span class="required">*</span>
+                        </label>
+                        <select id="estado_conservacao_barreiras" name="estado_conservacao_barreiras" required>
+                            <option value="">Selecione...</option>
+                            <option value="BOM">Bom</option>
+                            <option value="REGULAR">Regular</option>
+                            <option value="RUIM">Ruim</option>
+                            <option value="NAO_POSSUI">Não possui barreiras</option>
+                        </select>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label class="checkbox-enhanced">
+                            <input type="checkbox" name="risco_deriva_agrotoxicos" value="true">
+                            <span>Existe risco de deriva de agrotóxicos de áreas vizinhas?</span>
+                        </label>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label class="checkbox-enhanced">
+                            <input type="checkbox" name="risco_contaminacao_transgenicos" value="true">
+                            <span>Existe risco de contaminação por transgênicos?</span>
+                        </label>
+                    </div>
+
+                    <div class="field-wrapper full-width">
+                        <label for="situacao_formigas">
+                            Situação das Formigas Cortadeiras
+                            <span class="required">*</span>
+                        </label>
+                        <select id="situacao_formigas" name="situacao_formigas" required>
+                            <option value="">Selecione...</option>
+                            <option value="SEM_PROBLEMAS">Sem problemas</option>
+                            <option value="PROBLEMAS_LEVES">Problemas leves</option>
+                            <option value="PROBLEMAS_MODERADOS">Problemas moderados</option>
+                            <option value="PROBLEMAS_GRAVES">Problemas graves</option>
+                        </select>
+                    </div>
+
+                    <div class="field-wrapper full-width">
+                        <label for="controle_formigas">
+                            Métodos de Controle de Formigas
+                        </label>
+                        <textarea id="controle_formigas"
+                                  name="controle_formigas"
+                                  rows="3"
+                                  placeholder="Ex: Uso de plantas repelentes, iscas com manipueira..."></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 5: ADUBAÇÃO E NUTRIÇÃO -->
+            <section id="secao-adubacao-nutricao" class="form-section">
+                <h2>5. Adubação e Nutrição das Plantas</h2>
+
+                <div class="form-grid">
+                    <div class="field-wrapper full-width">
+                        <label for="sistema_adubacao">
+                            Sistema de Adubação Utilizado
+                            <span class="required">*</span>
+                        </label>
+                        <textarea id="sistema_adubacao"
+                                  name="sistema_adubacao"
+                                  rows="4"
+                                  required
+                                  placeholder="Descreva o sistema de adubação: tipos de adubo, fontes, frequência de aplicação..."></textarea>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label class="checkbox-enhanced">
+                            <input type="checkbox" name="utiliza_substrato" value="true">
+                            <span>Utiliza substrato para produção de mudas?</span>
+                        </label>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label class="checkbox-enhanced">
+                            <input type="checkbox" name="prepara_substrato_proprio" value="true">
+                            <span>Prepara substrato próprio?</span>
+                        </label>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label class="checkbox-enhanced">
+                            <input type="checkbox" name="compra_substrato_pronto" value="true">
+                            <span>Compra substrato pronto?</span>
+                        </label>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label class="checkbox-enhanced">
+                            <input type="checkbox" name="adquire_substrato_aprovado" value="true">
+                            <span>Adquire substrato aprovado para orgânicos?</span>
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 6: SUBSTRATO E RECEITAS -->
+            <section id="secao-substrato-receitas" class="form-section">
+                <h2>6. Substrato e Ingredientes</h2>
+
+                <div class="section-info">
+                    <p class="instruction">ℹ️ Liste os ingredientes usados na preparação de substrato (se aplicável)</p>
+                </div>
+
+                <div class="table-wrapper">
+                    <table id="tabela-substrato" class="dynamic-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Ingrediente/Material <span class="required">*</span></th>
+                                <th>Origem <span class="required">*</span></th>
+                                <th>Proporção (%)</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-substrato"></tbody>
+                    </table>
+                    <button type="button" onclick="addSubstratoRow()" class="btn btn-add">➕ Adicionar Ingrediente</button>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 7: RECEITAS PRÓPRIAS -->
+            <section id="secao-receitas-proprias" class="form-section">
+                <h2>7. Receitas Próprias (Biofertilizantes, Caldas, etc.)</h2>
+
+                <div class="section-info">
+                    <p class="instruction">ℹ️ Liste as receitas próprias que você utiliza ou pretende utilizar</p>
+                </div>
+
+                <div class="table-wrapper">
+                    <table id="tabela-receitas" class="dynamic-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nome da Receita</th>
+                                <th>Ingredientes</th>
+                                <th>Quantidade/Dose/Frequência</th>
+                                <th>Cultura/Talhão</th>
+                                <th>Já usa / Pretende usar</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-receitas"></tbody>
+                    </table>
+                    <button type="button" onclick="addReceitaRow()" class="btn btn-add">➕ Adicionar Receita</button>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 8: PRODUTOS COMERCIAIS -->
+            <section id="secao-produtos-comerciais" class="form-section">
+                <h2>8. Produtos Comerciais Permitidos</h2>
+
+                <div class="section-info">
+                    <p class="instruction">ℹ️ Liste produtos comerciais aprovados para uso em orgânicos</p>
+                    <p class="alert">⚠️ Somente produtos certificados para uso orgânico são permitidos</p>
+                </div>
+
+                <div class="table-wrapper">
+                    <table id="tabela-produtos-comerciais" class="dynamic-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Marca/Nome Comercial</th>
+                                <th>Substância Ativa</th>
+                                <th>Fabricante</th>
+                                <th>Finalidade</th>
+                                <th>Culturas Alvo</th>
+                                <th>Já usa / Pretende usar</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-produtos-comerciais"></tbody>
+                    </table>
+                    <button type="button" onclick="addProdutoComercialRow()" class="btn btn-add">➕ Adicionar Produto</button>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 9: EQUIPAMENTOS -->
+            <section id="secao-equipamentos" class="form-section">
+                <h2>9. Equipamentos</h2>
+
+                <div class="form-grid">
+                    <div class="field-wrapper">
+                        <label class="checkbox-enhanced">
+                            <input type="checkbox" name="usa_equipamento_terceiro" value="true">
+                            <span>Usa equipamento de terceiros?</span>
+                        </label>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label class="checkbox-enhanced">
+                            <input type="checkbox" name="empresta_equipamento" value="true">
+                            <span>Empresta equipamento para terceiros?</span>
+                        </label>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label class="checkbox-enhanced">
+                            <input type="checkbox" name="equipamentos_nao_compartilhados" value="true">
+                            <span>Equipamentos não são compartilhados com propriedades convencionais?</span>
+                        </label>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label class="checkbox-enhanced">
+                            <input type="checkbox" name="faz_higienizacao" value="true">
+                            <span>Faz higienização adequada dos equipamentos?</span>
+                        </label>
+                    </div>
+
+                    <div class="field-wrapper full-width">
+                        <label for="condicoes_armazenamento_equipamentos">
+                            Condições de Armazenamento dos Equipamentos
+                        </label>
+                        <textarea id="condicoes_armazenamento_equipamentos"
+                                  name="condicoes_armazenamento_equipamentos"
+                                  rows="3"
+                                  placeholder="Descreva como são armazenados os equipamentos..."></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 10: ESPAÇOS DE ARMAZENAMENTO -->
+            <section id="secao-espacos-armazenamento" class="form-section">
+                <h2>10. Espaços de Armazenamento</h2>
+
+                <div class="form-grid">
+                    <div class="field-wrapper full-width">
+                        <label for="condicoes_organizacao">
+                            Condições de Organização e Limpeza
+                            <span class="required">*</span>
+                        </label>
+                        <textarea id="condicoes_organizacao"
+                                  name="condicoes_organizacao"
+                                  rows="3"
+                                  required
+                                  placeholder="Descreva as condições dos espaços de armazenamento..."></textarea>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label class="checkbox-enhanced">
+                            <input type="checkbox" name="sem_produtos_nao_permitidos" value="true">
+                            <span>Sem produtos não permitidos?</span>
+                        </label>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label class="checkbox-enhanced">
+                            <input type="checkbox" name="baixo_nivel_acidente" value="true">
+                            <span>Baixo nível de risco de acidentes?</span>
+                        </label>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label class="checkbox-enhanced">
+                            <input type="checkbox" name="acessivel_visitacao" value="true">
+                            <span>Acessível para visitação/vistoria?</span>
+                        </label>
+                    </div>
+
+                    <div class="field-wrapper full-width">
+                        <label for="observacoes_armazenamento">
+                            Observações sobre Armazenamento
+                        </label>
+                        <textarea id="observacoes_armazenamento"
+                                  name="observacoes_armazenamento"
+                                  rows="3"
+                                  placeholder="Informações adicionais..."></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 11: PRODUTOS NÃO CERTIFICAR -->
+            <section id="secao-produtos-nao-certificar" class="form-section">
+                <h2>11. Produtos que NÃO Pretende Certificar</h2>
+
+                <div class="section-info">
+                    <p class="instruction">ℹ️ Liste produtos cultivados na propriedade que não serão certificados como orgânicos</p>
+                </div>
+
+                <div class="table-wrapper">
+                    <table id="tabela-produtos-nao-certificar" class="dynamic-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Produto</th>
+                                <th>Variedade</th>
+                                <th>Talhão/Área</th>
+                                <th>Origem Muda</th>
+                                <th>Origem Semente</th>
+                                <th>Tipo de Cultivo</th>
+                                <th>Motivo</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-produtos-nao-certificar"></tbody>
+                    </table>
+                    <button type="button" onclick="addProdutoNaoCertificarRow()" class="btn btn-add">➕ Adicionar Produto</button>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 12: DECLARAÇÕES -->
+            <section id="secao-declaracoes" class="form-section">
+                <h2>12. Declarações</h2>
+
+                <div class="section-info">
+                    <p class="alert">⚠️ Declarações obrigatórias para certificação</p>
+                </div>
+
+                <div class="checkbox-group">
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="decl_incrementa_producao_mudas" value="true" required>
+                        <span>Declaro que incremento a produção de mudas e sementes próprias</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="decl_equipamentos_nao_compartilhados" value="true" required>
+                        <span>Declaro que equipamentos de pulverização não são compartilhados com produção convencional</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="decl_faz_higienizacao" value="true" required>
+                        <span>Declaro que faço higienização adequada dos equipamentos</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="decl_espacos_sem_produtos_proibidos" value="true" required>
+                        <span>Declaro que os espaços de armazenamento não contêm produtos proibidos</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="decl_baixo_risco_acidentes" value="true" required>
+                        <span>Declaro que os locais apresentam baixo risco de acidentes</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="decl_espacos_acessiveis" value="true" required>
+                        <span>Declaro que os espaços são acessíveis para visitação e vistoria</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 13: ASSINATURA -->
+            <section id="secao-assinatura" class="form-section">
+                <h2>13. Assinatura e Data</h2>
+
+                <div class="form-grid">
+                    <div class="field-wrapper">
+                        <label for="nome_completo_produtor">
+                            Nome Completo do Produtor
+                            <span class="required">*</span>
+                        </label>
+                        <input type="text"
+                               id="nome_completo_produtor"
+                               name="nome_completo_produtor"
+                               required
+                               placeholder="Nome completo">
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="grupo_spg_anc">
+                            Grupo SPG - ANC
+                            <span class="required">*</span>
+                        </label>
+                        <input type="text"
+                               id="grupo_spg_anc"
+                               name="grupo_spg_anc"
+                               required
+                               placeholder="Ex: ANC-Campinas">
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="data_elaboracao">
+                            Data de Elaboração
+                            <span class="required">*</span>
+                        </label>
+                        <input type="date"
+                               id="data_elaboracao"
+                               name="data_elaboracao"
+                               required>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Botões de Ação -->
+            <div class="form-actions">
+                <button type="button" onclick="validateForm()" class="btn btn-secondary">
+                    ✅ Validar Formulário
+                </button>
+                <button type="button" onclick="saveForm()" class="btn btn-primary">
+                    💾 Salvar Rascunho
+                </button>
+                <button type="button" onclick="exportJSON()" class="btn btn-secondary">
+                    📦 Exportar JSON
+                </button>
+                <button type="button" onclick="exportPDF()" class="btn btn-secondary">
+                    📄 Exportar PDF
+                </button>
+                <button type="submit" class="btn btn-success">
+                    ✔️ Finalizar e Enviar
+                </button>
+            </div>
+        </form>
+
+        <!-- Rodapé -->
+        <footer class="pmo-footer">
+            <p>&copy; 2024 ANC - Associação de Agricultura Natural de Campinas e Região</p>
+            <p>Sistema PMO - Plano de Manejo Orgânico</p>
+        </footer>
+    </div>
+
+    <!-- Framework JS Unificado -->
+    <script src="../../framework/core/pmo-framework.js"></script>
+
+    <!-- JS Específico do Módulo -->
+    <script src="./vegetal.js"></script>
+    <script src="./vegetal-validators.js"></script>
+</body>
+</html>

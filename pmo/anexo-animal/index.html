@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anexo III - Produção Animal - PMO ANC</title>
+
+    <!-- Framework CSS Unificado -->
+    <link rel="stylesheet" href="../../framework/core/pmo-framework-full.css">
+
+    <!-- CSS Específico do Anexo Animal (se necessário) -->
+    <link rel="stylesheet" href="./anexo-animal.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
+</head>
+<body>
+    <!-- Header -->
+    <header class="pmo-header">
+        <div class="pmo-container">
+            <div class="header-content">
+                <div class="header-logo">
+                    <h1>🐄 Anexo III - Produção Animal</h1>
+                    <p>Plano de Manejo Orgânico - ANC</p>
+                </div>
+                <nav class="header-nav">
+                    <a href="../dashboard/index.html" class="btn btn-secondary">🏠 Dashboard</a>
+                    <a href="../pmo-principal/index.html" class="btn btn-secondary">📋 PMO Principal</a>
+                    <a href="../relatorios/index.html" class="btn btn-secondary">📊 Relatórios</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-info">
+            <span id="progress-text">Progresso: 0%</span>
+            <span id="auto-save-status">💾 Auto-save ativo</span>
+        </div>
+        <div class="progress-bar">
+            <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="pmo-container">
+        <form id="form-anexo-animal" novalidate>
+
+            <!-- Seção 1: Identificação do Produtor -->
+            <section id="secao-identificacao" class="form-section">
+                <h2>1. Identificação do Produtor</h2>
+
+                <div class="section-info">
+                    <p class="instruction">ℹ️ Preencha os dados de identificação. Estes dados devem ser consistentes com o PMO Principal.</p>
+                </div>
+
+                <div class="form-grid">
+                    <div class="field-wrapper col-span-2">
+                        <label for="nome_fornecedor">
+                            Nome do Fornecedor/Produtor
+                            <span class="required">*</span>
+                        </label>
+                        <input type="text" id="nome_fornecedor" name="nome_fornecedor" required placeholder="Nome completo ou Razão Social">
+                    </div>
+
+                    <div class="field-wrapper col-span-2">
+                        <label for="nome_unidade_producao">
+                            Nome da Unidade de Produção
+                            <span class="required">*</span>
+                        </label>
+                        <input type="text" id="nome_unidade_producao" name="nome_unidade_producao" required placeholder="Ex: Sítio Boa Vista">
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="data_preenchimento">
+                            Data de Preenchimento
+                            <span class="required">*</span>
+                        </label>
+                        <input type="date" id="data_preenchimento" name="data_preenchimento" required>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="grupo_spg">
+                            Grupo SPG/ANC
+                            <span class="required">*</span>
+                        </label>
+                        <input type="text" id="grupo_spg" name="grupo_spg" required placeholder="Ex: Grupo Norte">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção 2: Inspeção Sanitária -->
+            <section id="secao-inspecao" class="form-section">
+                <h2>2. Inspeção Sanitária</h2>
+
+                <div class="section-info">
+                    <p class="alert">⚠️ Para comercializar produtos de origem animal, é obrigatória a inspeção sanitária (Municipal, Estadual ou Federal).</p>
+                </div>
+
+                <div class="form-grid">
+                    <div class="field-wrapper col-span-4">
+                        <label>
+                            Possui inspeção sanitária?
+                            <span class="required">*</span>
+                        </label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="possui_inspecao_sanitaria" value="sim" required onchange="AnexoAnimal.toggleInspecao(this)">
+                                Sim
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="possui_inspecao_sanitaria" value="nao" required onchange="AnexoAnimal.toggleInspecao(this)">
+                                Não
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="detalhes-inspecao" style="display:none;">
+                        <div class="form-grid">
+                            <div class="field-wrapper">
+                                <label for="tipo_inspecao">Tipo de Inspeção <span class="required">*</span></label>
+                                <select id="tipo_inspecao" name="tipo_inspecao">
+                                    <option value="">Selecione...</option>
+                                    <option value="municipal">Municipal (SIM)</option>
+                                    <option value="estadual">Estadual (SIE)</option>
+                                    <option value="federal">Federal (SIF)</option>
+                                    <option value="em_processo">Em processo</option>
+                                </select>
+                            </div>
+
+                            <div class="field-wrapper">
+                                <label for="orgao_responsavel">Órgão Responsável</label>
+                                <input type="text" id="orgao_responsavel" name="orgao_responsavel" placeholder="Ex: Secretaria Municipal de Agricultura">
+                            </div>
+
+                            <div class="field-wrapper">
+                                <label for="numero_registro">Número do Registro</label>
+                                <input type="text" id="numero_registro" name="numero_registro" placeholder="Ex: SIM 123/2024">
+                            </div>
+
+                            <div class="field-wrapper">
+                                <label for="data_validade">Data de Validade</label>
+                                <input type="date" id="data_validade" name="data_validade">
+                            </div>
+
+                            <div class="field-wrapper col-span-4">
+                                <label for="detalhes_inspecao">Detalhes da Inspeção</label>
+                                <textarea id="detalhes_inspecao" name="detalhes_inspecao" rows="3" placeholder="Especifique quais produtos/atividades estão aprovados pela inspeção"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção 3: Espécies Criadas -->
+            <section id="secao-especies" class="form-section">
+                <h2>3. Espécies Criadas</h2>
+
+                <div class="section-info">
+                    <p class="instruction">ℹ️ Liste todas as espécies animais criadas na propriedade, incluindo finalidade e sistema de criação.</p>
+                </div>
+
+                <div class="table-wrapper">
+                    <table id="tabela-especies" class="dynamic-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Espécie <span class="required">*</span></th>
+                                <th>Raça/Linhagem</th>
+                                <th>Área (ha)</th>
+                                <th>Nº Animais</th>
+                                <th>Finalidade <span class="required">*</span></th>
+                                <th>Sistema Criação</th>
+                                <th>Em Transição? <span class="required">*</span></th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-especies">
+                            <template id="row-template-especies">
+                                <tr class="dynamic-row">
+                                    <td class="row-number"></td>
+                                    <td>
+                                        <select name="especie[]" required>
+                                            <option value="">Selecione...</option>
+                                            <option value="bovinos">Bovinos</option>
+                                            <option value="bubalinos">Bubalinos</option>
+                                            <option value="ovinos">Ovinos</option>
+                                            <option value="caprinos">Caprinos</option>
+                                            <option value="suinos">Suínos</option>
+                                            <option value="equinos">Equinos</option>
+                                            <option value="aves_galinhas">Aves - Galinhas</option>
+                                            <option value="aves_patos">Aves - Patos</option>
+                                            <option value="aves_gansos">Aves - Gansos</option>
+                                            <option value="aves_codornas">Aves - Codornas</option>
+                                            <option value="coelhos">Coelhos</option>
+                                            <option value="peixes">Peixes</option>
+                                            <option value="abelhas">Abelhas</option>
+                                            <option value="outro">Outro</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="text" name="raca_linhagem[]" placeholder="Ex: Holandês"></td>
+                                    <td><input type="number" name="area_utilizada_ha[]" step="0.01" min="0" placeholder="0.00"></td>
+                                    <td><input type="number" name="numero_animais_atual[]" min="0" placeholder="0"></td>
+                                    <td>
+                                        <select name="finalidade[]" required>
+                                            <option value="">Selecione...</option>
+                                            <option value="comercial">Comercial</option>
+                                            <option value="subsistencia">Subsistência</option>
+                                            <option value="reproducao">Reprodução</option>
+                                            <option value="trabalho">Trabalho</option>
+                                            <option value="estimacao">Estimação</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="sistema_criacao[]">
+                                            <option value="">Selecione...</option>
+                                            <option value="extensivo">Extensivo</option>
+                                            <option value="semi_intensivo">Semi-intensivo</option>
+                                            <option value="intensivo">Intensivo</option>
+                                            <option value="confinado">Confinado</option>
+                                            <option value="livre">Livre</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="em_transicao_organica[]" required>
+                                            <option value="">Selecione...</option>
+                                            <option value="sim">Sim</option>
+                                            <option value="nao">Não</option>
+                                        </select>
+                                    </td>
+                                    <td class="action-buttons">
+                                        <button type="button" onclick="AnexoAnimal.table.duplicateRow(this)" title="Duplicar">📋</button>
+                                        <button type="button" onclick="AnexoAnimal.table.removeRow(this)" title="Remover">❌</button>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                    <button type="button" onclick="AnexoAnimal.table.addRow('tabela-especies')" class="btn btn-add">➕ Adicionar Espécie</button>
+                </div>
+            </section>
+
+            <!-- Seção 4: Alimentação -->
+            <section id="secao-alimentacao" class="form-section">
+                <h2>4. Alimentação Animal</h2>
+
+                <div class="section-info">
+                    <p class="instruction">ℹ️ Descreva o plano alimentar dos animais, incluindo origem, composição e frequência dos alimentos.</p>
+                    <p class="alert">⚠️ Mínimo 80% da alimentação deve ser orgânica (em matéria seca).</p>
+                </div>
+
+                <!-- Plano Alimentar -->
+                <h3>4.1. Plano Alimentar</h3>
+                <div class="table-wrapper">
+                    <table id="tabela-plano-alimentar" class="dynamic-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Tipo Alimento <span class="required">*</span></th>
+                                <th>Espécies Alvo</th>
+                                <th>Origem <span class="required">*</span></th>
+                                <th>% Orgânico</th>
+                                <th>Qtd. Mensal (kg)</th>
+                                <th>Frequência</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-plano-alimentar">
+                            <template id="row-template-plano-alimentar">
+                                <tr class="dynamic-row">
+                                    <td class="row-number"></td>
+                                    <td>
+                                        <select name="tipo_alimento[]" required>
+                                            <option value="">Selecione...</option>
+                                            <option value="racao_comercial">Ração comercial</option>
+                                            <option value="racao_fabricacao_propria">Ração fabricação própria</option>
+                                            <option value="pastagem">Pastagem</option>
+                                            <option value="silagem">Silagem</option>
+                                            <option value="feno">Feno</option>
+                                            <option value="concentrados">Concentrados</option>
+                                            <option value="graos">Grãos</option>
+                                            <option value="residuos_cultura">Resíduos de cultura</option>
+                                            <option value="suplementos_minerais">Suplementos minerais</option>
+                                            <option value="outro">Outro</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="text" name="especies_alvo[]" placeholder="Ex: Bovinos, galinhas"></td>
+                                    <td>
+                                        <select name="origem_alimento[]" required>
+                                            <option value="">Selecione...</option>
+                                            <option value="producao_propria">Produção própria</option>
+                                            <option value="compra_externa">Compra externa</option>
+                                            <option value="ambos">Ambos</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="number" name="percent_organico[]" min="0" max="100" placeholder="0-100"></td>
+                                    <td><input type="number" name="quantidade_mensal_kg[]" min="0" step="0.1" placeholder="0.0"></td>
+                                    <td>
+                                        <select name="frequencia_fornecimento[]">
+                                            <option value="">Selecione...</option>
+                                            <option value="diaria">Diária</option>
+                                            <option value="semanal">Semanal</option>
+                                            <option value="quinzenal">Quinzenal</option>
+                                            <option value="mensal">Mensal</option>
+                                            <option value="continuo">Contínuo</option>
+                                        </select>
+                                    </td>
+                                    <td class="action-buttons">
+                                        <button type="button" onclick="AnexoAnimal.table.duplicateRow(this)" title="Duplicar">📋</button>
+                                        <button type="button" onclick="AnexoAnimal.table.removeRow(this)" title="Remover">❌</button>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                    <button type="button" onclick="AnexoAnimal.table.addRow('tabela-plano-alimentar')" class="btn btn-add">➕ Adicionar Alimento</button>
+                </div>
+
+                <!-- Pastagem -->
+                <h3>4.2. Pastagem</h3>
+                <div class="form-grid">
+                    <div class="field-wrapper col-span-4">
+                        <label>
+                            Possui área de pastagem?
+                            <span class="required">*</span>
+                        </label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="possui_area_pastagem" value="sim" required onchange="AnexoAnimal.togglePastagem(this)">
+                                Sim
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="possui_area_pastagem" value="nao" required onchange="AnexoAnimal.togglePastagem(this)">
+                                Não
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="detalhes-pastagem" style="display:none;">
+                        <div class="form-grid">
+                            <div class="field-wrapper">
+                                <label for="area_total_pastagem">Área Total de Pastagem (ha)</label>
+                                <input type="number" id="area_total_pastagem" name="area_total_pastagem" step="0.01" min="0" placeholder="0.00">
+                            </div>
+
+                            <div class="field-wrapper col-span-3">
+                                <label for="tipos_forrageiras">Tipos de Forrageiras</label>
+                                <input type="text" id="tipos_forrageiras" name="tipos_forrageiras" placeholder="Ex: Brachiaria, Panicum, Tifton">
+                            </div>
+
+                            <div class="field-wrapper">
+                                <label for="sistema_pastejo">Sistema de Pastejo</label>
+                                <select id="sistema_pastejo" name="sistema_pastejo">
+                                    <option value="">Selecione...</option>
+                                    <option value="continuo">Contínuo</option>
+                                    <option value="rotacionado">Rotacionado</option>
+                                    <option value="alternado">Alternado</option>
+                                    <option value="voisin">Voisin (PRV)</option>
+                                </select>
+                            </div>
+
+                            <div class="field-wrapper">
+                                <label>Faz rotação de pastos?</label>
+                                <div class="radio-group">
+                                    <label class="radio-label">
+                                        <input type="radio" name="rotacao_pastos" value="sim">
+                                        Sim
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="rotacao_pastos" value="nao">
+                                        Não
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="field-wrapper">
+                                <label for="periodo_descanso_dias">Período de Descanso (dias)</label>
+                                <input type="number" id="periodo_descanso_dias" name="periodo_descanso_dias" min="0" placeholder="0">
+                            </div>
+
+                            <div class="field-wrapper col-span-4">
+                                <label for="adubacao_pastagem">Adubação da Pastagem</label>
+                                <textarea id="adubacao_pastagem" name="adubacao_pastagem" rows="2" placeholder="Descreva os métodos e insumos utilizados"></textarea>
+                            </div>
+
+                            <div class="field-wrapper col-span-4">
+                                <label for="controle_invasoras">Controle de Plantas Invasoras</label>
+                                <textarea id="controle_invasoras" name="controle_invasoras" rows="2" placeholder="Descreva os métodos de controle"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção 5: Bem-Estar Animal -->
+            <section id="secao-bem-estar" class="form-section">
+                <h2>5. Bem-Estar Animal</h2>
+
+                <div class="section-info">
+                    <p class="instruction">ℹ️ O bem-estar animal é princípio fundamental da produção orgânica.</p>
+                </div>
+
+                <div class="form-grid">
+                    <div class="field-wrapper col-span-4">
+                        <h4>Condições Fornecidas aos Animais</h4>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="agua_qualidade_abundante" value="sim">
+                                <span>Água de qualidade e abundante</span>
+                            </label>
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="alimento_farto_qualidade" value="sim">
+                                <span>Alimento farto e de qualidade</span>
+                            </label>
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="instalacoes_adequadas" value="sim">
+                                <span>Instalações adequadas</span>
+                            </label>
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="lotacao_adequada" value="sim">
+                                <span>Lotação adequada</span>
+                            </label>
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="areas_sombreamento" value="sim">
+                                <span>Áreas de sombreamento</span>
+                            </label>
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="acesso_areas_abertas" value="sim">
+                                <span>Acesso a áreas abertas</span>
+                            </label>
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="acesso_pastagem" value="sim">
+                                <span>Acesso à pastagem</span>
+                            </label>
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="enriquecimento_ambiental" value="sim">
+                                <span>Enriquecimento ambiental</span>
+                            </label>
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="manejo_adequado_cama" value="sim">
+                                <span>Manejo adequado de cama</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="densidade_maxima_respeitada">Densidade máxima respeitada?</label>
+                        <select id="densidade_maxima_respeitada" name="densidade_maxima_respeitada">
+                            <option value="">Selecione...</option>
+                            <option value="sim">Sim</option>
+                            <option value="nao">Não</option>
+                        </select>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="area_minima_por_animal_m2">Área Mínima por Animal (m²)</label>
+                        <input type="number" id="area_minima_por_animal_m2" name="area_minima_por_animal_m2" step="0.1" min="0" placeholder="0.0">
+                    </div>
+
+                    <div class="field-wrapper col-span-2">
+                        <label for="tempo_confinamento_horas_dia">Tempo de Confinamento (horas/dia)</label>
+                        <input type="number" id="tempo_confinamento_horas_dia" name="tempo_confinamento_horas_dia" min="0" max="24" placeholder="0-24">
+                    </div>
+
+                    <div class="field-wrapper col-span-4">
+                        <label for="observacoes_bem_estar">Observações sobre Bem-Estar</label>
+                        <textarea id="observacoes_bem_estar" name="observacoes_bem_estar" rows="3" placeholder="Descreva outras práticas de bem-estar implementadas"></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção 6: Manejo Sanitário -->
+            <section id="secao-manejo-sanitario" class="form-section">
+                <h2>6. Manejo Sanitário</h2>
+
+                <div class="section-info">
+                    <p class="alert">⚠️ Na produção orgânica, prioriza-se a prevenção. Medicamentos alopáticos só em casos emergenciais, com período de carência dobrado.</p>
+                </div>
+
+                <!-- Prevenção de Doenças -->
+                <h3>6.1. Prevenção de Doenças</h3>
+                <div class="table-wrapper">
+                    <table id="tabela-prevencao" class="dynamic-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Método Preventivo</th>
+                                <th>Especificação</th>
+                                <th>Espécies Alvo</th>
+                                <th>Frequência</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-prevencao">
+                            <template id="row-template-prevencao">
+                                <tr class="dynamic-row">
+                                    <td class="row-number"></td>
+                                    <td>
+                                        <select name="metodo_preventivo[]">
+                                            <option value="">Selecione...</option>
+                                            <option value="manejo_adequado">Manejo adequado</option>
+                                            <option value="alimentacao_balanceada">Alimentação balanceada</option>
+                                            <option value="higiene_instalacoes">Higiene das instalações</option>
+                                            <option value="quarentena">Quarentena de novos animais</option>
+                                            <option value="homeopatia">Homeopatia</option>
+                                            <option value="fitoterapia">Fitoterapia</option>
+                                            <option value="probioticos">Probióticos</option>
+                                            <option value="vacinacao">Vacinação</option>
+                                            <option value="outro">Outro</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="text" name="especificacao_prevencao[]" placeholder="Detalhes"></td>
+                                    <td><input type="text" name="especies_alvo_prevencao[]" placeholder="Ex: Bovinos"></td>
+                                    <td>
+                                        <select name="frequencia_aplicacao_prevencao[]">
+                                            <option value="">Selecione...</option>
+                                            <option value="diaria">Diária</option>
+                                            <option value="semanal">Semanal</option>
+                                            <option value="mensal">Mensal</option>
+                                            <option value="trimestral">Trimestral</option>
+                                            <option value="semestral">Semestral</option>
+                                            <option value="anual">Anual</option>
+                                        </select>
+                                    </td>
+                                    <td class="action-buttons">
+                                        <button type="button" onclick="AnexoAnimal.table.duplicateRow(this)" title="Duplicar">📋</button>
+                                        <button type="button" onclick="AnexoAnimal.table.removeRow(this)" title="Remover">❌</button>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                    <button type="button" onclick="AnexoAnimal.table.addRow('tabela-prevencao')" class="btn btn-add">➕ Adicionar Método Preventivo</button>
+                </div>
+
+                <!-- Tratamentos Curativos -->
+                <h3>6.2. Tratamentos Curativos</h3>
+                <div class="table-wrapper">
+                    <table id="tabela-tratamentos" class="dynamic-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Espécie</th>
+                                <th>Doença/Enfermidade</th>
+                                <th>Tratamento/Produto</th>
+                                <th>Marca</th>
+                                <th>Período Carência (dias)</th>
+                                <th>Condição de Uso</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-tratamentos">
+                            <template id="row-template-tratamentos">
+                                <tr class="dynamic-row">
+                                    <td class="row-number"></td>
+                                    <td><input type="text" name="especie_animal_tratamento[]" placeholder="Ex: Bovinos"></td>
+                                    <td><input type="text" name="doenca_enfermidade[]" placeholder="Ex: Mastite"></td>
+                                    <td><input type="text" name="tratamento_produto[]" placeholder="Produto/medicamento"></td>
+                                    <td><input type="text" name="marca_comercial_tratamento[]" placeholder="Marca"></td>
+                                    <td><input type="number" name="periodo_carencia_dias[]" min="0" placeholder="0"></td>
+                                    <td><input type="text" name="condicao_epoca_uso[]" placeholder="Quando usar"></td>
+                                    <td class="action-buttons">
+                                        <button type="button" onclick="AnexoAnimal.table.duplicateRow(this)" title="Duplicar">📋</button>
+                                        <button type="button" onclick="AnexoAnimal.table.removeRow(this)" title="Remover">❌</button>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                    <button type="button" onclick="AnexoAnimal.table.addRow('tabela-tratamentos')" class="btn btn-add">➕ Adicionar Tratamento</button>
+                </div>
+            </section>
+
+            <!-- Seção 7: Vacinação -->
+            <section id="secao-vacinacao" class="form-section">
+                <h2>7. Programa de Vacinação</h2>
+
+                <div class="section-info">
+                    <p class="instruction">ℹ️ Liste todas as vacinas aplicadas, priorizando as obrigatórias por lei.</p>
+                </div>
+
+                <div class="table-wrapper">
+                    <table id="tabela-vacinacao" class="dynamic-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Vacina <span class="required">*</span></th>
+                                <th>Espécies Alvo</th>
+                                <th>Obrigatória?</th>
+                                <th>Calendário Aplicação</th>
+                                <th>Fabricante</th>
+                                <th>Registros Atualizados?</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-vacinacao">
+                            <template id="row-template-vacinacao">
+                                <tr class="dynamic-row">
+                                    <td class="row-number"></td>
+                                    <td><input type="text" name="vacina[]" required placeholder="Ex: Febre Aftosa"></td>
+                                    <td><input type="text" name="especies_alvo_vacina[]" placeholder="Ex: Bovinos"></td>
+                                    <td>
+                                        <select name="obrigatoria[]">
+                                            <option value="">Selecione...</option>
+                                            <option value="sim">Sim</option>
+                                            <option value="nao">Não</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="text" name="calendario_aplicacao[]" placeholder="Ex: Maio e Novembro"></td>
+                                    <td><input type="text" name="fabricante_vacina[]" placeholder="Fabricante"></td>
+                                    <td>
+                                        <select name="registros_atualizados[]">
+                                            <option value="">Selecione...</option>
+                                            <option value="sim">Sim</option>
+                                            <option value="nao">Não</option>
+                                        </select>
+                                    </td>
+                                    <td class="action-buttons">
+                                        <button type="button" onclick="AnexoAnimal.table.duplicateRow(this)" title="Duplicar">📋</button>
+                                        <button type="button" onclick="AnexoAnimal.table.removeRow(this)" title="Remover">❌</button>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                    <button type="button" onclick="AnexoAnimal.table.addRow('tabela-vacinacao')" class="btn btn-add">➕ Adicionar Vacina</button>
+                </div>
+            </section>
+
+            <!-- Seção 8: Reprodução -->
+            <section id="secao-reproducao" class="form-section">
+                <h2>8. Reprodução</h2>
+
+                <div class="section-info">
+                    <p class="instruction">ℹ️ Informe sobre métodos reprodutivos, origem dos animais e seleção genética.</p>
+                </div>
+
+                <!-- Origem dos Animais -->
+                <h3>8.1. Origem dos Animais</h3>
+                <div class="table-wrapper">
+                    <table id="tabela-origem-animais" class="dynamic-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Espécie</th>
+                                <th>Origem <span class="required">*</span></th>
+                                <th>Tipo de Origem</th>
+                                <th>Idade de Entrada</th>
+                                <th>Possui Documentação?</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-origem-animais">
+                            <template id="row-template-origem-animais">
+                                <tr class="dynamic-row">
+                                    <td class="row-number"></td>
+                                    <td><input type="text" name="especie_origem[]" placeholder="Ex: Bovinos"></td>
+                                    <td>
+                                        <select name="origem_animais[]" required>
+                                            <option value="">Selecione...</option>
+                                            <option value="nascidos_propriedade">Nascidos na propriedade</option>
+                                            <option value="comprados_organicos">Comprados orgânicos</option>
+                                            <option value="comprados_convencionais">Comprados convencionais</option>
+                                            <option value="doacao">Doação</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="text" name="tipo_origem[]" placeholder="Ex: Criação própria"></td>
+                                    <td><input type="text" name="idade_entrada_rebanho[]" placeholder="Ex: 3 meses"></td>
+                                    <td>
+                                        <select name="documentacao_origem[]">
+                                            <option value="">Selecione...</option>
+                                            <option value="sim">Sim</option>
+                                            <option value="nao">Não</option>
+                                        </select>
+                                    </td>
+                                    <td class="action-buttons">
+                                        <button type="button" onclick="AnexoAnimal.table.duplicateRow(this)" title="Duplicar">📋</button>
+                                        <button type="button" onclick="AnexoAnimal.table.removeRow(this)" title="Remover">❌</button>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                    <button type="button" onclick="AnexoAnimal.table.addRow('tabela-origem-animais')" class="btn btn-add">➕ Adicionar Origem</button>
+                </div>
+
+                <!-- Reprodução Artificial -->
+                <h3>8.2. Reprodução Artificial</h3>
+                <div class="form-grid">
+                    <div class="field-wrapper col-span-4">
+                        <label>Utiliza reprodução artificial (IA, TE)?</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="utiliza_reproducao_artificial" value="sim" onchange="AnexoAnimal.toggleReproducaoArtificial(this)">
+                                Sim
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="utiliza_reproducao_artificial" value="nao" onchange="AnexoAnimal.toggleReproducaoArtificial(this)">
+                                Não
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="detalhes-reproducao-artificial" style="display:none;">
+                        <div class="form-grid">
+                            <div class="field-wrapper">
+                                <label for="tipo_reproducao_artificial">Tipo</label>
+                                <select id="tipo_reproducao_artificial" name="tipo_reproducao_artificial">
+                                    <option value="">Selecione...</option>
+                                    <option value="inseminacao_artificial">Inseminação Artificial (IA)</option>
+                                    <option value="transferencia_embriao">Transferência de Embrião (TE)</option>
+                                    <option value="ambos">Ambos</option>
+                                </select>
+                            </div>
+
+                            <div class="field-wrapper col-span-2">
+                                <label for="origem_semen">Origem do Sêmen/Embrião</label>
+                                <input type="text" id="origem_semen" name="origem_semen" placeholder="Nome da central/fornecedor">
+                            </div>
+
+                            <div class="field-wrapper">
+                                <label for="certificacao_organica_semen">Certificado Orgânico?</label>
+                                <select id="certificacao_organica_semen" name="certificacao_organica_semen">
+                                    <option value="">Selecione...</option>
+                                    <option value="sim">Sim</option>
+                                    <option value="nao">Não</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção 9: Instalações -->
+            <section id="secao-instalacoes" class="form-section">
+                <h2>9. Instalações para Animais</h2>
+
+                <div class="section-info">
+                    <p class="instruction">ℹ️ Descreva todas as instalações onde os animais são alojados (estábulos, galpões, currais, etc.).</p>
+                </div>
+
+                <div class="table-wrapper">
+                    <table id="tabela-instalacoes" class="dynamic-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Tipo Instalação <span class="required">*</span></th>
+                                <th>Espécies Alojadas</th>
+                                <th>Tamanho (m²)</th>
+                                <th>Capacidade Máx.</th>
+                                <th>Lotação Atual</th>
+                                <th>Tipo de Piso</th>
+                                <th>Ventilação</th>
+                                <th>Frequência Limpeza</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-instalacoes">
+                            <template id="row-template-instalacoes">
+                                <tr class="dynamic-row">
+                                    <td class="row-number"></td>
+                                    <td>
+                                        <select name="tipo_instalacao[]" required>
+                                            <option value="">Selecione...</option>
+                                            <option value="estabulo">Estábulo</option>
+                                            <option value="galinheiro">Galinheiro</option>
+                                            <option value="pocilga">Pocilga</option>
+                                            <option value="aprisco">Aprisco</option>
+                                            <option value="curral">Curral</option>
+                                            <option value="piquete">Piquete</option>
+                                            <option value="galpao">Galpão</option>
+                                            <option value="baia">Baia</option>
+                                            <option value="outro">Outro</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="text" name="especies_alojadas[]" placeholder="Ex: Galinhas"></td>
+                                    <td><input type="number" name="tamanho_total_m2[]" min="0" step="0.1" placeholder="0.0"></td>
+                                    <td><input type="number" name="capacidade_maxima_animais[]" min="0" placeholder="0"></td>
+                                    <td><input type="number" name="lotacao_atual_instalacao[]" min="0" placeholder="0"></td>
+                                    <td>
+                                        <select name="tipo_piso[]">
+                                            <option value="">Selecione...</option>
+                                            <option value="terra_batida">Terra batida</option>
+                                            <option value="cimento">Cimento</option>
+                                            <option value="madeira">Madeira</option>
+                                            <option value="grade">Grade</option>
+                                            <option value="cama">Cama (maravalha/palha)</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="ventilacao_instalacao[]">
+                                            <option value="">Selecione...</option>
+                                            <option value="natural">Natural</option>
+                                            <option value="mecanica">Mecânica</option>
+                                            <option value="mista">Mista</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="frequencia_limpeza[]">
+                                            <option value="">Selecione...</option>
+                                            <option value="diaria">Diária</option>
+                                            <option value="semanal">Semanal</option>
+                                            <option value="quinzenal">Quinzenal</option>
+                                            <option value="mensal">Mensal</option>
+                                        </select>
+                                    </td>
+                                    <td class="action-buttons">
+                                        <button type="button" onclick="AnexoAnimal.table.duplicateRow(this)" title="Duplicar">📋</button>
+                                        <button type="button" onclick="AnexoAnimal.table.removeRow(this)" title="Remover">❌</button>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                    <button type="button" onclick="AnexoAnimal.table.addRow('tabela-instalacoes')" class="btn btn-add">➕ Adicionar Instalação</button>
+                </div>
+            </section>
+
+            <!-- Seção 10: Manejo de Esterco e Resíduos -->
+            <section id="secao-esterco" class="form-section">
+                <h2>10. Manejo de Esterco e Resíduos</h2>
+
+                <div class="section-info">
+                    <p class="instruction">ℹ️ O manejo adequado de resíduos é fundamental para evitar contaminações e aproveitar nutrientes.</p>
+                </div>
+
+                <div class="form-grid">
+                    <div class="field-wrapper col-span-4">
+                        <label for="metodo_manejo_esterco">Método de Manejo <span class="required">*</span></label>
+                        <select id="metodo_manejo_esterco" name="metodo_manejo_esterco" required>
+                            <option value="">Selecione...</option>
+                            <option value="compostagem">Compostagem</option>
+                            <option value="biodigestor">Biodigestor</option>
+                            <option value="esterqueira">Esterqueira</option>
+                            <option value="aplicacao_direta">Aplicação direta no solo</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="volume_mensal_estimado_kg">Volume Mensal Estimado (kg)</label>
+                        <input type="number" id="volume_mensal_estimado_kg" name="volume_mensal_estimado_kg" min="0" placeholder="0">
+                    </div>
+
+                    <div class="field-wrapper col-span-3">
+                        <label for="tempo_maturacao">Tempo de Maturação</label>
+                        <input type="text" id="tempo_maturacao" name="tempo_maturacao" placeholder="Ex: 90 dias">
+                    </div>
+
+                    <div class="field-wrapper col-span-4">
+                        <h4>Destinação do Esterco/Composto</h4>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="uso_proprio_adubacao" value="sim">
+                                <span>Uso próprio (adubação)</span>
+                            </label>
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="comercializacao_esterco" value="sim">
+                                <span>Comercialização</span>
+                            </label>
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="doacao_esterco" value="sim">
+                                <span>Doação</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="field-wrapper col-span-4">
+                        <h4>Condições de Armazenamento</h4>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="local_adequado_esterco" value="sim">
+                                <span>Local adequado e afastado</span>
+                            </label>
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="cobertura_esterco" value="sim">
+                                <span>Cobertura (proteção da chuva)</span>
+                            </label>
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="impermeabilizacao_esterco" value="sim">
+                                <span>Impermeabilização do piso</span>
+                            </label>
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="drenagem_chorume" value="sim">
+                                <span>Sistema de drenagem de chorume</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="field-wrapper col-span-4">
+                        <label for="descricao_processo_esterco">Descrição do Processo</label>
+                        <textarea id="descricao_processo_esterco" name="descricao_processo_esterco" rows="3" placeholder="Descreva como é feito o manejo do esterco desde a coleta até a destinação final"></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção 11: Rastreabilidade e Registros -->
+            <section id="secao-rastreabilidade" class="form-section">
+                <h2>11. Rastreabilidade e Registros</h2>
+
+                <div class="section-info">
+                    <p class="alert">⚠️ A rastreabilidade é OBRIGATÓRIA conforme IN 19/2011 MAPA.</p>
+                </div>
+
+                <div class="form-grid">
+                    <div class="field-wrapper col-span-2">
+                        <label for="metodo_identificacao">Método de Identificação <span class="required">*</span></label>
+                        <select id="metodo_identificacao" name="metodo_identificacao" required>
+                            <option value="">Selecione...</option>
+                            <option value="brinco">Brinco</option>
+                            <option value="tatuagem">Tatuagem</option>
+                            <option value="chip_eletronico">Chip eletrônico</option>
+                            <option value="anilha">Anilha</option>
+                            <option value="carimbo">Carimbo (ovos)</option>
+                            <option value="lote">Por lote</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label>Rastreabilidade Individual?</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="rastreabilidade_individual" value="sim">
+                                Sim
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="rastreabilidade_individual" value="nao">
+                                Não
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label>Rastreabilidade por Lote?</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="rastreabilidade_lote" value="sim">
+                                Sim
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="rastreabilidade_lote" value="nao">
+                                Não
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="field-wrapper col-span-4">
+                        <h4>Registros Mantidos <span class="required">*</span></h4>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="registros_nascimentos" value="sim" required>
+                                <span>Nascimentos</span>
+                            </label>
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="registros_mortes" value="sim">
+                                <span>Mortes</span>
+                            </label>
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="registros_tratamentos_veterinarios" value="sim">
+                                <span>Tratamentos veterinários</span>
+                            </label>
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="registros_vacinacoes" value="sim">
+                                <span>Vacinações</span>
+                            </label>
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="registros_alimentacao" value="sim">
+                                <span>Alimentação</span>
+                            </label>
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="registros_producao" value="sim">
+                                <span>Produção (leite, ovos, carne)</span>
+                            </label>
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="registros_movimentacao_animais" value="sim">
+                                <span>Movimentação de animais</span>
+                            </label>
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="registros_reproducao" value="sim">
+                                <span>Reprodução</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="field-wrapper col-span-2">
+                        <label for="metodo_registro">Método de Registro <span class="required">*</span></label>
+                        <select id="metodo_registro" name="metodo_registro" required>
+                            <option value="">Selecione...</option>
+                            <option value="caderno_campo">Caderno de campo</option>
+                            <option value="planilha_eletronica">Planilha eletrônica</option>
+                            <option value="software_gestao">Software de gestão</option>
+                            <option value="fichas_individuais">Fichas individuais</option>
+                            <option value="app_celular">App de celular</option>
+                        </select>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="periodo_retencao_anos">Período de Retenção (anos) <span class="required">*</span></label>
+                        <input type="number" id="periodo_retencao_anos" name="periodo_retencao_anos" min="1" max="10" required placeholder="Ex: 5">
+                        <small class="help-text">Recomendado: mínimo 5 anos</small>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção 12: Declarações -->
+            <section id="secao-declaracoes" class="form-section">
+                <h2>12. Declarações do Produtor</h2>
+
+                <div class="alert alert-warning">
+                    <strong>⚠️ Declaração de Responsabilidade</strong><br>
+                    Ao preencher este anexo, você declara conhecer e seguir as normas de produção animal orgânica.
+                </div>
+
+                <div class="form-grid">
+                    <div class="field-wrapper col-span-4">
+                        <label class="checkbox-enhanced" style="display: block; margin-bottom: 1rem;">
+                            <input type="checkbox" name="conhece_legislacao_organica" value="sim" required>
+                            <span><strong>Conheço a legislação de produção animal orgânica</strong> (Lei 10.831/2003, Portaria 52/2021 MAPA)</span>
+                            <span class="required">*</span>
+                        </label>
+                    </div>
+
+                    <div class="field-wrapper col-span-4">
+                        <label class="checkbox-enhanced" style="display: block; margin-bottom: 1rem;">
+                            <input type="checkbox" name="cumpre_normas_bem_estar" value="sim" required>
+                            <span><strong>Cumpro as normas de bem-estar animal</strong> conforme legislação vigente</span>
+                            <span class="required">*</span>
+                        </label>
+                    </div>
+
+                    <div class="field-wrapper col-span-4">
+                        <label class="checkbox-enhanced" style="display: block; margin-bottom: 1rem;">
+                            <input type="checkbox" name="nao_usa_hormonios_crescimento" value="sim" required>
+                            <span><strong>NÃO utilizo hormônios de crescimento</strong> ou promotores de crescimento sintéticos</span>
+                            <span class="required">*</span>
+                        </label>
+                    </div>
+
+                    <div class="field-wrapper col-span-4">
+                        <label class="checkbox-enhanced" style="display: block; margin-bottom: 1rem;">
+                            <input type="checkbox" name="nao_usa_antibioticos_preventivos" value="sim" required>
+                            <span><strong>NÃO utilizo antibióticos de forma preventiva</strong> ou como promotores de crescimento</span>
+                            <span class="required">*</span>
+                        </label>
+                    </div>
+
+                    <div class="field-wrapper col-span-4">
+                        <label class="checkbox-enhanced" style="display: block; margin-bottom: 1rem;">
+                            <input type="checkbox" name="nao_usa_urea_sintetica" value="sim" required>
+                            <span><strong>NÃO utilizo ureia sintética</strong> na alimentação animal</span>
+                            <span class="required">*</span>
+                        </label>
+                    </div>
+
+                    <div class="field-wrapper col-span-4">
+                        <label class="checkbox-enhanced" style="display: block; margin-bottom: 1rem;">
+                            <input type="checkbox" name="nao_usa_organismos_transgenicos" value="sim" required>
+                            <span><strong>NÃO utilizo organismos geneticamente modificados (transgênicos)</strong> na alimentação ou reprodução</span>
+                            <span class="required">*</span>
+                        </label>
+                    </div>
+
+                    <div class="field-wrapper col-span-4">
+                        <label class="checkbox-enhanced" style="display: block; margin-bottom: 1rem;">
+                            <input type="checkbox" name="respeita_periodo_carencia" value="sim" required>
+                            <span><strong>Respeito o período de carência dobrado</strong> quando uso medicamentos alopáticos</span>
+                            <span class="required">*</span>
+                        </label>
+                    </div>
+
+                    <div class="field-wrapper col-span-4">
+                        <label class="checkbox-enhanced" style="display: block; margin-bottom: 1rem;">
+                            <input type="checkbox" name="mantem_registros_atualizados" value="sim" required>
+                            <span><strong>Mantenho registros atualizados</strong> de todos os manejos e movimentações de animais</span>
+                            <span class="required">*</span>
+                        </label>
+                    </div>
+
+                    <div class="field-wrapper col-span-4">
+                        <label class="checkbox-enhanced" style="display: block; margin-bottom: 1rem;">
+                            <input type="checkbox" name="autoriza_visitas_verificacao" value="sim" required>
+                            <span><strong>Autorizo visitas de verificação</strong> sem aviso prévio pela certificadora e membros do OPAC</span>
+                            <span class="required">*</span>
+                        </label>
+                    </div>
+
+                    <div class="field-wrapper col-span-4">
+                        <label class="checkbox-enhanced" style="display: block; margin-bottom: 1rem;">
+                            <input type="checkbox" name="declara_veracidade_informacoes" value="sim" required>
+                            <span><strong>Declaro que todas as informações prestadas são verdadeiras</strong> e estou ciente das penalidades por informações falsas</span>
+                            <span class="required">*</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="field-wrapper col-span-2">
+                        <label for="nome_completo_produtor">Nome Completo do Responsável <span class="required">*</span></label>
+                        <input type="text" id="nome_completo_produtor" name="nome_completo_produtor" required placeholder="Nome completo">
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="cpf_produtor">CPF <span class="required">*</span></label>
+                        <input type="text" id="cpf_produtor" name="cpf_produtor" data-mask="cpf" required placeholder="000.000.000-00">
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="data_elaboracao_pmo">Data <span class="required">*</span></label>
+                        <input type="date" id="data_elaboracao_pmo" name="data_elaboracao_pmo" required>
+                    </div>
+
+                    <div class="field-wrapper col-span-4">
+                        <label for="observacoes_gerais">Observações Finais (Opcional)</label>
+                        <textarea id="observacoes_gerais" name="observacoes_gerais" rows="4" placeholder="Informações adicionais relevantes sobre a produção animal"></textarea>
+                    </div>
+                </div>
+
+                <div class="alert alert-success">
+                    <strong>✅ Próximos Passos:</strong>
+                    <ol style="margin: 0.5rem 0 0 1.5rem;">
+                        <li>Clique em "Validar Formulário" para verificar se há erros</li>
+                        <li>Corrija qualquer problema apontado</li>
+                        <li>Salve o rascunho para segurança</li>
+                        <li>Quando tudo estiver correto, exporte o anexo</li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- Action Buttons -->
+            <div class="form-actions">
+                <button type="button" onclick="AnexoAnimal.salvar()" class="btn btn-secondary">
+                    💾 Salvar Rascunho
+                </button>
+                <button type="button" onclick="AnexoAnimal.validar()" class="btn btn-info">
+                    ✓ Validar Formulário
+                </button>
+                <button type="button" onclick="AnexoAnimal.exportarJSON()" class="btn btn-secondary">
+                    📥 Exportar JSON
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    📄 Gerar PDF
+                </button>
+            </div>
+
+        </form>
+
+        <!-- Validation Results -->
+        <div id="validation-results" class="validation-report"></div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="pmo-footer">
+        <div class="pmo-container">
+            <p>© 2024 ANC - Associação de Agricultura Natural de Campinas e Região</p>
+            <p>Sistema PMO Digital v2.0 | Anexo III - Produção Animal | Portaria MAPA 52/2021</p>
+        </div>
+    </footer>
+
+    <!-- Framework JS Unificado -->
+    <script src="../../framework/core/pmo-framework.js"></script>
+
+    <!-- JS Específico do Anexo Animal -->
+    <script src="./anexo-animal.js"></script>
+
+    <!-- Validation Rules -->
+    <script src="./validation-rules.js"></script>
+</body>
+</html>

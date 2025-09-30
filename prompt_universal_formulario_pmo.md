@@ -5,6 +5,43 @@ Este prompt serve como template universal para criação de qualquer formulário
 
 ---
 
+## ⚠️ REGRA CRÍTICA - INTEGRAÇÃO COM PMO PRINCIPAL
+
+### 🔴 OBRIGATÓRIO para TODOS os anexos:
+encoding UTF-8
+Todos os formulários secundários (Anexo Vegetal, Anexo Animal, Anexo Cogumelos, etc.) **DEVEM** carregar automaticamente dados do PMO Principal na inicialização.
+
+**Implementação obrigatória:**
+```javascript
+// Na função init() do módulo:
+init() {
+    console.log('Inicializando...');
+
+    // ... outras inicializações ...
+
+    // ⚠️ OBRIGATÓRIO: Carregar dados do PMO Principal
+    this.loadPMOPrincipal();
+
+    // ... resto da inicialização ...
+}
+
+// Função loadPMOPrincipal() - Ver seção "J) Integração com PMO Principal"
+```
+
+**Chave do localStorage:** `'pmo_principal_data'`
+
+**Campos mínimos a preencher:**
+- ✅ nome_fornecedor/nome_produtor
+- ✅ nome_unidade_producao
+- ✅ data_preenchimento
+- ✅ grupo_spg
+
+**Ver detalhes completos na seção "J) Integração com PMO Principal"**
+
+**📖 Guia completo:** [`INTEGRACAO_PMO_PRINCIPAL.md`](./INTEGRACAO_PMO_PRINCIPAL.md)
+
+---
+
 ## 📋 INSTRUÇÕES GERAIS
 
 ### Contexto Base
@@ -161,6 +198,94 @@ document.querySelector('[name="uf"]').value = endereco.uf;
 // Validar CNPJ (algoritmo + BrasilAPI)
 const cnpjDados = await PMOFramework.api.validarCNPJ('12.345.678/0001-90');
 ```
+
+##### J) Integração com PMO Principal (OBRIGATÓRIO para Anexos)
+**IMPORTANTE**: Todos os anexos e formulários secundários **DEVEM** carregar dados do PMO Principal automaticamente.
+
+```javascript
+/**
+ * Carregar dados do PMO Principal
+ * OBRIGATÓRIO para todos os anexos (Vegetal, Animal, Cogumelos, etc.)
+ */
+loadPMOPrincipal() {
+    try {
+        // Chave correta do localStorage do PMO Principal
+        const pmoPrincipal = localStorage.getItem('pmo_principal_data');
+        if (!pmoPrincipal) {
+            console.log('Nenhum dado do PMO Principal encontrado.');
+            return;
+        }
+
+        const data = JSON.parse(pmoPrincipal);
+        const form = document.getElementById(this.config.formId);
+
+        if (!form) return;
+
+        // Preencher campos de identificação (ADAPTAR conforme formulário)
+        // Nome do fornecedor/produtor
+        const nomeField = form.querySelector('[name="nome_fornecedor"]');
+        if (nomeField && !nomeField.value) {
+            nomeField.value = data.nome_completo || data.razao_social || '';
+            console.log('Nome do fornecedor preenchido:', nomeField.value);
+        }
+
+        // Nome da unidade de produção
+        const unidadeField = form.querySelector('[name="nome_unidade_producao"]');
+        if (unidadeField && !unidadeField.value) {
+            unidadeField.value = data.nome_unidade_producao || '';
+            console.log('Nome da unidade preenchido:', unidadeField.value);
+        }
+
+        // Data de preenchimento
+        const dataField = form.querySelector('[name="data_preenchimento"]');
+        if (dataField && !dataField.value) {
+            const today = new Date().toISOString().split('T')[0];
+            dataField.value = today;
+        }
+
+        // Grupo SPG (se disponível)
+        const grupoField = form.querySelector('[name="grupo_spg"]');
+        if (grupoField && !grupoField.value && data.grupo_spg) {
+            grupoField.value = data.grupo_spg;
+        }
+
+        // ADICIONAR OUTROS CAMPOS CONFORME NECESSÁRIO
+        // Exemplos: CPF, CNPJ, endereço, telefone, etc.
+
+        this.showMessage('Dados carregados do PMO Principal!', 'info');
+    } catch (error) {
+        console.error('Erro ao carregar dados do PMO Principal:', error);
+        this.showMessage('Aviso: Não foi possível carregar dados do PMO Principal.', 'warning');
+    }
+}
+
+// CHAMAR na inicialização do módulo
+init() {
+    console.log('Inicializando...');
+
+    // ... outras inicializações ...
+
+    // OBRIGATÓRIO: Carregar dados do PMO Principal
+    this.loadPMOPrincipal();
+
+    // ... resto da inicialização ...
+}
+```
+
+**Campos comuns que devem ser preenchidos automaticamente:**
+- ✅ `nome_fornecedor` ou `nome_produtor` → `data.nome_completo` ou `data.razao_social`
+- ✅ `nome_unidade_producao` → `data.nome_unidade_producao`
+- ✅ `data_preenchimento` → Data atual
+- ✅ `grupo_spg` → `data.grupo_spg`
+- ✅ `cpf` ou `cnpj` → `data.cpf` ou `data.cnpj` (se aplicável)
+- ✅ `endereco`, `cep`, `municipio`, `uf` → Dados de endereço (se aplicável)
+
+**Princípios importantes:**
+1. **NÃO sobrescrever** campos já preenchidos manualmente (`if (!field.value)`)
+2. **Registrar logs** no console para debug
+3. **Mostrar mensagem** de confirmação ao usuário
+4. **Tratar erros** gracefully - não bloquear o formulário se PMO Principal não existir
+5. **Validar dados** antes de preencher
 
 ---
 
@@ -611,6 +736,11 @@ Antes de considerar o formulário completo, verificar:
 - [ ] Não duplica funcionalidades do framework
 - [ ] Compartilha dados com outros módulos via localStorage
 - [ ] Schema JSON definido em `database/schemas/`
+- [ ] **OBRIGATÓRIO (para anexos)**: Carrega dados do PMO Principal automaticamente
+- [ ] Implementa função `loadPMOPrincipal()` na inicialização
+- [ ] Preenche campos: nome_fornecedor, nome_unidade_producao, data_preenchimento, grupo_spg
+- [ ] Não sobrescreve campos já preenchidos manualmente
+- [ ] Exibe mensagem de confirmação ao carregar dados
 
 ### Documentação
 - [ ] README.md com instruções de uso
@@ -631,12 +761,13 @@ INFORMAÇÕES ESPECÍFICAS:
 - Nome do módulo: anexo-animal
 - Escopo: Detalhamento de práticas de criação animal orgânica
 - Seções principais:
-  1. Espécies criadas (tabela dinâmica)
-  2. Alimentação (origem, composição, pastagens)
-  3. Bem-estar animal
-  4. Manejo sanitário (vacinas, medicamentos)
-  5. Instalações
-  6. Rastreabilidade
+  1. Identificação do Produtor (carregar do PMO Principal)
+  2. Espécies criadas (tabela dinâmica)
+  3. Alimentação (origem, composição, pastagens)
+  4. Bem-estar animal
+  5. Manejo sanitário (vacinas, medicamentos)
+  6. Instalações
+  7. Rastreabilidade
 
 CAMPOS DINÂMICOS:
 - Tabela de espécies (min: 1, max: 10)
@@ -648,6 +779,11 @@ VALIDAÇÕES ESPECÍFICAS:
 - Verificar se animais em conversão têm período mínimo declarado
 - Validar que medicamentos estão na lista permitida MAPA
 - Verificar densidade de animais por área
+
+INTEGRAÇÃO OBRIGATÓRIA:
+- Carregar automaticamente dados do PMO Principal (nome_fornecedor, nome_unidade_producao)
+- Implementar função loadPMOPrincipal() conforme seção J do prompt
+- Exibir mensagem de confirmação ao usuário
 
 Siga todos os padrões do Prompt Universal.
 ```
@@ -677,6 +813,29 @@ Siga todos os padrões do Prompt Universal.
 ### Problema: Exportação PDF não formata corretamente
 **Solução**: Usar biblioteca jsPDF via CDN e configurar margens/orientação adequadas.
 
+### Problema: Dados do PMO Principal não carregam automaticamente
+**Causas possíveis:**
+1. PMO Principal não foi salvo antes → Preencher e salvar o PMO Principal primeiro
+2. Chave do localStorage incorreta → Usar `'pmo_principal_data'` (não `'pmo_principal'`)
+3. Função `loadPMOPrincipal()` não foi chamada no `init()`
+4. Campos do formulário têm nomes diferentes → Verificar `name` dos inputs
+
+**Solução:**
+```javascript
+// Debug no console (F12):
+localStorage.getItem('pmo_principal_data') // Deve retornar JSON, não null
+
+// Verificar se função está sendo chamada:
+init() {
+    console.log('Inicializando...');
+    this.loadPMOPrincipal(); // IMPORTANTE: Deve estar aqui
+}
+
+// Verificar logs:
+// "Nome do fornecedor preenchido: [nome]"
+// "Dados carregados do PMO Principal!"
+```
+
 ---
 
 ## 📝 NOTAS FINAIS
@@ -690,5 +849,36 @@ Este prompt universal deve ser **adaptado** conforme necessidades específicas d
 5. ✅ Responsividade
 6. ✅ Performance
 7. ✅ Documentação
+8. ✅ **Integração com PMO Principal (OBRIGATÓRIO para anexos)**
 
 **Objetivo**: Criar formulários consistentes, manuteníveis e que proporcionem excelente experiência ao usuário (produtor rural) preenchendo o PMO.
+
+---
+
+## 🔑 REGRAS DE OURO
+
+### Para TODOS os anexos e formulários secundários:
+
+1. **SEMPRE carregar dados do PMO Principal**
+   - Chave: `localStorage.getItem('pmo_principal_data')`
+   - Implementar função `loadPMOPrincipal()`
+   - Chamar no `init()` do módulo
+
+2. **Campos mínimos a preencher automaticamente:**
+   - `nome_fornecedor` ou `nome_produtor`
+   - `nome_unidade_producao`
+   - `data_preenchimento`
+   - `grupo_spg`
+
+3. **Princípios da integração:**
+   - ❌ NÃO sobrescrever campos já preenchidos
+   - ✅ Registrar logs no console
+   - ✅ Mostrar mensagem de confirmação
+   - ✅ Tratar erros gracefully
+   - ✅ Validar dados antes de preencher
+
+4. **Fluxo de trabalho esperado:**
+   - Usuário preenche PMO Principal primeiro
+   - Depois abre qualquer anexo
+   - Dados básicos são preenchidos automaticamente
+   - Usuário continua preenchendo campos específicos do anexo

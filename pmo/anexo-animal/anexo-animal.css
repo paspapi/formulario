@@ -1,0 +1,342 @@
+/**
+ * Anexo Animal - Estilos Específicos
+ * Sistema PMO - ANC
+ *
+ * Estilos customizados para o Anexo III - Produção Animal
+ * Complementa o framework CSS unificado
+ */
+
+/* ===== ÍCONES E IDENTIDADE VISUAL ===== */
+.pmo-header h1::before {
+    content: '🐄';
+    margin-right: 0.5rem;
+}
+
+/* ===== TABELAS DINÂMICAS ===== */
+.dynamic-table {
+    font-size: 0.9rem;
+}
+
+.dynamic-table input[type="text"],
+.dynamic-table input[type="number"],
+.dynamic-table select {
+    min-width: 120px;
+    font-size: 0.85rem;
+}
+
+/* Colunas estreitas */
+.dynamic-table .row-number {
+    width: 40px;
+    text-align: center;
+    font-weight: bold;
+    color: var(--gray-600);
+}
+
+.dynamic-table .action-buttons {
+    width: 80px;
+    text-align: center;
+}
+
+.dynamic-table .action-buttons button {
+    padding: 0.25rem 0.5rem;
+    margin: 0 0.1rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.dynamic-table .action-buttons button:hover {
+    transform: scale(1.2);
+}
+
+/* ===== SEÇÕES ESPECÍFICAS ===== */
+
+/* Inspeção Sanitária */
+#detalhes-inspecao {
+    padding: 1rem;
+    background-color: var(--gray-50);
+    border-radius: var(--radius-md);
+    margin-top: 1rem;
+}
+
+/* Pastagem */
+#detalhes-pastagem {
+    padding: 1rem;
+    background-color: var(--green-50);
+    border-radius: var(--radius-md);
+    margin-top: 1rem;
+}
+
+/* Reprodução Artificial */
+#detalhes-reproducao-artificial {
+    padding: 1rem;
+    background-color: var(--blue-50);
+    border-radius: var(--radius-md);
+    margin-top: 1rem;
+}
+
+/* ===== CHECKBOXES MELHORADOS ===== */
+.checkbox-enhanced {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    background-color: var(--white);
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.checkbox-enhanced:hover {
+    border-color: var(--primary);
+    background-color: var(--primary-light);
+}
+
+.checkbox-enhanced input[type="checkbox"] {
+    margin-right: 0.75rem;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.checkbox-enhanced input[type="checkbox"]:checked + span {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+/* Grid de checkboxes */
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 0.75rem;
+}
+
+/* ===== ALERTAS E MENSAGENS ===== */
+.alert {
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    margin-bottom: 1rem;
+}
+
+.alert-info {
+    background-color: var(--blue-50);
+    border-left: 4px solid var(--info);
+    color: var(--blue-900);
+}
+
+.alert-warning {
+    background-color: var(--yellow-50);
+    border-left: 4px solid var(--warning);
+    color: var(--yellow-900);
+}
+
+.alert-danger {
+    background-color: var(--red-50);
+    border-left: 4px solid var(--error);
+    color: var(--red-900);
+}
+
+.alert-success {
+    background-color: var(--green-50);
+    border-left: 4px solid var(--success);
+    color: var(--green-900);
+}
+
+.alert h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.alert ul {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+}
+
+.alert li {
+    margin-bottom: 0.25rem;
+}
+
+/* ===== VALIDATION REPORT ===== */
+.validation-report {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.validation-report .alert {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== BOTÕES DE AÇÃO ===== */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    padding: 2rem 0;
+    border-top: 2px solid var(--gray-200);
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+}
+
+.btn-secondary {
+    background-color: var(--gray-500);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: var(--gray-600);
+}
+
+.btn-info {
+    background-color: var(--info);
+    color: white;
+}
+
+.btn-info:hover {
+    background-color: var(--info-dark);
+}
+
+.btn-add {
+    background-color: var(--success);
+    color: white;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+}
+
+.btn-add:hover {
+    background-color: var(--success-dark);
+}
+
+/* ===== PROGRESS BAR ===== */
+.progress-container {
+    background-color: var(--white);
+    padding: 1rem;
+    border-bottom: 1px solid var(--gray-200);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--gray-600);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: var(--gray-200);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--success));
+    transition: width 0.3s ease;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+
+/* Tablet */
+@media (max-width: 768px) {
+    .checkbox-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dynamic-table {
+        font-size: 0.8rem;
+    }
+
+    .dynamic-table input,
+    .dynamic-table select {
+        font-size: 0.75rem;
+        min-width: 100px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .dynamic-table {
+        min-width: 600px;
+    }
+
+    .alert {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* ===== IMPRESSÃO ===== */
+@media print {
+    .pmo-header nav,
+    .progress-container,
+    .form-actions,
+    .action-buttons,
+    .btn-add {
+        display: none !important;
+    }
+
+    .form-section {
+        page-break-inside: avoid;
+    }
+
+    .dynamic-table {
+        font-size: 0.8rem;
+    }
+}
