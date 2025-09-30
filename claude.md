@@ -15,7 +15,7 @@ Sistema web para gerenciamento de Planos de Manejo Orgânico (PMO) da Associaç�
 ```
 PMO-SYSTEM/
 ├── framework/          # Framework unificado (Core)
-├── anc/               # Módulos principais do PMO
+├── pmo/               # Módulos principais do PMO
 ├── assets/            # Recursos estáticos
 ├── database/          # Estrutura de dados e schemas (JSON client-side)
 ├── config/            # Configurações (JavaScript modules)
