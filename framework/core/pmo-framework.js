@@ -167,7 +167,7 @@ class PMOFramework {
         this.currentModule = this.modules.get(moduleName);
       } else {
         // Carrega m�dulo dinamicamente
-        const modulePath = `../../anc/${moduleName}/${moduleName}.js`;
+        const modulePath = `${this.config.basePath}/anc/${moduleName}/${moduleName}.js`;
         const module = await import(modulePath);
         this.currentModule = new module.default(this);
         this.modules.set(moduleName, this.currentModule);

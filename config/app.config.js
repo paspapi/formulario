@@ -29,7 +29,7 @@ export const CONFIG = {
   },
 
   ROUTES: {
-    basePath: '/formulario/'
+    basePath: '/formulario'
   }
 };
 
