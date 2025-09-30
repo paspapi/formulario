@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMO Table - Exemplo de Uso</title>
+
+    <!-- Framework CSS -->
+    <link rel="stylesheet" href="../styles/_variables.css">
+    <link rel="stylesheet" href="../styles/_base.css">
+    <link rel="stylesheet" href="../styles/_components.css">
+    <link rel="stylesheet" href="../styles/_utilities.css">
+
+    <style>
+        body {
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .example-section {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .example-section h2 {
+            margin-top: 0;
+            color: #10b981;
+        }
+        .code-block {
+            background: #1f2937;
+            color: #f3f4f6;
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>📊 PMO Table - Exemplos de Uso</h1>
+    <p><strong>Componente de tabelas dinâmicas com suporte a clipboard (colar de planilhas)</strong></p>
+
+    <!-- Exemplo 1: Tabela Simples -->
+    <div class="example-section">
+        <h2>Exemplo 1: Tabela Simples de Produtos</h2>
+        <p>Tabela básica com campos de texto e número.</p>
+
+        <div id="tableProdutos"></div>
+
+        <div class="code-block">
+// Código JavaScript
+const tableProdutos = new PMOTable('tableProdutos', {
+    minRows: 1,
+    maxRows: 50,
+    columns: [
+        { field: 'produto', label: 'Produto', type: 'text', required: true },
+        { field: 'quantidade', label: 'Quantidade', type: 'number', required: true, min: 0 },
+        { field: 'unidade', label: 'Unidade', type: 'select', required: true,
+          options: ['kg', 'g', 'L', 'mL', 'unidade'] },
+        { field: 'observacoes', label: 'Observações', type: 'text' }
+    ],
+    allowPaste: true,
+    allowExport: true,
+    zebra: true
+});
+        </div>
+    </div>
+
+    <!-- Exemplo 2: Tabela com Validações -->
+    <div class="example-section">
+        <h2>Exemplo 2: Tabela de Fornecedores (com validação de CNPJ)</h2>
+        <p>Tabela com validações customizadas.</p>
+
+        <div id="tableFornecedores"></div>
+
+        <div class="code-block">
+// Código JavaScript
+const tableFornecedores = new PMOTable('tableFornecedores', {
+    minRows: 1,
+    maxRows: 20,
+    columns: [
+        { field: 'razao_social', label: 'Razão Social', type: 'text', required: true },
+        { field: 'cnpj', label: 'CNPJ', type: 'text', required: true, mask: 'cnpj',
+          placeholder: '00.000.000/0000-00' },
+        { field: 'telefone', label: 'Telefone', type: 'tel', mask: 'telefone',
+          placeholder: '(00) 00000-0000' },
+        { field: 'email', label: 'E-mail', type: 'email' },
+        { field: 'status', label: 'Status', type: 'select',
+          options: [
+              { value: 'ativo', label: 'Ativo' },
+              { value: 'inativo', label: 'Inativo' }
+          ]
+        }
+    ],
+    validators: {
+        cnpj: (value) => {
+            const cnpj = value.replace(/\D/g, '');
+            if (cnpj.length !== 14) return false;
+            // Validação simplificada (você pode usar a função completa)
+            return true;
+        }
+    },
+    allowPaste: true,
+    allowExport: true
+});
+        </div>
+    </div>
+
+    <!-- Exemplo 3: Tabela com Datas -->
+    <div class="example-section">
+        <h2>Exemplo 3: Tabela de Atividades com Datas</h2>
+        <p>Tabela com campos de data e textarea.</p>
+
+        <div id="tableAtividades"></div>
+
+        <div class="code-block">
+// Código JavaScript
+const tableAtividades = new PMOTable('tableAtividades', {
+    minRows: 2,
+    maxRows: 100,
+    columns: [
+        { field: 'data_inicio', label: 'Data Início', type: 'date', required: true },
+        { field: 'data_fim', label: 'Data Fim', type: 'date', required: true },
+        { field: 'atividade', label: 'Atividade', type: 'select', required: true,
+          options: ['Preparo do solo', 'Plantio', 'Tratos culturais', 'Colheita',
+                    'Adubação', 'Controle de pragas'] },
+        { field: 'area_ha', label: 'Área (ha)', type: 'number', required: true,
+          min: 0, step: 0.01 },
+        { field: 'descricao', label: 'Descrição', type: 'textarea', rows: 2 }
+    ],
+    allowPaste: true,
+    allowExport: true,
+    zebra: true,
+    onRowAdd: (row, index, data) => {
+        console.log('Linha adicionada:', index, data);
+    }
+});
+        </div>
+    </div>
+
+    <!-- Instruções de uso do Clipboard -->
+    <div class="example-section">
+        <h2>🎯 Como colar dados de planilhas (Excel, Google Sheets)</h2>
+
+        <h3>Método 1: Botão "Colar planilha"</h3>
+        <ol>
+            <li>Copie os dados no Excel ou Google Sheets (Ctrl+C)</li>
+            <li>Clique no botão "Colar planilha" acima da tabela</li>
+            <li>Cole os dados na caixa de texto (Ctrl+V)</li>
+            <li>Veja o preview e clique em "Colar dados"</li>
+        </ol>
+
+        <h3>Método 2: Atalho direto (Ctrl+V)</h3>
+        <ol>
+            <li>Copie os dados no Excel ou Google Sheets (Ctrl+C)</li>
+            <li>Clique em qualquer campo da tabela</li>
+            <li>Pressione Ctrl+V</li>
+            <li>Os dados serão colados automaticamente!</li>
+        </ol>
+
+        <h3>📝 Formatos suportados</h3>
+        <ul>
+            <li><strong>TSV (Tab Separated Values)</strong> - Padrão do Excel</li>
+            <li><strong>CSV (Comma Separated Values)</strong> - Vírgula como separador</li>
+            <li><strong>CSV Ponto-e-vírgula</strong> - Ponto-e-vírgula (comum no Excel PT-BR)</li>
+            <li><strong>Detecção automática</strong> - O sistema detecta o delimitador automaticamente</li>
+        </ul>
+
+        <h3>💡 Dicas</h3>
+        <ul>
+            <li>O número de colunas deve corresponder à estrutura da tabela</li>
+            <li>Células vazias são aceitas</li>
+            <li>Campos entre aspas são suportados (ex: "valor com, vírgula")</li>
+            <li>Você pode limpar a tabela antes de colar (sistema perguntará)</li>
+        </ul>
+
+        <h3>🧪 Teste com dados de exemplo</h3>
+        <p>Copie os dados abaixo e cole em qualquer tabela acima:</p>
+
+        <div class="code-block">
+Tomate	100	kg	Orgânico certificado
+Alface	50	kg	Hidropônico
+Cenoura	75	kg	Agroecológico
+Batata	200	kg	Cultivo em terra
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="example-section">
+        <h2>📚 Referência da API</h2>
+
+        <h3>Construtor</h3>
+        <div class="code-block">
+new PMOTable(containerId, config)
+
+Parâmetros:
+- containerId (string): ID do elemento container
+- config (object): Objeto de configuração
+
+Configuração disponível:
+{
+    minRows: 1,              // Número mínimo de linhas
+    maxRows: 999,            // Número máximo de linhas
+    columns: [],             // Array de definição de colunas (obrigatório)
+    allowAdd: true,          // Permitir adicionar linhas
+    allowRemove: true,       // Permitir remover linhas
+    allowPaste: true,        // Permitir colar do clipboard
+    allowExport: true,       // Permitir exportar CSV
+    autoSave: true,          // Auto-save em localStorage
+    storageKey: 'pmo_table', // Chave do localStorage
+    validators: {},          // Validadores customizados
+    zebra: true,             // Zebra striping (linhas alternadas)
+    onRowAdd: null,          // Callback ao adicionar linha
+    onRowRemove: null,       // Callback ao remover linha
+    onPaste: null,           // Callback ao colar dados
+    onValidate: null         // Callback de validação
+}
+        </div>
+
+        <h3>Definição de Colunas</h3>
+        <div class="code-block">
+{
+    field: 'nome_campo',     // Nome do campo (obrigatório)
+    label: 'Label',          // Label exibido no cabeçalho
+    type: 'text',            // Tipo: text, number, email, tel, date, select, textarea, checkbox
+    required: false,         // Campo obrigatório
+    disabled: false,         // Campo desabilitado
+    placeholder: '',         // Placeholder
+    min: null,               // Valor mínimo (number, date)
+    max: null,               // Valor máximo (number, date)
+    step: null,              // Step (number)
+    pattern: '',             // Pattern de validação (regex)
+    mask: '',                // Máscara: cpf, cnpj, cep, telefone
+    options: [],             // Opções para select/radio
+    rows: 3,                 // Linhas (textarea)
+    width: '150px',          // Largura da coluna
+    help: '',                // Texto de ajuda (tooltip)
+    validate: ''             // Nome do validador
+}
+        </div>
+
+        <h3>Métodos Públicos</h3>
+        <div class="code-block">
+// Adicionar linha
+table.addRow(data, skipValidation);
+
+// Remover linha
+table.removeRow(row);
+
+// Obter dados
+const data = table.getData();
+
+// Definir dados
+table.setData(data);
+
+// Limpar tabela
+table.clearRows();
+
+// Validar tudo
+const result = table.validateAll(); // {valid: true/false, errors: [...]}
+
+// Exportar CSV
+table.exportToCSV();
+
+// Salvar no localStorage
+table.saveData();
+
+// Carregar do localStorage
+table.loadSavedData();
+
+// Destruir tabela
+table.destroy();
+        </div>
+    </div>
+
+    <!-- Framework Scripts -->
+    <script src="../components/validators.js"></script>
+    <script src="../components/tables.js"></script>
+
+    <script>
+        // Exemplo 1: Tabela de Produtos
+        const tableProdutos = new PMOTable('tableProdutos', {
+            minRows: 1,
+            maxRows: 50,
+            columns: [
+                { field: 'produto', label: 'Produto', type: 'text', required: true, placeholder: 'Nome do produto' },
+                { field: 'quantidade', label: 'Quantidade', type: 'number', required: true, min: 0, step: 1 },
+                { field: 'unidade', label: 'Unidade', type: 'select', required: true,
+                  options: ['kg', 'g', 'L', 'mL', 'unidade', 'caixa'] },
+                { field: 'observacoes', label: 'Observações', type: 'text', placeholder: 'Informações adicionais' }
+            ],
+            allowPaste: true,
+            allowExport: true,
+            zebra: true,
+            storageKey: 'pmo_produtos_example'
+        });
+
+        // Exemplo 2: Tabela de Fornecedores
+        const tableFornecedores = new PMOTable('tableFornecedores', {
+            minRows: 1,
+            maxRows: 20,
+            columns: [
+                { field: 'razao_social', label: 'Razão Social', type: 'text', required: true,
+                  placeholder: 'Nome da empresa' },
+                { field: 'cnpj', label: 'CNPJ', type: 'text', required: true,
+                  placeholder: '00.000.000/0000-00', mask: 'cnpj' },
+                { field: 'telefone', label: 'Telefone', type: 'tel',
+                  placeholder: '(00) 00000-0000', mask: 'telefone' },
+                { field: 'email', label: 'E-mail', type: 'email', placeholder: 'email@exemplo.com' },
+                { field: 'status', label: 'Status', type: 'select', required: true,
+                  options: [
+                      { value: 'ativo', label: 'Ativo' },
+                      { value: 'inativo', label: 'Inativo' },
+                      { value: 'pendente', label: 'Pendente' }
+                  ]
+                }
+            ],
+            allowPaste: true,
+            allowExport: true,
+            zebra: true,
+            storageKey: 'pmo_fornecedores_example'
+        });
+
+        // Exemplo 3: Tabela de Atividades
+        const tableAtividades = new PMOTable('tableAtividades', {
+            minRows: 2,
+            maxRows: 100,
+            columns: [
+                { field: 'data_inicio', label: 'Data Início', type: 'date', required: true },
+                { field: 'data_fim', label: 'Data Fim', type: 'date', required: true },
+                { field: 'atividade', label: 'Atividade', type: 'select', required: true,
+                  options: [
+                      'Preparo do solo',
+                      'Plantio',
+                      'Tratos culturais',
+                      'Colheita',
+                      'Adubação orgânica',
+                      'Controle biológico',
+                      'Irrigação',
+                      'Capina manual'
+                  ]
+                },
+                { field: 'area_ha', label: 'Área (ha)', type: 'number', required: true,
+                  min: 0, step: 0.01, placeholder: '0.00' },
+                { field: 'descricao', label: 'Descrição', type: 'textarea', rows: 2,
+                  placeholder: 'Descreva a atividade realizada' }
+            ],
+            allowPaste: true,
+            allowExport: true,
+            zebra: true,
+            storageKey: 'pmo_atividades_example',
+            onRowAdd: (row, index, data) => {
+                console.log('✓ Linha adicionada:', index, data);
+            },
+            onPaste: (parsed, addedCount, errorCount) => {
+                console.log(`✓ Dados colados: ${addedCount} linhas, ${errorCount} erros`);
+            }
+        });
+
+        // Log de eventos para debug
+        console.log('✓ PMOTable examples loaded');
+        console.log('Tabelas disponíveis:', {
+            tableProdutos,
+            tableFornecedores,
+            tableAtividades
+        });
+    </script>
+</body>
+</html>

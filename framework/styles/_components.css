@@ -1,6 +1,6 @@
 /**
- * PMO Framework - Componentes Reutilizáveis
- * Versão: 1.0.0
+ * PMO Framework - Componentes Reutilizï¿½veis
+ * Versï¿½o: 1.0.0
  */
 
 /* ===== CONTAINER ===== */
@@ -99,7 +99,7 @@
     }
 }
 
-/* ===== CAMPOS DE FORMULÁRIO ===== */
+/* ===== CAMPOS DE FORMULï¿½RIO ===== */
 .field-wrapper {
     margin-bottom: var(--spacing-md);
 }
@@ -158,7 +158,7 @@ textarea {
     resize: vertical;
 }
 
-/* Estados de validação */
+/* Estados de validaï¿½ï¿½o */
 .field-valid {
     border-left: 3px solid var(--success) !important;
 }
@@ -227,7 +227,7 @@ textarea {
     cursor: pointer;
 }
 
-/* ===== BOTÕES ===== */
+/* ===== BOTï¿½ES ===== */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -314,7 +314,7 @@ textarea {
     color: var(--white);
 }
 
-/* Tamanhos de botões */
+/* Tamanhos de botï¿½es */
 .btn-sm {
     padding: var(--spacing-xs) var(--spacing-md);
     font-size: var(--text-sm);
@@ -325,7 +325,7 @@ textarea {
     font-size: var(--text-lg);
 }
 
-/* ===== TABELAS DINÂMICAS ===== */
+/* ===== TABELAS DINï¿½MICAS ===== */
 .table-wrapper {
     overflow-x: auto;
     margin: var(--spacing-md) 0;
@@ -720,5 +720,350 @@ textarea {
 .card-footer {
     margin-top: var(--spacing-md);
     padding-top: var(--spacing-md);
+}
+
+/* ===== PMO TABLE - TABELAS DINÃ‚MICAS COM CLIPBOARD ===== */
+.pmo-table-wrapper {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    margin: var(--spacing-md) 0;
+}
+
+.pmo-table-toolbar {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-sm);
+    background: var(--gray-50);
+    border-radius: var(--radius-md);
+    flex-wrap: wrap;
+}
+
+.pmo-table-toolbar .btn {
+    font-size: var(--text-sm);
+    padding: var(--spacing-xs) var(--spacing-md);
+}
+
+.pmo-table-info {
+    margin-left: auto;
+    font-size: var(--text-sm);
+    color: var(--gray-600);
+}
+
+.row-counter strong {
+    color: var(--primary);
+    font-weight: var(--font-bold);
+}
+
+.pmo-table-scroll {
+    overflow-x: auto;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.dynamic-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+}
+
+.dynamic-table thead {
+    background: linear-gradient(135deg, var(--primary-600), var(--primary-500));
+    color: var(--white);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.dynamic-table th {
+    padding: var(--spacing-md);
+    text-align: left;
+    font-weight: var(--font-semibold);
+    font-size: var(--text-sm);
+    white-space: nowrap;
+    border-bottom: 3px solid var(--primary-700);
+}
+
+.dynamic-table th .required {
+    color: var(--error-light);
+    margin-left: var(--spacing-xs);
+}
+
+.dynamic-table th .help-tooltip {
+    display: inline-block;
+    margin-left: var(--spacing-xs);
+    width: 16px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 16px;
+    font-size: 11px;
+    cursor: help;
+}
+
+.dynamic-table tbody tr {
+    transition: background var(--transition-fast);
+}
+
+.dynamic-table tbody tr:hover {
+    background: var(--gray-50);
+}
+
+/* Zebra striping */
+.dynamic-table.zebra tbody tr:nth-child(even) {
+    background: var(--gray-50);
+}
+
+.dynamic-table.zebra tbody tr:nth-child(even):hover {
+    background: var(--gray-100);
+}
+
+.dynamic-table td {
+    padding: var(--spacing-sm);
+    border-bottom: var(--border-width) solid var(--gray-200);
+    vertical-align: middle;
+}
+
+.dynamic-table td .form-control {
+    width: 100%;
+    min-width: 100px;
+    font-size: var(--text-sm);
+}
+
+.dynamic-table td input[type="checkbox"],
+.dynamic-table td input[type="radio"] {
+    width: auto;
+    min-width: auto;
+}
+
+.dynamic-table .action-column {
+    width: 60px;
+    text-align: center;
+}
+
+.dynamic-table .btn-remove-row {
+    padding: var(--spacing-xs);
+    background: transparent;
+    color: var(--error);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.dynamic-table .btn-remove-row:hover:not(:disabled) {
+    background: var(--error);
+    color: var(--white);
+    transform: scale(1.1);
+}
+
+.dynamic-table .btn-remove-row:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* Paste Hint */
+.paste-hint {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--info-light);
+    border-left: 4px solid var(--info);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: var(--info-dark);
+}
+
+/* Paste Dialog */
+.paste-dialog-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-modal);
+    padding: var(--spacing-md);
+}
+
+.paste-dialog {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-2xl);
+    max-width: 700px;
+    width: 100%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.paste-dialog-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-lg);
+    border-bottom: var(--border-width) solid var(--gray-200);
+}
+
+.paste-dialog-header h3 {
+    margin: 0;
+    font-size: var(--text-xl);
+    color: var(--gray-800);
+}
+
+.btn-close-dialog {
+    background: transparent;
+    border: none;
+    font-size: var(--text-3xl);
+    line-height: 1;
+    color: var(--gray-500);
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+}
+
+.btn-close-dialog:hover {
+    background: var(--gray-100);
+    color: var(--gray-900);
+}
+
+.paste-dialog-body {
+    padding: var(--spacing-lg);
+    flex: 1;
+    overflow-y: auto;
+}
+
+.paste-textarea {
+    width: 100%;
+    min-height: 200px;
+    padding: var(--spacing-md);
+    border: 2px solid var(--gray-300);
+    border-radius: var(--radius-md);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    resize: vertical;
+    transition: border-color var(--transition-fast);
+}
+
+.paste-textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.paste-options {
+    display: flex;
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.paste-options label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: var(--text-sm);
+    color: var(--gray-700);
+    cursor: pointer;
+}
+
+.paste-options input[type="radio"] {
+    cursor: pointer;
+}
+
+.paste-preview {
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background: var(--gray-50);
+    border-radius: var(--radius-md);
+    border: var(--border-width) solid var(--gray-200);
+}
+
+.paste-preview.hidden {
+    display: none;
+}
+
+.paste-preview h4 {
+    margin: 0 0 var(--spacing-sm) 0;
+    font-size: var(--text-base);
+    color: var(--gray-700);
+}
+
+.preview-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--spacing-sm);
+    font-size: var(--text-sm);
+}
+
+.preview-table td {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: var(--border-width) solid var(--gray-300);
+    background: var(--white);
+}
+
+.preview-content .info-text {
+    margin-top: var(--spacing-sm);
+    font-size: var(--text-sm);
+    color: var(--info);
+    font-weight: var(--font-medium);
+}
+
+.preview-content .error-text {
+    color: var(--error);
+    font-weight: var(--font-medium);
+}
+
+.paste-dialog-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-lg);
+    border-top: var(--border-width) solid var(--gray-200);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .pmo-table-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .pmo-table-info {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .dynamic-table {
+        font-size: var(--text-xs);
+    }
+
+    .dynamic-table th,
+    .dynamic-table td {
+        padding: var(--spacing-xs);
+    }
+
+    .paste-dialog {
+        max-width: 100%;
+        margin: var(--spacing-sm);
+    }
+
+    .paste-options {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+}
     border-top: var(--border-width) solid var(--gray-200);
 }
