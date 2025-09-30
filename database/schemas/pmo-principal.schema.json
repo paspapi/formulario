@@ -1,0 +1,639 @@
+{
+  "metadata": {
+    "id_produtor": "",
+    "tipo_documento": [],
+    "data_extracao": "",
+    "versao_schema": "1.0",
+    "grupo_spg": "",
+    "status_processamento": "EXTRAIDO"
+  },
+  "dados_gerais": {
+    "identificacao": {
+      "nome_completo": "",
+      "cpf_cnpj": "",
+      "inscricao_estadual": "",
+      "inscricao_municipal": "",
+      "nome_fantasia": "",
+      "nome_unidade_producao": "",
+      "razao_social": ""
+    },
+    "contato": {
+      "telefone": "",
+      "email": "",
+      "endereco": {
+        "endereco_completo": "",
+        "bairro": "",
+        "municipio": "",
+        "uf": "",
+        "cep": "",
+        "coordenadas": {
+          "latitude": 0,
+          "longitude": 0
+        }
+      }
+    },
+    "propriedade": {
+      "posse_terra": "",
+      "area_total_ha": 0,
+      "caf_numero": "",
+      "caf_nao_possui": false,
+      "roteiro_acesso": "",
+      "data_aquisicao_posse": "",
+      "terra_familiar": false
+    },
+    "manejo_organico": {
+      "anos_manejo_organico": 0,
+      "situacao_manejo": "",
+      "comprovacao_manejo": []
+    }
+  },
+  "responsaveis_producao": [
+    {
+      "nome_responsavel": "",
+      "cpf_responsavel": "",
+      "data_nascimento": "",
+      "funcao_responsabilidade": "",
+      "contato_telefone": "",
+      "contato_email": ""
+    }
+  ],
+  "atividades_organicas": {
+    "tipos_producao": [
+      {
+        "tipo_producao": "",
+        "tem_atividade": false,
+        "area_ha": 0
+      }
+    ],
+    "situacao_funcional": [
+      {
+        "tipo_funcionario": "",
+        "quantidade": 0
+      }
+    ]
+  },
+  "historico_culturas": [
+    {
+      "cultura_tipo": "",
+      "data_ultima_aplicacao": "",
+      "insumo_utilizado": "",
+      "ingrediente_ativo": "",
+      "estava_manejo_organico": false,
+      "era_certificado": false
+    }
+  ],
+  "produtos_certificar": [
+    {
+      "produto": "",
+      "variedade": "",
+      "talhao_identificacao": "",
+      "estimativa_producao": "",
+      "periodicidade": "",
+      "peso_kg_und": 0,
+      "origem_muda": "",
+      "origem_semente": "",
+      "tipo_cultivo": ""
+    }
+  ],
+  "preservacao_ambiental": {
+    "areas_preservacao": [
+      {
+        "tipo_area": "",
+        "possui_na_propriedade": false,
+        "esta_preservada": false
+      }
+    ],
+    "geral": {
+      "tecnicas_prevencao_incendios": "",
+      "experiencia_recuperacao_solos": "",
+      "destino_lixo_organico": "",
+      "destino_lixo_nao_organico": "",
+      "destino_esgoto_domestico": "",
+      "periodicidade_analise_agua": "",
+      "possui_car": false,
+      "situacao_car": "",
+      "situacao_reserva_legal": ""
+    }
+  },
+  "recursos_hidricos": [
+    {
+      "uso_agua": "",
+      "origem_agua": "",
+      "risco_contaminacao": "",
+      "nivel_risco": "",
+      "garantia_qualidade": ""
+    }
+  ],
+  "comercializacao": {
+    "canais": [
+      {
+        "tipo_comercializacao": "",
+        "descricao": ""
+      }
+    ],
+    "geral": {
+      "rotulagem": "",
+      "transporte": "",
+      "rastreabilidade": "",
+      "pos_colheita_operacoes": "",
+      "produtos_armazenados": false,
+      "explicacao_armazenagem": "",
+      "previsao_inicio_vendas": "",
+      "comercializa_nao_organicos": false,
+      "separacao_produtos": ""
+    }
+  },
+  "controles_registros": [
+    {
+      "atividade": "",
+      "metodo_controle": ""
+    }
+  ],
+  "producao_subsistencia": {
+    "tipos": [
+      {
+        "tipo_atividade": "",
+        "subtipo_atividade": "",
+        "area_ha": 0
+      }
+    ],
+    "geral": {
+      "possui_producao_subsistencia": false,
+      "usa_insumos_nao_permitidos": false,
+      "risco_contaminacao": "",
+      "manejos_bloqueios": "",
+      "observacoes": ""
+    }
+  },
+  "producao_paralela": {
+    "tipos": [
+      {
+        "tipo_atividade": "",
+        "subtipo_atividade": "",
+        "area_ha": 0
+      }
+    ],
+    "geral": {
+      "possui_producao_paralela": false,
+      "usa_insumos_nao_permitidos": false,
+      "risco_contaminacao": "",
+      "manejos_bloqueios": "",
+      "pretende_conversao_total": false,
+      "tempo_conversao_total": "",
+      "observacoes": ""
+    }
+  },
+  "anexo_vegetal": {
+    "preparo_solo": [
+      {
+        "tipo_preparo": "",
+        "utiliza": false
+      }
+    ],
+    "praticas_conservacionistas": [
+      {
+        "tipo_pratica": "",
+        "descricao_processo": "",
+        "utiliza": false
+      }
+    ],
+    "barreiras_protecao": {
+      "estado_conservacao_barreiras": "",
+      "risco_deriva_agrotoxicos": false,
+      "risco_contaminacao_transgenicos": false,
+      "situacao_formigas": "",
+      "controle_formigas": ""
+    },
+    "adubacao_nutricao": {
+      "sistema_adubacao": "",
+      "utiliza_substrato": false,
+      "prepara_substrato_proprio": false,
+      "compra_substrato_pronto": false,
+      "adquire_substrato_aprovado": false
+    },
+    "substrato_receitas": [
+      {
+        "ingrediente_material": "",
+        "origem": "",
+        "proporcao_percent": 0,
+        "tipo_item": ""
+      }
+    ],
+    "receitas_proprias": [
+      {
+        "nome_receita": "",
+        "ingredientes": "",
+        "quantidade_dose_frequencia": "",
+        "cultura_talhao": "",
+        "ja_usa_pretende": ""
+      }
+    ],
+    "produtos_comerciais": [
+      {
+        "marca_nome_comercial": "",
+        "substancia_ativa": "",
+        "fabricante": "",
+        "finalidade": "",
+        "culturas_alvo": "",
+        "ja_usa_pretende": ""
+      }
+    ],
+    "equipamentos": {
+      "usa_equipamento_terceiro": false,
+      "empresta_equipamento": false,
+      "equipamentos_nao_compartilhados": false,
+      "faz_higienizacao": false,
+      "condicoes_armazenamento": ""
+    },
+    "produtos_nao_certificar": [
+      {
+        "produto": "",
+        "talhao_area": "",
+        "origem_muda": "",
+        "origem_semente": "",
+        "tipo_cultivo": ""
+      }
+    ]
+  },
+  "anexo_cogumelos": {
+    "tipos_cogumelos": [
+      {
+        "tipo_cogumelo": "",
+        "origem_semente": "",
+        "origem_substrato": "",
+        "estimativa_producao_anual_kg": 0,
+        "area_cultivada_m2": 0
+      }
+    ],
+    "substrato_materiais": [
+      {
+        "material": "",
+        "origem_proprio_comprado": "",
+        "tipo_organico_convencional": "",
+        "risco_transgenicos": "",
+        "proporcao_percent": 0
+      }
+    ],
+    "tratamento_solo_madeira": {
+      "utiliza_solo": false,
+      "origem_solo": "",
+      "solo_recebe_tratamento": false,
+      "origem_madeira": "",
+      "madeira_sem_tratamento_quimico": false,
+      "utiliza_toras": false,
+      "origem_toras": "",
+      "toras_sem_tratamento_quimico": false,
+      "utiliza_lenha_vapor": false,
+      "origem_lenha": "",
+      "lenha_sem_tratamento_quimico": false,
+      "nao_usa_radiacao_ionizante": false
+    },
+    "tratamento_solo_produtos": [
+      {
+        "produto": "",
+        "marca_comercial": "",
+        "ingrediente_ativo": "",
+        "fabricante": "",
+        "ja_usa_pretende": ""
+      }
+    ],
+    "inoculo": {
+      "origem_inoculos": "",
+      "inoculo_nao_transgenico": false,
+      "possui_analise_metais_pesados": false,
+      "valores_acordo_portaria": false,
+      "analise_realizada_por": "",
+      "ciente_nova_analise_fornecedor": false
+    },
+    "controle_pragas": [
+      {
+        "praga": "",
+        "pratica_utilizada": "",
+        "substancia_utilizada": "",
+        "origem_fabricante": ""
+      }
+    ],
+    "residuos": {
+      "destino_substrato": "",
+      "destino_chorume": ""
+    },
+    "equipamentos": {
+      "usa_equipamento_terceiro": false,
+      "empresta_equipamento": false,
+      "equipamentos_nao_compartilhados": false,
+      "faz_higienizacao": false,
+      "condicoes_armazenamento": ""
+    }
+  },
+  "anexo_animal": {
+    "inspecao_sanitaria": {
+      "possui_inspecao_sanitaria": false,
+      "detalhes_inspecao": ""
+    },
+    "especies_criadas": [
+      {
+        "especie": "",
+        "area_utilizada_ha": 0,
+        "subsistencia_tendencia": false,
+        "estimacao": 0,
+        "fins_comerciais": false
+      }
+    ],
+    "alimentacao": [
+      {
+        "tipo_alimento": "",
+        "producao_propria": false,
+        "compra_fora": false,
+        "fabricante": "",
+        "percent_organico": 0,
+        "percent_nao_organico": 0,
+        "especies_alvo": ""
+      }
+    ],
+    "ingredientes_racao": [
+      {
+        "ingrediente": "",
+        "percent_organico": 0,
+        "percent_nao_organico": 0
+      }
+    ],
+    "tipos_forragem": [
+      {
+        "tipo_forragem": "",
+        "especificacao_forragem": ""
+      }
+    ],
+    "plano_alimentacao_anual": [
+      {
+        "tipo_alimento": "",
+        "mes": "",
+        "utiliza_mes": false
+      }
+    ],
+    "bem_estar": [
+      {
+        "pratica_bem_estar": "",
+        "descricao_pratica": ""
+      }
+    ],
+    "manejo_sanidade": [
+      {
+        "metodo_controle": "",
+        "especificacao_metodo": ""
+      }
+    ],
+    "tratamentos": [
+      {
+        "especie_alvo": "",
+        "doenca": "",
+        "tratamento_produto": "",
+        "fabricante": "",
+        "origem": "",
+        "condicao_epoca_uso": ""
+      }
+    ],
+    "vacinas": [
+      {
+        "vacina_utilizada": ""
+      }
+    ],
+    "origem_reproducao": [
+      {
+        "origem_animais": "",
+        "metodo_reproducao": ""
+      }
+    ],
+    "manejo_esterco": [
+      {
+        "metodo_manejo": "",
+        "descricao_metodo": ""
+      }
+    ],
+    "instalacoes": [
+      {
+        "tipo_instalacao": "",
+        "tamanho_m2": 0,
+        "lotacao_m2": 0,
+        "permanencia_horas_dia": 0,
+        "limpeza": ""
+      }
+    ],
+    "evolucao_plantel": [
+      {
+        "tipo_animal": "",
+        "numero_atual": 0,
+        "em_1_ano": 0,
+        "em_3_anos": 0,
+        "em_5_anos": 0
+      }
+    ],
+    "equipamentos": {
+      "usa_equipamento_terceiro": false,
+      "empresta_equipamento": false,
+      "faz_higienizacao": false,
+      "condicoes_armazenamento": ""
+    }
+  },
+  "anexo_apicultura": {
+    "geral": {
+      "tipo_abelha": "",
+      "modalidade": "",
+      "origem_ceras": "",
+      "origem_abelhas": "",
+      "estimativa_producao_anual_kg": 0,
+      "area_criacao_m2_ha": 0
+    },
+    "floradas": [
+      {
+        "nome_florada": "",
+        "periodo_floracao": ""
+      }
+    ],
+    "distancias_areas": [
+      {
+        "tipo_area": "",
+        "distancia_3km": false,
+        "distancia_4km": false,
+        "distancia_5km": false,
+        "distancia_mais_km": false
+      }
+    ],
+    "alimentacao_artificial": {
+      "utiliza_alimentacao_artificial": false,
+      "alimentos_tempo": "",
+      "alimento_permitido_organico": false
+    },
+    "tratamentos": [
+      {
+        "doenca": "",
+        "tratamento_produto_substancia": "",
+        "fabricante": "",
+        "origem": "",
+        "condicao_epoca_uso": ""
+      }
+    ],
+    "equipamentos": {
+      "usa_equipamento_terceiro": false,
+      "empresta_equipamento": false,
+      "equipamentos_nao_compartilhados": false,
+      "faz_higienizacao": false,
+      "condicoes_armazenamento": ""
+    }
+  },
+  "processamento_minimo": {
+    "geral": {
+      "razao_social": "",
+      "cnpj_empresa": "",
+      "inscricao_estadual": "",
+      "inscricao_municipal": "",
+      "endereco_processamento": "",
+      "local_proprio_arrendado": "",
+      "coordenadas": {
+        "latitude": 0,
+        "longitude": 0
+      },
+      "numero_funcionarios": 0
+    },
+    "situacao_legal": [
+      {
+        "documento_legal": "",
+        "possui_documento": false,
+        "numero_documento": "",
+        "situacao_documento": ""
+      }
+    ],
+    "produtos": [
+      {
+        "produto_final": "",
+        "conteudo_processado": "",
+        "expectativa_producao_mensal_kg": 0,
+        "produto_proprio": false,
+        "nome_agricultor_fornecedor": "",
+        "opac_certificou_parceiro": false
+      }
+    ],
+    "etapas_fora_unidade": [
+      {
+        "etapa": "",
+        "local_fora_unidade": "",
+        "alvara_funcionamento": ""
+      }
+    ],
+    "etapas_realizadas": [
+      {
+        "etapa_processo": "",
+        "descricao_etapa": "",
+        "substancias_utilizadas": "",
+        "equipamentos_utilizados": ""
+      }
+    ],
+    "controles": [
+      {
+        "tipo_controle": "",
+        "utiliza_controle": false
+      }
+    ],
+    "higienizacao": [
+      {
+        "marca_nome_comercial": "",
+        "substancia_ativa": "",
+        "fabricante": "",
+        "quando_usar": "",
+        "ja_usa_pretende": ""
+      }
+    ],
+    "mao_obra": [
+      {
+        "tipo_funcionario": "",
+        "quantidade_funcionarios": 0
+      }
+    ]
+  },
+  "processamento_industrial": {
+    "geral": {
+      "razao_social": "",
+      "cnpj_empresa": "",
+      "escopo_origem_animal": false,
+      "escopo_origem_vegetal": false,
+      "endereco_processamento": "",
+      "coordenadas": {
+        "latitude": 0,
+        "longitude": 0
+      },
+      "numero_funcionarios": 0
+    },
+    "situacao_legal": [
+      {
+        "documento_legal": "",
+        "possui_documento": false,
+        "numero_documento": "",
+        "situacao_documento": ""
+      }
+    ],
+    "fornecedores": [
+      {
+        "ingrediente": "",
+        "nome_fornecedor": "",
+        "quantidade_mensal_kg": 0
+      }
+    ],
+    "produtos": [
+      {
+        "produto_final": "",
+        "ingredientes_organicos": "",
+        "percent_organicos": 0,
+        "ingredientes_nao_organicos": "",
+        "percent_nao_organicos": 0,
+        "expectativa_producao_mensal": 0,
+        "tipo_produto": ""
+      }
+    ],
+    "produtos_nao_organicos": [
+      {
+        "produto_final": "",
+        "ingredientes": "",
+        "expectativa_producao_mensal": 0
+      }
+    ],
+    "outros_produtos": [
+      {
+        "tipo_produto": "",
+        "identificacao_nome": "",
+        "organico": false
+      }
+    ],
+    "producao_paralela": [
+      {
+        "etapa_processamento": "",
+        "como_evita_contaminacao": ""
+      }
+    ],
+    "higienizacao": [
+      {
+        "marca_nome_comercial": "",
+        "substancia_ativa": "",
+        "fabricante": "",
+        "quando_usar": "",
+        "ja_usa_pretende": ""
+      }
+    ],
+    "comercializacao": [
+      {
+        "tipo_comercializacao": "",
+        "descricao": ""
+      }
+    ],
+    "controles": [
+      {
+        "atividade_controle": "",
+        "metodo_controle": ""
+      }
+    ],
+    "mao_obra": [
+      {
+        "tipo_funcionario": "",
+        "quantidade_funcionarios": 0
+      }
+    ]
+  }
+}

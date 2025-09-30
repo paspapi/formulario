@@ -1,0 +1,641 @@
+{
+  "metadata": {
+    "id_produtor": "",
+    "tipo_documento": "ANEXO_III_ANIMAL",
+    "data_extracao": "",
+    "versao_schema": "1.0",
+    "grupo_spg": "",
+    "status_processamento": "EXTRAIDO",
+    "vinculo_pmo_principal": ""
+  },
+  
+  "identificacao_produtor": {
+    "nome_fornecedor": "",
+    "nome_unidade_producao": "",
+    "data_preenchimento": ""
+  },
+  
+  "inspecao_sanitaria": {
+    "possui_inspecao_sanitaria": false,
+    "tipo_inspecao": "",
+    "orgao_responsavel": "",
+    "numero_registro": "",
+    "data_validade": "",
+    "detalhes_inspecao": ""
+  },
+  
+  "especies_criadas": [
+    {
+      "especie": "",
+      "raca_linhagem": "",
+      "area_utilizada_ha": 0,
+      "numero_animais_atual": 0,
+      "finalidade": {
+        "subsistencia": false,
+        "comercial": false,
+        "estimacao": false,
+        "trabalho": false,
+        "reproducao": false
+      },
+      "sistema_criacao": "",
+      "densidade_animais": 0,
+      "em_transicao_organica": false,
+      "tempo_transicao_meses": 0
+    }
+  ],
+  
+  "alimentacao": {
+    "plano_alimentar": [
+      {
+        "tipo_alimento": "",
+        "especies_alvo": [],
+        "origem": {
+          "producao_propria": false,
+          "compra_externa": false,
+          "fabricante_fornecedor": ""
+        },
+        "composicao": {
+          "percent_organico": 0,
+          "percent_nao_organico": 0,
+          "percent_mineral": 0
+        },
+        "quantidade_mensal_kg": 0,
+        "frequencia_fornecimento": ""
+      }
+    ],
+    
+    "ingredientes_racao": [
+      {
+        "ingrediente": "",
+        "origem": "",
+        "tipo_organico_convencional": "",
+        "risco_transgenico": false,
+        "percent_composicao": 0,
+        "fornecedor": ""
+      }
+    ],
+    
+    "pastagem": {
+      "possui_area_pastagem": false,
+      "area_total_ha": 0,
+      "tipos_forrageiras": [],
+      "sistema_pastejo": "",
+      "rotacao_pastos": false,
+      "periodo_descanso_dias": 0,
+      "adubacao_pastagem": "",
+      "controle_invasoras": ""
+    },
+    
+    "forragens_conservadas": [
+      {
+        "tipo_forragem": "",
+        "especificacao": "",
+        "origem": "",
+        "volume_armazenado_kg": 0,
+        "periodo_uso": ""
+      }
+    ],
+    
+    "suplementacao": {
+      "minerais_vitaminas": [
+        {
+          "produto": "",
+          "marca": "",
+          "composicao": "",
+          "especies_alvo": [],
+          "forma_fornecimento": "",
+          "quantidade_dose": ""
+        }
+      ],
+      
+      "concentrados": [
+        {
+          "tipo": "",
+          "composicao": "",
+          "fabricante": "",
+          "especies_alvo": [],
+          "quantidade_dia_kg": 0
+        }
+      ]
+    },
+    
+    "plano_anual_alimentacao": {
+      "janeiro": [],
+      "fevereiro": [],
+      "marco": [],
+      "abril": [],
+      "maio": [],
+      "junho": [],
+      "julho": [],
+      "agosto": [],
+      "setembro": [],
+      "outubro": [],
+      "novembro": [],
+      "dezembro": []
+    }
+  },
+  
+  "bem_estar_animal": {
+    "praticas_implementadas": [
+      {
+        "pratica": "",
+        "descricao_implementacao": "",
+        "especies_beneficiadas": [],
+        "frequencia_avaliacao": ""
+      }
+    ],
+    
+    "condicoes_fornecidas": {
+      "agua_qualidade_abundante": false,
+      "alimento_farto_qualidade": false,
+      "instalacoes_adequadas": false,
+      "lotacao_adequada": false,
+      "areas_sombreamento": false,
+      "acesso_areas_abertas": false,
+      "acesso_pastagem": false,
+      "enriquecimento_ambiental": false,
+      "manejo_adequado_cama": false
+    },
+    
+    "espaco_movimentacao": {
+      "densidade_maxima_respeitada": false,
+      "area_minima_por_animal_m2": 0,
+      "tempo_confinamento_horas_dia": 0
+    },
+    
+    "observacoes_bem_estar": ""
+  },
+  
+  "manejo_sanitario": {
+    "prevencao_doencas": [
+      {
+        "metodo_preventivo": "",
+        "especificacao": "",
+        "especies_alvo": [],
+        "frequencia_aplicacao": ""
+      }
+    ],
+    
+    "controle_parasitas": {
+      "endoparasitas": [
+        {
+          "metodo_controle": "",
+          "produto_utilizado": "",
+          "principio_ativo": "",
+          "fabricante": "",
+          "especies_alvo": [],
+          "frequencia_aplicacao": "",
+          "periodo_carencia_dias": 0
+        }
+      ],
+      
+      "ectoparasitas": [
+        {
+          "metodo_controle": "",
+          "produto_utilizado": "",
+          "principio_ativo": "",
+          "fabricante": "",
+          "especies_alvo": [],
+          "frequencia_aplicacao": "",
+          "periodo_carencia_dias": 0
+        }
+      ]
+    },
+    
+    "tratamentos_curativos": [
+      {
+        "especie_animal": "",
+        "doenca_enfermidade": "",
+        "tratamento_produto": "",
+        "marca_comercial": "",
+        "substancia_ativa": "",
+        "fabricante": "",
+        "via_administracao": "",
+        "dosagem": "",
+        "periodo_carencia_dias": 0,
+        "condicao_epoca_uso": "",
+        "registros_tratamento": false
+      }
+    ],
+    
+    "medicamentos_permitidos": [
+      {
+        "medicamento": "",
+        "tipo": "",
+        "finalidade": "",
+        "especies_aplicaveis": [],
+        "em_estoque": false
+      }
+    ],
+    
+    "fitoterapia_homeopatia": {
+      "utiliza_fitoterapicos": false,
+      "plantas_utilizadas": [],
+      "preparacoes": [],
+      
+      "utiliza_homeopatia": false,
+      "medicamentos_homeopaticos": [],
+      "frequencia_uso": ""
+    }
+  },
+  
+  "vacinacao": {
+    "programa_vacinacao": [
+      {
+        "vacina": "",
+        "especies_alvo": [],
+        "obrigatoria": false,
+        "calendario_aplicacao": "",
+        "fabricante": "",
+        "registros_atualizados": false
+      }
+    ]
+  },
+  
+  "reproducao": {
+    "origem_animais": [
+      {
+        "especie": "",
+        "origem": "",
+        "tipo_origem": "",
+        "idade_entrada_rebanho": "",
+        "documentacao": false
+      }
+    ],
+    
+    "metodos_reproducao": [
+      {
+        "especie": "",
+        "metodo": "",
+        "taxa_sucesso_percent": 0,
+        "observacoes": ""
+      }
+    ],
+    
+    "selecao_genetica": {
+      "criterios_selecao": [],
+      "objetivo_melhoramento": "",
+      "registro_genealogico": false
+    },
+    
+    "reproducao_artificial": {
+      "utiliza": false,
+      "tipo": "",
+      "origem_semen": "",
+      "certificacao_organica_semen": false
+    }
+  },
+  
+  "manejo_esterco_residuos": {
+    "sistemas_manejo": [
+      {
+        "metodo": "",
+        "descricao_processo": "",
+        "volume_mensal_estimado_kg": 0,
+        "tempo_maturacao": ""
+      }
+    ],
+    
+    "destinacao": {
+      "uso_proprio_adubacao": false,
+      "comercializacao": false,
+      "doacao": false,
+      "outro": ""
+    },
+    
+    "armazenamento": {
+      "local_adequado": false,
+      "cobertura": false,
+      "impermeabilizacao": false,
+      "drenagem_chorume": false
+    },
+    
+    "compostagem": {
+      "realiza_compostagem": false,
+      "metodo_compostagem": "",
+      "materiais_adicionados": [],
+      "tempo_processo_dias": 0,
+      "temperatura_processo": "",
+      "qualidade_final": ""
+    },
+    
+    "biodigestor": {
+      "utiliza_biodigestor": false,
+      "capacidade_m3": 0,
+      "biofertilizante_produzido": false,
+      "biogas_utilizado": false,
+      "finalidade_biogas": ""
+    }
+  },
+  
+  "instalacoes_animais": [
+    {
+      "tipo_instalacao": "",
+      "especies_alojadas": [],
+      "tamanho_total_m2": 0,
+      "capacidade_maxima_animais": 0,
+      "lotacao_atual": 0,
+      "densidade_m2_por_animal": 0,
+      "material_construcao": "",
+      "tipo_piso": "",
+      "tipo_cobertura": "",
+      "ventilacao": "",
+      "iluminacao_natural": false,
+      "iluminacao_artificial": false,
+      "sistema_climatizacao": false,
+      "permanencia_animais_horas_dia": 0,
+      "tipo_cama": "",
+      "frequencia_troca_cama": "",
+      "destino_cama_usada": "",
+      "limpeza_desinfeccao": "",
+      "frequencia_limpeza": "",
+      "produtos_limpeza": "",
+      "estado_conservacao": "",
+      "conformidade_bem_estar": false,
+      "observacoes": ""
+    }
+  ],
+  
+  "areas_externas": {
+    "piquetes_paddocks": [
+      {
+        "identificacao": "",
+        "area_ha": 0,
+        "especies_utilizadoras": [],
+        "tipo_cobertura_vegetal": "",
+        "sombreamento_natural": false,
+        "bebedouros": 0,
+        "cochos_comedouros": 0,
+        "estado_conservacao": ""
+      }
+    ],
+    
+    "areas_exercicio": {
+      "possui_areas_livres": false,
+      "area_total_m2": 0,
+      "tempo_acesso_diario_horas": 0
+    }
+  },
+  
+  "evolucao_plantel": {
+    "projecoes": [
+      {
+        "tipo_animal": "",
+        "numero_atual": 0,
+        "projecao_1_ano": 0,
+        "projecao_3_anos": 0,
+        "projecao_5_anos": 0,
+        "estrategia_crescimento": ""
+      }
+    ],
+    
+    "metas_producao": {
+      "leite_litros_ano": 0,
+      "carne_kg_ano": 0,
+      "ovos_duzias_ano": 0,
+      "la_kg_ano": 0,
+      "mel_kg_ano": 0,
+      "outros": ""
+    }
+  },
+  
+  "producao_animais": {
+    "produtos_comercializados": [
+      {
+        "produto": "",
+        "especie_origem": "",
+        "volume_mensal": 0,
+        "unidade_medida": "",
+        "periodo_producao": "",
+        "destinacao": "",
+        "valor_medio_un": 0
+      }
+    ],
+    
+    "processamento_produtos": {
+      "realiza_processamento": false,
+      "produtos_processados": [],
+      "local_processamento": "",
+      "possui_autorizacao_sanitaria": false
+    }
+  },
+  
+  "transporte_animais": {
+    "realiza_transporte": false,
+    
+    "condicoes_transporte": {
+      "veiculo_adequado": false,
+      "densidade_adequada": false,
+      "tempo_maximo_transporte": "",
+      "fornecimento_agua": false,
+      "protecao_intemperies": false,
+      "manejo_embarque_desembarque": ""
+    },
+    
+    "destinos_transporte": []
+  },
+  
+  "abate": {
+    "realiza_abate_propriedade": false,
+    
+    "detalhes_abate": {
+      "local_abate": "",
+      "possui_autorizacao": false,
+      "numero_autorizacao": "",
+      "metodo_abate": "",
+      "atende_bem_estar": false,
+      "destino_subprodutos": ""
+    },
+    
+    "abate_externo": {
+      "estabelecimento": "",
+      "tipo_inspecao": "",
+      "distancia_km": 0,
+      "frequencia_mensal": 0
+    }
+  },
+  
+  "animais_trabalho_companhia": {
+    "possui_animais_nao_comerciais": false,
+    
+    "animais": [
+      {
+        "tipo_animal": "",
+        "finalidade": "",
+        "quantidade": 0,
+        "manejo_alimentacao": "",
+        "manejo_sanitario": "",
+        "area_acesso": "",
+        "observacoes": ""
+      }
+    ]
+  },
+  
+  "rastreabilidade_registros": {
+    "sistema_identificacao": {
+      "metodo_identificacao": "",
+      "rastreabilidade_individual": false,
+      "rastreabilidade_lote": false
+    },
+    
+    "registros_mantidos": {
+      "nascimentos": false,
+      "mortes": false,
+      "tratamentos_veterinarios": false,
+      "vacinacoes": false,
+      "alimentacao": false,
+      "producao": false,
+      "movimentacao_animais": false,
+      "reproducao": false
+    },
+    
+    "metodo_registro": "",
+    "periodo_retencao_anos": 0
+  },
+  
+  "equipamentos_ferramentas": {
+    "lista_equipamentos": [
+      {
+        "equipamento": "",
+        "finalidade": "",
+        "quantidade": 0,
+        "estado_conservacao": "",
+        "periodicidade_manutencao": ""
+      }
+    ],
+    
+    "compartilhamento": {
+      "usa_equipamento_terceiro": false,
+      "empresta_equipamento": false,
+      "faz_higienizacao": false,
+      "produtos_higienizacao_utilizados": ""
+    },
+    
+    "armazenamento": {
+      "condicoes_armazenamento": "",
+      "separacao_produtos_proibidos": false,
+      "baixo_risco_acidentes": false,
+      "controle_acesso": false,
+      "acessivel_visitacao": false
+    }
+  },
+  
+  "agua_utilizada": {
+    "fontes_agua": [
+      {
+        "origem": "",
+        "uso": "",
+        "tratamento": "",
+        "qualidade": "",
+        "disponibilidade": ""
+      }
+    ],
+    
+    "analise_agua": {
+      "possui_analise": false,
+      "data_analise": "",
+      "laboratorio": "",
+      "parametros_conformes": false,
+      "periodicidade_analise": ""
+    }
+  },
+  
+  "gestao_ambiental": {
+    "impactos_ambientais": {
+      "controle_erosao": false,
+      "protecao_nascentes": false,
+      "preservacao_matas_ciliares": false,
+      "manejo_adequado_residuos": false,
+      "uso_racional_agua": false
+    },
+    
+    "areas_preservacao": {
+      "possui_reserva_legal": false,
+      "area_reserva_ha": 0,
+      "possui_app": false,
+      "area_app_ha": 0,
+      "estado_conservacao": ""
+    }
+  },
+  
+  "mao_obra": {
+    "situacao_funcional": [
+      {
+        "tipo_funcionario": "",
+        "quantidade": 0,
+        "funcao_principal": "",
+        "capacitacao_producao_organica": false,
+        "equipamentos_protecao": false
+      }
+    ],
+    
+    "capacitacao": {
+      "programa_treinamento": false,
+      "temas_abordados": [],
+      "periodicidade": ""
+    }
+  },
+  
+  "producao_paralela": {
+    "possui_criacao_nao_organica": false,
+    
+    "detalhes": {
+      "especies_nao_organicas": [],
+      "area_destinada_ha": 0,
+      "separacao_fisica": false,
+      "separacao_temporal": false,
+      "risco_contaminacao": "",
+      "medidas_prevencao": "",
+      "pretende_conversao": false,
+      "prazo_conversao": ""
+    }
+  },
+  
+  "certificacao_producao": {
+    "pretende_certificar_organico": false,
+    "especies_certificacao": [],
+    "produtos_certificacao": [],
+    "tempo_transicao_necessario": ""
+  },
+  
+  "informacoes_complementares": {
+    "especificidades_criacao": "",
+    "diferenciais_producao": "",
+    "desafios_enfrentados": "",
+    "melhorias_planejadas": "",
+    "observacoes_gerais": ""
+  },
+  
+  "declaracoes_produtor": {
+    "conhece_legislacao_organica": false,
+    "cumpre_normas_bem_estar": false,
+    "nao_usa_hormonios_crescimento": false,
+    "nao_usa_antibioticos_preventivos": false,
+    "nao_usa_urea_sintetica": false,
+    "nao_usa_organismos_transgenicos": false,
+    "respeita_periodo_carencia": false,
+    "mantem_registros_atualizados": false,
+    "autoriza_visitas_verificacao": false,
+    "declara_veracidade_informacoes": false
+  },
+  
+  "assinatura": {
+    "nome_completo_produtor": "",
+    "cpf_produtor": "",
+    "grupo_spg_anc": "",
+    "data_elaboracao_pmo": "",
+    "assinatura_digital": ""
+  },
+  
+  "anexos_documentos": {
+    "fotos_instalacoes": [],
+    "fotos_animais": [],
+    "registros_vacinacao": [],
+    "registros_tratamentos": [],
+    "analises_agua": [],
+    "autorizacoes_sanitarias": [],
+    "notas_fiscais_insumos": [],
+    "guias_transporte_animal": [],
+    "outros_documentos": []
+  }
+}

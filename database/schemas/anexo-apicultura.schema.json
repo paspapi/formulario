@@ -1,0 +1,697 @@
+{
+  "metadata": {
+    "id_produtor": "",
+    "tipo_documento": "ANEXO_IV_APICULTURA",
+    "data_extracao": "",
+    "versao_schema": "1.0",
+    "grupo_spg": "",
+    "status_processamento": "EXTRAIDO",
+    "vinculo_pmo_principal": ""
+  },
+  
+  "identificacao_produtor": {
+    "nome_fornecedor": "",
+    "nome_unidade_producao": "",
+    "data_preenchimento": ""
+  },
+  
+  "caracterizacao_apicultura": {
+    "tipo_abelha": "",
+    "tipo_abelha_especifico": "",
+    "modalidade": "",
+    "anos_experiencia": 0,
+    "registro_apicultor": "",
+    "associacao_cooperativa": ""
+  },
+  
+  "apiarios": [
+    {
+      "identificacao_apiario": "",
+      "localizacao": {
+        "endereco_completo": "",
+        "coordenadas_lat": 0,
+        "coordenadas_lon": 0,
+        "altitude_metros": 0,
+        "acesso": ""
+      },
+      "numero_colmeias": 0,
+      "tipo_colmeia": "",
+      "modelo_colmeia": "",
+      "capacidade_maxima": 0,
+      "densidade_colmeias_ha": 0,
+      "distancia_minima_residencias_m": 0,
+      "sinalizacao_adequada": false,
+      "cerca_protecao": false,
+      "sombreamento_natural": false,
+      "fonte_agua_proxima": false,
+      "distancia_fonte_agua_m": 0,
+      "estado_conservacao": "",
+      "data_instalacao": "",
+      "observacoes": ""
+    }
+  ],
+  
+  "colmeias": {
+    "total_colmeias": 0,
+    "colmeias_producao": 0,
+    "colmeias_nucleos": 0,
+    "colmeias_transicao": 0,
+    
+    "especificacoes": [
+      {
+        "tipo_modelo": "",
+        "material_construcao": "",
+        "numero_colmeias": 0,
+        "estado_conservacao": "",
+        "necessita_manutencao": false,
+        "ano_fabricacao": 0,
+        "tratamento_madeira": "",
+        "pintura_externa": false,
+        "tipo_tinta": ""
+      }
+    ],
+    
+    "identificacao": {
+      "metodo_marcacao": "",
+      "numeracao_individual": false,
+      "codigo_apiario": false,
+      "data_instalacao_colmeia": false
+    }
+  },
+  
+  "origem_abelhas": [
+    {
+      "metodo_origem": "",
+      "fonte_especifica": "",
+      "data_aquisicao": "",
+      "quantidade_enxames": 0,
+      "certificacao_origem": false,
+      "quarentena_realizada": false,
+      "periodo_quarentena_dias": 0,
+      "observacoes": ""
+    }
+  ],
+  
+  "ceras": {
+    "origem_ceras": "",
+    "origem_especifica": "",
+    "producao_propria": false,
+    "volume_anual_kg": 0,
+    
+    "ceras_compradas": {
+      "fornecedor": "",
+      "certificacao_organica": false,
+      "analise_residuos": false,
+      "data_ultima_analise": "",
+      "resultado_analise": ""
+    },
+    
+    "renovacao_ceras": {
+      "frequencia_renovacao": "",
+      "percentual_anual": 0,
+      "metodo_fundacao": ""
+    }
+  },
+  
+  "area_forrageamento": {
+    "raio_forrageamento_km": 0,
+    
+    "caracterizacao_vegetacao": {
+      "tipo_predominante": "",
+      "diversidade_floristicas": "",
+      "cobertura_nativa_percent": 0,
+      "areas_cultivadas_percent": 0,
+      "areas_preservacao_percent": 0
+    },
+    
+    "fontes_alimentacao": [
+      {
+        "tipo_fonte": "",
+        "distancia_apiario_km": 0,
+        "area_estimada_ha": 0,
+        "tipo_manejo": "",
+        "uso_agrotoxicos": false,
+        "risco_contaminacao": ""
+      }
+    ]
+  },
+  
+  "floradas": [
+    {
+      "nome_planta": "",
+      "nome_cientifico": "",
+      "tipo_florada": "",
+      "periodo_floracao": "",
+      "mes_inicio": "",
+      "mes_fim": "",
+      "duracao_dias": 0,
+      "abundancia": "",
+      "qualidade_nectar": "",
+      "qualidade_polen": "",
+      "caracteristicas_mel": "",
+      "producao_estimada_kg_colmeia": 0,
+      "importancia": ""
+    }
+  ],
+  
+  "calendario_floradas": {
+    "janeiro": [],
+    "fevereiro": [],
+    "marco": [],
+    "abril": [],
+    "maio": [],
+    "junho": [],
+    "julho": [],
+    "agosto": [],
+    "setembro": [],
+    "outubro": [],
+    "novembro": [],
+    "dezembro": []
+  },
+  
+  "distancias_areas_risco": [
+    {
+      "tipo_area": "",
+      "existe_proximidade": false,
+      "distancia_3km": false,
+      "distancia_4km": false,
+      "distancia_5km": false,
+      "distancia_mais_5km": false,
+      "distancia_exata_km": 0,
+      "nivel_risco": "",
+      "medidas_protecao": ""
+    }
+  ],
+  
+  "areas_convencionais_proximas": {
+    "existem_areas_convencionais": false,
+    
+    "detalhamento": [
+      {
+        "tipo_cultivo": "",
+        "distancia_km": 0,
+        "area_ha": 0,
+        "uso_agrotoxicos": false,
+        "frequencia_aplicacao": "",
+        "periodo_critico": "",
+        "medidas_protecao": "",
+        "comunicacao_proprietario": false
+      }
+    ]
+  },
+  
+  "alimentacao_artificial": {
+    "utiliza_alimentacao_artificial": false,
+    
+    "detalhes_alimentacao": {
+      "periodo_utilizacao": "",
+      "meses_utilizacao": [],
+      "motivo_utilizacao": "",
+      "duracao_dias": 0,
+      
+      "alimentos_utilizados": [
+        {
+          "tipo_alimento": "",
+          "composicao": "",
+          "origem": "",
+          "organico": false,
+          "quantidade_kg_colmeia": 0,
+          "frequencia": "",
+          "metodo_fornecimento": ""
+        }
+      ]
+    },
+    
+    "declaracao_permitido": false,
+    "periodo_sem_producao": false
+  },
+  
+  "manejo_colmeias": {
+    "frequencia_revisao": "",
+    
+    "atividades_manejo": [
+      {
+        "atividade": "",
+        "frequencia": "",
+        "epoca_ano": "",
+        "descricao_procedimento": ""
+      }
+    ],
+    
+    "manejo_rainhas": {
+      "metodo_renovacao": "",
+      "frequencia_renovacao": "",
+      "origem_rainhas": "",
+      "marcacao_rainhas": false,
+      "clipagem_asas": false
+    },
+    
+    "controle_enxameacao": {
+      "metodo": "",
+      "efetividade": ""
+    },
+    
+    "divisao_colmeias": {
+      "realiza_divisao": false,
+      "metodo": "",
+      "epoca": "",
+      "numero_divisoes_ano": 0
+    }
+  },
+  
+  "sanidade_apicola": {
+    "principais_problemas": [
+      {
+        "doenca_praga": "",
+        "frequencia_ocorrencia": "",
+        "nivel_impacto": "",
+        "epoca_maior_incidencia": ""
+      }
+    ],
+    
+    "tratamentos": [
+      {
+        "doenca_praga": "",
+        "tratamento_produto": "",
+        "principio_ativo": "",
+        "marca_comercial": "",
+        "fabricante": "",
+        "origem": "",
+        "dosagem": "",
+        "metodo_aplicacao": "",
+        "condicao_uso": "",
+        "epoca_aplicacao": "",
+        "periodo_carencia_dias": 0,
+        "ja_usa_pretende": "",
+        "permitido_organico": false
+      }
+    ],
+    
+    "medidas_preventivas": {
+      "limpeza_periodica": false,
+      "desinfeccao_equipamentos": false,
+      "quarentena_novos_enxames": false,
+      "monitoramento_regular": false,
+      "renovacao_ceras": false,
+      "descarte_favos_velhos": false,
+      "controle_traça": false,
+      "protecao_predadores": false
+    },
+    
+    "varroase": {
+      "monitoramento": false,
+      "nivel_infestacao": "",
+      "metodo_controle": "",
+      "efetividade": ""
+    }
+  },
+  
+  "colheita_mel": {
+    "numero_colheitas_ano": 0,
+    
+    "colheitas": [
+      {
+        "periodo": "",
+        "mes": "",
+        "numero_colmeias": 0,
+        "producao_total_kg": 0,
+        "producao_media_colmeia_kg": 0,
+        "tipo_mel": "",
+        "florada_predominante": ""
+      }
+    ],
+    
+    "metodo_colheita": {
+      "tipo_equipamento": "",
+      "uso_fumaca": false,
+      "tipo_combustivel_fumaca": "",
+      "uso_repelentes": false,
+      "repelente_utilizado": "",
+      "horario_preferencial": "",
+      "condicoes_climaticas": "",
+      "cuidados_especiais": ""
+    },
+    
+    "transporte_favos": {
+      "tipo_recipiente": "",
+      "tempo_maximo_transporte": "",
+      "protecao_contaminacao": false,
+      "temperatura_transporte": ""
+    }
+  },
+  
+  "processamento_mel": {
+    "local_processamento": "",
+    "tipo_local": "",
+    
+    "casa_mel": {
+      "possui_casa_mel": false,
+      "area_m2": 0,
+      "tipo_construcao": "",
+      "pisos_paredes": "",
+      "telas_janelas": false,
+      "iluminacao": "",
+      "ventilacao": "",
+      "agua_potavel": false,
+      "pia_lavagem": false,
+      "sanitario": false,
+      "area_processamento": false,
+      "area_armazenamento": false,
+      "temperatura_ambiente": "",
+      "umidade_relativa": "",
+      "estado_higiene": "",
+      "possui_licenca_sanitaria": false,
+      "numero_licenca": ""
+    },
+    
+    "equipamentos_processamento": [
+      {
+        "equipamento": "",
+        "material": "",
+        "capacidade": "",
+        "estado_conservacao": "",
+        "frequencia_higienizacao": ""
+      }
+    ],
+    
+    "etapas_processamento": {
+      "desoperculacao": {
+        "metodo": "",
+        "equipamento": ""
+      },
+      "extracao": {
+        "metodo": "",
+        "tipo_extrator": "",
+        "velocidade_rpm": 0
+      },
+      "filtragem": {
+        "numero_filtracoes": 0,
+        "tipo_filtro": "",
+        "mesh_filtro": ""
+      },
+      "decantacao": {
+        "realiza": false,
+        "tempo_horas": 0,
+        "temperatura": ""
+      },
+      "envase": {
+        "tipo_embalagem": "",
+        "material_embalagem": "",
+        "tamanhos_comercializados": [],
+        "rotulagem_conforme": false
+      }
+    },
+    
+    "controle_qualidade": {
+      "analises_realizadas": [],
+      "frequencia_analises": "",
+      "laboratorio": "",
+      "parametros_analisados": [],
+      "conformidade_legislacao": false
+    }
+  },
+  
+  "outros_produtos": {
+    "propolis": {
+      "produz": false,
+      "tipo_coleta": "",
+      "producao_anual_kg": 0,
+      "processamento": "",
+      "comercializacao": ""
+    },
+    
+    "polen": {
+      "produz": false,
+      "tipo_coletador": "",
+      "producao_anual_kg": 0,
+      "secagem": "",
+      "armazenamento": "",
+      "comercializacao": ""
+    },
+    
+    "geleia_real": {
+      "produz": false,
+      "metodo_producao": "",
+      "producao_anual_kg": 0,
+      "armazenamento": "",
+      "comercializacao": ""
+    },
+    
+    "cera": {
+      "produz": false,
+      "producao_anual_kg": 0,
+      "metodo_purificacao": "",
+      "uso_destino": ""
+    },
+    
+    "apitoxina": {
+      "produz": false,
+      "metodo_coleta": "",
+      "producao_anual_g": 0,
+      "destino": ""
+    },
+    
+    "enxames": {
+      "comercializa": false,
+      "numero_anual": 0,
+      "tipo_enxame": "",
+      "certificacao": false
+    }
+  },
+  
+  "producao_estimada": {
+    "mel_kg_ano": 0,
+    "propolis_kg_ano": 0,
+    "polen_kg_ano": 0,
+    "geleia_real_kg_ano": 0,
+    "cera_kg_ano": 0,
+    "enxames_ano": 0,
+    
+    "area_total_apiarios": 0,
+    "unidade_area": ""
+  },
+  
+  "armazenamento": {
+    "local_armazenamento": "",
+    
+    "condicoes": {
+      "temperatura_ideal": false,
+      "umidade_controlada": false,
+      "protecao_luz": false,
+      "ventilacao_adequada": false,
+      "ausencia_odores": false,
+      "recipientes_adequados": false
+    },
+    
+    "tempo_armazenamento": {
+      "mel_meses": 0,
+      "propolis_meses": 0,
+      "polen_meses": 0,
+      "geleia_real_meses": 0
+    },
+    
+    "controle_estoque": {
+      "metodo": "",
+      "rastreabilidade": false
+    }
+  },
+  
+  "comercializacao": {
+    "canais_comercializacao": [
+      {
+        "canal": "",
+        "percentual_vendas": 0,
+        "distancia_media_km": 0,
+        "frequencia": ""
+      }
+    ],
+    
+    "rotulagem": {
+      "possui_rotulo": false,
+      "informacoes_rotulo": [],
+      "selo_organico": false,
+      "selo_sif": false,
+      "conformidade_legislacao": false
+    },
+    
+    "rastreabilidade": {
+      "sistema_rastreabilidade": "",
+      "identificacao_lote": false,
+      "registro_vendas": false
+    },
+    
+    "transporte_produtos": {
+      "metodo_transporte": "",
+      "condicoes_transporte": "",
+      "tempo_maximo_entrega": ""
+    }
+  },
+  
+  "equipamentos_ferramentas": {
+    "equipamentos_apicolas": [
+      {
+        "equipamento": "",
+        "quantidade": 0,
+        "material": "",
+        "estado_conservacao": "",
+        "necessita_substituicao": false
+      }
+    ],
+    
+    "vestimentas_protecao": {
+      "macacoes": 0,
+      "mascaras": 0,
+      "luvas": 0,
+      "botas": 0,
+      "estado_conservacao": ""
+    },
+    
+    "compartilhamento": {
+      "usa_equipamento_terceiro": false,
+      "empresta_equipamento": false,
+      "equipamentos_nao_compartilhados": false,
+      "faz_higienizacao": false,
+      "produtos_higienizacao": ""
+    },
+    
+    "armazenamento_equipamentos": {
+      "local_armazenamento": "",
+      "condicoes_armazenamento": "",
+      "separacao_produtos_proibidos": false,
+      "controle_acesso": false,
+      "acessivel_visitacao": false
+    }
+  },
+  
+  "higienizacao_sanitizacao": {
+    "equipamentos": {
+      "metodo_limpeza": "",
+      "produtos_utilizados": [
+        {
+          "produto": "",
+          "marca": "",
+          "principio_ativo": "",
+          "diluicao": "",
+          "frequencia_uso": ""
+        }
+      ],
+      "frequencia_higienizacao": ""
+    },
+    
+    "colmeias": {
+      "limpeza_interna": false,
+      "frequencia": "",
+      "metodo": "",
+      "desinfeccao": false,
+      "produto_desinfeccao": ""
+    },
+    
+    "casa_mel": {
+      "limpeza_diaria": false,
+      "desinfeccao_semanal": false,
+      "controle_pragas": false,
+      "metodo_controle": ""
+    }
+  },
+  
+  "capacitacao_assistencia": {
+    "capacitacoes_recebidas": [
+      {
+        "tema": "",
+        "instituicao": "",
+        "data": "",
+        "carga_horaria": 0,
+        "certificado": false
+      }
+    ],
+    
+    "assistencia_tecnica": {
+      "recebe_assistencia": false,
+      "instituicao": "",
+      "tecnico_responsavel": "",
+      "frequencia_visitas": ""
+    }
+  },
+  
+  "registros_controles": {
+    "registros_mantidos": {
+      "revisoes_colmeias": false,
+      "producao": false,
+      "tratamentos": false,
+      "alimentacao": false,
+      "divisoes": false,
+      "perdas": false,
+      "comercializacao": false,
+      "clima": false
+    },
+    
+    "metodo_registro": "",
+    "periodo_retencao": ""
+  },
+  
+  "impactos_ambientais": {
+    "beneficios": [
+      {
+        "tipo_beneficio": "",
+        "descricao": ""
+      }
+    ],
+    
+    "medidas_conservacao": {
+      "preservacao_vegetacao_nativa": false,
+      "plantio_especies_atrativas": false,
+      "corredores_ecologicos": false,
+      "educacao_ambiental": false,
+      "nao_uso_fogo": false
+    }
+  },
+  
+  "desafios_perspectivas": {
+    "principais_desafios": [],
+    "perspectivas_futuras": [],
+    "investimentos_planejados": [],
+    "metas_producao": ""
+  },
+  
+  "informacoes_complementares": {
+    "especificidades_producao": "",
+    "diferenciais": "",
+    "observacoes_gerais": ""
+  },
+  
+  "declaracoes_apicultor": {
+    "conhece_legislacao_organica": false,
+    "cumpre_normas_apicolas": false,
+    "nao_usa_antibioticos": false,
+    "nao_usa_produtos_sinteticos": false,
+    "respeita_periodo_carencia": false,
+    "nao_alimenta_durante_fluxo": false,
+    "usa_ceras_organicas": false,
+    "rastreabilidade_completa": false,
+    "autoriza_coleta_amostras": false,
+    "autoriza_visitas_verificacao": false,
+    "declara_veracidade_informacoes": false
+  },
+  
+  "assinatura": {
+    "nome_completo_apicultor": "",
+    "cpf_apicultor": "",
+    "grupo_spg_anc": "",
+    "data_elaboracao_pmo": "",
+    "assinatura_digital": ""
+  },
+  
+  "anexos_documentos": {
+    "fotos_apiarios": [],
+    "fotos_colmeias": [],
+    "fotos_casa_mel": [],
+    "mapa_localizacao_apiarios": [],
+    "analises_mel": [],
+    "analises_residuos": [],
+    "licenca_sanitaria": [],
+    "certificados_capacitacao": [],
+    "notas_fiscais_insumos": [],
+    "registros_producao": [],
+    "outros_documentos": []
+  }
+}

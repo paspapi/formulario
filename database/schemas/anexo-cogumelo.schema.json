@@ -1,0 +1,384 @@
+{
+  "metadata": {
+    "id_produtor": "",
+    "tipo_documento": "ANEXO_II_COGUMELOS",
+    "data_extracao": "",
+    "versao_schema": "1.0",
+    "grupo_spg": "",
+    "status_processamento": "EXTRAIDO",
+    "vinculo_pmo_principal": ""
+  },
+  
+  "identificacao_produtor": {
+    "nome_fornecedor": "",
+    "nome_unidade_producao": "",
+    "data_preenchimento": ""
+  },
+  
+  "tipos_cogumelos": [
+    {
+      "tipo_cogumelo": "",
+      "variedade": "",
+      "origem_semente": "",
+      "origem_substrato": "",
+      "origem_substrato_tipo": "",
+      "estimativa_producao_anual_kg": 0,
+      "area_cultivada_m2": 0,
+      "ciclo_producao": "",
+      "periodo_colheita": ""
+    }
+  ],
+  
+  "substrato": {
+    "utiliza_substrato": false,
+    "producao_propria": false,
+    "compra_pronto": false,
+    
+    "materiais_formulacao": [
+      {
+        "material_ingrediente": "",
+        "origem_proprio_comprado": "",
+        "fornecedor": "",
+        "tipo_organico_convencional": "",
+        "risco_transgenicos": "",
+        "proporcao_percent": 0,
+        "tratamento_recebido": ""
+      }
+    ],
+    
+    "declaracoes": {
+      "possui_declaracao_isencao_transgenicos": false,
+      "possui_analise_metais_pesados": false,
+      "valores_acordo_portaria": false,
+      "analise_realizada_por": "",
+      "ciente_nova_analise_fornecedor": false
+    }
+  },
+  
+  "tratamento_solo": {
+    "utiliza_solo": false,
+    "origem_solo": "",
+    "solo_recebe_tratamento": false,
+    "tipo_tratamento": "",
+    
+    "produtos_tratamento_solo": [
+      {
+        "produto": "",
+        "marca_comercial": "",
+        "ingrediente_ativo": "",
+        "fabricante": "",
+        "finalidade": "",
+        "ja_usa_pretende": ""
+      }
+    ]
+  },
+  
+  "madeira_toras": {
+    "utiliza_madeira": false,
+    "origem_madeira": "",
+    "madeira_sem_tratamento_quimico": false,
+    "madeira_origem_legal": false,
+    
+    "utiliza_toras": false,
+    "origem_toras": "",
+    "toras_sem_tratamento_quimico": false,
+    "toras_origem_legal": false,
+    
+    "utiliza_lenha_vapor": false,
+    "origem_lenha": "",
+    "lenha_sem_tratamento_quimico": false,
+    "lenha_origem_legal": false
+  },
+  
+  "inoculo": {
+    "origem_inoculos": "",
+    "tipo_inoculo": "",
+    "inoculo_nao_transgenico": false,
+    "possui_certificacao": false,
+    "fornecedor_inoculo": "",
+    "lote_inoculo": "",
+    "data_validade": ""
+  },
+  
+  "ambiente_cultivo": {
+    "tipo_instalacao": "",
+    "area_total_m2": 0,
+    "numero_estufas": 0,
+    
+    "controle_ambiental": {
+      "temperatura_min": 0,
+      "temperatura_max": 0,
+      "umidade_relativa_min": 0,
+      "umidade_relativa_max": 0,
+      "ventilacao": "",
+      "iluminacao": "",
+      "sistema_refrigeracao": false,
+      "sistema_aquecimento": false,
+      "sistema_umidificacao": false
+    },
+    
+    "estruturas": [
+      {
+        "tipo_estrutura": "",
+        "quantidade": 0,
+        "capacidade_producao": 0,
+        "material_construcao": "",
+        "estado_conservacao": ""
+      }
+    ]
+  },
+  
+  "controle_pragas_doencas": {
+    "ocorrencias": [
+      {
+        "praga_doenca": "",
+        "pratica_utilizada": "",
+        "substancia_utilizada": "",
+        "marca_comercial": "",
+        "ingrediente_ativo": "",
+        "origem_fabricante": "",
+        "frequencia_aplicacao": "",
+        "eficacia": ""
+      }
+    ],
+    
+    "manejo_preventivo": {
+      "higienizacao_instalacoes": "",
+      "controle_temperatura_umidade": false,
+      "isolamento_lotes_contaminados": false,
+      "descarte_adequado_residuos": false,
+      "monitoramento_regular": false
+    }
+  },
+  
+  "agua_utilizada": {
+    "origem_agua": "",
+    "possui_analise_qualidade": false,
+    "data_ultima_analise": "",
+    "periodicidade_analise": "",
+    "tratamento_agua": "",
+    "uso_agua": ""
+  },
+  
+  "colheita_pos_colheita": {
+    "metodo_colheita": "",
+    "ferramentas_utilizadas": "",
+    "higienizacao_ferramentas": false,
+    
+    "processamento_pos_colheita": {
+      "limpeza": false,
+      "selecao": false,
+      "classificacao": false,
+      "embalagem": false,
+      "refrigeracao": false,
+      "outros_processos": ""
+    },
+    
+    "armazenamento": {
+      "tipo_armazenamento": "",
+      "temperatura_armazenamento": 0,
+      "tempo_maximo_armazenamento": "",
+      "tipo_embalagem": ""
+    }
+  },
+  
+  "residuos_efluentes": {
+    "substrato_utilizado": {
+      "destino_substrato": "",
+      "volume_mensal_kg": 0,
+      "reutilizacao": false,
+      "forma_reutilizacao": ""
+    },
+    
+    "chorume": {
+      "destino_chorume": "",
+      "volume_mensal_litros": 0,
+      "tratamento_chorume": false,
+      "tipo_tratamento": ""
+    },
+    
+    "cogumelos_descartados": {
+      "destino": "",
+      "volume_mensal_kg": 0
+    },
+    
+    "embalagens_insumos": {
+      "destino": "",
+      "tipo_separacao": ""
+    }
+  },
+  
+  "equipamentos_ferramentas": {
+    "lista_equipamentos": [
+      {
+        "equipamento": "",
+        "finalidade": "",
+        "quantidade": 0,
+        "estado_conservacao": ""
+      }
+    ],
+    
+    "compartilhamento": {
+      "usa_equipamento_terceiro": false,
+      "empresta_equipamento": false,
+      "equipamentos_nao_compartilhados": false,
+      "faz_higienizacao": false,
+      "produtos_higienizacao": ""
+    },
+    
+    "armazenamento_equipamentos": {
+      "condicoes_armazenamento": "",
+      "local_especifico": false,
+      "separacao_produtos_proibidos": false,
+      "controle_acesso": false,
+      "acessivel_visitacao": false
+    }
+  },
+  
+  "insumos_utilizados": {
+    "insumos_permitidos": [
+      {
+        "tipo_insumo": "",
+        "marca_nome_comercial": "",
+        "substancia_ativa": "",
+        "fabricante": "",
+        "finalidade": "",
+        "ja_usa_pretende": "",
+        "nota_fiscal": false
+      }
+    ],
+    
+    "declaracoes_insumos": {
+      "todos_insumos_aprovados": false,
+      "possui_rastreabilidade": false,
+      "armazenamento_adequado": false
+    }
+  },
+  
+  "rastreabilidade_registros": {
+    "sistema_rastreabilidade": "",
+    
+    "registros_mantidos": {
+      "compra_insumos": false,
+      "producao_inoculo": false,
+      "preparacao_substrato": false,
+      "inoculacao": false,
+      "desenvolvimento_cogumelos": false,
+      "colheita": false,
+      "pos_colheita": false,
+      "comercializacao": false
+    },
+    
+    "metodo_registro": "",
+    "periodo_retencao_registros": ""
+  },
+  
+  "higienizacao_sanitizacao": {
+    "instalacoes": {
+      "frequencia_higienizacao": "",
+      "produtos_utilizados": [
+        {
+          "produto": "",
+          "marca": "",
+          "principio_ativo": "",
+          "finalidade": "",
+          "diluicao": ""
+        }
+      ]
+    },
+    
+    "equipamentos": {
+      "frequencia_higienizacao": "",
+      "metodo_higienizacao": "",
+      "produtos_utilizados": ""
+    },
+    
+    "controle_pragas_ambiente": {
+      "realiza_desinsetizacao": false,
+      "empresa_responsavel": "",
+      "periodicidade_aplicacao": "",
+      "data_ultima_aplicacao": "",
+      "certificado_aplicacao": false
+    }
+  },
+  
+  "mao_obra": {
+    "situacao_funcional": [
+      {
+        "tipo_funcionario": "",
+        "quantidade": 0,
+        "funcao": "",
+        "treinamento_organico": false
+      }
+    ],
+    
+    "capacitacao": {
+      "funcionarios_capacitados": false,
+      "tipo_capacitacao": "",
+      "periodicidade_treinamentos": ""
+    }
+  },
+  
+  "producao_paralela": {
+    "possui_producao_nao_organica": false,
+    
+    "detalhes_producao_paralela": {
+      "tipo_cogumelo": "",
+      "area_destinada_m2": 0,
+      "separacao_espacial": false,
+      "separacao_temporal": false,
+      "risco_contaminacao": "",
+      "medidas_prevencao": ""
+    }
+  },
+  
+  "certificacao_qualidade": {
+    "certificacoes_adicionais": [],
+    "analises_laboratoriais": [
+      {
+        "tipo_analise": "",
+        "laboratorio": "",
+        "data_analise": "",
+        "resultado": ""
+      }
+    ]
+  },
+  
+  "informacoes_complementares": {
+    "especificidades_producao": "",
+    "diferenciais_produto": "",
+    "desafios_enfrentados": "",
+    "melhorias_planejadas": "",
+    "observacoes_gerais": ""
+  },
+  
+  "declaracoes_produtor": {
+    "nao_usa_radiacao_ionizante": false,
+    "nao_usa_microondas": false,
+    "nao_usa_nanotecnologia": false,
+    "conhece_legislacao_organica": false,
+    "cumpre_normas_organicas": false,
+    "autoriza_visitas_verificacao": false,
+    "aceita_coleta_amostras": false,
+    "declara_veracidade_informacoes": false
+  },
+  
+  "assinatura": {
+    "nome_completo_produtor": "",
+    "cpf_produtor": "",
+    "grupo_spg_anc": "",
+    "data_elaboracao_pmo": "",
+    "assinatura_digital": ""
+  },
+  
+  "anexos_documentos": {
+    "fotos_instalacoes": [],
+    "analises_substrato": [],
+    "analises_agua": [],
+    "certificados_fornecedores": [],
+    "notas_fiscais_insumos": [],
+    "registros_producao": [],
+    "certificado_desinsetizacao": [],
+    "outros_documentos": []
+  }
+}

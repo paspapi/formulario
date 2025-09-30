@@ -1,0 +1,172 @@
+{
+  "metadata": {
+    "id_produtor": "",
+    "tipo_documento": ["ANEXO_I_VEGETAL"],
+    "data_preenchimento": "",
+    "versao_schema": "2.0",
+    "grupo_spg": "",
+    "nome_unidade_producao": "",
+    "status_preenchimento": "EM_ANDAMENTO"
+  },
+
+  "dados_basicos": {
+    "nome_fornecedor": "",
+    "nome_unidade_producao": "",
+    "data_preenchimento": ""
+  },
+
+  "preparo_solo": [
+    {
+      "tipo_preparo": "ROÇADA",
+      "utiliza": false
+    },
+    {
+      "tipo_preparo": "ARAÇÃO",
+      "utiliza": false
+    },
+    {
+      "tipo_preparo": "GRADAGEM",
+      "utiliza": false
+    }
+  ],
+
+  "praticas_conservacionistas": [
+    {
+      "tipo_pratica": "ROTAÇÃO DE CULTURAS",
+      "descricao_processo": "",
+      "utiliza": false
+    },
+    {
+      "tipo_pratica": "ADUBAÇÃO VERDE",
+      "descricao_processo": "",
+      "utiliza": false
+    },
+    {
+      "tipo_pratica": "CONSÓRCIOS",
+      "descricao_processo": "",
+      "utiliza": false
+    },
+    {
+      "tipo_pratica": "QUEBRA-VENTOS/CORTINAS VEGETAIS/FAIXAS/ALEIAS",
+      "descricao_processo": "",
+      "utiliza": false
+    },
+    {
+      "tipo_pratica": "COBERTURA DE SOLO",
+      "descricao_processo": "",
+      "utiliza": false
+    },
+    {
+      "tipo_pratica": "PROTEÇÃO CONTRA EROSÃO",
+      "descricao_processo": "",
+      "utiliza": false
+    },
+    {
+      "tipo_pratica": "MANEJO DO MATO",
+      "descricao_processo": "",
+      "utiliza": false
+    },
+    {
+      "tipo_pratica": "OUTRAS",
+      "descricao_processo": "",
+      "utiliza": false
+    }
+  ],
+
+  "barreiras_protecao": {
+    "estado_conservacao_barreiras": "",
+    "risco_deriva_agrotoxicos": false,
+    "risco_contaminacao_transgenicos": false,
+    "situacao_formigas": "",
+    "controle_formigas": ""
+  },
+
+  "adubacao_nutricao": {
+    "sistema_adubacao": "",
+    "utiliza_substrato": false,
+    "prepara_substrato_proprio": false,
+    "compra_substrato_pronto": false,
+    "adquire_substrato_aprovado": false
+  },
+
+  "substrato_receitas": [
+    {
+      "ingrediente_material": "",
+      "origem": "",
+      "proporcao_percent": 0,
+      "tipo_item": "SUBSTRATO"
+    }
+  ],
+
+  "receitas_proprias": [
+    {
+      "nome_receita": "",
+      "ingredientes": "",
+      "quantidade_dose_frequencia": "",
+      "cultura_talhao": "",
+      "ja_usa_pretende": ""
+    }
+  ],
+
+  "produtos_comerciais": [
+    {
+      "marca_nome_comercial": "",
+      "substancia_ativa": "",
+      "fabricante": "",
+      "finalidade": "",
+      "culturas_alvo": "",
+      "ja_usa_pretende": ""
+    }
+  ],
+
+  "equipamentos": {
+    "usa_equipamento_terceiro": false,
+    "empresta_equipamento": false,
+    "equipamentos_nao_compartilhados": false,
+    "faz_higienizacao": false,
+    "condicoes_armazenamento": ""
+  },
+
+  "espacos_armazenamento": {
+    "condicoes_organizacao": "",
+    "sem_produtos_nao_permitidos": false,
+    "baixo_nivel_acidente": false,
+    "acessivel_visitacao": false,
+    "observacoes_armazenamento": ""
+  },
+
+  "produtos_nao_certificar": [
+    {
+      "produto": "",
+      "variedade": "",
+      "talhao_area": "",
+      "origem_muda": "",
+      "origem_semente": "",
+      "tipo_cultivo": "",
+      "motivo_nao_certificacao": ""
+    }
+  ],
+
+  "declaracoes": {
+    "incrementa_producao_mudas_sementes": false,
+    "equipamentos_pulverizacao_nao_compartilhados": false,
+    "faz_higienizacao_equipamentos": false,
+    "espacos_sem_produtos_proibidos": false,
+    "baixo_risco_acidentes": false,
+    "espacos_acessiveis_visitacao": false
+  },
+
+  "assinatura": {
+    "nome_completo_produtor": "",
+    "grupo_spg_anc": "",
+    "data_elaboracao": ""
+  },
+
+  "validacao": {
+    "campos_obrigatorios_completos": false,
+    "possui_erros": false,
+    "erros": [],
+    "avisos": [],
+    "percentual_preenchimento": 0
+  }
+}

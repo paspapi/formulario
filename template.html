@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMO Framework - Sistema Unificado</title>
+    
+    <!-- CSS UNIFICADO -->
+    <style>
+        /* ============================================
+           PMO DESIGN SYSTEM - BASE CSS
+           ============================================ */
+        
+        :root {
+            /* Cores Principais */
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --primary-light: #86efac;
+            --secondary: #3b82f6;
+            --secondary-dark: #1d4ed8;
+            
+            /* Estados e Feedback */
+            --success: #10b981;
+            --error: #ef4444;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            
+            /* Neutros */
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            
+            /* Espaçamentos */
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+            
+            /* Bordas */
+            --radius-sm: 0.25rem;
+            --radius-md: 0.375rem;
+            --radius-lg: 0.5rem;
+            --radius-xl: 0.75rem;
+            --radius-full: 9999px;
+            
+            /* Sombras */
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            
+            /* Transições */
+            --transition-fast: 150ms ease;
+            --transition-base: 300ms ease;
+            --transition-slow: 500ms ease;
+        }
+        
+        /* Reset e Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--gray-900);
+            background: var(--gray-50);
+            line-height: 1.6;
+        }
+        
+        /* ============================================
+           COMPONENTES REUTILIZÁVEIS
+           ============================================ */
+        
+        /* Container Principal */
+        .pmo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-xl);
+        }
+        
+        /* Seções de Formulário */
+        .form-section {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .form-section h2 {
+            color: var(--gray-800);
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .form-section h3 {
+            color: var(--gray-700);
+            font-size: 1.2rem;
+            margin: var(--spacing-lg) 0 var(--spacing-md);
+        }
+        
+        .form-section h4 {
+            color: var(--gray-600);
+            font-size: 1rem;
+            margin: var(--spacing-md) 0;
+        }
+        
+        /* Grid Layout Responsivo */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        /* Campos de Formulário Base */
+        .field-wrapper {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .field-wrapper label {
+            display: block;
+            font-weight: 500;
+            color: var(--gray-700);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        input[type="text"],
+        input[type="number"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="month"],
+        input[type="url"],
+        select,
+        textarea {
+            width: 100%;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            transition: all var(--transition-fast);
+        }
+        
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+        
+        /* Estados de Validação */
+        .field-valid {
+            border-left: 3px solid var(--success) !important;
+        }
+        
+        .field-invalid {
+            border-left: 3px solid var(--error) !important;
+            background-color: rgba(239, 68, 68, 0.05);
+        }
+        
+        .field-warning {
+            border-left: 3px solid var(--warning) !important;
+            background-color: rgba(245, 158, 11, 0.05);
+        }
+        
+        /* Checkboxes e Radio Buttons Melhorados */
+        .checkbox-enhanced,
+        .radio-enhanced {
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-sm);
+            margin-bottom: var(--spacing-sm);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: background var(--transition-fast);
+        }
+        
+        .checkbox-enhanced:hover,
+        .radio-enhanced:hover {
+            background: var(--gray-50);
+        }
+        
+        .checkbox-enhanced input[type="checkbox"],
+        .radio-enhanced input[type="radio"] {
+            width: auto;
+            margin-right: var(--spacing-sm);
+            cursor: pointer;
+        }
+        
+        /* Botões Padronizados */
+        .btn {
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn-secondary {
+            background: var(--gray-200);
+            color: var(--gray-700);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--gray-300);
+        }
+        
+        .btn-danger {
+            background: var(--error);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+        
+        .btn-add {
+            background: var(--success);
+            color: white;
+        }
+        
+        .btn-add:hover {
+            background: var(--primary-dark);
+        }
+        
+        .btn-remove {
+            background: transparent;
+            color: var(--error);
+            border: 1px solid var(--error);
+            padding: var(--spacing-xs) var(--spacing-sm);
+        }
+        
+        .btn-remove:hover {
+            background: var(--error);
+            color: white;
+        }
+        
+        /* Tabelas Dinâmicas */
+        .dynamic-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--spacing-md) 0;
+        }
+        
+        .dynamic-table thead {
+            background: var(--gray-100);
+        }
+        
+        .dynamic-table th {
+            padding: var(--spacing-md);
+            text-align: left;
+            font-weight: 600;
+            color: var(--gray-700);
+            border-bottom: 2px solid var(--gray-200);
+        }
+        
+        .dynamic-table td {
+            padding: var(--spacing-sm);
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .dynamic-table tbody tr:hover {
+            background: var(--gray-50);
+        }
+        
+        .dynamic-table input,
+        .dynamic-table select {
+            width: 100%;
+            min-width: 100px;
+        }
+        
+        /* Sistema de Upload */
+        .upload-area {
+            border: 2px dashed var(--gray-300);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            text-align: center;
+            transition: all var(--transition-fast);
+            cursor: pointer;
+            background: var(--gray-50);
+        }
+        
+        .upload-area:hover {
+            border-color: var(--primary);
+            background: white;
+        }
+        
+        .upload-area.dragover {
+            border-color: var(--primary);
+            background: rgba(16, 185, 129, 0.05);
+        }
+        
+        .file-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .file-item {
+            position: relative;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-sm);
+            background: white;
+        }
+        
+        .file-item img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: var(--radius-sm);
+        }
+        
+        .file-item .file-name {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            margin-top: var(--spacing-xs);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .file-item .remove-file {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--error);
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Sistema de Tooltips */
+        .help-tooltip {
+            position: relative;
+            display: inline-block;
+            margin-left: var(--spacing-xs);
+        }
+        
+        .help-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            background: var(--info);
+            color: white;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            cursor: help;
+        }
+        
+        .help-text {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gray-800);
+            color: white;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            white-space: nowrap;
+            max-width: 300px;
+            z-index: 1000;
+            transition: all var(--transition-fast);
+        }
+        
+        .help-tooltip:hover .help-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        /* Mensagens de Feedback */
+        .message {
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .message-info {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid var(--info);
+            color: var(--info);
+        }
+        
+        .message-success {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--success);
+            color: var(--success);
+        }
+        
+        .message-warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid var(--warning);
+            color: #92400e;
+        }
+        
+        .message-error {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid var(--error);
+            color: #991b1b;
+        }
+        
+        /* Barra de Progresso */
+        .progress-container {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: var(--spacing-md);
+            box-shadow: var(--shadow-md);
+            z-index: 100;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: var(--gray-200);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            border-radius: var(--radius-full);
+            transition: width var(--transition-base);
+        }
+        
+        .progress-text {
+            text-align: center;
+            margin-top: var(--spacing-sm);
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+        
+        .progress-sections {
+            display: flex;
+            justify-content: space-between;
+            margin-top: var(--spacing-md);
+            font-size: 0.875rem;
+        }
+        
+        .progress-section {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+        
+        .progress-section.completed {
+            color: var(--success);
+        }
+        
+        .progress-section.current {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .progress-section.pending {
+            color: var(--gray-400);
+        }
+        
+        /* Tabs */
+        .tabs-container {
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .tabs-header {
+            display: flex;
+            border-bottom: 2px solid var(--gray-200);
+            gap: var(--spacing-xs);
+        }
+        
+        .tab-button {
+            padding: var(--spacing-sm) var(--spacing-lg);
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: var(--gray-600);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .tab-button:hover {
+            color: var(--gray-800);
+            background: var(--gray-50);
+        }
+        
+        .tab-button.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+            padding: var(--spacing-lg) 0;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Accordion/Collapse */
+        .accordion-item {
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-md);
+            overflow: hidden;
+        }
+        
+        .accordion-header {
+            padding: var(--spacing-md) var(--spacing-lg);
+            background: var(--gray-50);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background var(--transition-fast);
+        }
+        
+        .accordion-header:hover {
+            background: var(--gray-100);
+        }
+        
+        .accordion-header.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .accordion-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all var(--transition-base);
+        }
+        
+        .accordion-content.active {
+            padding: var(--spacing-lg);
+            max-height: 2000px;
+        }
+        
+        /* Validação Visual */
+        .validation-container {
+            position: fixed;
+            bottom: var(--spacing-xl);
+            right: var(--spacing-xl);
+            max-width: 400px;
+            z-index: 1000;
+        }
+        
+        .validation-message {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-sm);
+            box-shadow: var(--shadow-xl);
+            display: flex;
+            align-items: start;
+            gap: var(--spacing-sm);
+            animation: slideIn var(--transition-base);
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .pmo-container {
+                padding: var(--spacing-md);
+            }
+            
+            .form-section {
+                padding: var(--spacing-lg);
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs-header {
+                flex-wrap: wrap;
+            }
+            
+            .dynamic-table {
+                font-size: 0.875rem;
+            }
+            
+            .validation-container {
+                left: var(--spacing-md);
+                right: var(--spacing-md);
+                bottom: var(--spacing-md);
+            }
+        }
+        
+        /* Utilitários */
+        .hidden { display: none !important; }
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .font-bold { font-weight: 700; }
+        .mt-1 { margin-top: var(--spacing-sm); }
+        .mt-2 { margin-top: var(--spacing-md); }
+        .mt-3 { margin-top: var(--spacing-lg); }
+        .mb-1 { margin-bottom: var(--spacing-sm); }
+        .mb-2 { margin-bottom: var(--spacing-md); }
+        .mb-3 { margin-bottom: var(--spacing-lg); }
+        
+        /* Print Styles */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            
+            .form-section {
+                page-break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid var(--gray-300);
+            }
+            
+            body {
+                background: white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pmo-container">
+        <!-- Header com Progresso -->
+        <div class="progress-container">
+            <h1 style="margin-bottom: 16px;">PMO Framework - Sistema Unificado</h1>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 45%"></div>
+            </div>
+            <div class="progress-text">45% Completo</div>
+            <div class="progress-sections">
+                <span class="progress-section completed">✓ Dados Básicos</span>
+                <span class="progress-section current">→ Produção</span>
+                <span class="progress-section pending">○ Documentos</span>
+                <span class="progress-section pending">○ Revisão</span>
+            </div>
+        </div>
+
+        <!-- Demonstração de Componentes -->
+        <div class="form-section">
+            <h2>Biblioteca de Componentes Unificados</h2>
+            
+            <!-- Tabs de Demonstração -->
+            <div class="tabs-container">
+                <div class="tabs-header">
+                    <button class="tab-button active" onclick="PMOFramework.tabs.show('campos')">Campos</button>
+                    <button class="tab-button" onclick="PMOFramework.tabs.show('tabelas')">Tabelas</button>
+                    <button class="tab-button" onclick="PMOFramework.tabs.show('uploads')">Uploads</button>
+                    <button class="tab-button" onclick="PMOFramework.tabs.show('validacao')">Validação</button>
+                </div>
+                
+                <div id="tab-campos" class="tab-content active">
+                    <h3>Campos de Formulário</h3>
+                    <div class="form-grid">
+                        <div class="field-wrapper">
+                            <label>Campo de Texto
+                                <span class="help-tooltip">
+                                    <span class="help-icon">?</span>
+                                    <span class="help-text">Este é um campo de texto padrão</span>
+                                </span>
+                            </label>
+                            <input type="text" placeholder="Digite aqui..." class="field-valid">
+                        </div>
+                        
+                        <div class="field-wrapper">
+                            <label>CPF com Validação</label>
+                            <input type="text" 
+                                   placeholder="000.000.000-00" 
+                                   class="cpf-field"
+                                   data-mask="cpf">
+                        </div>
+                        
+                        <div class="field-wrapper">
+                            <label>Seleção</label>
+                            <select>
+                                <option>Selecione...</option>
+                                <option>Opção 1</option>
+                                <option>Opção 2</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <h4>Checkboxes e Radio</h4>
+                    <div class="checkbox-enhanced">
+                        <input type="checkbox" id="check1">
+                        <label for="check1">Opção com checkbox melhorado</label>
+                    </div>
+                    
+                    <div class="radio-enhanced">
+                        <input type="radio" name="radio" id="radio1">
+                        <label for="radio1">Opção com radio button</label>
+                    </div>
+                </div>
+                
+                <div id="tab-tabelas" class="tab-content">
+                    <h3>Tabela Dinâmica</h3>
+                    <table class="dynamic-table">
+                        <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Quantidade</th>
+                                <th>Unidade</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="text" value="Alface Crespa"></td>
+                                <td><input type="number" value="100"></td>
+                                <td>
+                                    <select>
+                                        <option>Unidade</option>
+                                        <option>Kg</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button class="btn btn-remove" onclick="PMOFramework.table.removeRow(this)">❌</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-add" onclick="PMOFramework.table.addRow()">➕ Adicionar Linha</button>
+                </div>
+                
+                <div id="tab-uploads" class="tab-content">
+                    <h3>Sistema de Upload</h3>
+                    <div class="upload-area" id="upload-demo">
+                        <p>📁 Arraste arquivos aqui ou clique para selecionar</p>
+                        <input type="file" multiple hidden>
+                    </div>
+                    <div class="file-preview" id="preview-demo"></div>
+                </div>
+                
+                <div id="tab-validacao" class="tab-content">
+                    <h3>Sistema de Validação</h3>
+                    <div class="message message-info">
+                        ℹ️ Mensagem informativa
+                    </div>
+                    <div class="message message-success">
+                        ✅ Operação realizada com sucesso
+                    </div>
+                    <div class="message message-warning">
+                        ⚠️ Atenção: Verificar informações
+                    </div>
+                    <div class="message message-error">
+                        ❌ Erro: Campo obrigatório não preenchido
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Accordion Demo -->
+        <div class="form-section">
+            <h2>Componente Accordion</h2>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="PMOFramework.accordion.toggle(this)">
+                    <span>Seção Expansível 1</span>
+                    <span>▼</span>
+                </div>
+                <div class="accordion-content">
+                    <p>Conteúdo da seção que pode ser expandido ou recolhido.</p>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="PMOFramework.accordion.toggle(this)">
+                    <span>Seção Expansível 2</span>
+                    <span>▼</span>
+                </div>
+                <div class="accordion-content">
+                    <p>Outro conteúdo expansível.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botões de Ação -->
+        <div class="form-section">
+            <h2>Botões de Ação</h2>
+            <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                <button class="btn btn-primary">💾 Salvar</button>
+                <button class="btn btn-secondary">📥 Exportar</button>
+                <button class="btn btn-add">➕ Adicionar</button>
+                <button class="btn btn-danger">🗑️ Excluir</button>
+                <button class="btn btn-primary" disabled>Desabilitado</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT UNIFICADO -->
+    <script>
+        /**
+         * PMO Framework - Sistema Unificado de Componentes
+         * Biblioteca JavaScript reutilizável para todos os formulários PMO
+         */
+        
+        const PMOFramework = (function() {
+            'use strict';
+            
+            // ====================================
+            // CORE - Funções Base
+            // ====================================
+            const Core = {
+                /**
+                 * Inicialização do Framework
+                 */
+                init() {
+                    this.setupEventListeners();
+                    this.initializeComponents();
+                    this.loadSavedData();
+                    console.log('PMO Framework inicializado');
+                },
+                
+                /**
+                 * Setup de Event Listeners globais
+                 */
+                setupEventListeners() {
+                    // Auto-save a cada 30 segundos
+                    setInterval(() => Storage.autoSave(), 30000);
+                    
+                    // Prevenir perda de dados ao sair
+                    window.addEventListener('beforeunload', (e) => {
+                        if (Storage.hasUnsavedChanges()) {
+                            e.preventDefault();
+                            e.returnValue = 'Existem alterações não salvas. Deseja sair?';
+                        }
+                    });
+                },
+                
+                /**
+                 * Inicializar componentes
+                 */
+                initializeComponents() {
+                    Validators.initMasks();
+                    DynamicFields.init();
+                    Upload.init();
+                    Progress.calculate();
+                }
+            };
+            
+            // ====================================
+            // VALIDATORS - Sistema de Validação
+            // ====================================
+            const Validators = {
+                /**
+                 * Validar CPF
+                 */
+                cpf(value) {
+                    const cpf = value.replace(/\D/g, '');
+                    
+                    if (cpf.length !== 11) return false;
+                    if (/^(\d)\1{10}$/.test(cpf)) return false;
+                    
+                    let sum = 0;
+                    for (let i = 0; i < 9; i++) {
+                        sum += parseInt(cpf.charAt(i)) * (10 - i);
+                    }
+                    let rev = 11 - (sum % 11);
+                    if (rev === 10 || rev === 11) rev = 0;
+                    if (rev !== parseInt(cpf.charAt(9))) return false;
+                    
+                    sum = 0;
+                    for (let i = 0; i < 10; i++) {
+                        sum += parseInt(cpf.charAt(i)) * (11 - i);
+                    }
+                    rev = 11 - (sum % 11);
+                    if (rev === 10 || rev === 11) rev = 0;
+                    if (rev !== parseInt(cpf.charAt(10))) return false;
+                    
+                    return true;
+                },
+                
+                /**
+                 * Validar CNPJ
+                 */
+                cnpj(value) {
+                    const cnpj = value.replace(/\D/g, '');
+                    
+                    if (cnpj.length !== 14) return false;
+                    if (/^(\d)\1{13}$/.test(cnpj)) return false;
+                    
+                    let length = cnpj.length - 2;
+                    let numbers = cnpj.substring(0, length);
+                    let digits = cnpj.substring(length);
+                    let sum = 0;
+                    let pos = length - 7;
+                    
+                    for (let i = length; i >= 1; i--) {
+                        sum += numbers.charAt(length - i) * pos--;
+                        if (pos < 2) pos = 9;
+                    }
+                    
+                    let result = sum % 11 < 2 ? 0 : 11 - sum % 11;
+                    if (result !== parseInt(digits.charAt(0))) return false;
+                    
+                    length = length + 1;
+                    numbers = cnpj.substring(0, length);
+                    sum = 0;
+                    pos = length - 7;
+                    
+                    for (let i = length; i >= 1; i--) {
+                        sum += numbers.charAt(length - i) * pos--;
+                        if (pos < 2) pos = 9;
+                    }
+                    
+                    result = sum % 11 < 2 ? 0 : 11 - sum % 11;
+                    if (result !== parseInt(digits.charAt(1))) return false;
+                    
+                    return true;
+                },
+                
+                /**
+                 * Validar Email
+                 */
+                email(value) {
+                    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    return regex.test(value);
+                },
+                
+                /**
+                 * Validar CEP
+                 */
+                cep(value) {
+                    const cep = value.replace(/\D/g, '');
+                    return cep.length === 8;
+                },
+                
+                /**
+                 * Validar Telefone
+                 */
+                telefone(value) {
+                    const tel = value.replace(/\D/g, '');
+                    return tel.length >= 10 && tel.length <= 11;
+                },
+                
+                /**
+                 * Validar Coordenadas Geográficas (Brasil)
+                 */
+                coordenadas(lat, lon) {
+                    const latNum = parseFloat(lat);
+                    const lonNum = parseFloat(lon);
+                    
+                    // Limites do Brasil
+                    if (latNum < -33.75 || latNum > 5.27) return false;
+                    if (lonNum < -73.99 || lonNum > -34.79) return false;
+                    
+                    return true;
+                },
+                
+                /**
+                 * Validar Idade Mínima
+                 */
+                idadeMinima(dataNascimento, minIdade = 18) {
+                    const nascimento = new Date(dataNascimento);
+                    const hoje = new Date();
+                    const idade = Math.floor((hoje - nascimento) / (365.25 * 24 * 60 * 60 * 1000));
+                    return idade >= minIdade;
+                },
+                
+                /**
+                 * Aplicar máscara em campos
+                 */
+                initMasks() {
+                    document.querySelectorAll('[data-mask]').forEach(input => {
+                        const mask = input.dataset.mask;
+                        input.addEventListener('input', (e) => {
+                            e.target.value = this.applyMask(e.target.value, mask);
+                        });
+                    });
+                },
+                
+                /**
+                 * Aplicar máscara específica
+                 */
+                applyMask(value, type) {
+                    const masks = {
+                        cpf: (v) => v.replace(/\D/g, '')
+                            .replace(/(\d{3})(\d)/, '$1.$2')
+                            .replace(/(\d{3})(\d)/, '$1.$2')
+                            .replace(/(\d{3})(\d{1,2})/, '$1-$2')
+                            .replace(/(-\d{2})\d+?$/, '$1'),
+                        
+                        cnpj: (v) => v.replace(/\D/g, '')
+                            .replace(/(\d{2})(\d)/, '$1.$2')
+                            .replace(/(\d{3})(\d)/, '$1.$2')
+                            .replace(/(\d{3})(\d)/, '$1/$2')
+                            .replace(/(\d{4})(\d)/, '$1-$2')
+                            .replace(/(-\d{2})\d+?$/, '$1'),
+                        
+                        cep: (v) => v.replace(/\D/g, '')
+                            .replace(/(\d{5})(\d)/, '$1-$2')
+                            .replace(/(-\d{3})\d+?$/, '$1'),
+                        
+                        telefone: (v) => {
+                            v = v.replace(/\D/g, '');
+                            if (v.length <= 10) {
+                                return v.replace(/(\d{2})(\d{4})(\d)/, '($1) $2-$3');
+                            } else {
+                                return v.replace(/(\d{2})(\d{5})(\d)/, '($1) $2-$3');
+                            }
+                        }
+                    };
+                    
+                    return masks[type] ? masks[type](value) : value;
+                }
+            };
+            
+            // ====================================
+            // DYNAMIC FIELDS - Campos Dinâmicos
+            // ====================================
+            const DynamicFields = {
+                init() {
+                    // Inicializar todos os campos dinâmicos
+                    document.querySelectorAll('[data-dynamic]').forEach(container => {
+                        this.setupDynamic(container);
+                    });
+                },
+                
+                setupDynamic(container) {
+                    const min = parseInt(container.dataset.min) || 1;
+                    const max = parseInt(container.dataset.max) || 999;
+                    
+                    container.dataset.count = container.querySelectorAll('.dynamic-row').length || 1;
+                    
+                    // Atualizar botões
+                    this.updateButtons(container, min, max);
+                },
+                
+                add(containerId, template) {
+                    const container = document.getElementById(containerId);
+                    const count = parseInt(container.dataset.count) || 0;
+                    const max = parseInt(container.dataset.max) || 999;
+                    
+                    if (count >= max) {
+                        UI.showMessage(`Máximo de ${max} itens permitidos`, 'warning');
+                        return;
+                    }
+                    
+                    const newRow = template.cloneNode(true);
+                    newRow.querySelectorAll('input, select, textarea').forEach(field => {
+                        field.value = '';
+                        field.name = field.name.replace('[]', `[${count}]`);
+                    });
+                    
+                    container.appendChild(newRow);
+                    container.dataset.count = count + 1;
+                    
+                    this.updateButtons(container);
+                    Progress.calculate();
+                },
+                
+                remove(button) {
+                    const container = button.closest('[data-dynamic]');
+                    const min = parseInt(container.dataset.min) || 1;
+                    const count = parseInt(container.dataset.count) || 0;
+                    
+                    if (count <= min) {
+                        UI.showMessage(`Mínimo de ${min} item(s) obrigatório(s)`, 'warning');
+                        return;
+                    }
+                    
+                    button.closest('.dynamic-row').remove();
+                    container.dataset.count = count - 1;
+                    
+                    this.updateButtons(container);
+                    Progress.calculate();
+                },
+                
+                updateButtons(container) {
+                    const count = parseInt(container.dataset.count) || 0;
+                    const min = parseInt(container.dataset.min) || 1;
+                    const max = parseInt(container.dataset.max) || 999;
+                    
+                    // Atualizar botão adicionar
+                    const addBtn = container.querySelector('.btn-add-dynamic');
+                    if (addBtn) {
+                        addBtn.disabled = count >= max;
+                    }
+                    
+                    // Atualizar botões remover
+                    container.querySelectorAll('.btn-remove-dynamic').forEach(btn => {
+                        btn.disabled = count <= min;
+                    });
+                }
+            };
+            
+            // ====================================
+            // TABLE - Tabelas Dinâmicas
+            // ====================================
+            const Table = {
+                addRow(tableId, data = {}) {
+                    const tbody = document.querySelector(`#${tableId} tbody`);
+                    const template = tbody.querySelector('tr');
+                    const newRow = template.cloneNode(true);
+                    
+                    // Limpar valores
+                    newRow.querySelectorAll('input, select, textarea').forEach(field => {
+                        field.value = data[field.name] || '';
+                    });
+                    
+                    tbody.appendChild(newRow);
+                    Progress.calculate();
+                },
+                
+                removeRow(button) {
+                    const tbody = button.closest('tbody');
+                    const rows = tbody.querySelectorAll('tr').length;
+                    
+                    if (rows <= 1) {
+                        UI.showMessage('Deve haver pelo menos uma linha na tabela', 'warning');
+                        return;
+                    }
+                    
+                    button.closest('tr').remove();
+                    Progress.calculate();
+                },
+                
+                duplicateRow(button) {
+                    const row = button.closest('tr');
+                    const newRow = row.cloneNode(true);
+                    
+                    row.parentNode.insertBefore(newRow, row.nextSibling);
+                    Progress.calculate();
+                },
+                
+                sortTable(tableId, column) {
+                    const table = document.getElementById(tableId);
+                    const tbody = table.querySelector('tbody');
+                    const rows = Array.from(tbody.querySelectorAll('tr'));
+                    
+                    rows.sort((a, b) => {
+                        const aVal = a.cells[column].textContent.trim();
+                        const bVal = b.cells[column].textContent.trim();
+                        return aVal.localeCompare(bVal);
+                    });
+                    
+                    rows.forEach(row => tbody.appendChild(row));
+                }
+            };
+            
+            // ====================================
+            // UPLOAD - Sistema de Upload
+            // ====================================
+            const Upload = {
+                init() {
+                    document.querySelectorAll('.upload-area').forEach(area => {
+                        this.setupUploadArea(area);
+                    });
+                },
+                
+                setupUploadArea(area) {
+                    const input = area.querySelector('input[type="file"]') || this.createFileInput();
+                    
+                    // Eventos de drag and drop
+                    area.addEventListener('click', () => input.click());
+                    area.addEventListener('dragover', (e) => {
+                        e.preventDefault();
+                        area.classList.add('dragover');
+                    });
+                    area.addEventListener('dragleave', () => {
+                        area.classList.remove('dragover');
+                    });
+                    area.addEventListener('drop', (e) => {
+                        e.preventDefault();
+                        area.classList.remove('dragover');
+                        this.handleFiles(e.dataTransfer.files, area);
+                    });
+                    
+                    // Input change
+                    input.addEventListener('change', (e) => {
+                        this.handleFiles(e.target.files, area);
+                    });
+                },
+                
+                createFileInput() {
+                    const input = document.createElement('input');
+                    input.type = 'file';
+                    input.multiple = true;
+                    input.hidden = true;
+                    return input;
+                },
+                
+                handleFiles(files, area) {
+                    const previewId = area.dataset.preview || 'file-preview';
+                    const preview = document.getElementById(previewId);
+                    const maxSize = parseInt(area.dataset.maxSize) || 10; // MB
+                    
+                    Array.from(files).forEach(file => {
+                        // Validar tamanho
+                        if (file.size > maxSize * 1024 * 1024) {
+                            UI.showMessage(`Arquivo ${file.name} muito grande (máx: ${maxSize}MB)`, 'error');
+                            return;
+                        }
+                        
+                        // Criar preview
+                        this.createPreview(file, preview);
+                    });
+                    
+                    Storage.markAsChanged();
+                },
+                
+                createPreview(file, container) {
+                    const item = document.createElement('div');
+                    item.className = 'file-item';
+                    
+                    if (file.type.startsWith('image/')) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            item.innerHTML = `
+                                <img src="${e.target.result}" alt="${file.name}">
+                                <div class="file-name">${file.name}</div>
+                                <button class="remove-file" onclick="PMOFramework.upload.removeFile(this)">×</button>
+                            `;
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        item.innerHTML = `
+                            <div class="file-icon">📄</div>
+                            <div class="file-name">${file.name}</div>
+                            <div class="file-size">${this.formatFileSize(file.size)}</div>
+                            <button class="remove-file" onclick="PMOFramework.upload.removeFile(this)">×</button>
+                        `;
+                    }
+                    
+                    container.appendChild(item);
+                },
+                
+                removeFile(button) {
+                    button.closest('.file-item').remove();
+                    Storage.markAsChanged();
+                },
+                
+                formatFileSize(bytes) {
+                    if (bytes === 0) return '0 Bytes';
+                    const k = 1024;
+                    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                    const i = Math.floor(Math.log(bytes) / Math.log(k));
+                    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+                }
+            };
+            
+            // ====================================
+            // STORAGE - Sistema de Armazenamento
+            // ====================================
+            const Storage = {
+                hasChanges: false,
+                lastSave: null,
+                
+                autoSave() {
+                    const formData = this.collectFormData();
+                    localStorage.setItem('pmo_draft', JSON.stringify(formData));
+                    localStorage.setItem('pmo_draft_timestamp', new Date().toISOString());
+                    
+                    this.hasChanges = false;
+                    this.lastSave = new Date();
+                    
+                    UI.showMessage('Salvo automaticamente', 'success', 2000);
+                },
+                
+                collectFormData() {
+                    const forms = document.querySelectorAll('form');
+                    const data = {};
+                    
+                    forms.forEach(form => {
+                        const formData = new FormData(form);
+                        for (let [key, value] of formData.entries()) {
+                            if (data[key]) {
+                                if (!Array.isArray(data[key])) {
+                                    data[key] = [data[key]];
+                                }
+                                data[key].push(value);
+                            } else {
+                                data[key] = value;
+                            }
+                        }
+                    });
+                    
+                    return data;
+                },
+                
+                loadSavedData() {
+                    const savedData = localStorage.getItem('pmo_draft');
+                    if (!savedData) return;
+                    
+                    const data = JSON.parse(savedData);
+                    const timestamp = localStorage.getItem('pmo_draft_timestamp');
+                    
+                    // Perguntar se deseja restaurar
+                    if (confirm(`Rascunho encontrado de ${new Date(timestamp).toLocaleString()}. Deseja restaurar?`)) {
+                        this.restoreData(data);
+                    }
+                },
+                
+                restoreData(data) {
+                    Object.keys(data).forEach(key => {
+                        const elements = document.querySelectorAll(`[name="${key}"]`);
+                        
+                        elements.forEach(element => {
+                            if (element.type === 'checkbox' || element.type === 'radio') {
+                                element.checked = data[key] === element.value;
+                            } else {
+                                element.value = data[key];
+                            }
+                        });
+                    });
+                    
+                    UI.showMessage('Dados restaurados com sucesso', 'success');
+                },
+                
+                markAsChanged() {
+                    this.hasChanges = true;
+                },
+                
+                hasUnsavedChanges() {
+                    return this.hasChanges;
+                },
+                
+                clearDraft() {
+                    localStorage.removeItem('pmo_draft');
+                    localStorage.removeItem('pmo_draft_timestamp');
+                }
+            };
+            
+            // ====================================
+            // PROGRESS - Sistema de Progresso
+            // ====================================
+            const Progress = {
+                calculate() {
+                    const required = document.querySelectorAll('[required]');
+                    const completed = document.querySelectorAll('[required]:valid');
+                    
+                    const percentage = Math.round((completed.length / required.length) * 100);
+                    
+                    this.updateBar(percentage);
+                    this.updateSections();
+                    
+                    return percentage;
+                },
+                
+                updateBar(percentage) {
+                    const bar = document.querySelector('.progress-fill');
+                    const text = document.querySelector('.progress-text');
+                    
+                    if (bar) bar.style.width = `${percentage}%`;
+                    if (text) text.textContent = `${percentage}% Completo`;
+                },
+                
+                updateSections() {
+                    document.querySelectorAll('.form-section').forEach(section => {
+                        const required = section.querySelectorAll('[required]');
+                        const completed = section.querySelectorAll('[required]:valid');
+                        
+                        const indicator = section.querySelector('.section-progress');
+                        if (indicator) {
+                            const percentage = Math.round((completed.length / required.length) * 100);
+                            indicator.innerHTML = `
+                                <div class="mini-progress">
+                                    <div class="mini-bar" style="width: ${percentage}%"></div>
+                                    <span>${completed.length}/${required.length}</span>
+                                </div>
+                            `;
+                        }
+                    });
+                }
+            };
+            
+            // ====================================
+            // EXPORT - Sistema de Exportação
+            // ====================================
+            const Export = {
+                toJSON() {
+                    const data = Storage.collectFormData();
+                    const json = JSON.stringify(data, null, 2);
+                    
+                    this.download(json, 'pmo_export.json', 'application/json');
+                },
+                
+                toPDF() {
+                    // Implementação simplificada - usar biblioteca como jsPDF em produção
+                    window.print();
+                },
+                
+                toCSV() {
+                    const data = Storage.collectFormData();
+                    let csv = 'Campo,Valor\n';
+                    
+                    Object.keys(data).forEach(key => {
+                        csv += `"${key}","${data[key]}"\n`;
+                    });
+                    
+                    this.download(csv, 'pmo_export.csv', 'text/csv');
+                },
+                
+                download(content, filename, type) {
+                    const blob = new Blob([content], { type });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = filename;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                }
+            };
+            
+            // ====================================
+            // UI - Interface do Usuário
+            // ====================================
+            const UI = {
+                showMessage(message, type = 'info', duration = 5000) {
+                    const container = document.querySelector('.validation-container') || this.createMessageContainer();
+                    
+                    const messageEl = document.createElement('div');
+                    messageEl.className = `validation-message message-${type}`;
+                    messageEl.innerHTML = `
+                        <span>${this.getIcon(type)}</span>
+                        <span>${message}</span>
+                    `;
+                    
+                    container.appendChild(messageEl);
+                    
+                    if (duration > 0) {
+                        setTimeout(() => messageEl.remove(), duration);
+                    }
+                },
+                
+                createMessageContainer() {
+                    const container = document.createElement('div');
+                    container.className = 'validation-container';
+                    document.body.appendChild(container);
+                    return container;
+                },
+                
+                getIcon(type) {
+                    const icons = {
+                        info: 'ℹ️',
+                        success: '✅',
+                        warning: '⚠️',
+                        error: '❌'
+                    };
+                    return icons[type] || 'ℹ️';
+                },
+                
+                confirm(message) {
+                    return confirm(message);
+                },
+                
+                prompt(message, defaultValue = '') {
+                    return prompt(message, defaultValue);
+                }
+            };
+            
+            // ====================================
+            // TABS - Sistema de Abas
+            // ====================================
+            const Tabs = {
+                show(tabId) {
+                    // Esconder todas as abas
+                    document.querySelectorAll('.tab-content').forEach(tab => {
+                        tab.classList.remove('active');
+                    });
+                    
+                    // Remover active de todos os botões
+                    document.querySelectorAll('.tab-button').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    // Mostrar aba selecionada
+                    const tab = document.getElementById(`tab-${tabId}`);
+                    if (tab) tab.classList.add('active');
+                    
+                    // Ativar botão correspondente
+                    event.target.classList.add('active');
+                }
+            };
+            
+            // ====================================
+            // ACCORDION - Sistema Collapse
+            // ====================================
+            const Accordion = {
+                toggle(header) {
+                    const content = header.nextElementSibling;
+                    const isActive = header.classList.contains('active');
+                    
+                    header.classList.toggle('active');
+                    content.classList.toggle('active');
+                    
+                    // Atualizar ícone
+                    const icon = header.querySelector('span:last-child');
+                    if (icon) {
+                        icon.textContent = isActive ? '▼' : '▲';
+                    }
+                }
+            };
+            
+            // ====================================
+            // API - Integrações Externas
+            // ====================================
+            const API = {
+                async buscarCEP(cep) {
+                    const cleanCEP = cep.replace(/\D/g, '');
+                    
+                    if (cleanCEP.length !== 8) {
+                        throw new Error('CEP inválido');
+                    }
+                    
+                    try {
+                        const response = await fetch(`https://viacep.com.br/ws/${cleanCEP}/json/`);
+                        const data = await response.json();
+                        
+                        if (data.erro) {
+                            throw new Error('CEP não encontrado');
+                        }
+                        
+                        return {
+                            logradouro: data.logradouro,
+                            bairro: data.bairro,
+                            cidade: data.localidade,
+                            uf: data.uf
+                        };
+                    } catch (error) {
+                        UI.showMessage('Erro ao buscar CEP: ' + error.message, 'error');
+                        throw error;
+                    }
+                },
+                
+                async validarCPF(cpf) {
+                    // Em produção, integrar com API da Receita Federal
+                    return Validators.cpf(cpf);
+                },
+                
+                async validarCNPJ(cnpj) {
+                    // Em produção, integrar com API da Receita Federal
+                    return Validators.cnpj(cnpj);
+                }
+            };
+            
+            // ====================================
+            // PUBLIC API - Interface Pública
+            // ====================================
+            return {
+                // Core
+                init: () => Core.init(),
+                
+                // Validadores
+                validators: Validators,
+                
+                // Campos Dinâmicos
+                dynamic: DynamicFields,
+                
+                // Tabelas
+                table: Table,
+                
+                // Upload
+                upload: Upload,
+                
+                // Armazenamento
+                storage: Storage,
+                
+                // Progresso
+                progress: Progress,
+                
+                // Exportação
+                export: Export,
+                
+                // Interface
+                ui: UI,
+                
+                // Tabs
+                tabs: Tabs,
+                
+                // Accordion
+                accordion: Accordion,
+                
+                // API
+                api: API,
+                
+                // Versão
+                version: '1.0.0'
+            };
+        })();
+        
+        // Inicializar Framework quando DOM estiver pronto
+        document.addEventListener('DOMContentLoaded', () => {
+            PMOFramework.init();
+            console.log('PMO Framework v' + PMOFramework.version + ' carregado');
+        });
+        
+        // Expor globalmente para uso em formulários
+        window.PMOFramework = PMOFramework;
+    </script>
+</body>
+</html>

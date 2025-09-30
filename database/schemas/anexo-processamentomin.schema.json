@@ -1,0 +1,631 @@
+{
+  "metadata": {
+    "id_produtor": "",
+    "tipo_documento": "PROCESSAMENTO_MINIMO",
+    "data_extracao": "",
+    "versao_schema": "1.0",
+    "grupo_spg": "",
+    "status_processamento": "EXTRAIDO",
+    "vinculo_pmo_principal": ""
+  },
+  
+  "identificacao": {
+    "fornecedores_responsaveis": [
+      {
+        "nome_completo": "",
+        "cpf": "",
+        "data_nascimento": ""
+      }
+    ],
+    
+    "dados_empresa": {
+      "razao_social": "",
+      "nome_fantasia": "",
+      "cnpj_produtor_rural": "",
+      "inscricao_estadual": "",
+      "inscricao_municipal": "",
+      "grupo_spg": "",
+      "data_preenchimento": ""
+    },
+    
+    "contato": {
+      "telefone": "",
+      "email": ""
+    }
+  },
+  
+  "localizacao": {
+    "endereco_processamento": {
+      "logradouro": "",
+      "numero": "",
+      "complemento": "",
+      "bairro": "",
+      "municipio": "",
+      "uf": "",
+      "cep": ""
+    },
+    
+    "coordenadas": {
+      "latitude": 0,
+      "longitude": 0
+    },
+    
+    "tipo_local": "",
+    
+    "roteiro_acesso": ""
+  },
+  
+  "situacao_legal": {
+    "documentos_legais": [
+      {
+        "documento": "",
+        "possui": false,
+        "numero": "",
+        "situacao": "",
+        "data_validade": "",
+        "orgao_emissor": ""
+      }
+    ],
+    
+    "declaracoes": {
+      "ciencia_obrigacoes": false,
+      "possui_alvara_funcionamento": false,
+      "processo_analise_sanitaria": false,
+      "protocolo_vigilancia": "",
+      "possui_licenca_sanitaria": false,
+      "numero_cevs": "",
+      "numero_licenca_outra_uf": "",
+      "atividade_dispensada_licenca": false,
+      "possui_analise_agua": false,
+      "possui_manual_boas_praticas": false,
+      "nao_usa_radiacao_ionizante": false,
+      "nao_usa_microondas": false,
+      "nao_usa_nanotecnologia": false,
+      "nao_usa_mesmo_ingrediente_org_nao_org": false,
+      "nao_usa_transgenicos": false,
+      "conhece_legislacao_especifica": false
+    }
+  },
+  
+  "mao_obra": {
+    "situacao_funcional": [
+      {
+        "tipo_funcionario": "",
+        "quantidade": 0,
+        "funcao": "",
+        "capacitacao_organicos": false
+      }
+    ],
+    
+    "numero_total_funcionarios": 0,
+    
+    "detalhes_situacao": ""
+  },
+  
+  "produtos_processados": [
+    {
+      "nome_produto_final": "",
+      "conteudo_processado": "",
+      "descricao_processamento": "",
+      "expectativa_producao_mensal_kg": 0,
+      
+      "origem_materia_prima": {
+        "produto_proprio": false,
+        "nome_agricultor_fornecedor": "",
+        "cidade_origem": "",
+        "uf_origem": "",
+        "opac_certificou_parceiro": false,
+        "certificadora_parceiro": ""
+      },
+      
+      "tipo_produto": "",
+      "embalagem": "",
+      "rotulagem_conforme": false,
+      "possui_registro": false,
+      "numero_registro": ""
+    }
+  ],
+  
+  "croqui_planta": {
+    "possui_croqui": false,
+    "tipo_arquivo": "",
+    "descricao_layout": "",
+    
+    "areas_identificadas": {
+      "entrada": false,
+      "recepcao_materia_prima": false,
+      "area_processamento": false,
+      "area_higienizacao": false,
+      "area_embalagem": false,
+      "area_armazenamento": false,
+      "sanitarios": false,
+      "vestiarios": false,
+      "deposito_insumos": false,
+      "deposito_residuos": false
+    },
+    
+    "fluxograma_processo": false
+  },
+  
+  "etapas_fora_unidade": {
+    "realiza_etapas_externas": false,
+    
+    "etapas_externas": [
+      {
+        "etapa": "",
+        "local": "",
+        "endereco_completo": "",
+        "responsavel": "",
+        "alvara_funcionamento": "",
+        "certificacao_organica": false
+      }
+    ]
+  },
+  
+  "etapas_processamento": {
+    "recepcao_materia_prima": {
+      "realiza": false,
+      "descricao": "",
+      "controles_realizados": [],
+      "criterios_aceitacao": "",
+      "equipamentos_utilizados": []
+    },
+    
+    "selecao_classificacao": {
+      "realiza": false,
+      "descricao": "",
+      "criterios_selecao": [],
+      "destino_descartes": "",
+      "equipamentos_utilizados": []
+    },
+    
+    "lavagem_higienizacao": {
+      "realiza": false,
+      "descricao": "",
+      "substancias_utilizadas": [
+        {
+          "substancia": "",
+          "marca": "",
+          "concentracao": "",
+          "tempo_contato": "",
+          "permitida_organicos": false
+        }
+      ],
+      "metodo_lavagem": "",
+      "agua_utilizada": "",
+      "equipamentos_utilizados": []
+    },
+    
+    "descascamento": {
+      "realiza": false,
+      "descricao": "",
+      "metodo": "",
+      "destino_cascas": "",
+      "equipamentos_utilizados": []
+    },
+    
+    "corte_fatiamento": {
+      "realiza": false,
+      "descricao": "",
+      "tipo_corte": [],
+      "equipamentos_utilizados": [],
+      "higienizacao_equipamentos": ""
+    },
+    
+    "branqueamento": {
+      "realiza": false,
+      "descricao": "",
+      "temperatura": 0,
+      "tempo_segundos": 0,
+      "metodo_resfriamento": "",
+      "equipamentos_utilizados": []
+    },
+    
+    "sanitizacao_final": {
+      "realiza": false,
+      "descricao": "",
+      "substancias_utilizadas": [
+        {
+          "substancia": "",
+          "marca": "",
+          "concentracao": "",
+          "tempo_contato": "",
+          "permitida_organicos": false
+        }
+      ],
+      "metodo_aplicacao": "",
+      "enxague": false
+    },
+    
+    "centrifugacao_secagem": {
+      "realiza": false,
+      "descricao": "",
+      "metodo": "",
+      "tempo_processo": "",
+      "equipamentos_utilizados": []
+    },
+    
+    "embalagem": {
+      "realiza": false,
+      "descricao": "",
+      "tipos_embalagem": [],
+      "material_embalagem": [],
+      "equipamentos_embalagem": [],
+      "possui_equipamento_proprio": false,
+      "atmosfera_modificada": false
+    },
+    
+    "rotulagem": {
+      "realiza": false,
+      "descricao": "",
+      "metodo_rotulagem": "",
+      "equipamentos_utilizados": [],
+      "possui_equipamento_proprio": false,
+      
+      "informacoes_rotulo": {
+        "nome_produto": false,
+        "nome_empresa": false,
+        "cnpj": false,
+        "endereco_completo": false,
+        "selo_organico": false,
+        "peso_liquido": false,
+        "data_fabricacao": false,
+        "data_validade": false,
+        "lote": false,
+        "ingredientes": false,
+        "tabela_nutricional": false,
+        "registro_quando_aplicavel": false
+      },
+      
+      "modelo_rotulo_anexado": false
+    },
+    
+    "armazenamento_estocagem": {
+      "realiza": false,
+      "descricao": "",
+      "tipo_armazenamento": "",
+      "temperatura": 0,
+      "umidade_relativa": 0,
+      "tempo_maximo_estocagem": "",
+      "controle_temperatura": false,
+      "controle_pragas": false,
+      "separacao_produtos_organicos": false,
+      "identificacao_lotes": false,
+      "fifo": false
+    },
+    
+    "transporte": {
+      "descricao": "",
+      "tipo_veiculo": "",
+      "condicoes_transporte": "",
+      "temperatura_controlada": false,
+      "separacao_organicos_nao_organicos": false,
+      "tempo_maximo_transporte": "",
+      "medidas_prevencao_contaminacao": ""
+    },
+    
+    "comercializacao": {
+      "descricao": "",
+      "pontos_venda": [],
+      "exposicao_produtos": "",
+      "separacao_organicos_nao_organicos": false,
+      "identificacao_clara": false,
+      "rastreabilidade": false,
+      "medidas_prevencao_contaminacao": ""
+    }
+  },
+  
+  "fornecedores_materia_prima": [
+    {
+      "nome_fornecedor": "",
+      "tipo_pessoa": "",
+      "cpf_cnpj": "",
+      "cidade": "",
+      "uf": "",
+      "produtos_fornecidos": [],
+      "frequencia_compra": "",
+      "volume_mensal_kg": 0,
+      "certificacao_organica": false,
+      "opac_certificadora": "",
+      "numero_certificado": "",
+      "validade_certificado": ""
+    }
+  ],
+  
+  "rastreabilidade": {
+    "sistema_rastreabilidade": "",
+    
+    "mecanismos_registro": {
+      "anotacoes_entrada_insumo": false,
+      "controle_estoque_lote": false,
+      "anotacoes_saida_comercializacao": false,
+      "notas_fiscais_recibos": false,
+      "certificados_fornecedores": false,
+      "fichas_tecnicas_produtos": false,
+      "registro_processos": false,
+      "identificacao_lotes": false
+    },
+    
+    "detalhamento_sistema": "",
+    
+    "periodo_retencao_registros": ""
+  },
+  
+  "controle_pragas_higiene": {
+    "higienizacao_ambientes": {
+      "frequencia": "",
+      "procedimentos": "",
+      
+      "produtos_utilizados": [
+        {
+          "marca_nome_comercial": "",
+          "substancia_ativa": "",
+          "fabricante": "",
+          "finalidade": "",
+          "diluicao": "",
+          "quando_usar": "",
+          "ja_usa_pretende": "",
+          "permitido_organicos": false
+        }
+      ]
+    },
+    
+    "desinsetizacao": {
+      "realiza_desinsetizacao": false,
+      "empresa_responsavel": "",
+      "cnpj_empresa": "",
+      "periodicidade": "",
+      "data_ultima_aplicacao": "",
+      "produtos_utilizados": [],
+      "possui_certificado_aplicacao": false,
+      "conforme_legislacao_organica": false
+    },
+    
+    "controle_integrado_pragas": {
+      "possui_programa": false,
+      "metodos_utilizados": [],
+      "frequencia_monitoramento": ""
+    },
+    
+    "declaracao_higienizacao_conforme": false
+  },
+  
+  "producao_paralela": {
+    "processa_produtos_nao_organicos": false,
+    
+    "detalhes_producao_paralela": {
+      "produtos_nao_organicos": [],
+      "volume_mensal_kg": 0,
+      "percentual_producao": 0,
+      
+      "separacao_produtos": {
+        "temporal": false,
+        "espacial": false,
+        "identificacao_clara": false,
+        "procedimentos_prevencao": ""
+      },
+      
+      "risco_contaminacao": "",
+      
+      "analise_risco_documentada": false,
+      "analise_aprovada_grupo_spg": false
+    },
+    
+    "observacao_importante": "Não pode processar minimamente a mesma cultura orgânica e não orgânica"
+  },
+  
+  "residuos_efluentes": {
+    "tipos_residuos": [
+      {
+        "tipo": "",
+        "origem": "",
+        "volume_estimado_kg_mes": 0,
+        "estado_fisico": "",
+        "destino": "",
+        "tratamento": false,
+        "tipo_tratamento": ""
+      }
+    ],
+    
+    "identificacao_croqui": false,
+    
+    "gestao_residuos": {
+      "segregacao_origem": false,
+      "acondicionamento_adequado": false,
+      "coleta_regular": false,
+      "destino_ambientalmente_adequado": false
+    },
+    
+    "riscos_externos": ""
+  },
+  
+  "agua_utilizada": {
+    "origem_agua": "",
+    
+    "analise_agua": {
+      "possui_analise": false,
+      "tipo_analise": "",
+      "data_analise": "",
+      "laboratorio": "",
+      "resultados_conformes": false,
+      "parametros_analisados": [],
+      "periodicidade_analise": ""
+    },
+    
+    "tratamento_agua": {
+      "realiza_tratamento": false,
+      "tipo_tratamento": "",
+      "produtos_utilizados": []
+    },
+    
+    "uso_agua": []
+  },
+  
+  "equipamentos_utensilios": {
+    "lista_equipamentos": [
+      {
+        "equipamento": "",
+        "finalidade": "",
+        "quantidade": 0,
+        "material": "",
+        "estado_conservacao": "",
+        "frequencia_higienizacao": "",
+        "metodo_higienizacao": ""
+      }
+    ],
+    
+    "superficie_contato": {
+      "material_adequado": false,
+      "facilidade_limpeza": false,
+      "ausencia_rachaduras": false
+    }
+  },
+  
+  "infraestrutura": {
+    "areas_instalacao": {
+      "area_total_m2": 0,
+      "pe_direito_minimo": false,
+      "iluminacao_adequada": false,
+      "ventilacao_adequada": false,
+      "revestimentos_adequados": false,
+      "piso": "",
+      "paredes": "",
+      "teto": "",
+      "portas": "",
+      "janelas_telas": false
+    },
+    
+    "instalacoes_sanitarias": {
+      "possui_sanitarios": false,
+      "quantidade": 0,
+      "separado_area_producao": false,
+      "pia_lavagem_maos": false,
+      "sabonete_liquido": false,
+      "papel_toalha": false,
+      "lixeira_pedal": false
+    },
+    
+    "vestiarios": {
+      "possui_vestiarios": false,
+      "armarios_individuais": false,
+      "separado_area_producao": false
+    }
+  },
+  
+  "boas_praticas_fabricacao": {
+    "possui_manual_bpf": false,
+    "funcionarios_treinados": false,
+    "frequencia_treinamentos": "",
+    
+    "procedimentos_implementados": {
+      "controle_materia_prima": false,
+      "higiene_pessoal": false,
+      "higiene_ambiental": false,
+      "controle_pragas": false,
+      "manutencao_equipamentos": false,
+      "controle_qualidade_agua": false,
+      "rastreabilidade": false,
+      "recall": false
+    }
+  },
+  
+  "capacitacao_equipe": {
+    "treinamentos_realizados": [
+      {
+        "tema": "",
+        "data": "",
+        "carga_horaria": 0,
+        "participantes": 0,
+        "instrutor": ""
+      }
+    ],
+    
+    "temas_necessarios": []
+  },
+  
+  "comercializacao_distribuicao": {
+    "canais_comercializacao": [
+      {
+        "tipo": "",
+        "descricao": "",
+        "percentual_vendas": 0,
+        "distancia_media_km": 0
+      }
+    ],
+    
+    "previsao_inicio_vendas": "",
+    
+    "documentacao_comercial": {
+      "emite_nota_fiscal": false,
+      "tipo_nota": "",
+      "sistema_emissao": ""
+    }
+  },
+  
+  "controles_registros": {
+    "registros_mantidos": [
+      {
+        "atividade": "",
+        "metodo_controle": "",
+        "responsavel": "",
+        "frequencia": ""
+      }
+    ],
+    
+    "sistema_gestao": {
+      "tipo": "",
+      "informatizado": false,
+      "backup_regular": false
+    }
+  },
+  
+  "melhorias_investimentos": {
+    "melhorias_planejadas": [],
+    "investimentos_necessarios": [],
+    "prazo_implementacao": ""
+  },
+  
+  "observacoes_complementares": {
+    "especificidades_processamento": "",
+    "diferenciais_produto": "",
+    "desafios_enfrentados": "",
+    "informacoes_adicionais": ""
+  },
+  
+  "declaracoes_responsavel": {
+    "veracidade_informacoes": false,
+    "compromisso_atualizacao": false,
+    "conhecimento_legislacao": false,
+    "conhecimento_regras_spg": false,
+    "autorizacao_acesso_integral": false,
+    "fornecimento_informacoes_adicionais": false,
+    "ciencia_visitas_sem_aviso": false,
+    "aceita_condicoes_sancoes": false,
+    "direito_recurso": false,
+    "total_conhecimento_declaracoes": false
+  },
+  
+  "assinatura": {
+    "nome_completo_responsavel": "",
+    "cpf_responsavel": "",
+    "grupo_spg_anc": "",
+    "data_elaboracao_pmo": "",
+    "assinatura_digital": ""
+  },
+  
+  "anexos_documentos": {
+    "fotos_instalacoes": [],
+    "fotos_processos": [],
+    "croqui_fluxograma": [],
+    "alvara_funcionamento": [],
+    "licenca_sanitaria": [],
+    "analise_agua": [],
+    "manual_boas_praticas": [],
+    "certificados_fornecedores": [],
+    "notas_fiscais": [],
+    "certificado_desinsetizacao": [],
+    "registros_producao": [],
+    "analise_risco_producao_paralela": [],
+    "outros_documentos": []
+  }
+}
