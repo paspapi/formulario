@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMO Anexo Processamento Mínimo - ANC</title>
+
+    <!-- Framework CSS Unificado -->
+    <link rel="stylesheet" href="../../framework/core/pmo-framework-full.css">
+
+    <!-- CSS Específico -->
+    <link rel="stylesheet" href="./processamento-minimo.css">
+</head>
+<body>
+    <!-- HEADER PADRÃO -->
+    <header class="pmo-header">
+        <div class="pmo-container">
+            <div class="header-content">
+                <h1>🥗 Anexo VI - Processamento Mínimo</h1>
+                <p class="subtitle">Frutas e Vegetais Minimamente Processados - ANC</p>
+            </div>
+
+            <!-- Navegação -->
+            <nav class="pmo-navigation">
+                <a href="../dashboard/index.html">🏠 Dashboard</a>
+                <a href="../pmo-principal/index.html">📋 PMO Principal</a>
+                <a href="../anexo-vegetal/index.html">🌱 Anexo Vegetal</a>
+                <a href="../anexo-animal/index.html">🐄 Anexo Animal</a>
+                <a href="../anexo-cogumelo/index.html">🍄 Anexo Cogumelo</a>
+                <a href="../anexo-apicultura/index.html">🐝 Anexo Apicultura</a>
+                <a href="../anexo-processamentominimo/index.html" class="active">🥗 Processamento Mínimo</a>
+                <a href="../anexo-processamento/index.html">🏭 Processamento</a>
+                <a href="../relatorios/index.html">📊 Relatórios</a>
+            </nav>
+
+            <!-- Barra de Progresso -->
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+                <span class="progress-text" id="progress-text">0% Completo</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTAINER PRINCIPAL -->
+    <div class="pmo-container">
+        <form id="form-processamento-minimo" class="pmo-form">
+
+            <!-- SEÇÃO 1: IDENTIFICAÇÃO -->
+            <section class="form-section">
+                <h2>📋 1. Identificação</h2>
+
+                <h3>👤 Fornecedores/Responsáveis</h3>
+                <div class="table-wrapper">
+                    <table class="dynamic-table" id="tabela-responsaveis">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%">#</th>
+                                <th style="width: 45%">Nome Completo *</th>
+                                <th style="width: 25%">CPF *</th>
+                                <th style="width: 20%">Data Nascimento</th>
+                                <th style="width: 5%">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Linhas dinâmicas -->
+                        </tbody>
+                    </table>
+                    <button type="button" class="btn btn-add" onclick="ProcessamentoMinimo.table.addRow('tabela-responsaveis')">
+                        ➕ Adicionar Responsável
+                    </button>
+                </div>
+
+                <h3>🏢 Dados da Empresa</h3>
+                <div class="form-grid">
+                    <div class="field-wrapper col-span-2">
+                        <label for="razao_social">Razão Social *</label>
+                        <input type="text" id="razao_social" name="razao_social" required>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="nome_fantasia">Nome Fantasia</label>
+                        <input type="text" id="nome_fantasia" name="nome_fantasia">
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="cnpj_produtor">CNPJ/CPF Produtor Rural *</label>
+                        <input type="text" id="cnpj_produtor" name="cnpj_produtor" data-mask="cnpj" required>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="inscricao_estadual">Inscrição Estadual</label>
+                        <input type="text" id="inscricao_estadual" name="inscricao_estadual">
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="inscricao_municipal">Inscrição Municipal</label>
+                        <input type="text" id="inscricao_municipal" name="inscricao_municipal">
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="grupo_spg">Grupo SPG</label>
+                        <input type="text" id="grupo_spg" name="grupo_spg">
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="data_preenchimento">Data Preenchimento *</label>
+                        <input type="date" id="data_preenchimento" name="data_preenchimento" required>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="telefone">Telefone *</label>
+                        <input type="tel" id="telefone" name="telefone" required>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="email">E-mail *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 2: LOCALIZAÇÃO -->
+            <section class="form-section">
+                <h2>📍 2. Localização</h2>
+
+                <div class="form-grid">
+                    <div class="field-wrapper col-span-2">
+                        <label for="logradouro">Logradouro *</label>
+                        <input type="text" id="logradouro" name="logradouro" required>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="numero">Número</label>
+                        <input type="text" id="numero" name="numero">
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="complemento">Complemento</label>
+                        <input type="text" id="complemento" name="complemento">
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="bairro">Bairro *</label>
+                        <input type="text" id="bairro" name="bairro" required>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="municipio">Município *</label>
+                        <input type="text" id="municipio" name="municipio" required>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="uf">UF *</label>
+                        <select id="uf" name="uf" required>
+                            <option value="">Selecione...</option>
+                            <option value="SP">SP</option>
+                            <option value="MG">MG</option>
+                            <option value="RJ">RJ</option>
+                            <!-- Adicionar outros estados -->
+                        </select>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="cep">CEP *</label>
+                        <input type="text" id="cep" name="cep" data-mask="cep" required>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="latitude">Latitude</label>
+                        <input type="number" id="latitude" name="latitude" step="0.000001">
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="longitude">Longitude</label>
+                        <input type="number" id="longitude" name="longitude" step="0.000001">
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="tipo_local">Tipo de Local *</label>
+                        <select id="tipo_local" name="tipo_local" required>
+                            <option value="">Selecione...</option>
+                            <option value="PROPRIO">Próprio</option>
+                            <option value="ARRENDADO">Arrendado</option>
+                            <option value="COMODATO">Comodato</option>
+                            <option value="ALUGADO">Alugado</option>
+                        </select>
+                    </div>
+
+                    <div class="field-wrapper col-span-3">
+                        <label for="roteiro_acesso">Roteiro de Acesso</label>
+                        <textarea id="roteiro_acesso" name="roteiro_acesso" rows="3"
+                            placeholder="Descreva como chegar ao local de processamento..."></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 3: SITUAÇÃO LEGAL -->
+            <section class="form-section">
+                <h2>📄 3. Situação Legal</h2>
+
+                <div class="section-info">
+                    <p><strong>Importante:</strong> Marque os documentos que você possui e preencha os dados quando aplicável.</p>
+                </div>
+
+                <div class="checkbox-list">
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="doc_ciencia_obrigacoes" value="sim">
+                        <span>Tenho ciência das minhas obrigações como negócio que produz alimentação orgânica</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="doc_alvara_funcionamento" value="sim">
+                        <span>Possuo Alvará de Funcionamento pela Prefeitura</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="doc_processo_vigilancia" value="sim">
+                        <span>Dei entrada ao processo de análise sanitária do manejo de alimentos</span>
+                    </label>
+
+                    <div class="field-wrapper col-span-3" style="margin-left: 2rem;">
+                        <label for="protocolo_vigilancia">Número do Protocolo</label>
+                        <input type="text" id="protocolo_vigilancia" name="protocolo_vigilancia">
+                    </div>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="doc_licenca_sanitaria" value="sim">
+                        <span>Possuo Licença Sanitária</span>
+                    </label>
+
+                    <div class="field-wrapper col-span-3" style="margin-left: 2rem;">
+                        <label for="numero_cevs">Número CEVS (SP) ou Licença Sanitária</label>
+                        <input type="text" id="numero_cevs" name="numero_cevs">
+                    </div>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="doc_atividade_dispensada" value="sim">
+                        <span>Minha atividade econômica (CNAE) está dispensada da licença sanitária</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="doc_analise_agua" value="sim">
+                        <span>Possuo análise da qualidade da água utilizada no processamento atualizada</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="doc_manual_boas_praticas" value="sim">
+                        <span>Possuo Manual de Boas Práticas de Fabricação</span>
+                    </label>
+                </div>
+
+                <h3>✅ Declarações Obrigatórias</h3>
+                <div class="checkbox-list">
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="decl_nao_radiacao" value="sim" required>
+                        <span>Declaro que NÃO faço uso de radiações ionizantes *</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="decl_nao_microondas" value="sim" required>
+                        <span>Declaro que NÃO faço uso de emissão de micro ondas *</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="decl_nao_nanotecnologia" value="sim" required>
+                        <span>Declaro que NÃO faço uso de nanotecnologia *</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="decl_nao_duplicidade" value="sim" required>
+                        <span>Declaro que NÃO utilizo o mesmo ingrediente de origem orgânica e não orgânica *</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="decl_nao_transgenicos" value="sim" required>
+                        <span>Declaro que NÃO utilizo organismos geneticamente modificados (transgênicos) *</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="decl_conhece_legislacao" value="sim" required>
+                        <span>Declaro que conheço a legislação específica para cada produto por mim processado *</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 4: MÃO DE OBRA -->
+            <section class="form-section">
+                <h2>👥 4. Mão de Obra</h2>
+
+                <div class="table-wrapper">
+                    <table class="dynamic-table" id="tabela-funcionarios">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%">#</th>
+                                <th style="width: 25%">Tipo Funcionário</th>
+                                <th style="width: 10%">Quantidade</th>
+                                <th style="width: 30%">Função</th>
+                                <th style="width: 25%">Capacitação em Orgânicos?</th>
+                                <th style="width: 5%">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Linhas dinâmicas -->
+                        </tbody>
+                    </table>
+                    <button type="button" class="btn btn-add" onclick="ProcessamentoMinimo.table.addRow('tabela-funcionarios')">
+                        ➕ Adicionar Funcionário
+                    </button>
+                </div>
+
+                <div class="form-grid">
+                    <div class="field-wrapper">
+                        <label for="numero_total_funcionarios">Número Total de Funcionários *</label>
+                        <input type="number" id="numero_total_funcionarios" name="numero_total_funcionarios" min="0" required>
+                    </div>
+
+                    <div class="field-wrapper col-span-2">
+                        <label for="detalhes_situacao_funcional">Detalhes da Situação Funcional</label>
+                        <textarea id="detalhes_situacao_funcional" name="detalhes_situacao_funcional" rows="2"></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 5: PRODUTOS PROCESSADOS -->
+            <section class="form-section">
+                <h2>🥗 5. Produtos Processados</h2>
+
+                <div class="table-wrapper">
+                    <table class="dynamic-table" id="tabela-produtos">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%">#</th>
+                                <th style="width: 20%">Nome Produto Final *</th>
+                                <th style="width: 15%">Conteúdo Processado</th>
+                                <th style="width: 20%">Descrição Processamento</th>
+                                <th style="width: 10%">Produção Mensal (kg)</th>
+                                <th style="width: 15%">Tipo Produto</th>
+                                <th style="width: 10%">Embalagem</th>
+                                <th style="width: 5%">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Linhas dinâmicas -->
+                        </tbody>
+                    </table>
+                    <button type="button" class="btn btn-add" onclick="ProcessamentoMinimo.table.addRow('tabela-produtos')">
+                        ➕ Adicionar Produto
+                    </button>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 6: CROQUI/PLANTA DA UNIDADE -->
+            <section class="form-section">
+                <h2>🗺️ 6. Croqui/Planta da Unidade</h2>
+
+                <div class="form-grid">
+                    <div class="field-wrapper col-span-3">
+                        <label>
+                            <input type="checkbox" name="possui_croqui" value="sim">
+                            Possuo croqui/planta da unidade de processamento
+                        </label>
+                    </div>
+
+                    <div class="field-wrapper col-span-3">
+                        <label for="descricao_layout">Descrição do Layout</label>
+                        <textarea id="descricao_layout" name="descricao_layout" rows="3"
+                            placeholder="Descreva como está organizado o espaço de processamento..."></textarea>
+                    </div>
+                </div>
+
+                <h3>Áreas Identificadas no Croqui</h3>
+                <div class="checkbox-grid">
+                    <label><input type="checkbox" name="area_entrada" value="sim"> Entrada</label>
+                    <label><input type="checkbox" name="area_recepcao" value="sim"> Recepção de Matéria-Prima</label>
+                    <label><input type="checkbox" name="area_processamento" value="sim"> Área de Processamento</label>
+                    <label><input type="checkbox" name="area_higienizacao" value="sim"> Área de Higienização</label>
+                    <label><input type="checkbox" name="area_embalagem" value="sim"> Área de Embalagem</label>
+                    <label><input type="checkbox" name="area_armazenamento" value="sim"> Área de Armazenamento</label>
+                    <label><input type="checkbox" name="area_sanitarios" value="sim"> Sanitários</label>
+                    <label><input type="checkbox" name="area_vestiarios" value="sim"> Vestiários</label>
+                    <label><input type="checkbox" name="area_deposito_insumos" value="sim"> Depósito de Insumos</label>
+                    <label><input type="checkbox" name="area_deposito_residuos" value="sim"> Depósito de Resíduos</label>
+                </div>
+
+                <div class="form-grid">
+                    <div class="field-wrapper col-span-3">
+                        <label>
+                            <input type="checkbox" name="fluxograma_processo" value="sim">
+                            Possuo fluxograma do processo de produção
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 7: ETAPAS FORA DA UNIDADE -->
+            <section class="form-section">
+                <h2>🏢 7. Etapas Realizadas Fora da Unidade</h2>
+
+                <div class="form-grid">
+                    <div class="field-wrapper col-span-3">
+                        <label>
+                            <input type="checkbox" name="realiza_etapas_externas" value="sim"
+                                onchange="ProcessamentoMinimo.toggleEtapasExternas(this)">
+                            Realizo etapas de processamento em local externo (terceirizado)
+                        </label>
+                    </div>
+                </div>
+
+                <div id="etapas-externas-container" style="display: none;">
+                    <div class="table-wrapper">
+                        <table class="dynamic-table" id="tabela-etapas-externas">
+                            <thead>
+                                <tr>
+                                    <th style="width: 5%">#</th>
+                                    <th style="width: 20%">Etapa</th>
+                                    <th style="width: 20%">Local/Empresa</th>
+                                    <th style="width: 25%">Endereço Completo</th>
+                                    <th style="width: 15%">Responsável</th>
+                                    <th style="width: 10%">Certificação Orgânica?</th>
+                                    <th style="width: 5%">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Linhas dinâmicas -->
+                            </tbody>
+                        </table>
+                        <button type="button" class="btn btn-add" onclick="ProcessamentoMinimo.table.addRow('tabela-etapas-externas')">
+                            ➕ Adicionar Etapa Externa
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 8: ETAPAS DO PROCESSAMENTO -->
+            <section class="form-section">
+                <h2>⚙️ 8. Etapas do Processamento Mínimo</h2>
+
+                <div class="section-info">
+                    <p><strong>Instruções:</strong> Marque as etapas que você realiza e descreva cada processo detalhadamente.</p>
+                </div>
+
+                <!-- 8.1 Recepção Matéria-Prima -->
+                <div class="etapa-box">
+                    <h3>
+                        <label>
+                            <input type="checkbox" name="etapa_recepcao" value="sim"
+                                onchange="ProcessamentoMinimo.toggleEtapa(this, 'recepcao')">
+                            1. Recepção de Matéria-Prima
+                        </label>
+                    </h3>
+                    <div id="etapa-recepcao" class="etapa-content" style="display: none;">
+                        <div class="form-grid">
+                            <div class="field-wrapper col-span-3">
+                                <label for="recepcao_descricao">Descrição da Etapa</label>
+                                <textarea id="recepcao_descricao" name="recepcao_descricao" rows="2"></textarea>
+                            </div>
+                            <div class="field-wrapper col-span-3">
+                                <label for="recepcao_criterios">Critérios de Aceitação</label>
+                                <textarea id="recepcao_criterios" name="recepcao_criterios" rows="2"></textarea>
+                            </div>
+                            <div class="field-wrapper col-span-3">
+                                <label for="recepcao_equipamentos">Equipamentos Utilizados</label>
+                                <input type="text" id="recepcao_equipamentos" name="recepcao_equipamentos">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8.2 Seleção e Classificação -->
+                <div class="etapa-box">
+                    <h3>
+                        <label>
+                            <input type="checkbox" name="etapa_selecao" value="sim"
+                                onchange="ProcessamentoMinimo.toggleEtapa(this, 'selecao')">
+                            2. Seleção e Classificação
+                        </label>
+                    </h3>
+                    <div id="etapa-selecao" class="etapa-content" style="display: none;">
+                        <div class="form-grid">
+                            <div class="field-wrapper col-span-3">
+                                <label for="selecao_descricao">Descrição da Etapa</label>
+                                <textarea id="selecao_descricao" name="selecao_descricao" rows="2"></textarea>
+                            </div>
+                            <div class="field-wrapper col-span-2">
+                                <label for="selecao_criterios">Critérios de Seleção</label>
+                                <input type="text" id="selecao_criterios" name="selecao_criterios">
+                            </div>
+                            <div class="field-wrapper">
+                                <label for="selecao_destino_descartes">Destino dos Descartes</label>
+                                <input type="text" id="selecao_destino_descartes" name="selecao_destino_descartes">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8.3 Lavagem e Higienização -->
+                <div class="etapa-box">
+                    <h3>
+                        <label>
+                            <input type="checkbox" name="etapa_lavagem" value="sim"
+                                onchange="ProcessamentoMinimo.toggleEtapa(this, 'lavagem')">
+                            3. Lavagem e Higienização
+                        </label>
+                    </h3>
+                    <div id="etapa-lavagem" class="etapa-content" style="display: none;">
+                        <div class="form-grid">
+                            <div class="field-wrapper col-span-3">
+                                <label for="lavagem_descricao">Descrição da Etapa</label>
+                                <textarea id="lavagem_descricao" name="lavagem_descricao" rows="2"></textarea>
+                            </div>
+                            <div class="field-wrapper">
+                                <label for="lavagem_metodo">Método de Lavagem</label>
+                                <input type="text" id="lavagem_metodo" name="lavagem_metodo">
+                            </div>
+                            <div class="field-wrapper col-span-2">
+                                <label for="lavagem_agua">Água Utilizada</label>
+                                <select id="lavagem_agua" name="lavagem_agua">
+                                    <option value="">Selecione...</option>
+                                    <option value="POTAVEL">Potável</option>
+                                    <option value="TRATADA">Tratada</option>
+                                    <option value="POCO">Poço</option>
+                                    <option value="CISTERNA">Cisterna</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <h4>Substâncias Utilizadas na Lavagem</h4>
+                        <div class="table-wrapper">
+                            <table class="dynamic-table" id="tabela-substancias-lavagem">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 5%">#</th>
+                                        <th style="width: 20%">Substância</th>
+                                        <th style="width: 15%">Marca</th>
+                                        <th style="width: 15%">Concentração</th>
+                                        <th style="width: 15%">Tempo Contato</th>
+                                        <th style="width: 10%">Permitida Orgânicos?</th>
+                                        <th style="width: 5%">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Linhas dinâmicas -->
+                                </tbody>
+                            </table>
+                            <button type="button" class="btn btn-add btn-sm" onclick="ProcessamentoMinimo.table.addRow('tabela-substancias-lavagem')">
+                                ➕ Adicionar Substância
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8.4 Descascamento -->
+                <div class="etapa-box">
+                    <h3>
+                        <label>
+                            <input type="checkbox" name="etapa_descascamento" value="sim"
+                                onchange="ProcessamentoMinimo.toggleEtapa(this, 'descascamento')">
+                            4. Descascamento
+                        </label>
+                    </h3>
+                    <div id="etapa-descascamento" class="etapa-content" style="display: none;">
+                        <div class="form-grid">
+                            <div class="field-wrapper col-span-2">
+                                <label for="descascamento_metodo">Método</label>
+                                <input type="text" id="descascamento_metodo" name="descascamento_metodo">
+                            </div>
+                            <div class="field-wrapper">
+                                <label for="descascamento_destino">Destino das Cascas</label>
+                                <input type="text" id="descascamento_destino" name="descascamento_destino">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8.5 Corte e Fatiamento -->
+                <div class="etapa-box">
+                    <h3>
+                        <label>
+                            <input type="checkbox" name="etapa_corte" value="sim"
+                                onchange="ProcessamentoMinimo.toggleEtapa(this, 'corte')">
+                            5. Corte e Fatiamento
+                        </label>
+                    </h3>
+                    <div id="etapa-corte" class="etapa-content" style="display: none;">
+                        <div class="form-grid">
+                            <div class="field-wrapper col-span-2">
+                                <label for="corte_tipo">Tipo de Corte</label>
+                                <input type="text" id="corte_tipo" name="corte_tipo" placeholder="Ex: cubos, rodelas, tiras">
+                            </div>
+                            <div class="field-wrapper">
+                                <label for="corte_higienizacao">Higienização dos Equipamentos</label>
+                                <input type="text" id="corte_higienizacao" name="corte_higienizacao">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8.6 Branqueamento -->
+                <div class="etapa-box">
+                    <h3>
+                        <label>
+                            <input type="checkbox" name="etapa_branqueamento" value="sim"
+                                onchange="ProcessamentoMinimo.toggleEtapa(this, 'branqueamento')">
+                            6. Branqueamento
+                        </label>
+                    </h3>
+                    <div id="etapa-branqueamento" class="etapa-content" style="display: none;">
+                        <div class="form-grid">
+                            <div class="field-wrapper">
+                                <label for="branqueamento_temperatura">Temperatura (°C)</label>
+                                <input type="number" id="branqueamento_temperatura" name="branqueamento_temperatura" min="0">
+                            </div>
+                            <div class="field-wrapper">
+                                <label for="branqueamento_tempo">Tempo (segundos)</label>
+                                <input type="number" id="branqueamento_tempo" name="branqueamento_tempo" min="0">
+                            </div>
+                            <div class="field-wrapper">
+                                <label for="branqueamento_resfriamento">Método de Resfriamento</label>
+                                <input type="text" id="branqueamento_resfriamento" name="branqueamento_resfriamento">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8.7 Sanitização Final -->
+                <div class="etapa-box">
+                    <h3>
+                        <label>
+                            <input type="checkbox" name="etapa_sanitizacao" value="sim"
+                                onchange="ProcessamentoMinimo.toggleEtapa(this, 'sanitizacao')">
+                            7. Sanitização Final
+                        </label>
+                    </h3>
+                    <div id="etapa-sanitizacao" class="etapa-content" style="display: none;">
+                        <div class="form-grid">
+                            <div class="field-wrapper col-span-2">
+                                <label for="sanitizacao_metodo">Método de Aplicação</label>
+                                <input type="text" id="sanitizacao_metodo" name="sanitizacao_metodo">
+                            </div>
+                            <div class="field-wrapper">
+                                <label>
+                                    <input type="checkbox" name="sanitizacao_enxague" value="sim">
+                                    Realiza Enxágue após Sanitização
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8.8 Centrifugação/Secagem -->
+                <div class="etapa-box">
+                    <h3>
+                        <label>
+                            <input type="checkbox" name="etapa_centrifugacao" value="sim"
+                                onchange="ProcessamentoMinimo.toggleEtapa(this, 'centrifugacao')">
+                            8. Centrifugação/Secagem
+                        </label>
+                    </h3>
+                    <div id="etapa-centrifugacao" class="etapa-content" style="display: none;">
+                        <div class="form-grid">
+                            <div class="field-wrapper">
+                                <label for="centrifugacao_metodo">Método</label>
+                                <input type="text" id="centrifugacao_metodo" name="centrifugacao_metodo">
+                            </div>
+                            <div class="field-wrapper col-span-2">
+                                <label for="centrifugacao_tempo">Tempo do Processo</label>
+                                <input type="text" id="centrifugacao_tempo" name="centrifugacao_tempo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8.9 Embalagem -->
+                <div class="etapa-box">
+                    <h3>
+                        <label>
+                            <input type="checkbox" name="etapa_embalagem" value="sim"
+                                onchange="ProcessamentoMinimo.toggleEtapa(this, 'embalagem')">
+                            9. Embalagem
+                        </label>
+                    </h3>
+                    <div id="etapa-embalagem" class="etapa-content" style="display: none;">
+                        <div class="form-grid">
+                            <div class="field-wrapper col-span-2">
+                                <label for="embalagem_tipos">Tipos de Embalagem</label>
+                                <input type="text" id="embalagem_tipos" name="embalagem_tipos" placeholder="Ex: bandeja PET, saco plástico">
+                            </div>
+                            <div class="field-wrapper">
+                                <label>
+                                    <input type="checkbox" name="embalagem_atmosfera_modificada" value="sim">
+                                    Atmosfera Modificada
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8.10 Rotulagem -->
+                <div class="etapa-box">
+                    <h3>
+                        <label>
+                            <input type="checkbox" name="etapa_rotulagem" value="sim"
+                                onchange="ProcessamentoMinimo.toggleEtapa(this, 'rotulagem')">
+                            10. Rotulagem
+                        </label>
+                    </h3>
+                    <div id="etapa-rotulagem" class="etapa-content" style="display: none;">
+                        <div class="form-grid">
+                            <div class="field-wrapper col-span-3">
+                                <label for="rotulagem_metodo">Método de Rotulagem</label>
+                                <input type="text" id="rotulagem_metodo" name="rotulagem_metodo">
+                            </div>
+                        </div>
+
+                        <h4>Informações no Rótulo</h4>
+                        <div class="checkbox-grid">
+                            <label><input type="checkbox" name="rotulo_nome_produto" value="sim"> Nome do Produto</label>
+                            <label><input type="checkbox" name="rotulo_nome_empresa" value="sim"> Nome da Empresa</label>
+                            <label><input type="checkbox" name="rotulo_cnpj" value="sim"> CNPJ</label>
+                            <label><input type="checkbox" name="rotulo_endereco" value="sim"> Endereço Completo</label>
+                            <label><input type="checkbox" name="rotulo_selo_organico" value="sim"> Selo Orgânico</label>
+                            <label><input type="checkbox" name="rotulo_peso" value="sim"> Peso Líquido</label>
+                            <label><input type="checkbox" name="rotulo_data_fabricacao" value="sim"> Data de Fabricação</label>
+                            <label><input type="checkbox" name="rotulo_data_validade" value="sim"> Data de Validade</label>
+                            <label><input type="checkbox" name="rotulo_lote" value="sim"> Lote</label>
+                            <label><input type="checkbox" name="rotulo_ingredientes" value="sim"> Ingredientes</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8.11 Armazenamento -->
+                <div class="etapa-box">
+                    <h3>
+                        <label>
+                            <input type="checkbox" name="etapa_armazenamento" value="sim"
+                                onchange="ProcessamentoMinimo.toggleEtapa(this, 'armazenamento')">
+                            11. Armazenamento/Estocagem
+                        </label>
+                    </h3>
+                    <div id="etapa-armazenamento" class="etapa-content" style="display: none;">
+                        <div class="form-grid">
+                            <div class="field-wrapper">
+                                <label for="armazenamento_tipo">Tipo de Armazenamento</label>
+                                <select id="armazenamento_tipo" name="armazenamento_tipo">
+                                    <option value="">Selecione...</option>
+                                    <option value="REFRIGERADO">Refrigerado</option>
+                                    <option value="CONGELADO">Congelado</option>
+                                    <option value="AMBIENTE">Temperatura Ambiente</option>
+                                </select>
+                            </div>
+                            <div class="field-wrapper">
+                                <label for="armazenamento_temperatura">Temperatura (°C)</label>
+                                <input type="number" id="armazenamento_temperatura" name="armazenamento_temperatura">
+                            </div>
+                            <div class="field-wrapper">
+                                <label for="armazenamento_tempo">Tempo Máximo de Estocagem</label>
+                                <input type="text" id="armazenamento_tempo" name="armazenamento_tempo">
+                            </div>
+                        </div>
+                        <div class="checkbox-grid">
+                            <label><input type="checkbox" name="armazenamento_controle_temp" value="sim"> Controle de Temperatura</label>
+                            <label><input type="checkbox" name="armazenamento_controle_pragas" value="sim"> Controle de Pragas</label>
+                            <label><input type="checkbox" name="armazenamento_separacao" value="sim"> Separação de Produtos Orgânicos</label>
+                            <label><input type="checkbox" name="armazenamento_fifo" value="sim"> Sistema FIFO (primeiro que entra, primeiro que sai)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8.12 Transporte -->
+                <div class="etapa-box">
+                    <h3>
+                        <label>
+                            <input type="checkbox" name="etapa_transporte" value="sim"
+                                onchange="ProcessamentoMinimo.toggleEtapa(this, 'transporte')">
+                            12. Transporte
+                        </label>
+                    </h3>
+                    <div id="etapa-transporte" class="etapa-content" style="display: none;">
+                        <div class="form-grid">
+                            <div class="field-wrapper">
+                                <label for="transporte_tipo_veiculo">Tipo de Veículo</label>
+                                <input type="text" id="transporte_tipo_veiculo" name="transporte_tipo_veiculo">
+                            </div>
+                            <div class="field-wrapper col-span-2">
+                                <label for="transporte_condicoes">Condições de Transporte</label>
+                                <input type="text" id="transporte_condicoes" name="transporte_condicoes">
+                            </div>
+                            <div class="field-wrapper">
+                                <label>
+                                    <input type="checkbox" name="transporte_temp_controlada" value="sim">
+                                    Temperatura Controlada
+                                </label>
+                            </div>
+                            <div class="field-wrapper col-span-2">
+                                <label for="transporte_medidas_prevencao">Medidas de Prevenção de Contaminação</label>
+                                <input type="text" id="transporte_medidas_prevencao" name="transporte_medidas_prevencao">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 9: FORNECEDORES MATÉRIA-PRIMA -->
+            <section class="form-section">
+                <h2>📦 9. Fornecedores de Matéria-Prima</h2>
+
+                <div class="table-wrapper">
+                    <table class="dynamic-table" id="tabela-fornecedores">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%">#</th>
+                                <th style="width: 20%">Nome Fornecedor *</th>
+                                <th style="width: 15%">CPF/CNPJ</th>
+                                <th style="width: 15%">Cidade/UF</th>
+                                <th style="width: 15%">Produtos Fornecidos</th>
+                                <th style="width: 10%">Volume Mensal (kg)</th>
+                                <th style="width: 10%">Certificação Orgânica?</th>
+                                <th style="width: 5%">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Linhas dinâmicas -->
+                        </tbody>
+                    </table>
+                    <button type="button" class="btn btn-add" onclick="ProcessamentoMinimo.table.addRow('tabela-fornecedores')">
+                        ➕ Adicionar Fornecedor
+                    </button>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 10: RASTREABILIDADE -->
+            <section class="form-section">
+                <h2>🔍 10. Rastreabilidade</h2>
+
+                <div class="form-grid">
+                    <div class="field-wrapper col-span-3">
+                        <label for="sistema_rastreabilidade">Sistema de Rastreabilidade</label>
+                        <textarea id="sistema_rastreabilidade" name="sistema_rastreabilidade" rows="3"
+                            placeholder="Descreva como você faz o controle de rastreabilidade dos produtos..."></textarea>
+                    </div>
+                </div>
+
+                <h3>Mecanismos de Registro</h3>
+                <div class="checkbox-grid">
+                    <label><input type="checkbox" name="rastr_anotacoes_entrada" value="sim"> Anotações de Entrada de Insumos</label>
+                    <label><input type="checkbox" name="rastr_controle_estoque" value="sim"> Controle de Estoque por Lote</label>
+                    <label><input type="checkbox" name="rastr_anotacoes_saida" value="sim"> Anotações de Saída/Comercialização</label>
+                    <label><input type="checkbox" name="rastr_notas_fiscais" value="sim"> Notas Fiscais e Recibos</label>
+                    <label><input type="checkbox" name="rastr_certificados" value="sim"> Certificados dos Fornecedores</label>
+                    <label><input type="checkbox" name="rastr_fichas_tecnicas" value="sim"> Fichas Técnicas dos Produtos</label>
+                    <label><input type="checkbox" name="rastr_registro_processos" value="sim"> Registro dos Processos</label>
+                    <label><input type="checkbox" name="rastr_identificacao_lotes" value="sim"> Identificação de Lotes</label>
+                </div>
+
+                <div class="form-grid">
+                    <div class="field-wrapper col-span-3">
+                        <label for="rastr_periodo_retencao">Período de Retenção dos Registros</label>
+                        <input type="text" id="rastr_periodo_retencao" name="rastr_periodo_retencao"
+                            placeholder="Ex: 2 anos, 5 anos">
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 11: PRODUÇÃO PARALELA -->
+            <section class="form-section">
+                <h2>⚖️ 11. Produção Paralela</h2>
+
+                <div class="alert alert-warning">
+                    <strong>⚠️ Importante:</strong> NÃO é permitido processar minimamente a MESMA cultura orgânica e não orgânica.
+                </div>
+
+                <div class="form-grid">
+                    <div class="field-wrapper col-span-3">
+                        <label>
+                            <input type="checkbox" name="processa_nao_organicos" value="sim"
+                                onchange="ProcessamentoMinimo.toggleProducaoParalela(this)">
+                            Processo produtos NÃO orgânicos na mesma unidade
+                        </label>
+                    </div>
+                </div>
+
+                <div id="producao-paralela-container" style="display: none;">
+                    <div class="form-grid">
+                        <div class="field-wrapper col-span-2">
+                            <label for="pp_produtos">Produtos Não Orgânicos</label>
+                            <input type="text" id="pp_produtos" name="pp_produtos">
+                        </div>
+                        <div class="field-wrapper">
+                            <label for="pp_volume">Volume Mensal (kg)</label>
+                            <input type="number" id="pp_volume" name="pp_volume" min="0" step="0.1">
+                        </div>
+
+                        <div class="field-wrapper col-span-3">
+                            <label for="pp_procedimentos">Procedimentos de Prevenção de Contaminação</label>
+                            <textarea id="pp_procedimentos" name="pp_procedimentos" rows="3"></textarea>
+                        </div>
+
+                        <div class="field-wrapper col-span-3">
+                            <label for="pp_risco">Análise de Risco de Contaminação</label>
+                            <textarea id="pp_risco" name="pp_risco" rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <h3>Tipo de Separação</h3>
+                    <div class="checkbox-grid">
+                        <label><input type="checkbox" name="pp_separacao_temporal" value="sim"> Separação Temporal (processamento em horários diferentes)</label>
+                        <label><input type="checkbox" name="pp_separacao_espacial" value="sim"> Separação Espacial (áreas diferentes)</label>
+                        <label><input type="checkbox" name="pp_identificacao_clara" value="sim"> Identificação Clara dos Produtos</label>
+                        <label><input type="checkbox" name="pp_analise_aprovada" value="sim"> Análise de Risco Aprovada pelo Grupo SPG</label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 12: OBSERVAÇÕES -->
+            <section class="form-section">
+                <h2>📝 12. Observações Adicionais</h2>
+                <div class="field-wrapper">
+                    <label for="observacoes">Observações, Comentários ou Informações Adicionais</label>
+                    <textarea id="observacoes" name="observacoes" rows="5"
+                        placeholder="Utilize este espaço para incluir qualquer informação adicional relevante sobre o processamento mínimo..."></textarea>
+                </div>
+            </section>
+
+            <!-- BOTÕES DE AÇÃO -->
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" onclick="ProcessamentoMinimo.salvar()">
+                    💾 Salvar Rascunho
+                </button>
+                <button type="button" class="btn btn-primary" onclick="ProcessamentoMinimo.validar()">
+                    ✓ Validar Formulário
+                </button>
+                <button type="button" class="btn btn-success" onclick="ProcessamentoMinimo.exportarJSON()">
+                    📥 Exportar JSON
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    📄 Gerar PDF
+                </button>
+            </div>
+
+            <!-- STATUS AUTO-SAVE -->
+            <div class="auto-save-status">
+                <span id="auto-save-status">💾 Auto-save ativo</span>
+            </div>
+
+            <!-- RESULTADOS DE VALIDAÇÃO -->
+            <div id="validation-results"></div>
+
+        </form>
+    </div>
+
+    <!-- FOOTER PADRÃO -->
+    <footer class="pmo-footer">
+        <p>&copy; 2024 ANC - Associação de Agricultura Natural de Campinas e Região</p>
+        <p>Sistema PMO - Plano de Manejo Orgânico</p>
+    </footer>
+
+    <!-- Framework JS Unificado -->
+    <script src="../../framework/core/pmo-framework.js"></script>
+    <script src="../../framework/components/pmo-tables.js"></script>
+
+    <!-- Script Específico do Formulário -->
+    <script src="./processamento-minimo.js"></script>
+</body>
+</html>

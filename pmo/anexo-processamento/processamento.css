@@ -1,0 +1,392 @@
+/**
+ * Processamento Mínimo - Estilos Específicos
+ * Sistema PMO - ANC
+ *
+ * Seguindo o Design System do Prompt Universal
+ * Os estilos principais vêm do pmo-framework-full.css
+ */
+
+/* ========================================
+   ETAPAS DO PROCESSAMENTO
+   ======================================== */
+
+.etapa-box {
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    background-color: var(--gray-50);
+    transition: all 0.2s ease;
+}
+
+.etapa-box:hover {
+    border-color: var(--primary-light);
+    box-shadow: var(--shadow-sm);
+}
+
+.etapa-box h3 {
+    margin: 0;
+    font-size: var(--text-lg);
+    color: var(--gray-900);
+}
+
+.etapa-box h3 label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.etapa-box h3 input[type="checkbox"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    cursor: pointer;
+}
+
+.etapa-content {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--gray-200);
+}
+
+.etapa-content h4 {
+    font-size: var(--text-base);
+    color: var(--primary-dark);
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+}
+
+/* ========================================
+   CHECKBOX GRID
+   ======================================== */
+
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+}
+
+.checkbox-grid label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm);
+    background-color: white;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.checkbox-grid label:hover {
+    background-color: var(--gray-50);
+    border-color: var(--primary-light);
+}
+
+.checkbox-grid input[type="checkbox"] {
+    width: 1.1rem;
+    height: 1.1rem;
+    cursor: pointer;
+}
+
+/* ========================================
+   CAMPOS DE INPUT EM TABELAS
+   ======================================== */
+
+.dynamic-table input.full-width,
+.dynamic-table select.full-width {
+    width: 100%;
+    padding: 0.4rem;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    transition: border-color 0.2s ease;
+}
+
+.dynamic-table input.full-width:focus,
+.dynamic-table select.full-width:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.row-number {
+    text-align: center;
+    font-weight: 600;
+    color: var(--gray-600);
+    background-color: var(--gray-50);
+    font-size: var(--text-sm);
+}
+
+/* ========================================
+   BOTÕES DE AÇÃO EM TABELAS
+   ======================================== */
+
+.btn-icon {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.3rem;
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-icon:hover {
+    background-color: var(--gray-100);
+    transform: scale(1.1);
+}
+
+.btn-icon.btn-danger:hover {
+    background-color: #fee2e2;
+}
+
+.btn-sm {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--text-sm);
+}
+
+/* ========================================
+   AUTO-SAVE STATUS
+   ======================================== */
+
+.auto-save-status {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: white;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    z-index: 1000;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    border: 1px solid var(--gray-200);
+}
+
+/* ========================================
+   ALERTAS E VALIDAÇÃO
+   ======================================== */
+
+#validation-results {
+    margin-top: var(--spacing-xl);
+}
+
+#validation-results h3 {
+    margin-bottom: var(--spacing-md);
+    font-size: var(--text-lg);
+}
+
+#validation-results ul {
+    margin: var(--spacing-sm) 0 0 var(--spacing-md);
+    padding-left: var(--spacing-md);
+}
+
+#validation-results li {
+    margin-bottom: var(--spacing-xs);
+    font-size: var(--text-sm);
+}
+
+/* ========================================
+   SECTION INFO
+   ======================================== */
+
+.section-info {
+    background-color: var(--gray-50);
+    border-left: 4px solid var(--primary);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    border-radius: var(--radius-sm);
+}
+
+.section-info p {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--gray-700);
+    line-height: 1.6;
+}
+
+.section-info strong {
+    color: var(--primary-dark);
+    font-weight: 600;
+}
+
+/* ========================================
+   SEÇÕES DO FORMULÁRIO
+   ======================================== */
+
+.form-section h2 {
+    color: var(--primary-dark);
+    border-bottom: 2px solid var(--primary-light);
+    padding-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--text-2xl);
+}
+
+.form-section h3 {
+    color: var(--gray-800);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+    font-size: var(--text-lg);
+}
+
+/* ========================================
+   RESPONSIVIDADE
+   ======================================== */
+
+@media (max-width: 768px) {
+    .etapa-box {
+        padding: var(--spacing-sm);
+    }
+
+    .checkbox-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .auto-save-status {
+        bottom: 1rem;
+        right: 1rem;
+        font-size: var(--text-xs);
+        padding: var(--spacing-xs) var(--spacing-sm);
+    }
+
+    .dynamic-table {
+        font-size: var(--text-xs);
+    }
+
+    .btn-icon {
+        font-size: 1rem;
+        padding: 0.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .etapa-content {
+        padding-top: var(--spacing-sm);
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* ========================================
+   ANIMAÇÕES
+   ======================================== */
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.alert {
+    animation: slideIn 0.3s ease;
+}
+
+.etapa-content {
+    animation: slideIn 0.2s ease;
+}
+
+/* ========================================
+   IMPRESSÃO
+   ======================================== */
+
+@media print {
+    .btn,
+    .btn-add,
+    .btn-icon,
+    .auto-save-status,
+    .form-actions,
+    .pmo-navigation,
+    .progress-bar-container {
+        display: none !important;
+    }
+
+    .form-section {
+        page-break-inside: avoid;
+    }
+
+    .etapa-box {
+        border: 1px solid #000;
+        break-inside: avoid;
+    }
+
+    .dynamic-table {
+        font-size: 0.75rem;
+    }
+
+    .dynamic-table th,
+    .dynamic-table td {
+        padding: 0.25rem;
+    }
+}
+
+/* ========================================
+   ESTADOS DE FOCO E ACESSIBILIDADE
+   ======================================== */
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.checkbox-enhanced input:focus + span,
+.checkbox-grid input:focus + * {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+/* ========================================
+   CAMPOS DESABILITADOS
+   ======================================== */
+
+input:disabled,
+select:disabled,
+textarea:disabled {
+    background-color: var(--gray-100);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* ========================================
+   LOADING STATES
+   ======================================== */
+
+.loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid var(--primary);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
