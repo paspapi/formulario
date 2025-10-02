@@ -1,0 +1,96 @@
+/**
+ * Anexo Cogumelos - CSS Específico
+ * Sistema PMO Digital - ANC
+ * Tema: Roxo (#a855f7)
+ */
+
+/* ===== CORES TEMÁTICAS - PRODUÇÃO DE COGUMELOS ===== */
+:root {
+    --cogumelo-primary: #a855f7;
+    --cogumelo-primary-dark: #9333ea;
+    --cogumelo-primary-light: #e9d5ff;
+}
+
+/* Override de cores para tema cogumelo */
+.pmo-header {
+    background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%) !important;
+}
+
+.pmo-header h1,
+.pmo-header .subtitle,
+.pmo-navigation a {
+    color: white !important;
+}
+
+.pmo-navigation a.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: white !important;
+    border-radius: 8px;
+}
+
+.pmo-navigation a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.form-section h2 {
+    color: #a855f7 !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #a855f7 !important;
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1) !important;
+}
+
+.btn-primary {
+    background-color: #a855f7 !important;
+}
+
+.btn-primary:hover {
+    background-color: #9333ea !important;
+}
+
+.btn-add, .btn-secondary {
+    background-color: #a855f7 !important;
+}
+
+.btn-add:hover, .btn-secondary:hover {
+    background-color: #9333ea !important;
+}
+
+.progress-fill {
+    background: linear-gradient(90deg, #a855f7, #c084fc) !important;
+}
+
+/* Estilos específicos de cogumelo */
+.conditional-fields {
+    display: none;
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f9fafb;
+    border-radius: 6px;
+    border-left: 4px solid #a855f7;
+}
+
+.alert-info {
+    background-color: #f3e8ff;
+    border-left: 4px solid #a855f7;
+    padding: 1rem;
+    border-radius: 6px;
+}
+
+.alert-warning {
+    background-color: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    padding: 1rem;
+    border-radius: 6px;
+}
+
+.alert-error {
+    background-color: #fee2e2;
+    border-left: 4px solid #ef4444;
+    padding: 1rem;
+    border-radius: 6px;
+}

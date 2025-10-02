@@ -7,6 +7,12 @@
     "grupo_spg": "",
     "status_processamento": "EXTRAIDO"
   },
+  "certificacao": {
+    "tipo_certificacao": "SPG/OPAC",
+    "opac_nome": "ANC",
+    "grupo_spg": "",
+    "observacoes": ""
+  },
   "dados_gerais": {
     "identificacao": {
       "nome_completo": "",

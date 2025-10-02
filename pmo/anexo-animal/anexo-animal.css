@@ -1,10 +1,71 @@
 /**
  * Anexo Animal - Estilos Específicos
  * Sistema PMO - ANC
+ * Tema: Laranja (#f97316)
  *
  * Estilos customizados para o Anexo III - Produção Animal
  * Complementa o framework CSS unificado
  */
+
+/* ===== CORES TEMÁTICAS - PRODUÇÃO ANIMAL ===== */
+:root {
+    --animal-primary: #f97316;
+    --animal-primary-dark: #ea580c;
+    --animal-primary-light: #fed7aa;
+}
+
+/* Override de cores para tema animal */
+.pmo-header {
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
+}
+
+.pmo-header h1,
+.pmo-header .subtitle,
+.pmo-navigation a {
+    color: white !important;
+}
+
+.pmo-navigation a.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: white !important;
+    border-radius: 8px;
+}
+
+.pmo-navigation a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.form-section h2 {
+    color: #f97316 !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #f97316 !important;
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1) !important;
+}
+
+.btn-primary {
+    background-color: #f97316 !important;
+}
+
+.btn-primary:hover {
+    background-color: #ea580c !important;
+}
+
+.btn-add {
+    background-color: #f97316 !important;
+}
+
+.btn-add:hover {
+    background-color: #ea580c !important;
+}
+
+.progress-fill {
+    background: linear-gradient(90deg, #f97316, #fb923c) !important;
+}
 
 /* ===== ÍCONES E IDENTIDADE VISUAL ===== */
 .pmo-header h1::before {

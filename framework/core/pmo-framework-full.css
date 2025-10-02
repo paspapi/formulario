@@ -1464,6 +1464,26 @@ textarea {
 .col-span-4 { grid-column: span 4 / span 4 !important; }
 .col-span-full { grid-column: 1 / -1 !important; }
 
+/* Campos condicionais (detalhes) - ocupam toda largura e têm espaçamento adequado */
+[id^="detalhes-"] {
+    grid-column: 1 / -1 !important;
+    padding: var(--spacing-md);
+    background-color: var(--gray-50);
+    border-radius: var(--radius-md);
+    margin-top: var(--spacing-md);
+}
+
+/* Remove grid aninhado dentro de campos de detalhes */
+[id^="detalhes-"] > .form-grid {
+    display: block !important;
+}
+
+/* Mas mantém os field-wrappers dentro funcionando como grid */
+[id^="detalhes-"] .field-wrapper {
+    display: block;
+    margin-bottom: var(--spacing-md);
+}
+
 /* ===== PRINT ===== */
 @media print {
     .print-hidden { display: none !important; }

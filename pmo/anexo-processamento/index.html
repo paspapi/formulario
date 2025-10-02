@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMO Anexo Processamento Mínimo - ANC</title>
+
+    <!-- Framework CSS Unificado -->
+    <link rel="stylesheet" href="../../framework/core/pmo-framework-full.css">
+
+    <!-- CSS Específico -->
+    <link rel="stylesheet" href="./anexo-processamento.css">
+</head>
+<body>
+    <!-- HEADER PADRÃO -->
+    <header class="pmo-header">
+        <div class="pmo-container">
+            <div class="header-content">
+                <h1>🏭 Anexo VI - Processamento Mínimo</h1>
+                <p class="subtitle">Plano de Manejo Orgânico - ANC</p>
+            </div>
+
+            <!-- Navegação -->
+            <nav class="pmo-navigation">
+                <a href="../dashboard/index.html">🏠 Dashboard</a>
+                <a href="../pmo-principal/index.html">📋 PMO Principal</a>
+                <a href="../anexo-vegetal/index.html">🌱 Anexo Vegetal</a>
+                <a href="../anexo-animal/index.html">🐄 Anexo Animal</a>
+                <a href="../anexo-cogumelo/index.html">🍄 Anexo Cogumelo</a>
+                <a href="../anexo-apicultura/index.html">🐝 Anexo Apicultura</a>
+                <a href="../anexo-processamento/index.html" class="active">🏭 Anexo Processamento</a>
+                <a href="../relatorios/index.html">📊 Relatórios</a>
+            </nav>
+
+            <!-- Barra de Progresso -->
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+                <span class="progress-text" id="progress-text">0% Completo</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTAINER PRINCIPAL -->
+    <div class="pmo-container">
+        <form id="form-anexo-processamento" class="pmo-form">
+
+            <!-- SEÇÃO 1: DADOS GERAIS -->
+            <section class="form-section">
+                <h2>📋 1. Dados Gerais da Unidade de Processamento</h2>
+                <div class="section-info">
+                    <p><strong>Informações:</strong> Preencha os dados de identificação da unidade de processamento mínimo.</p>
+                </div>
+
+                <div class="form-grid">
+                    <div class="field-wrapper col-span-3">
+                        <label for="razao_social">Razão Social *</label>
+                        <input type="text" id="razao_social" name="razao_social" required>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="cnpj_empresa">CNPJ *</label>
+                        <input type="text" id="cnpj_empresa" name="cnpj_empresa" data-mask="cnpj" required>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="inscricao_estadual">Inscrição Estadual</label>
+                        <input type="text" id="inscricao_estadual" name="inscricao_estadual">
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="inscricao_municipal">Inscrição Municipal</label>
+                        <input type="text" id="inscricao_municipal" name="inscricao_municipal">
+                    </div>
+
+                    <div class="field-wrapper col-span-2">
+                        <label for="endereco_processamento">Endereço Completo *</label>
+                        <input type="text" id="endereco_processamento" name="endereco_processamento" required>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="local_proprio_arrendado">Local Próprio/Arrendado *</label>
+                        <select id="local_proprio_arrendado" name="local_proprio_arrendado" required>
+                            <option value="">Selecione...</option>
+                            <option value="PROPRIO">Próprio</option>
+                            <option value="ARRENDADO">Arrendado</option>
+                            <option value="COMODATO">Comodato</option>
+                        </select>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="numero_funcionarios">Número de Funcionários *</label>
+                        <input type="number" id="numero_funcionarios" name="numero_funcionarios" min="0" required>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="latitude">Latitude</label>
+                        <input type="number" id="latitude" name="latitude" step="0.000001">
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="longitude">Longitude</label>
+                        <input type="number" id="longitude" name="longitude" step="0.000001">
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="data_preenchimento">Data de Preenchimento *</label>
+                        <input type="date" id="data_preenchimento" name="data_preenchimento" required>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 2: SITUAÇÃO LEGAL -->
+            <section class="form-section">
+                <h2>📄 2. Situação Legal</h2>
+                <div class="section-info">
+                    <p><strong>Importante:</strong> Marque os documentos que você possui para regularização legal do processamento.</p>
+                </div>
+
+                <div class="checkbox-list">
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="doc_ciencia_obrigacoes" value="sim">
+                        <span>Tenho ciência das minhas obrigações como negócio que produz alimentação orgânica</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="doc_alvara_funcionamento" value="sim">
+                        <span>Possuo Alvará de Funcionamento pela Prefeitura</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="doc_processo_vigilancia" value="sim">
+                        <span>Dei entrada ao processo de análise sanitária do manejo de alimentos</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="doc_licenca_sanitaria_sp" value="sim">
+                        <span>Possuo Licença Sanitária expedida pela Vigilância Sanitária do Estado de SP</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="doc_licenca_sanitaria_outro" value="sim">
+                        <span>Possuo Licença Sanitária de fora do Estado de SP</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="doc_cnae_dispensado" value="sim">
+                        <span>Minha atividade econômica (CNAE) está dispensada da licença sanitária</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="doc_analise_agua" value="sim">
+                        <span>Possuo análise da qualidade da água utilizada no processamento atualizada</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="doc_manual_boas_praticas" value="sim">
+                        <span>Possuo Manual de Boas Práticas de Fabricação</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 3: PRODUTOS PROCESSADOS -->
+            <section class="form-section">
+                <h2>🥫 3. Produtos Processados</h2>
+                <div class="section-info">
+                    <p><strong>Produtos:</strong> Liste os produtos que você processa minimamente (ex: frutas higienizadas, legumes cortados, etc).</p>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="dynamic-table" id="tabela-produtos">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%">#</th>
+                                <th style="width: 35%">Produto</th>
+                                <th style="width: 40%">Descrição do Processamento</th>
+                                <th style="width: 10%">Quantidade Mensal (kg)</th>
+                                <th style="width: 10%">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Linhas serão adicionadas via JavaScript -->
+                        </tbody>
+                    </table>
+                    <button type="button" class="btn btn-add" onclick="AnexoProcessamento.table.addRow('tabela-produtos')">
+                        ➕ Adicionar Produto
+                    </button>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 4: ETAPAS DO PROCESSAMENTO -->
+            <section class="form-section">
+                <h2>⚙️ 4. Etapas do Processamento Mínimo</h2>
+                <div class="section-info">
+                    <p><strong>Etapas:</strong> Descreva cada etapa do seu processo de produção.</p>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="dynamic-table" id="tabela-etapas">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%">#</th>
+                                <th style="width: 20%">Etapa do Processo</th>
+                                <th style="width: 35%">Descrição da Etapa</th>
+                                <th style="width: 20%">Substâncias Utilizadas</th>
+                                <th style="width: 15%">Equipamentos</th>
+                                <th style="width: 5%">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Linhas serão adicionadas via JavaScript -->
+                        </tbody>
+                    </table>
+                    <button type="button" class="btn btn-add" onclick="AnexoProcessamento.table.addRow('tabela-etapas')">
+                        ➕ Adicionar Etapa
+                    </button>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 5: PRODUTOS DE HIGIENIZAÇÃO -->
+            <section class="form-section">
+                <h2>🧼 5. Produtos de Higienização</h2>
+                <div class="section-info">
+                    <p><strong>Higienização:</strong> Liste os produtos utilizados para limpeza e higienização.</p>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="dynamic-table" id="tabela-higienizacao">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%">#</th>
+                                <th style="width: 20%">Marca/Nome Comercial</th>
+                                <th style="width: 20%">Substância Ativa</th>
+                                <th style="width: 20%">Fabricante</th>
+                                <th style="width: 25%">Quando Usar</th>
+                                <th style="width: 5%">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Linhas serão adicionadas via JavaScript -->
+                        </tbody>
+                    </table>
+                    <button type="button" class="btn btn-add" onclick="AnexoProcessamento.table.addRow('tabela-higienizacao')">
+                        ➕ Adicionar Produto de Higienização
+                    </button>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 6: CONTROLES E REGISTROS -->
+            <section class="form-section">
+                <h2>📊 6. Controles e Registros</h2>
+                <div class="section-info">
+                    <p><strong>Controles:</strong> Descreva como você faz o controle de cada atividade.</p>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="dynamic-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 40%">Atividade</th>
+                                <th style="width: 60%">Método de Controle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>ENTRADA DE INGREDIENTES / COMPRAS</td>
+                                <td><input type="text" name="controle_entrada_ingredientes" class="full-width"></td>
+                            </tr>
+                            <tr>
+                                <td>CONTROLE DE ESTOQUE DOS INGREDIENTES/MATÉRIAS PRIMAS</td>
+                                <td><input type="text" name="controle_estoque_ingredientes" class="full-width"></td>
+                            </tr>
+                            <tr>
+                                <td>PROCESSAMENTO</td>
+                                <td><input type="text" name="controle_processamento" class="full-width"></td>
+                            </tr>
+                            <tr>
+                                <td>CONTROLE DE ESTOQUE DO PRODUTO FINAL PARA VENDA</td>
+                                <td><input type="text" name="controle_estoque_final" class="full-width"></td>
+                            </tr>
+                            <tr>
+                                <td>VENDA DE PRODUTOS</td>
+                                <td><input type="text" name="controle_venda_produtos" class="full-width"></td>
+                            </tr>
+                            <tr>
+                                <td>COMPRA DE INSUMOS / PRODUTOS HIGIENIZAÇÃO</td>
+                                <td><input type="text" name="controle_compra_insumos" class="full-width"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 7: MÃO DE OBRA -->
+            <section class="form-section">
+                <h2>👥 7. Mão de Obra</h2>
+                <div class="section-info">
+                    <p><strong>Funcionários:</strong> Informe a quantidade de funcionários por tipo.</p>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="dynamic-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 60%">Tipo de Funcionário</th>
+                                <th style="width: 40%">Quantidade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>FAMILIAR</td>
+                                <td><input type="number" name="func_familiar" min="0" value="0" class="full-width"></td>
+                            </tr>
+                            <tr>
+                                <td>EMPREGADOS</td>
+                                <td><input type="number" name="func_empregados" min="0" value="0" class="full-width"></td>
+                            </tr>
+                            <tr>
+                                <td>DIARISTAS</td>
+                                <td><input type="number" name="func_diaristas" min="0" value="0" class="full-width"></td>
+                            </tr>
+                            <tr>
+                                <td>PARCEIROS</td>
+                                <td><input type="number" name="func_parceiros" min="0" value="0" class="full-width"></td>
+                            </tr>
+                            <tr>
+                                <td>MEEIRO RURAL</td>
+                                <td><input type="number" name="func_meeiro" min="0" value="0" class="full-width"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 8: ETAPAS FORA DA UNIDADE -->
+            <section class="form-section">
+                <h2>🏢 8. Etapas Realizadas Fora da Unidade</h2>
+                <div class="section-info">
+                    <p><strong>Terceirização:</strong> Caso alguma etapa seja realizada fora da sua unidade, preencha abaixo.</p>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="dynamic-table" id="tabela-etapas-fora">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%">#</th>
+                                <th style="width: 30%">Etapa</th>
+                                <th style="width: 45%">Local/Empresa</th>
+                                <th style="width: 15%">Alvará/Licença</th>
+                                <th style="width: 5%">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Linhas serão adicionadas via JavaScript -->
+                        </tbody>
+                    </table>
+                    <button type="button" class="btn btn-add" onclick="AnexoProcessamento.table.addRow('tabela-etapas-fora')">
+                        ➕ Adicionar Etapa Externa
+                    </button>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 9: DECLARAÇÕES OBRIGATÓRIAS -->
+            <section class="form-section">
+                <h2>✅ 9. Declarações Obrigatórias</h2>
+                <div class="section-info">
+                    <p><strong>Importante:</strong> Todas as declarações abaixo são obrigatórias para processamento orgânico.</p>
+                </div>
+
+                <div class="checkbox-list">
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="decl_nao_radiacao" value="sim" required>
+                        <span>Declaro que NÃO faço uso de radiações ionizantes, emissão de micro ondas e nanotecnologia *</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="decl_nao_duplicidade" value="sim" required>
+                        <span>Declaro que NÃO utilizo o mesmo ingrediente de origem orgânica e não orgânica *</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="decl_nao_transgenico" value="sim" required>
+                        <span>Declaro que NÃO utilizo organismos geneticamente modificados (transgênicos) *</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="decl_conhece_legislacao" value="sim" required>
+                        <span>Declaro que conheço a legislação específica para cada produto por mim processado *</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="decl_rastreabilidade" value="sim" required>
+                        <span>Mantenho registros de rastreabilidade de todos os ingredientes e produtos *</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="decl_separacao_produtos" value="sim" required>
+                        <span>Mantenho separação adequada entre produtos orgânicos e não orgânicos (se aplicável) *</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="decl_autoriza_visitas" value="sim" required>
+                        <span>Autorizo visitas de verificação do SPG na unidade de processamento *</span>
+                    </label>
+
+                    <label class="checkbox-enhanced">
+                        <input type="checkbox" name="decl_veracidade" value="sim" required>
+                        <span>Declaro que todas as informações prestadas são verdadeiras *</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- ÁREA DE OBSERVAÇÕES -->
+            <section class="form-section">
+                <h2>📝 10. Observações Adicionais</h2>
+                <div class="field-wrapper">
+                    <label for="observacoes">Observações, Comentários ou Informações Adicionais</label>
+                    <textarea id="observacoes" name="observacoes" rows="5"
+                        placeholder="Utilize este espaço para incluir qualquer informação adicional relevante sobre o processamento..."></textarea>
+                </div>
+            </section>
+
+            <!-- BOTÕES DE AÇÃO -->
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" onclick="AnexoProcessamento.salvar()">
+                    💾 Salvar Rascunho
+                </button>
+                <button type="button" class="btn btn-primary" onclick="AnexoProcessamento.validar()">
+                    ✓ Validar Formulário
+                </button>
+                <button type="button" class="btn btn-success" onclick="AnexoProcessamento.exportarJSON()">
+                    📥 Exportar JSON
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    📄 Gerar PDF
+                </button>
+            </div>
+
+            <!-- STATUS AUTO-SAVE -->
+            <div class="auto-save-status">
+                <span id="auto-save-status">💾 Auto-save ativo</span>
+            </div>
+
+            <!-- RESULTADOS DE VALIDAÇÃO -->
+            <div id="validation-results"></div>
+
+        </form>
+    </div>
+
+    <!-- FOOTER PADRÃO -->
+    <footer class="pmo-footer">
+        <p>&copy; 2024 ANC - Associação de Agricultura Natural de Campinas e Região</p>
+        <p>Sistema PMO - Plano de Manejo Orgânico</p>
+    </footer>
+
+    <!-- Framework JS Unificado -->
+    <script src="../../framework/core/pmo-framework.js"></script>
+    <script src="../../framework/components/pmo-tables.js"></script>
+
+    <!-- Script Específico do Formulário -->
+    <script src="./anexo-processamento.js"></script>
+</body>
+</html>

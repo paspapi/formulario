@@ -15,39 +15,34 @@
     <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
 </head>
 <body>
-    <!-- Header -->
+    <!-- Cabeçalho -->
     <header class="pmo-header">
         <div class="pmo-container">
             <div class="header-content">
-                <div class="header-logo">
-                    <h1>🐄 Anexo III - Produção Animal</h1>
-                    <p>Plano de Manejo Orgânico - ANC</p>
-                </div>
-                <nav class="header-nav">
-                <a href="../dashboard/index.html" class="btn btn-secondary">🏠 Dashboard</a>
-                <a href="../pmo-principal/index.html" class="btn btn-secondary">📋 PMO Principal</a>
-                <a href="../anexo-vegetal/index.html" class="btn btn-secondary">🌱 Anexo Vegetal</a>
-                <a href="../anexo-animal/index.html" class="active" class="btn btn-secondary">🐄 Anexo Animal</a>
-                <a href="../relatorios/index.html" class="btn btn-secondary">📊 Relatórios</a>
-                </nav>
+                <h1>🐄 Anexo III - Produção Animal</h1>
+                <p class="subtitle">Plano de Manejo Orgânico - ANC</p>
+            </div>
+
+            <!-- Navegação -->
+            <nav class="pmo-navigation">
+                <a href="../dashboard/index.html">🏠 Dashboard</a>
+                <a href="../pmo-principal/index.html">📋 PMO Principal</a>
+                <a href="../anexo-vegetal/index.html">🌱 Anexo Vegetal</a>
+                <a href="../anexo-animal/index.html" class="active">🐄 Anexo Animal</a>
+                <a href="../relatorios/index.html">📊 Relatórios</a>
+            </nav>
+
+            <!-- Barra de Progresso -->
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+                <span class="progress-text" id="progress-text">0% Completo</span>
             </div>
         </div>
     </header>
 
-    <!-- Progress Bar -->
-    <div class="progress-container">
-        <div class="progress-info">
-            <span id="progress-text">Progresso: 0%</span>
-            <span id="auto-save-status">💾 Auto-save ativo</span>
-        </div>
-        <div class="progress-bar">
-            <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
-        </div>
-    </div>
-
-    <!-- Main Content -->
-    <main class="pmo-container">
-        <form id="form-anexo-animal" novalidate>
+    <div class="pmo-container">
+        <!-- Formulário Principal -->
+        <form id="form-anexo-animal" class="pmo-form">
 
             <!-- Seção 1: Identificação do Produtor -->
             <section id="secao-identificacao" class="form-section">
@@ -118,9 +113,8 @@
                         </div>
                     </div>
 
-                    <div id="detalhes-inspecao" style="display:none;">
-                        <div class="form-grid">
-                            <div class="field-wrapper">
+                    <div id="detalhes-inspecao" class="col-span-4" style="display:none;">
+                        <div class="field-wrapper">
                                 <label for="tipo_inspecao">Tipo de Inspeção <span class="required">*</span></label>
                                 <select id="tipo_inspecao" name="tipo_inspecao">
                                     <option value="">Selecione...</option>
@@ -150,7 +144,6 @@
                                 <label for="detalhes_inspecao">Detalhes da Inspeção</label>
                                 <textarea id="detalhes_inspecao" name="detalhes_inspecao" rows="3" placeholder="Especifique quais produtos/atividades estão aprovados pela inspeção"></textarea>
                             </div>
-                        </div>
                     </div>
                 </div>
             </section>
@@ -179,7 +172,7 @@
                             </tr>
                         </thead>
                         <tbody id="tbody-especies">
-                            <template id="row-template-especies">
+                            <template id="template-especies">
                                 <tr class="dynamic-row">
                                     <td class="row-number"></td>
                                     <td>
@@ -269,7 +262,7 @@
                             </tr>
                         </thead>
                         <tbody id="tbody-plano-alimentar">
-                            <template id="row-template-plano-alimentar">
+                            <template id="template-plano-alimentar">
                                 <tr class="dynamic-row">
                                     <td class="row-number"></td>
                                     <td>
@@ -339,9 +332,8 @@
                         </div>
                     </div>
 
-                    <div id="detalhes-pastagem" style="display:none;">
-                        <div class="form-grid">
-                            <div class="field-wrapper">
+                    <div id="detalhes-pastagem" class="col-span-4" style="display:none;">
+                        <div class="field-wrapper">
                                 <label for="area_total_pastagem">Área Total de Pastagem (ha)</label>
                                 <input type="number" id="area_total_pastagem" name="area_total_pastagem" step="0.01" min="0" placeholder="0.00">
                             </div>
@@ -390,7 +382,6 @@
                                 <label for="controle_invasoras">Controle de Plantas Invasoras</label>
                                 <textarea id="controle_invasoras" name="controle_invasoras" rows="2" placeholder="Descreva os métodos de controle"></textarea>
                             </div>
-                        </div>
                     </div>
                 </div>
             </section>
@@ -495,7 +486,7 @@
                             </tr>
                         </thead>
                         <tbody id="tbody-prevencao">
-                            <template id="row-template-prevencao">
+                            <template id="template-prevencao">
                                 <tr class="dynamic-row">
                                     <td class="row-number"></td>
                                     <td>
@@ -553,7 +544,7 @@
                             </tr>
                         </thead>
                         <tbody id="tbody-tratamentos">
-                            <template id="row-template-tratamentos">
+                            <template id="template-tratamentos">
                                 <tr class="dynamic-row">
                                     <td class="row-number"></td>
                                     <td><input type="text" name="especie_animal_tratamento[]" placeholder="Ex: Bovinos"></td>
@@ -597,7 +588,7 @@
                             </tr>
                         </thead>
                         <tbody id="tbody-vacinacao">
-                            <template id="row-template-vacinacao">
+                            <template id="template-vacinacao">
                                 <tr class="dynamic-row">
                                     <td class="row-number"></td>
                                     <td><input type="text" name="vacina[]" required placeholder="Ex: Febre Aftosa"></td>
@@ -654,7 +645,7 @@
                             </tr>
                         </thead>
                         <tbody id="tbody-origem-animais">
-                            <template id="row-template-origem-animais">
+                            <template id="template-origem-animais">
                                 <tr class="dynamic-row">
                                     <td class="row-number"></td>
                                     <td><input type="text" name="especie_origem[]" placeholder="Ex: Bovinos"></td>
@@ -704,9 +695,8 @@
                         </div>
                     </div>
 
-                    <div id="detalhes-reproducao-artificial" style="display:none;">
-                        <div class="form-grid">
-                            <div class="field-wrapper">
+                    <div id="detalhes-reproducao-artificial" class="col-span-4" style="display:none;">
+                        <div class="field-wrapper">
                                 <label for="tipo_reproducao_artificial">Tipo</label>
                                 <select id="tipo_reproducao_artificial" name="tipo_reproducao_artificial">
                                     <option value="">Selecione...</option>
@@ -729,7 +719,6 @@
                                     <option value="nao">Não</option>
                                 </select>
                             </div>
-                        </div>
                     </div>
                 </div>
             </section>
@@ -759,7 +748,7 @@
                             </tr>
                         </thead>
                         <tbody id="tbody-instalacoes">
-                            <template id="row-template-instalacoes">
+                            <template id="template-instalacoes">
                                 <tr class="dynamic-row">
                                     <td class="row-number"></td>
                                     <td>
@@ -1151,18 +1140,16 @@
         <!-- Validation Results -->
         <div id="validation-results" class="validation-report"></div>
 
-    </main>
-
-    <!-- Footer -->
-    <footer class="pmo-footer">
-        <div class="pmo-container">
-            <p>© 2024 ANC - Associação de Agricultura Natural de Campinas e Região</p>
-            <p>Sistema PMO Digital v2.0 | Anexo III - Produção Animal | Portaria MAPA 52/2021</p>
-        </div>
-    </footer>
+        <!-- Rodapé -->
+        <footer class="pmo-footer">
+            <p>&copy; 2024 ANC - Associação de Agricultura Natural de Campinas e Região</p>
+            <p>Sistema PMO - Plano de Manejo Orgânico</p>
+        </footer>
+    </div>
 
     <!-- Framework JS Unificado -->
     <script src="../../framework/core/pmo-framework.js"></script>
+    <script src="../../framework/components/pmo-tables.js"></script>
 
     <!-- JS Específico do Anexo Animal -->
     <script src="./anexo-animal.js"></script>

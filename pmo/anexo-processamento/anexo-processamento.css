@@ -1,0 +1,247 @@
+/**
+ * Anexo Processamento Mínimo - Estilos Específicos
+ * Sistema PMO - ANC
+ *
+ * Estilos customizados para o formulário de Processamento Mínimo
+ * (Os estilos principais vêm do pmo-framework-full.css)
+ */
+
+/* ========================================
+   ESTILOS ESPECÍFICOS DE TABELAS
+   ======================================== */
+
+/* Campos de input dentro de células de tabela */
+.dynamic-table input.full-width {
+    width: 100%;
+    padding: 0.4rem;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+}
+
+.dynamic-table input.full-width:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Células de número de linha */
+.row-number {
+    text-align: center;
+    font-weight: 600;
+    color: var(--gray-600);
+    background-color: var(--gray-50);
+}
+
+/* ========================================
+   LISTA DE CHECKBOXES
+   ======================================== */
+
+.checkbox-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.checkbox-enhanced {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.checkbox-enhanced:hover {
+    background-color: var(--gray-50);
+    border-color: var(--primary-light);
+}
+
+.checkbox-enhanced input[type="checkbox"] {
+    margin-top: 0.25rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    cursor: pointer;
+}
+
+.checkbox-enhanced span {
+    flex: 1;
+    font-size: var(--text-sm);
+    color: var(--gray-700);
+    line-height: 1.5;
+}
+
+.checkbox-enhanced input[type="checkbox"]:checked + span {
+    color: var(--gray-900);
+    font-weight: 500;
+}
+
+/* ========================================
+   VALIDAÇÃO E RESULTADOS
+   ======================================== */
+
+#validation-results {
+    margin-top: var(--spacing-xl);
+}
+
+.validation-report {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.validation-report ul {
+    margin: var(--spacing-sm) 0 0 var(--spacing-md);
+    padding-left: var(--spacing-md);
+}
+
+.validation-report li {
+    margin-bottom: var(--spacing-xs);
+    font-size: var(--text-sm);
+}
+
+/* ========================================
+   AUTO-SAVE STATUS
+   ======================================== */
+
+.auto-save-status {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: white;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    z-index: 1000;
+    font-size: var(--text-sm);
+    font-weight: 500;
+}
+
+/* ========================================
+   BOTÕES DE AÇÃO EM TABELAS
+   ======================================== */
+
+.btn-icon {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.3rem;
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+}
+
+.btn-icon:hover {
+    background-color: var(--gray-100);
+    transform: scale(1.1);
+}
+
+.btn-icon.btn-danger:hover {
+    background-color: #fee2e2;
+}
+
+/* ========================================
+   SEÇÕES ESPECIAIS
+   ======================================== */
+
+/* Destaque para seções críticas */
+.form-section h2 {
+    color: var(--primary-dark);
+    border-bottom: 2px solid var(--primary-light);
+    padding-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Info boxes */
+.section-info {
+    background-color: var(--gray-50);
+    border-left: 4px solid var(--primary);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    border-radius: var(--radius-sm);
+}
+
+.section-info p {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--gray-700);
+}
+
+.section-info strong {
+    color: var(--primary-dark);
+}
+
+/* ========================================
+   CAMPOS DE COORDENADAS
+   ======================================== */
+
+input[name="latitude"],
+input[name="longitude"] {
+    font-family: 'Courier New', monospace;
+}
+
+/* ========================================
+   RESPONSIVIDADE ESPECÍFICA
+   ======================================== */
+
+@media (max-width: 768px) {
+    .auto-save-status {
+        bottom: 1rem;
+        right: 1rem;
+        font-size: var(--text-xs);
+        padding: var(--spacing-xs) var(--spacing-sm);
+    }
+
+    .checkbox-enhanced {
+        padding: var(--spacing-sm);
+    }
+
+    .validation-report ul {
+        margin-left: 0;
+        padding-left: var(--spacing-md);
+    }
+}
+
+/* ========================================
+   ANIMAÇÕES
+   ======================================== */
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.alert {
+    animation: slideIn 0.3s ease;
+}
+
+/* ========================================
+   IMPRESSÃO
+   ======================================== */
+
+@media print {
+    .btn,
+    .btn-add,
+    .btn-icon,
+    .auto-save-status,
+    .form-actions,
+    .pmo-navigation {
+        display: none !important;
+    }
+
+    .form-section {
+        page-break-inside: avoid;
+    }
+
+    .dynamic-table {
+        font-size: 0.8rem;
+    }
+}

@@ -1,0 +1,774 @@
+{
+  "metadata": {
+    "id_produtor": "",
+    "tipo_documento": [
+      "PROCESSAMENTO"
+    ],
+    "data_extracao": "2024-05-30T10:00:00Z",
+    "versao_schema": "1.0",
+    "grupo_spg": "",
+    "status_processamento": "EXTRAIDO"
+  },
+  "dados_gerais": {
+    "identificacao": {
+      "nome_completo": "",
+      "cpf_cnpj": "",
+      "inscricao_estadual": "",
+      "inscricao_municipal": "",
+      "nome_fantasia": "",
+      "nome_unidade_producao": "",
+      "razao_social": ""
+    },
+    "contato": {
+      "telefone": "",
+      "email": "",
+      "endereco": {
+        "endereco_completo": "",
+        "bairro": "",
+        "municipio": "",
+        "uf": "",
+        "cep": "",
+        "coordenadas": {
+          "latitude": 0,
+          "longitude": 0
+        }
+      }
+    },
+    "propriedade": {
+      "posse_terra": "",
+      "area_total_ha": 0,
+      "caf_numero": "",
+      "caf_nao_possui": false,
+      "roteiro_acesso": "",
+      "data_aquisicao_posse": "",
+      "terra_familiar": false
+    },
+    "manejo_organico": {
+      "anos_manejo_organico": 0,
+      "situacao_manejo": "",
+      "comprovacao_manejo": []
+    }
+  },
+  "responsaveis_producao": [
+    {
+      "nome_responsavel": "",
+      "cpf_responsavel": "",
+      "data_nascimento": "",
+      "funcao_responsabilidade": "",
+      "contato_telefone": "",
+      "contato_email": ""
+    },
+    {
+      "nome_responsavel": "",
+      "cpf_responsavel": "",
+      "data_nascimento": "",
+      "funcao_responsabilidade": "",
+      "contato_telefone": "",
+      "contato_email": ""
+    },
+    {
+      "nome_responsavel": "",
+      "cpf_responsavel": "",
+      "data_nascimento": "",
+      "funcao_responsabilidade": "",
+      "contato_telefone": "",
+      "contato_email": ""
+    },
+    {
+      "nome_responsavel": "",
+      "cpf_responsavel": "",
+      "data_nascimento": "",
+      "funcao_responsabilidade": "",
+      "contato_telefone": "",
+      "contato_email": ""
+    }
+  ],
+  "atividades_organicas": {
+    "tipos_producao": [
+      {
+        "tipo_producao": "",
+        "tem_atividade": false,
+        "area_ha": 0
+      }
+    ],
+    "situacao_funcional": [
+      {
+        "tipo_funcionario": "",
+        "quantidade": 0
+      }
+    ]
+  },
+  "historico_culturas": [],
+  "produtos_certificar": [],
+  "preservacao_ambiental": {
+    "areas_preservacao": [
+      {
+        "tipo_area": "",
+        "possui_na_propriedade": false,
+        "esta_preservada": false
+      }
+    ],
+    "geral": {
+      "tecnicas_prevencao_incendios": "",
+      "experiencia_recuperacao_solos": "",
+      "destino_lixo_organico": "",
+      "destino_lixo_nao_organico": "",
+      "destino_esgoto_domestico": "",
+      "periodicidade_analise_agua": "",
+      "possui_car": false,
+      "situacao_car": "",
+      "situacao_reserva_legal": ""
+    }
+  },
+  "recursos_hidricos": [
+    {
+      "uso_agua": "",
+      "origem_agua": "",
+      "risco_contaminacao": "",
+      "nivel_risco": "",
+      "garantia_qualidade": ""
+    }
+  ],
+  "comercializacao": {
+    "canais": [],
+    "geral": {
+      "rotulagem": "Os rótulos devem conter: NOME DA UNIDADE PRODUTIVA OU EMPRESA/NEGÓCIO; CNPJ; ENDEREÇO COMPLETO LEGÍVEL; SELO SISTEMA PARTICIPATIVO; PESO; DATA DE FABRICAÇÃO E / OU DATA DE VALIDADE; IDENTIFICAÇÃO SOBRE QUAIS INGREDIENTES SÃO ORGÂNICOS E QUAIS INGREDIENTES NÃO SÃO ORGÂNICOS [1].",
+      "transporte": "",
+      "rastreabilidade": "",
+      "pos_colheita_operacoes": "",
+      "produtos_armazenados": false,
+      "explicacao_armazenagem": "",
+      "previsao_inicio_vendas": "",
+      "comercializa_nao_organicos": false,
+      "separacao_produtos": ""
+    }
+  },
+  "controles_registros": [
+    {
+      "atividade": "ENTRADA DE INGREDIENTES / COMPRAS",
+      "metodo_controle": ""
+    },
+    {
+      "atividade": "CONTROLE DE ESTOQUE DOS INGREDIENTES/ MATÉRIAS PRIMAS",
+      "metodo_controle": ""
+    },
+    {
+      "atividade": "PROCESSAMENTO",
+      "metodo_controle": ""
+    },
+    {
+      "atividade": "CONTROLE DE ESTOQUE DO PRODUTO FINAL PARA VENDA",
+      "metodo_controle": ""
+    },
+    {
+      "atividade": "VENDA DE PRODUTOS",
+      "metodo_controle": ""
+    },
+    {
+      "atividade": "COMPRA DE INSUMOS / PRODUTOS HIGIENIZAÇÃO",
+      "metodo_controle": ""
+    }
+  ],
+  "producao_subsistencia": {
+    "tipos": [
+      {
+        "tipo_atividade": "",
+        "subtipo_atividade": "",
+        "area_ha": 0
+      }
+    ],
+    "geral": {
+      "possui_producao_subsistencia": false,
+      "usa_insumos_nao_permitidos": false,
+      "risco_contaminacao": "",
+      "manejos_bloqueios": "",
+      "observacoes": ""
+    }
+  },
+  "producao_paralela": {
+    "tipos": [],
+    "geral": {
+      "possui_producao_paralela": false,
+      "usa_insumos_nao_permitidos": false,
+      "risco_contaminacao": "",
+      "manejos_bloqueios": "",
+      "pretende_conversao_total": false,
+      "tempo_conversao_total": "",
+      "observacoes": ""
+    }
+  },
+  "anexo_vegetal": {
+    "preparo_solo": [
+      {
+        "tipo_preparo": "",
+        "utiliza": false
+      }
+    ],
+    "praticas_conservacionistas": [
+      {
+        "tipo_pratica": "",
+        "descricao_processo": "",
+        "utiliza": false
+      }
+    ],
+    "barreiras_protecao": {
+      "estado_conservacao_barreiras": "",
+      "risco_deriva_agrotoxicos": false,
+      "risco_contaminacao_transgenicos": false,
+      "situacao_formigas": "",
+      "controle_formigas": ""
+    },
+    "adubacao_nutricao": {
+      "sistema_adubacao": "",
+      "utiliza_substrato": false,
+      "prepara_substrato_proprio": false,
+      "compra_substrato_pronto": false,
+      "adquire_substrato_aprovado": false
+    },
+    "substrato_receitas": [],
+    "receitas_proprias": [],
+    "produtos_comerciais": [],
+    "equipamentos": {
+      "usa_equipamento_terceiro": false,
+      "empresta_equipamento": false,
+      "equipamentos_nao_compartilhados": false,
+      "faz_higienizacao": false,
+      "condicoes_armazenamento": ""
+    },
+    "produtos_nao_certificar": []
+  },
+  "anexo_cogumelos": {
+    "tipos_cogumelos": [],
+    "substrato_materiais": [],
+    "tratamento_solo_madeira": {
+      "utiliza_solo": false,
+      "origem_solo": "",
+      "solo_recebe_tratamento": false,
+      "origem_madeira": "",
+      "madeira_sem_tratamento_quimico": false,
+      "utiliza_toras": false,
+      "origem_toras": "",
+      "toras_sem_tratamento_quimico": false,
+      "utiliza_lenha_vapor": false,
+      "origem_lenha": "",
+      "lenha_sem_tratamento_quimico": false,
+      "nao_usa_radiacao_ionizante": false
+    },
+    "tratamento_solo_produtos": [],
+    "inoculo": {
+      "origem_inoculos": "",
+      "inoculo_nao_transgenico": false,
+      "possui_analise_metais_pesados": false,
+      "valores_acordo_portaria": false,
+      "analise_realizada_por": "",
+      "ciente_nova_analise_fornecedor": false
+    },
+    "controle_pragas": [],
+    "residuos": {
+      "destino_substrato": "",
+      "destino_chorume": ""
+    },
+    "equipamentos": {
+      "usa_equipamento_terceiro": false,
+      "empresta_equipamento": false,
+      "equipamentos_nao_compartilhados": false,
+      "faz_higienizacao": false,
+      "condicoes_armazenamento": ""
+    }
+  },
+  "anexo_animal": {
+    "inspecao_sanitaria": {
+      "possui_inspecao_sanitaria": false,
+      "detalhes_inspecao": ""
+    },
+    "especies_criadas": [],
+    "alimentacao": [],
+    "ingredientes_racao": [],
+    "tipos_forragem": [],
+    "plano_alimentacao_anual": [],
+    "bem_estar": [],
+    "manejo_sanidade": [],
+    "tratamentos": [],
+    "vacinas": [],
+    "origem_reproducao": [],
+    "manejo_esterco": [],
+    "instalacoes": [],
+    "evolucao_plantel": [],
+    "equipamentos": {
+      "usa_equipamento_terceiro": false,
+      "empresta_equipamento": false,
+      "faz_higienizacao": false,
+      "condicoes_armazenamento": ""
+    }
+  },
+  "anexo_apicultura": {
+    "geral": {
+      "tipo_abelha": "",
+      "modalidade": "",
+      "origem_ceras": "",
+      "origem_abelhas": "",
+      "estimativa_producao_anual_kg": 0,
+      "area_criacao_m2_ha": 0
+    },
+    "floradas": [],
+    "distancias_areas": [
+      {
+        "tipo_area": "",
+        "distancia_3km": false,
+        "distancia_4km": false,
+        "distancia_5km": false,
+        "distancia_mais_km": false
+      }
+    ],
+    "alimentacao_artificial": {
+      "utiliza_alimentacao_artificial": false,
+      "alimentos_tempo": "",
+      "alimento_permitido_organico": false
+    },
+    "tratamentos": [],
+    "equipamentos": {
+      "usa_equipamento_terceiro": false,
+      "empresta_equipamento": false,
+      "equipamentos_nao_compartilhados": false,
+      "faz_higienizacao": false,
+      "condicoes_armazenamento": ""
+    }
+  },
+  "processamento_minimo": {
+    "geral": {
+      "razao_social": "",
+      "cnpj_empresa": "",
+      "inscricao_estadual": "",
+      "inscricao_municipal": "",
+      "endereco_processamento": "",
+      "local_proprio_arrendado": "",
+      "coordenadas": {
+        "latitude": 0,
+        "longitude": 0
+      },
+      "numero_funcionarios": 0
+    },
+    "situacao_legal": [
+      {
+        "documento_legal": "",
+        "possui_documento": false,
+        "numero_documento": "",
+        "situacao_documento": ""
+      }
+    ],
+    "produtos": [],
+    "etapas_fora_unidade": [
+      {
+        "etapa": "",
+        "local_fora_unidade": "",
+        "alvara_funcionamento": ""
+      }
+    ],
+    "etapas_realizadas": [
+      {
+        "etapa_processo": "",
+        "descricao_etapa": "",
+        "substancias_utilizadas": "",
+        "equipamentos_utilizados": ""
+      }
+    ],
+    "controles": [
+      {
+        "tipo_controle": "",
+        "utiliza_controle": false
+      }
+    ],
+    "higienizacao": [
+      {
+        "marca_nome_comercial": "",
+        "substancia_ativa": "",
+        "fabricante": "",
+        "quando_usar": "",
+        "ja_usa_pretende": ""
+      }
+    ],
+    "mao_obra": [
+      {
+        "tipo_funcionario": "",
+        "quantidade_funcionarios": 0
+      }
+    ]
+  },
+  "processamento_industrial": {
+    "geral": {
+      "razao_social": "",
+      "cnpj_empresa": "",
+      "escopo_origem_animal": false,
+      "escopo_origem_vegetal": false,
+      "endereco_processamento": "",
+      "coordenadas": {
+        "latitude": 0,
+        "longitude": 0
+      },
+      "numero_funcionarios": 0
+    },
+    "situacao_legal": [
+      {
+        "documento_legal": "DECLARO QUE TENHO CIÊNCIA DAS MINHAS OBRIGAÇÕES COMO UM NEGÓCIO PRÓPRIO QUE PRODUZ ALIMENTAÇÃO ORGÂNICA. APRESENTO EM ANEXO OS DOCUMENTOS RELATIVOS À LEGALIDADE DO MEU NEGÓCIO",
+        "possui_documento": false,
+        "numero_documento": "",
+        "situacao_documento": ""
+      },
+      {
+        "documento_legal": "POSSUO ALVARÁ DE FUNCIONAMENTO PELA PREFEITURA DE MEU MUNICÍPIO – REFERENTE AO ENDEREÇO DA MINHA UNIDADE PRODUTIVA.",
+        "possui_documento": false,
+        "numero_documento": "",
+        "situacao_documento": ""
+      },
+      {
+        "documento_legal": "DECLARO QUE DEI ENTRADA AO PROCESSO DE ANÁLISE SANITÁRIA DO MANEJO DE ALIMENTOS, CUJO PROTOCOLO DESTE PEDIDO ESTÁ ANEXO A ESTE PMO.",
+        "possui_documento": false,
+        "numero_documento": "",
+        "situacao_documento": "A MINHA SITUAÇÃO ATUAL NA VIGILÂNCIA SANITÁRIA É:"
+      },
+      {
+        "documento_legal": "POSSUO LICENÇA SANITÁRIA EXPEDIDA PELA VIGILÂNCIA SANITÁRIA DO ESTADO DE SP",
+        "possui_documento": false,
+        "numero_documento": "",
+        "situacao_documento": "TENDO MEU CADASTRO DEFINITIVO (Nº CEVS):"
+      },
+      {
+        "documento_legal": "POSSUO LICENÇA SANITÁRIA EXPEDIDA PELA VIGILÂNCIA SANITÁRIA DE FORA DO ESTADO DE SP",
+        "possui_documento": false,
+        "numero_documento": "",
+        "situacao_documento": "TENDO MEU REGISTRO DA LICENÇA SANITÁRIA Nº:"
+      },
+      {
+        "documento_legal": "A MINHA ATIVIDADE ECONÔMICA (CNAE) ESTÁ DISPENSADA DA LICENÇA SANITÁRIA",
+        "possui_documento": false,
+        "numero_documento": "",
+        "situacao_documento": "COMPROVO ESTA SITUAÇÃO PELO DOCUMENTO ANEXO."
+      },
+      {
+        "documento_legal": "POSSUO REGISTRO DE ESTABELECIMENTO (PROCESSAMENTO PRODUTOS DE ORIGEM ANIMAL)",
+        "possui_documento": false,
+        "numero_documento": "",
+        "situacao_documento": ""
+      },
+      {
+        "documento_legal": "POSSUO CÓPIA DE OUTRAS AUTORIZAÇÕES E DEMAIS DOCUMENTOS NECESSÁRIOS PARA O FUNCIONAMENTO LEGAL DO MEU NEGÓCIO",
+        "possui_documento": false,
+        "numero_documento": "",
+        "situacao_documento": ""
+      },
+      {
+        "documento_legal": "POSSUO ANÁLISE DA QUALIDADE DA ÁGUA UTILIZADA NO PROCESSAMENTO, ATUALIZADA (OU CÓPIA DO COMPROVANTE DE CONTA DE ÁGUA OFERECIDA PELA REDE PÚBLICA).",
+        "possui_documento": false,
+        "numero_documento": "",
+        "situacao_documento": "(ATENTAR PARA O CRITÉRIO DA POTABILIDADE PARA USO HUMANO, PELO MINISTÉRIO DA SAÚDE)."
+      },
+      {
+        "documento_legal": "POSSUO MANUAL DE BOAS PRÁTICAS DE FABRICAÇÃO - DE ACORDO COM OS REQUISITOS EXIGIDOS NA LEGISLAÇÃO REFERENTE AO MEU TIPO DE PROCESSAMENTO.",
+        "possui_documento": false,
+        "numero_documento": "",
+        "situacao_documento": ""
+      },
+      {
+        "documento_legal": "DECLARO QUE NÃO FAÇO USO DE RADIAÇÕES IONIZANTES, EMISSÃO DE MICRO ONDAS E NANOTECNOLOGIA EM QUALQUER ETAPA DO PROCESSO PRODUTIVO",
+        "possui_documento": true,
+        "numero_documento": "",
+        "situacao_documento": "DECLARAÇÃO"
+      },
+      {
+        "documento_legal": "DECLARO QUE NÃO UTILIZO O MESMO INGREDIENTE DE ORIGEM ORGÂNICA E NÃO ORGÂNICA.",
+        "possui_documento": true,
+        "numero_documento": "",
+        "situacao_documento": "DECLARAÇÃO"
+      },
+      {
+        "documento_legal": "DECLARO QUE NÃO UTILIZO ORGANISMO GENETICAMENTE MODIFICADO OU PRODUTOS EM CUJO PROCESSO DE OBTENÇÃO OS ORGANISMOS GENETICAMENTE MODIFICADOS FORAM UTILIZADOS (TRANSGÊNICOS).",
+        "possui_documento": true,
+        "numero_documento": "",
+        "situacao_documento": "DECLARAÇÃO"
+      },
+      {
+        "documento_legal": "DECLARO QUE CONHEÇO A LEGISLAÇÃO ESPECÍFICA PARA CADA PRODUTO POR MIM PROCESSADO.",
+        "possui_documento": true,
+        "numero_documento": "",
+        "situacao_documento": "DECLARAÇÃO"
+      }
+    ],
+    "fornecedores": [
+      {
+        "ingrediente": "FARINHA DE TRIGO",
+        "nome_fornecedor": "X",
+        "quantidade_mensal_kg": 15
+      },
+      {
+        "ingrediente": "FARINHA DE TRIGO",
+        "nome_fornecedor": "Y",
+        "quantidade_mensal_kg": 15
+      },
+      {
+        "ingrediente": "FARINHA DE TRIGO",
+        "nome_fornecedor": "Z",
+        "quantidade_mensal_kg": 15
+      },
+      {
+        "ingrediente": "",
+        "nome_fornecedor": "",
+        "quantidade_mensal_kg": 0
+      },
+      {
+        "ingrediente": "",
+        "nome_fornecedor": "",
+        "quantidade_mensal_kg": 0
+      },
+      {
+        "ingrediente": "",
+        "nome_fornecedor": "",
+        "quantidade_mensal_kg": 0
+      },
+      {
+        "ingrediente": "",
+        "nome_fornecedor": "",
+        "quantidade_mensal_kg": 0
+      },
+      {
+        "ingrediente": "",
+        "nome_fornecedor": "",
+        "quantidade_mensal_kg": 0
+      },
+      {
+        "ingrediente": "",
+        "nome_fornecedor": "",
+        "quantidade_mensal_kg": 0
+      }
+    ],
+    "produtos": [
+      {
+        "produto_final": "BOLO DE MARACUJÁ",
+        "ingredientes_organicos": "1 MARACUJÁ, 2 AÇÚCAR, 3 FARINHA TRIGO",
+        "percent_organicos": 95,
+        "ingredientes_nao_organicos": "1 DAMASCO",
+        "percent_nao_organicos": 5,
+        "expectativa_producao_mensal": 35,
+        "tipo_produto": "ORGÂNICO"
+      },
+      {
+        "produto_final": "",
+        "ingredientes_organicos": "1, 2, 3, 4, 5",
+        "percent_organicos": 0,
+        "ingredientes_nao_organicos": "1, 2, 3, 4, 5",
+        "percent_nao_organicos": 0,
+        "expectativa_producao_mensal": 0,
+        "tipo_produto": ""
+      },
+      {
+        "produto_final": "",
+        "ingredientes_organicos": "1, 2, 3, 4, 5",
+        "percent_organicos": 0,
+        "ingredientes_nao_organicos": "1, 2, 3, 4, 5",
+        "percent_nao_organicos": 0,
+        "expectativa_producao_mensal": 0,
+        "tipo_produto": ""
+      },
+      {
+        "produto_final": "",
+        "ingredientes_organicos": "1, 2, 3, 4, 5",
+        "percent_organicos": 0,
+        "ingredientes_nao_organicos": "1, 2, 3, 4, 5",
+        "percent_nao_organicos": 0,
+        "expectativa_producao_mensal": 0,
+        "tipo_produto": ""
+      },
+      {
+        "produto_final": "",
+        "ingredientes_organicos": "1, 2, 3, 4, 5",
+        "percent_organicos": 0,
+        "ingredientes_nao_organicos": "1, 2, 3, 4, 5",
+        "percent_nao_organicos": 0,
+        "expectativa_producao_mensal": 0,
+        "tipo_produto": ""
+      },
+      {
+        "produto_final": "",
+        "ingredientes_organicos": "1, 2, 3, 4, 5",
+        "percent_organicos": 0,
+        "ingredientes_nao_organicos": "1, 2, 3, 4, 5",
+        "percent_nao_organicos": 0,
+        "expectativa_producao_mensal": 0,
+        "tipo_produto": ""
+      },
+      {
+        "produto_final": "",
+        "ingredientes_organicos": "1, 2, 3, 4, 5",
+        "percent_organicos": 0,
+        "ingredientes_nao_organicos": "1, 2, 3, 4, 5",
+        "percent_nao_organicos": 0,
+        "expectativa_producao_mensal": 0,
+        "tipo_produto": ""
+      },
+      {
+        "produto_final": "",
+        "ingredientes_organicos": "1, 2, 3, 4, 5",
+        "percent_organicos": 0,
+        "ingredientes_nao_organicos": "1, 2, 3, 4, 5",
+        "percent_nao_organicos": 0,
+        "expectativa_producao_mensal": 0,
+        "tipo_produto": ""
+      }
+    ],
+    "produtos_nao_organicos": [
+      {
+        "produto_final": "1)",
+        "ingredientes": "1, 2, 3, 4, 5, 6, 7",
+        "expectativa_producao_mensal": 0
+      },
+      {
+        "produto_final": "2)",
+        "ingredientes": "1, 2, 3, 4, 5, 6, 7",
+        "expectativa_producao_mensal": 0
+      },
+      {
+        "produto_final": "3)",
+        "ingredientes": "1, 2, 3, 4, 5, 6, 7",
+        "expectativa_producao_mensal": 0
+      },
+      {
+        "produto_final": "4)",
+        "ingredientes": "1, 2, 3, 4, 5, 6, 7",
+        "expectativa_producao_mensal": 0
+      }
+    ],
+    "outros_produtos": [
+      {
+        "tipo_produto": "ADITIVOS ALIMENTARES (EX. FERMENTO)",
+        "identificacao_nome": "",
+        "organico": false
+      },
+      {
+        "tipo_produto": "COADJUVANTES TECNOLÓGICOS",
+        "identificacao_nome": "",
+        "organico": false
+      },
+      {
+        "tipo_produto": "CORANTES",
+        "identificacao_nome": "",
+        "organico": false
+      },
+      {
+        "tipo_produto": "OUTROS",
+        "identificacao_nome": "",
+        "organico": false
+      }
+    ],
+    "producao_paralela": [
+      {
+        "etapa_processamento": "RECEBIMENTO E ARMAZENAMENTO DE MATÉRIAS PRIMAS / INGREDIENTES",
+        "como_evita_contaminacao": ""
+      },
+      {
+        "etapa_processamento": "PROCESSAMENTO",
+        "como_evita_contaminacao": ""
+      },
+      {
+        "etapa_processamento": "EMBALAGEM E ROTULAGEM",
+        "como_evita_contaminacao": ""
+      },
+      {
+        "etapa_processamento": "ESTOCAGEM DO PRODUTO FINAL",
+        "como_evita_contaminacao": ""
+      },
+      {
+        "etapa_processamento": "TRANSPORTE",
+        "como_evita_contaminacao": ""
+      },
+      {
+        "etapa_processamento": "PONTO DE VENDA",
+        "como_evita_contaminacao": ""
+      }
+    ],
+    "higienizacao": [
+      {
+        "marca_nome_comercial": "",
+        "substancia_ativa": "",
+        "fabricante": "",
+        "quando_usar": "",
+        "ja_usa_pretende": ""
+      },
+      {
+        "marca_nome_comercial": "",
+        "substancia_ativa": "",
+        "fabricante": "",
+        "quando_usar": "",
+        "ja_usa_pretende": ""
+      },
+      {
+        "marca_nome_comercial": "",
+        "substancia_ativa": "",
+        "fabricante": "",
+        "quando_usar": "",
+        "ja_usa_pretende": ""
+      },
+      {
+        "marca_nome_comercial": "",
+        "substancia_ativa": "",
+        "fabricante": "",
+        "quando_usar": "",
+        "ja_usa_pretende": ""
+      },
+      {
+        "marca_nome_comercial": "",
+        "substancia_ativa": "",
+        "fabricante": "",
+        "quando_usar": "",
+        "ja_usa_pretende": ""
+      }
+    ],
+    "comercializacao": [],
+    "controles": [
+      {
+        "atividade_controle": "ENTRADA DE INGREDIENTES / COMPRAS",
+        "metodo_controle": ""
+      },
+      {
+        "atividade_controle": "CONTROLE DE ESTOQUE DOS INGREDIENTES/ MATÉRIAS PRIMAS",
+        "metodo_controle": ""
+      },
+      {
+        "atividade_controle": "PROCESSAMENTO",
+        "metodo_controle": ""
+      },
+      {
+        "atividade_controle": "CONTROLE DE ESTOQUE DO PRODUTO FINAL PARA VENDA",
+        "metodo_controle": ""
+      },
+      {
+        "atividade_controle": "VENDA DE PRODUTOS",
+        "metodo_controle": ""
+      },
+      {
+        "atividade_controle": "COMPRA DE INSUMOS / PRODUTOS HIGIENIZAÇÃO",
+        "metodo_controle": ""
+      }
+    ],
+    "mao_obra": [
+      {
+        "tipo_funcionario": "FAMILIAR",
+        "quantidade_funcionarios": 0
+      },
+      {
+        "tipo_funcionario": "EMPREGADOS",
+        "quantidade_funcionarios": 0
+      },
+      {
+        "tipo_funcionario": "DIARISTAS",
+        "quantidade_funcionarios": 0
+      },
+      {
+        "tipo_funcionario": "PARCEIROS",
+        "quantidade_funcionarios": 0
+      },
+      {
+        "tipo_funcionario": "MEEIRO RURAL",
+        "quantidade_funcionarios": 0
+      }
+    ]
+  }
+}

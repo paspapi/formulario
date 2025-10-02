@@ -1,0 +1,107 @@
+/* Anexo I - Produção Vegetal - Estilos Específicos
+ * Sistema PMO ANC
+ * Tema: Verde (#10b981)
+ */
+
+/* Override de cores temáticas para Produção Vegetal */
+.pmo-header {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.pmo-header h1,
+.pmo-header .subtitle,
+.pmo-navigation a {
+    color: white !important;
+}
+
+.pmo-navigation a.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: white !important;
+    border-radius: 8px;
+}
+
+.pmo-navigation a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.form-section h2 {
+    color: #10b981;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.practice-item {
+    border-left: 4px solid #10b981;
+}
+
+.btn-primary {
+    background: #10b981;
+}
+
+.btn-primary:hover {
+    background: #059669;
+}
+
+.btn-success {
+    background: #10b981;
+}
+
+.btn-success:hover {
+    background: #047857;
+}
+
+.btn-add {
+    background: #10b981;
+}
+
+.btn-add:hover {
+    background: #059669;
+}
+
+/* Estilos específicos do anexo vegetal */
+.practice-item {
+    background: #f9fafb;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #10b981;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.conditional-field {
+    display: none;
+    margin-top: 15px;
+    padding: 15px;
+    background: white;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+}
+
+.conditional-field.show {
+    display: block;
+}
+
+/* Seções com layout vertical - força todos os campos a ocuparem largura completa */
+#secao-barreiras-protecao .field-wrapper,
+#secao-adubacao-nutricao .field-wrapper,
+#secao-equipamentos .field-wrapper,
+#secao-espacos-armazenamento .field-wrapper {
+    grid-column: 1 / -1;
+}
+
+/* Alternativa: quando há múltiplos checkboxes em sequência dentro de form-grid,
+   forçar layout vertical para melhor legibilidade */
+.form-grid .field-wrapper:has(.checkbox-enhanced) {
+    grid-column: 1 / -1;
+}

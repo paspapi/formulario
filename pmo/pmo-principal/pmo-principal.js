@@ -149,8 +149,26 @@ const PMOPrincipal = {
      * Aplicar máscaras de entrada
      */
     applyMasks() {
-        // Máscara CPF
-        const cpfInputs = document.querySelectorAll('input[name="cpf"], input[name="cpf_responsavel[]"], input[name="cpf_declarante"]');
+        // Máscara CPF/CNPJ dinâmica para responsáveis
+        const cpfCnpjInputs = document.querySelectorAll('input[data-mask="cpf-cnpj"]');
+        cpfCnpjInputs.forEach(input => {
+            input.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\D/g, '');
+
+                if (value.length <= 11) {
+                    // Máscara CPF: 000.000.000-00
+                    value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+                    e.target.value = value.substring(0, 14);
+                } else {
+                    // Máscara CNPJ: 00.000.000/0000-00
+                    value = value.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+                    e.target.value = value.substring(0, 18);
+                }
+            });
+        });
+
+        // Máscara CPF simples
+        const cpfInputs = document.querySelectorAll('input[data-mask="cpf"]');
         cpfInputs.forEach(input => {
             input.addEventListener('input', (e) => {
                 let value = e.target.value.replace(/\D/g, '');
@@ -192,6 +210,132 @@ const PMOPrincipal = {
                 e.target.value = value.substring(0, 15);
             });
         });
+    },
+
+    /**
+     * Toggle tipo de certificação
+     */
+    toggleTipoCertificacao() {
+        const tipoCertificacao = document.getElementById('tipo_certificacao');
+        const campoOpac = document.getElementById('campo-opac');
+        const campoGrupoSpg = document.getElementById('campo-grupo-spg');
+        const opacNomeInput = document.getElementById('opac_nome');
+
+        if (!tipoCertificacao || !campoOpac || !campoGrupoSpg) return;
+
+        const valor = tipoCertificacao.value;
+
+        // Mostrar/ocultar campos baseado no tipo
+        if (valor === 'spg') {
+            // SPG/OPAC - mostrar ambos
+            campoOpac.style.display = 'block';
+            campoGrupoSpg.style.display = 'block';
+            opacNomeInput.setAttribute('required', 'required');
+        } else if (valor === 'ocs') {
+            // OCS - ocultar ambos
+            campoOpac.style.display = 'none';
+            campoGrupoSpg.style.display = 'none';
+            opacNomeInput.removeAttribute('required');
+        } else if (valor === 'auditoria') {
+            // Auditoria - mostrar OPAC, ocultar grupo
+            campoOpac.style.display = 'block';
+            campoGrupoSpg.style.display = 'none';
+            opacNomeInput.setAttribute('required', 'required');
+            // Limpar valor de ANC para auditoria
+            if (opacNomeInput.value === 'ANC') {
+                opacNomeInput.value = '';
+                opacNomeInput.removeAttribute('readonly');
+            }
+        } else {
+            // Nenhum selecionado - ocultar ambos
+            campoOpac.style.display = 'none';
+            campoGrupoSpg.style.display = 'none';
+            opacNomeInput.removeAttribute('required');
+        }
+    },
+
+    /**
+     * Toggle tipo de pessoa (CPF/CNPJ)
+     */
+    togglePessoaTipo() {
+        const tipoPessoa = document.getElementById('tipo_pessoa');
+        const campoCpfCnpj = document.getElementById('campo-cpf-cnpj');
+        const labelCpfCnpj = document.getElementById('label-cpf-cnpj');
+        const cpfCnpjInput = document.getElementById('cpf_cnpj');
+        const campoInscricaoEstadual = document.getElementById('campo-inscricao-estadual');
+        const campoInscricaoMunicipal = document.getElementById('campo-inscricao-municipal');
+        const campoNomeFantasia = document.getElementById('campo-nome-fantasia');
+
+        if (!tipoPessoa || !campoCpfCnpj) return;
+
+        const valor = tipoPessoa.value;
+
+        if (valor === 'fisica') {
+            // Pessoa Física - mostrar CPF, ocultar campos de empresa
+            campoCpfCnpj.style.display = 'block';
+            labelCpfCnpj.innerHTML = 'CPF <span class="required">*</span>';
+            cpfCnpjInput.placeholder = '000.000.000-00';
+            cpfCnpjInput.setAttribute('required', 'required');
+            cpfCnpjInput.value = '';
+
+            // Ocultar campos de empresa
+            if (campoInscricaoEstadual) campoInscricaoEstadual.style.display = 'none';
+            if (campoInscricaoMunicipal) campoInscricaoMunicipal.style.display = 'none';
+            if (campoNomeFantasia) campoNomeFantasia.style.display = 'none';
+
+            // Remover máscaras anteriores e aplicar máscara de CPF
+            this.aplicarMascaraCpf(cpfCnpjInput);
+
+        } else if (valor === 'juridica') {
+            // Pessoa Jurídica - mostrar CNPJ e campos de empresa
+            campoCpfCnpj.style.display = 'block';
+            labelCpfCnpj.innerHTML = 'CNPJ <span class="required">*</span>';
+            cpfCnpjInput.placeholder = '00.000.000/0000-00';
+            cpfCnpjInput.setAttribute('required', 'required');
+            cpfCnpjInput.value = '';
+
+            // Mostrar campos de empresa
+            if (campoInscricaoEstadual) campoInscricaoEstadual.style.display = 'block';
+            if (campoInscricaoMunicipal) campoInscricaoMunicipal.style.display = 'block';
+            if (campoNomeFantasia) campoNomeFantasia.style.display = 'block';
+
+            // Remover máscaras anteriores e aplicar máscara de CNPJ
+            this.aplicarMascaraCnpj(cpfCnpjInput);
+
+        } else {
+            // Nenhum selecionado - ocultar tudo
+            campoCpfCnpj.style.display = 'none';
+            if (campoInscricaoEstadual) campoInscricaoEstadual.style.display = 'none';
+            if (campoInscricaoMunicipal) campoInscricaoMunicipal.style.display = 'none';
+            if (campoNomeFantasia) campoNomeFantasia.style.display = 'none';
+            cpfCnpjInput.removeAttribute('required');
+        }
+    },
+
+    /**
+     * Aplicar máscara de CPF
+     */
+    aplicarMascaraCpf(input) {
+        input.removeEventListener('input', this._cnpjMask);
+        this._cpfMask = (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+            e.target.value = value.substring(0, 14);
+        };
+        input.addEventListener('input', this._cpfMask);
+    },
+
+    /**
+     * Aplicar máscara de CNPJ
+     */
+    aplicarMascaraCnpj(input) {
+        input.removeEventListener('input', this._cpfMask);
+        this._cnpjMask = (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            value = value.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+            e.target.value = value.substring(0, 18);
+        };
+        input.addEventListener('input', this._cnpjMask);
     },
 
     /**

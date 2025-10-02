@@ -1,0 +1,2024 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PMO Anexo Cogumelos - ANC</title>
+
+  <!-- Framework CSS Unificado (Versão Completa) -->
+  <link rel="stylesheet" href="../../framework/core/pmo-framework-full.css">
+
+  <!-- CSS Específico do Anexo Cogumelos -->
+  <link rel="stylesheet" href="./cogumelo.css">
+</head>
+<body>
+  <!-- Cabeçalho -->
+  <header class="pmo-header">
+    <div class="pmo-container">
+      <div class="header-content">
+        <h1>🍄 Anexo II - Produção de Cogumelos</h1>
+        <p class="subtitle">Plano de Manejo Orgânico - ANC</p>
+      </div>
+
+      <!-- Navegação -->
+      <nav class="pmo-navigation">
+        <a href="../dashboard/index.html">🏠 Dashboard</a>
+        <a href="../pmo-principal/index.html">📋 PMO Principal</a>
+        <a href="../anexo-vegetal/index.html">🌱 Anexo Vegetal</a>
+        <a href="../anexo-animal/index.html">🐄 Anexo Animal</a>
+        <a href="../anexo-cogumelo/index.html" class="active">🍄 Cogumelos</a>
+        <a href="../relatorios/index.html">📊 Relatórios</a>
+      </nav>
+
+      <!-- Barra de Progresso -->
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+        <span class="progress-text" id="progress-text">0% Completo</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="pmo-container">
+
+    <!-- Formulário Principal -->
+    <form id="form-anexo-cogumelo" class="pmo-form">
+
+      <!-- SEÇÃO 1: IDENTIFICAÇÃO -->
+      <section id="identificacao-produtor" class="form-section fade-in">
+        <h2>🍄 1. Identificação do Produtor</h2>
+
+        <div class="form-grid">
+            <div class="form-group col-span-2">
+              <label for="nome_fornecedor">Nome do Fornecedor/Produtor <span class="required">*</span></label>
+              <input type="text"
+                     id="nome_fornecedor"
+                     name="nome_fornecedor"
+                     required
+                     minlength="5"
+                     aria-describedby="help-nome">
+              <small id="help-nome" class="help-text">ℹ️ Nome completo conforme documentação oficial</small>
+            </div>
+
+            <div class="form-group col-span-2">
+              <label for="nome_unidade_producao">Nome da Unidade de Produção <span class="required">*</span></label>
+              <input type="text"
+                     id="nome_unidade_producao"
+                     name="nome_unidade_producao"
+                     required
+                     minlength="3">
+            </div>
+
+            <div class="form-group">
+              <label for="data_preenchimento">Data de Preenchimento <span class="required">*</span></label>
+              <input type="date"
+                     id="data_preenchimento"
+                     name="data_preenchimento"
+                     required>
+            </div>
+          </div>
+      </section>
+
+      <!-- SEÇÃO 2: TIPOS DE COGUMELOS -->
+      <section id="tipos-cogumelos" class="form-section">
+        <h2>🍄 2. Tipos de Cogumelos Produzidos</h2>
+
+        <div class="table-wrapper">
+          <table id="tabela-cogumelos" class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Tipo de Cogumelo <span class="required">*</span></th>
+                <th>Variedade</th>
+                <th>Origem Semente</th>
+                <th>Origem Substrato</th>
+                <th>Produção Anual (kg)</th>
+                <th>Área Cultivada (m²)</th>
+                <th>Ciclo Produção</th>
+                <th>Período Colheita</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <template id="template-cogumelo">
+                <tr>
+                  <td class="row-number">1</td>
+                  <td>
+                    <input type="text" name="tipo_cogumelo[]" required placeholder="Ex: Shitake, Shimeji">
+                  </td>
+                  <td>
+                    <input type="text" name="variedade[]" placeholder="Ex: Lentinula edodes">
+                  </td>
+                  <td>
+                    <input type="text" name="origem_semente[]" placeholder="Ex: Própria, Comprada">
+                  </td>
+                  <td>
+                    <input type="text" name="origem_substrato[]" placeholder="Ex: Próprio, Terceiros">
+                  </td>
+                  <td>
+                    <input type="number" name="estimativa_producao_anual_kg[]" step="0.01" min="0">
+                  </td>
+                  <td>
+                    <input type="number" name="area_cultivada_m2[]" step="0.01" min="0">
+                  </td>
+                  <td>
+                    <input type="text" name="ciclo_producao[]" placeholder="Ex: 90 dias">
+                  </td>
+                  <td>
+                    <input type="text" name="periodo_colheita[]" placeholder="Ex: Mar-Set">
+                  </td>
+                  <td class="action-buttons">
+                    <button type="button" onclick="PMOTable.duplicateRow(this)" title="Duplicar">📋</button>
+                    <button type="button" onclick="PMOTable.removeRow(this)" class="btn-danger" title="Remover">🗑️</button>
+                  </td>
+                </tr>
+              </template>
+
+              <!-- Primeira linha -->
+              <tr>
+                <td class="row-number">1</td>
+                <td><input type="text" name="tipo_cogumelo[]" required placeholder="Ex: Shitake, Shimeji"></td>
+                <td><input type="text" name="variedade[]" placeholder="Ex: Lentinula edodes"></td>
+                <td><input type="text" name="origem_semente[]" placeholder="Ex: Própria, Comprada"></td>
+                <td><input type="text" name="origem_substrato[]" placeholder="Ex: Próprio, Terceiros"></td>
+                <td><input type="number" name="estimativa_producao_anual_kg[]" step="0.01" min="0"></td>
+                <td><input type="number" name="area_cultivada_m2[]" step="0.01" min="0"></td>
+                <td><input type="text" name="ciclo_producao[]" placeholder="Ex: 90 dias"></td>
+                <td><input type="text" name="periodo_colheita[]" placeholder="Ex: Mar-Set"></td>
+                <td class="action-buttons">
+                  <button type="button" onclick="PMOTable.duplicateRow(this)">📋</button>
+                  <button type="button" onclick="PMOTable.removeRow(this)" class="btn-danger">🗑️</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <button type="button" class="btn btn-secondary" onclick="PMOTable.addRow('tabela-cogumelos')">
+            ➕ Adicionar Tipo de Cogumelo
+          </button>
+        </div>
+
+        <div class="alert alert-info">
+          <p>ℹ️ <strong>Instrução:</strong> Liste todos os tipos de cogumelos produzidos na unidade.</p>
+          <p>⚠️ <strong>Importante:</strong> Especifique variedades, origens e estimativas de produção.</p>
+        </div>
+      </section>
+
+      <!-- SEÇÃO 3: SUBSTRATO -->
+      <section id="substrato" class="form-section">
+        <h2>🌾 3. Substrato Utilizado</h2>
+
+        
+          <h3>Uso de Substrato</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>
+                <input type="checkbox"
+                       id="utiliza_substrato"
+                       name="utiliza_substrato"
+                       onchange="AnexoCogumelo.toggleSection('detalhes-substrato', this.checked)">
+                Utiliza substrato na produção?
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="producao_propria">
+                Produção própria de substrato
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="compra_pronto">
+                Compra substrato pronto
+              </label>
+            </div>
+          </div>
+        
+
+        <!-- Detalhes do Substrato (Condicional) -->
+        <div id="detalhes-substrato" class="conditional-fields" style="display: none;">
+          
+            <h3>Materiais de Formulação do Substrato</h3>
+
+            <div class="table-wrapper">
+              <table id="tabela-materiais-substrato" class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Material/Ingrediente <span class="required">*</span></th>
+                    <th>Origem</th>
+                    <th>Fornecedor</th>
+                    <th>Tipo</th>
+                    <th>Risco Transgênicos</th>
+                    <th>Proporção (%)</th>
+                    <th>Tratamento Recebido</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <template id="template-material-substrato">
+                    <tr>
+                      <td class="row-number">1</td>
+                      <td><input type="text" name="material_ingrediente[]" required placeholder="Ex: Palha de trigo"></td>
+                      <td>
+                        <select name="origem_proprio_comprado[]">
+                          <option value="">Selecione...</option>
+                          <option value="proprio">Próprio</option>
+                          <option value="comprado">Comprado</option>
+                        </select>
+                      </td>
+                      <td><input type="text" name="fornecedor_material[]"></td>
+                      <td>
+                        <select name="tipo_organico_convencional[]">
+                          <option value="">Selecione...</option>
+                          <option value="organico">Orgânico</option>
+                          <option value="convencional">Convencional</option>
+                        </select>
+                      </td>
+                      <td>
+                        <select name="risco_transgenicos[]">
+                          <option value="">Selecione...</option>
+                          <option value="baixo">Baixo</option>
+                          <option value="medio">Médio</option>
+                          <option value="alto">Alto</option>
+                        </select>
+                      </td>
+                      <td><input type="number" name="proporcao_percent[]" step="0.1" min="0" max="100"></td>
+                      <td><input type="text" name="tratamento_recebido[]" placeholder="Ex: Pasteurização"></td>
+                      <td class="action-buttons">
+                        <button type="button" onclick="PMOTable.duplicateRow(this)">📋</button>
+                        <button type="button" onclick="PMOTable.removeRow(this)" class="btn-danger">🗑️</button>
+                      </td>
+                    </tr>
+                  </template>
+
+                  <tr>
+                    <td class="row-number">1</td>
+                    <td><input type="text" name="material_ingrediente[]" placeholder="Ex: Palha de trigo"></td>
+                    <td>
+                      <select name="origem_proprio_comprado[]">
+                        <option value="">Selecione...</option>
+                        <option value="proprio">Próprio</option>
+                        <option value="comprado">Comprado</option>
+                      </select>
+                    </td>
+                    <td><input type="text" name="fornecedor_material[]"></td>
+                    <td>
+                      <select name="tipo_organico_convencional[]">
+                        <option value="">Selecione...</option>
+                        <option value="organico">Orgânico</option>
+                        <option value="convencional">Convencional</option>
+                      </select>
+                    </td>
+                    <td>
+                      <select name="risco_transgenicos[]">
+                        <option value="">Selecione...</option>
+                        <option value="baixo">Baixo</option>
+                        <option value="medio">Médio</option>
+                        <option value="alto">Alto</option>
+                      </select>
+                    </td>
+                    <td><input type="number" name="proporcao_percent[]" step="0.1" min="0" max="100"></td>
+                    <td><input type="text" name="tratamento_recebido[]" placeholder="Ex: Pasteurização"></td>
+                    <td class="action-buttons">
+                      <button type="button" onclick="PMOTable.duplicateRow(this)">📋</button>
+                      <button type="button" onclick="PMOTable.removeRow(this)" class="btn-danger">🗑️</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <button type="button" class="btn btn-secondary" onclick="PMOTable.addRow('tabela-materiais-substrato')">
+                ➕ Adicionar Material
+              </button>
+            </div>
+          
+
+          
+            <h3>Declarações sobre Substrato</h3>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>
+                  <input type="checkbox" name="possui_declaracao_isencao_transgenicos">
+                  Possui declaração de isenção de transgênicos
+                </label>
+              </div>
+
+              <div class="form-group">
+                <label>
+                  <input type="checkbox" name="possui_analise_metais_pesados">
+                  Possui análise de metais pesados
+                </label>
+              </div>
+
+              <div class="form-group">
+                <label>
+                  <input type="checkbox" name="valores_acordo_portaria">
+                  Valores de acordo com portaria
+                </label>
+              </div>
+
+              <div class="form-group col-span-2">
+                <label for="analise_realizada_por">Análise Realizada Por</label>
+                <input type="text" id="analise_realizada_por" name="analise_realizada_por" placeholder="Nome do laboratório">
+              </div>
+
+              <div class="form-group">
+                <label>
+                  <input type="checkbox" name="ciente_nova_analise_fornecedor">
+                  Ciente da necessidade de nova análise ao mudar fornecedor
+                </label>
+              </div>
+            </div>
+          
+        </div>
+      </section>
+
+      <!-- SEÇÃO 4: TRATAMENTO DO SOLO -->
+      <section id="tratamento-solo" class="form-section">
+        <h2>🌍 4. Tratamento do Solo</h2>
+
+        
+          <h3>Uso de Solo</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>
+                <input type="checkbox"
+                       id="utiliza_solo"
+                       name="utiliza_solo"
+                       onchange="AnexoCogumelo.toggleSection('detalhes-solo', this.checked)">
+                Utiliza solo na produção?
+              </label>
+            </div>
+          </div>
+        
+
+        <div id="detalhes-solo" class="conditional-fields" style="display: none;">
+          
+            <h3>Informações sobre Solo</h3>
+            <div class="form-grid">
+              <div class="form-group col-span-2">
+                <label for="origem_solo">Origem do Solo</label>
+                <input type="text" id="origem_solo" name="origem_solo" placeholder="Descrição da origem">
+              </div>
+
+              <div class="form-group">
+                <label>
+                  <input type="checkbox"
+                         id="solo_recebe_tratamento"
+                         name="solo_recebe_tratamento"
+                         onchange="AnexoCogumelo.toggleSection('produtos-tratamento', this.checked)">
+                  Solo recebe tratamento
+                </label>
+              </div>
+
+              <div class="form-group">
+                <label for="tipo_tratamento">Tipo de Tratamento</label>
+                <input type="text" id="tipo_tratamento" name="tipo_tratamento" placeholder="Ex: Esterilização">
+              </div>
+            </div>
+          
+
+          <div id="produtos-tratamento" class="conditional-fields" style="display: none;">
+            
+              <h3>Produtos Utilizados no Tratamento do Solo</h3>
+
+              <div class="table-wrapper">
+                <table id="tabela-produtos-solo" class="table">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Produto <span class="required">*</span></th>
+                      <th>Marca Comercial</th>
+                      <th>Ingrediente Ativo</th>
+                      <th>Fabricante</th>
+                      <th>Finalidade</th>
+                      <th>Status</th>
+                      <th>Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <template id="template-produto-solo">
+                      <tr>
+                        <td class="row-number">1</td>
+                        <td><input type="text" name="produto_solo[]" required></td>
+                        <td><input type="text" name="marca_comercial_solo[]"></td>
+                        <td><input type="text" name="ingrediente_ativo_solo[]"></td>
+                        <td><input type="text" name="fabricante_solo[]"></td>
+                        <td><input type="text" name="finalidade_solo[]"></td>
+                        <td>
+                          <select name="ja_usa_pretende_solo[]">
+                            <option value="">Selecione...</option>
+                            <option value="ja_usa">Já usa</option>
+                            <option value="pretende">Pretende usar</option>
+                          </select>
+                        </td>
+                        <td class="action-buttons">
+                          <button type="button" onclick="PMOTable.duplicateRow(this)">📋</button>
+                          <button type="button" onclick="PMOTable.removeRow(this)" class="btn-danger">🗑️</button>
+                        </td>
+                      </tr>
+                    </template>
+
+                    <tr>
+                      <td class="row-number">1</td>
+                      <td><input type="text" name="produto_solo[]"></td>
+                      <td><input type="text" name="marca_comercial_solo[]"></td>
+                      <td><input type="text" name="ingrediente_ativo_solo[]"></td>
+                      <td><input type="text" name="fabricante_solo[]"></td>
+                      <td><input type="text" name="finalidade_solo[]"></td>
+                      <td>
+                        <select name="ja_usa_pretende_solo[]">
+                          <option value="">Selecione...</option>
+                          <option value="ja_usa">Já usa</option>
+                          <option value="pretende">Pretende usar</option>
+                        </select>
+                      </td>
+                      <td class="action-buttons">
+                        <button type="button" onclick="PMOTable.duplicateRow(this)">📋</button>
+                        <button type="button" onclick="PMOTable.removeRow(this)" class="btn-danger">🗑️</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <button type="button" class="btn btn-secondary" onclick="PMOTable.addRow('tabela-produtos-solo')">
+                  ➕ Adicionar Produto
+                </button>
+              </div>
+            
+          </div>
+        </div>
+      </section>
+
+      <!-- SEÇÃO 5: MADEIRA E TORAS -->
+      <section id="madeira-toras" class="form-section">
+        <h2>🪵 5. Madeira e Toras</h2>
+
+        
+          <h3>Uso de Madeira</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>
+                <input type="checkbox"
+                       id="utiliza_madeira"
+                       name="utiliza_madeira"
+                       onchange="AnexoCogumelo.toggleSection('detalhes-madeira', this.checked)">
+                Utiliza madeira na produção?
+              </label>
+            </div>
+          </div>
+        
+
+        <div id="detalhes-madeira" class="conditional-fields" style="display: none;">
+          
+            <h3>Informações sobre Madeira</h3>
+            <div class="form-grid">
+              <div class="form-group col-span-2">
+                <label for="origem_madeira">Origem da Madeira</label>
+                <input type="text" id="origem_madeira" name="origem_madeira" placeholder="Descrição da origem">
+              </div>
+
+              <div class="form-group">
+                <label>
+                  <input type="checkbox" name="madeira_sem_tratamento_quimico">
+                  Madeira sem tratamento químico
+                </label>
+              </div>
+
+              <div class="form-group">
+                <label>
+                  <input type="checkbox" name="madeira_origem_legal">
+                  Madeira de origem legal
+                </label>
+              </div>
+            </div>
+          
+
+          
+            <h3>Toras</h3>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>
+                  <input type="checkbox" name="utiliza_toras">
+                  Utiliza toras
+                </label>
+              </div>
+
+              <div class="form-group col-span-2">
+                <label for="origem_toras">Origem das Toras</label>
+                <input type="text" id="origem_toras" name="origem_toras">
+              </div>
+
+              <div class="form-group">
+                <label>
+                  <input type="checkbox" name="toras_sem_tratamento_quimico">
+                  Toras sem tratamento químico
+                </label>
+              </div>
+
+              <div class="form-group">
+                <label>
+                  <input type="checkbox" name="toras_origem_legal">
+                  Toras de origem legal
+                </label>
+              </div>
+            </div>
+          
+
+          
+            <h3>Lenha para Vapor</h3>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>
+                  <input type="checkbox" name="utiliza_lenha_vapor">
+                  Utiliza lenha para vapor
+                </label>
+              </div>
+
+              <div class="form-group col-span-2">
+                <label for="origem_lenha">Origem da Lenha</label>
+                <input type="text" id="origem_lenha" name="origem_lenha">
+              </div>
+
+              <div class="form-group">
+                <label>
+                  <input type="checkbox" name="lenha_sem_tratamento_quimico">
+                  Lenha sem tratamento químico
+                </label>
+              </div>
+
+              <div class="form-group">
+                <label>
+                  <input type="checkbox" name="lenha_origem_legal">
+                  Lenha de origem legal
+                </label>
+              </div>
+            </div>
+          
+        </div>
+      </section>
+
+      <!-- SEÇÃO 6: INÓCULO -->
+      <section id="inoculo" class="form-section">
+        <h2>🧫 6. Inóculo (Spawn)</h2>
+
+        
+          <h3>Informações sobre Inóculo</h3>
+          <div class="form-grid">
+            <div class="form-group col-span-2">
+              <label for="origem_inoculos">Origem dos Inóculos <span class="required">*</span></label>
+              <input type="text"
+                     id="origem_inoculos"
+                     name="origem_inoculos"
+                     required
+                     placeholder="Ex: Produção própria, Comprado">
+            </div>
+
+            <div class="form-group">
+              <label for="tipo_inoculo">Tipo de Inóculo</label>
+              <input type="text" id="tipo_inoculo" name="tipo_inoculo" placeholder="Ex: Líquido, Grãos">
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="inoculo_nao_transgenico">
+                Inóculo não transgênico
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="possui_certificacao_inoculo">
+                Possui certificação do inóculo
+              </label>
+            </div>
+
+            <div class="form-group col-span-2">
+              <label for="fornecedor_inoculo">Fornecedor do Inóculo</label>
+              <input type="text" id="fornecedor_inoculo" name="fornecedor_inoculo">
+            </div>
+
+            <div class="form-group">
+              <label for="lote_inoculo">Lote do Inóculo</label>
+              <input type="text" id="lote_inoculo" name="lote_inoculo">
+            </div>
+
+            <div class="form-group">
+              <label for="data_validade_inoculo">Data de Validade</label>
+              <input type="date" id="data_validade_inoculo" name="data_validade">
+            </div>
+          </div>
+        
+
+        <div class="alert alert-warning">
+          <p>⚠️ <strong>Importante:</strong> Certifique-se de que o inóculo não seja de origem transgênica e possua rastreabilidade.</p>
+        </div>
+      </section>
+
+      <!-- SEÇÃO 7: AMBIENTE DE CULTIVO -->
+      <section id="ambiente-cultivo" class="form-section">
+        <h2>🏭 7. Ambiente de Cultivo</h2>
+
+        
+          <h3>Instalações</h3>
+          <div class="form-grid">
+            <div class="form-group col-span-2">
+              <label for="tipo_instalacao">Tipo de Instalação <span class="required">*</span></label>
+              <input type="text"
+                     id="tipo_instalacao"
+                     name="tipo_instalacao"
+                     required
+                     placeholder="Ex: Estufa, Galpão climatizado">
+            </div>
+
+            <div class="form-group">
+              <label for="area_total_m2">Área Total (m²) <span class="required">*</span></label>
+              <input type="number"
+                     id="area_total_m2"
+                     name="area_total_m2"
+                     step="0.01"
+                     min="0"
+                     required>
+            </div>
+
+            <div class="form-group">
+              <label for="numero_estufas">Número de Estufas</label>
+              <input type="number" id="numero_estufas" name="numero_estufas" min="0">
+            </div>
+          </div>
+        
+
+        
+          <h3>Controle Ambiental</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="temperatura_min">Temperatura Mínima (°C)</label>
+              <input type="number" id="temperatura_min" name="temperatura_min" step="0.1">
+            </div>
+
+            <div class="form-group">
+              <label for="temperatura_max">Temperatura Máxima (°C)</label>
+              <input type="number" id="temperatura_max" name="temperatura_max" step="0.1">
+            </div>
+
+            <div class="form-group">
+              <label for="umidade_relativa_min">Umidade Relativa Mínima (%)</label>
+              <input type="number" id="umidade_relativa_min" name="umidade_relativa_min" min="0" max="100">
+            </div>
+
+            <div class="form-group">
+              <label for="umidade_relativa_max">Umidade Relativa Máxima (%)</label>
+              <input type="number" id="umidade_relativa_max" name="umidade_relativa_max" min="0" max="100">
+            </div>
+
+            <div class="form-group col-span-2">
+              <label for="ventilacao">Sistema de Ventilação</label>
+              <input type="text" id="ventilacao" name="ventilacao" placeholder="Descrição do sistema">
+            </div>
+
+            <div class="form-group col-span-2">
+              <label for="iluminacao">Sistema de Iluminação</label>
+              <input type="text" id="iluminacao" name="iluminacao" placeholder="Descrição do sistema">
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="sistema_refrigeracao">
+                Possui sistema de refrigeração
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="sistema_aquecimento">
+                Possui sistema de aquecimento
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="sistema_umidificacao">
+                Possui sistema de umidificação
+              </label>
+            </div>
+          </div>
+        
+
+        
+          <h3>Estruturas de Produção</h3>
+
+          <div class="table-wrapper">
+            <table id="tabela-estruturas" class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Tipo de Estrutura</th>
+                  <th>Quantidade</th>
+                  <th>Capacidade Produção</th>
+                  <th>Material Construção</th>
+                  <th>Estado Conservação</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <template id="template-estrutura">
+                  <tr>
+                    <td class="row-number">1</td>
+                    <td><input type="text" name="tipo_estrutura[]" placeholder="Ex: Prateleiras"></td>
+                    <td><input type="number" name="quantidade_estrutura[]" min="0"></td>
+                    <td><input type="number" name="capacidade_producao[]" step="0.01" min="0"></td>
+                    <td><input type="text" name="material_construcao[]" placeholder="Ex: Aço inox"></td>
+                    <td>
+                      <select name="estado_conservacao[]">
+                        <option value="">Selecione...</option>
+                        <option value="otimo">Ótimo</option>
+                        <option value="bom">Bom</option>
+                        <option value="regular">Regular</option>
+                        <option value="precisa_manutencao">Precisa Manutenção</option>
+                      </select>
+                    </td>
+                    <td class="action-buttons">
+                      <button type="button" onclick="PMOTable.duplicateRow(this)">📋</button>
+                      <button type="button" onclick="PMOTable.removeRow(this)" class="btn-danger">🗑️</button>
+                    </td>
+                  </tr>
+                </template>
+
+                <tr>
+                  <td class="row-number">1</td>
+                  <td><input type="text" name="tipo_estrutura[]" placeholder="Ex: Prateleiras"></td>
+                  <td><input type="number" name="quantidade_estrutura[]" min="0"></td>
+                  <td><input type="number" name="capacidade_producao[]" step="0.01" min="0"></td>
+                  <td><input type="text" name="material_construcao[]" placeholder="Ex: Aço inox"></td>
+                  <td>
+                    <select name="estado_conservacao[]">
+                      <option value="">Selecione...</option>
+                      <option value="otimo">Ótimo</option>
+                      <option value="bom">Bom</option>
+                      <option value="regular">Regular</option>
+                      <option value="precisa_manutencao">Precisa Manutenção</option>
+                    </select>
+                  </td>
+                  <td class="action-buttons">
+                    <button type="button" onclick="PMOTable.duplicateRow(this)">📋</button>
+                    <button type="button" onclick="PMOTable.removeRow(this)" class="btn-danger">🗑️</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <button type="button" class="btn btn-secondary" onclick="PMOTable.addRow('tabela-estruturas')">
+              ➕ Adicionar Estrutura
+            </button>
+          </div>
+        
+      </section>
+
+      <!-- SEÇÃO 8: CONTROLE DE PRAGAS E DOENÇAS -->
+      <section id="controle-pragas" class="form-section">
+        <h2>🐛 8. Controle de Pragas e Doenças</h2>
+
+        
+          <h3>Ocorrências de Pragas e Doenças</h3>
+
+          <div class="table-wrapper">
+            <table id="tabela-pragas" class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Praga/Doença</th>
+                  <th>Prática Utilizada</th>
+                  <th>Substância</th>
+                  <th>Marca Comercial</th>
+                  <th>Ingrediente Ativo</th>
+                  <th>Fabricante</th>
+                  <th>Frequência</th>
+                  <th>Eficácia</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <template id="template-praga">
+                  <tr>
+                    <td class="row-number">1</td>
+                    <td><input type="text" name="praga_doenca[]" placeholder="Ex: Mofo verde"></td>
+                    <td><input type="text" name="pratica_utilizada[]" placeholder="Ex: Controle preventivo"></td>
+                    <td><input type="text" name="substancia_utilizada[]"></td>
+                    <td><input type="text" name="marca_comercial_praga[]"></td>
+                    <td><input type="text" name="ingrediente_ativo_praga[]"></td>
+                    <td><input type="text" name="origem_fabricante[]"></td>
+                    <td><input type="text" name="frequencia_aplicacao[]" placeholder="Ex: Semanal"></td>
+                    <td>
+                      <select name="eficacia[]">
+                        <option value="">Selecione...</option>
+                        <option value="alta">Alta</option>
+                        <option value="media">Média</option>
+                        <option value="baixa">Baixa</option>
+                      </select>
+                    </td>
+                    <td class="action-buttons">
+                      <button type="button" onclick="PMOTable.duplicateRow(this)">📋</button>
+                      <button type="button" onclick="PMOTable.removeRow(this)" class="btn-danger">🗑️</button>
+                    </td>
+                  </tr>
+                </template>
+
+                <tr>
+                  <td class="row-number">1</td>
+                  <td><input type="text" name="praga_doenca[]" placeholder="Ex: Mofo verde"></td>
+                  <td><input type="text" name="pratica_utilizada[]" placeholder="Ex: Controle preventivo"></td>
+                  <td><input type="text" name="substancia_utilizada[]"></td>
+                  <td><input type="text" name="marca_comercial_praga[]"></td>
+                  <td><input type="text" name="ingrediente_ativo_praga[]"></td>
+                  <td><input type="text" name="origem_fabricante[]"></td>
+                  <td><input type="text" name="frequencia_aplicacao[]" placeholder="Ex: Semanal"></td>
+                  <td>
+                    <select name="eficacia[]">
+                      <option value="">Selecione...</option>
+                      <option value="alta">Alta</option>
+                      <option value="media">Média</option>
+                      <option value="baixa">Baixa</option>
+                    </select>
+                  </td>
+                  <td class="action-buttons">
+                    <button type="button" onclick="PMOTable.duplicateRow(this)">📋</button>
+                    <button type="button" onclick="PMOTable.removeRow(this)" class="btn-danger">🗑️</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <button type="button" class="btn btn-secondary" onclick="PMOTable.addRow('tabela-pragas')">
+              ➕ Adicionar Ocorrência
+            </button>
+          </div>
+        
+
+        
+          <h3>Manejo Preventivo</h3>
+          <div class="form-grid">
+            <div class="form-group col-span-2">
+              <label for="higienizacao_instalacoes">Higienização das Instalações</label>
+              <textarea id="higienizacao_instalacoes"
+                        name="higienizacao_instalacoes"
+                        rows="3"
+                        placeholder="Descreva as práticas de higienização"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="controle_temperatura_umidade">
+                Controle de temperatura e umidade
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="isolamento_lotes_contaminados">
+                Isolamento de lotes contaminados
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="descarte_adequado_residuos">
+                Descarte adequado de resíduos
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="monitoramento_regular">
+                Monitoramento regular
+              </label>
+            </div>
+          </div>
+        
+      </section>
+
+      <!-- SEÇÃO 9: ÁGUA UTILIZADA -->
+      <section id="agua-utilizada" class="form-section">
+        <h2>💧 9. Água Utilizada</h2>
+
+        
+          <h3>Informações sobre Água</h3>
+          <div class="form-grid">
+            <div class="form-group col-span-2">
+              <label for="origem_agua">Origem da Água <span class="required">*</span></label>
+              <input type="text"
+                     id="origem_agua"
+                     name="origem_agua"
+                     required
+                     placeholder="Ex: Poço artesiano, Rede pública">
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="possui_analise_qualidade">
+                Possui análise de qualidade da água
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label for="data_ultima_analise">Data da Última Análise</label>
+              <input type="date" id="data_ultima_analise" name="data_ultima_analise">
+            </div>
+
+            <div class="form-group">
+              <label for="periodicidade_analise">Periodicidade das Análises</label>
+              <input type="text" id="periodicidade_analise" name="periodicidade_analise" placeholder="Ex: Semestral">
+            </div>
+
+            <div class="form-group col-span-2">
+              <label for="tratamento_agua">Tratamento da Água</label>
+              <input type="text" id="tratamento_agua" name="tratamento_agua" placeholder="Descrição do tratamento">
+            </div>
+
+            <div class="form-group col-span-2">
+              <label for="uso_agua">Uso da Água</label>
+              <textarea id="uso_agua"
+                        name="uso_agua"
+                        rows="3"
+                        placeholder="Descreva como a água é utilizada (irrigação, preparação substrato, etc.)"></textarea>
+            </div>
+          </div>
+        
+      </section>
+
+      <!-- SEÇÃO 10: COLHEITA E PÓS-COLHEITA -->
+      <section id="colheita-pos-colheita" class="form-section">
+        <h2>🧺 10. Colheita e Pós-Colheita</h2>
+
+        
+          <h3>Método de Colheita</h3>
+          <div class="form-grid">
+            <div class="form-group col-span-2">
+              <label for="metodo_colheita">Método de Colheita <span class="required">*</span></label>
+              <textarea id="metodo_colheita"
+                        name="metodo_colheita"
+                        rows="3"
+                        required
+                        placeholder="Descreva o método utilizado para colheita dos cogumelos"></textarea>
+            </div>
+
+            <div class="form-group col-span-2">
+              <label for="ferramentas_utilizadas">Ferramentas Utilizadas</label>
+              <input type="text"
+                     id="ferramentas_utilizadas"
+                     name="ferramentas_utilizadas"
+                     placeholder="Ex: Facas, tesouras">
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="higienizacao_ferramentas">
+                Realiza higienização das ferramentas
+              </label>
+            </div>
+          </div>
+        
+
+        
+          <h3>Processamento Pós-Colheita</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="limpeza_pos">
+                Limpeza
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="selecao_pos">
+                Seleção
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="classificacao_pos">
+                Classificação
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="embalagem_pos">
+                Embalagem
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="refrigeracao_pos">
+                Refrigeração
+              </label>
+            </div>
+
+            <div class="form-group col-span-2">
+              <label for="outros_processos">Outros Processos</label>
+              <input type="text" id="outros_processos" name="outros_processos">
+            </div>
+          </div>
+        
+
+        
+          <h3>Armazenamento</h3>
+          <div class="form-grid">
+            <div class="form-group col-span-2">
+              <label for="tipo_armazenamento">Tipo de Armazenamento</label>
+              <input type="text" id="tipo_armazenamento" name="tipo_armazenamento" placeholder="Ex: Câmara fria">
+            </div>
+
+            <div class="form-group">
+              <label for="temperatura_armazenamento">Temperatura de Armazenamento (°C)</label>
+              <input type="number" id="temperatura_armazenamento" name="temperatura_armazenamento" step="0.1">
+            </div>
+
+            <div class="form-group">
+              <label for="tempo_maximo_armazenamento">Tempo Máximo de Armazenamento</label>
+              <input type="text" id="tempo_maximo_armazenamento" name="tempo_maximo_armazenamento" placeholder="Ex: 7 dias">
+            </div>
+
+            <div class="form-group col-span-2">
+              <label for="tipo_embalagem">Tipo de Embalagem</label>
+              <input type="text" id="tipo_embalagem" name="tipo_embalagem" placeholder="Ex: Bandejas PET">
+            </div>
+          </div>
+        
+      </section>
+
+      <!-- SEÇÃO 11: RESÍDUOS E EFLUENTES -->
+      <section id="residuos-efluentes" class="form-section">
+        <h2>♻️ 11. Gestão de Resíduos e Efluentes</h2>
+
+        
+          <h3>Substrato Utilizado</h3>
+          <div class="form-grid">
+            <div class="form-group col-span-2">
+              <label for="destino_substrato">Destino do Substrato Utilizado <span class="required">*</span></label>
+              <input type="text"
+                     id="destino_substrato"
+                     name="destino_substrato"
+                     required
+                     placeholder="Ex: Compostagem, Venda para adubação">
+            </div>
+
+            <div class="form-group">
+              <label for="volume_mensal_kg">Volume Mensal (kg)</label>
+              <input type="number" id="volume_mensal_kg" name="volume_mensal_kg" step="0.01" min="0">
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="reutilizacao_substrato">
+                Reutilização do substrato
+              </label>
+            </div>
+
+            <div class="form-group col-span-2">
+              <label for="forma_reutilizacao">Forma de Reutilização</label>
+              <input type="text" id="forma_reutilizacao" name="forma_reutilizacao">
+            </div>
+          </div>
+        
+
+        
+          <h3>Chorume</h3>
+          <div class="form-grid">
+            <div class="form-group col-span-2">
+              <label for="destino_chorume">Destino do Chorume</label>
+              <input type="text" id="destino_chorume" name="destino_chorume" placeholder="Ex: Tratamento biológico">
+            </div>
+
+            <div class="form-group">
+              <label for="volume_mensal_litros">Volume Mensal (litros)</label>
+              <input type="number" id="volume_mensal_litros" name="volume_mensal_litros" step="0.01" min="0">
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="tratamento_chorume">
+                Realiza tratamento do chorume
+              </label>
+            </div>
+
+            <div class="form-group col-span-2">
+              <label for="tipo_tratamento_chorume">Tipo de Tratamento</label>
+              <input type="text" id="tipo_tratamento_chorume" name="tipo_tratamento">
+            </div>
+          </div>
+        
+
+        
+          <h3>Cogumelos Descartados</h3>
+          <div class="form-grid">
+            <div class="form-group col-span-2">
+              <label for="destino_cogumelos">Destino dos Cogumelos Descartados</label>
+              <input type="text" id="destino_cogumelos" name="destino" placeholder="Ex: Compostagem, Alimentação animal">
+            </div>
+
+            <div class="form-group">
+              <label for="volume_mensal_kg_cogumelos">Volume Mensal (kg)</label>
+              <input type="number" id="volume_mensal_kg_cogumelos" name="volume_mensal_kg_cogumelos" step="0.01" min="0">
+            </div>
+          </div>
+        
+
+        
+          <h3>Embalagens de Insumos</h3>
+          <div class="form-grid">
+            <div class="form-group col-span-2">
+              <label for="destino_embalagens">Destino das Embalagens</label>
+              <input type="text" id="destino_embalagens" name="destino_embalagens" placeholder="Ex: Coleta seletiva, Reciclagem">
+            </div>
+
+            <div class="form-group col-span-2">
+              <label for="tipo_separacao">Tipo de Separação</label>
+              <input type="text" id="tipo_separacao" name="tipo_separacao" placeholder="Ex: Por material (plástico, papel, metal)">
+            </div>
+          </div>
+        
+      </section>
+
+      <!-- SEÇÃO 12: EQUIPAMENTOS E FERRAMENTAS -->
+      <section id="equipamentos-ferramentas" class="form-section">
+        <h2>🔧 12. Equipamentos e Ferramentas</h2>
+
+        
+          <h3>Lista de Equipamentos</h3>
+
+          <div class="table-wrapper">
+            <table id="tabela-equipamentos" class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Equipamento <span class="required">*</span></th>
+                  <th>Finalidade</th>
+                  <th>Quantidade</th>
+                  <th>Estado de Conservação</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <template id="template-equipamento">
+                  <tr>
+                    <td class="row-number">1</td>
+                    <td><input type="text" name="equipamento[]" required placeholder="Ex: Autoclave"></td>
+                    <td><input type="text" name="finalidade_equipamento[]" placeholder="Ex: Esterilização"></td>
+                    <td><input type="number" name="quantidade_equipamento[]" min="0"></td>
+                    <td>
+                      <select name="estado_conservacao_equipamento[]">
+                        <option value="">Selecione...</option>
+                        <option value="otimo">Ótimo</option>
+                        <option value="bom">Bom</option>
+                        <option value="regular">Regular</option>
+                        <option value="precisa_manutencao">Precisa Manutenção</option>
+                      </select>
+                    </td>
+                    <td class="action-buttons">
+                      <button type="button" onclick="PMOTable.duplicateRow(this)">📋</button>
+                      <button type="button" onclick="PMOTable.removeRow(this)" class="btn-danger">🗑️</button>
+                    </td>
+                  </tr>
+                </template>
+
+                <tr>
+                  <td class="row-number">1</td>
+                  <td><input type="text" name="equipamento[]" required placeholder="Ex: Autoclave"></td>
+                  <td><input type="text" name="finalidade_equipamento[]" placeholder="Ex: Esterilização"></td>
+                  <td><input type="number" name="quantidade_equipamento[]" min="0"></td>
+                  <td>
+                    <select name="estado_conservacao_equipamento[]">
+                      <option value="">Selecione...</option>
+                      <option value="otimo">Ótimo</option>
+                      <option value="bom">Bom</option>
+                      <option value="regular">Regular</option>
+                      <option value="precisa_manutencao">Precisa Manutenção</option>
+                    </select>
+                  </td>
+                  <td class="action-buttons">
+                    <button type="button" onclick="PMOTable.duplicateRow(this)">📋</button>
+                    <button type="button" onclick="PMOTable.removeRow(this)" class="btn-danger">🗑️</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <button type="button" class="btn btn-secondary" onclick="PMOTable.addRow('tabela-equipamentos')">
+              ➕ Adicionar Equipamento
+            </button>
+          </div>
+        
+
+        
+          <h3>Compartilhamento de Equipamentos</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="usa_equipamento_terceiro">
+                Usa equipamento de terceiro
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="empresta_equipamento">
+                Empresta equipamento
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="equipamentos_nao_compartilhados">
+                Equipamentos não compartilhados
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="faz_higienizacao">
+                Faz higienização após uso
+              </label>
+            </div>
+
+            <div class="form-group col-span-2">
+              <label for="produtos_higienizacao">Produtos de Higienização</label>
+              <input type="text" id="produtos_higienizacao" name="produtos_higienizacao">
+            </div>
+          </div>
+        
+
+        
+          <h3>Armazenamento de Equipamentos</h3>
+          <div class="form-grid">
+            <div class="form-group col-span-2">
+              <label for="condicoes_armazenamento">Condições de Armazenamento</label>
+              <textarea id="condicoes_armazenamento"
+                        name="condicoes_armazenamento"
+                        rows="3"
+                        placeholder="Descreva as condições de armazenamento dos equipamentos"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="local_especifico">
+                Possui local específico
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="separacao_produtos_proibidos">
+                Separação de produtos proibidos
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="controle_acesso">
+                Controle de acesso
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="acessivel_visitacao">
+                Acessível para visitação
+              </label>
+            </div>
+          </div>
+        
+      </section>
+
+      <!-- SEÇÃO 13: INSUMOS UTILIZADOS -->
+      <section id="insumos-utilizados" class="form-section">
+        <h2>📦 13. Insumos Utilizados</h2>
+
+        
+          <h3>Insumos Permitidos</h3>
+
+          <div class="table-wrapper">
+            <table id="tabela-insumos" class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Tipo de Insumo</th>
+                  <th>Marca/Nome Comercial</th>
+                  <th>Substância Ativa</th>
+                  <th>Fabricante</th>
+                  <th>Finalidade</th>
+                  <th>Status</th>
+                  <th>Nota Fiscal</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <template id="template-insumo">
+                  <tr>
+                    <td class="row-number">1</td>
+                    <td><input type="text" name="tipo_insumo[]" placeholder="Ex: Cal hidratada"></td>
+                    <td><input type="text" name="marca_nome_comercial[]"></td>
+                    <td><input type="text" name="substancia_ativa[]"></td>
+                    <td><input type="text" name="fabricante_insumo[]"></td>
+                    <td><input type="text" name="finalidade_insumo[]" placeholder="Ex: Correção pH"></td>
+                    <td>
+                      <select name="ja_usa_pretende_insumo[]">
+                        <option value="">Selecione...</option>
+                        <option value="ja_usa">Já usa</option>
+                        <option value="pretende">Pretende usar</option>
+                      </select>
+                    </td>
+                    <td>
+                      <label>
+                        <input type="checkbox" name="nota_fiscal[]">
+                        Possui
+                      </label>
+                    </td>
+                    <td class="action-buttons">
+                      <button type="button" onclick="PMOTable.duplicateRow(this)">📋</button>
+                      <button type="button" onclick="PMOTable.removeRow(this)" class="btn-danger">🗑️</button>
+                    </td>
+                  </tr>
+                </template>
+
+                <tr>
+                  <td class="row-number">1</td>
+                  <td><input type="text" name="tipo_insumo[]" placeholder="Ex: Cal hidratada"></td>
+                  <td><input type="text" name="marca_nome_comercial[]"></td>
+                  <td><input type="text" name="substancia_ativa[]"></td>
+                  <td><input type="text" name="fabricante_insumo[]"></td>
+                  <td><input type="text" name="finalidade_insumo[]" placeholder="Ex: Correção pH"></td>
+                  <td>
+                    <select name="ja_usa_pretende_insumo[]">
+                      <option value="">Selecione...</option>
+                      <option value="ja_usa">Já usa</option>
+                      <option value="pretende">Pretende usar</option>
+                    </select>
+                  </td>
+                  <td>
+                    <label>
+                      <input type="checkbox" name="nota_fiscal[]">
+                      Possui
+                    </label>
+                  </td>
+                  <td class="action-buttons">
+                    <button type="button" onclick="PMOTable.duplicateRow(this)">📋</button>
+                    <button type="button" onclick="PMOTable.removeRow(this)" class="btn-danger">🗑️</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <button type="button" class="btn btn-secondary" onclick="PMOTable.addRow('tabela-insumos')">
+              ➕ Adicionar Insumo
+            </button>
+          </div>
+        
+
+        
+          <h3>Declarações sobre Insumos</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="todos_insumos_aprovados">
+                Todos os insumos são aprovados para produção orgânica
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="possui_rastreabilidade">
+                Possui rastreabilidade dos insumos
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="armazenamento_adequado">
+                Armazenamento adequado
+              </label>
+            </div>
+          </div>
+        
+      </section>
+
+      <!-- SEÇÃO 14: RASTREABILIDADE E REGISTROS -->
+      <section id="rastreabilidade-registros" class="form-section">
+        <h2>📊 14. Rastreabilidade e Registros</h2>
+
+        
+          <h3>Sistema de Rastreabilidade</h3>
+          <div class="form-grid">
+            <div class="form-group col-span-2">
+              <label for="sistema_rastreabilidade">Sistema de Rastreabilidade Utilizado <span class="required">*</span></label>
+              <textarea id="sistema_rastreabilidade"
+                        name="sistema_rastreabilidade"
+                        rows="3"
+                        required
+                        placeholder="Descreva o sistema utilizado para rastreabilidade da produção"></textarea>
+            </div>
+          </div>
+        
+
+        
+          <h3>Registros Mantidos</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="compra_insumos">
+                Compra de insumos
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="producao_inoculo">
+                Produção de inóculo
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="preparacao_substrato">
+                Preparação de substrato
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="inoculacao">
+                Inoculação
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="desenvolvimento_cogumelos">
+                Desenvolvimento de cogumelos
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="colheita_reg">
+                Colheita
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="pos_colheita_reg">
+                Pós-colheita
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="comercializacao">
+                Comercialização
+              </label>
+            </div>
+          </div>
+        
+
+        
+          <h3>Método de Registro</h3>
+          <div class="form-grid">
+            <div class="form-group col-span-2">
+              <label for="metodo_registro">Método de Registro <span class="required">*</span></label>
+              <input type="text"
+                     id="metodo_registro"
+                     name="metodo_registro"
+                     required
+                     placeholder="Ex: Caderno de campo, Planilhas digitais">
+            </div>
+
+            <div class="form-group col-span-2">
+              <label for="periodo_retencao_registros">Período de Retenção dos Registros</label>
+              <input type="text"
+                     id="periodo_retencao_registros"
+                     name="periodo_retencao_registros"
+                     placeholder="Ex: 5 anos">
+            </div>
+          </div>
+        
+      </section>
+
+      <!-- SEÇÃO 15: HIGIENIZAÇÃO E SANITIZAÇÃO -->
+      <section id="higienizacao-sanitizacao" class="form-section">
+        <h2>🧼 15. Higienização e Sanitização</h2>
+
+        
+          <h3>Higienização de Instalações</h3>
+          <div class="form-grid">
+            <div class="form-group col-span-2">
+              <label for="frequencia_higienizacao_inst">Frequência de Higienização</label>
+              <input type="text"
+                     id="frequencia_higienizacao_inst"
+                     name="frequencia_higienizacao"
+                     placeholder="Ex: Diária, Semanal">
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table id="tabela-produtos-higienizacao" class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Produto</th>
+                  <th>Marca</th>
+                  <th>Princípio Ativo</th>
+                  <th>Finalidade</th>
+                  <th>Diluição</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <template id="template-produto-higienizacao">
+                  <tr>
+                    <td class="row-number">1</td>
+                    <td><input type="text" name="produto_hig[]" placeholder="Ex: Água sanitária"></td>
+                    <td><input type="text" name="marca_hig[]"></td>
+                    <td><input type="text" name="principio_ativo[]"></td>
+                    <td><input type="text" name="finalidade_hig[]" placeholder="Ex: Desinfecção"></td>
+                    <td><input type="text" name="diluicao[]" placeholder="Ex: 1:10"></td>
+                    <td class="action-buttons">
+                      <button type="button" onclick="PMOTable.duplicateRow(this)">📋</button>
+                      <button type="button" onclick="PMOTable.removeRow(this)" class="btn-danger">🗑️</button>
+                    </td>
+                  </tr>
+                </template>
+
+                <tr>
+                  <td class="row-number">1</td>
+                  <td><input type="text" name="produto_hig[]" placeholder="Ex: Água sanitária"></td>
+                  <td><input type="text" name="marca_hig[]"></td>
+                  <td><input type="text" name="principio_ativo[]"></td>
+                  <td><input type="text" name="finalidade_hig[]" placeholder="Ex: Desinfecção"></td>
+                  <td><input type="text" name="diluicao[]" placeholder="Ex: 1:10"></td>
+                  <td class="action-buttons">
+                    <button type="button" onclick="PMOTable.duplicateRow(this)">📋</button>
+                    <button type="button" onclick="PMOTable.removeRow(this)" class="btn-danger">🗑️</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <button type="button" class="btn btn-secondary" onclick="PMOTable.addRow('tabela-produtos-higienizacao')">
+              ➕ Adicionar Produto
+            </button>
+          </div>
+        
+
+        
+          <h3>Higienização de Equipamentos</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="frequencia_higienizacao_equip">Frequência de Higienização</label>
+              <input type="text"
+                     id="frequencia_higienizacao_equip"
+                     name="frequencia_higienizacao_equip"
+                     placeholder="Ex: Após cada uso">
+            </div>
+
+            <div class="form-group">
+              <label for="metodo_higienizacao_equip">Método de Higienização</label>
+              <input type="text"
+                     id="metodo_higienizacao_equip"
+                     name="metodo_higienizacao"
+                     placeholder="Ex: Lavagem e esterilização">
+            </div>
+
+            <div class="form-group col-span-2">
+              <label for="produtos_utilizados_equip">Produtos Utilizados</label>
+              <input type="text"
+                     id="produtos_utilizados_equip"
+                     name="produtos_utilizados">
+            </div>
+          </div>
+        
+
+        
+          <h3>Controle de Pragas do Ambiente</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="realiza_desinsetizacao">
+                Realiza desinsetização
+              </label>
+            </div>
+
+            <div class="form-group col-span-2">
+              <label for="empresa_responsavel">Empresa Responsável</label>
+              <input type="text" id="empresa_responsavel" name="empresa_responsavel">
+            </div>
+
+            <div class="form-group">
+              <label for="periodicidade_aplicacao">Periodicidade de Aplicação</label>
+              <input type="text" id="periodicidade_aplicacao" name="periodicidade_aplicacao" placeholder="Ex: Trimestral">
+            </div>
+
+            <div class="form-group">
+              <label for="data_ultima_aplicacao">Data da Última Aplicação</label>
+              <input type="date" id="data_ultima_aplicacao" name="data_ultima_aplicacao">
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="certificado_aplicacao">
+                Possui certificado de aplicação
+              </label>
+            </div>
+          </div>
+        
+      </section>
+
+      <!-- SEÇÃO 16: MÃO DE OBRA -->
+      <section id="mao-obra" class="form-section">
+        <h2>👥 16. Mão de Obra</h2>
+
+        
+          <h3>Situação Funcional</h3>
+
+          <div class="table-wrapper">
+            <table id="tabela-funcionarios" class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Tipo de Funcionário</th>
+                  <th>Quantidade</th>
+                  <th>Função</th>
+                  <th>Treinamento Orgânico</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <template id="template-funcionario">
+                  <tr>
+                    <td class="row-number">1</td>
+                    <td>
+                      <select name="tipo_funcionario[]">
+                        <option value="">Selecione...</option>
+                        <option value="familiar">Familiar</option>
+                        <option value="contratado">Contratado</option>
+                        <option value="temporario">Temporário</option>
+                      </select>
+                    </td>
+                    <td><input type="number" name="quantidade_func[]" min="0"></td>
+                    <td><input type="text" name="funcao[]" placeholder="Ex: Colheita, Preparo substrato"></td>
+                    <td>
+                      <label>
+                        <input type="checkbox" name="treinamento_organico[]">
+                        Possui
+                      </label>
+                    </td>
+                    <td class="action-buttons">
+                      <button type="button" onclick="PMOTable.duplicateRow(this)">📋</button>
+                      <button type="button" onclick="PMOTable.removeRow(this)" class="btn-danger">🗑️</button>
+                    </td>
+                  </tr>
+                </template>
+
+                <tr>
+                  <td class="row-number">1</td>
+                  <td>
+                    <select name="tipo_funcionario[]">
+                      <option value="">Selecione...</option>
+                      <option value="familiar">Familiar</option>
+                      <option value="contratado">Contratado</option>
+                      <option value="temporario">Temporário</option>
+                    </select>
+                  </td>
+                  <td><input type="number" name="quantidade_func[]" min="0"></td>
+                  <td><input type="text" name="funcao[]" placeholder="Ex: Colheita, Preparo substrato"></td>
+                  <td>
+                    <label>
+                      <input type="checkbox" name="treinamento_organico[]">
+                      Possui
+                    </label>
+                  </td>
+                  <td class="action-buttons">
+                    <button type="button" onclick="PMOTable.duplicateRow(this)">📋</button>
+                    <button type="button" onclick="PMOTable.removeRow(this)" class="btn-danger">🗑️</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <button type="button" class="btn btn-secondary" onclick="PMOTable.addRow('tabela-funcionarios')">
+              ➕ Adicionar Funcionário
+            </button>
+          </div>
+        
+
+        
+          <h3>Capacitação</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="funcionarios_capacitados">
+                Funcionários capacitados
+              </label>
+            </div>
+
+            <div class="form-group col-span-2">
+              <label for="tipo_capacitacao">Tipo de Capacitação</label>
+              <input type="text"
+                     id="tipo_capacitacao"
+                     name="tipo_capacitacao"
+                     placeholder="Ex: Produção orgânica, Boas práticas de fabricação">
+            </div>
+
+            <div class="form-group">
+              <label for="periodicidade_treinamentos">Periodicidade dos Treinamentos</label>
+              <input type="text"
+                     id="periodicidade_treinamentos"
+                     name="periodicidade_treinamentos"
+                     placeholder="Ex: Anual, Semestral">
+            </div>
+          </div>
+        
+      </section>
+
+      <!-- SEÇÃO 17: PRODUÇÃO PARALELA -->
+      <section id="producao-paralela" class="form-section">
+        <h2>⚠️ 17. Produção Paralela</h2>
+
+        
+          <h3>Produção Não Orgânica</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>
+                <input type="checkbox"
+                       id="possui_producao_nao_organica"
+                       name="possui_producao_nao_organica"
+                       onchange="AnexoCogumelo.toggleSection('detalhes-producao-paralela', this.checked)">
+                Possui produção não orgânica
+              </label>
+            </div>
+          </div>
+        
+
+        <div id="detalhes-producao-paralela" class="conditional-fields" style="display: none;">
+          
+            <h3>Detalhes da Produção Paralela</h3>
+            <div class="form-grid">
+              <div class="form-group col-span-2">
+                <label for="tipo_cogumelo_paralela">Tipo de Cogumelo</label>
+                <input type="text" id="tipo_cogumelo_paralela" name="tipo_cogumelo_paralela">
+              </div>
+
+              <div class="form-group">
+                <label for="area_destinada_m2">Área Destinada (m²)</label>
+                <input type="number" id="area_destinada_m2" name="area_destinada_m2" step="0.01" min="0">
+              </div>
+
+              <div class="form-group">
+                <label>
+                  <input type="checkbox" name="separacao_espacial">
+                  Separação espacial
+                </label>
+              </div>
+
+              <div class="form-group">
+                <label>
+                  <input type="checkbox" name="separacao_temporal">
+                  Separação temporal
+                </label>
+              </div>
+
+              <div class="form-group col-span-2">
+                <label for="risco_contaminacao">Risco de Contaminação</label>
+                <select id="risco_contaminacao" name="risco_contaminacao">
+                  <option value="">Selecione...</option>
+                  <option value="baixo">Baixo</option>
+                  <option value="medio">Médio</option>
+                  <option value="alto">Alto</option>
+                </select>
+              </div>
+
+              <div class="form-group col-span-2">
+                <label for="medidas_prevencao">Medidas de Prevenção</label>
+                <textarea id="medidas_prevencao"
+                          name="medidas_prevencao"
+                          rows="3"
+                          placeholder="Descreva as medidas para evitar contaminação cruzada"></textarea>
+              </div>
+            </div>
+          
+        </div>
+
+        <div class="alert alert-warning">
+          <p>⚠️ <strong>Importante:</strong> A produção paralela deve estar claramente separada e documentada para evitar contaminação da produção orgânica.</p>
+        </div>
+      </section>
+
+      <!-- SEÇÃO 18: INFORMAÇÕES COMPLEMENTARES -->
+      <section id="informacoes-complementares" class="form-section">
+        <h2>📝 18. Informações Complementares</h2>
+
+        
+          <h3>Detalhes da Produção</h3>
+          <div class="form-grid">
+            <div class="form-group col-span-2">
+              <label for="especificidades_producao">Especificidades da Produção</label>
+              <textarea id="especificidades_producao"
+                        name="especificidades_producao"
+                        rows="4"
+                        placeholder="Descreva características específicas da sua produção de cogumelos"></textarea>
+            </div>
+
+            <div class="form-group col-span-2">
+              <label for="diferenciais_produto">Diferenciais do Produto</label>
+              <textarea id="diferenciais_produto"
+                        name="diferenciais_produto"
+                        rows="4"
+                        placeholder="Quais são os diferenciais dos seus cogumelos?"></textarea>
+            </div>
+
+            <div class="form-group col-span-2">
+              <label for="desafios_enfrentados">Desafios Enfrentados</label>
+              <textarea id="desafios_enfrentados"
+                        name="desafios_enfrentados"
+                        rows="4"
+                        placeholder="Principais desafios na produção orgânica de cogumelos"></textarea>
+            </div>
+
+            <div class="form-group col-span-2">
+              <label for="melhorias_planejadas">Melhorias Planejadas</label>
+              <textarea id="melhorias_planejadas"
+                        name="melhorias_planejadas"
+                        rows="4"
+                        placeholder="Melhorias que pretende implementar"></textarea>
+            </div>
+
+            <div class="form-group col-span-2">
+              <label for="observacoes_gerais">Observações Gerais</label>
+              <textarea id="observacoes_gerais"
+                        name="observacoes_gerais"
+                        rows="4"
+                        placeholder="Outras informações relevantes"></textarea>
+            </div>
+          </div>
+        
+      </section>
+
+      <!-- SEÇÃO 19: DECLARAÇÕES DO PRODUTOR -->
+      <section id="declaracoes-produtor" class="form-section">
+        <h2>✅ 19. Declarações do Produtor</h2>
+
+        
+          <h3>Compromissos e Declarações <span class="required">*</span></h3>
+          <div class="form-grid">
+            <div class="form-group col-span-2">
+              <label>
+                <input type="checkbox" name="nao_usa_radiacao_ionizante" required>
+                <strong>Não usa radiação ionizante</strong>
+              </label>
+            </div>
+
+            <div class="form-group col-span-2">
+              <label>
+                <input type="checkbox" name="nao_usa_microondas" required>
+                <strong>Não usa microondas</strong>
+              </label>
+            </div>
+
+            <div class="form-group col-span-2">
+              <label>
+                <input type="checkbox" name="nao_usa_nanotecnologia" required>
+                <strong>Não usa nanotecnologia</strong>
+              </label>
+            </div>
+
+            <div class="form-group col-span-2">
+              <label>
+                <input type="checkbox" name="conhece_legislacao_organica" required>
+                <strong>Conhece a legislação de produção orgânica</strong>
+              </label>
+            </div>
+
+            <div class="form-group col-span-2">
+              <label>
+                <input type="checkbox" name="cumpre_normas_organicas" required>
+                <strong>Compromete-se a cumprir as normas de produção orgânica</strong>
+              </label>
+            </div>
+
+            <div class="form-group col-span-2">
+              <label>
+                <input type="checkbox" name="autoriza_visitas_verificacao" required>
+                <strong>Autoriza visitas de verificação</strong>
+              </label>
+            </div>
+
+            <div class="form-group col-span-2">
+              <label>
+                <input type="checkbox" name="aceita_coleta_amostras" required>
+                <strong>Aceita coleta de amostras para análise</strong>
+              </label>
+            </div>
+
+            <div class="form-group col-span-2">
+              <label>
+                <input type="checkbox" name="declara_veracidade_informacoes" required>
+                <strong>Declara que todas as informações prestadas são verdadeiras</strong>
+              </label>
+            </div>
+          </div>
+        
+
+        <div class="alert alert-error">
+          <p>⚠️ <strong>Atenção:</strong> Todas as declarações acima são obrigatórias para a certificação orgânica.</p>
+        </div>
+      </section>
+
+      <!-- SEÇÃO 20: ASSINATURA -->
+      <section id="assinatura" class="form-section">
+        <h2>✍️ 20. Assinatura e Responsabilidade</h2>
+
+        
+          <h3>Dados para Assinatura</h3>
+          <div class="form-grid">
+            <div class="form-group col-span-2">
+              <label for="nome_completo_produtor">Nome Completo do Produtor <span class="required">*</span></label>
+              <input type="text"
+                     id="nome_completo_produtor"
+                     name="nome_completo_produtor"
+                     required
+                     minlength="5">
+            </div>
+
+            <div class="form-group">
+              <label for="cpf_produtor">CPF do Produtor <span class="required">*</span></label>
+              <input type="text"
+                     id="cpf_produtor"
+                     name="cpf_produtor"
+                     data-mask="cpf"
+                     required>
+            </div>
+
+            <div class="form-group">
+              <label for="grupo_spg_anc">Grupo SPG/ANC <span class="required">*</span></label>
+              <input type="text"
+                     id="grupo_spg_anc"
+                     name="grupo_spg_anc"
+                     required>
+            </div>
+
+            <div class="form-group">
+              <label for="data_elaboracao_pmo">Data de Elaboração do PMO <span class="required">*</span></label>
+              <input type="date"
+                     id="data_elaboracao_pmo"
+                     name="data_elaboracao_pmo"
+                     required>
+            </div>
+          </div>
+        
+
+        <div class="alert alert-info">
+          <p>ℹ️ <strong>Informação:</strong> Ao preencher este formulário, você está declarando que todas as informações são verdadeiras e está ciente das responsabilidades da certificação orgânica.</p>
+        </div>
+      </section>
+
+    </form>
+
+    <!-- BOTÕES DE AÇÃO -->
+    <div class="form-actions">
+      <button type="button" class="btn btn-secondary" onclick="AnexoCogumelo.salvar()">
+        💾 Salvar Rascunho
+      </button>
+      <button type="button" class="btn btn-warning" onclick="AnexoCogumelo.validar()">
+        ✓ Validar Formulário
+      </button>
+      <button type="button" class="btn btn-info" onclick="AnexoCogumelo.exportarJSON()">
+        📥 Exportar JSON
+      </button>
+      <button type="button" class="btn btn-info" onclick="PMOExport.toPDF(document.getElementById('form-anexo-cogumelo'))">
+        📄 Gerar PDF
+      </button>
+      <button type="button" class="btn btn-primary btn-lg" onclick="AnexoCogumelo.submitForm()">
+        📤 Enviar para Certificação
+      </button>
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="pmo-footer">
+      <p>&copy; 2024 ANC - Associação de Agricultura Natural de Campinas e Região</p>
+      <p>Sistema PMO - Plano de Manejo Orgânico</p>
+    </footer>
+  </div>
+
+  <!-- SCRIPTS -->
+  <!-- Framework JS Unificado -->
+  <script src="../../framework/core/pmo-framework.js"></script>
+  <script src="../../framework/components/pmo-tables.js"></script>
+
+  <!-- JS Específico do Módulo -->
+  <script src="./cogumelo.js"></script>
+</body>
+</html>

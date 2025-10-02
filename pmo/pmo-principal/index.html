@@ -15,45 +15,94 @@
     <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
 </head>
 <body>
-    <!-- Header -->
+    <!-- Cabeçalho -->
     <header class="pmo-header">
         <div class="pmo-container">
             <div class="header-content">
-                <div class="header-logo">
-                    <h1>📋 PMO Principal</h1>
-                    <p>Plano de Manejo Orgânico - ANC</p>
-                </div>
-                <nav class="header-nav">
-                <a href="../dashboard/index.html"  class="btn btn-secondary">🏠 Dashboard</a>
-                <a href="../pmo-principal/index.html" class="active" class="btn btn-secondary">📋 PMO Principal</a>
-                <a href="../anexo-vegetal/index.html"class="btn btn-secondary">🌱 Anexo Vegetal</a>
-                <a href="../anexo-animal/index.html" class="btn btn-secondary">🐄 Anexo Animal</a>
-                <a href="../relatorios/index.html" class="btn btn-secondary">📊 Relatórios</a>
+                <h1>📋 PMO Principal</h1>
+                <p class="subtitle">Plano de Manejo Orgânico - ANC</p>
+            </div>
 
-                </nav>
+            <!-- Navegação -->
+            <nav class="pmo-navigation">
+                <a href="../dashboard/index.html">🏠 Dashboard</a>
+                <a href="../pmo-principal/index.html" class="active">📋 PMO Principal</a>
+                <a href="../anexo-vegetal/index.html">🌱 Anexo Vegetal</a>
+                <a href="../anexo-animal/index.html">🐄 Anexo Animal</a>
+                <a href="../relatorios/index.html">📊 Relatórios</a>
+            </nav>
+
+            <!-- Barra de Progresso -->
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+                <span class="progress-text" id="progress-text">0% Completo</span>
             </div>
         </div>
     </header>
 
-    <!-- Progress Bar -->
-    <div class="progress-container">
-        <div class="progress-info">
-            <span id="progress-text">Progresso: 0%</span>
-            <span id="auto-save-status">💾 Auto-save ativo</span>
-        </div>
-        <div class="progress-bar">
-            <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
-        </div>
-    </div>
+    <div class="pmo-container">
 
-    <!-- Main Content -->
-    <main class="pmo-container">
-        <form id="form-pmo-principal" novalidate>
+        <!-- Formulário Principal -->
+        <form id="form-pmo-principal" class="pmo-form">
 
-            <!-- Seção 1: Dados Gerais - Identificação -->
-            <section id="secao-identificacao" class="form-section">
-                <h2>1. Identificação do Produtor/Empresa</h2>
+            <!-- Seção 1: Informações Gerais -->
+            <section id="secao-informacoes-gerais" class="form-section">
+                <h2>1. Informações Gerais</h2>
 
+                <div class="section-info">
+                    <p class="instruction">ℹ️ Preencha as informações gerais sobre certificação e identificação do produtor.</p>
+                </div>
+
+                <!-- Subseção: Certificação -->
+                <h3>Certificação</h3>
+                <div class="form-grid">
+                    <div class="field-wrapper col-span-2">
+                        <label for="tipo_certificacao">
+                            Tipo de Certificação
+                            <span class="required">*</span>
+                        </label>
+                        <select id="tipo_certificacao" name="tipo_certificacao" required onchange="PMOPrincipal.toggleTipoCertificacao()">
+                            <option value="">Selecione...</option>
+                            <option value="ocs">Controle Social para Venda Direta sem Certificado (OCS)</option>
+                            <option value="auditoria">Certificação por Auditoria</option>
+                            <option value="spg" selected>Sistema Participativo de Garantia (SPG/OPAC)</option>
+                        </select>
+                    </div>
+
+                    <div class="field-wrapper col-span-2" id="campo-opac">
+                        <label for="opac_nome">
+                            Nome da OPAC
+                            <span class="required">*</span>
+                        </label>
+                        <input type="text"
+                               id="opac_nome"
+                               name="opac_nome"
+                               value="ANC"
+                               readonly
+                               placeholder="Nome da Organização Participativa de Avaliação da Conformidade">
+                    </div>
+
+                    <div class="field-wrapper col-span-2" id="campo-grupo-spg">
+                        <label for="grupo_spg">
+                            Grupo SPG
+                        </label>
+                        <input type="text"
+                               id="grupo_spg"
+                               name="grupo_spg"
+                               placeholder="Nome do grupo SPG ao qual pertence">
+                    </div>
+
+                    <div class="field-wrapper col-span-2">
+                        <label for="observacoes_certificacao">Observações sobre Certificação</label>
+                        <textarea id="observacoes_certificacao"
+                                  name="observacoes_certificacao"
+                                  rows="2"
+                                  placeholder="Informações adicionais sobre a certificação"></textarea>
+                    </div>
+                </div>
+
+                <!-- Subseção: Identificação do Produtor -->
+                <h3>Identificação do Produtor/Empresa</h3>
                 <div class="section-info">
                     <p class="instruction">ℹ️ Preencha os dados de identificação do produtor ou empresa responsável pela unidade de produção orgânica.</p>
                 </div>
@@ -84,31 +133,18 @@
                         </select>
                     </div>
 
-                    <div class="field-wrapper" id="campo-cpf" style="display:none;">
-                        <label for="cpf">
-                            CPF
+                    <div class="field-wrapper" id="campo-cpf-cnpj" style="display:none;">
+                        <label for="cpf_cnpj" id="label-cpf-cnpj">
+                            CPF/CNPJ
                             <span class="required">*</span>
                         </label>
                         <input type="text"
-                               id="cpf"
-                               name="cpf"
-                               data-mask="cpf"
+                               id="cpf_cnpj"
+                               name="cpf_cnpj"
                                placeholder="000.000.000-00">
                     </div>
 
-                    <div class="field-wrapper" id="campo-cnpj" style="display:none;">
-                        <label for="cnpj">
-                            CNPJ
-                            <span class="required">*</span>
-                        </label>
-                        <input type="text"
-                               id="cnpj"
-                               name="cnpj"
-                               data-mask="cnpj"
-                               placeholder="00.000.000/0000-00">
-                    </div>
-
-                    <div class="field-wrapper">
+                    <div class="field-wrapper" id="campo-inscricao-estadual" style="display:none;">
                         <label for="inscricao_estadual">Inscrição Estadual</label>
                         <input type="text"
                                id="inscricao_estadual"
@@ -116,7 +152,7 @@
                                placeholder="Ex: 123.456.789.012">
                     </div>
 
-                    <div class="field-wrapper">
+                    <div class="field-wrapper" id="campo-inscricao-municipal" style="display:none;">
                         <label for="inscricao_municipal">Inscrição Municipal</label>
                         <input type="text"
                                id="inscricao_municipal"
@@ -124,7 +160,7 @@
                                placeholder="Ex: 123456">
                     </div>
 
-                    <div class="field-wrapper col-span-2">
+                    <div class="field-wrapper col-span-2" id="campo-nome-fantasia" style="display:none;">
                         <label for="nome_fantasia">Nome Fantasia</label>
                         <input type="text"
                                id="nome_fantasia"
@@ -146,30 +182,48 @@
                 </div>
             </section>
 
-            <!-- Seção 2: Contato -->
-            <section id="secao-contato" class="form-section">
-                <h2>2. Dados de Contato</h2>
+            <!-- Seção 2: Dados dos Responsáveis -->
+            <section id="secao-responsaveis" class="form-section">
+                <h2>2. Dados dos Responsáveis</h2>
+
+                <div class="section-info">
+                    <p class="instruction">ℹ️ Liste todas as pessoas responsáveis pelas atividades produtivas, decisões técnicas e representação legal.</p>
+                </div>
 
                 <div class="table-wrapper">
-                    <table id="tabela-contatos" class="dynamic-table">
+                    <table id="tabela-responsaveis" class="dynamic-table">
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Nome Completo <span class="required">*</span></th>
+                                <th>CPF/CNPJ <span class="required">*</span></th>
+                                <th>Data Nascimento</th>
+                                <th>Função <span class="required">*</span></th>
                                 <th>Telefone <span class="required">*</span></th>
-                                <th>E-mail <span class="required">*</span></th>
+                                <th>E-mail</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
-                        <tbody id="tbody-contatos">
-                            <template id="row-template-contatos">
+                        <tbody id="tbody-responsaveis">
+                            <template id="row-template-responsaveis">
                                 <tr class="dynamic-row">
                                     <td class="row-number"></td>
+                                    <td><input type="text" name="responsavel_nome[]" required placeholder="Nome completo ou Razão Social"></td>
+                                    <td><input type="text" name="responsavel_cpf_cnpj[]" data-mask="cpf-cnpj" required placeholder="000.000.000-00 ou 00.000.000/0000-00"></td>
+                                    <td><input type="date" name="responsavel_nascimento[]"></td>
                                     <td>
-                                        <input type="tel" name="contato_telefone[]" data-mask="telefone" required placeholder="(00) 00000-0000">
+                                        <select name="responsavel_funcao[]" required>
+                                            <option value="">Selecione...</option>
+                                            <option value="proprietario">Proprietário</option>
+                                            <option value="responsavel_tecnico">Responsável Técnico</option>
+                                            <option value="representante_legal">Representante Legal</option>
+                                            <option value="gerente">Gerente</option>
+                                            <option value="encarregado">Encarregado</option>
+                                            <option value="outro">Outro</option>
+                                        </select>
                                     </td>
-                                    <td>
-                                        <input type="email" name="contato_email[]" required placeholder="email@exemplo.com">
-                                    </td>
+                                    <td><input type="tel" name="responsavel_telefone[]" data-mask="telefone" required placeholder="(00) 00000-0000"></td>
+                                    <td><input type="email" name="responsavel_email[]" placeholder="email@exemplo.com"></td>
                                     <td class="action-buttons">
                                         <button type="button" onclick="PMOPrincipal.table.duplicateRow(this)" title="Duplicar">📋</button>
                                         <button type="button" onclick="PMOPrincipal.table.removeRow(this)" title="Remover">❌</button>
@@ -178,7 +232,7 @@
                             </template>
                         </tbody>
                     </table>
-                    <button type="button" onclick="PMOPrincipal.table.addRow('tabela-contatos')" class="btn btn-add">➕ Adicionar Contato</button>
+                    <button type="button" onclick="PMOPrincipal.table.addRow('tabela-responsaveis')" class="btn btn-add">➕ Adicionar Responsável</button>
                 </div>
             </section>
 
@@ -457,60 +511,10 @@
                 </div>
             </section>
 
-            <!-- Seção 6: Responsáveis pela Produção -->
-            <section id="secao-responsaveis" class="form-section">
-                <h2>6. Responsáveis pela Produção</h2>
 
-                <div class="section-info">
-                    <p class="instruction">ℹ️ Liste todas as pessoas responsáveis pelas atividades produtivas e decisões técnicas.</p>
-                </div>
-
-                <div class="table-wrapper">
-                    <table id="tabela-responsaveis" class="dynamic-table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nome Completo <span class="required">*</span></th>
-                                <th>CPF <span class="required">*</span></th>
-                                <th>Data Nascimento</th>
-                                <th>Função <span class="required">*</span></th>
-                                <th>Telefone</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbody-responsaveis">
-                            <template id="row-template-responsaveis">
-                                <tr class="dynamic-row">
-                                    <td class="row-number"></td>
-                                    <td><input type="text" name="responsavel_nome[]" required placeholder="Nome completo"></td>
-                                    <td><input type="text" name="responsavel_cpf[]" data-mask="cpf" required placeholder="000.000.000-00"></td>
-                                    <td><input type="date" name="responsavel_nascimento[]"></td>
-                                    <td>
-                                        <select name="responsavel_funcao[]" required>
-                                            <option value="">Selecione...</option>
-                                            <option value="proprietario">Proprietário</option>
-                                            <option value="responsavel_tecnico">Responsável Técnico</option>
-                                            <option value="gerente">Gerente</option>
-                                            <option value="encarregado">Encarregado</option>
-                                            <option value="outro">Outro</option>
-                                        </select>
-                                    </td>
-                                    <td><input type="tel" name="responsavel_telefone[]" data-mask="telefone" placeholder="(00) 00000-0000"></td>
-                                    <td class="action-buttons">
-                                        <button type="button" onclick="PMOPrincipal.table.duplicateRow(this)" title="Duplicar">📋</button>
-                                        <button type="button" onclick="PMOPrincipal.table.removeRow(this)" title="Remover">❌</button>
-                                    </td>
-                                </tr>
-                            </template>
-                        </tbody>
-                    </table>
-                    <button type="button" onclick="PMOPrincipal.table.addRow('tabela-responsaveis')" class="btn btn-add">➕ Adicionar Responsável</button>
-                </div>
-            </section>
-
-            <!-- Seção 7: Atividades Orgânicas -->
+            <!-- Seção 6: Atividades Orgânicas -->
             <section id="secao-atividades" class="form-section">
-                <h2>7. Atividades Orgânicas na Propriedade</h2>
+                <h2>6. Atividades Orgânicas na Propriedade</h2>
 
                 <div class="section-info">
                     <p class="instruction">ℹ️ Marque todas as atividades orgânicas desenvolvidas e informe a área utilizada.</p>
@@ -604,9 +608,9 @@
                 </div>
             </section>
 
-            <!-- Seção 8: Histórico de Aplicações -->
+            <!-- Seção 7: Histórico de Aplicações -->
             <section id="secao-historico" class="form-section">
-                <h2>8. Histórico de Aplicações na Área (últimos 3 anos)</h2>
+                <h2>7. Histórico de Aplicações na Área (últimos 3 anos)</h2>
 
                 <div class="section-info">
                     <p class="alert">⚠️ É obrigatório declarar todas as aplicações de insumos não permitidos na produção orgânica nos últimos 3 anos.</p>
@@ -659,9 +663,9 @@
                 </div>
             </section>
 
-            <!-- Seção 9: Produtos a Certificar -->
+            <!-- Seção 8: Produtos a Certificar -->
             <section id="secao-produtos" class="form-section">
-                <h2>9. Lista de Produtos a Certificar</h2>
+                <h2>8. Lista de Produtos a Certificar</h2>
 
                 <div class="section-info">
                     <p class="instruction">ℹ️ Liste todos os produtos que deseja certificar como orgânicos. Esta é uma seção obrigatória.</p>
@@ -723,9 +727,9 @@
                 </div>
             </section>
 
-            <!-- Seção 10: Preservação Ambiental -->
+            <!-- Seção 9: Preservação Ambiental -->
             <section id="secao-preservacao" class="form-section">
-                <h2>10. Preservação Ambiental</h2>
+                <h2>9. Preservação Ambiental</h2>
 
                 <div class="form-grid">
                     <div class="field-wrapper col-span-4">
@@ -813,9 +817,9 @@
                 </div>
             </section>
 
-            <!-- Seção 11: Recursos Hídricos -->
+            <!-- Seção 10: Recursos Hídricos -->
             <section id="secao-recursos-hidricos" class="form-section">
-                <h2>11. Recursos Hídricos</h2>
+                <h2>10. Recursos Hídricos</h2>
 
                 <div class="section-info">
                     <p class="instruction">ℹ️ Informe as fontes de água utilizadas na produção e possíveis riscos de contaminação.</p>
@@ -882,9 +886,9 @@
                 </div>
             </section>
 
-            <!-- ===== 12. COMERCIALIZAÇÃO ===== -->
+            <!-- ===== 11. COMERCIALIZAÇÃO ===== -->
             <section class="form-section" id="secao-comercializacao">
-                <h2>12. Comercialização</h2>
+                <h2>11. Comercialização</h2>
 
                 <div class="form-group">
                     <label class="label-title">Canais de Comercialização <span class="required">*</span></label>
@@ -977,9 +981,9 @@
                 </div>
             </section>
 
-            <!-- ===== 13. CONTROLES E REGISTROS ===== -->
+            <!-- ===== 12. CONTROLES E REGISTROS ===== -->
             <section class="form-section" id="secao-controles">
-                <h2>13. Controles e Registros</h2>
+                <h2>12. Controles e Registros</h2>
 
                 <div class="form-group">
                     <label class="label-title">Tipos de Registros Mantidos <span class="required">*</span></label>
@@ -1059,9 +1063,9 @@
                 </div>
             </section>
 
-            <!-- ===== 14. PRODUÇÃO DE SUBSISTÊNCIA ===== -->
+            <!-- ===== 13. PRODUÇÃO DE SUBSISTÊNCIA ===== -->
             <section class="form-section" id="secao-subsistencia">
-                <h2>14. Produção de Subsistência (Consumo Próprio)</h2>
+                <h2>13. Produção de Subsistência (Consumo Próprio)</h2>
 
                 <div class="alert alert-info">
                     <strong>ℹ️ O que é?</strong> Produção destinada ao consumo da família, que pode ser manejada de forma NÃO orgânica, desde que separada da produção orgânica certificada.
@@ -1109,9 +1113,9 @@
                 </div>
             </section>
 
-            <!-- ===== 15. PRODUÇÃO PARALELA ===== -->
+            <!-- ===== 14. PRODUÇÃO PARALELA ===== -->
             <section class="form-section" id="secao-producao-paralela">
-                <h2>15. Produção Paralela (Orgânica e Convencional do Mesmo Produto)</h2>
+                <h2>14. Produção Paralela (Orgânica e Convencional do Mesmo Produto)</h2>
 
                 <div class="alert alert-warning">
                     <strong>⚠️ Atenção!</strong> Produção paralela significa produzir o MESMO produto de forma orgânica E convencional simultaneamente. Esta prática é permitida mas NÃO recomendada devido aos riscos de contaminação e mistura.
@@ -1189,9 +1193,9 @@
                 </div>
             </section>
 
-            <!-- ===== 16. UPLOAD DE DOCUMENTOS ===== -->
+            <!-- ===== 15. UPLOAD DE DOCUMENTOS ===== -->
             <section class="form-section" id="secao-documentos">
-                <h2>16. Upload de Documentos</h2>
+                <h2>15. Upload de Documentos</h2>
 
                 <div class="alert alert-info">
                     <strong>ℹ️ Documentos Importantes:</strong>
@@ -1290,9 +1294,9 @@
                 </div>
             </section>
 
-            <!-- ===== 17. DECLARAÇÕES E COMPROMISSOS ===== -->
+            <!-- ===== 16. DECLARAÇÕES E COMPROMISSOS ===== -->
             <section class="form-section" id="secao-declaracoes">
-                <h2>17. Declarações e Compromissos</h2>
+                <h2>16. Declarações e Compromissos</h2>
 
                 <div class="alert alert-warning">
                     <strong>⚠️ Declaração de Responsabilidade</strong><br>
@@ -1429,18 +1433,16 @@
         <!-- Validation Results -->
         <div id="validation-results" class="validation-report"></div>
 
-    </main>
-
-    <!-- Footer -->
-    <footer class="pmo-footer">
-        <div class="pmo-container">
-            <p>© 2024 ANC - Associação de Agricultura Natural de Campinas e Região</p>
-            <p>Sistema PMO Digital v2.0 | Portaria MAPA 52/2021</p>
-        </div>
-    </footer>
+        <!-- Rodapé -->
+        <footer class="pmo-footer">
+            <p>&copy; 2024 ANC - Associação de Agricultura Natural de Campinas e Região</p>
+            <p>Sistema PMO - Plano de Manejo Orgânico</p>
+        </footer>
+    </div>
 
     <!-- Framework JS Unificado -->
     <script src="../../framework/core/pmo-framework.js"></script>
+    <script src="../../framework/components/pmo-tables.js"></script>
 
     <!-- JS Específico do PMO Principal -->
     <script src="./pmo-principal.js"></script>

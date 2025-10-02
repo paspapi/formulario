@@ -65,47 +65,23 @@ const AnexoAnimal = {
         ];
 
         tables.forEach(tableId => {
-            this.table.addRow(tableId);
+            // Usar PMOTable para inicializar
+            const tbody = document.querySelector(`#${tableId} tbody`);
+            if (tbody && tbody.children.length === 0) {
+                PMOTable.addRow(tableId);
+            }
         });
     },
 
     /**
-     * Sistema de tabelas dinâmicas
+     * Sistema de tabelas dinâmicas - usa PMOTable
      */
     table: {
         /**
          * Adicionar linha à tabela
          */
         addRow(tableId) {
-            const table = document.getElementById(tableId);
-            if (!table) {
-                console.error(`Tabela ${tableId} não encontrada`);
-                return;
-            }
-
-            const tbody = table.querySelector('tbody');
-            const template = document.getElementById(`row-template-${tableId}`);
-
-            if (!template) {
-                console.error(`Template da tabela ${tableId} não encontrado`);
-                return;
-            }
-
-            // Clonar template
-            const newRow = template.content.cloneNode(true);
-            const tr = newRow.querySelector('tr');
-
-            // Atualizar número da linha
-            const rowNumber = tbody.querySelectorAll('tr').length + 1;
-            newRow.querySelector('.row-number').textContent = rowNumber;
-
-            // Adicionar à tabela
-            tbody.appendChild(newRow);
-
-            // Renumerar linhas
-            this.renumberRows(tableId);
-
-            // Marcar mudança
+            PMOTable.addRow(tableId);
             AnexoAnimal.markAsChanged();
         },
 
@@ -113,43 +89,15 @@ const AnexoAnimal = {
          * Remover linha da tabela
          */
         removeRow(button) {
-            const tr = button.closest('tr');
-            const tbody = tr.closest('tbody');
-            const table = tbody.closest('table');
-
-            // Não permitir remover se for a única linha
-            const rows = tbody.querySelectorAll('tr');
-            if (rows.length <= 1) {
-                alert('Não é possível remover a única linha da tabela.');
-                return;
-            }
-
-            // Confirmar remoção
-            if (confirm('Deseja realmente remover esta linha?')) {
-                tr.remove();
-                this.renumberRows(table.id);
-                AnexoAnimal.markAsChanged();
-            }
+            PMOTable.removeRow(button);
+            AnexoAnimal.markAsChanged();
         },
 
         /**
          * Duplicar linha da tabela
          */
         duplicateRow(button) {
-            const tr = button.closest('tr');
-            const tbody = tr.closest('tbody');
-            const table = tbody.closest('table');
-
-            // Clonar linha
-            const newRow = tr.cloneNode(true);
-
-            // Inserir após a linha atual
-            tr.after(newRow);
-
-            // Renumerar linhas
-            this.renumberRows(table.id);
-
-            // Marcar mudança
+            PMOTable.duplicateRow(button);
             AnexoAnimal.markAsChanged();
         },
 
@@ -157,16 +105,7 @@ const AnexoAnimal = {
          * Renumerar linhas da tabela
          */
         renumberRows(tableId) {
-            const table = document.getElementById(tableId);
-            if (!table) return;
-
-            const rows = table.querySelectorAll('tbody tr');
-            rows.forEach((row, index) => {
-                const numberCell = row.querySelector('.row-number');
-                if (numberCell) {
-                    numberCell.textContent = index + 1;
-                }
-            });
+            PMOTable.updateRowNumbers(tableId);
         }
     },
 

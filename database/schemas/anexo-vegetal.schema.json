@@ -1,7 +1,7 @@
 {
   "metadata": {
     "id_produtor": "",
-    "tipo_documento": ["ANEXO_I_VEGETAL"],
+    "tipo_documento": "ANEXO_I_VEGETAL",
     "data_preenchimento": "",
     "versao_schema": "2.0",
     "grupo_spg": "",
@@ -15,63 +15,46 @@
     "data_preenchimento": ""
   },
 
-  "preparo_solo": [
-    {
-      "tipo_preparo": "ROÇADA",
-      "utiliza": false
-    },
-    {
-      "tipo_preparo": "ARAÇÃO",
-      "utiliza": false
-    },
-    {
-      "tipo_preparo": "GRADAGEM",
-      "utiliza": false
-    }
-  ],
+  "preparo_solo": {
+    "rocada": false,
+    "aracao": false,
+    "gradagem": false
+  },
 
-  "praticas_conservacionistas": [
-    {
-      "tipo_pratica": "ROTAÇÃO DE CULTURAS",
-      "descricao_processo": "",
-      "utiliza": false
+  "praticas_conservacionistas": {
+    "rotacao_culturas": {
+      "utiliza": false,
+      "descricao_processo": ""
     },
-    {
-      "tipo_pratica": "ADUBAÇÃO VERDE",
-      "descricao_processo": "",
-      "utiliza": false
+    "adubacao_verde": {
+      "utiliza": false,
+      "descricao_processo": ""
     },
-    {
-      "tipo_pratica": "CONSÓRCIOS",
-      "descricao_processo": "",
-      "utiliza": false
+    "consorcios": {
+      "utiliza": false,
+      "descricao_processo": ""
     },
-    {
-      "tipo_pratica": "QUEBRA-VENTOS/CORTINAS VEGETAIS/FAIXAS/ALEIAS",
-      "descricao_processo": "",
-      "utiliza": false
+    "quebra_ventos": {
+      "utiliza": false,
+      "descricao_processo": ""
     },
-    {
-      "tipo_pratica": "COBERTURA DE SOLO",
-      "descricao_processo": "",
-      "utiliza": false
+    "cobertura_solo": {
+      "utiliza": false,
+      "descricao_processo": ""
     },
-    {
-      "tipo_pratica": "PROTEÇÃO CONTRA EROSÃO",
-      "descricao_processo": "",
-      "utiliza": false
+    "protecao_erosao": {
+      "utiliza": false,
+      "descricao_processo": ""
     },
-    {
-      "tipo_pratica": "MANEJO DO MATO",
-      "descricao_processo": "",
-      "utiliza": false
+    "manejo_mato": {
+      "utiliza": false,
+      "descricao_processo": ""
     },
-    {
-      "tipo_pratica": "OUTRAS",
-      "descricao_processo": "",
-      "utiliza": false
+    "outras": {
+      "utiliza": false,
+      "descricao_processo": ""
     }
-  ],
+  },
 
   "barreiras_protecao": {
     "estado_conservacao_barreiras": "",
