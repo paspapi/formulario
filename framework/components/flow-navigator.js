@@ -85,15 +85,31 @@ class FlowNavigator {
      */
     getSelectedScopes() {
         try {
+            // Primeiro tenta pegar do localStorage
+            let data = null;
             const pmoData = localStorage.getItem('pmo-principal-form-data');
-            if (!pmoData) return [];
 
-            const data = JSON.parse(pmoData);
+            if (pmoData) {
+                data = JSON.parse(pmoData);
+            } else {
+                // Se não houver no localStorage, tenta ler do formulário atual
+                const form = document.querySelector('#form-pmo-principal');
+                if (form) {
+                    const formData = new FormData(form);
+                    data = {};
+                    for (let [key, value] of formData.entries()) {
+                        data[key] = value;
+                    }
+                }
+            }
+
+            if (!data) return [];
+
             const scopes = [];
 
             // Verifica cada campo de escopo
             for (const [key, value] of Object.entries(data)) {
-                if (key.startsWith('escopo_') && (value === 'sim' || value === true || value === 'on')) {
+                if (key.startsWith('escopo_') && (value === 'sim' || value === true || value === 'on' || value === 'true')) {
                     scopes.push(key);
                 }
             }
@@ -276,6 +292,58 @@ class FlowNavigator {
         document.addEventListener('pmo-form-saved', () => {
             setTimeout(() => this.render(containerId), 100);
         });
+
+        // Re-renderiza quando os checkboxes de escopo mudarem
+        document.addEventListener('change', (e) => {
+            if (e.target.name && e.target.name.startsWith('escopo_')) {
+                // Salva o estado atual dos checkboxes no localStorage
+                this.saveCurrentScopeState();
+                // Re-renderiza o navegador
+                setTimeout(() => this.render(containerId), 50);
+            }
+        });
+
+        // Re-renderiza quando qualquer campo do formulário mudar (para atualizar %)
+        document.addEventListener('input', () => {
+            // Debounce para evitar renderizações excessivas
+            clearTimeout(this._updateTimeout);
+            this._updateTimeout = setTimeout(() => this.render(containerId), 500);
+        });
+    }
+
+    /**
+     * Salva o estado atual dos checkboxes de escopo no localStorage
+     */
+    saveCurrentScopeState() {
+        try {
+            const form = document.querySelector('#form-pmo-principal');
+            if (!form) return;
+
+            const formData = new FormData(form);
+            const data = {};
+
+            for (let [key, value] of formData.entries()) {
+                if (key.startsWith('escopo_')) {
+                    data[key] = value;
+                }
+            }
+
+            // Também captura checkboxes desmarcados
+            const scopeCheckboxes = form.querySelectorAll('input[name^="escopo_"]');
+            scopeCheckboxes.forEach(checkbox => {
+                if (!formData.has(checkbox.name)) {
+                    data[checkbox.name] = null;
+                }
+            });
+
+            // Atualiza apenas os campos de escopo no localStorage
+            const existingData = JSON.parse(localStorage.getItem('pmo-principal-form-data') || '{}');
+            const updatedData = { ...existingData, ...data };
+            localStorage.setItem('pmo-principal-form-data', JSON.stringify(updatedData));
+
+        } catch (error) {
+            console.warn('Erro ao salvar estado do escopo:', error);
+        }
     }
 }
 
