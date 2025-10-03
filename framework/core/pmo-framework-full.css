@@ -2073,3 +2073,244 @@ textarea {
         page-break-before: always !important;
     }
 }
+
+/* ========================================
+   FLOW NAVIGATOR - Navegador de Fluxo
+   ======================================== */
+
+.flow-navigator {
+    background: linear-gradient(135deg, var(--primary-50) 0%, var(--secondary-50) 100%);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    border: 1px solid var(--primary-200);
+}
+
+.flow-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--primary-700);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: var(--text-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    background: white;
+    border: 1px solid var(--primary-300);
+    transition: all 0.2s ease;
+    margin-bottom: var(--spacing-md);
+}
+
+.flow-back-link:hover {
+    background: var(--primary-50);
+    border-color: var(--primary-500);
+    transform: translateX(-2px);
+}
+
+.flow-current {
+    text-align: center;
+    padding: var(--spacing-lg);
+    background: white;
+    border-radius: var(--radius-md);
+    border: 2px solid var(--primary-400);
+}
+
+.flow-current .flow-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: var(--spacing-sm);
+}
+
+.flow-current .flow-title {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--gray-800);
+    display: block;
+    margin-bottom: var(--spacing-sm);
+}
+
+.flow-current .flow-hint {
+    font-size: var(--text-sm);
+    color: var(--gray-600);
+    font-style: italic;
+    display: block;
+}
+
+.flow-title-header {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--gray-700);
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--primary-300);
+}
+
+.flow-steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.flow-step {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.flow-step.current {
+    border-color: var(--primary-500);
+    background: var(--primary-50);
+    box-shadow: 0 0 0 3px var(--primary-100);
+}
+
+.flow-step.complete {
+    border-color: var(--success);
+    background: var(--success-light);
+}
+
+.flow-step.in-progress {
+    border-color: var(--warning);
+    background: var(--warning-light);
+}
+
+.flow-step.pending {
+    border-color: var(--gray-300);
+    background: var(--gray-50);
+}
+
+.flow-step-content {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.flow-status-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.flow-step-info,
+.flow-step-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    flex: 1;
+    text-decoration: none;
+    color: inherit;
+}
+
+.flow-step-link {
+    transition: all 0.2s ease;
+}
+
+.flow-step-link:hover {
+    transform: translateX(4px);
+}
+
+.flow-step-link:hover .flow-step-name {
+    color: var(--primary-600);
+    text-decoration: underline;
+}
+
+.flow-step-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.flow-step-name {
+    font-weight: 600;
+    font-size: var(--text-base);
+    color: var(--gray-800);
+}
+
+.flow-current-indicator {
+    font-size: var(--text-sm);
+    color: var(--primary-700);
+    font-weight: 600;
+    background: white;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--primary-300);
+    margin-left: auto;
+}
+
+.flow-progress {
+    font-size: var(--text-sm);
+    color: var(--gray-600);
+    font-weight: 500;
+    flex-shrink: 0;
+    background: white;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--gray-300);
+}
+
+.flow-step.current .flow-progress {
+    background: var(--primary-100);
+    border-color: var(--primary-400);
+    color: var(--primary-700);
+    font-weight: 600;
+}
+
+.flow-step.complete .flow-progress {
+    background: var(--success-light);
+    border-color: var(--success);
+    color: var(--success-dark);
+}
+
+.flow-step.in-progress .flow-progress {
+    background: var(--warning-light);
+    border-color: var(--warning);
+    color: var(--warning-dark);
+}
+
+.flow-arrow {
+    text-align: center;
+    color: var(--gray-400);
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: var(--spacing-xs) 0;
+    margin-left: 3rem;
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+    .flow-navigator {
+        padding: var(--spacing-md);
+    }
+
+    .flow-step-content {
+        flex-wrap: wrap;
+    }
+
+    .flow-current-indicator {
+        width: 100%;
+        text-align: center;
+        margin-left: 0;
+        margin-top: var(--spacing-sm);
+    }
+
+    .flow-progress {
+        order: -1;
+    }
+
+    .flow-arrow {
+        margin-left: 1.5rem;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .flow-navigator {
+        background: white;
+        border: 1px solid #ccc;
+        page-break-inside: avoid;
+    }
+
+    .flow-step {
+        page-break-inside: avoid;
+    }
+}
