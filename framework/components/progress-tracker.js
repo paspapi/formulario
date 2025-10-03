@@ -68,35 +68,15 @@ class PMOProgressTracker {
 
     /**
      * Atualizar barra de progresso visual
+     * @deprecated Barra de progresso removida do menu - progresso exibido apenas no fluxo
      * @param {number} percentage
      * @param {string} barId - ID da barra de progresso
      * @param {string} textId - ID do texto de progresso
      */
     static updateProgressBar(percentage, barId = 'progress-bar', textId = 'progress-text') {
-        const progressBar = document.getElementById(barId);
-        const progressText = document.getElementById(textId);
-
-        if (progressBar) {
-            progressBar.style.width = `${percentage}%`;
-
-            // Adicionar classe baseada no progresso
-            progressBar.className = 'progress-bar';
-            if (percentage === 0) {
-                progressBar.classList.add('progress-none');
-            } else if (percentage < 34) {
-                progressBar.classList.add('progress-low');
-            } else if (percentage < 67) {
-                progressBar.classList.add('progress-medium');
-            } else if (percentage < 100) {
-                progressBar.classList.add('progress-high');
-            } else {
-                progressBar.classList.add('progress-complete');
-            }
-        }
-
-        if (progressText) {
-            progressText.textContent = `${percentage}% Completo`;
-        }
+        // Função desabilitada - barra de progresso removida do menu
+        // O progresso agora é exibido apenas no navegador de fluxo
+        return;
     }
 
     /**
