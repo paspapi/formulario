@@ -176,9 +176,9 @@ const AnexoProcessamento = {
 
     loadFromPMOPrincipal() {
         try {
-            const pmoPrincipal = localStorage.getItem('pmo_principal_data');
-            if (!pmoPrincipal) return;
-            const data = JSON.parse(pmoPrincipal);
+            const cadastroGeralPMO = localStorage.getItem('cadastro_geral_pmo_data');
+            if (!cadastroGeralPMO) return;
+            const data = JSON.parse(cadastroGeralPMO);
             const form = document.getElementById('form-anexo-processamento');
             if (!form) return;
             const razaoSocialField = form.querySelector('[name="razao_social"]');

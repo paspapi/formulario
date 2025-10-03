@@ -20,10 +20,10 @@ class FlowNavigator {
 
         // Configuração dos anexos
         this.anexos = {
-            'pmo-principal': {
-                name: 'PMO Principal',
+            'cadastro-geral-pmo': {
+                name: 'Cadastro Geral do PMO',
                 icon: '📋',
-                path: '../pmo-principal/index.html',
+                path: '../cadastro-geral-pmo/index.html',
                 order: 0
             },
             'anexo-vegetal': {
@@ -77,7 +77,7 @@ class FlowNavigator {
             }
         }
 
-        return 'pmo-principal'; // default
+        return 'cadastro-geral-pmo'; // default
     }
 
     /**
@@ -87,13 +87,13 @@ class FlowNavigator {
         try {
             // Primeiro tenta pegar do localStorage
             let data = null;
-            const pmoData = localStorage.getItem('pmo-principal-form-data');
+            const pmoData = localStorage.getItem('cadastro-geral-pmo-form-data');
 
             if (pmoData) {
                 data = JSON.parse(pmoData);
             } else {
                 // Se não houver no localStorage, tenta ler do formulário atual
-                const form = document.querySelector('#form-pmo-principal');
+                const form = document.querySelector('#form-cadastro-geral-pmo');
                 if (form) {
                     const formData = new FormData(form);
                     data = {};
@@ -126,7 +126,7 @@ class FlowNavigator {
      */
     getFlowAnexos() {
         const selectedScopes = this.getSelectedScopes();
-        const anexosSet = new Set(['pmo-principal']); // PMO Principal sempre aparece
+        const anexosSet = new Set(['cadastro-geral-pmo']); // Cadastro Geral do PMO sempre aparece
 
         // Adiciona anexos baseados nos escopos selecionados
         selectedScopes.forEach(scope => {
@@ -206,7 +206,7 @@ class FlowNavigator {
         const currentAnexo = this.getCurrentAnexo();
 
         // Se estiver no PMO Principal e não houver escopos selecionados ainda
-        if (currentAnexo === 'pmo-principal' && flowAnexos.length === 1) {
+        if (currentAnexo === 'cadastro-geral-pmo' && flowAnexos.length === 1) {
             container.innerHTML = `
                 <div class="flow-navigator">
                     <a href="../dashboard/index.html" class="flow-back-link">🏠 Painel</a>
@@ -312,7 +312,7 @@ class FlowNavigator {
      */
     saveCurrentScopeState() {
         try {
-            const form = document.querySelector('#form-pmo-principal');
+            const form = document.querySelector('#form-cadastro-geral-pmo');
             if (!form) return;
 
             const formData = new FormData(form);
@@ -333,9 +333,9 @@ class FlowNavigator {
             });
 
             // Atualiza apenas os campos de escopo no localStorage
-            const existingData = JSON.parse(localStorage.getItem('pmo-principal-form-data') || '{}');
+            const existingData = JSON.parse(localStorage.getItem('cadastro-geral-pmo-form-data') || '{}');
             const updatedData = { ...existingData, ...data };
-            localStorage.setItem('pmo-principal-form-data', JSON.stringify(updatedData));
+            localStorage.setItem('cadastro-geral-pmo-form-data', JSON.stringify(updatedData));
 
         } catch (error) {
             console.warn('Erro ao salvar estado do escopo:', error);

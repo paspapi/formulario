@@ -380,9 +380,9 @@ const AnexoApicultura = {
      */
     loadPMOPrincipal() {
         try {
-            const pmoPrincipal = localStorage.getItem('pmo_principal_data');
-            if (pmoPrincipal) {
-                const data = JSON.parse(pmoPrincipal);
+            const cadastroGeralPMO = localStorage.getItem('cadastro_geral_pmo_data');
+            if (cadastroGeralPMO) {
+                const data = JSON.parse(cadastroGeralPMO);
 
                 // Preencher campos de identificação
                 if (data.nome_fornecedor) {

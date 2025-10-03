@@ -57,11 +57,11 @@ class DashboardContent {
                         Bem-vindo ao PMO Digital!
                     </h2>
                     <p style="color: var(--color-text-light); margin-bottom: 2rem; font-size: 1.125rem;">
-                        Para começar, você precisa preencher o PMO Principal e selecionar as atividades orgânicas que desenvolve.
+                        Para começar, você precisa preencher o Cadastro Geral do PMO e selecionar as atividades orgânicas que desenvolve.
                     </p>
-                    <a href="../pmo-principal/index.html"
+                    <a href="../cadastro-geral-pmo/index.html"
                        style="display: inline-block; background: var(--color-primary); color: white; padding: 1rem 2rem; border-radius: 0.5rem; text-decoration: none; font-weight: 600; transition: background 0.2s;">
-                        📋 Preencher PMO Principal
+                        📋 Preencher Cadastro Geral do PMO
                     </a>
 
                     <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--color-border);">
@@ -70,7 +70,7 @@ class DashboardContent {
                         </h3>
                         <div style="text-align: left; max-width: 500px; margin: 0 auto;">
                             <ol style="color: var(--color-text-light); line-height: 2;">
-                                <li>Preencha o <strong>PMO Principal</strong> com dados da sua propriedade</li>
+                                <li>Preencha o <strong>Cadastro Geral do PMO</strong> com dados da sua propriedade</li>
                                 <li>Marque as <strong>atividades orgânicas</strong> que você desenvolve (Seção 6)</li>
                                 <li>O menu será <strong>automaticamente atualizado</strong> para mostrar apenas os anexos relevantes</li>
                                 <li>Preencha os <strong>anexos habilitados</strong> e acompanhe seu progresso</li>

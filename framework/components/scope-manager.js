@@ -265,10 +265,10 @@ class PMOScopeManager {
     }
 
     /**
-     * Sincronizar atividades do formulário PMO Principal
+     * Sincronizar atividades do formulário Cadastro Geral do PMO
      */
-    syncFromPMOPrincipal() {
-        const form = document.getElementById('form-pmo-principal');
+    syncFromCadastroGeralPMO() {
+        const form = document.getElementById('form-cadastro-geral-pmo');
         if (!form) return;
 
         // Verificar se pretende certificar
@@ -311,8 +311,8 @@ class PMOScopeManager {
             items.forEach(item => {
                 const formType = item.getAttribute('data-form-type');
 
-                if (formType === 'pmo-principal') {
-                    // PMO Principal sempre disponível
+                if (formType === 'cadastro-geral-pmo') {
+                    // Cadastro Geral do PMO sempre disponível
                     item.classList.remove('form-disabled');
                     return;
                 }

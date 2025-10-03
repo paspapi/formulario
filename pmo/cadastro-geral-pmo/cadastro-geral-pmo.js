@@ -1,15 +1,15 @@
 /**
- * PMO Principal - JavaScript
- * Módulo de gerenciamento do Plano de Manejo Orgânico Principal
+ * Cadastro Geral do PMO - JavaScript
+ * Módulo de gerenciamento do Cadastro Geral do Plano de Manejo Orgânico
  * @version 2.0
  * @author ANC - Associação de Agricultura Natural de Campinas e Região
  */
 
-const PMOPrincipal = {
+const CadastroGeralPMO = {
     // Configurações
     config: {
-        moduleName: 'pmo-principal',
-        storageKey: 'pmo_principal_data',
+        moduleName: 'cadastro-geral-pmo',
+        storageKey: 'cadastro_geral_pmo_data',
         autoSaveInterval: 30000, // 30 segundos
         version: '2.0'
     },
@@ -25,7 +25,7 @@ const PMOPrincipal = {
      * Inicialização do módulo
      */
     init() {
-        console.log('✅ Inicializando PMO Principal...');
+        console.log('✅ Inicializando Cadastro Geral do PMO...');
 
         // Carregar dados salvos
         this.loadSavedData();
@@ -54,14 +54,14 @@ const PMOPrincipal = {
         // Restaurar estado do escopo
         this.restoreEscopoState();
 
-        console.log('✅ PMO Principal inicializado com sucesso!');
+        console.log('✅ Cadastro Geral do PMO inicializado com sucesso!');
     },
 
     /**
      * Configurar event listeners
      */
     setupEventListeners() {
-        const form = document.getElementById('form-pmo-principal');
+        const form = document.getElementById('form-cadastro-geral-pmo');
         if (!form) return;
 
         // Marcar como modificado em qualquer alteração
@@ -167,7 +167,7 @@ const PMOPrincipal = {
             return;
         }
 
-        window.PMOScopeManager.syncFromPMOPrincipal();
+        window.PMOScopeManager.syncFromCadastroGeralPMO();
         console.log('✅ Atividades sincronizadas com scope manager');
     },
 
@@ -543,8 +543,8 @@ const PMOPrincipal = {
             tbody.appendChild(clone);
 
             // Recalcular progresso
-            if (window.PMOPrincipal) {
-                PMOPrincipal.state.isModified = true;
+            if (window.CadastroGeralPMO) {
+                CadastroGeralPMO.state.isModified = true;
                 PMOPrincipal.calculateProgress();
             }
         },
@@ -569,8 +569,8 @@ const PMOPrincipal = {
             this.updateRowNumbers(tbody);
 
             // Recalcular progresso
-            if (window.PMOPrincipal) {
-                PMOPrincipal.state.isModified = true;
+            if (window.CadastroGeralPMO) {
+                CadastroGeralPMO.state.isModified = true;
                 PMOPrincipal.calculateProgress();
             }
         },
@@ -595,8 +595,8 @@ const PMOPrincipal = {
             this.updateRowNumbers(tbody);
 
             // Recalcular progresso
-            if (window.PMOPrincipal) {
-                PMOPrincipal.state.isModified = true;
+            if (window.CadastroGeralPMO) {
+                CadastroGeralPMO.state.isModified = true;
                 PMOPrincipal.calculateProgress();
             }
         },
@@ -731,7 +731,7 @@ const PMOPrincipal = {
      * Calcular progresso do preenchimento
      */
     calculateProgress() {
-        const form = document.getElementById('form-pmo-principal');
+        const form = document.getElementById('form-cadastro-geral-pmo');
         if (!form) return;
 
         const requiredFields = form.querySelectorAll('[required]');
@@ -759,7 +759,7 @@ const PMOPrincipal = {
 
         // Salvar progresso no scope manager
         if (window.PMOScopeManager) {
-            window.PMOScopeManager.saveProgress('pmo-principal', percentage);
+            window.PMOScopeManager.saveProgress('cadastro-geral-pmo', percentage);
         }
     },
 
@@ -767,7 +767,7 @@ const PMOPrincipal = {
      * Salvar dados no localStorage
      */
     salvar(isAutoSave = false) {
-        const form = document.getElementById('form-pmo-principal');
+        const form = document.getElementById('form-cadastro-geral-pmo');
         if (!form) return;
 
         const formData = new FormData(form);
@@ -818,7 +818,7 @@ const PMOPrincipal = {
             if (!savedData) return;
 
             const data = JSON.parse(savedData);
-            const form = document.getElementById('form-pmo-principal');
+            const form = document.getElementById('form-cadastro-geral-pmo');
             if (!form) return;
 
             // Preencher campos
@@ -873,7 +873,7 @@ const PMOPrincipal = {
      * Validação básica (fallback se validation-rules.js não estiver carregado)
      */
     basicValidation() {
-        const form = document.getElementById('form-pmo-principal');
+        const form = document.getElementById('form-cadastro-geral-pmo');
         const errors = [];
         const warnings = [];
 
@@ -944,14 +944,14 @@ const PMOPrincipal = {
      * Exportar dados como JSON
      */
     exportarJSON() {
-        const form = document.getElementById('form-pmo-principal');
+        const form = document.getElementById('form-cadastro-geral-pmo');
         if (!form) return;
 
         const formData = new FormData(form);
         const data = {
             metadata: {
                 id_produtor: formData.get('cpf') || formData.get('cnpj') || '',
-                tipo_documento: ['pmo-principal'],
+                tipo_documento: ['cadastro-geral-pmo'],
                 data_extracao: new Date().toISOString(),
                 versao_schema: '1.0',
                 grupo_spg: 'ANC',
@@ -981,7 +981,7 @@ const PMOPrincipal = {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `pmo-principal-${data.metadata.id_produtor}-${new Date().toISOString().split('T')[0]}.json`;
+        a.download = `cadastro-geral-pmo-${data.metadata.id_produtor}-${new Date().toISOString().split('T')[0]}.json`;
         a.click();
         URL.revokeObjectURL(url);
 
@@ -1019,7 +1019,7 @@ const PMOPrincipal = {
      * Coletar dados do formulário
      */
     collectFormData() {
-        const form = document.getElementById('form-pmo-principal');
+        const form = document.getElementById('form-cadastro-geral-pmo');
         const formData = new FormData(form);
         const data = {};
 
@@ -1064,8 +1064,8 @@ const PMOPrincipal = {
 
 // Inicializar quando o DOM estiver pronto
 document.addEventListener('DOMContentLoaded', () => {
-    PMOPrincipal.init();
+    CadastroGeralPMO.init();
 });
 
 // Expor globalmente
-window.PMOPrincipal = PMOPrincipal;
+window.CadastroGeralPMO = CadastroGeralPMO;

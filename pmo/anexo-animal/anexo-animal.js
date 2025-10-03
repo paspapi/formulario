@@ -334,13 +334,13 @@ const AnexoAnimal = {
     loadPMOPrincipal() {
         try {
             // Chave correta do localStorage do PMO Principal
-            const pmoPrincipal = localStorage.getItem('pmo_principal_data');
-            if (!pmoPrincipal) {
+            const cadastroGeralPMO = localStorage.getItem('cadastro_geral_pmo_data');
+            if (!cadastroGeralPMO) {
                 console.log('Nenhum dado do PMO Principal encontrado.');
                 return;
             }
 
-            const data = JSON.parse(pmoPrincipal);
+            const data = JSON.parse(cadastroGeralPMO);
             const form = document.getElementById(this.config.formId);
 
             if (!form) return;

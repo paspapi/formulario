@@ -488,10 +488,10 @@ const ProcessamentoMinimo = {
      */
     loadFromPMOPrincipal() {
         try {
-            const pmoPrincipal = localStorage.getItem('pmo_principal_data');
-            if (!pmoPrincipal) return;
+            const cadastroGeralPMO = localStorage.getItem('cadastro_geral_pmo_data');
+            if (!cadastroGeralPMO) return;
 
-            const data = JSON.parse(pmoPrincipal);
+            const data = JSON.parse(cadastroGeralPMO);
             const form = document.getElementById('form-processamento-minimo');
             if (!form) return;
 

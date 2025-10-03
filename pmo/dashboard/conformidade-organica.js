@@ -104,9 +104,9 @@ class ConformidadeOrganica {
      * Carrega dados do PMO Principal
      */
     loadFromPMO() {
-        const pmoPrincipal = localStorage.getItem('pmo_principal');
-        if (pmoPrincipal) {
-            const pmoData = JSON.parse(pmoPrincipal);
+        const cadastroGeralPMO = localStorage.getItem('cadastro_geral_pmo_data');
+        if (cadastroGeralPMO) {
+            const pmoData = JSON.parse(cadastroGeralPMO);
 
             if (pmoData.nome_produtor) {
                 this.data.identificacao.nomeProdutor = pmoData.nome_produtor;

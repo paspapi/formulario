@@ -170,7 +170,7 @@ class Dashboard extends PMOModule {
 
             <h4>📋 Estrutura do PMO:</h4>
             <ul>
-              <li><strong>PMO Principal:</strong> Formulário base obrigatório para todos os produtores</li>
+              <li><strong>Cadastro Geral do PMO:</strong> Formulário base obrigatório para todos os produtores</li>
               <li><strong>Anexos de Produção:</strong> Vegetal, Animal, Cogumelos, Apicultura</li>
               <li><strong>Anexos de Processamento:</strong> Completo ou Mínimo</li>
               <li><strong>Relatórios:</strong> Exportação em PDF, JSON ou CSV</li>
@@ -296,7 +296,7 @@ class Dashboard extends PMOModule {
 
     switch (action) {
       case 'novo-pmo':
-        this.framework.navigate('/pmo-principal');
+        this.framework.navigate('/cadastro-geral-pmo');
         break;
 
       case 'importar':

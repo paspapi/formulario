@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PMO Principal - Plano de Manejo Orgânico - ANC</title>
+    <title>Cadastro Geral do PMO - Plano de Manejo Orgânico - ANC</title>
 
     <!-- Framework CSS Unificado (Versão Completa) -->
     <link rel="stylesheet" href="../../framework/core/pmo-framework-full.css">
 
-    <!-- CSS Específico do PMO Principal -->
-    <link rel="stylesheet" href="./pmo-principal.css">
+    <!-- CSS Específico do Cadastro Geral do PMO -->
+    <link rel="stylesheet" href="./cadastro-geral-pmo.css">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
@@ -19,7 +19,7 @@
     <header class="pmo-header">
         <div class="pmo-container">
             <div class="header-content">
-                <h1>📋 PMO Principal</h1>
+                <h1>📋 Cadastro Geral do PMO</h1>
                 <p class="subtitle">Plano de Manejo Orgânico - ANC</p>
             </div>
 
@@ -31,7 +31,7 @@
     <div class="pmo-container">
 
         <!-- Formulário Principal -->
-        <form id="form-pmo-principal" class="pmo-form">
+        <form id="form-cadastro-geral-pmo" class="pmo-form">
 
             <!-- Seção 1: Informações Gerais -->
             <section id="secao-informacoes-gerais" class="form-section">
@@ -49,7 +49,7 @@
                             Tipo de Certificação
                             <span class="required">*</span>
                         </label>
-                        <select id="tipo_certificacao" name="tipo_certificacao" required onchange="PMOPrincipal.toggleTipoCertificacao()">
+                        <select id="tipo_certificacao" name="tipo_certificacao" required onchange="CadastroGeralPMO.toggleTipoCertificacao()">
                             <option value="">Selecione...</option>
                             <option value="ocs">Controle Social para Venda Direta sem Certificado (OCS)</option>
                             <option value="auditoria">Certificação por Auditoria</option>
@@ -100,19 +100,19 @@
                         <h4>Produção Vegetal</h4>
                         <div class="checkbox-grid">
                             <label class="checkbox-enhanced">
-                                <input type="checkbox" name="escopo_hortalicas" value="sim" onchange="PMOPrincipal.updateEscopo()">
+                                <input type="checkbox" name="escopo_hortalicas" value="sim" onchange="CadastroGeralPMO.updateEscopo()">
                                 <span>🥬 Hortaliças</span>
                             </label>
                             <label class="checkbox-enhanced">
-                                <input type="checkbox" name="escopo_frutas" value="sim" onchange="PMOPrincipal.updateEscopo()">
+                                <input type="checkbox" name="escopo_frutas" value="sim" onchange="CadastroGeralPMO.updateEscopo()">
                                 <span>🍊 Frutas</span>
                             </label>
                             <label class="checkbox-enhanced">
-                                <input type="checkbox" name="escopo_cogumelos" value="sim" onchange="PMOPrincipal.updateEscopo()">
+                                <input type="checkbox" name="escopo_cogumelos" value="sim" onchange="CadastroGeralPMO.updateEscopo()">
                                 <span>🍄 Cogumelos</span>
                             </label>
                             <label class="checkbox-enhanced">
-                                <input type="checkbox" name="escopo_medicinais" value="sim" onchange="PMOPrincipal.updateEscopo()">
+                                <input type="checkbox" name="escopo_medicinais" value="sim" onchange="CadastroGeralPMO.updateEscopo()">
                                 <span>🌿 Plantas Medicinais</span>
                             </label>
                         </div>
@@ -120,11 +120,11 @@
                         <h4>Produção Animal</h4>
                         <div class="checkbox-grid">
                             <label class="checkbox-enhanced">
-                                <input type="checkbox" name="escopo_pecuaria" value="sim" onchange="PMOPrincipal.updateEscopo()">
+                                <input type="checkbox" name="escopo_pecuaria" value="sim" onchange="CadastroGeralPMO.updateEscopo()">
                                 <span>🐄 Pecuária</span>
                             </label>
                             <label class="checkbox-enhanced">
-                                <input type="checkbox" name="escopo_apicultura" value="sim" onchange="PMOPrincipal.updateEscopo()">
+                                <input type="checkbox" name="escopo_apicultura" value="sim" onchange="CadastroGeralPMO.updateEscopo()">
                                 <span>🐝 Apicultura</span>
                             </label>
                         </div>
@@ -132,11 +132,11 @@
                         <h4>Processamento</h4>
                         <div class="checkbox-grid">
                             <label class="checkbox-enhanced">
-                                <input type="checkbox" name="escopo_proc_minimo" value="sim" onchange="PMOPrincipal.updateEscopo()">
+                                <input type="checkbox" name="escopo_proc_minimo" value="sim" onchange="CadastroGeralPMO.updateEscopo()">
                                 <span>🥗 Processamento Mínimo</span>
                             </label>
                             <label class="checkbox-enhanced">
-                                <input type="checkbox" name="escopo_processamento" value="sim" onchange="PMOPrincipal.updateEscopo()">
+                                <input type="checkbox" name="escopo_processamento" value="sim" onchange="CadastroGeralPMO.updateEscopo()">
                                 <span>🏭 Processamento/Transformação</span>
                             </label>
                         </div>
@@ -168,7 +168,7 @@
                             Tipo de Pessoa
                             <span class="required">*</span>
                         </label>
-                        <select id="tipo_pessoa" name="tipo_pessoa" required onchange="PMOPrincipal.togglePessoaTipo()">
+                        <select id="tipo_pessoa" name="tipo_pessoa" required onchange="CadastroGeralPMO.togglePessoaTipo()">
                             <option value="">Selecione...</option>
                             <option value="fisica">Pessoa Física (CPF)</option>
                             <option value="juridica">Pessoa Jurídica (CNPJ)</option>
@@ -267,14 +267,14 @@
                                     <td><input type="tel" name="responsavel_telefone[]" data-mask="telefone" required placeholder="(00) 00000-0000"></td>
                                     <td><input type="email" name="responsavel_email[]" placeholder="email@exemplo.com"></td>
                                     <td class="action-buttons">
-                                        <button type="button" onclick="PMOPrincipal.table.duplicateRow(this)" title="Duplicar">📋</button>
-                                        <button type="button" onclick="PMOPrincipal.table.removeRow(this)" title="Remover">❌</button>
+                                        <button type="button" onclick="CadastroGeralPMO.table.duplicateRow(this)" title="Duplicar">📋</button>
+                                        <button type="button" onclick="CadastroGeralPMO.table.removeRow(this)" title="Remover">❌</button>
                                     </td>
                                 </tr>
                             </template>
                         </tbody>
                     </table>
-                    <button type="button" onclick="PMOPrincipal.table.addRow('tabela-responsaveis')" class="btn btn-add">➕ Adicionar Responsável</button>
+                    <button type="button" onclick="CadastroGeralPMO.table.addRow('tabela-responsaveis')" class="btn btn-add">➕ Adicionar Responsável</button>
                 </div>
             </section>
 
@@ -289,7 +289,7 @@
                             <span class="required">*</span>
                             <button type="button"
                                     class="btn-icon-inline"
-                                    onclick="PMOPrincipal.buscarCEP()"
+                                    onclick="CadastroGeralPMO.buscarCEP()"
                                     title="Buscar endereço">
                                 🔍
                             </button>
@@ -488,7 +488,7 @@
                                    id="caf_nao_possui"
                                    name="caf_nao_possui"
                                    value="sim"
-                                   onchange="PMOPrincipal.toggleCAF(this)">
+                                   onchange="CadastroGeralPMO.toggleCAF(this)">
                             <span>Não possuo CAF</span>
                         </label>
                     </div>
@@ -624,19 +624,19 @@
                                         </select>
                                     </td>
                                     <td class="action-buttons">
-                                        <button type="button" onclick="PMOPrincipal.table.duplicateRow(this)" title="Duplicar">📋</button>
-                                        <button type="button" onclick="PMOPrincipal.table.removeRow(this)" title="Remover">❌</button>
+                                        <button type="button" onclick="CadastroGeralPMO.table.duplicateRow(this)" title="Duplicar">📋</button>
+                                        <button type="button" onclick="CadastroGeralPMO.table.removeRow(this)" title="Remover">❌</button>
                                     </td>
                                 </tr>
                             </template>
                         </tbody>
                     </table>
-                    <button type="button" onclick="PMOPrincipal.table.addRow('tabela-historico')" class="btn btn-add">➕ Adicionar Registro</button>
+                    <button type="button" onclick="CadastroGeralPMO.table.addRow('tabela-historico')" class="btn btn-add">➕ Adicionar Registro</button>
                 </div>
 
                 <div class="field-wrapper col-span-4">
                     <label class="checkbox-enhanced">
-                        <input type="checkbox" id="sem_aplicacoes" name="sem_aplicacoes" value="sim" onchange="PMOPrincipal.toggleHistorico(this)">
+                        <input type="checkbox" id="sem_aplicacoes" name="sem_aplicacoes" value="sim" onchange="CadastroGeralPMO.toggleHistorico(this)">
                         <span><strong>Não houve aplicação de insumos não permitidos nos últimos 3 anos</strong></span>
                     </label>
                 </div>
@@ -695,14 +695,14 @@
                                         </select>
                                     </td>
                                     <td class="action-buttons">
-                                        <button type="button" onclick="PMOPrincipal.table.duplicateRow(this)" title="Duplicar">📋</button>
-                                        <button type="button" onclick="PMOPrincipal.table.removeRow(this)" title="Remover">❌</button>
+                                        <button type="button" onclick="CadastroGeralPMO.table.duplicateRow(this)" title="Duplicar">📋</button>
+                                        <button type="button" onclick="CadastroGeralPMO.table.removeRow(this)" title="Remover">❌</button>
                                     </td>
                                 </tr>
                             </template>
                         </tbody>
                     </table>
-                    <button type="button" onclick="PMOPrincipal.table.addRow('tabela-produtos')" class="btn btn-add">➕ Adicionar Produto</button>
+                    <button type="button" onclick="CadastroGeralPMO.table.addRow('tabela-produtos')" class="btn btn-add">➕ Adicionar Produto</button>
                 </div>
             </section>
 
@@ -738,7 +738,7 @@
                             Possui CAR (Cadastro Ambiental Rural)?
                             <span class="required">*</span>
                         </label>
-                        <select id="possui_car" name="possui_car" required onchange="PMOPrincipal.toggleCAR(this)">
+                        <select id="possui_car" name="possui_car" required onchange="CadastroGeralPMO.toggleCAR(this)">
                             <option value="">Selecione...</option>
                             <option value="sim">Sim</option>
                             <option value="nao">Não</option>
@@ -854,14 +854,14 @@
                                     </td>
                                     <td><input type="text" name="agua_garantia[]" placeholder="Ex: Análise anual"></td>
                                     <td class="action-buttons">
-                                        <button type="button" onclick="PMOPrincipal.table.duplicateRow(this)" title="Duplicar">📋</button>
-                                        <button type="button" onclick="PMOPrincipal.table.removeRow(this)" title="Remover">❌</button>
+                                        <button type="button" onclick="CadastroGeralPMO.table.duplicateRow(this)" title="Duplicar">📋</button>
+                                        <button type="button" onclick="CadastroGeralPMO.table.removeRow(this)" title="Remover">❌</button>
                                     </td>
                                 </tr>
                             </template>
                         </tbody>
                     </table>
-                    <button type="button" onclick="PMOPrincipal.table.addRow('tabela-recursos-hidricos')" class="btn btn-add">➕ Adicionar Fonte de Água</button>
+                    <button type="button" onclick="CadastroGeralPMO.table.addRow('tabela-recursos-hidricos')" class="btn btn-add">➕ Adicionar Fonte de Água</button>
                 </div>
             </section>
 
@@ -1393,13 +1393,13 @@
 
             <!-- Action Buttons -->
             <div class="form-actions">
-                <button type="button" onclick="PMOPrincipal.salvar()" class="btn btn-secondary">
+                <button type="button" onclick="CadastroGeralPMO.salvar()" class="btn btn-secondary">
                     💾 Salvar Rascunho
                 </button>
-                <button type="button" onclick="PMOPrincipal.validar()" class="btn btn-info">
+                <button type="button" onclick="CadastroGeralPMO.validar()" class="btn btn-info">
                     ✓ Validar Formulário
                 </button>
-                <button type="button" onclick="PMOPrincipal.exportarJSON()" class="btn btn-secondary">
+                <button type="button" onclick="CadastroGeralPMO.exportarJSON()" class="btn btn-secondary">
                     📥 Exportar JSON
                 </button>
                 <button type="submit" class="btn btn-primary">
@@ -1426,8 +1426,8 @@
     <script src="../../framework/components/flow-navigator.js"></script>
     <script type="module" src="../../framework/components/scope-manager.js"></script>
 
-    <!-- JS Específico do PMO Principal -->
-    <script src="./pmo-principal.js"></script>
+    <!-- JS Específico do Cadastro Geral do PMO -->
+    <script src="./cadastro-geral-pmo.js"></script>
 
     <!-- Validation Rules -->
     <script src="./validation-rules.js"></script>
