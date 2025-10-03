@@ -165,6 +165,17 @@ const AnexoAnimal = {
             });
         });
 
+        // Configurar auto-save ao navegar
+        if (window.AutoSaveNavigation) {
+            window.AutoSaveNavigation.setup({
+                state: { isModified: false },
+                salvar: (isAutoSave) => this.saveData(isAutoSave),
+                get state() {
+                    return { isModified: AnexoAnimal.state.hasChanges };
+                }
+            });
+        }
+
         // Submit do formulário
         form.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -611,10 +622,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Alertar sobre mudanças não salvas ao sair
-window.addEventListener('beforeunload', (e) => {
-    if (AnexoAnimal.state.hasChanges) {
-        e.preventDefault();
-        e.returnValue = 'Você tem alterações não salvas. Deseja realmente sair?';
-        return e.returnValue;
-    }
-});
+// Removido - auto-save ao navegar é gerenciado pelo AutoSaveNavigation

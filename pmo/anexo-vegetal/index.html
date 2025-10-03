@@ -744,9 +744,20 @@
     <!-- Framework JS Unificado -->
     <script src="../../framework/core/pmo-framework.js"></script>
     <script src="../../framework/components/pmo-tables.js"></script>
+    <script src="../../framework/components/auto-save-navigation.js"></script>
 
     <!-- JS Específico do Módulo -->
+    <script type="module" src="../../framework/components/scope-manager.js"></script>
+    <script type="module" src="../../framework/components/progress-tracker.js"></script>
     <script src="./vegetal.js"></script>
     <script src="./vegetal-validators.js"></script>
+    <script>
+        // Auto-inicializar rastreamento de progresso
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.PMOProgressTracker) {
+                PMOProgressTracker.autoTrack('form-anexo-vegetal', 'anexo-vegetal');
+            }
+        });
+    </script>
 </body>
 </html>

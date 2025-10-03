@@ -343,6 +343,17 @@ const ProcessamentoMinimo = {
             e.preventDefault();
             this.gerarPDF();
         });
+
+        // Configurar auto-save ao navegar
+        if (window.AutoSaveNavigation) {
+            window.AutoSaveNavigation.setup({
+                state: { isModified: false },
+                salvar: (isAutoSave) => this.salvar(isAutoSave),
+                get state() {
+                    return { isModified: ProcessamentoMinimo.state.hasChanges };
+                }
+            });
+        }
     },
 
     /**
@@ -654,13 +665,4 @@ const ProcessamentoMinimo = {
 // Inicializar quando DOM estiver pronto
 document.addEventListener('DOMContentLoaded', () => {
     ProcessamentoMinimo.init();
-});
-
-// Alertar sobre mudanças não salvas
-window.addEventListener('beforeunload', (e) => {
-    if (ProcessamentoMinimo.state.hasChanges) {
-        e.preventDefault();
-        e.returnValue = 'Você tem alterações não salvas. Deseja realmente sair?';
-        return e.returnValue;
-    }
 });

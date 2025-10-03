@@ -51,6 +51,9 @@ const PMOPrincipal = {
         // Configurar campos condicionais
         this.setupConditionalFields();
 
+        // Restaurar estado do escopo
+        this.restoreEscopoState();
+
         console.log('✅ PMO Principal inicializado com sucesso!');
     },
 
@@ -68,13 +71,8 @@ const PMOPrincipal = {
             this.calculateProgress();
         });
 
-        // Prevenir perda de dados ao sair
-        window.addEventListener('beforeunload', (e) => {
-            if (this.state.isModified) {
-                e.preventDefault();
-                e.returnValue = 'Você tem alterações não salvas. Deseja realmente sair?';
-            }
-        });
+        // Interceptar navegação para salvar automaticamente
+        this.setupNavigationAutoSave();
 
         // Submit do formulário
         form.addEventListener('submit', (e) => {
@@ -84,6 +82,18 @@ const PMOPrincipal = {
 
         // Drag and drop para uploads
         this.setupDragAndDrop();
+    },
+
+    /**
+     * Configurar salvamento automático ao navegar
+     */
+    setupNavigationAutoSave() {
+        // Usar helper do framework se disponível
+        if (window.AutoSaveNavigation) {
+            window.AutoSaveNavigation.setup(this);
+        } else {
+            console.warn('AutoSaveNavigation não disponível');
+        }
     },
 
     /**
@@ -122,6 +132,43 @@ const PMOPrincipal = {
                 }
             });
         });
+
+        // Sincronizar atividades com scope manager
+        this.setupActivitySync();
+    },
+
+    /**
+     * Configurar sincronização de atividades
+     */
+    setupActivitySync() {
+        // Checkboxes de atividades
+        const activityCheckboxes = document.querySelectorAll(
+            'input[name^="atividade_"]'
+        );
+
+        activityCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                this.syncActivitiesWithScopeManager();
+            });
+        });
+
+        // Sincronizar no carregamento inicial
+        setTimeout(() => {
+            this.syncActivitiesWithScopeManager();
+        }, 500);
+    },
+
+    /**
+     * Sincronizar atividades com scope manager
+     */
+    syncActivitiesWithScopeManager() {
+        if (!window.PMOScopeManager) {
+            console.warn('PMOScopeManager não disponível');
+            return;
+        }
+
+        window.PMOScopeManager.syncFromPMOPrincipal();
+        console.log('✅ Atividades sincronizadas com scope manager');
     },
 
     /**
@@ -252,6 +299,58 @@ const PMOPrincipal = {
             campoGrupoSpg.style.display = 'none';
             opacNomeInput.removeAttribute('required');
         }
+    },
+
+    /**
+     * Atualizar escopo no scope manager
+     * Chamado sempre que uma atividade é marcada/desmarcada
+     */
+    updateEscopo() {
+        if (!window.PMOScopeManager) {
+            console.warn('PMOScopeManager não disponível');
+            return;
+        }
+
+        const activities = {};
+
+        // Coletar todas as atividades selecionadas
+        const activityCheckboxes = document.querySelectorAll('[name^="escopo_"]');
+        activityCheckboxes.forEach(checkbox => {
+            activities[checkbox.name] = checkbox.checked;
+        });
+
+        // Verificar se pelo menos uma atividade foi selecionada
+        const hasActivity = Object.values(activities).some(val => val === true);
+
+        // Salvar no scope manager (pretende certificar = true se houver alguma atividade marcada)
+        window.PMOScopeManager.saveActivities(activities, hasActivity);
+
+        console.log('✅ Escopo atualizado:', { hasActivity, activities });
+    },
+
+    /**
+     * Restaurar estado do escopo ao carregar página
+     */
+    restoreEscopoState() {
+        if (!window.PMOScopeManager) {
+            console.warn('PMOScopeManager não disponível para restaurar escopo');
+            return;
+        }
+
+        // Verificar se há dados salvos
+        const activities = window.PMOScopeManager.getActivities();
+
+        // Restaurar checkboxes de atividades
+        if (activities) {
+            Object.keys(activities).forEach(activityKey => {
+                const checkbox = document.querySelector(`input[name="${activityKey}"]`);
+                if (checkbox) {
+                    checkbox.checked = activities[activityKey] === true || activities[activityKey] === 'sim';
+                }
+            });
+        }
+
+        console.log('✅ Estado do escopo restaurado:', { activities });
     },
 
     /**
@@ -656,6 +755,11 @@ const PMOPrincipal = {
 
         if (progressFill) progressFill.style.width = `${percentage}%`;
         if (progressText) progressText.textContent = `Progresso: ${percentage}%`;
+
+        // Salvar progresso no scope manager
+        if (window.PMOScopeManager) {
+            window.PMOScopeManager.saveProgress('pmo-principal', percentage);
+        }
     },
 
     /**

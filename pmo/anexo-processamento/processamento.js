@@ -107,6 +107,17 @@ const AnexoProcessamento = {
             field.addEventListener('change', () => { this.markAsChanged(); this.calculateProgress(); });
         });
         form.addEventListener('submit', (e) => { e.preventDefault(); this.gerarPDF(); });
+
+        // Configurar auto-save ao navegar
+        if (window.AutoSaveNavigation) {
+            window.AutoSaveNavigation.setup({
+                state: { isModified: false },
+                salvar: (isAutoSave) => this.salvar(isAutoSave),
+                get state() {
+                    return { isModified: AnexoProcessamento.state.hasChanges };
+                }
+            });
+        }
     },
 
     markAsChanged() {
@@ -246,10 +257,3 @@ const AnexoProcessamento = {
 };
 
 document.addEventListener('DOMContentLoaded', () => { AnexoProcessamento.init(); });
-window.addEventListener('beforeunload', (e) => {
-    if (AnexoProcessamento.state.hasChanges) {
-        e.preventDefault();
-        e.returnValue = 'Você tem alterações não salvas. Deseja realmente sair?';
-        return e.returnValue;
-    }
-});

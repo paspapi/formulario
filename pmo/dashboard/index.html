@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="../../framework/styles/components.css">
   <link rel="stylesheet" href="../../framework/styles/utilities.css">
   <link rel="stylesheet" href="../../framework/styles/responsive.css">
+  <link rel="stylesheet" href="./menu-styles.css">
 
   <!-- CDN Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -294,28 +295,32 @@
         <div class="nav-section">
           <h3 class="nav-section-title">Anexos de Produção</h3>
           <ul class="nav-menu">
-            <li class="nav-item">
+            <li class="nav-item" data-form-type="anexo-vegetal">
               <a href="../anexo-vegetal/index.html" class="nav-link" data-navigate="/pmo/anexo-vegetal">
                 <span class="nav-icon">🌱</span>
                 Produção Vegetal
+                <span class="form-badge"></span>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" data-form-type="anexo-animal">
               <a href="../anexo-animal/index.html" class="nav-link" data-navigate="/pmo/anexo-animal">
                 <span class="nav-icon">🐄</span>
                 Produção Animal
+                <span class="form-badge"></span>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" data-form-type="anexo-cogumelo">
               <a href="../anexo-cogumelo/index.html" class="nav-link" data-navigate="/pmo/anexo-cogumelo">
                 <span class="nav-icon">🍄</span>
                 Cogumelos
+                <span class="form-badge"></span>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" data-form-type="anexo-apicultura">
               <a href="../anexo-apicultura/index.html" class="nav-link" data-navigate="/pmo/anexo-apicultura">
                 <span class="nav-icon">🐝</span>
                 Apicultura
+                <span class="form-badge"></span>
               </a>
             </li>
           </ul>
@@ -325,16 +330,18 @@
         <div class="nav-section">
           <h3 class="nav-section-title">Processamento</h3>
           <ul class="nav-menu">
-            <li class="nav-item">
+            <li class="nav-item" data-form-type="anexo-processamento">
               <a href="../anexo-processamento/index.html" class="nav-link" data-navigate="/pmo/anexo-processamento">
                 <span class="nav-icon">🏭</span>
                 Processamento
+                <span class="form-badge"></span>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" data-form-type="anexo-processamentominimo">
               <a href="../anexo-processamentominimo/index.html" class="nav-link" data-navigate="/pmo/anexo-processamentominimo">
                 <span class="nav-icon">🥗</span>
                 Proc. Mínimo
+                <span class="form-badge"></span>
               </a>
             </li>
           </ul>
@@ -401,6 +408,9 @@
     import PMOExport from '../../framework/components/export.js';
     import PMOAPIClient from '../../framework/utils/api-client.js';
     import { PMOFormatters, PMOMasks } from '../../framework/utils/formatters.js';
+    import PMOScopeManager from '../../framework/components/scope-manager.js';
+    import PMOMenuManager from './menu-manager.js';
+    import DashboardContent from './dashboard-content.js';
 
     if (typeof dayjs !== 'undefined') {
       dayjs.locale('pt-br');
@@ -437,6 +447,24 @@
     PMOMasks.init();
 
     console.log('✅ PMO Digital inicializado');
+  </script>
+
+  <!-- Scope Manager -->
+  <script type="module" src="../../framework/components/scope-manager.js"></script>
+
+  <!-- Aplicar filtros de escopo após carregar scope manager -->
+  <script type="module">
+    import scopeManager from '../../framework/components/scope-manager.js';
+
+    // Aplicar filtros ao carregar
+    scopeManager.applyDashboardFilters('.nav-menu');
+    console.log('✅ Filtros de escopo aplicados');
+
+    // Escutar mudanças no escopo
+    window.addEventListener('pmo-scope-changed', () => {
+      scopeManager.applyDashboardFilters('.nav-menu');
+      console.log('✅ Dashboard atualizado com novo escopo');
+    });
   </script>
 </body>
 </html>

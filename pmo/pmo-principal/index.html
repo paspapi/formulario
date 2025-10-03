@@ -105,6 +105,60 @@
                     </div>
                 </div>
 
+                <!-- Subseção: Escopo de Certificação -->
+                <h3>Escopo de Certificação</h3>
+                <div class="section-info">
+                    <p class="instruction">ℹ️ Selecione as atividades que pretende certificar como orgânicas. Isto determina quais formulários anexos estarão disponíveis.</p>
+                </div>
+
+                <div class="form-grid">
+                    <div class="field-wrapper col-span-4">
+                        <h4>Produção Vegetal</h4>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="escopo_hortalicas" value="sim" onchange="PMOPrincipal.updateEscopo()">
+                                <span>🥬 Hortaliças</span>
+                            </label>
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="escopo_frutas" value="sim" onchange="PMOPrincipal.updateEscopo()">
+                                <span>🍊 Frutas</span>
+                            </label>
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="escopo_cogumelos" value="sim" onchange="PMOPrincipal.updateEscopo()">
+                                <span>🍄 Cogumelos</span>
+                            </label>
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="escopo_medicinais" value="sim" onchange="PMOPrincipal.updateEscopo()">
+                                <span>🌿 Plantas Medicinais</span>
+                            </label>
+                        </div>
+
+                        <h4>Produção Animal</h4>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="escopo_pecuaria" value="sim" onchange="PMOPrincipal.updateEscopo()">
+                                <span>🐄 Pecuária</span>
+                            </label>
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="escopo_apicultura" value="sim" onchange="PMOPrincipal.updateEscopo()">
+                                <span>🐝 Apicultura</span>
+                            </label>
+                        </div>
+
+                        <h4>Processamento</h4>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="escopo_proc_minimo" value="sim" onchange="PMOPrincipal.updateEscopo()">
+                                <span>🥗 Processamento Mínimo</span>
+                            </label>
+                            <label class="checkbox-enhanced">
+                                <input type="checkbox" name="escopo_processamento" value="sim" onchange="PMOPrincipal.updateEscopo()">
+                                <span>🏭 Processamento/Transformação</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Subseção: Identificação do Produtor -->
                 <h3>Identificação do Produtor/Empresa</h3>
                 <div class="section-info">
@@ -516,78 +570,15 @@
             </section>
 
 
-            <!-- Seção 6: Atividades Orgânicas -->
+            <!-- Seção 6: Mão de Obra -->
             <section id="secao-atividades" class="form-section">
-                <h2>6. Atividades Orgânicas na Propriedade</h2>
+                <h2>6. Mão de Obra</h2>
 
                 <div class="section-info">
-                    <p class="instruction">ℹ️ Marque todas as atividades orgânicas desenvolvidas e informe a área utilizada.</p>
+                    <p class="instruction">ℹ️ As atividades a certificar foram selecionadas na Seção 1 (Escopo de Certificação). Os detalhes de cada produto devem ser preenchidos na Seção 8 (Lista de Produtos).</p>
                 </div>
 
                 <div class="form-grid">
-                    <div class="field-wrapper col-span-4">
-                        <h4>Tipos de Produção</h4>
-                        <div class="checkbox-grid">
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="atividade_hortalicas" value="sim" onchange="PMOPrincipal.toggleAreaInput(this, 'area_hortalicas')">
-                                <span>🥬 Hortaliças</span>
-                            </label>
-                            <div class="field-wrapper area-input" id="area_hortalicas" style="display:none;">
-                                <input type="number" name="area_hortalicas_ha" step="0.01" min="0" placeholder="Área (ha)">
-                            </div>
-
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="atividade_frutas" value="sim" onchange="PMOPrincipal.toggleAreaInput(this, 'area_frutas')">
-                                <span>🍊 Frutas</span>
-                            </label>
-                            <div class="field-wrapper area-input" id="area_frutas" style="display:none;">
-                                <input type="number" name="area_frutas_ha" step="0.01" min="0" placeholder="Área (ha)">
-                            </div>
-
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="atividade_graos" value="sim" onchange="PMOPrincipal.toggleAreaInput(this, 'area_graos')">
-                                <span>🌾 Grãos</span>
-                            </label>
-                            <div class="field-wrapper area-input" id="area_graos" style="display:none;">
-                                <input type="number" name="area_graos_ha" step="0.01" min="0" placeholder="Área (ha)">
-                            </div>
-
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="atividade_plantas_medicinais" value="sim" onchange="PMOPrincipal.toggleAreaInput(this, 'area_medicinais')">
-                                <span>🌿 Plantas Medicinais</span>
-                            </label>
-                            <div class="field-wrapper area-input" id="area_medicinais" style="display:none;">
-                                <input type="number" name="area_medicinais_ha" step="0.01" min="0" placeholder="Área (ha)">
-                            </div>
-
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="atividade_pecuaria" value="sim" onchange="PMOPrincipal.toggleAreaInput(this, 'area_pecuaria')">
-                                <span>🐄 Pecuária</span>
-                            </label>
-                            <div class="field-wrapper area-input" id="area_pecuaria" style="display:none;">
-                                <input type="number" name="area_pecuaria_ha" step="0.01" min="0" placeholder="Área (ha)">
-                            </div>
-
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="atividade_apicultura" value="sim">
-                                <span>🐝 Apicultura</span>
-                            </label>
-
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="atividade_cogumelos" value="sim" onchange="PMOPrincipal.toggleAreaInput(this, 'area_cogumelos')">
-                                <span>🍄 Cogumelos</span>
-                            </label>
-                            <div class="field-wrapper area-input" id="area_cogumelos" style="display:none;">
-                                <input type="number" name="area_cogumelos_m2" step="0.01" min="0" placeholder="Área (m²)">
-                            </div>
-
-                            <label class="checkbox-enhanced">
-                                <input type="checkbox" name="atividade_processamento" value="sim">
-                                <span>🏭 Processamento</span>
-                            </label>
-                        </div>
-                    </div>
-
                     <div class="field-wrapper col-span-4">
                         <h4>Mão de Obra</h4>
                         <div class="form-grid">
@@ -1447,6 +1438,8 @@
     <!-- Framework JS Unificado -->
     <script src="../../framework/core/pmo-framework.js"></script>
     <script src="../../framework/components/pmo-tables.js"></script>
+    <script src="../../framework/components/auto-save-navigation.js"></script>
+    <script type="module" src="../../framework/components/scope-manager.js"></script>
 
     <!-- JS Específico do PMO Principal -->
     <script src="./pmo-principal.js"></script>

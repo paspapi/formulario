@@ -86,6 +86,17 @@ const AnexoVegetal = {
 
         form.addEventListener('change', () => this.updateProgress());
         form.addEventListener('input', () => this.markAsChanged());
+
+        // Configurar auto-save ao navegar
+        if (window.AutoSaveNavigation) {
+            window.AutoSaveNavigation.setup({
+                state: { isModified: false },
+                salvar: (isAutoSave) => this.saveForm(isAutoSave),
+                get state() {
+                    return { isModified: AnexoVegetal.hasChanges };
+                }
+            });
+        }
     },
 
     setupAutoSave() {

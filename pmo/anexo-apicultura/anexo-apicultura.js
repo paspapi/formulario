@@ -363,14 +363,16 @@ const AnexoApicultura = {
             this.markAsChanged();
         });
 
-        // Aviso ao sair sem salvar
-        window.addEventListener('beforeunload', (e) => {
-            if (this.state.hasChanges) {
-                e.preventDefault();
-                e.returnValue = 'Existem alterações não salvas. Deseja sair mesmo assim?';
-                return e.returnValue;
-            }
-        });
+        // Configurar auto-save ao navegar
+        if (window.AutoSaveNavigation) {
+            window.AutoSaveNavigation.setup({
+                state: { isModified: false },
+                salvar: (isAutoSave) => this.saveData(isAutoSave),
+                get state() {
+                    return { isModified: AnexoApicultura.state.hasChanges };
+                }
+            });
+        }
     },
 
     /**

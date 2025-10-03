@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste - Filtros de Escopo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+        .success { background-color: #d4edda; border-color: #28a745; }
+        .error { background-color: #f8d7da; border-color: #dc3545; }
+        .info { background-color: #d1ecf1; border-color: #17a2b8; }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            background: #007bff;
+            color: white;
+        }
+        button:hover { background: #0056b3; }
+        .checkbox-label {
+            display: block;
+            padding: 8px;
+            margin: 5px 0;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Teste de Filtros de Escopo</h1>
+
+    <div class="test-section info">
+        <h2>1. Selecione as Atividades</h2>
+        <label class="checkbox-label">
+            <input type="checkbox" name="escopo_hortalicas" value="sim" onchange="updateEscopo()">
+            🥬 Hortaliças
+        </label>
+        <label class="checkbox-label">
+            <input type="checkbox" name="escopo_frutas" value="sim" onchange="updateEscopo()">
+            🍊 Frutas
+        </label>
+        <label class="checkbox-label">
+            <input type="checkbox" name="escopo_cogumelos" value="sim" onchange="updateEscopo()">
+            🍄 Cogumelos
+        </label>
+        <label class="checkbox-label">
+            <input type="checkbox" name="escopo_medicinais" value="sim" onchange="updateEscopo()">
+            🌿 Plantas Medicinais
+        </label>
+        <label class="checkbox-label">
+            <input type="checkbox" name="escopo_pecuaria" value="sim" onchange="updateEscopo()">
+            🐄 Pecuária
+        </label>
+        <label class="checkbox-label">
+            <input type="checkbox" name="escopo_apicultura" value="sim" onchange="updateEscopo()">
+            🐝 Apicultura
+        </label>
+        <label class="checkbox-label">
+            <input type="checkbox" name="escopo_proc_minimo" value="sim" onchange="updateEscopo()">
+            🥗 Processamento Mínimo
+        </label>
+        <label class="checkbox-label">
+            <input type="checkbox" name="escopo_processamento" value="sim" onchange="updateEscopo()">
+            🏭 Processamento
+        </label>
+    </div>
+
+    <div class="test-section">
+        <h2>2. Formulários Habilitados</h2>
+        <div id="enabled-forms"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>3. Estado no LocalStorage</h2>
+        <button onclick="showStorage()">🔍 Mostrar LocalStorage</button>
+        <button onclick="clearStorage()">🗑️ Limpar LocalStorage</button>
+        <pre id="storage-content"></pre>
+    </div>
+
+    <div class="test-section">
+        <h2>4. Disponibilidade de Formulários</h2>
+        <table style="width:100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background: #f4f4f4;">
+                    <th style="padding: 8px; border: 1px solid #ddd;">Formulário</th>
+                    <th style="padding: 8px; border: 1px solid #ddd;">Status</th>
+                </tr>
+            </thead>
+            <tbody id="form-status"></tbody>
+        </table>
+    </div>
+
+    <script type="module">
+        import scopeManager from './framework/components/scope-manager.js';
+        window.PMOScopeManager = scopeManager;
+
+        window.updateEscopo = function() {
+            const activities = {};
+            const checkboxes = document.querySelectorAll('[name^="escopo_"]');
+            checkboxes.forEach(cb => {
+                activities[cb.name] = cb.checked;
+            });
+
+            const hasActivity = Object.values(activities).some(v => v === true);
+            PMOScopeManager.saveActivities(activities, hasActivity);
+
+            updateDisplay();
+        };
+
+        window.updateDisplay = function() {
+            // Formulários habilitados
+            const enabledAnexos = PMOScopeManager.getEnabledAnexos();
+            const enabledDiv = document.getElementById('enabled-forms');
+
+            if (enabledAnexos.length === 0) {
+                enabledDiv.innerHTML = '<p style="color: #999;">Nenhum formulário habilitado. Marque pelo menos uma atividade.</p>';
+            } else {
+                enabledDiv.innerHTML = '<ul>' + enabledAnexos.map(a => `<li><strong>${a}</strong></li>`).join('') + '</ul>';
+            }
+
+            // Status de formulários
+            const formTypes = ['anexo-vegetal', 'anexo-animal', 'anexo-cogumelo', 'anexo-apicultura', 'anexo-processamentominimo', 'anexo-processamento'];
+            const tbody = document.getElementById('form-status');
+
+            tbody.innerHTML = formTypes.map(formType => {
+                const isEnabled = PMOScopeManager.isAnexoEnabled(formType);
+                const status = isEnabled
+                    ? '<span style="color: green;">✅ Disponível</span>'
+                    : '<span style="color: red;">🔒 Bloqueado</span>';
+
+                return `<tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;">${formType}</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">${status}</td>
+                </tr>`;
+            }).join('');
+
+            showStorage();
+        };
+
+        window.showStorage = function() {
+            const data = localStorage.getItem('pmo_scope_activities');
+            const content = document.getElementById('storage-content');
+
+            if (data) {
+                content.textContent = JSON.stringify(JSON.parse(data), null, 2);
+            } else {
+                content.textContent = 'LocalStorage vazio';
+            }
+        };
+
+        window.clearStorage = function() {
+            if (confirm('Tem certeza que deseja limpar o localStorage?')) {
+                PMOScopeManager.clear();
+
+                // Desmarcar todos os checkboxes
+                document.querySelectorAll('[name^="escopo_"]').forEach(cb => cb.checked = false);
+
+                updateDisplay();
+                alert('✅ LocalStorage limpo!');
+            }
+        };
+
+        // Restaurar estado ao carregar
+        window.addEventListener('DOMContentLoaded', () => {
+            const activities = PMOScopeManager.getActivities();
+
+            if (activities) {
+                Object.keys(activities).forEach(key => {
+                    const checkbox = document.querySelector(`[name="${key}"]`);
+                    if (checkbox) {
+                        checkbox.checked = activities[key] === true;
+                    }
+                });
+            }
+
+            updateDisplay();
+        });
+    </script>
+</body>
+</html>

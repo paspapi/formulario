@@ -56,19 +56,22 @@ const AnexoCogumelo = {
             this.state.isModified = true;
         });
 
-        // Prevenir perda de dados
-        window.addEventListener('beforeunload', (e) => {
-            if (this.state.isModified) {
-                e.preventDefault();
-                e.returnValue = 'Você tem alterações não salvas. Deseja realmente sair?';
-            }
-        });
-
         // Submit
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             this.submitForm();
         });
+
+        // Configurar auto-save ao navegar
+        if (window.AutoSaveNavigation) {
+            window.AutoSaveNavigation.setup({
+                state: { isModified: false },
+                salvar: (isAutoSave) => this.salvar(isAutoSave),
+                get state() {
+                    return { isModified: AnexoCogumelo.state.isModified };
+                }
+            });
+        }
     },
 
     /**
