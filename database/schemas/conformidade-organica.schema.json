@@ -1,0 +1,245 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Conformidade Orgânica",
+  "description": "Schema para dados de conformidade orgânica e certificação",
+  "type": "object",
+  "properties": {
+    "identificacao": {
+      "type": "object",
+      "properties": {
+        "nomeProdutor": {
+          "type": "string",
+          "description": "Nome do produtor ou unidade de produção"
+        },
+        "codigoInterno": {
+          "type": "string",
+          "description": "Código interno da propriedade"
+        },
+        "numeroCadastroNacional": {
+          "type": "string",
+          "description": "Número do Cadastro Nacional de Produtores Orgânicos"
+        }
+      },
+      "required": ["nomeProdutor"]
+    },
+    "visitaVerificacao": {
+      "type": "object",
+      "properties": {
+        "dataUltimaVisita": {
+          "type": "string",
+          "format": "date",
+          "description": "Data da última Visita de Verificação (formato: YYYY-MM-DD)"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["realizada", "atrasada", "pendente"],
+          "description": "Status da Visita de Verificação"
+        },
+        "proximaVisitaPrevista": {
+          "type": "string",
+          "format": "date",
+          "description": "Data prevista para próxima visita"
+        },
+        "observacoes": {
+          "type": "string",
+          "description": "Observações sobre a visita"
+        }
+      }
+    },
+    "equilibrioSistema": {
+      "type": "object",
+      "properties": {
+        "visitasExternasRealizadas": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Número de Visitas de Verificação externas realizadas"
+        },
+        "visitasExternasMinimas": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Número mínimo de Visitas de Verificação externas exigidas"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["cumprido", "nao_cumprido", "em_andamento"],
+          "description": "Status do equilíbrio do sistema"
+        },
+        "historico": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "string",
+                "format": "date"
+              },
+              "visitante": {
+                "type": "string"
+              },
+              "propriedadeVisitada": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "aprovacaoDecisao": {
+      "type": "object",
+      "properties": {
+        "dataAprovacao": {
+          "type": "string",
+          "format": "date",
+          "description": "Data da aprovação da decisão sobre conformidade"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["aprovado", "pendente", "em_analise", "reprovado"],
+          "description": "Status da aprovação"
+        },
+        "numeroDecisao": {
+          "type": "string",
+          "description": "Número da decisão/protocolo"
+        },
+        "observacoes": {
+          "type": "string",
+          "description": "Observações sobre a decisão"
+        }
+      }
+    },
+    "apresentacaoOrganizacaoParticipativa": {
+      "type": "object",
+      "properties": {
+        "dataApresentacao": {
+          "type": "string",
+          "format": "date",
+          "description": "Data de apresentação à Comissão de Avaliação da Organização Participativa de Avaliação da Conformidade"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["apresentada", "nao_apresentada", "agendada"],
+          "description": "Status da apresentação"
+        },
+        "parecer": {
+          "type": "string",
+          "description": "Parecer da comissão"
+        },
+        "proximaReuniao": {
+          "type": "string",
+          "format": "date",
+          "description": "Data da próxima reunião da comissão"
+        }
+      }
+    },
+    "certificadoConformidade": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["emitido", "renovado", "pendente", "suspenso", "cancelado"],
+          "description": "Status do Certificado de Conformidade Orgânica"
+        },
+        "numeroSelo": {
+          "type": "string",
+          "description": "Número do selo/certificado"
+        },
+        "dataEmissao": {
+          "type": "string",
+          "format": "date",
+          "description": "Data de emissão do certificado"
+        },
+        "dataValidade": {
+          "type": "string",
+          "format": "date",
+          "description": "Data de validade do certificado"
+        },
+        "escoposCertificados": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["vegetal", "animal", "cogumelo", "apicultura", "processamento", "processamento_minimo"]
+          },
+          "description": "Escopos certificados"
+        },
+        "observacoes": {
+          "type": "string"
+        }
+      }
+    },
+    "cadastroNacional": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["inserido", "atualizado", "pendente", "desatualizado"],
+          "description": "Status do Cadastro Nacional de Produtores Orgânicos"
+        },
+        "dataUltimaAtualizacao": {
+          "type": "string",
+          "format": "date",
+          "description": "Data da última atualização no cadastro"
+        },
+        "linkCadastro": {
+          "type": "string",
+          "format": "uri",
+          "description": "Link para consulta do cadastro"
+        },
+        "observacoes": {
+          "type": "string"
+        }
+      }
+    },
+    "alertas": {
+      "type": "object",
+      "properties": {
+        "visitaAtrasada": {
+          "type": "boolean",
+          "description": "Indica se a visita está atrasada (> 12 meses)"
+        },
+        "certificadoProximoVencimento": {
+          "type": "boolean",
+          "description": "Indica se o certificado está próximo do vencimento (< 30 dias)"
+        },
+        "acoesPendentes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "tipo": {
+                "type": "string"
+              },
+              "descricao": {
+                "type": "string"
+              },
+              "prazo": {
+                "type": "string",
+                "format": "date"
+              },
+              "prioridade": {
+                "type": "string",
+                "enum": ["alta", "media", "baixa"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "metadados": {
+      "type": "object",
+      "properties": {
+        "dataCriacao": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dataUltimaModificacao": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "versao": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "required": ["identificacao"]
+}

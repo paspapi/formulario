@@ -18,6 +18,9 @@
   <link rel="stylesheet" href="../../framework/styles/responsive.css">
   <link rel="stylesheet" href="./menu-styles.css">
 
+  <!-- Conformidade Orgânica Styles -->
+  <link rel="stylesheet" href="./conformidade-organica.css">
+
   <!-- CDN Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
@@ -270,9 +273,15 @@
           <h3 class="nav-section-title">Menu Principal</h3>
           <ul class="nav-menu">
             <li class="nav-item">
-              <a href="index.html" class="nav-link active" data-navigate="/">
+              <a href="#" class="nav-link active" onclick="showDashboard(); return false;">
                 <span class="nav-icon">🏠</span>
                 Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link" onclick="showConformidade(); return false;">
+                <span class="nav-icon">🏛️</span>
+                Conformidade Orgânica
               </a>
             </li>
           </ul>
@@ -380,10 +389,15 @@
       </header>
 
       <!-- Content -->
-      <div class="main-content" id="app-content">
-        <!-- O conteúdo será carregado dinamicamente aqui -->
-        <div style="text-align: center; padding: 4rem;">
-          
+      <div class="main-content">
+        <!-- Dashboard Content -->
+        <div id="app-content">
+          <!-- O conteúdo do dashboard será carregado aqui -->
+        </div>
+
+        <!-- Conformidade Orgânica Content -->
+        <div id="conformidade-content" style="display: none;">
+          <!-- O painel de conformidade será carregado aqui -->
         </div>
       </div>
 
@@ -465,6 +479,41 @@
       scopeManager.applyDashboardFilters('.nav-menu');
       console.log('✅ Dashboard atualizado com novo escopo');
     });
+  </script>
+
+  <!-- Timeline Component -->
+  <script type="module" src="../../framework/components/timeline.js"></script>
+
+  <!-- Conformidade Orgânica Component -->
+  <script type="module" src="./conformidade-organica.js"></script>
+
+  <!-- Navigation Functions -->
+  <script>
+    function showDashboard() {
+      // Esconder conformidade
+      document.getElementById('conformidade-content').style.display = 'none';
+      // Mostrar dashboard
+      document.getElementById('app-content').style.display = 'block';
+
+      // Atualizar menu ativo
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+      });
+      event.target.closest('.nav-link').classList.add('active');
+    }
+
+    function showConformidade() {
+      // Esconder dashboard
+      document.getElementById('app-content').style.display = 'none';
+      // Mostrar conformidade
+      document.getElementById('conformidade-content').style.display = 'block';
+
+      // Atualizar menu ativo
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+      });
+      event.target.closest('.nav-link').classList.add('active');
+    }
   </script>
 </body>
 </html>
