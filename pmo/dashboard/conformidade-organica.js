@@ -89,13 +89,15 @@ class ConformidadeOrganica {
     /**
      * Salva dados no localStorage
      */
-    saveData() {
+    saveData(skipAlertas = false) {
         this.data.metadados = {
             dataUltimaModificacao: new Date().toISOString(),
             versao: '1.0.0'
         };
         localStorage.setItem(this.storageKey, JSON.stringify(this.data));
-        this.checkAlertas();
+        if (!skipAlertas) {
+            this.checkAlertas();
+        }
     }
 
     /**
@@ -201,7 +203,7 @@ class ConformidadeOrganica {
         }
 
         this.data.alertas.acoesPendentes = acoesPendentes;
-        this.saveData();
+        this.saveData(true); // Skip checkAlertas para evitar loop infinito
     }
 
     /**

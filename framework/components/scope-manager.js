@@ -132,11 +132,6 @@ class PMOScopeManager {
      * @returns {Array} - ['anexo-vegetal', 'anexo-animal', ...]
      */
     getEnabledAnexos() {
-        // Se não pretende certificar, nenhum anexo está habilitado
-        if (!this.pretendeCertificar()) {
-            return [];
-        }
-
         const activities = this.getActivities();
         const enabledAnexos = new Set();
 
@@ -148,7 +143,20 @@ class PMOScopeManager {
             }
         });
 
-        return Array.from(enabledAnexos);
+        const enabledArray = Array.from(enabledAnexos);
+
+        // Se há atividades habilitadas, considerar como "pretende certificar"
+        // independentemente do flag pretende_certificar
+        if (enabledArray.length > 0) {
+            return enabledArray;
+        }
+
+        // Só verificar pretende_certificar se não houver atividades
+        if (!this.pretendeCertificar()) {
+            return [];
+        }
+
+        return enabledArray;
     }
 
     /**
