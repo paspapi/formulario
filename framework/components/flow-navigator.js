@@ -209,26 +209,21 @@ class FlowNavigator {
         if (currentAnexo === 'pmo-principal' && flowAnexos.length === 1) {
             container.innerHTML = `
                 <div class="flow-navigator">
-                    <a href="../dashboard/index.html" class="flow-back-link">
-                        🏠 Voltar ao Dashboard
-                    </a>
+                    <a href="../dashboard/index.html" class="flow-back-link">🏠 Dashboard</a>
                     <div class="flow-current">
                         <span class="flow-icon">📋</span>
                         <span class="flow-title">PMO Principal</span>
-                        <span class="flow-hint">Selecione os escopos na Seção 1 para ver o fluxo completo</span>
+                        <span class="flow-hint">(Selecione os escopos abaixo)</span>
                     </div>
                 </div>
             `;
             return;
         }
 
-        // Gera o HTML do fluxo
+        // Gera o HTML do fluxo (horizontal e compacto)
         let html = `
             <div class="flow-navigator">
-                <a href="../dashboard/index.html" class="flow-back-link">
-                    🏠 Voltar ao Dashboard
-                </a>
-                <div class="flow-title-header">Fluxo de Preenchimento:</div>
+                <a href="../dashboard/index.html" class="flow-back-link">🏠 Dashboard</a>
                 <div class="flow-steps">
         `;
 
@@ -249,22 +244,23 @@ class FlowNavigator {
                             <span class="flow-step-info">
                                 <span class="flow-step-icon">${anexo.icon}</span>
                                 <span class="flow-step-name">${anexo.name}</span>
-                                ${isCurrent ? '<span class="flow-current-indicator">← Você está aqui</span>' : ''}
                             </span>
+                            <span class="flow-progress">${progress}%</span>
+                            <span class="flow-current-indicator">atual</span>
                         ` : `
                             <a href="${anexo.path}" class="flow-step-link">
                                 <span class="flow-step-icon">${anexo.icon}</span>
                                 <span class="flow-step-name">${anexo.name}</span>
                             </a>
+                            <span class="flow-progress">${progress}%</span>
                         `}
-                        <span class="flow-progress">(${progress}%)</span>
                     </div>
                 </div>
             `;
 
             // Adiciona seta entre os itens (exceto no último)
             if (index < flowAnexos.length - 1) {
-                html += '<div class="flow-arrow">↓</div>';
+                html += '<span class="flow-arrow">→</span>';
             }
         });
 
