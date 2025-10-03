@@ -1,5 +1,5 @@
 /**
- * Dashboard Module - Página inicial do sistema PMO
+ * Painel Module - Página inicial do sistema PMO
  * @version 2.0
  */
 
@@ -24,7 +24,7 @@ class Dashboard extends PMOModule {
     // Renderiza HTML
     this.container.innerHTML = `
       <div class="dashboard">
-        <h1 class="page-title">Dashboard PMO</h1>
+        <h1 class="page-title">Painel PMO</h1>
         <p class="page-subtitle">Sistema de Planos de Manejo Orgânico - ANC</p>
 
         <!-- Cards de Resumo -->

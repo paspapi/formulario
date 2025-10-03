@@ -275,7 +275,7 @@
             <li class="nav-item">
               <a href="#" class="nav-link active" onclick="showDashboard(); return false;">
                 <span class="nav-icon">🏠</span>
-                Dashboard
+                Painel
               </a>
             </li>
             <li class="nav-item">
@@ -390,9 +390,9 @@
 
       <!-- Content -->
       <div class="main-content">
-        <!-- Dashboard Content -->
+        <!-- Painel Content -->
         <div id="app-content">
-          <!-- O conteúdo do dashboard será carregado aqui -->
+          <!-- O conteúdo do painel será carregado aqui -->
         </div>
 
         <!-- Conformidade Orgânica Content -->
@@ -477,7 +477,7 @@
     // Escutar mudanças no escopo
     window.addEventListener('pmo-scope-changed', () => {
       scopeManager.applyDashboardFilters('.nav-menu');
-      console.log('✅ Dashboard atualizado com novo escopo');
+      console.log('✅ Painel atualizado com novo escopo');
     });
   </script>
 
@@ -492,7 +492,7 @@
     function showDashboard() {
       // Esconder conformidade
       document.getElementById('conformidade-content').style.display = 'none';
-      // Mostrar dashboard
+      // Mostrar painel
       document.getElementById('app-content').style.display = 'block';
 
       // Atualizar menu ativo
@@ -503,7 +503,7 @@
     }
 
     function showConformidade() {
-      // Esconder dashboard
+      // Esconder painel
       document.getElementById('app-content').style.display = 'none';
       // Mostrar conformidade
       document.getElementById('conformidade-content').style.display = 'block';

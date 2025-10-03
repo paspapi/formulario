@@ -1,5 +1,5 @@
 /**
- * Conteúdo do Dashboard
+ * Conteúdo do Painel
  * Exibe resumo de progresso e estatísticas
  */
 
@@ -35,7 +35,7 @@ class DashboardContent {
         if (enabledAnexos.length === 0) {
             container.innerHTML = this.getNoScopeHTML();
         } else {
-            container.innerHTML = this.getDashboardHTML(enabledAnexos, allProgress, overallProgress);
+            container.innerHTML = this.getPainelHTML(enabledAnexos, allProgress, overallProgress);
         }
     }
 
@@ -82,7 +82,7 @@ class DashboardContent {
         `;
     }
 
-    getDashboardHTML(enabledAnexos, allProgress, overallProgress) {
+    getPainelHTML(enabledAnexos, allProgress, overallProgress) {
         const cards = enabledAnexos.map(anexoId => {
             const progress = allProgress[anexoId] || 0;
             const label = this.getAnexoLabel(anexoId);
@@ -116,7 +116,7 @@ class DashboardContent {
 
         return `
             <div class="dashboard-container">
-                <!-- Header do Dashboard -->
+                <!-- Header do Painel -->
                 <div class="dashboard-header">
                     <h1>📊 Meu Progresso</h1>
                     <div class="overall-progress">

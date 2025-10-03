@@ -209,7 +209,7 @@ class FlowNavigator {
         if (currentAnexo === 'pmo-principal' && flowAnexos.length === 1) {
             container.innerHTML = `
                 <div class="flow-navigator">
-                    <a href="../dashboard/index.html" class="flow-back-link">🏠 Dashboard</a>
+                    <a href="../dashboard/index.html" class="flow-back-link">🏠 Painel</a>
                     <div class="flow-current">
                         <span class="flow-icon">📋</span>
                         <span class="flow-title">PMO Principal</span>
@@ -223,7 +223,7 @@ class FlowNavigator {
         // Gera o HTML do fluxo (horizontal e compacto)
         let html = `
             <div class="flow-navigator">
-                <a href="../dashboard/index.html" class="flow-back-link">🏠 Dashboard</a>
+                <a href="../dashboard/index.html" class="flow-back-link">🏠 Painel</a>
                 <div class="flow-steps">
         `;
 

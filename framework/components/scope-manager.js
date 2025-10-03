@@ -289,7 +289,7 @@ class PMOScopeManager {
     }
 
     /**
-     * Aplicar filtros visuais no dashboard
+     * Aplicar filtros visuais no painel
      * @param {string} containerSelector - Seletor do container (ex: '.nav-menu' ou '.dashboard-cards')
      */
     applyDashboardFilters(containerSelector = '.nav-menu') {
