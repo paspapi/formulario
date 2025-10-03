@@ -8,6 +8,7 @@
 - [x] `/pmo/anexo-apicultura/` ✅ COMPLETO
 - [x] `/pmo/anexo-processamento/` ✅ COMPLETO
 - [x] `/pmo/anexo-processamentominimo/` ✅ COMPLETO
+- [x] `/pmo/avaliacao/` ✅ COMPLETO
 
 **TODOS OS FORMULÁRIOS FORAM ADAPTADOS COM SUCESSO!**
 Todos seguem o mesmo padrão e estão usando o PMOStorageManager.
@@ -245,6 +246,7 @@ loadPMOPrincipal() {
 | Anexo Apicultura | `anexo_apicultura` | `pmo_anexo_apicultura` |
 | Anexo Processamento | `anexo_processamento` | `pmo_processamento` |
 | Anexo Proc. Mínimo | `anexo_processamentominimo` | `pmo_processamento_minimo` |
+| Avaliação | `avaliacao` | `avaliacao_data` |
 
 ---
 
