@@ -320,12 +320,13 @@ const PMOPrincipal = {
         });
 
         // Verificar se pelo menos uma atividade foi selecionada
-        const hasActivity = Object.values(activities).some(val => val === true);
+        const hasActivity = Object.values(activities).some(val => val === true || val === 'sim');
 
         // Salvar no scope manager (pretende certificar = true se houver alguma atividade marcada)
         window.PMOScopeManager.saveActivities(activities, hasActivity);
 
         console.log('✅ Escopo atualizado:', { hasActivity, activities });
+        console.log('📦 LocalStorage salvo:', localStorage.getItem('pmo_scope_activities'));
     },
 
     /**
