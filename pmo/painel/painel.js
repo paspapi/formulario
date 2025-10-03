@@ -305,6 +305,14 @@ const PainelPMO = {
     },
 
     /**
+     * Nova avaliação
+     */
+    novaAvaliacao() {
+        // Redirecionar para página de avaliação
+        window.location.href = '../avaliacao/index.html';
+    },
+
+    /**
      * Editar PMO
      */
     editarPMO(pmoId, formulario = 'cadastro-geral-pmo') {
@@ -483,15 +491,117 @@ const PainelPMO = {
     },
 
     /**
-     * Processar arquivo PDF
+     * Processar arquivo PDF ou JSON
      */
     async handleFile(file) {
-        if (file.type !== 'application/pdf') {
-            this.showMessage('Por favor, selecione um arquivo PDF', 'error');
+        const status = document.getElementById('upload-status');
+
+        // Verificar tipo de arquivo
+        if (file.type === 'application/json' || file.name.endsWith('.json')) {
+            await this.handleJSONImport(file, status);
+        } else if (file.type === 'application/pdf') {
+            await this.handlePDFImport(file, status);
+        } else {
+            this.showMessage('Por favor, selecione um arquivo PDF ou JSON', 'error');
             return;
         }
+    },
 
-        const status = document.getElementById('upload-status');
+    /**
+     * Processar importação de JSON
+     */
+    async handleJSONImport(file, status) {
+        if (status) {
+            status.style.display = 'block';
+            status.innerHTML = '<p>⏳ Processando JSON...</p>';
+        }
+
+        try {
+            const text = await file.text();
+            const data = JSON.parse(text);
+
+            // Validar estrutura do JSON
+            if (!this.validateJSONStructure(data)) {
+                throw new Error('Estrutura do JSON inválida');
+            }
+
+            // Determinar tipo de importação (geral ou com escopos)
+            const isGeneralOnly = data.metadata && data.dados && !data.escopos;
+            const hasScopes = data.metadata && data.dados && data.escopos;
+
+            if (!isGeneralOnly && !hasScopes) {
+                throw new Error('JSON não contém estrutura válida (geral ou geral+escopos)');
+            }
+
+            // Criar novo PMO
+            const pmoId = window.PMOStorageManager.createPMO({
+                nome: data.dados.nome_fornecedor || data.dados.nome_completo || data.dados.razao_social || 'PMO Importado',
+                tipo_pessoa: data.dados.tipo_pessoa || 'fisica'
+            });
+
+            // Importar dados gerais
+            if (data.dados) {
+                const generalData = {
+                    metadata: data.metadata || {
+                        data_preenchimento: new Date().toISOString().split('T')[0],
+                        ultima_atualizacao: new Date().toISOString(),
+                        versao: '1.0'
+                    },
+                    dados: data.dados
+                };
+                window.PMOStorageManager.updateFormulario(pmoId, 'cadastro_geral_pmo', generalData);
+            }
+
+            // Importar escopos (se existirem)
+            if (hasScopes && data.escopos) {
+                Object.keys(data.escopos).forEach(scopeKey => {
+                    const scopeData = data.escopos[scopeKey];
+                    if (scopeData && scopeData.dados) {
+                        window.PMOStorageManager.updateFormulario(pmoId, scopeKey, scopeData);
+                    }
+                });
+            }
+
+            if (status) {
+                status.innerHTML = '<p style="color: var(--success-color);">✅ JSON importado com sucesso!</p>';
+            }
+
+            this.showMessage('JSON importado com sucesso!', 'success');
+
+            setTimeout(() => {
+                this.fecharModalUpload();
+                this.renderPMOs();
+            }, 1500);
+
+        } catch (error) {
+            console.error('Erro ao processar JSON:', error);
+            if (status) {
+                status.innerHTML = `<p style="color: var(--danger-color);">❌ Erro: ${error.message}</p>`;
+            }
+        }
+    },
+
+    /**
+     * Validar estrutura do JSON
+     */
+    validateJSONStructure(data) {
+        // Deve ter metadata e dados
+        if (!data.metadata || !data.dados) {
+            return false;
+        }
+
+        // Validar que dados tem pelo menos um campo
+        if (typeof data.dados !== 'object' || Object.keys(data.dados).length === 0) {
+            return false;
+        }
+
+        return true;
+    },
+
+    /**
+     * Processar importação de PDF
+     */
+    async handlePDFImport(file, status) {
         if (status) {
             status.style.display = 'block';
             status.innerHTML = '<p>⏳ Processando PDF...</p>';

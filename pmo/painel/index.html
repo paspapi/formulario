@@ -23,7 +23,10 @@
                     ➕ Novo PMO
                 </button>
                 <button class="btn btn-secondary" onclick="PainelPMO.abrirModalUpload()">
-                    📤 Upload PDF
+                    📤 Importar PDF/JSON
+                </button>
+                <button class="btn btn-success" onclick="PainelPMO.novaAvaliacao()">
+                    📋 Avaliar PMO
                 </button>
             </div>
         </header>
@@ -120,19 +123,19 @@
     <div id="modal-upload" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>📤 Upload de PDF do PMO</h2>
+                <h2>📤 Upload de PDF/JSON do PMO</h2>
             </div>
             <div class="modal-body">
                 <div class="upload-area" id="upload-area">
                     <input
                         type="file"
                         id="upload-input"
-                        accept="application/pdf"
+                        accept="application/pdf,application/json"
                         onchange="PainelPMO.handleFileSelect(event)"
                     >
                     <div class="upload-icon">📄</div>
-                    <div class="upload-text">Clique ou arraste o PDF aqui</div>
-                    <div class="upload-hint">O PDF deve conter metadados JSON do PMO</div>
+                    <div class="upload-text">Clique ou arraste o PDF/JSON aqui</div>
+                    <div class="upload-hint">PDF com metadados ou arquivo JSON exportado (geral ou com escopos)</div>
                 </div>
                 <div id="upload-status" style="margin-top: 15px; display: none;"></div>
             </div>

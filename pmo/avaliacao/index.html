@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação de Conformidade - PMO ANC</title>
+
+    <!-- Framework CSS -->
+    <link rel="stylesheet" href="../../framework/core/pmo-framework-full.css">
+
+    <!-- CSS Específico de Avaliação -->
+    <link rel="stylesheet" href="./avaliacao.css">
+</head>
+<body>
+    <!-- Header -->
+    <div class="avaliacao-container">
+        <header class="avaliacao-header">
+            <h1>📋 Avaliação de Conformidade - PMO</h1>
+            <p>Sistema de avaliação e verificação de conformidade orgânica</p>
+
+            <div class="header-actions">
+                <button class="btn btn-secondary" onclick="AvaliacaoPMO.voltarPainel()">
+                    ← Voltar ao Painel
+                </button>
+            </div>
+        </header>
+
+        <!-- Etapa 1: Upload do PMO -->
+        <section id="etapa-upload" class="etapa-section active">
+            <div class="etapa-header">
+                <h2>1️⃣ Upload do PMO para Avaliação</h2>
+                <p>Faça upload do PDF ou JSON do PMO que deseja avaliar</p>
+            </div>
+
+            <div class="upload-area-wrapper">
+                <div class="upload-area" id="upload-area">
+                    <input
+                        type="file"
+                        id="upload-input"
+                        accept="application/pdf,application/json"
+                        onchange="AvaliacaoPMO.handleFileSelect(event)"
+                    >
+                    <div class="upload-icon">📄</div>
+                    <div class="upload-text">Clique ou arraste o PDF/JSON aqui</div>
+                    <div class="upload-hint">PDF exportado ou arquivo JSON do PMO</div>
+                </div>
+                <div id="upload-status" class="upload-status"></div>
+            </div>
+        </section>
+
+        <!-- Etapa 2: Dados do Avaliador -->
+        <section id="etapa-avaliador" class="etapa-section">
+            <div class="etapa-header">
+                <h2>2️⃣ Dados do Avaliador</h2>
+                <p>Informe seus dados para identificação na avaliação</p>
+            </div>
+
+            <form id="form-avaliador" class="form-avaliador">
+                <div class="form-grid">
+                    <div class="field-wrapper col-span-2">
+                        <label for="avaliador_nome">
+                            Nome Completo do Avaliador
+                            <span class="required">*</span>
+                        </label>
+                        <input type="text" id="avaliador_nome" name="avaliador_nome" required placeholder="Nome completo">
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="avaliador_cpf">
+                            CPF
+                            <span class="required">*</span>
+                        </label>
+                        <input type="text" id="avaliador_cpf" name="avaliador_cpf" required placeholder="000.000.000-00">
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="avaliador_cargo">Cargo/Função</label>
+                        <input type="text" id="avaliador_cargo" name="avaliador_cargo" placeholder="Ex: Técnico ANC">
+                    </div>
+
+                    <div class="field-wrapper col-span-2">
+                        <label for="avaliador_observacao_geral">Observação Geral</label>
+                        <textarea id="avaliador_observacao_geral" name="avaliador_observacao_geral" rows="3" placeholder="Observações gerais sobre a avaliação (opcional)"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="AvaliacaoPMO.voltarEtapa()">
+                        ← Voltar
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="AvaliacaoPMO.iniciarAvaliacao()">
+                        Iniciar Avaliação →
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Etapa 3: Avaliação -->
+        <section id="etapa-avaliacao" class="etapa-section">
+            <div class="etapa-header">
+                <h2>3️⃣ Avaliação de Conformidade</h2>
+                <p>Revise cada seção e adicione observações sobre a conformidade</p>
+
+                <div class="progress-avaliacao">
+                    <div class="progress-info">
+                        <span>Progresso: <strong id="progresso-count">0/0</strong></span>
+                        <span>Conformidade: <strong id="conformidade-score">0%</strong></span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" id="progress-bar-avaliacao" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resumo do PMO -->
+            <div class="pmo-resumo-card">
+                <h3>📄 PMO em Avaliação</h3>
+                <div id="pmo-resumo-info"></div>
+            </div>
+
+            <!-- Seções de Avaliação -->
+            <div id="secoes-avaliacao"></div>
+
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" onclick="AvaliacaoPMO.salvarProgresso()">
+                    💾 Salvar Progresso
+                </button>
+                <button type="button" class="btn btn-primary" onclick="AvaliacaoPMO.finalizarAvaliacao()">
+                    ✅ Finalizar Avaliação
+                </button>
+            </div>
+        </section>
+
+        <!-- Etapa 4: Resultado -->
+        <section id="etapa-resultado" class="etapa-section">
+            <div class="etapa-header">
+                <h2>4️⃣ Resultado da Avaliação</h2>
+                <p>Resumo da avaliação e geração de relatório</p>
+            </div>
+
+            <div class="resultado-card">
+                <div class="resultado-score">
+                    <div class="score-circle">
+                        <svg width="200" height="200">
+                            <circle cx="100" cy="100" r="90" fill="none" stroke="#e2e8f0" stroke-width="20"/>
+                            <circle
+                                id="score-circle"
+                                cx="100"
+                                cy="100"
+                                r="90"
+                                fill="none"
+                                stroke="#48bb78"
+                                stroke-width="20"
+                                stroke-dasharray="565.48"
+                                stroke-dashoffset="565.48"
+                                transform="rotate(-90 100 100)"
+                            />
+                            <text x="100" y="100" text-anchor="middle" dy="0.3em" font-size="48" font-weight="bold" id="score-text">0%</text>
+                        </svg>
+                    </div>
+                    <h3 id="resultado-titulo">Conformidade Geral</h3>
+                    <p id="resultado-descricao"></p>
+                </div>
+
+                <div class="resultado-detalhes" id="resultado-detalhes"></div>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" onclick="AvaliacaoPMO.novaAvaliacao()">
+                    ➕ Nova Avaliação
+                </button>
+                <button type="button" class="btn btn-primary" onclick="AvaliacaoPMO.exportarPDFAvaliacao()">
+                    📥 Exportar PDF de Avaliação
+                </button>
+                <button type="button" class="btn btn-secondary" onclick="AvaliacaoPMO.voltarPainel()">
+                    🏠 Voltar ao Painel
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="pmo-footer">
+        <p>&copy; 2024 ANC - Associação de Agricultura Natural de Campinas e Região</p>
+        <p>Sistema de Avaliação de Conformidade PMO</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/pdf-lib"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="../../framework/core/pmo-framework.js"></script>
+    <script src="../../framework/components/export.js"></script>
+    <script src="../../framework/components/avaliacao-storage.js"></script>
+    <script src="./avaliacao.js"></script>
+
+    <script>
+        // Inicializar quando DOM estiver pronto
+        document.addEventListener('DOMContentLoaded', () => {
+            AvaliacaoPMO.init();
+        });
+    </script>
+</body>
+</html>
