@@ -380,27 +380,29 @@ const AnexoApicultura = {
      */
     loadPMOPrincipal() {
         try {
-            const cadastroGeralPMO = localStorage.getItem('cadastro_geral_pmo_data');
-            if (cadastroGeralPMO) {
-                const data = JSON.parse(cadastroGeralPMO);
-
-                // Preencher campos de identificação
-                if (data.nome_fornecedor) {
-                    const field = document.getElementById('nome_fornecedor');
-                    if (field && !field.value) {
-                        field.value = data.nome_fornecedor;
-                    }
-                }
-
-                if (data.grupo_spg) {
-                    const field = document.getElementById('grupo_spg');
-                    if (field && !field.value) {
-                        field.value = data.grupo_spg;
-                    }
-                }
-
-                console.log('Dados do PMO Principal carregados.');
+            const pmo = window.PMOStorageManager.getActivePMO();
+            if (!pmo || !pmo.dados || !pmo.dados.cadastro_geral_pmo) {
+                console.log('Nenhum dado do PMO Principal encontrado.');
+                return;
             }
+
+            const data = pmo.dados.cadastro_geral_pmo;
+            const form = document.getElementById(this.config.formId);
+
+            if (!form) return;
+
+            // Preencher campos de identificação
+            const nomeField = form.querySelector('[name="nome_fornecedor"]');
+            if (nomeField && !nomeField.value) {
+                nomeField.value = data.dados?.nome_completo || data.dados?.razao_social || '';
+            }
+
+            const grupoField = form.querySelector('[name="grupo_spg"]');
+            if (grupoField && !grupoField.value && data.dados?.grupo_spg) {
+                grupoField.value = data.dados.grupo_spg;
+            }
+
+            console.log('Dados do PMO Principal carregados.');
         } catch (error) {
             console.error('Erro ao carregar dados do PMO Principal:', error);
         }
@@ -409,11 +411,11 @@ const AnexoApicultura = {
     /**
      * Salvar dados no localStorage
      */
-    saveData() {
+    saveData(isAutoSave = false) {
         try {
             const form = document.getElementById(this.config.formId);
             const formData = new FormData(form);
-            const data = {};
+            const dados = {};
 
             // Converter FormData para objeto
             for (let [key, value] of formData.entries()) {
@@ -425,18 +427,18 @@ const AnexoApicultura = {
                         const index = parseInt(match[2]);
                         const fieldName = match[3];
 
-                        if (!data[arrayName]) {
-                            data[arrayName] = [];
+                        if (!dados[arrayName]) {
+                            dados[arrayName] = [];
                         }
 
-                        if (!data[arrayName][index]) {
-                            data[arrayName][index] = {};
+                        if (!dados[arrayName][index]) {
+                            dados[arrayName][index] = {};
                         }
 
-                        data[arrayName][index][fieldName] = value;
+                        dados[arrayName][index][fieldName] = value;
                     }
                 } else {
-                    data[key] = value;
+                    dados[key] = value;
                 }
             }
 
@@ -444,17 +446,36 @@ const AnexoApicultura = {
             const checkboxes = form.querySelectorAll('input[type="checkbox"]');
             checkboxes.forEach(checkbox => {
                 if (!formData.has(checkbox.name)) {
-                    data[checkbox.name] = false;
+                    dados[checkbox.name] = false;
                 }
             });
 
-            // Salvar no localStorage
-            localStorage.setItem(this.config.storageKey, JSON.stringify(data));
+            const data = {
+                metadata: {
+                    data_preenchimento: formData.get('data_preenchimento'),
+                    ultima_atualizacao: new Date().toISOString(),
+                    versao: '1.0'
+                },
+                dados: dados
+            };
+
+            // Salvar usando PMOStorageManager
+            const pmo = window.PMOStorageManager.getActivePMO();
+            if (!pmo) {
+                console.warn('Nenhum PMO ativo. Crie o Cadastro Geral primeiro.');
+                this.showNotification('Crie o Cadastro Geral PMO primeiro!', 'warning');
+                return;
+            }
+
+            window.PMOStorageManager.updateFormulario(pmo.id, 'anexo_apicultura', data);
+
             this.state.lastSaved = new Date();
             this.state.hasChanges = false;
 
             // Notificação
-            this.showNotification('Dados salvos com sucesso!', 'success');
+            if (!isAutoSave) {
+                this.showNotification('Dados salvos com sucesso!', 'success');
+            }
 
             console.log('Dados salvos:', data);
         } catch (error) {
@@ -468,12 +489,17 @@ const AnexoApicultura = {
      */
     loadData() {
         try {
-            const savedData = localStorage.getItem(this.config.storageKey);
+            const pmo = window.PMOStorageManager.getActivePMO();
+            if (!pmo || !pmo.dados || !pmo.dados.anexo_apicultura) {
+                console.log('Nenhum dado salvo encontrado.');
+                return;
+            }
 
-            if (!savedData) return;
-
-            const data = JSON.parse(savedData);
+            const savedData = pmo.dados.anexo_apicultura;
+            const data = savedData.dados;
             const form = document.getElementById(this.config.formId);
+
+            console.log(`✅ Dados carregados do PMO: ${pmo.id}`);
 
             // Preencher campos simples
             Object.keys(data).forEach(key => {
@@ -518,7 +544,7 @@ const AnexoApicultura = {
                 }
             });
 
-            this.state.lastSaved = new Date();
+            this.state.lastSaved = new Date(savedData.metadata.ultima_atualizacao);
             this.state.hasChanges = false;
 
             console.log('Dados carregados do localStorage');
@@ -581,6 +607,12 @@ const AnexoApicultura = {
 
         if (progressText) {
             progressText.textContent = `${progress}% Completo`;
+        }
+
+        // Atualizar progresso no PMOStorageManager
+        const pmo = window.PMOStorageManager.getActivePMO();
+        if (pmo) {
+            window.PMOStorageManager.updateProgresso(pmo.id, 'anexo_apicultura', progress);
         }
     },
 

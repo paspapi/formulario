@@ -255,19 +255,14 @@ const AnexoAnimal = {
 
         // Salvar usando PMOStorageManager
         try {
-            if (window.PMOStorageManager) {
-                const pmo = window.PMOStorageManager.getActivePMO();
-                if (pmo) {
-                    window.PMOStorageManager.updateFormulario(pmo.id, 'anexo_animal', data);
-                } else {
-                    console.warn('Nenhum PMO ativo. Crie o Cadastro Geral primeiro.');
-                    this.showMessage('Crie o Cadastro Geral PMO primeiro!', 'warning');
-                    return;
-                }
-            } else {
-                // Fallback para formato antigo
-                localStorage.setItem(this.config.storageKey, JSON.stringify(data));
+            const pmo = window.PMOStorageManager.getActivePMO();
+            if (!pmo) {
+                console.warn('Nenhum PMO ativo. Crie o Cadastro Geral primeiro.');
+                this.showMessage('Crie o Cadastro Geral PMO primeiro!', 'warning');
+                return;
             }
+
+            window.PMOStorageManager.updateFormulario(pmo.id, 'anexo_animal', data);
 
             this.state.lastSaved = new Date();
             this.state.hasChanges = false;
@@ -292,27 +287,15 @@ const AnexoAnimal = {
      */
     loadData() {
         try {
-            let data = null;
-
-            // Tentar carregar usando PMOStorageManager
-            if (window.PMOStorageManager) {
-                const pmo = window.PMOStorageManager.getActivePMO();
-                if (pmo && pmo.dados && pmo.dados.anexo_animal) {
-                    data = pmo.dados.anexo_animal;
-                    console.log(`✅ Dados carregados do PMO: ${pmo.id}`);
-                }
+            const pmo = window.PMOStorageManager.getActivePMO();
+            if (!pmo || !pmo.dados || !pmo.dados.anexo_animal) {
+                console.log('Nenhum dado salvo encontrado.');
+                return;
             }
 
-            // Fallback para formato antigo
-            if (!data) {
-                const savedData = localStorage.getItem(this.config.storageKey);
-                if (savedData) {
-                    data = JSON.parse(savedData);
-                    console.log('✅ Dados carregados do formato antigo');
-                }
-            }
+            const data = pmo.dados.anexo_animal;
+            console.log(`✅ Dados carregados do PMO: ${pmo.id}`);
 
-            if (!data) return;
             const form = document.getElementById(this.config.formId);
             if (!form) return;
 
@@ -363,28 +346,13 @@ const AnexoAnimal = {
      */
     loadPMOPrincipal() {
         try {
-            let data = null;
-
-            // Tentar carregar usando PMOStorageManager
-            if (window.PMOStorageManager) {
-                const pmo = window.PMOStorageManager.getActivePMO();
-                if (pmo && pmo.dados && pmo.dados.cadastro_geral_pmo) {
-                    data = pmo.dados.cadastro_geral_pmo;
-                }
-            }
-
-            // Fallback para formato antigo
-            if (!data) {
-                const cadastroGeralPMO = localStorage.getItem('cadastro_geral_pmo_data');
-                if (cadastroGeralPMO) {
-                    data = JSON.parse(cadastroGeralPMO);
-                }
-            }
-
-            if (!data) {
+            const pmo = window.PMOStorageManager.getActivePMO();
+            if (!pmo || !pmo.dados || !pmo.dados.cadastro_geral_pmo) {
                 console.log('Nenhum dado do PMO Principal encontrado.');
                 return;
             }
+
+            const data = pmo.dados.cadastro_geral_pmo;
             const form = document.getElementById(this.config.formId);
 
             if (!form) return;
@@ -393,14 +361,14 @@ const AnexoAnimal = {
             // Nome do fornecedor (pode vir de nome_completo ou razão social)
             const nomeField = form.querySelector('[name="nome_fornecedor"]');
             if (nomeField && !nomeField.value) {
-                nomeField.value = data.nome_completo || data.razao_social || '';
+                nomeField.value = data.dados?.nome_completo || data.dados?.razao_social || '';
                 console.log('Nome do fornecedor preenchido:', nomeField.value);
             }
 
             // Nome da unidade
             const unidadeField = form.querySelector('[name="nome_unidade_producao"]');
             if (unidadeField && !unidadeField.value) {
-                unidadeField.value = data.nome_unidade_producao || '';
+                unidadeField.value = data.dados?.nome_unidade_producao || '';
                 console.log('Nome da unidade preenchido:', unidadeField.value);
             }
 
@@ -413,8 +381,8 @@ const AnexoAnimal = {
 
             // Grupo SPG (pode tentar preencher se disponível)
             const grupoField = form.querySelector('[name="grupo_spg"]');
-            if (grupoField && !grupoField.value && data.grupo_spg) {
-                grupoField.value = data.grupo_spg;
+            if (grupoField && !grupoField.value && data.dados?.grupo_spg) {
+                grupoField.value = data.dados.grupo_spg;
             }
 
             this.showMessage('Dados carregados do PMO Principal!', 'info');
@@ -624,11 +592,9 @@ const AnexoAnimal = {
         }
 
         // Atualizar progresso no PMOStorageManager
-        if (window.PMOStorageManager) {
-            const pmo = window.PMOStorageManager.getActivePMO();
-            if (pmo) {
-                window.PMOStorageManager.updateProgresso(pmo.id, 'anexo_animal', progress);
-            }
+        const pmo = window.PMOStorageManager.getActivePMO();
+        if (pmo) {
+            window.PMOStorageManager.updateProgresso(pmo.id, 'anexo_animal', progress);
         }
     },
 

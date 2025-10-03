@@ -411,7 +411,9 @@ const ProcessamentoMinimo = {
         }
 
         try {
-            localStorage.setItem(this.config.storageKey, JSON.stringify(data));
+            const pmo = window.PMOStorageManager.getActivePMO();
+            if (!pmo) { console.warn('Nenhum PMO ativo.'); PMONotify.warning('Crie o Cadastro Geral PMO primeiro!'); return; }
+            window.PMOStorageManager.updateFormulario(pmo.id, 'anexo_processamento_minimo', data);
             this.state.lastSaved = new Date();
             this.state.hasChanges = false;
 
@@ -438,12 +440,12 @@ const ProcessamentoMinimo = {
      */
     loadSavedData() {
         try {
-            const savedData = localStorage.getItem(this.config.storageKey);
-            if (!savedData) return;
-
-            const data = JSON.parse(savedData);
+            const pmo = window.PMOStorageManager.getActivePMO();
+            if (!pmo || !pmo.dados || !pmo.dados.anexo_processamento_minimo) { console.log('Nenhum dado salvo.'); return; }
+            const data = pmo.dados.anexo_processamento_minimo;
             const form = document.getElementById('form-processamento-minimo');
             if (!form) return;
+            console.log(`✅ Dados carregados do PMO: ${pmo.id}`);
 
             // Preencher campos
             for (let [key, value] of Object.entries(data.dados)) {
@@ -488,19 +490,18 @@ const ProcessamentoMinimo = {
      */
     loadFromPMOPrincipal() {
         try {
-            const cadastroGeralPMO = localStorage.getItem('cadastro_geral_pmo_data');
-            if (!cadastroGeralPMO) return;
-
-            const data = JSON.parse(cadastroGeralPMO);
+            const pmo = window.PMOStorageManager.getActivePMO();
+            if (!pmo || !pmo.dados || !pmo.dados.cadastro_geral_pmo) { console.log('Nenhum dado do PMO Principal.'); return; }
+            const data = pmo.dados.cadastro_geral_pmo.dados;
             const form = document.getElementById('form-processamento-minimo');
             if (!form) return;
 
             // Preencher campos comuns
             const mapping = {
-                'razao_social': data.razao_social || data.nome_completo,
-                'cnpj_produtor': data.cpf_cnpj,
-                'telefone': data.telefone,
-                'email': data.email
+                'razao_social': data?.razao_social || data?.nome_completo,
+                'cnpj_produtor': data?.cpf_cnpj,
+                'telefone': data?.telefone,
+                'email': data?.email
             };
 
             for (let [field, value] of Object.entries(mapping)) {
@@ -646,6 +647,9 @@ const ProcessamentoMinimo = {
 
         if (progressBar) progressBar.style.width = progress + '%';
         if (progressText) progressText.textContent = `${progress}% Completo`;
+
+        const pmo = window.PMOStorageManager.getActivePMO();
+        if (pmo) window.PMOStorageManager.updateProgresso(pmo.id, 'anexo_processamento_minimo', progress);
     },
 
     /**

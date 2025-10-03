@@ -143,7 +143,9 @@ const AnexoProcessamento = {
             } else data.dados[key] = value;
         }
         try {
-            localStorage.setItem(this.config.storageKey, JSON.stringify(data));
+            const pmo = window.PMOStorageManager.getActivePMO();
+            if (!pmo) { console.warn('Nenhum PMO ativo.'); PMONotify.warning('Crie o Cadastro Geral PMO primeiro!'); return; }
+            window.PMOStorageManager.updateFormulario(pmo.id, 'anexo_processamento', data);
             this.state.lastSaved = new Date();
             this.state.hasChanges = false;
             const status = document.getElementById('auto-save-status');
@@ -154,11 +156,12 @@ const AnexoProcessamento = {
 
     loadSavedData() {
         try {
-            const savedData = localStorage.getItem(this.config.storageKey);
-            if (!savedData) return;
-            const data = JSON.parse(savedData);
+            const pmo = window.PMOStorageManager.getActivePMO();
+            if (!pmo || !pmo.dados || !pmo.dados.anexo_processamento) { console.log('Nenhum dado salvo.'); return; }
+            const data = pmo.dados.anexo_processamento;
             const form = document.getElementById('form-anexo-processamento');
             if (!form) return;
+            console.log(`✅ Dados carregados do PMO: ${pmo.id}`);
             for (let [key, value] of Object.entries(data.dados)) {
                 if (Array.isArray(value)) {
                     const inputs = form.querySelectorAll(`[name="${key}[]"]`);
@@ -176,15 +179,15 @@ const AnexoProcessamento = {
 
     loadFromPMOPrincipal() {
         try {
-            const cadastroGeralPMO = localStorage.getItem('cadastro_geral_pmo_data');
-            if (!cadastroGeralPMO) return;
-            const data = JSON.parse(cadastroGeralPMO);
+            const pmo = window.PMOStorageManager.getActivePMO();
+            if (!pmo || !pmo.dados || !pmo.dados.cadastro_geral_pmo) { console.log('Nenhum dado do PMO Principal.'); return; }
+            const data = pmo.dados.cadastro_geral_pmo;
             const form = document.getElementById('form-anexo-processamento');
             if (!form) return;
             const razaoSocialField = form.querySelector('[name="razao_social"]');
-            if (razaoSocialField && !razaoSocialField.value) razaoSocialField.value = data.razao_social || data.nome_completo || '';
+            if (razaoSocialField && !razaoSocialField.value) razaoSocialField.value = data.dados?.razao_social || data.dados?.nome_completo || '';
             const cnpjField = form.querySelector('[name="cnpj_empresa"]');
-            if (cnpjField && !cnpjField.value) cnpjField.value = data.cpf_cnpj || '';
+            if (cnpjField && !cnpjField.value) cnpjField.value = data.dados?.cpf_cnpj || '';
         } catch (error) { console.error('Erro ao carregar PMO Principal:', error); }
     },
 
@@ -249,6 +252,8 @@ const AnexoProcessamento = {
         const progressText = document.getElementById('progress-text');
         if (progressBar) progressBar.style.width = progress + '%';
         if (progressText) progressText.textContent = `${progress}% Completo`;
+        const pmo = window.PMOStorageManager.getActivePMO();
+        if (pmo) window.PMOStorageManager.updateProgresso(pmo.id, 'anexo_processamento', progress);
     },
 
     formatDate(date) {

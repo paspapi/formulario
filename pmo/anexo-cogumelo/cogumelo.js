@@ -149,8 +149,17 @@ const AnexoCogumelo = {
      * Calcular progresso
      */
     calculateProgress() {
+        const form = document.getElementById('form-anexo-cogumelo');
+        if (!form) return;
+
         if (typeof PMOProgress !== 'undefined') {
-            PMOProgress.calculate(document.getElementById('form-anexo-cogumelo'));
+            const progress = PMOProgress.calculate(form);
+
+            // Atualizar progresso no PMOStorageManager
+            const pmo = window.PMOStorageManager.getActivePMO();
+            if (pmo) {
+                window.PMOStorageManager.updateProgresso(pmo.id, 'anexo_cogumelo', progress);
+            }
         }
     },
 
@@ -182,32 +191,41 @@ const AnexoCogumelo = {
     salvar(isAutoSave = false) {
         const form = document.getElementById('form-anexo-cogumelo');
         const formData = new FormData(form);
-        const data = {};
+        const dados = {};
 
         // Converter FormData para objeto
         for (let [key, value] of formData.entries()) {
             // Arrays (campos com [])
             if (key.endsWith('[]')) {
                 const arrayKey = key.replace('[]', '');
-                if (!data[arrayKey]) {
-                    data[arrayKey] = [];
+                if (!dados[arrayKey]) {
+                    dados[arrayKey] = [];
                 }
-                data[arrayKey].push(value);
+                dados[arrayKey].push(value);
             } else {
-                data[key] = value;
+                dados[key] = value;
             }
         }
 
-        // Adicionar arquivos
-        data.uploadedFiles = this.state.uploadedFiles;
-        data.lastModified = new Date().toISOString();
+        const data = {
+            metadata: {
+                data_preenchimento: formData.get('data_preenchimento'),
+                ultima_atualizacao: new Date().toISOString(),
+                versao: '1.0'
+            },
+            dados: dados,
+            uploadedFiles: this.state.uploadedFiles
+        };
 
-        // Salvar no localStorage
-        if (typeof PMOStorage !== 'undefined') {
-            PMOStorage.save(this.config.storageKey, data);
-        } else {
-            localStorage.setItem(this.config.storageKey, JSON.stringify(data));
+        // Salvar usando PMOStorageManager
+        const pmo = window.PMOStorageManager.getActivePMO();
+        if (!pmo) {
+            console.warn('Nenhum PMO ativo. Crie o Cadastro Geral primeiro.');
+            alert('Crie o Cadastro Geral PMO primeiro!');
+            return;
         }
+
+        window.PMOStorageManager.updateFormulario(pmo.id, 'anexo_cogumelo', data);
 
         this.state.isModified = false;
         this.state.lastSaved = new Date();
@@ -233,32 +251,27 @@ const AnexoCogumelo = {
      * Carregar dados salvos
      */
     loadSavedData() {
-        let data;
-
-        if (typeof PMOStorage !== 'undefined') {
-            data = PMOStorage.load(this.config.storageKey);
-        } else {
-            const saved = localStorage.getItem(this.config.storageKey);
-            if (saved) {
-                data = JSON.parse(saved);
-            }
+        const pmo = window.PMOStorageManager.getActivePMO();
+        if (!pmo || !pmo.dados || !pmo.dados.anexo_cogumelo) {
+            console.log('Nenhum dado salvo encontrado.');
+            this.loadPMOPrincipal();
+            return;
         }
 
-        if (!data) return;
+        const data = pmo.dados.anexo_cogumelo;
+        console.log(`✅ Dados carregados do PMO: ${pmo.id}`);
 
         const form = document.getElementById('form-anexo-cogumelo');
 
-        // Preencher campos simples
-        Object.keys(data).forEach(key => {
-            if (key === 'uploadedFiles' || key === 'lastModified') {
-                if (key === 'uploadedFiles') {
-                    this.state.uploadedFiles = data[key];
-                }
-                return;
-            }
+        // Carregar arquivos
+        if (data.uploadedFiles) {
+            this.state.uploadedFiles = data.uploadedFiles;
+        }
 
+        // Preencher campos simples
+        Object.keys(data.dados).forEach(key => {
             // Arrays
-            if (Array.isArray(data[key])) {
+            if (Array.isArray(data.dados[key])) {
                 // Arrays são tratados nas tabelas dinâmicas
                 return;
             }
@@ -266,12 +279,12 @@ const AnexoCogumelo = {
             const element = form.querySelector(`[name="${key}"]`);
             if (element) {
                 if (element.type === 'checkbox') {
-                    element.checked = data[key] === 'on' || data[key] === true;
+                    element.checked = data.dados[key] === 'on' || data.dados[key] === true;
                 } else if (element.type === 'radio') {
-                    const radio = form.querySelector(`[name="${key}"][value="${data[key]}"]`);
+                    const radio = form.querySelector(`[name="${key}"][value="${data.dados[key]}"]`);
                     if (radio) radio.checked = true;
                 } else {
-                    element.value = data[key];
+                    element.value = data.dados[key];
                 }
             }
         });
@@ -282,6 +295,45 @@ const AnexoCogumelo = {
 
         this.calculateProgress();
         console.log('✅ Dados carregados:', data);
+    },
+
+    /**
+     * Carregar dados do PMO Principal
+     */
+    loadPMOPrincipal() {
+        try {
+            const pmo = window.PMOStorageManager.getActivePMO();
+            if (!pmo || !pmo.dados || !pmo.dados.cadastro_geral_pmo) {
+                console.log('Nenhum dado do PMO Principal encontrado.');
+                return;
+            }
+
+            const data = pmo.dados.cadastro_geral_pmo;
+            const form = document.getElementById('form-anexo-cogumelo');
+
+            if (!form) return;
+
+            // Preencher campos de identificação
+            const nomeField = form.querySelector('[name="nome_fornecedor"]');
+            if (nomeField && !nomeField.value) {
+                nomeField.value = data.dados?.nome_completo || data.dados?.razao_social || '';
+            }
+
+            const unidadeField = form.querySelector('[name="nome_unidade_producao"]');
+            if (unidadeField && !unidadeField.value) {
+                unidadeField.value = data.dados?.nome_unidade_producao || '';
+            }
+
+            const dataField = form.querySelector('[name="data_preenchimento"]');
+            if (dataField && !dataField.value) {
+                const today = new Date().toISOString().split('T')[0];
+                dataField.value = today;
+            }
+
+            console.log('Dados carregados do PMO Principal!');
+        } catch (error) {
+            console.error('Erro ao carregar dados do PMO Principal:', error);
+        }
     },
 
     /**
