@@ -761,10 +761,18 @@ const CadastroGeralPMO = {
         if (window.PMOScopeManager) {
             window.PMOScopeManager.saveProgress('cadastro-geral-pmo', percentage);
         }
+
+        // Salvar progresso no PMOStorageManager
+        if (window.PMOStorageManager) {
+            const pmo = window.PMOStorageManager.getActivePMO();
+            if (pmo) {
+                window.PMOStorageManager.updateProgresso(pmo.id, 'cadastro-geral-pmo', percentage);
+            }
+        }
     },
 
     /**
-     * Salvar dados no localStorage
+     * Salvar dados no localStorage usando PMOStorageManager
      */
     salvar(isAutoSave = false) {
         const form = document.getElementById('form-cadastro-geral-pmo');
@@ -790,9 +798,70 @@ const CadastroGeralPMO = {
         // Adicionar arquivos uploadados
         data.uploadedFiles = this.state.uploadedFiles;
 
-        // Salvar no localStorage
+        // Salvar usando PMOStorageManager
         try {
-            localStorage.setItem(this.config.storageKey, JSON.stringify(data));
+            // Verificar se PMOStorageManager está disponível
+            if (!window.PMOStorageManager) {
+                console.error('PMOStorageManager não disponível. Salvando no formato antigo.');
+                localStorage.setItem(this.config.storageKey, JSON.stringify(data));
+                this.state.lastSaved = new Date();
+                this.state.isModified = false;
+                if (!isAutoSave) {
+                    this.showMessage('Rascunho salvo com sucesso!', 'success');
+                }
+                this.updateAutoSaveStatus(`Salvo em ${new Date().toLocaleTimeString()}`);
+                return;
+            }
+
+            // Obter ou criar PMO
+            let pmo = window.PMOStorageManager.getActivePMO();
+            let pmoId;
+
+            if (!pmo) {
+                // Criar novo PMO
+                const cpf_cnpj = data.cpf_cnpj || data.cpf || data.cnpj || '000.000.000-00';
+                const nome = data.nome_completo || 'Novo Produtor';
+                const unidade = data.nome_unidade_producao || 'Nova Unidade';
+                const ano = data.ano_vigente || new Date().getFullYear();
+                const grupo = data.grupo_spg || '';
+
+                pmoId = window.PMOStorageManager.createPMO({
+                    cpf_cnpj: cpf_cnpj,
+                    nome: nome,
+                    unidade: unidade,
+                    grupo_spg: grupo,
+                    ano_vigente: ano,
+                    cadastro_geral_pmo: data
+                });
+
+                console.log(`✅ Novo PMO criado: ${pmoId}`);
+            } else {
+                pmoId = pmo.id;
+
+                // Atualizar dados do formulário
+                window.PMOStorageManager.updateFormulario(pmoId, 'cadastro_geral_pmo', data);
+
+                // Atualizar informações básicas do PMO (se mudaram)
+                const updates = {};
+                if (data.nome_completo && data.nome_completo !== pmo.nome) {
+                    updates.nome = data.nome_completo;
+                }
+                if (data.grupo_spg && data.grupo_spg !== pmo.grupo_spg) {
+                    updates.grupo_spg = data.grupo_spg;
+                }
+                if (Object.keys(updates).length > 0) {
+                    window.PMOStorageManager.updatePMOInfo(pmoId, updates);
+                }
+            }
+
+            // Salvar documentos anexados
+            if (this.state.uploadedFiles && Object.keys(this.state.uploadedFiles).length > 0) {
+                Object.keys(this.state.uploadedFiles).forEach(fileName => {
+                    const file = this.state.uploadedFiles[fileName];
+                    window.PMOStorageManager.saveDocumentoAnexado(pmoId, fileName, file.data);
+                });
+            }
+
             this.state.lastSaved = new Date();
             this.state.isModified = false;
 
@@ -810,21 +879,42 @@ const CadastroGeralPMO = {
     },
 
     /**
-     * Carregar dados salvos
+     * Carregar dados salvos usando PMOStorageManager
      */
     loadSavedData() {
         try {
-            const savedData = localStorage.getItem(this.config.storageKey);
-            if (!savedData) return;
+            let data = null;
 
-            const data = JSON.parse(savedData);
+            // Tentar carregar usando PMOStorageManager
+            if (window.PMOStorageManager) {
+                const pmo = window.PMOStorageManager.getActivePMO();
+                if (pmo && pmo.dados && pmo.dados.cadastro_geral_pmo) {
+                    data = pmo.dados.cadastro_geral_pmo;
+                    console.log(`✅ Dados carregados do PMO: ${pmo.id}`);
+                }
+            }
+
+            // Fallback: tentar carregar do formato antigo
+            if (!data) {
+                const savedData = localStorage.getItem(this.config.storageKey);
+                if (savedData) {
+                    data = JSON.parse(savedData);
+                    console.log('✅ Dados carregados do formato antigo');
+                }
+            }
+
+            if (!data) {
+                console.log('ℹ️ Nenhum dado salvo encontrado');
+                return;
+            }
+
             const form = document.getElementById('form-cadastro-geral-pmo');
             if (!form) return;
 
             // Preencher campos
             Object.keys(data).forEach(key => {
                 if (key === 'uploadedFiles') {
-                    this.state.uploadedFiles = data[key];
+                    this.state.uploadedFiles = data[key] || {};
                     return;
                 }
 

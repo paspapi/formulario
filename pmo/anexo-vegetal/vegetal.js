@@ -12,15 +12,30 @@ const AnexoVegetal = {
     loadPMOPrincipal() {
         try {
             console.log('Carregando dados do PMO Principal...');
-            const cadastroGeralPMO = localStorage.getItem('cadastro_geral_pmo_data');
+            let data = null;
 
-            if (!cadastroGeralPMO) {
+            // Tentar carregar usando PMOStorageManager
+            if (window.PMOStorageManager) {
+                const pmo = window.PMOStorageManager.getActivePMO();
+                if (pmo && pmo.dados && pmo.dados.cadastro_geral_pmo) {
+                    data = pmo.dados.cadastro_geral_pmo;
+                }
+            }
+
+            // Fallback para formato antigo
+            if (!data) {
+                const cadastroGeralPMO = localStorage.getItem('cadastro_geral_pmo_data');
+                if (cadastroGeralPMO) {
+                    data = JSON.parse(cadastroGeralPMO);
+                }
+            }
+
+            if (!data) {
                 console.log('Nenhum dado do PMO Principal encontrado.');
                 this.showMessage('Aviso: Preencha o PMO Principal primeiro.', 'warning');
                 return;
             }
 
-            const data = JSON.parse(cadastroGeralPMO);
             const form = document.getElementById(this.config.formId);
             if (!form) return;
 
@@ -134,6 +149,14 @@ const AnexoVegetal = {
         if (progressBar) progressBar.style.width = percentage + '%';
         if (progressText) progressText.textContent = percentage + '% Completo';
 
+        // Atualizar progresso no PMOStorageManager
+        if (window.PMOStorageManager) {
+            const pmo = window.PMOStorageManager.getActivePMO();
+            if (pmo) {
+                window.PMOStorageManager.updateProgresso(pmo.id, 'anexo_vegetal', percentage);
+            }
+        }
+
         return percentage;
     },
 
@@ -163,7 +186,20 @@ const AnexoVegetal = {
             const data = this.collectFormData();
             if (!data) throw new Error('Erro ao coletar dados');
 
-            localStorage.setItem(this.config.storageKey, JSON.stringify(data));
+            // Usar PMOStorageManager
+            if (window.PMOStorageManager) {
+                const pmo = window.PMOStorageManager.getActivePMO();
+                if (pmo) {
+                    window.PMOStorageManager.updateFormulario(pmo.id, 'anexo_vegetal', data);
+                } else {
+                    console.warn('Nenhum PMO ativo. Crie o Cadastro Geral primeiro.');
+                    this.showMessage('Crie o Cadastro Geral PMO primeiro!', 'warning');
+                    return false;
+                }
+            } else {
+                // Fallback para formato antigo
+                localStorage.setItem(this.config.storageKey, JSON.stringify(data));
+            }
 
             if (!isAutoSave) {
                 this.showMessage('Dados salvos com sucesso!', 'success');
@@ -178,8 +214,27 @@ const AnexoVegetal = {
 
     loadSavedData() {
         try {
-            const savedData = localStorage.getItem(this.config.storageKey);
-            if (savedData) {
+            let data = null;
+
+            // Tentar carregar usando PMOStorageManager
+            if (window.PMOStorageManager) {
+                const pmo = window.PMOStorageManager.getActivePMO();
+                if (pmo && pmo.dados && pmo.dados.anexo_vegetal) {
+                    data = pmo.dados.anexo_vegetal;
+                    console.log(`✅ Dados carregados do PMO: ${pmo.id}`);
+                }
+            }
+
+            // Fallback para formato antigo
+            if (!data) {
+                const savedData = localStorage.getItem(this.config.storageKey);
+                if (savedData) {
+                    data = JSON.parse(savedData);
+                    console.log('✅ Dados carregados do formato antigo');
+                }
+            }
+
+            if (data) {
                 this.showMessage('Dados anteriores carregados', 'info');
             }
         } catch (error) {
