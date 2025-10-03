@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel PMO - ANC</title>
+
+    <!-- Framework CSS -->
+    <link rel="stylesheet" href="../../framework/core/pmo-framework-full.css">
+
+    <!-- CSS Específico do Painel -->
+    <link rel="stylesheet" href="./painel.css">
+</head>
+<body>
+    <!-- Header do Painel -->
+    <div class="painel-container">
+        <header class="painel-header">
+            <h1>🏠 Painel PMO - ANC</h1>
+            <p>Gerenciamento centralizado de Planos de Manejo Orgânico</p>
+
+            <div class="painel-actions">
+                <button class="btn btn-primary" onclick="PainelPMO.novoPMO()">
+                    ➕ Novo PMO
+                </button>
+                <button class="btn btn-secondary" onclick="PainelPMO.abrirModalUpload()">
+                    📤 Upload PDF
+                </button>
+            </div>
+        </header>
+
+        <!-- Busca e Filtros -->
+        <section class="busca-filtros-section">
+            <div class="busca-container">
+                <input
+                    type="search"
+                    id="busca-input"
+                    class="busca-input"
+                    placeholder="🔍 Buscar por nome, CPF/CNPJ ou unidade..."
+                    oninput="PainelPMO.aplicarFiltros()"
+                >
+                <button class="btn-filtros-toggle" onclick="PainelPMO.toggleFiltros()">
+                    <span id="filtros-toggle-icon">🔽</span>
+                    <span id="filtros-toggle-text">Mostrar Filtros</span>
+                </button>
+            </div>
+
+            <!-- Filtros Expansíveis -->
+            <div id="filtros-expandivel" class="filtros-expandivel">
+                <div class="filtros-grid">
+                    <!-- Filtro de Status -->
+                    <div class="filtro-group">
+                        <label>Status</label>
+                        <div class="filtro-radios">
+                            <label class="filtro-radio-option">
+                                <input type="radio" name="filtro-status" value="todos" checked onchange="PainelPMO.aplicarFiltros()">
+                                Todos
+                            </label>
+                            <label class="filtro-radio-option">
+                                <input type="radio" name="filtro-status" value="rascunho" onchange="PainelPMO.aplicarFiltros()">
+                                Rascunho
+                            </label>
+                            <label class="filtro-radio-option">
+                                <input type="radio" name="filtro-status" value="completo" onchange="PainelPMO.aplicarFiltros()">
+                                Completo
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Filtro de Grupo -->
+                    <div class="filtro-group">
+                        <label for="filtro-grupo">Grupo SPG</label>
+                        <select id="filtro-grupo" class="filtro-select" onchange="PainelPMO.aplicarFiltros()">
+                            <option value="">Todos os grupos</option>
+                        </select>
+                    </div>
+
+                    <!-- Filtro de Ano -->
+                    <div class="filtro-group">
+                        <label for="filtro-ano">Ano Vigente</label>
+                        <select id="filtro-ano" class="filtro-select" onchange="PainelPMO.aplicarFiltros()">
+                            <option value="">Todos os anos</option>
+                        </select>
+                    </div>
+
+                    <!-- Ordenação -->
+                    <div class="filtro-group">
+                        <label for="filtro-ordenar">Ordenar por</label>
+                        <select id="filtro-ordenar" class="filtro-select" onchange="PainelPMO.aplicarFiltros()">
+                            <option value="recente">Mais recentes</option>
+                            <option value="antigo">Mais antigos</option>
+                            <option value="progresso-desc">Maior progresso</option>
+                            <option value="progresso-asc">Menor progresso</option>
+                            <option value="nome-asc">Nome (A-Z)</option>
+                            <option value="nome-desc">Nome (Z-A)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lista de PMOs -->
+        <section id="pmos-lista" class="pmos-lista">
+            <!-- Cards serão renderizados aqui via JavaScript -->
+        </section>
+
+        <!-- Estado Vazio -->
+        <div id="empty-state" class="empty-state hidden">
+            <div class="empty-state-icon">📋</div>
+            <h3>Nenhum PMO encontrado</h3>
+            <p>Crie um novo PMO ou faça upload de um PDF existente</p>
+            <div class="mt-20">
+                <button class="btn btn-primary" onclick="PainelPMO.novoPMO()">
+                    ➕ Criar Primeiro PMO
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Upload -->
+    <div id="modal-upload" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📤 Upload de PDF do PMO</h2>
+            </div>
+            <div class="modal-body">
+                <div class="upload-area" id="upload-area">
+                    <input
+                        type="file"
+                        id="upload-input"
+                        accept="application/pdf"
+                        onchange="PainelPMO.handleFileSelect(event)"
+                    >
+                    <div class="upload-icon">📄</div>
+                    <div class="upload-text">Clique ou arraste o PDF aqui</div>
+                    <div class="upload-hint">O PDF deve conter metadados JSON do PMO</div>
+                </div>
+                <div id="upload-status" style="margin-top: 15px; display: none;"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="PainelPMO.fecharModalUpload()">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação de Exclusão -->
+    <div id="modal-delete" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>⚠️ Confirmar Exclusão</h2>
+            </div>
+            <div class="modal-body">
+                <p>Tem certeza que deseja deletar este PMO?</p>
+                <p><strong id="delete-pmo-name"></strong></p>
+                <p style="color: var(--danger-color); margin-top: 10px;">
+                    Esta ação não pode ser desfeita!
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="PainelPMO.fecharModalDelete()">
+                    Cancelar
+                </button>
+                <button class="btn btn-danger" onclick="PainelPMO.confirmarDelete()">
+                    Deletar PMO
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/pdf-lib"></script>
+    <script src="../../framework/core/pmo-framework.js"></script>
+    <script src="../../framework/components/pmo-storage-manager.js"></script>
+    <script src="./painel.js"></script>
+
+    <script>
+        // Inicializar painel quando DOM estiver pronto
+        document.addEventListener('DOMContentLoaded', () => {
+            PainelPMO.init();
+        });
+    </script>
+</body>
+</html>
