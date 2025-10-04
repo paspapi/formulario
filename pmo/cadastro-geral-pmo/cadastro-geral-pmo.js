@@ -1046,21 +1046,42 @@ const CadastroGeralPMO = {
             // DEBUG: Verificar estrutura dos dados recebidos
             console.log('🔍 Estrutura dos dados carregados:', {
                 tipo: typeof data,
-                keys: Object.keys(data),
+                keys: Object.keys(data).slice(0, 10), // Primeiras 10 keys
                 tem_metadata: 'metadata' in data,
                 tem_dados: 'dados' in data,
-                valor_metadata: data.metadata,
-                valor_dados: data.dados ? 'EXISTE' : 'NÃO EXISTE'
+                primeiros_campos: Object.keys(data).slice(0, 5)
             });
 
-            // VERIFICAR SE É FORMATO NOVO (com metadata e dados aninhados) OU ANTIGO (flat)
+            // TENTAR 3 FORMATOS DIFERENTES DE DADOS
+
+            // Formato 1: Novo (importação JSON com metadata + dados)
             if (data.metadata && data.dados) {
-                console.log('📥 Formato novo detectado (importação JSON), convertendo...');
+                console.log('📥 Formato 1 detectado: Novo (metadata + dados)');
                 this.preencherFormularioComJSON(data);
                 return;
             }
 
-            console.log('📝 Formato antigo detectado, usando método tradicional...');
+            // Formato 2: Só dados aninhados (sem metadata)
+            if (data.dados && typeof data.dados === 'object' && data.dados.identificacao) {
+                console.log('📥 Formato 2 detectado: Intermediário (dados aninhados sem metadata)');
+                this.preencherFormularioComJSON({
+                    metadata: { versao: '1.0' },
+                    dados: data.dados
+                });
+                return;
+            }
+
+            // Formato 3: Dados diretos com estrutura de importação
+            if (data.identificacao || data.contato || data.propriedade) {
+                console.log('📥 Formato 3 detectado: Dados diretos (estrutura importada)');
+                this.preencherFormularioComJSON({
+                    metadata: { versao: '1.0' },
+                    dados: data
+                });
+                return;
+            }
+
+            console.log('📝 Formato 4 detectado: Antigo (flat fields), usando método tradicional...');
 
             const form = document.getElementById('form-cadastro-geral-pmo');
             if (!form) return;
