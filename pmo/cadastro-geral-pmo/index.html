@@ -291,13 +291,7 @@
                                     class="btn-icon-inline"
                                     onclick="CadastroGeralPMO.buscarCEP()"
                                     title="Buscar endereço">
-                                🔍
-                            </button>
-                            <button type="button"
-                                    class="btn-icon-inline"
-                                    onclick="LocationModal.open({latInput: 'latitude', lonInput: 'longitude'})"
-                                    title="Localização exata (GPS)">
-                                🗺️
+                                Buscar endereço
                             </button>
                         </label>
                         <input type="text"
@@ -403,6 +397,12 @@
                                 <span class="help-icon">?</span>
                                 <span class="help-text">Use coordenadas em formato decimal (ex: -47.063236)</span>
                             </span>
+                            <button type="button"
+                                    class="btn-icon-inline"
+                                    onclick="LocationModal.open({latInput: 'latitude', lonInput: 'longitude'})"
+                                    title="Abrir mapa para obter coordenadas GPS">
+                                Abrir Mapa
+                            </button>
                         </label>
                         <input type="number"
                                id="longitude"
