@@ -129,11 +129,24 @@ const PMOValidationRules = {
             errors.push('Seção 3: Estado é obrigatório');
         }
 
+        const coordenadas = document.getElementById('coordenadas')?.value;
         const latitude = document.getElementById('latitude')?.value;
         const longitude = document.getElementById('longitude')?.value;
 
-        if (!latitude || !longitude) {
+        if (!coordenadas || !latitude || !longitude) {
             warnings.push('Seção 3: Coordenadas GPS recomendadas para localização precisa');
+        } else {
+            // Validar formato das coordenadas
+            const lat = parseFloat(latitude);
+            const lon = parseFloat(longitude);
+
+            if (isNaN(lat) || isNaN(lon)) {
+                errors.push('Seção 3: Coordenadas em formato inválido');
+            } else if (lat < -90 || lat > 90) {
+                errors.push('Seção 3: Latitude deve estar entre -90 e 90');
+            } else if (lon < -180 || lon > 180) {
+                errors.push('Seção 3: Longitude deve estar entre -180 e 180');
+            }
         }
 
         return { errors, warnings };

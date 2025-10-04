@@ -448,6 +448,97 @@ const CadastroGeralPMO = {
     },
 
     /**
+     * Parsear coordenadas do campo único
+     */
+    parseCoordenadas() {
+        const coordenadasInput = document.getElementById('coordenadas');
+        const latitudeInput = document.getElementById('latitude');
+        const longitudeInput = document.getElementById('longitude');
+
+        if (!coordenadasInput || !latitudeInput || !longitudeInput) return;
+
+        const coordenadas = coordenadasInput.value.trim();
+
+        // Limpar se vazio
+        if (!coordenadas) {
+            latitudeInput.value = '';
+            longitudeInput.value = '';
+            return;
+        }
+
+        // Padrões aceitos:
+        // -22.907104, -47.063236
+        // -22.907104,-47.063236
+        // (-22.907104, -47.063236)
+        const patterns = [
+            /^\(?(-?\d+\.?\d*)\s*,\s*(-?\d+\.?\d*)\)?$/,  // Com ou sem parênteses e espaços
+            /^(-?\d+\.?\d*)\s+(-?\d+\.?\d*)$/             // Separado por espaço
+        ];
+
+        let latitude = null;
+        let longitude = null;
+
+        for (const pattern of patterns) {
+            const match = coordenadas.match(pattern);
+            if (match) {
+                latitude = parseFloat(match[1]);
+                longitude = parseFloat(match[2]);
+                break;
+            }
+        }
+
+        // Validar range
+        if (latitude !== null && longitude !== null) {
+            if (latitude >= -90 && latitude <= 90 && longitude >= -180 && longitude <= 180) {
+                latitudeInput.value = latitude;
+                longitudeInput.value = longitude;
+
+                // Feedback visual positivo
+                coordenadasInput.style.borderColor = '#28a745';
+                setTimeout(() => {
+                    coordenadasInput.style.borderColor = '';
+                }, 1000);
+            } else {
+                // Coordenadas fora do range válido
+                latitudeInput.value = '';
+                longitudeInput.value = '';
+                coordenadasInput.style.borderColor = '#dc3545';
+            }
+        } else {
+            // Formato inválido
+            latitudeInput.value = '';
+            longitudeInput.value = '';
+            if (coordenadas.length > 5) { // Só mostrar erro se já digitou algo significativo
+                coordenadasInput.style.borderColor = '#ffc107';
+            }
+        }
+    },
+
+    /**
+     * Abrir modal de coordenadas
+     */
+    abrirModalCoordenadas() {
+        if (!window.LocationModal) {
+            alert('Modal de coordenadas não disponível. Por favor, recarregue a página.');
+            return;
+        }
+
+        // Configurar callback para quando confirmar no modal
+        window.LocationModal.open({
+            latInput: 'latitude',
+            lonInput: 'longitude',
+            onConfirm: (coords) => {
+                // Preencher o campo único com as coordenadas do modal
+                const coordenadasInput = document.getElementById('coordenadas');
+                if (coordenadasInput && coords.latitude && coords.longitude) {
+                    coordenadasInput.value = `${coords.latitude}, ${coords.longitude}`;
+                    this.parseCoordenadas();
+                }
+            }
+        });
+    },
+
+    /**
      * Buscar CEP
      */
     async buscarCEP() {
@@ -952,6 +1043,15 @@ const CadastroGeralPMO = {
                     }
                 });
             });
+
+            // Restaurar campo de coordenadas visível a partir dos campos hidden
+            const latitude = data.latitude;
+            const longitude = data.longitude;
+            const coordenadasInput = document.getElementById('coordenadas');
+
+            if (coordenadasInput && latitude && longitude) {
+                coordenadasInput.value = `${latitude}, ${longitude}`;
+            }
 
             this.updateAutoSaveStatus(`Dados recuperados`);
             this.calculateProgress();
