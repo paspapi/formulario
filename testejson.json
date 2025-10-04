@@ -1,0 +1,677 @@
+{
+  "metadata": {
+    "id_produtor": "46.765.198/0001-03",
+    "tipo_documento": ["PROCESSAMENTO"],
+    "data_extracao": "2024-05-15T12:00:00Z",
+    "versao_schema": "1.0",
+    "grupo_spg": "Bela Vista",
+    "status_processamento": "EXTRAIDO"
+  },
+  "dados": {
+    "identificacao": {
+      "nome_completo": "Sítio Quinta do Quebra Machado",
+      "cpf_cnpj": "46.765.198/0001-03",
+      "inscricao_estadual": "15.587.1.208-99",
+      "inscricao_municipal": "",
+      "nome_fantasia": "Quinta do Quebra Machado - QQM",
+      "nome_unidade_producao": "Quinta do Quebra Machado",
+      "razao_social": "Sítio Quinta do Quebra Machado"
+    },
+    "contato": {
+      "telefone": "(19) 99773-8697",
+      "email": "lualuzi1@yahoo.com.br, luziene.luz.campinas@gmail.com, alipaan3@hotmail.com",
+      "endereco": {
+        "endereco_completo": "Sítio Quinta do Quebra Machado, Pantaleão, Amparo - SP, 13900-000",
+        "bairro": "Pantaleão",
+        "municipio": "Amparo",
+        "uf": "São Paulo",
+        "cep": "13900-000",
+        "coordenadas": {
+          "latitude": -22.6344166667,
+          "longitude": -46.8167777778
+        }
+      }
+    },
+    "propriedade": {
+      "posse_terra": "PRÓPRIA",
+      "area_total_ha": 0,
+      "caf_numero": "",
+      "caf_nao_possui": false,
+      "roteiro_acesso": "Partindo de Amparo (SP), seguir pela Rodovia Barros Munhoz, que liga o município à cidade de Itapira. Por volta do KM 12, pegar a saída para o bairro Pantaleão (observar que há várias placas sinalizando o acesso). No bairro, seguir a placa que indica a escola pública (e Organização Social) do Movimento de Ação Rural do Bairro Pantaleão (MARP). Há poucos metros antes da entrada da instituição, virar a primeira rua à direita, passar a ponte, e encontrará o sítio Quinta do Quebra Machado, primeira propriedade à esquerda. Para facilitar, há placa que identifica o sítio logo na entrada.",
+      "data_aquisicao_posse": "",
+      "terra_familiar": false
+    },
+    "manejo_organico": {
+      "anos_manejo_organico": 0,
+      "situacao_manejo": "",
+      "comprovacao_manejo": []
+    }
+  },
+  "responsaveis_producao": [
+    {
+      "nome_responsavel": "Alonso Leonel de Paiva Neto",
+      "cpf_responsavel": "15587120899",
+      "data_nascimento": "02/12/1975",
+      "funcao_responsabilidade": "Responsável (Fornecedor)",
+      "contato_telefone": "(19) 99773-8697",
+      "contato_email": "alipaan3@hotmail.com"
+    },
+    {
+      "nome_responsavel": "Luziene Aparecida da Luz",
+      "cpf_responsavel": "239026950",
+      "data_nascimento": "08/10/1973",
+      "funcao_responsabilidade": "Responsável (Fornecedor)",
+      "contato_telefone": "(19) 99773-8697",
+      "contato_email": "luziene.luz.campinas@gmail.com"
+    }
+  ],
+  "atividades_organicas": {
+    "tipos_producao": [],
+    "situacao_funcional": [
+      {
+        "tipo_funcionario": "FAMILIAR",
+        "quantidade": 1
+      }
+    ]
+  },
+  "historico_culturas": [],
+  "produtos_certificar": [],
+  "preservacao_ambiental": {
+    "areas_preservacao": [],
+    "geral": {
+      "tecnicas_prevencao_incendios": "",
+      "experiencia_recuperacao_solos": "",
+      "destino_lixo_organico": "Utilizados na compostagem e coleta seletiva",
+      "destino_lixo_nao_organico": "Plásticos e papéis que são direcionados para reciclagem",
+      "destino_esgoto_domestico": "",
+      "periodicidade_analise_agua": "",
+      "possui_car": false,
+      "situacao_car": "",
+      "situacao_reserva_legal": ""
+    }
+  },
+  "recursos_hidricos": [],
+  "comercializacao": {
+    "canais": [
+      {
+        "tipo_comercializacao": "REVENDA",
+        "descricao": "Entrego para Pequeno Varejo"
+      },
+      {
+        "tipo_comercializacao": "REVENDA",
+        "descricao": "Para Lojas de Produtos Naturais"
+      }
+    ],
+    "geral": {
+      "rotulagem": "Não isento de registro de rótulo no Ministério da Saúde. Requisitos: Nome da unidade produtiva ou empresa/negócio, CNPJ, Endereço completo legível, Sub sistema participativo, Peso, Data de fabricação e/ou data de validade, Identificação sobre quais ingredientes são orgânicos e quais ingredientes não são orgânicos.",
+      "transporte": "",
+      "rastreabilidade": "Feita através de registros/controles das etapas de processamento.",
+      "pos_colheita_operacoes": "",
+      "produtos_armazenados": false,
+      "explicacao_armazenagem": "",
+      "previsao_inicio_vendas": "",
+      "comercializa_nao_organicos": false,
+      "separacao_produtos": ""
+    }
+  },
+  "controles_registros": [
+    {
+      "atividade": "ENTRADA DE INGREDIENTES / COMPRAS",
+      "metodo_controle": "CADERNO, FICHAS DE CONTROLE"
+    },
+    {
+      "atividade": "CONTROLE DE ESTOQUE DOS INGREDIENTES/ MATÉRIAS PRIMAS",
+      "metodo_controle": "CADERNO, FICHAS DE CONTROLE"
+    },
+    {
+      "atividade": "PROCESSAMENTO",
+      "metodo_controle": "CADERNO, FICHAS DE CONTROLE"
+    },
+    {
+      "atividade": "CONTROLE DE ESTOQUE DO PRODUTO FINAL PARA VENDA",
+      "metodo_controle": "CADERNO, FICHAS DE CONTROLE"
+    },
+    {
+      "atividade": "VENDA DE PRODUTOS",
+      "metodo_controle": "NOTA FISCAL, CADERNO, FICHAS DE CONTROLE"
+    },
+    {
+      "atividade": "COMPRA DE INSUMOS / PRODUTOS HIGIENIZAÇÃO",
+      "metodo_controle": "NOTA FISCAL, CADERNO"
+    }
+  ],
+  "producao_subsistencia": {
+    "tipos": [],
+    "geral": {
+      "possui_producao_subsistencia": false,
+      "usa_insumos_nao_permitidos": false,
+      "risco_contaminacao": "",
+      "manejos_bloqueios": "",
+      "observacoes": ""
+    }
+  },
+  "producao_paralela": {
+    "tipos": [],
+    "geral": {
+      "possui_producao_paralela": false,
+      "usa_insumos_nao_permitidos": false,
+      "risco_contaminacao": "",
+      "manejos_bloqueios": "",
+      "pretende_conversao_total": false,
+      "tempo_conversao_total": "",
+      "observacoes": ""
+    }
+  },
+  "anexo_vegetal": {
+    "preparo_solo": [],
+    "praticas_conservacionistas": [],
+    "barreiras_protecao": {
+      "estado_conservacao_barreiras": "",
+      "risco_deriva_agrotoxicos": false,
+      "risco_contaminacao_transgenicos": false,
+      "situacao_formigas": "",
+      "controle_formigas": ""
+    },
+    "adubacao_nutricao": {
+      "sistema_adubacao": "",
+      "utiliza_substrato": false,
+      "prepara_substrato_proprio": false,
+      "compra_substrato_pronto": false,
+      "adquire_substrato_aprovado": false
+    },
+    "substrato_receitas": [],
+    "receitas_proprias": [],
+    "produtos_comerciais": [],
+    "equipamentos": {
+      "usa_equipamento_terceiro": false,
+      "empresta_equipamento": false,
+      "equipamentos_nao_compartilhados": false,
+      "faz_higienizacao": false,
+      "condicoes_armazenamento": ""
+    },
+    "produtos_nao_certificar": []
+  },
+  "anexo_cogumelos": {
+    "tipos_cogumelos": [],
+    "substrato_materiais": [],
+    "tratamento_solo_madeira": {
+      "utiliza_solo": false,
+      "origem_solo": "",
+      "solo_recebe_tratamento": false,
+      "origem_madeira": "",
+      "madeira_sem_tratamento_quimico": false,
+      "utiliza_toras": false,
+      "origem_toras": "",
+      "toras_sem_tratamento_quimico": false,
+      "utiliza_lenha_vapor": false,
+      "origem_lenha": "",
+      "lenha_sem_tratamento_quimico": false,
+      "nao_usa_radiacao_ionizante": false
+    },
+    "tratamento_solo_produtos": [],
+    "inoculo": {
+      "origem_inoculos": "",
+      "inoculo_nao_transgenico": false,
+      "possui_analise_metais_pesados": false,
+      "valores_acordo_portaria": false,
+      "analise_realizada_por": "",
+      "ciente_nova_analise_fornecedor": false
+    },
+    "controle_pragas": [],
+    "residuos": {
+      "destino_substrato": "",
+      "destino_chorume": ""
+    },
+    "equipamentos": {
+      "usa_equipamento_terceiro": false,
+      "empresta_equipamento": false,
+      "equipamentos_nao_compartilhados": false,
+      "faz_higienizacao": false,
+      "condicoes_armazenamento": ""
+    }
+  },
+  "anexo_animal": {
+    "inspecao_sanitaria": {
+      "possui_inspecao_sanitaria": false,
+      "detalhes_inspecao": ""
+    },
+    "especies_criadas": [],
+    "alimentacao": [],
+    "ingredientes_racao": [],
+    "tipos_forragem": [],
+    "plano_alimentacao_anual": [],
+    "bem_estar": [],
+    "manejo_sanidade": [],
+    "tratamentos": [],
+    "vacinas": [],
+    "origem_reproducao": [],
+    "manejo_esterco": [],
+    "instalacoes": [],
+    "evolucao_plantel": [],
+    "equipamentos": {
+      "usa_equipamento_terceiro": false,
+      "empresta_equipamento": false,
+      "faz_higienizacao": false,
+      "condicoes_armazenamento": ""
+    }
+  },
+  "anexo_apicultura": {
+    "geral": {
+      "tipo_abelha": "",
+      "modalidade": "",
+      "origem_ceras": "",
+      "origem_abelhas": "",
+      "estimativa_producao_anual_kg": 0,
+      "area_criacao_m2_ha": 0
+    },
+    "floradas": [],
+    "distancias_areas": [],
+    "alimentacao_artificial": {
+      "utiliza_alimentacao_artificial": false,
+      "alimentos_tempo": "",
+      "alimento_permitido_organico": false
+    },
+    "tratamentos": [],
+    "equipamentos": {
+      "usa_equipamento_terceiro": false,
+      "empresta_equipamento": false,
+      "equipamentos_nao_compartilhados": false,
+      "faz_higienizacao": false,
+      "condicoes_armazenamento": ""
+    }
+  },
+  "processamento_minimo": {
+    "geral": {
+      "razao_social": "",
+      "cnpj_empresa": "",
+      "inscricao_estadual": "",
+      "inscricao_municipal": "",
+      "endereco_processamento": "",
+      "local_proprio_arrendado": "",
+      "coordenadas": {
+        "latitude": 0,
+        "longitude": 0
+      },
+      "numero_funcionarios": 0
+    },
+    "situacao_legal": [],
+    "produtos": [],
+    "etapas_fora_unidade": [],
+    "etapas_realizadas": [],
+    "controles": [],
+    "higienizacao": [],
+    "mao_obra": []
+  },
+  "processamento_industrial": {
+    "geral": {
+      "razao_social": "Sítio Quinta do Quebra Machado",
+      "cnpj_empresa": "46.765.198/0001-03",
+      "escopo_origem_animal": false,
+      "escopo_origem_vegetal": true,
+      "endereco_processamento": "Sítio Quinta do Quebra Machado, Pantaleão, Amparo - SP, 13900-000",
+      "coordenadas": {
+        "latitude": -22.6344166667,
+        "longitude": -46.8167777778
+      },
+      "numero_funcionarios": 1
+    },
+    "situacao_legal": [
+      {
+        "documento_legal": "Licença Sanitária Estadual de SP",
+        "possui_documento": true,
+        "numero_documento": "",
+        "situacao_documento": "Cadastro Definitivo"
+      },
+      {
+        "documento_legal": "Alvará e Licença de Funcionamento",
+        "possui_documento": true,
+        "numero_documento": "",
+        "situacao_documento": "Dispensado com Termo de Ciência e Responsabilidade"
+      },
+      {
+        "documento_legal": "Certificado MEI",
+        "possui_documento": true,
+        "numero_documento": "46.765.198/0001-03",
+        "situacao_documento": "Ativo"
+      },
+      {
+        "documento_legal": "Dispensa Licença Sanitária (CNAE)",
+        "possui_documento": true,
+        "numero_documento": "",
+        "situacao_documento": "Dispensada"
+      }
+    ],
+    "fornecedores": [
+      { "ingrediente": "Farinha de trigo branca", "nome_fornecedor": "Mirella (Casa do Naturalista/Supermercado Pão de Açúcar)", "quantidade_mensal_kg": 25 },
+      { "ingrediente": "Farinha de trigo integral", "nome_fornecedor": "Mirella (Casa do Naturalista/Supermercado Pão de Açúcar)", "quantidade_mensal_kg": 10 },
+      { "ingrediente": "Fermento biológico", "nome_fornecedor": "Ottker ou Fleischmann", "quantidade_mensal_kg": 0.08 },
+      { "ingrediente": "Sal", "nome_fornecedor": "Cisne", "quantidade_mensal_kg": 0.32 },
+      { "ingrediente": "Açúcar", "nome_fornecedor": "Native", "quantidade_mensal_kg": 5 },
+      { "ingrediente": "Ovo", "nome_fornecedor": "Fazenda da Toca/Qualité", "quantidade_mensal_kg": 2.4 },
+      { "ingrediente": "Morango", "nome_fornecedor": "Sxzen/Alexandro e Márcio (SPG)", "quantidade_mensal_kg": 28 },
+      { "ingrediente": "Tomate", "nome_fornecedor": "Instituto Candombá/Alexandro/Ricardo (SPG) e Supermercado Pão de Açúcar", "quantidade_mensal_kg": 20 },
+      { "ingrediente": "Berinjela", "nome_fornecedor": "Instituto Candombá/Alexandro/Ricardo (SPG) e Supermercado Pão de Açúcar", "quantidade_mensal_kg": 1.5 },
+      { "ingrediente": "Abobrinha", "nome_fornecedor": "Instituto Candombá/Alexandro/Ricardo (SPG) e Supermercado Pão de Açúcar", "quantidade_mensal_kg": 1.5 },
+      { "ingrediente": "Cebola", "nome_fornecedor": "Instituto Candombá/Alexandro/Ricardo (SPG) e Supermercado Pão de Açúcar", "quantidade_mensal_kg": 0.5 },
+      { "ingrediente": "Alho", "nome_fornecedor": "Instituto Candombá/Alexandro/Ricardo (SPG) e Supermercado Pão de Açúcar", "quantidade_mensal_kg": 0.5 },
+      { "ingrediente": "Pimenta dedo de moça", "nome_fornecedor": "Instituto Candombá/Alexandro/Ricardo (SPG) e Supermercado Pão de Açúcar", "quantidade_mensal_kg": 1 },
+      { "ingrediente": "Maçã", "nome_fornecedor": "Instituto Candombá", "quantidade_mensal_kg": 10 },
+      { "ingrediente": "Pimentão", "nome_fornecedor": "Instituto Candombá/Alexandro/Ricardo (SPG) e Supermercado Pão de Açúcar", "quantidade_mensal_kg": 1.5 },
+      { "ingrediente": "Uva passa", "nome_fornecedor": "Supermercado Pão de Açúcar, Instituto Candombá", "quantidade_mensal_kg": 0.5 },
+      { "ingrediente": "Azeitona", "nome_fornecedor": "Supermercado Pão de Açúcar, Instituto Candombá", "quantidade_mensal_kg": 0.5 },
+      { "ingrediente": "Azeite", "nome_fornecedor": "Supermercado Pão de Açúcar, Instituto Candombá", "quantidade_mensal_kg": 0.5 },
+      { "ingrediente": "Chimichurri", "nome_fornecedor": "Supermercado Pão de Açúcar", "quantidade_mensal_kg": 0.02 },
+      { "ingrediente": "Pimenta do reino", "nome_fornecedor": "Supermercado Pão de Açúcar", "quantidade_mensal_kg": 0.01 },
+      { "ingrediente": "Molho inglês", "nome_fornecedor": "Senko/Sakura", "quantidade_mensal_kg": 0.24 },
+      { "ingrediente": "Canela em pó", "nome_fornecedor": "Instituto Candombá", "quantidade_mensal_kg": 0.01 },
+      { "ingrediente": "Óleo de girassol", "nome_fornecedor": "Instituto Candombá", "quantidade_mensal_kg": 3.6 },
+      { "ingrediente": "Vinagre de maçã", "nome_fornecedor": "Supermercado Pão de Açúcar, Instituto Candombá", "quantidade_mensal_kg": 0.2 },
+      { "ingrediente": "Shitake", "nome_fornecedor": "Vila Barrichello", "quantidade_mensal_kg": 4 },
+      { "ingrediente": "Laranja", "nome_fornecedor": "Alexandro/Ricardo (SPG), Instituto Candombá", "quantidade_mensal_kg": 2 },
+      { "ingrediente": "Suco de maçã orgânico", "nome_fornecedor": "Instituto Candombá", "quantidade_mensal_kg": 1 }
+    ],
+    "produtos": [
+      {
+        "produto_final": "CAPONATA",
+        "ingredientes_organicos": "1. abobrinha – 300gr, 2. berinjela – 300gr, 3. tomate – 240gr, 4. pimentão – 200gr, 5. cebola – 100gr, 6. alho – 5gr, 7. vinagre de maçã – 10gr",
+        "percent_organicos": 81.33,
+        "ingredientes_nao_organicos": "1. uva passa – 100gr, 2. azeitonas – 10gr, 3. azeite – 150gr, 4. chimichurri – 5gr",
+        "percent_nao_organicos": 18.67,
+        "expectativa_producao_mensal": 5.68,
+        "tipo_produto": "COM_INGREDIENTES_ORGÂNICOS"
+      },
+      {
+        "produto_final": "BANANADA SEM AÇÚCAR",
+        "ingredientes_organicos": "1. banana – 1000gr, 2. limão – 120gr",
+        "percent_organicos": 99.96,
+        "ingredientes_nao_organicos": "1.canela em pó – 5gr",
+        "percent_nao_organicos": 0.44,
+        "expectativa_producao_mensal": 4.5,
+        "tipo_produto": "ORGÂNICO"
+      },
+      {
+        "produto_final": "CONSERVA DE PIMENTA",
+        "ingredientes_organicos": "1. pimenta dedo de moça – 1000gr, 2. alho – 15gr",
+        "percent_organicos": 96.39,
+        "ingredientes_nao_organicos": "1.óleo de girassol – 30gr, 2. pimenta do reino – 2gr",
+        "percent_nao_organicos": 3.61,
+        "expectativa_producao_mensal": 1,
+        "tipo_produto": "ORGÂNICO"
+      },
+      {
+        "produto_final": "ESFIHA DE SHIMEJI",
+        "ingredientes_organicos": "1.farinha de trigo branca – 1000 gr, 2. shimeji–1000 gr, 3. cebola – 50gr, 4. tomate – 350gr, 5. azeitona – 30gr, 6. açúcar – 60gr, 7. molho shoyu – 10gr",
+        "percent_organicos": 93.99,
+        "ingredientes_nao_organicos": "1.óleo de girassol – 108gr, 2. fermento biológico – 5gr, 3. levedura de cerveja – 50gr",
+        "percent_nao_organicos": 6.03,
+        "expectativa_producao_mensal": 5,
+        "tipo_produto": "ORGÂNICO"
+      },
+      {
+        "produto_final": "ESFIRRA DE SHIMEJI COM MAÇÃ",
+        "ingredientes_organicos": "1.farinha de trigo branca – 1000 gr, 2. shimeji–1000 gr, 3. maça – 300gr, 4. sofrito de tomate – 200gr, 5. cebola – 50gr, 6. azeita – 60gr, 7. molho shoyu – 10gr",
+        "percent_organicos": 96.66,
+        "ingredientes_nao_organicos": "1.óleo de girassol – 108gr, 2. fermento biológico – 5gr, 3. levedura de cerveja – 50gr",
+        "percent_nao_organicos": 3.34,
+        "expectativa_producao_mensal": 5,
+        "tipo_produto": "ORGÂNICO"
+      },
+      {
+        "produto_final": "ESFIHA DE SHITAKE",
+        "ingredientes_organicos": "1. farinha de trigo branca – 1000 gr, 2. shitake–1000 gr, 3. cebola – 50gr, 4. tomate – 120gr, 5. limão – 100gr, 6. açúcar – 60gr, 7. shoyo – 10gr",
+        "percent_organicos": 93.60,
+        "ingredientes_nao_organicos": "1. óleo de girassol – 108 gr, 2. fermento biológico – 5gr, 3. azeitonas – 10gr",
+        "percent_nao_organicos": 6.40,
+        "expectativa_producao_mensal": 3,
+        "tipo_produto": "ORGÂNICO"
+      },
+      {
+        "produto_final": "GELEIA DE AMORA",
+        "ingredientes_organicos": "1. amoras – 7000gr, 2. açúcar – 1500gr, 3. limão – 120gr",
+        "percent_organicos": 100.00,
+        "ingredientes_nao_organicos": "",
+        "percent_nao_organicos": 0,
+        "expectativa_producao_mensal": 17,
+        "tipo_produto": "ORGÂNICO"
+      },
+      {
+        "produto_final": "GELEIA DE FRAMBOESA",
+        "ingredientes_organicos": "1. framboesa – 7000gr, 2. açúcar – 1500gr, 3. limão – 120gr",
+        "percent_organicos": 100.00,
+        "ingredientes_nao_organicos": "",
+        "percent_nao_organicos": 0,
+        "expectativa_producao_mensal": 8.6,
+        "tipo_produto": "ORGÂNICO"
+      },
+      {
+        "produto_final": "GELEIA DE FRUTAS VERMELHAS",
+        "ingredientes_organicos": "1. morangos – 5000gr, 2. amoras – 3000gr, 3. framboesas – 200gr, 4. açúcar – 1500gr, 5. limão – 120gr",
+        "percent_organicos": 100.00,
+        "ingredientes_nao_organicos": "",
+        "percent_nao_organicos": 0,
+        "expectativa_producao_mensal": 34,
+        "tipo_produto": "ORGÂNICO"
+      },
+      {
+        "produto_final": "GELEIA DE MARACUJÁ",
+        "ingredientes_organicos": "1. morangos – 7000gr, 2. açúcar – 1500gr, 3. limão – 120gr",
+        "percent_organicos": 100.00,
+        "ingredientes_nao_organicos": "",
+        "percent_nao_organicos": 0,
+        "expectativa_producao_mensal": 17,
+        "tipo_produto": "ORGÂNICO"
+      },
+      {
+        "produto_final": "GELEIA DE PIMENTA",
+        "ingredientes_organicos": "1. maçã – 300gr, 2. pimenta dedo de moça – 100gr, 3. açúcar – 240gr, 4. limão – 120gr",
+        "percent_organicos": 100.00,
+        "ingredientes_nao_organicos": "",
+        "percent_nao_organicos": 0,
+        "expectativa_producao_mensal": 3,
+        "tipo_produto": "ORGÂNICO"
+      },
+      {
+        "produto_final": "GELEIA DE TOMATE COM BANANA",
+        "ingredientes_organicos": "1.tomate – 2000gr, 2. banana – 700gr, 3. laranja – 200gr, 4. açúcar – 1300gr, 5. limão – 140gr",
+        "percent_organicos": 100.00,
+        "ingredientes_nao_organicos": "",
+        "percent_nao_organicos": 0,
+        "expectativa_producao_mensal": 5,
+        "tipo_produto": "ORGÂNICO"
+      },
+      {
+        "produto_final": "GOIABADA CREMOSA",
+        "ingredientes_organicos": "1. goiaba – 10000gr, 2. açúcar – 1000gr, 3. limão – 200gr",
+        "percent_organicos": 100.00,
+        "ingredientes_nao_organicos": "",
+        "percent_nao_organicos": 0,
+        "expectativa_producao_mensal": 11,
+        "tipo_produto": "ORGÂNICO"
+      },
+      {
+        "produto_final": "MACARRÃO",
+        "ingredientes_organicos": "1.farinha de trigo branca – 480gr, 2. ovos – 220gr",
+        "percent_organicos": 100.00,
+        "ingredientes_nao_organicos": "",
+        "percent_nao_organicos": 0,
+        "expectativa_producao_mensal": 1.4,
+        "tipo_produto": "ORGÂNICO"
+      },
+      {
+        "produto_final": "MACARRÃO DE ORA PRO NOBIS",
+        "ingredientes_organicos": "1.farinha de trigo branca – 480gr, 2. ora pro nobis – 100gr, 3. ovos – 220gr",
+        "percent_organicos": 100.00,
+        "ingredientes_nao_organicos": "",
+        "percent_nao_organicos": 0,
+        "expectativa_producao_mensal": 1.6,
+        "tipo_produto": "ORGÂNICO"
+      },
+      {
+        "produto_final": "MACARRÃO INTEGRAL",
+        "ingredientes_organicos": "1.farinha de trigo integral – 480gr, 2. farinha de trigo branca – 240gr, 3. ovos – 220gr",
+        "percent_organicos": 100.00,
+        "ingredientes_nao_organicos": "",
+        "percent_nao_organicos": 0,
+        "expectativa_producao_mensal": 1.4,
+        "tipo_produto": "ORGÂNICO"
+      },
+      {
+        "produto_final": "MOLHO DE TOMATE",
+        "ingredientes_organicos": "1. tomates – 1000gr, 2. cebolas – 50gr, 3. alho – 5gr",
+        "percent_organicos": 100.00,
+        "ingredientes_nao_organicos": "",
+        "percent_nao_organicos": 0,
+        "expectativa_producao_mensal": 11,
+        "tipo_produto": "ORGÂNICO"
+      },
+      {
+        "produto_final": "PÃO DE CAMPANHA",
+        "ingredientes_organicos": "1.farinha de trigo branca – 1000gr, 2. levain – 300gr",
+        "percent_organicos": 99.62,
+        "ingredientes_nao_organicos": "1.fermento biológico – 5gr",
+        "percent_nao_organicos": 0.38,
+        "expectativa_producao_mensal": 15.6,
+        "tipo_produto": "ORGÂNICO"
+      },
+      {
+        "produto_final": "PÃO DE CAMPANHA INTEGRAL",
+        "ingredientes_organicos": "1.farinha de trigo branca – 500gr, 2. farinha de trigo integral – 500gr, 3.levain – 300gr",
+        "percent_organicos": 99.62,
+        "ingredientes_nao_organicos": "1.fermento biológico – 5gr",
+        "percent_nao_organicos": 0.38,
+        "expectativa_producao_mensal": 15.6,
+        "tipo_produto": "ORGÂNICO"
+      },
+      {
+        "produto_final": "PÃO DOCE DE BANANA",
+        "ingredientes_organicos": "1.farinha de trigo – 1000gr, 2. banana – 800gr, 3. açúcar – 150gr",
+        "percent_organicos": 95.05,
+        "ingredientes_nao_organicos": "1.óleo de girassol – 106 gr, 2. açúcar – 100gr, 3. canela em pó – 5gr",
+        "percent_nao_organicos": 4.95,
+        "expectativa_producao_mensal": 2.2,
+        "tipo_produto": "ORGÂNICO"
+      },
+      {
+        "produto_final": "PÃO DOCE DE GOIABA",
+        "ingredientes_organicos": "1.farinha de trigo – 1000gr, 2. goiaba – 1000gr, 3. açúcar – 150gr",
+        "percent_organicos": 95.94,
+        "ingredientes_nao_organicos": "1.óleo de girassol – 106 gr, 2. açúcar – 100gr, 3. canela em pó – 5gr",
+        "percent_nao_organicos": 4.06,
+        "expectativa_producao_mensal": 2.2,
+        "tipo_produto": "ORGÂNICO"
+      },
+      {
+        "produto_final": "PÃO ITALIANO",
+        "ingredientes_organicos": "1.farinha de trigo branca – 1000gr, 2. levain – 300gr",
+        "percent_organicos": 99.62,
+        "ingredientes_nao_organicos": "1.fermento biológico – 5gr",
+        "percent_nao_organicos": 0.38,
+        "expectativa_producao_mensal": 5.2,
+        "tipo_produto": "ORGÂNICO"
+      },
+      {
+        "produto_final": "TOMATE SUCULENTO",
+        "ingredientes_organicos": "1.tomate – 3000gr, 2. açúcar – 240gr",
+        "percent_organicos": 95.44,
+        "ingredientes_nao_organicos": "1.azeite extra virgem – 150gr, 2.chimichurri – 5gr",
+        "percent_nao_organicos": 4.56,
+        "expectativa_producao_mensal": 3.3,
+        "tipo_produto": "ORGÂNICO"
+      }
+    ],
+    "produtos_nao_organicos": [],
+    "outros_produtos": [
+      {
+        "tipo_produto": "Aditivos alimentares",
+        "identificacao_nome": "Biológico (Ottker, Fleischmann)",
+        "organico": false
+      },
+      {
+        "tipo_produto": "Coajuvantes tecnológicos",
+        "identificacao_nome": "",
+        "organico": false
+      },
+      {
+        "tipo_produto": "Corantes",
+        "identificacao_nome": "",
+        "organico": false
+      },
+      {
+        "tipo_produto": "Outros",
+        "identificacao_nome": "Óleo de Girassol (Liza)",
+        "organico": false
+      },
+      {
+        "tipo_produto": "Outros",
+        "identificacao_nome": "Molho Inglês (Senko/Sakura)",
+        "organico": false
+      }
+    ],
+    "producao_paralela": [],
+    "higienizacao": [
+      {
+        "marca_nome_comercial": "YPÊ",
+        "substancia_ativa": "DETERGENTE",
+        "fabricante": "YPÊ",
+        "quando_usar": "NA LIMPEZA COM ÁGUA",
+        "ja_usa_pretende": true
+      },
+      {
+        "marca_nome_comercial": "YPÊ",
+        "substancia_ativa": "CLORO",
+        "fabricante": "YPÊ",
+        "quando_usar": "NA LIMPEZA COM ÁGUA",
+        "ja_usa_pretende": true
+      },
+      {
+        "marca_nome_comercial": "YPÊ",
+        "substancia_ativa": "ÁLCOOL 70%",
+        "fabricante": "YPÊ",
+        "quando_usar": "NA LIMPEZA À SECO",
+        "ja_usa_pretende": true
+      }
+    ],
+    "comercializacao": [
+      {
+        "tipo_comercializacao": "REVENDA",
+        "descricao": "Entrego para Pequeno Varejo"
+      },
+      {
+        "tipo_comercializacao": "REVENDA",
+        "descricao": "Para Lojas de Produtos Naturais"
+      }
+    ],
+    "controles": [
+      {
+        "atividade_controle": "ENTRADA DE INGREDIENTES / COMPRAS",
+        "metodo_controle": "CADERNO, FICHAS DE CONTROLE"
+      },
+      {
+        "atividade_controle": "CONTROLE DE ESTOQUE DOS INGREDIENTES/ MATÉRIAS PRIMAS",
+        "metodo_controle": "CADERNO, FICHAS DE CONTROLE"
+      },
+      {
+        "atividade_controle": "PROCESSAMENTO",
+        "metodo_controle": "CADERNO, FICHAS DE CONTROLE"
+      },
+      {
+        "atividade_controle": "CONTROLE DE ESTOQUE DO PRODUTO FINAL PARA VENDA",
+        "metodo_controle": "CADERNO, FICHAS DE CONTROLE"
+      },
+      {
+        "atividade_controle": "VENDA DE PRODUTOS",
+        "metodo_controle": "NOTA FISCAL, CADERNO, FICHAS DE CONTROLE"
+      },
+      {
+        "atividade_controle": "COMPRA DE INSUMOS / PRODUTOS HIGIENIZAÇÃO",
+        "metodo_controle": "NOTA FISCAL, CADERNO"
+      }
+    ],
+    "mao_obra": [
+      {
+        "tipo_funcionario": "FAMILIAR",
+        "quantidade_funcionarios": 1
+      }
+    ]
+  }
+}

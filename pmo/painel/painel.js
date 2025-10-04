@@ -571,7 +571,11 @@ const PainelPMO = {
 
             // Criar novo PMO
             const pmoId = window.PMOStorageManager.createPMO({
-                nome: data.dados.nome_fornecedor || data.dados.nome_completo || data.dados.razao_social || 'PMO Importado',
+                cpf_cnpj: data.dados.identificacao?.cpf_cnpj || data.metadata?.id_produtor || '',
+                nome: data.dados.identificacao?.nome_completo || data.dados.identificacao?.razao_social || 'PMO Importado',
+                unidade: data.dados.identificacao?.nome_unidade_producao || data.dados.identificacao?.nome_fantasia || 'Unidade Principal',
+                grupo_spg: data.metadata?.grupo_spg || '',
+                ano_vigente: data.metadata?.ano_vigente || new Date().getFullYear(),
                 tipo_pessoa: data.dados.tipo_pessoa || 'fisica'
             });
 
