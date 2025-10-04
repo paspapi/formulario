@@ -495,9 +495,9 @@ class PMOStorageManager {
 }
 
 // Criar instância global
-const PMOStorageManager = new PMOStorageManager();
+const pmoStorageManager = new PMOStorageManager();
 
 // Expor globalmente
-window.PMOStorageManager = PMOStorageManager;
+window.PMOStorageManager = pmoStorageManager;
 
 console.log('✅ PMOStorageManager carregado e disponível globalmente');
