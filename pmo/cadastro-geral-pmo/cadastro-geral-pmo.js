@@ -1235,20 +1235,36 @@ const CadastroGeralPMO = {
         }
 
         console.log('📥 Iniciando importação de JSON:', data);
+        console.log('📊 Estrutura do JSON:', {
+            tem_metadata: !!data.metadata,
+            tem_dados: !!data.dados,
+            keys_data: Object.keys(data),
+            keys_dados: data.dados ? Object.keys(data.dados) : null
+        });
 
-        // Limpar formulário primeiro
-        form.reset();
+        // NÃO limpar formulário - pode causar conflitos
+        // form.reset();
 
         const dados = data.dados;
 
         if (!dados) {
             console.error('❌ Campo "dados" não encontrado no JSON');
+            console.error('Estrutura recebida:', data);
             return;
         }
 
+        console.log('✅ Dados encontrados, iniciando preenchimento...');
+
         // 1. Identificação
         if (dados.identificacao) {
-            this.preencherCampo(form, 'nome_completo', dados.identificacao.nome_completo || dados.identificacao.razao_social);
+            console.log('📝 Preenchendo identificação:', dados.identificacao);
+
+            // Nome completo ou Razão Social (dependendo do tipo de pessoa)
+            const nome = dados.identificacao.razao_social || dados.identificacao.nome_completo;
+            if (nome) {
+                this.preencherCampo(form, 'nome_completo', nome);
+            }
+
             this.preencherCampo(form, 'cpf_cnpj', dados.identificacao.cpf_cnpj);
             this.preencherCampo(form, 'inscricao_estadual', dados.identificacao.inscricao_estadual);
             this.preencherCampo(form, 'inscricao_municipal', dados.identificacao.inscricao_municipal);
@@ -1258,11 +1274,13 @@ const CadastroGeralPMO = {
 
         // 2. Tipo de pessoa
         if (dados.tipo_pessoa) {
+            console.log('📝 Preenchendo tipo de pessoa:', dados.tipo_pessoa);
             this.preencherCampo(form, 'tipo_pessoa', dados.tipo_pessoa);
         }
 
         // 3. Contato
         if (dados.contato) {
+            console.log('📝 Preenchendo contato:', dados.contato);
             this.preencherCampo(form, 'telefone', dados.contato.telefone);
             this.preencherCampo(form, 'email', dados.contato.email);
 
@@ -1327,15 +1345,16 @@ const CadastroGeralPMO = {
             }
         }
 
+        console.log('✅ Preenchimento concluído, atualizando campos condicionais...');
+
         // Atualizar campos condicionais
         setTimeout(() => {
             this.togglePessoaTipo();
             this.toggleTipoCertificacao();
             this.updateEscopo();
             this.calculateProgress();
-        }, 100);
-
-        console.log('✅ Formulário preenchido com dados do JSON');
+            console.log('✅ Formulário completamente preenchido e atualizado!');
+        }, 300);
     },
 
     /**
@@ -1354,7 +1373,16 @@ const CadastroGeralPMO = {
      * Preencher um campo específico
      */
     preencherCampo(form, name, value) {
+        if (!value || value === '' || value === 'undefined' || value === 'null') {
+            return; // Não preencher valores vazios
+        }
+
         const elements = form.querySelectorAll(`[name="${name}"]`);
+
+        if (elements.length === 0) {
+            console.warn(`⚠️ Campo não encontrado: ${name}`);
+            return;
+        }
 
         elements.forEach(element => {
             if (element.type === 'checkbox') {
@@ -1366,6 +1394,7 @@ const CadastroGeralPMO = {
             } else {
                 element.value = value;
             }
+            console.log(`✅ Campo preenchido: ${name} = ${value}`);
         });
     },
 
