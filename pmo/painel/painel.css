@@ -62,16 +62,31 @@
 }
 
 .painel-header p {
-    margin: 0;
+    margin: 0 0 20px 0;
     color: var(--text-secondary);
     font-size: 1rem;
+}
+
+.painel-header-controls {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .painel-actions {
     display: flex;
     gap: 15px;
-    margin-top: 20px;
     flex-wrap: wrap;
+}
+
+.painel-busca-inline {
+    flex: 1;
+    min-width: 300px;
+}
+
+.painel-busca-inline .busca-input {
+    width: 100%;
 }
 
 .btn {
@@ -579,8 +594,19 @@
         font-size: 1.5rem;
     }
 
-    .painel-actions {
+    .painel-header-controls {
         flex-direction: column;
+        gap: 15px;
+    }
+
+    .painel-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .painel-busca-inline {
+        width: 100%;
+        min-width: auto;
     }
 
     .busca-container {

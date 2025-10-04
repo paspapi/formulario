@@ -18,26 +18,30 @@
             <h1>🏠 Painel PMO - ANC</h1>
             <p>Gerenciamento centralizado de Planos de Manejo Orgânico</p>
 
-            <div class="painel-actions">
-                <button class="btn btn-primary" onclick="PainelPMO.abrirModalCriarPMO()">
-                    ➕ Criar PMO
-                </button>
-                <button class="btn btn-success" onclick="PainelPMO.novaAvaliacao()">
-                    📋 Avaliar PMO
-                </button>
+            <div class="painel-header-controls">
+                <div class="painel-actions">
+                    <button class="btn btn-primary" onclick="PainelPMO.abrirModalCriarPMO()">
+                        ➕ Criar PMO
+                    </button>
+                    <button class="btn btn-success" onclick="PainelPMO.novaAvaliacao()">
+                        📋 Avaliar PMO
+                    </button>
+                </div>
+                <div class="painel-busca-inline">
+                    <input
+                        type="search"
+                        id="busca-input"
+                        class="busca-input"
+                        placeholder="🔍 Buscar por nome, CPF/CNPJ ou unidade..."
+                        oninput="PainelPMO.aplicarFiltros()"
+                    >
+                </div>
             </div>
         </header>
 
-        <!-- Busca e Filtros -->
+        <!-- Filtros -->
         <section class="busca-filtros-section">
             <div class="busca-container">
-                <input
-                    type="search"
-                    id="busca-input"
-                    class="busca-input"
-                    placeholder="🔍 Buscar por nome, CPF/CNPJ ou unidade..."
-                    oninput="PainelPMO.aplicarFiltros()"
-                >
                 <button class="btn-filtros-toggle" onclick="PainelPMO.toggleFiltros()">
                     <span id="filtros-toggle-icon">🔽</span>
                     <span id="filtros-toggle-text">Mostrar Filtros</span>
