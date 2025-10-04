@@ -422,25 +422,33 @@ const PainelPMO = {
             const pdfDoc = await PDFLib.PDFDocument.create();
 
             // Embedar JSON COMPLETO nos metadados do PDF
-            const jsonString = JSON.stringify(jsonCompleto);
+            const jsonString = JSON.stringify(jsonCompleto, null, 2);
 
-            // Método 1: Metadados padrão (title, subject, keywords)
+            // Metadados padrão (title, subject, keywords)
             pdfDoc.setTitle(`PMO - ${pmo.nome} - ${pmo.unidade}`);
             pdfDoc.setAuthor('ANC - Sistema PMO v2.0');
-            pdfDoc.setSubject(`Plano de Manejo Orgânico - ${pmo.ano_vigente}`);
+            pdfDoc.setSubject(`Plano de Manejo Orgânico - ${pmo.ano_vigente} - JSON embedado`);
             pdfDoc.setKeywords(['PMO', 'Orgânico', 'ANC', 'SPG', pmo.grupo_spg, pmo.id]);
-            pdfDoc.setCreator('Sistema PMO ANC - pdf-lib v1.17.1');
-            pdfDoc.setProducer('pdf-lib');
+            pdfDoc.setCreator('Sistema PMO ANC - @cantoo/pdf-lib v2.5.2');
+            pdfDoc.setProducer('@cantoo/pdf-lib');
             pdfDoc.setCreationDate(new Date());
             pdfDoc.setModificationDate(new Date());
 
-            // Método 2: JSON compactado no campo Subject (fallback para extração)
-            // Usamos base64 para evitar problemas com caracteres especiais
-            const jsonBase64 = btoa(unescape(encodeURIComponent(jsonString)));
-            pdfDoc.setSubject(`PMO-JSON-DATA:${jsonBase64.substring(0, 200)}`); // Primeiros 200 chars
-
-            // Renderizar conteúdo visual do PDF
+            // Renderizar conteúdo visual do PDF ANTES de anexar
             await this.renderPDFContent(pdfDoc, pmo, jsonCompleto);
+
+            // Anexar JSON COMPLETO como arquivo embedado (invisível na impressão)
+            const jsonBytes = new TextEncoder().encode(jsonString);
+            const nomeArquivoJSON = `PMO-Completo_${pmo.id}_${new Date().toISOString().split('T')[0]}.json`;
+
+            await pdfDoc.attach(jsonBytes, nomeArquivoJSON, {
+                mimeType: 'application/json',
+                description: 'Dados completos do PMO em formato JSON (Schema v2.0.0)',
+                creationDate: new Date(),
+                modificationDate: new Date()
+            });
+
+            console.log('✅ JSON anexado ao PDF (invisível):', nomeArquivoJSON);
 
             // Salvar PDF
             const pdfBytes = await pdfDoc.save();
@@ -748,6 +756,60 @@ const PainelPMO = {
     },
 
     /**
+     * Importar dados de objeto JSON (lógica compartilhada)
+     */
+    async importFromJSONData(data, status, source = 'JSON') {
+        try {
+            // Validar estrutura
+            if (!this.validateJSONStructure(data)) {
+                throw new Error('Estrutura do JSON inválida');
+            }
+
+            // Criar novo PMO
+            const pmoId = window.PMOStorageManager.createPMO({
+                cpf_cnpj: data.dados.identificacao?.cpf_cnpj || data.metadata?.id_produtor || '',
+                nome: data.dados.identificacao?.nome_completo || data.dados.identificacao?.razao_social || 'PMO Importado',
+                unidade: data.dados.identificacao?.nome_unidade_producao || 'Unidade Principal',
+                grupo_spg: data.metadata?.grupo_spg || '',
+                ano_vigente: data.metadata?.ano_vigente || new Date().getFullYear(),
+                tipo_pessoa: data.dados.tipo_pessoa || 'fisica'
+            });
+
+            // Importar dados gerais
+            if (data.dados) {
+                window.PMOStorageManager.updateFormulario(pmoId, 'cadastro_geral_pmo', {
+                    metadata: data.metadata,
+                    dados: data.dados
+                });
+            }
+
+            // Importar escopos
+            if (data.escopos) {
+                Object.keys(data.escopos).forEach(scopeKey => {
+                    const scopeData = data.escopos[scopeKey];
+                    if (scopeData && scopeData.dados) {
+                        window.PMOStorageManager.updateFormulario(pmoId, scopeKey, scopeData);
+                    }
+                });
+            }
+
+            status.innerHTML = `<p style="color: var(--success-color);">✅ ${source} importado com sucesso!</p>`;
+
+            this.showMessage(`✅ PMO importado com sucesso do ${source}!`, 'success');
+
+            setTimeout(() => {
+                this.fecharModalUpload();
+                this.carregarPMOs();
+                setTimeout(() => this.destacarCard(pmoId), 300);
+            }, 1500);
+
+        } catch (error) {
+            console.error('Erro ao importar dados:', error);
+            throw error;
+        }
+    },
+
+    /**
      * Processar importação de JSON
      */
     async handleJSONImport(file, status) {
@@ -760,67 +822,8 @@ const PainelPMO = {
             const text = await file.text();
             const data = JSON.parse(text);
 
-            // Validar estrutura do JSON
-            if (!this.validateJSONStructure(data)) {
-                throw new Error('Estrutura do JSON inválida');
-            }
-
-            // Determinar tipo de importação (geral ou com escopos)
-            const isGeneralOnly = data.metadata && data.dados && !data.escopos;
-            const hasScopes = data.metadata && data.dados && data.escopos;
-
-            if (!isGeneralOnly && !hasScopes) {
-                throw new Error('JSON não contém estrutura válida (geral ou geral+escopos)');
-            }
-
-            // Criar novo PMO
-            const pmoId = window.PMOStorageManager.createPMO({
-                cpf_cnpj: data.dados.identificacao?.cpf_cnpj || data.metadata?.id_produtor || '',
-                nome: data.dados.identificacao?.nome_completo || data.dados.identificacao?.razao_social || 'PMO Importado',
-                unidade: data.dados.identificacao?.nome_unidade_producao || data.dados.identificacao?.nome_fantasia || 'Unidade Principal',
-                grupo_spg: data.metadata?.grupo_spg || '',
-                ano_vigente: data.metadata?.ano_vigente || new Date().getFullYear(),
-                tipo_pessoa: data.dados.tipo_pessoa || 'fisica'
-            });
-
-            // Importar dados gerais
-            if (data.dados) {
-                const generalData = {
-                    metadata: data.metadata || {
-                        data_preenchimento: new Date().toISOString().split('T')[0],
-                        ultima_atualizacao: new Date().toISOString(),
-                        versao: '1.0'
-                    },
-                    dados: data.dados
-                };
-                window.PMOStorageManager.updateFormulario(pmoId, 'cadastro_geral_pmo', generalData);
-            }
-
-            // Importar escopos (se existirem)
-            if (hasScopes && data.escopos) {
-                Object.keys(data.escopos).forEach(scopeKey => {
-                    const scopeData = data.escopos[scopeKey];
-                    if (scopeData && scopeData.dados) {
-                        window.PMOStorageManager.updateFormulario(pmoId, scopeKey, scopeData);
-                    }
-                });
-            }
-
-            if (status) {
-                status.innerHTML = '<p style="color: var(--success-color);">✅ JSON importado com sucesso!</p>';
-            }
-
-            this.showMessage('JSON importado com sucesso!', 'success');
-
-            setTimeout(() => {
-                this.fecharModalUpload();
-                this.carregarPMOs();
-
-                // Destacar PMO atualizado
-                setTimeout(() => {
-                    this.destacarCard(pmoId);
-                }, 300);
-            }, 1500);
+            // Reutilizar lógica compartilhada
+            await this.importFromJSONData(data, status, 'JSON');
 
         } catch (error) {
             console.error('Erro ao processar JSON:', error);
@@ -853,28 +856,93 @@ const PainelPMO = {
     async handlePDFImport(file, status) {
         if (status) {
             status.style.display = 'block';
-            status.innerHTML = '<p>⏳ Processando PDF...</p>';
+            status.innerHTML = '<p>⏳ Extraindo dados do PDF...</p>';
         }
 
         try {
             const arrayBuffer = await file.arrayBuffer();
             const pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
 
-            // TODO: Extrair metadata
-            // Por ora, mostrar mensagem
-            if (status) {
-                status.innerHTML = '<p style="color: var(--warning-color);">⚠️ Extração de metadata em desenvolvimento. Use "Novo PMO" por enquanto.</p>';
+            // Verificar se é PDF do Sistema PMO
+            const creator = pdfDoc.getCreator();
+            const isPMOPDF = creator && creator.includes('Sistema PMO ANC');
+
+            if (!isPMOPDF) {
+                if (status) {
+                    status.innerHTML = `
+                        <p style="color: var(--danger-color);">
+                            ❌ Este PDF não foi gerado pelo Sistema PMO ANC.<br>
+                            Para importar dados, use a opção "Novo PMO" e preencha manualmente.
+                        </p>
+                    `;
+                }
+                setTimeout(() => this.fecharModalUpload(), 4000);
+                return;
             }
 
-            setTimeout(() => {
-                this.fecharModalUpload();
-            }, 3000);
+            // Extrair anexos (attachments)
+            const attachments = pdfDoc.getAttachments();
+
+            console.log('📎 Anexos encontrados no PDF:', attachments.length);
+
+            if (attachments.length === 0) {
+                if (status) {
+                    status.innerHTML = `
+                        <p style="color: var(--warning-color);">
+                            ⚠️ PDF do Sistema PMO sem JSON anexado.<br>
+                            Use o arquivo JSON de backup para importação.<br>
+                            Nome sugerido: <code>${file.name.replace('.pdf', '.json')}</code>
+                        </p>
+                    `;
+                }
+                setTimeout(() => this.fecharModalUpload(), 5000);
+                return;
+            }
+
+            // Procurar arquivo JSON anexado
+            let jsonAttachment = null;
+            for (const attachment of attachments) {
+                console.log('📎 Anexo encontrado:', attachment.name);
+                if (attachment.name.endsWith('.json')) {
+                    jsonAttachment = attachment;
+                    break;
+                }
+            }
+
+            if (!jsonAttachment) {
+                if (status) {
+                    status.innerHTML = `
+                        <p style="color: var(--warning-color);">
+                            ⚠️ JSON não encontrado nos anexos do PDF.<br>
+                            Use o arquivo JSON de backup para importação.
+                        </p>
+                    `;
+                }
+                setTimeout(() => this.fecharModalUpload(), 4000);
+                return;
+            }
+
+            // Extrair e parsear JSON
+            if (status) {
+                status.innerHTML = '<p>⏳ Lendo JSON anexado (invisível)...</p>';
+            }
+
+            const jsonBytes = await jsonAttachment.data;
+            const jsonString = new TextDecoder().decode(jsonBytes);
+            const data = JSON.parse(jsonString);
+
+            console.log('✅ JSON extraído do PDF:', jsonAttachment.name);
+            console.log('📊 Dados extraídos:', data);
+
+            // Importar usando lógica compartilhada
+            await this.importFromJSONData(data, status, 'PDF');
 
         } catch (error) {
             console.error('Erro ao processar PDF:', error);
             if (status) {
                 status.innerHTML = `<p style="color: var(--danger-color);">❌ Erro: ${error.message}</p>`;
             }
+            setTimeout(() => this.fecharModalUpload(), 4000);
         }
     },
 

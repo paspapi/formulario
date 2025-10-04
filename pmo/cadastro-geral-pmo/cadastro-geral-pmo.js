@@ -1175,6 +1175,194 @@ const CadastroGeralPMO = {
     },
 
     /**
+     * Importar dados de JSON
+     * NOTA: Esta função não é mais usada na interface (botão foi removido),
+     * mas mantida para uso futuro ou chamadas programáticas.
+     * A importação padrão é feita via Painel PMO (upload unificado PDF/JSON).
+     */
+    importarJSON() {
+        // Criar input file invisível
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = '.json';
+
+        input.onchange = async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            try {
+                const text = await file.text();
+                const data = JSON.parse(text);
+
+                // Validar estrutura
+                if (!data.metadata || !data.dados) {
+                    throw new Error('Estrutura do JSON inválida');
+                }
+
+                // Preencher formulário com dados importados
+                this.preencherFormularioComJSON(data);
+
+                // Salvar automaticamente
+                setTimeout(() => {
+                    this.salvar();
+                }, 500);
+
+                this.showMessage('JSON importado com sucesso!', 'success');
+            } catch (error) {
+                console.error('Erro ao importar JSON:', error);
+                this.showMessage(`Erro ao importar JSON: ${error.message}`, 'error');
+            }
+        };
+
+        input.click();
+    },
+
+    /**
+     * Preencher formulário com dados do JSON
+     */
+    preencherFormularioComJSON(data) {
+        const form = document.getElementById('form-cadastro-geral-pmo');
+        if (!form) {
+            console.error('❌ Formulário não encontrado');
+            return;
+        }
+
+        console.log('📥 Iniciando importação de JSON:', data);
+
+        // Limpar formulário primeiro
+        form.reset();
+
+        const dados = data.dados;
+
+        if (!dados) {
+            console.error('❌ Campo "dados" não encontrado no JSON');
+            return;
+        }
+
+        // 1. Identificação
+        if (dados.identificacao) {
+            this.preencherCampo(form, 'nome_completo', dados.identificacao.nome_completo || dados.identificacao.razao_social);
+            this.preencherCampo(form, 'cpf_cnpj', dados.identificacao.cpf_cnpj);
+            this.preencherCampo(form, 'inscricao_estadual', dados.identificacao.inscricao_estadual);
+            this.preencherCampo(form, 'inscricao_municipal', dados.identificacao.inscricao_municipal);
+            this.preencherCampo(form, 'nome_fantasia', dados.identificacao.nome_fantasia);
+            this.preencherCampo(form, 'nome_unidade_producao', dados.identificacao.nome_unidade_producao);
+        }
+
+        // 2. Tipo de pessoa
+        if (dados.tipo_pessoa) {
+            this.preencherCampo(form, 'tipo_pessoa', dados.tipo_pessoa);
+        }
+
+        // 3. Contato
+        if (dados.contato) {
+            this.preencherCampo(form, 'telefone', dados.contato.telefone);
+            this.preencherCampo(form, 'email', dados.contato.email);
+
+            if (dados.contato.endereco) {
+                const end = dados.contato.endereco;
+                this.preencherCampo(form, 'endereco', end.endereco_completo || end.logradouro);
+                this.preencherCampo(form, 'bairro', end.bairro);
+                this.preencherCampo(form, 'municipio', end.municipio);
+                this.preencherCampo(form, 'uf', end.uf);
+                this.preencherCampo(form, 'cep', end.cep);
+
+                if (end.coordenadas) {
+                    const coordInput = document.getElementById('coordenadas');
+                    if (coordInput && end.coordenadas.latitude && end.coordenadas.longitude) {
+                        coordInput.value = `${end.coordenadas.latitude}, ${end.coordenadas.longitude}`;
+                        this.parseCoordenadas();
+                    }
+                }
+            }
+        }
+
+        // 4. Propriedade
+        if (dados.propriedade) {
+            this.preencherCampo(form, 'posse_terra', dados.propriedade.posse_terra);
+            this.preencherCampo(form, 'area_total_ha', dados.propriedade.area_total_ha);
+            this.preencherCampo(form, 'caf_numero', dados.propriedade.caf_numero);
+            this.preencherCampo(form, 'caf_nao_possui', dados.propriedade.caf_nao_possui);
+            this.preencherCampo(form, 'roteiro_acesso', dados.propriedade.roteiro_acesso);
+            this.preencherCampo(form, 'data_aquisicao', dados.propriedade.data_aquisicao_posse);
+            this.preencherCampo(form, 'terra_familiar', dados.propriedade.terra_familiar);
+        }
+
+        // 5. Manejo Orgânico
+        if (dados.manejo_organico) {
+            this.preencherCampo(form, 'anos_manejo_organico', dados.manejo_organico.anos_manejo_organico);
+            this.preencherCampo(form, 'situacao_manejo', dados.manejo_organico.situacao_manejo);
+        }
+
+        // 6. Escopo
+        if (dados.escopo) {
+            Object.keys(dados.escopo).forEach(escopoKey => {
+                if (dados.escopo[escopoKey] === true) {
+                    const checkbox = form.querySelector(`input[name="escopo_${escopoKey}"]`);
+                    if (checkbox) checkbox.checked = true;
+                }
+            });
+        }
+
+        // 7. Metadata (grupo SPG, etc)
+        if (data.metadata) {
+            this.preencherCampo(form, 'grupo_spg', data.metadata.grupo_spg);
+            this.preencherCampo(form, 'ano_vigente', data.metadata.ano_vigente);
+        }
+
+        // Processar escopos se existirem
+        if (data.escopos && data.escopos.anexo_processamento) {
+            const processoData = data.escopos.anexo_processamento.dados;
+            if (processoData) {
+                // Marcar escopo processamento se não estiver marcado
+                const checkbox = form.querySelector('input[name="escopo_processamento"]');
+                if (checkbox) checkbox.checked = true;
+            }
+        }
+
+        // Atualizar campos condicionais
+        setTimeout(() => {
+            this.togglePessoaTipo();
+            this.toggleTipoCertificacao();
+            this.updateEscopo();
+            this.calculateProgress();
+        }, 100);
+
+        console.log('✅ Formulário preenchido com dados do JSON');
+    },
+
+    /**
+     * Preencher campos do formulário
+     */
+    preencherCampos(form, data) {
+        Object.keys(data).forEach(key => {
+            const value = data[key];
+            if (typeof value !== 'object' || value === null) {
+                this.preencherCampo(form, key, value);
+            }
+        });
+    },
+
+    /**
+     * Preencher um campo específico
+     */
+    preencherCampo(form, name, value) {
+        const elements = form.querySelectorAll(`[name="${name}"]`);
+
+        elements.forEach(element => {
+            if (element.type === 'checkbox') {
+                element.checked = value === true || value === 'sim' || value === element.value;
+            } else if (element.type === 'radio') {
+                element.checked = value === element.value;
+            } else if (element.tagName === 'SELECT') {
+                element.value = value;
+            } else {
+                element.value = value;
+            }
+        });
+    },
+
+    /**
      * Exportar dados como JSON (conforme schema unificado v2.0.0)
      */
     exportarJSON() {
