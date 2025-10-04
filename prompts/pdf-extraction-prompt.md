@@ -104,8 +104,21 @@ Analise o conteúdo do PDF fornecido e extraia TODOS os dados para gerar um JSON
       "apicultura": false,
       "proc_minimo": false,
       "processamento": false
-    }
+    },
     // NOTA: Campo é "escopo" (SINGULAR), não "escopos"
+
+    "pretende_certificar": true,  // ← SEMPRE true se houver QUALQUER escopo marcado acima
+    "activities": {               // ← DUPLICAR os escopos aqui com prefixo "escopo_"
+      "escopo_hortalicas": false,
+      "escopo_frutas": false,
+      "escopo_graos": false,
+      "escopo_medicinais": false,
+      "escopo_cogumelos": false,
+      "escopo_pecuaria": false,
+      "escopo_apicultura": false,
+      "escopo_proc_minimo": false,
+      "escopo_processamento": false  // ← Se "escopo.processamento" = true, este TAMBÉM deve ser true
+    }
   },
   "escopos": {
     "anexo_vegetal": {
@@ -244,7 +257,7 @@ Gerar no formato: `pmo_{ano}_{cpf_cnpj_somente_numeros}_{unidade_slug}`
 - Unidade: `Sítio Boa Vista` → `sitio-boa-vista`
 - ID: `pmo_2024_12345678901_sitio-boa-vista`
 
-### 4. **Detecção de Escopos**
+### 4. **Detecção de Escopos** ⚠️ CRÍTICO
 
 Analise o PDF para identificar quais atividades o produtor realiza:
 
@@ -254,7 +267,27 @@ Analise o PDF para identificar quais atividades o produtor realiza:
 - **Apicultura/Mel** → `dados.escopo.apicultura: true` + incluir `anexo_apicultura`
 - **Processamento** → `dados.escopo.processamento: true` + incluir `anexo_processamento`
 
-**IMPORTANTE:** Só incluir em `escopos` os formulários que o produtor REALMENTE preenche.
+**🚨 REGRAS CRÍTICAS DE ESCOPOS:**
+
+1. **DUPLICAR ESCOPOS**: Cada escopo marcado como `true` em `dados.escopo.{tipo}` DEVE ser duplicado em `dados.activities.escopo_{tipo}` como `true`
+
+   **Exemplo:**
+   ```json
+   {
+     "dados": {
+       "escopo": {
+         "processamento": true  // ← Marcado
+       },
+       "activities": {
+         "escopo_processamento": true  // ← DEVE ser true também
+       }
+     }
+   }
+   ```
+
+2. **pretende_certificar**: SEMPRE `true` se houver QUALQUER escopo marcado
+
+3. **Incluir em escopos**: Só incluir em `escopos` os formulários que o produtor REALMENTE preenche
 
 ### 5. **Tabelas Dinâmicas**
 
@@ -339,10 +372,33 @@ Classificar produtos baseado em % de ingredientes orgânicos:
 - [ ] Percentuais de ingredientes somam ~100%
 - [ ] Tipo de produto condiz com % orgânicos
 
-### **4. Lógica de Escopos**
+### **4. Lógica de Escopos** ⚠️ CRÍTICO
 - [ ] `dados.escopo.{tipo}` = true SOMENTE se houver dados para esse anexo
+- [ ] `dados.activities.escopo_{tipo}` = MESMO VALOR de `dados.escopo.{tipo}` (DUPLICAR)
+- [ ] `dados.pretende_certificar` = true se QUALQUER escopo estiver marcado
 - [ ] `escopos.anexo_{tipo}` presente SOMENTE se `dados.escopo.{tipo}` = true
 - [ ] Cada anexo em `escopos` tem `metadata` + `dados` completos
+
+**Exemplo de Validação de Escopos:**
+```json
+{
+  "dados": {
+    "escopo": {
+      "processamento": true,  // ← Marcado
+      "hortalicas": false
+    },
+    "pretende_certificar": true,  // ← true porque tem escopo marcado
+    "activities": {
+      "escopo_processamento": true,  // ← DEVE estar true (duplicado)
+      "escopo_hortalicas": false
+    }
+  },
+  "escopos": {
+    "anexo_processamento": { /* dados completos */ }  // ← Incluído porque escopo = true
+    // anexo_vegetal NÃO incluído porque escopo.hortalicas = false
+  }
+}
+```
 
 ---
 
@@ -407,6 +463,10 @@ Classificar produtos baseado em % de ingredientes orgânicos:
     },
     "escopo": {  // ← SINGULAR "escopo", não "escopos"
       "processamento": true  // ← Marca quais anexos estão ativos
+    },
+    "pretende_certificar": true,  // ← SEMPRE true se tiver escopo marcado
+    "activities": {               // ← DUPLICAR escopos com prefixo "escopo_"
+      "escopo_processamento": true  // ← Mesmo valor de dados.escopo.processamento
     }
   },
   "escopos": {  // ← RAIZ, contém dados completos dos anexos ativos

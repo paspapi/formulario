@@ -1354,10 +1354,24 @@ const CadastroGeralPMO = {
 
         // 6. Escopo
         if (dados.escopo) {
+            console.log('📝 Preenchendo escopos:', dados.escopo);
             Object.keys(dados.escopo).forEach(escopoKey => {
-                if (dados.escopo[escopoKey] === true) {
-                    const checkbox = form.querySelector(`input[name="escopo_${escopoKey}"]`);
-                    if (checkbox) checkbox.checked = true;
+                const valor = dados.escopo[escopoKey];
+                const nomeCheckbox = `escopo_${escopoKey}`;
+                const checkbox = form.querySelector(`input[name="${nomeCheckbox}"]`);
+
+                if (checkbox) {
+                    // Marcar checkbox
+                    checkbox.checked = valor === true || valor === 'sim';
+
+                    // IMPORTANTE: Disparar evento change para atualizar scope manager
+                    if (checkbox.checked) {
+                        checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+                    }
+
+                    console.log(`✅ Escopo marcado: ${nomeCheckbox} = ${checkbox.checked}`);
+                } else {
+                    console.warn(`⚠️ Checkbox não encontrado: ${nomeCheckbox}`);
                 }
             });
         }
@@ -1384,7 +1398,7 @@ const CadastroGeralPMO = {
         setTimeout(() => {
             this.togglePessoaTipo();
             this.toggleTipoCertificacao();
-            this.updateEscopo();
+            // NÃO chamar updateEscopo() aqui - já foi chamado via dispatchEvent ao marcar checkboxes
             this.calculateProgress();
             console.log('✅ Formulário completamente preenchido e atualizado!');
         }, 300);
