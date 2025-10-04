@@ -315,31 +315,20 @@ const PainelPMO = {
 
     /**
      * Criar novo PMO em branco
+     * Abre o formulário de cadastro geral para preencher dados obrigatórios
      */
     criarNovoPMO() {
         try {
-            // Criar PMO vazio
-            const pmoId = window.PMOStorageManager.createPMO({
-                nome: 'Novo PMO',
-                tipo_pessoa: 'fisica'
-            });
-
-            this.showMessage('PMO criado com sucesso!', 'success');
-
             // Fechar modal
             this.fecharModalCriarPMO();
 
-            // Recarregar lista
-            this.carregarPMOs();
-
-            // Destacar card criado após renderização
-            setTimeout(() => {
-                this.destacarCard(pmoId);
-            }, 300);
+            // Redirecionar para cadastro geral em modo de criação
+            // O PMO só será criado no storage quando o usuário salvar o formulário
+            window.location.href = '../cadastro-geral-pmo/index.html?modo=criar';
 
         } catch (error) {
-            console.error('Erro ao criar PMO:', error);
-            this.showMessage('Erro ao criar PMO: ' + error.message, 'error');
+            console.error('Erro ao abrir formulário:', error);
+            this.showMessage('Erro ao abrir formulário: ' + error.message, 'error');
         }
     },
 
@@ -465,30 +454,11 @@ const PainelPMO = {
     /**
      * Abrir modal de upload
      */
-    abrirModalUpload(tipo = 'all') {
+    abrirModalUpload() {
         // Fechar modal de criar PMO
         this.fecharModalCriarPMO();
 
         const modal = document.getElementById('modal-upload');
-        const title = document.getElementById('modal-upload-title');
-        const hint = document.getElementById('upload-hint');
-        const input = document.getElementById('upload-input');
-
-        // Configurar modal baseado no tipo
-        if (tipo === 'pdf') {
-            if (title) title.textContent = '📄 Atualizar PMO - PDF';
-            if (hint) hint.textContent = 'PDF com metadados do PMO';
-            if (input) input.accept = 'application/pdf';
-        } else if (tipo === 'json') {
-            if (title) title.textContent = '📦 Atualizar PMO - JSON';
-            if (hint) hint.textContent = 'Arquivo JSON exportado (geral ou com escopos)';
-            if (input) input.accept = 'application/json';
-        } else {
-            if (title) title.textContent = '📤 Atualizar PMO';
-            if (hint) hint.textContent = 'PDF com metadados ou arquivo JSON exportado';
-            if (input) input.accept = 'application/pdf,application/json';
-        }
-
         if (modal) modal.classList.add('active');
     },
 

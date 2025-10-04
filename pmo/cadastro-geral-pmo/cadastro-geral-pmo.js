@@ -27,8 +27,17 @@ const CadastroGeralPMO = {
     init() {
         console.log('✅ Inicializando Cadastro Geral do PMO...');
 
-        // Carregar dados salvos
-        this.loadSavedData();
+        // Verificar modo de criação (do painel)
+        const urlParams = new URLSearchParams(window.location.search);
+        const modoCriar = urlParams.get('modo') === 'criar';
+
+        if (modoCriar) {
+            console.log('📝 Modo criação de novo PMO');
+            // Não carregar dados, começar em branco
+        } else {
+            // Carregar dados salvos
+            this.loadSavedData();
+        }
 
         // Configurar auto-save
         this.setupAutoSave();
@@ -816,6 +825,7 @@ const CadastroGeralPMO = {
             // Obter ou criar PMO
             let pmo = window.PMOStorageManager.getActivePMO();
             let pmoId;
+            let isPMONovo = false;
 
             if (!pmo) {
                 // Criar novo PMO
@@ -835,6 +845,7 @@ const CadastroGeralPMO = {
                 });
 
                 console.log(`✅ Novo PMO criado: ${pmoId}`);
+                isPMONovo = true;
             } else {
                 pmoId = pmo.id;
 
@@ -870,6 +881,16 @@ const CadastroGeralPMO = {
             }
 
             this.updateAutoSaveStatus(`Salvo em ${new Date().toLocaleTimeString()}`);
+
+            // Se foi criado PMO novo e está em modo criar, redirecionar para o painel
+            if (isPMONovo && !isAutoSave) {
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.get('modo') === 'criar') {
+                    setTimeout(() => {
+                        window.location.href = '../painel/index.html';
+                    }, 1000);
+                }
+            }
         } catch (error) {
             console.error('Erro ao salvar:', error);
             if (!isAutoSave) {
