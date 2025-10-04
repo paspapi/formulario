@@ -225,19 +225,37 @@ const AnexoAnimal = {
     /**
      * Salvar dados no localStorage
      */
-    salvar(isAutoSave = false) {
+    /**
+     * Coletar dados do formulário conforme schema unificado
+     */
+    collectFormData() {
         const form = document.getElementById(this.config.formId);
-        if (!form) return;
+        if (!form) return null;
 
         const formData = new FormData(form);
         const data = {
             metadata: {
-                data_preenchimento: formData.get('data_preenchimento'),
+                versao_schema: '2.0.0',
+                tipo_formulario: 'anexo_animal',
+                data_criacao: formData.get('data_preenchimento') || new Date().toISOString(),
                 ultima_atualizacao: new Date().toISOString(),
-                versao: '1.0'
+                status: 'rascunho'
             },
             dados: {}
         };
+
+        // Adicionar PMO info se disponível
+        if (window.PMOStorageManager) {
+            const pmo = window.PMOStorageManager.getActivePMO();
+            if (pmo) {
+                data.metadata.id_pmo = pmo.id;
+                data.metadata.id_produtor = pmo.cpf_cnpj;
+                data.metadata.grupo_spg = pmo.grupo_spg;
+                data.metadata.nome_produtor = pmo.nome;
+                data.metadata.nome_unidade = pmo.unidade;
+                data.metadata.ano_vigente = pmo.ano_vigente;
+            }
+        }
 
         // Coletar todos os dados do formulário
         for (let [key, value] of formData.entries()) {
@@ -251,6 +269,22 @@ const AnexoAnimal = {
             } else {
                 data.dados[key] = value;
             }
+        }
+
+        // Adicionar validação
+        data.validacao = {
+            percentual_completo: this.updateProgress(),
+            data_validacao: new Date().toISOString()
+        };
+
+        return data;
+    },
+
+    salvar(isAutoSave = false) {
+        const data = this.collectFormData();
+        if (!data) {
+            this.showMessage('Erro ao coletar dados', 'error');
+            return;
         }
 
         // Salvar usando PMOStorageManager
@@ -280,6 +314,32 @@ const AnexoAnimal = {
             console.error('Erro ao salvar:', error);
             this.showMessage('Erro ao salvar dados. Verifique o espaço disponível.', 'error');
         }
+    },
+
+    /**
+     * Exportar dados como JSON
+     */
+    exportJSON() {
+        const data = this.collectFormData();
+        if (!data) {
+            this.showMessage('Erro ao coletar dados', 'error');
+            return;
+        }
+
+        const pmoId = data.metadata.id_pmo || 'sem-pmo';
+        const fileName = `anexo-animal_${pmoId}_${new Date().toISOString().split('T')[0]}.json`;
+
+        const json = JSON.stringify(data, null, 2);
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fileName;
+        a.click();
+        URL.revokeObjectURL(url);
+
+        this.showMessage('JSON exportado com sucesso!', 'success');
+        console.log('✅ Anexo Animal exportado:', fileName);
     },
 
     /**

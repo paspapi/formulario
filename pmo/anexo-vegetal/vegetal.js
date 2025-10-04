@@ -167,15 +167,47 @@ const AnexoVegetal = {
         const formData = new FormData(form);
         const data = {
             metadata: {
-                versao_schema: this.config.version,
-                data_preenchimento: formData.get('data_preenchimento') || '',
-                ultima_atualizacao: new Date().toISOString()
+                versao_schema: '2.0.0',
+                tipo_formulario: 'anexo_vegetal',
+                data_criacao: formData.get('data_preenchimento') || new Date().toISOString(),
+                ultima_atualizacao: new Date().toISOString(),
+                status: 'rascunho'
             },
-            dados_basicos: {
-                nome_fornecedor: formData.get('nome_fornecedor') || '',
-                nome_unidade_producao: formData.get('nome_unidade_producao') || '',
-                data_preenchimento: formData.get('data_preenchimento') || ''
+            dados: {}
+        };
+
+        // Adicionar PMO info se disponível
+        if (window.PMOStorageManager) {
+            const pmo = window.PMOStorageManager.getActivePMO();
+            if (pmo) {
+                data.metadata.id_pmo = pmo.id;
+                data.metadata.id_produtor = pmo.cpf_cnpj;
+                data.metadata.grupo_spg = pmo.grupo_spg;
+                data.metadata.nome_produtor = pmo.nome;
+                data.metadata.nome_unidade = pmo.unidade;
+                data.metadata.ano_vigente = pmo.ano_vigente;
             }
+        }
+
+        // Converter todos os campos do FormData para o objeto dados
+        for (let [key, value] of formData.entries()) {
+            if (data.dados[key]) {
+                // Se já existe, transformar em array
+                if (Array.isArray(data.dados[key])) {
+                    data.dados[key].push(value);
+                } else {
+                    data.dados[key] = [data.dados[key], value];
+                }
+            } else {
+                data.dados[key] = value;
+            }
+        }
+
+        // Adicionar validação básica
+        data.validacao = {
+            percentual_completo: this.updateProgress(),
+            campos_obrigatorios_completos: this.validateForm(),
+            data_validacao: new Date().toISOString()
         };
 
         return data;
@@ -262,16 +294,21 @@ const AnexoVegetal = {
             return;
         }
 
+        // Nome do arquivo com identificação do PMO
+        const pmoId = data.metadata.id_pmo || 'sem-pmo';
+        const fileName = `anexo-vegetal_${pmoId}_${new Date().toISOString().split('T')[0]}.json`;
+
         const json = JSON.stringify(data, null, 2);
         const blob = new Blob([json], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'anexo_vegetal_' + new Date().toISOString().split('T')[0] + '.json';
+        a.download = fileName;
         a.click();
         URL.revokeObjectURL(url);
 
         this.showMessage('JSON exportado com sucesso!', 'success');
+        console.log('✅ Anexo Vegetal exportado:', fileName);
     },
 
     exportPDF() {

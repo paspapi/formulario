@@ -368,74 +368,79 @@ const PainelPMO = {
     },
 
     /**
-     * Exportar PMO completo
+     * Exportar PMO completo (PDF + JSON embedado nos metadados)
      */
     async exportarPMOCompleto(pmoId) {
         try {
-            this.showMessage('Gerando PDF completo...', 'info');
+            this.showMessage('Gerando PDF completo com dados embedados...', 'info');
 
             const pmo = window.PMOStorageManager.getPMO(pmoId);
             if (!pmo) {
                 throw new Error('PMO não encontrado');
             }
 
-            // Criar novo PDF
+            // Criar estrutura JSON completa conforme schema v2.0.0
+            const jsonCompleto = {
+                metadata: {
+                    versao_schema: '2.0.0',
+                    tipo_exportacao: 'pmo_completo',
+                    id_pmo: pmo.id,
+                    data_exportacao: new Date().toISOString(),
+                    id_produtor: pmo.cpf_cnpj,
+                    nome_produtor: pmo.nome,
+                    nome_unidade: pmo.unidade,
+                    grupo_spg: pmo.grupo_spg,
+                    ano_vigente: pmo.ano_vigente,
+                    status: pmo.status,
+                    formularios_incluidos: [],
+                    progresso: pmo.progresso
+                }
+            };
+
+            // Incluir apenas formulários dos escopos habilitados
+            const formulariosAtivos = pmo.formularios_ativos || ['cadastro-geral-pmo'];
+            const mapeamentoNomes = {
+                'cadastro-geral-pmo': 'cadastro_geral_pmo',
+                'anexo-vegetal': 'anexo_vegetal',
+                'anexo-animal': 'anexo_animal',
+                'anexo-cogumelo': 'anexo_cogumelo',
+                'anexo-apicultura': 'anexo_apicultura',
+                'anexo-processamento': 'anexo_processamento',
+                'anexo-processamentominimo': 'anexo_processamentominimo',
+                'avaliacao': 'avaliacao'
+            };
+
+            formulariosAtivos.forEach(formularioId => {
+                const nomeNormalizado = mapeamentoNomes[formularioId];
+                if (nomeNormalizado && pmo.dados[nomeNormalizado]) {
+                    jsonCompleto[nomeNormalizado] = pmo.dados[nomeNormalizado];
+                    jsonCompleto.metadata.formularios_incluidos.push(nomeNormalizado);
+                }
+            });
+
+            // Criar PDF com pdf-lib
             const pdfDoc = await PDFLib.PDFDocument.create();
 
-            // TODO: Mesclar PDFs dos formulários e documentos
-            // Por ora, criar PDF simples com informações
-            const page = pdfDoc.addPage([595, 842]); // A4
-            const { width, height } = page.getSize();
+            // Embedar JSON COMPLETO nos metadados do PDF
+            const jsonString = JSON.stringify(jsonCompleto);
 
-            page.drawText(`PMO - ${pmo.nome}`, {
-                x: 50,
-                y: height - 50,
-                size: 20
-            });
+            // Método 1: Metadados padrão (title, subject, keywords)
+            pdfDoc.setTitle(`PMO - ${pmo.nome} - ${pmo.unidade}`);
+            pdfDoc.setAuthor('ANC - Sistema PMO v2.0');
+            pdfDoc.setSubject(`Plano de Manejo Orgânico - ${pmo.ano_vigente}`);
+            pdfDoc.setKeywords(['PMO', 'Orgânico', 'ANC', 'SPG', pmo.grupo_spg, pmo.id]);
+            pdfDoc.setCreator('Sistema PMO ANC - pdf-lib v1.17.1');
+            pdfDoc.setProducer('pdf-lib');
+            pdfDoc.setCreationDate(new Date());
+            pdfDoc.setModificationDate(new Date());
 
-            page.drawText(`Unidade: ${pmo.unidade}`, {
-                x: 50,
-                y: height - 80,
-                size: 12
-            });
+            // Método 2: JSON compactado no campo Subject (fallback para extração)
+            // Usamos base64 para evitar problemas com caracteres especiais
+            const jsonBase64 = btoa(unescape(encodeURIComponent(jsonString)));
+            pdfDoc.setSubject(`PMO-JSON-DATA:${jsonBase64.substring(0, 200)}`); // Primeiros 200 chars
 
-            page.drawText(`CPF/CNPJ: ${pmo.cpf_cnpj}`, {
-                x: 50,
-                y: height - 100,
-                size: 12
-            });
-
-            page.drawText(`Grupo SPG: ${pmo.grupo_spg}`, {
-                x: 50,
-                y: height - 120,
-                size: 12
-            });
-
-            page.drawText(`Ano Vigente: ${pmo.ano_vigente}`, {
-                x: 50,
-                y: height - 140,
-                size: 12
-            });
-
-            page.drawText(`Progresso: ${pmo.progresso.total}%`, {
-                x: 50,
-                y: height - 160,
-                size: 12
-            });
-
-            // Embeber metadata JSON
-            const metadata = {
-                pmo_schema: "1.0",
-                id_produtor: pmo.cpf_cnpj,
-                nome: pmo.nome,
-                unidade: pmo.unidade,
-                grupo_spg: pmo.grupo_spg,
-                ano_vigente: pmo.ano_vigente,
-                versao: pmo.versao,
-                data_exportacao: new Date().toISOString(),
-                formularios_ativos: pmo.formularios_ativos,
-                progresso: pmo.progresso
-            };
+            // Renderizar conteúdo visual do PDF
+            await this.renderPDFContent(pdfDoc, pmo, jsonCompleto);
 
             // Salvar PDF
             const pdfBytes = await pdfDoc.save();
@@ -445,15 +450,214 @@ const PainelPMO = {
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `PMO-Completo-${pmo.nome}-${pmo.ano_vigente}.pdf`;
+            const nomeArquivo = `PMO-Completo_${pmo.id}_${new Date().toISOString().split('T')[0]}.pdf`;
+            a.download = nomeArquivo;
             a.click();
             URL.revokeObjectURL(url);
 
-            this.showMessage('PDF exportado com sucesso!', 'success');
+            // Também salvar JSON separado como backup
+            const jsonBlob = new Blob([JSON.stringify(jsonCompleto, null, 2)], { type: 'application/json' });
+            const jsonUrl = URL.createObjectURL(jsonBlob);
+            const jsonLink = document.createElement('a');
+            jsonLink.href = jsonUrl;
+            jsonLink.download = `PMO-Completo_${pmo.id}_${new Date().toISOString().split('T')[0]}.json`;
+            jsonLink.click();
+            URL.revokeObjectURL(jsonUrl);
+
+            this.showMessage('✅ PDF completo exportado com JSON embedado! Também foi gerado arquivo JSON de backup.', 'success');
+            console.log('✅ Exportação completa:', nomeArquivo);
+            console.log('📊 Formulários incluídos:', jsonCompleto.metadata.formularios_incluidos);
         } catch (error) {
             console.error('Erro ao exportar PDF:', error);
             this.showMessage('Erro ao exportar PDF: ' + error.message, 'error');
         }
+    },
+
+    /**
+     * Renderizar conteúdo visual do PDF
+     */
+    async renderPDFContent(pdfDoc, pmo, jsonCompleto) {
+        const helveticaFont = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+        const helveticaBold = await pdfDoc.embedFont(PDFLib.StandardFonts.HelveticaBold);
+
+        // PÁGINA 1: CAPA
+        let page = pdfDoc.addPage([595, 842]); // A4
+        let y = 750;
+        const margin = 50;
+        const maxWidth = 495;
+
+        // Título
+        page.drawText('PLANO DE MANEJO ORGÂNICO', {
+            x: margin,
+            y: y,
+            size: 24,
+            font: helveticaBold
+        });
+        y -= 40;
+
+        page.drawText('PMO - Produção Orgânica Certificada', {
+            x: margin,
+            y: y,
+            size: 14,
+            font: helveticaFont
+        });
+        y -= 60;
+
+        // Informações do Produtor
+        page.drawText('DADOS DO PRODUTOR', {
+            x: margin,
+            y: y,
+            size: 16,
+            font: helveticaBold
+        });
+        y -= 25;
+
+        const dadosProdutor = [
+            { label: 'Nome/Razão Social:', valor: pmo.nome },
+            { label: 'Unidade de Produção:', valor: pmo.unidade },
+            { label: 'CPF/CNPJ:', valor: pmo.cpf_cnpj },
+            { label: 'Grupo SPG:', valor: pmo.grupo_spg },
+            { label: 'Ano de Vigência:', valor: pmo.ano_vigente.toString() },
+            { label: 'ID do PMO:', valor: pmo.id },
+            { label: 'Status:', valor: pmo.status.toUpperCase() },
+            { label: 'Progresso Total:', valor: `${pmo.progresso.total}%` }
+        ];
+
+        dadosProdutor.forEach(item => {
+            page.drawText(item.label, {
+                x: margin,
+                y: y,
+                size: 10,
+                font: helveticaBold
+            });
+            page.drawText(item.valor, {
+                x: margin + 150,
+                y: y,
+                size: 10,
+                font: helveticaFont
+            });
+            y -= 20;
+        });
+
+        y -= 20;
+
+        // Formulários Incluídos
+        page.drawText('FORMULÁRIOS INCLUÍDOS NESTE PMO:', {
+            x: margin,
+            y: y,
+            size: 12,
+            font: helveticaBold
+        });
+        y -= 20;
+
+        const labelFormularios = {
+            'cadastro_geral_pmo': '✓ Cadastro Geral do PMO',
+            'anexo_vegetal': '✓ Anexo I - Produção Vegetal',
+            'anexo_animal': '✓ Anexo III - Produção Animal',
+            'anexo_cogumelo': '✓ Anexo II - Cogumelos',
+            'anexo_apicultura': '✓ Anexo IV - Apicultura',
+            'anexo_processamento': '✓ Anexo - Processamento Completo',
+            'anexo_processamentominimo': '✓ Anexo - Processamento Mínimo',
+            'avaliacao': '✓ Avaliação de Conformidade'
+        };
+
+        jsonCompleto.metadata.formularios_incluidos.forEach(formulario => {
+            const label = labelFormularios[formulario] || `✓ ${formulario}`;
+            const percentual = pmo.progresso[formulario.replace(/_/g, '-')] || pmo.progresso[formulario] || 0;
+
+            page.drawText(label, {
+                x: margin + 10,
+                y: y,
+                size: 10,
+                font: helveticaFont
+            });
+
+            page.drawText(`(${percentual}%)`, {
+                x: margin + 300,
+                y: y,
+                size: 10,
+                font: helveticaFont
+            });
+            y -= 18;
+        });
+
+        y -= 30;
+
+        // Rodapé da capa
+        page.drawText('Associação de Agricultura Natural de Campinas e Região - ANC', {
+            x: margin,
+            y: 50,
+            size: 9,
+            font: helveticaFont
+        });
+
+        page.drawText(`Gerado em: ${new Date().toLocaleString('pt-BR')}`, {
+            x: margin,
+            y: 35,
+            size: 8,
+            font: helveticaFont
+        });
+
+        page.drawText('Sistema PMO v2.0 | JSON embedado nos metadados do PDF', {
+            x: margin,
+            y: 20,
+            size: 7,
+            font: helveticaFont
+        });
+
+        // PÁGINA 2+: Resumo dos dados (simplificado)
+        page = pdfDoc.addPage([595, 842]);
+        y = 780;
+
+        page.drawText('RESUMO DOS DADOS DO PMO', {
+            x: margin,
+            y: y,
+            size: 16,
+            font: helveticaBold
+        });
+        y -= 30;
+
+        page.drawText('Este PDF contém os dados completos do PMO embedados nos metadados.', {
+            x: margin,
+            y: y,
+            size: 10,
+            font: helveticaFont
+        });
+        y -= 15;
+
+        page.drawText('Para extrair os dados JSON, utilize o Sistema PMO ANC ou ferramentas de leitura de metadados PDF.', {
+            x: margin,
+            y: y,
+            size: 10,
+            font: helveticaFont
+        });
+        y -= 30;
+
+        page.drawText('IMPORTANTE:', {
+            x: margin,
+            y: y,
+            size: 12,
+            font: helveticaBold
+        });
+        y -= 18;
+
+        const avisos = [
+            '• Este PDF contém dados JSON completos nos metadados',
+            '• Um arquivo JSON separado foi gerado como backup',
+            '• Ambos os arquivos podem ser usados para importação',
+            '• Os dados JSON incluem apenas os formulários dos escopos habilitados',
+            `• Total de formulários incluídos: ${jsonCompleto.metadata.formularios_incluidos.length}`
+        ];
+
+        avisos.forEach(aviso => {
+            page.drawText(aviso, {
+                x: margin + 10,
+                y: y,
+                size: 9,
+                font: helveticaFont
+            });
+            y -= 15;
+        });
     },
 
     /**

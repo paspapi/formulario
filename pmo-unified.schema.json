@@ -1,0 +1,432 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://anc.org.br/schemas/pmo-unified.schema.json",
+  "title": "PMO Unified Schema",
+  "description": "Schema unificado para todos os formulários do Sistema PMO da ANC",
+  "version": "2.0.0",
+  "type": "object",
+  "required": ["metadata", "dados"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "description": "Metadados do formulário",
+      "required": ["versao_schema", "tipo_formulario", "data_criacao"],
+      "properties": {
+        "versao_schema": {
+          "type": "string",
+          "description": "Versão do schema JSON",
+          "const": "2.0.0"
+        },
+        "tipo_formulario": {
+          "type": "string",
+          "description": "Tipo de formulário PMO",
+          "enum": [
+            "cadastro_geral_pmo",
+            "anexo_vegetal",
+            "anexo_animal",
+            "anexo_cogumelo",
+            "anexo_apicultura",
+            "anexo_processamento",
+            "anexo_processamentominimo",
+            "avaliacao",
+            "pmo_completo"
+          ]
+        },
+        "tipo_exportacao": {
+          "type": "string",
+          "description": "Tipo de exportação (quando aplicável)",
+          "enum": ["pmo_completo", "formulario_individual"]
+        },
+        "formularios_incluidos": {
+          "type": "array",
+          "description": "Lista de formulários incluídos na exportação completa",
+          "items": {
+            "type": "string",
+            "enum": [
+              "cadastro_geral_pmo",
+              "anexo_vegetal",
+              "anexo_animal",
+              "anexo_cogumelo",
+              "anexo_apicultura",
+              "anexo_processamento",
+              "anexo_processamentominimo",
+              "avaliacao"
+            ]
+          }
+        },
+        "data_exportacao": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data/hora da exportação (ISO 8601)"
+        },
+        "id_pmo": {
+          "type": "string",
+          "description": "ID único do PMO no formato: pmo_{ano}_{cpf_cnpj}_{unidade}",
+          "pattern": "^pmo_\\d{4}_[a-zA-Z0-9]+_[a-z0-9\\-]+$"
+        },
+        "data_criacao": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data/hora de criação do formulário (ISO 8601)"
+        },
+        "ultima_atualizacao": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data/hora da última atualização (ISO 8601)"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status do preenchimento",
+          "enum": ["rascunho", "completo", "validado", "enviado", "aprovado", "rejeitado"],
+          "default": "rascunho"
+        },
+        "id_produtor": {
+          "type": "string",
+          "description": "CPF ou CNPJ do produtor",
+          "pattern": "^(\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}|\\d{2}\\.\\d{3}\\.\\d{3}/\\d{4}-\\d{2})$"
+        },
+        "grupo_spg": {
+          "type": "string",
+          "description": "Nome do grupo SPG"
+        },
+        "nome_produtor": {
+          "type": "string",
+          "description": "Nome completo ou razão social do produtor"
+        },
+        "nome_unidade": {
+          "type": "string",
+          "description": "Nome da unidade de produção"
+        },
+        "ano_vigente": {
+          "type": "integer",
+          "description": "Ano de vigência do PMO",
+          "minimum": 2020,
+          "maximum": 2100
+        }
+      }
+    },
+    "dados": {
+      "type": "object",
+      "description": "Dados específicos do formulário (campos variam por tipo)"
+    },
+    "arquivos_anexados": {
+      "type": "object",
+      "description": "Arquivos anexados (PDFs, imagens em base64)",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "tipo": {
+            "type": "string",
+            "description": "MIME type do arquivo"
+          },
+          "tamanho": {
+            "type": "integer",
+            "description": "Tamanho em bytes"
+          },
+          "data_base64": {
+            "type": "string",
+            "description": "Arquivo codificado em base64"
+          },
+          "data_upload": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    "validacao": {
+      "type": "object",
+      "description": "Informações de validação do formulário",
+      "properties": {
+        "percentual_completo": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Percentual de preenchimento (0-100)"
+        },
+        "campos_obrigatorios_completos": {
+          "type": "boolean",
+          "description": "Indica se todos os campos obrigatórios foram preenchidos"
+        },
+        "erros": {
+          "type": "array",
+          "description": "Lista de erros de validação que impedem o envio",
+          "items": {
+            "type": "object",
+            "properties": {
+              "campo": {
+                "type": "string"
+              },
+              "mensagem": {
+                "type": "string"
+              },
+              "tipo": {
+                "type": "string",
+                "enum": ["obrigatorio", "formato", "valor_invalido", "regra_negocio"]
+              }
+            }
+          }
+        },
+        "avisos": {
+          "type": "array",
+          "description": "Lista de avisos/recomendações que não impedem o envio",
+          "items": {
+            "type": "object",
+            "properties": {
+              "campo": {
+                "type": "string"
+              },
+              "mensagem": {
+                "type": "string"
+              },
+              "tipo": {
+                "type": "string",
+                "enum": ["recomendacao", "atencao", "informacao"]
+              }
+            }
+          }
+        },
+        "data_validacao": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data/hora da última validação"
+        }
+      }
+    },
+    "historico": {
+      "type": "array",
+      "description": "Histórico de alterações do formulário",
+      "items": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "acao": {
+            "type": "string",
+            "enum": ["criacao", "edicao", "validacao", "envio", "aprovacao", "rejeicao"]
+          },
+          "usuario": {
+            "type": "string"
+          },
+          "observacoes": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "cadastro_geral_pmo_dados": {
+      "type": "object",
+      "description": "Estrutura específica para dados do Cadastro Geral PMO",
+      "properties": {
+        "tipo_certificacao": {
+          "type": "string",
+          "enum": ["ocs", "auditoria", "spg"]
+        },
+        "tipo_pessoa": {
+          "type": "string",
+          "enum": ["fisica", "juridica"]
+        },
+        "nome_completo": {
+          "type": "string"
+        },
+        "cpf_cnpj": {
+          "type": "string"
+        },
+        "nome_unidade_producao": {
+          "type": "string"
+        },
+        "escopo": {
+          "type": "object",
+          "properties": {
+            "hortalicas": {
+              "type": "boolean"
+            },
+            "frutas": {
+              "type": "boolean"
+            },
+            "cogumelos": {
+              "type": "boolean"
+            },
+            "medicinais": {
+              "type": "boolean"
+            },
+            "pecuaria": {
+              "type": "boolean"
+            },
+            "apicultura": {
+              "type": "boolean"
+            },
+            "proc_minimo": {
+              "type": "boolean"
+            },
+            "processamento": {
+              "type": "boolean"
+            }
+          }
+        },
+        "responsaveis": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "cpf_cnpj": {
+                "type": "string"
+              },
+              "funcao": {
+                "type": "string"
+              },
+              "telefone": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string",
+                "format": "email"
+              }
+            }
+          }
+        },
+        "endereco": {
+          "type": "object",
+          "properties": {
+            "cep": {
+              "type": "string"
+            },
+            "logradouro": {
+              "type": "string"
+            },
+            "numero": {
+              "type": "string"
+            },
+            "complemento": {
+              "type": "string"
+            },
+            "bairro": {
+              "type": "string"
+            },
+            "municipio": {
+              "type": "string"
+            },
+            "uf": {
+              "type": "string",
+              "maxLength": 2
+            },
+            "latitude": {
+              "type": "number",
+              "minimum": -90,
+              "maximum": 90
+            },
+            "longitude": {
+              "type": "number",
+              "minimum": -180,
+              "maximum": 180
+            }
+          }
+        }
+      }
+    },
+    "anexo_vegetal_dados": {
+      "type": "object",
+      "description": "Estrutura específica para dados do Anexo Vegetal",
+      "properties": {
+        "nome_fornecedor": {
+          "type": "string"
+        },
+        "nome_unidade_producao": {
+          "type": "string"
+        },
+        "data_preenchimento": {
+          "type": "string",
+          "format": "date"
+        },
+        "preparo_solo": {
+          "type": "object"
+        },
+        "praticas_conservacionistas": {
+          "type": "array"
+        },
+        "adubacao_nutricao": {
+          "type": "object"
+        },
+        "controle_pragas": {
+          "type": "object"
+        },
+        "produtos_insumos": {
+          "type": "array"
+        }
+      }
+    },
+    "anexo_animal_dados": {
+      "type": "object",
+      "description": "Estrutura específica para dados do Anexo Animal",
+      "properties": {
+        "especies_criadas": {
+          "type": "array"
+        },
+        "alimentacao": {
+          "type": "object"
+        },
+        "bem_estar_animal": {
+          "type": "object"
+        },
+        "manejo_sanitario": {
+          "type": "object"
+        },
+        "instalacoes": {
+          "type": "object"
+        }
+      }
+    },
+    "anexo_cogumelo_dados": {
+      "type": "object",
+      "description": "Estrutura específica para dados do Anexo Cogumelo",
+      "properties": {
+        "tipos_cogumelos": {
+          "type": "array"
+        },
+        "substrato": {
+          "type": "object"
+        },
+        "inoculo": {
+          "type": "object"
+        },
+        "ambiente_cultivo": {
+          "type": "object"
+        },
+        "controle_contaminacao": {
+          "type": "object"
+        }
+      }
+    },
+    "anexo_apicultura_dados": {
+      "type": "object",
+      "description": "Estrutura específica para dados do Anexo Apicultura",
+      "properties": {
+        "colmeias_apiarios": {
+          "type": "object"
+        },
+        "floradas": {
+          "type": "array"
+        },
+        "alimentacao_artificial": {
+          "type": "object"
+        },
+        "sanidade": {
+          "type": "object"
+        },
+        "produtos_apicolas": {
+          "type": "array"
+        }
+      }
+    }
+  }
+}

@@ -176,14 +176,50 @@ const AvaliacaoPMO = {
                 const text = await file.text();
                 dados = JSON.parse(text);
             }
-            // PDF (extração básica de metadata)
+            // PDF (extração de JSON embedado nos metadados)
             else if (file.type === 'application/pdf') {
                 const arrayBuffer = await file.arrayBuffer();
                 const pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
 
-                // Por enquanto, solicitar JSON
-                status.innerHTML = '<p class="status-warning">⚠️ Por favor, utilize o arquivo JSON exportado do PMO para melhor compatibilidade.</p>';
-                return;
+                // Tentar extrair JSON dos metadados do PDF
+                try {
+                    // Método 1: Extrair do campo Subject (onde embedamos o JSON em base64)
+                    const subject = pdfDoc.getSubject();
+
+                    if (subject && subject.startsWith('PMO-JSON-DATA:')) {
+                        // Extrair JSON do Subject (limitado)
+                        status.innerHTML = '<p class="status-warning">⚠️ PDF com JSON parcial detectado. Por favor, utilize o arquivo JSON de backup para dados completos.</p>';
+                        return;
+                    }
+
+                    // Método 2: Verificar se é PDF gerado pelo sistema
+                    const title = pdfDoc.getTitle();
+                    const author = pdfDoc.getAuthor();
+                    const creator = pdfDoc.getCreator();
+
+                    if (creator && creator.includes('Sistema PMO ANC')) {
+                        status.innerHTML = `
+                            <p class="status-info">
+                                ℹ️ PDF do Sistema PMO detectado.<br>
+                                <strong>Importante:</strong> Este PDF foi exportado com um arquivo JSON de backup.<br>
+                                Por favor, utilize o arquivo JSON correspondente para importar todos os dados:
+                            </p>
+                            <p class="status-info">
+                                <strong>Arquivo JSON esperado:</strong> ${file.name.replace('.pdf', '.json')}
+                            </p>
+                        `;
+                        return;
+                    }
+
+                    // PDF não reconhecido
+                    status.innerHTML = '<p class="status-warning">⚠️ PDF não contém dados JSON embedados. Por favor, utilize o arquivo JSON exportado do PMO.</p>';
+                    return;
+
+                } catch (pdfError) {
+                    console.error('Erro ao extrair metadados do PDF:', pdfError);
+                    status.innerHTML = '<p class="status-warning">⚠️ Erro ao ler metadados do PDF. Por favor, utilize o arquivo JSON exportado.</p>';
+                    return;
+                }
             }
             else {
                 throw new Error('Formato de arquivo não suportado');

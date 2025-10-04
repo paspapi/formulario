@@ -1175,7 +1175,7 @@ const CadastroGeralPMO = {
     },
 
     /**
-     * Exportar dados como JSON
+     * Exportar dados como JSON (conforme schema unificado v2.0.0)
      */
     exportarJSON() {
         const form = document.getElementById('form-cadastro-geral-pmo');
@@ -1184,15 +1184,27 @@ const CadastroGeralPMO = {
         const formData = new FormData(form);
         const data = {
             metadata: {
-                id_produtor: formData.get('cpf') || formData.get('cnpj') || '',
-                tipo_documento: ['cadastro-geral-pmo'],
-                data_extracao: new Date().toISOString(),
-                versao_schema: '1.0',
-                grupo_spg: 'ANC',
-                status_processamento: 'PREENCHIDO'
+                versao_schema: '2.0.0',
+                tipo_formulario: 'cadastro_geral_pmo',
+                data_criacao: formData.get('data_declaracao') || new Date().toISOString(),
+                ultima_atualizacao: new Date().toISOString(),
+                status: 'rascunho',
+                id_produtor: formData.get('cpf_cnpj') || '',
+                grupo_spg: formData.get('grupo_spg') || 'ANC',
+                nome_produtor: formData.get('nome_completo') || '',
+                nome_unidade: formData.get('nome_unidade_producao') || '',
+                ano_vigente: parseInt(formData.get('ano_vigente')) || new Date().getFullYear()
             },
             dados: {}
         };
+
+        // Adicionar PMO info se disponível
+        if (window.PMOStorageManager) {
+            const pmo = window.PMOStorageManager.getActivePMO();
+            if (pmo) {
+                data.metadata.id_pmo = pmo.id;
+            }
+        }
 
         // Converter todos os campos
         for (let [key, value] of formData.entries()) {
@@ -1207,19 +1219,41 @@ const CadastroGeralPMO = {
             }
         }
 
-        // Adicionar arquivos
-        data.arquivos = this.state.uploadedFiles;
+        // Adicionar arquivos anexados
+        if (this.state.uploadedFiles && Object.keys(this.state.uploadedFiles).length > 0) {
+            data.arquivos_anexados = {};
+            Object.keys(this.state.uploadedFiles).forEach(fileName => {
+                const file = this.state.uploadedFiles[fileName];
+                data.arquivos_anexados[fileName] = {
+                    nome: file.name,
+                    tipo: file.type,
+                    tamanho: file.size,
+                    data_base64: file.data,
+                    data_upload: new Date().toISOString()
+                };
+            });
+        }
+
+        // Adicionar informações de validação
+        data.validacao = {
+            percentual_completo: this.calculateProgress(),
+            data_validacao: new Date().toISOString()
+        };
 
         // Download
+        const pmoId = data.metadata.id_pmo || 'sem-pmo';
+        const fileName = `cadastro-geral-pmo_${pmoId}_${new Date().toISOString().split('T')[0]}.json`;
+
         const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `cadastro-geral-pmo-${data.metadata.id_produtor}-${new Date().toISOString().split('T')[0]}.json`;
+        a.download = fileName;
         a.click();
         URL.revokeObjectURL(url);
 
         this.showMessage('JSON exportado com sucesso!', 'success');
+        console.log('✅ Cadastro Geral PMO exportado:', fileName);
     },
 
     /**
