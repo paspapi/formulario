@@ -19,11 +19,8 @@
             <p>Gerenciamento centralizado de Planos de Manejo Orgânico</p>
 
             <div class="painel-actions">
-                <button class="btn btn-primary" onclick="PainelPMO.novoPMO()">
-                    ➕ Novo PMO
-                </button>
-                <button class="btn btn-secondary" onclick="PainelPMO.abrirModalUpload()">
-                    📤 Importar PDF/JSON
+                <button class="btn btn-primary" onclick="PainelPMO.abrirModalCriarPMO()">
+                    ➕ Criar PMO
                 </button>
                 <button class="btn btn-success" onclick="PainelPMO.novaAvaliacao()">
                     📋 Avaliar PMO
@@ -119,11 +116,45 @@
         </div>
     </div>
 
+    <!-- Modal de Criar PMO -->
+    <div id="modal-criar-pmo" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>➕ Criar PMO</h2>
+                <p style="color: var(--text-secondary); margin: 5px 0 0 0;">Escolha como deseja criar o PMO</p>
+            </div>
+            <div class="modal-body">
+                <div class="criar-pmo-options">
+                    <div class="criar-option" onclick="PainelPMO.criarNovoPMO()">
+                        <div class="criar-option-icon">📝</div>
+                        <div class="criar-option-title">Novo PMO em Branco</div>
+                        <div class="criar-option-desc">Preencher formulário do zero</div>
+                    </div>
+                    <div class="criar-option" onclick="PainelPMO.abrirModalUpload('pdf')">
+                        <div class="criar-option-icon">📄</div>
+                        <div class="criar-option-title">Atualizar PMO - PDF</div>
+                        <div class="criar-option-desc">Importar PDF com metadados</div>
+                    </div>
+                    <div class="criar-option" onclick="PainelPMO.abrirModalUpload('json')">
+                        <div class="criar-option-icon">📦</div>
+                        <div class="criar-option-title">Atualizar PMO - JSON</div>
+                        <div class="criar-option-desc">Importar arquivo JSON exportado</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="PainelPMO.fecharModalCriarPMO()">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal de Upload -->
     <div id="modal-upload" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>📤 Upload de PDF/JSON do PMO</h2>
+                <h2 id="modal-upload-title">📤 Atualizar PMO</h2>
             </div>
             <div class="modal-body">
                 <div class="upload-area" id="upload-area">
@@ -134,8 +165,8 @@
                         onchange="PainelPMO.handleFileSelect(event)"
                     >
                     <div class="upload-icon">📄</div>
-                    <div class="upload-text">Clique ou arraste o PDF/JSON aqui</div>
-                    <div class="upload-hint">PDF com metadados ou arquivo JSON exportado (geral ou com escopos)</div>
+                    <div class="upload-text">Clique ou arraste o arquivo aqui</div>
+                    <div class="upload-hint" id="upload-hint">PDF com metadados ou arquivo JSON exportado</div>
                 </div>
                 <div id="upload-status" style="margin-top: 15px; display: none;"></div>
             </div>

@@ -195,6 +195,7 @@ const PainelPMO = {
     criarCard(pmo) {
         const card = document.createElement('div');
         card.className = 'pmo-card fade-in';
+        card.id = `pmo-card-${pmo.id}`;
 
         // Header do card
         const header = document.createElement('div');
@@ -297,11 +298,49 @@ const PainelPMO = {
     },
 
     /**
-     * Criar novo PMO
+     * Abrir modal de criar PMO
      */
-    novoPMO() {
-        // Redirecionar para cadastro geral
-        window.location.href = '../cadastro-geral-pmo/index.html';
+    abrirModalCriarPMO() {
+        const modal = document.getElementById('modal-criar-pmo');
+        if (modal) modal.classList.add('active');
+    },
+
+    /**
+     * Fechar modal de criar PMO
+     */
+    fecharModalCriarPMO() {
+        const modal = document.getElementById('modal-criar-pmo');
+        if (modal) modal.classList.remove('active');
+    },
+
+    /**
+     * Criar novo PMO em branco
+     */
+    criarNovoPMO() {
+        try {
+            // Criar PMO vazio
+            const pmoId = window.PMOStorageManager.createPMO({
+                nome: 'Novo PMO',
+                tipo_pessoa: 'fisica'
+            });
+
+            this.showMessage('PMO criado com sucesso!', 'success');
+
+            // Fechar modal
+            this.fecharModalCriarPMO();
+
+            // Recarregar lista
+            this.carregarPMOs();
+
+            // Destacar card criado após renderização
+            setTimeout(() => {
+                this.destacarCard(pmoId);
+            }, 300);
+
+        } catch (error) {
+            console.error('Erro ao criar PMO:', error);
+            this.showMessage('Erro ao criar PMO: ' + error.message, 'error');
+        }
     },
 
     /**
@@ -426,8 +465,30 @@ const PainelPMO = {
     /**
      * Abrir modal de upload
      */
-    abrirModalUpload() {
+    abrirModalUpload(tipo = 'all') {
+        // Fechar modal de criar PMO
+        this.fecharModalCriarPMO();
+
         const modal = document.getElementById('modal-upload');
+        const title = document.getElementById('modal-upload-title');
+        const hint = document.getElementById('upload-hint');
+        const input = document.getElementById('upload-input');
+
+        // Configurar modal baseado no tipo
+        if (tipo === 'pdf') {
+            if (title) title.textContent = '📄 Atualizar PMO - PDF';
+            if (hint) hint.textContent = 'PDF com metadados do PMO';
+            if (input) input.accept = 'application/pdf';
+        } else if (tipo === 'json') {
+            if (title) title.textContent = '📦 Atualizar PMO - JSON';
+            if (hint) hint.textContent = 'Arquivo JSON exportado (geral ou com escopos)';
+            if (input) input.accept = 'application/json';
+        } else {
+            if (title) title.textContent = '📤 Atualizar PMO';
+            if (hint) hint.textContent = 'PDF com metadados ou arquivo JSON exportado';
+            if (input) input.accept = 'application/pdf,application/json';
+        }
+
         if (modal) modal.classList.add('active');
     },
 
@@ -570,7 +631,12 @@ const PainelPMO = {
 
             setTimeout(() => {
                 this.fecharModalUpload();
-                this.renderPMOs();
+                this.carregarPMOs();
+
+                // Destacar PMO atualizado
+                setTimeout(() => {
+                    this.destacarCard(pmoId);
+                }, 300);
             }, 1500);
 
         } catch (error) {
@@ -681,6 +747,33 @@ const PainelPMO = {
         if (!isoString) return '-';
         const date = new Date(isoString);
         return date.toLocaleDateString('pt-BR');
+    },
+
+    /**
+     * Destacar card (scroll + animação)
+     */
+    destacarCard(pmoId) {
+        const cardEl = document.getElementById(`pmo-card-${pmoId}`);
+        if (!cardEl) {
+            console.warn(`Card ${pmoId} não encontrado para destacar`);
+            return;
+        }
+
+        // Scroll suave até o card
+        cardEl.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+        });
+
+        // Adicionar classe de highlight
+        setTimeout(() => {
+            cardEl.classList.add('highlighted');
+
+            // Remover classe após animação
+            setTimeout(() => {
+                cardEl.classList.remove('highlighted');
+            }, 1500);
+        }, 500);
     },
 
     /**
