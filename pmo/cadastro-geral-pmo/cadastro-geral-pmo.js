@@ -33,6 +33,8 @@ const CadastroGeralPMO = {
 
         if (modoCriar) {
             console.log('📝 Modo criação de novo PMO');
+            // Limpar dados em cache do localStorage para garantir formulário em branco
+            localStorage.removeItem(this.config.storageKey);
             // Não carregar dados, começar em branco
         } else {
             // Carregar dados salvos

@@ -322,6 +322,11 @@ const PainelPMO = {
             // Fechar modal
             this.fecharModalCriarPMO();
 
+            // Limpar PMO ativo para garantir formulário em branco
+            if (window.PMOStorageManager) {
+                window.PMOStorageManager.setActivePMO(null);
+            }
+
             // Redirecionar para cadastro geral em modo de criação
             // O PMO só será criado no storage quando o usuário salvar o formulário
             window.location.href = '../cadastro-geral-pmo/index.html?modo=criar';

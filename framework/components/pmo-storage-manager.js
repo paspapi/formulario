@@ -328,6 +328,14 @@ class PMOStorageManager {
         const registry = this.getRegistry();
         if (!registry) return false;
 
+        // Permitir null para limpar PMO ativo
+        if (id === null) {
+            registry.current_pmo_id = null;
+            this.saveRegistry(registry);
+            console.log(`✅ PMO ativo limpo`);
+            return true;
+        }
+
         // Verificar se PMO existe
         const exists = registry.pmos.find(p => p.id === id);
         if (!exists) {
