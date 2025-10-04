@@ -344,6 +344,29 @@
     transform: scale(1.1);
 }
 
+/* ===== BUTTON INLINE WITH TEXT ===== */
+.btn-inline-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    margin-left: 8px;
+    background: var(--primary);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: var(--text-sm);
+    white-space: nowrap;
+    transition: all var(--transition-fast);
+}
+
+.btn-inline-text:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
 /* ===== FILE PREVIEW MELHORADO ===== */
 .file-preview {
     display: flex;
