@@ -518,21 +518,42 @@ const CadastroGeralPMO = {
      * Abrir modal de coordenadas
      */
     abrirModalCoordenadas() {
-        if (!window.LocationModal) {
-            alert('Modal de coordenadas não disponível. Por favor, recarregue a página.');
+        // Verificar se LocationModal está disponível
+        if (typeof window.LocationModal === 'undefined' || !window.LocationModal.open) {
+            // Tentar novamente após pequeno delay (pode estar carregando)
+            setTimeout(() => {
+                if (typeof window.LocationModal === 'undefined' || !window.LocationModal.open) {
+                    alert('Modal de coordenadas não disponível. Por favor, recarregue a página.');
+                    return;
+                }
+                this.abrirModalCoordenadas();
+            }, 100);
             return;
         }
+
+        // Obter endereço atual para o modal
+        const endereco = document.getElementById('endereco')?.value || '';
+        const bairro = document.getElementById('bairro')?.value || '';
+        const municipio = document.getElementById('municipio')?.value || '';
+        const uf = document.getElementById('uf')?.value || '';
+        const cep = document.getElementById('cep')?.value || '';
+
+        const enderecoCompleto = [endereco, bairro, municipio, uf, cep]
+            .filter(v => v)
+            .join(', ');
 
         // Configurar callback para quando confirmar no modal
         window.LocationModal.open({
             latInput: 'latitude',
             lonInput: 'longitude',
+            address: enderecoCompleto,
             onConfirm: (coords) => {
                 // Preencher o campo único com as coordenadas do modal
                 const coordenadasInput = document.getElementById('coordenadas');
-                if (coordenadasInput && coords.latitude && coords.longitude) {
+                if (coordenadasInput && coords && coords.latitude && coords.longitude) {
                     coordenadasInput.value = `${coords.latitude}, ${coords.longitude}`;
                     this.parseCoordenadas();
+                    this.state.isModified = true;
                 }
             }
         });

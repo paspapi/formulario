@@ -514,5 +514,8 @@ function abrirModalLocalizacao(latInputId, lonInputId, address = null) {
     });
 }
 
+// Expor globalmente
+window.LocationModal = LocationModal;
+
 // Auto-inicializar se houver dados de localização na página
 console.log('✅ LocationModal carregado e pronto para uso');
