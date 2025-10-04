@@ -1043,10 +1043,17 @@ const CadastroGeralPMO = {
                 return;
             }
 
+            // VERIFICAR SE É FORMATO NOVO (com metadata e dados aninhados) OU ANTIGO (flat)
+            if (data.metadata && data.dados) {
+                console.log('📥 Formato novo detectado (importação JSON), convertendo...');
+                this.preencherFormularioComJSON(data);
+                return;
+            }
+
             const form = document.getElementById('form-cadastro-geral-pmo');
             if (!form) return;
 
-            // Preencher campos
+            // Preencher campos (formato antigo - flat)
             Object.keys(data).forEach(key => {
                 if (key === 'uploadedFiles') {
                     this.state.uploadedFiles = data[key] || {};
