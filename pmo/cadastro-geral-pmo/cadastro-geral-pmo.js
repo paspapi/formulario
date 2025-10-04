@@ -1043,12 +1043,24 @@ const CadastroGeralPMO = {
                 return;
             }
 
+            // DEBUG: Verificar estrutura dos dados recebidos
+            console.log('🔍 Estrutura dos dados carregados:', {
+                tipo: typeof data,
+                keys: Object.keys(data),
+                tem_metadata: 'metadata' in data,
+                tem_dados: 'dados' in data,
+                valor_metadata: data.metadata,
+                valor_dados: data.dados ? 'EXISTE' : 'NÃO EXISTE'
+            });
+
             // VERIFICAR SE É FORMATO NOVO (com metadata e dados aninhados) OU ANTIGO (flat)
             if (data.metadata && data.dados) {
                 console.log('📥 Formato novo detectado (importação JSON), convertendo...');
                 this.preencherFormularioComJSON(data);
                 return;
             }
+
+            console.log('📝 Formato antigo detectado, usando método tradicional...');
 
             const form = document.getElementById('form-cadastro-geral-pmo');
             if (!form) return;
