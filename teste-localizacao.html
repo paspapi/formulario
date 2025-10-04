@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste - Localização Exata da Propriedade</title>
+    <link rel="stylesheet" href="./framework/core/pmo-framework-full.css">
+    <style>
+        body {
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            background: #f9fafb;
+        }
+        .test-header {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .test-header h1 {
+            margin: 0 0 8px 0;
+        }
+        .test-header p {
+            margin: 0;
+            opacity: 0.9;
+        }
+        .content-wrapper {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #374151;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .features-list {
+            background: #f0f9ff;
+            border: 2px solid #bae6fd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 24px;
+        }
+        .features-list h3 {
+            margin-top: 0;
+            color: #0c4a6e;
+        }
+        .features-list ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .features-list li {
+            margin-bottom: 8px;
+            color: #1e40af;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-header">
+        <h1>📍 Teste - Localização Exata da Propriedade</h1>
+        <p>Componente de geolocalização integrado com Google Maps</p>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="form-group">
+            <label for="endereco_completo">Endereço Completo</label>
+            <input
+                type="text"
+                id="endereco_completo"
+                name="endereco_completo"
+                placeholder="Rua, número, bairro, cidade - UF"
+                value="Av. Paulista, 1000, Bela Vista, São Paulo - SP"
+            >
+            <p class="help-text">Este endereço será usado para abrir o Google Maps</p>
+        </div>
+
+        <!-- COMPONENTE DE LOCALIZAÇÃO -->
+        <div class="localizacao-exata">
+            <h3>📍 Localização Exata da Propriedade</h3>
+
+            <a href="javascript:abrirGoogleMaps()" class="btn-google-maps">
+                🗺️ Abrir Google Maps com Este Endereço
+            </a>
+
+            <div class="instrucoes-coordenadas">
+                <strong>📋 Como obter as coordenadas:</strong>
+                <ol>
+                    <li>Clique no botão acima para abrir o Google Maps</li>
+                    <li>Encontre o local exato da sua propriedade</li>
+                    <li>Clique com <strong>botão direito</strong> no ponto exato</li>
+                    <li>Selecione <strong>"Copiar coordenadas"</strong> no menu</li>
+                    <li>Cole as coordenadas no campo abaixo (serão separadas automaticamente)</li>
+                </ol>
+            </div>
+
+            <div class="input-coordenadas">
+                <label for="coordenadas-google-maps">
+                    Coordenadas do Google Maps <span class="required">*</span>
+                </label>
+                <input
+                    type="text"
+                    id="coordenadas-google-maps"
+                    name="coordenadas_google_maps"
+                    placeholder="Cole aqui as coordenadas copiadas do Google Maps (ex: -22.9068467, -47.0632881)"
+                    autocomplete="off"
+                >
+                <p class="help-text">
+                    Cole as coordenadas exatamente como copiou do Google Maps.
+                    Elas serão separadas automaticamente nos campos abaixo.
+                </p>
+            </div>
+
+            <div class="campos-coordenadas">
+                <div class="latitude">
+                    <label for="latitude">Latitude</label>
+                    <input
+                        type="text"
+                        id="latitude"
+                        name="latitude"
+                        placeholder="-22.9068467"
+                        readonly
+                    >
+                </div>
+                <div class="longitude">
+                    <label for="longitude">Longitude</label>
+                    <input
+                        type="text"
+                        id="longitude"
+                        name="longitude"
+                        placeholder="-47.0632881"
+                        readonly
+                    >
+                </div>
+            </div>
+
+            <div class="confirmacao-localizacao">
+                <h4>✅ Localização Confirmada</h4>
+                <p>As coordenadas foram validadas e salvas com sucesso!</p>
+                <a href="javascript:verificarLocalizacao()" class="btn-verificar-maps">
+                    🔍 Verificar Localização no Google Maps
+                </a>
+                <div class="coordenadas-display" id="coords-display"></div>
+            </div>
+        </div>
+
+        <div class="features-list">
+            <h3>✅ Funcionalidades Implementadas</h3>
+            <ul>
+                <li>✅ Botão para abrir Google Maps com endereço pré-preenchido</li>
+                <li>✅ Instruções passo a passo para copiar coordenadas</li>
+                <li>✅ Auto-separação de coordenadas ao colar</li>
+                <li>✅ Suporte para múltiplos formatos de coordenadas</li>
+                <li>✅ Validação automática de latitude e longitude</li>
+                <li>✅ Feedback visual quando coordenadas são válidas</li>
+                <li>✅ Botão para verificar localização no mapa</li>
+                <li>✅ Campos readonly para evitar edição manual incorreta</li>
+                <li>✅ Design responsivo para mobile</li>
+                <li>✅ Integração com framework PMO</li>
+            </ul>
+        </div>
+
+        <div style="margin-top: 24px; padding: 16px; background: #fef3c7; border: 2px solid #fbbf24; border-radius: 8px;">
+            <h4 style="margin-top: 0; color: #78350f;">💡 Teste Rápido</h4>
+            <p style="margin-bottom: 12px; color: #92400e;">Cole estas coordenadas de exemplo no campo acima:</p>
+            <code style="display: block; background: white; padding: 8px; border-radius: 4px; color: #1f2937;">
+                -22.9068467, -47.0632881
+            </code>
+        </div>
+    </div>
+
+    <script src="./framework/core/pmo-framework.js"></script>
+    <script src="./framework/components/location-picker.js"></script>
+    <script>
+        // Exemplo de callback personalizado
+        LocationPicker.init({
+            onLocationChange: function(coords) {
+                console.log('Coordenadas atualizadas:', coords);
+
+                // Atualizar display de coordenadas
+                const display = document.getElementById('coords-display');
+                if (display) {
+                    display.innerHTML = `
+                        <strong>Latitude:</strong> ${coords.latitude}<br>
+                        <strong>Longitude:</strong> ${coords.longitude}
+                    `;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

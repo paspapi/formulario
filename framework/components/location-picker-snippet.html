@@ -1,0 +1,131 @@
+<!-- ===================================================== -->
+<!-- SNIPPET: Localização Exata da Propriedade           -->
+<!-- Copie e cole este código no seu formulário PMO      -->
+<!-- ===================================================== -->
+
+<!-- 1. ADICIONAR NO <head> ou antes de </body> -->
+<script src="../../framework/components/location-picker.js"></script>
+
+<!-- 2. ADICIONAR NO FORMULÁRIO (onde quiser que apareça) -->
+<div class="localizacao-exata">
+    <h3>📍 Localização Exata da Propriedade</h3>
+
+    <a href="javascript:abrirGoogleMaps()" class="btn-google-maps">
+        🗺️ Abrir Google Maps com Este Endereço
+    </a>
+
+    <div class="instrucoes-coordenadas">
+        <strong>📋 Como obter as coordenadas:</strong>
+        <ol>
+            <li>Clique no botão acima para abrir o Google Maps</li>
+            <li>Encontre o local exato da sua propriedade</li>
+            <li>Clique com <strong>botão direito</strong> no ponto exato</li>
+            <li>Selecione <strong>"Copiar coordenadas"</strong> no menu</li>
+            <li>Cole as coordenadas no campo abaixo (serão separadas automaticamente)</li>
+        </ol>
+    </div>
+
+    <div class="input-coordenadas">
+        <label for="coordenadas-google-maps">
+            Coordenadas do Google Maps <span class="required">*</span>
+        </label>
+        <input
+            type="text"
+            id="coordenadas-google-maps"
+            name="coordenadas_google_maps"
+            placeholder="Cole aqui as coordenadas copiadas do Google Maps (ex: -22.9068467, -47.0632881)"
+            autocomplete="off"
+        >
+        <p class="help-text">
+            Cole as coordenadas exatamente como copiou do Google Maps.
+            Elas serão separadas automaticamente nos campos abaixo.
+        </p>
+    </div>
+
+    <div class="campos-coordenadas">
+        <div class="latitude">
+            <label for="latitude">Latitude</label>
+            <input
+                type="text"
+                id="latitude"
+                name="latitude"
+                placeholder="-22.9068467"
+                readonly
+            >
+        </div>
+        <div class="longitude">
+            <label for="longitude">Longitude</label>
+            <input
+                type="text"
+                id="longitude"
+                name="longitude"
+                placeholder="-47.0632881"
+                readonly
+            >
+        </div>
+    </div>
+
+    <div class="confirmacao-localizacao">
+        <h4>✅ Localização Confirmada</h4>
+        <p>As coordenadas foram validadas e salvas com sucesso!</p>
+        <a href="javascript:verificarLocalizacao()" class="btn-verificar-maps">
+            🔍 Verificar Localização no Google Maps
+        </a>
+    </div>
+</div>
+
+<!-- ===================================================== -->
+<!-- CONFIGURAÇÃO (OPCIONAL)                              -->
+<!-- Adicione este script se precisar personalizar        -->
+<!-- ===================================================== -->
+<script>
+// Configuração básica (auto-inicializa)
+// LocationPicker.init();
+
+// OU configuração personalizada:
+LocationPicker.init({
+    // ID do campo de endereço (usado para abrir Google Maps)
+    addressFieldId: 'endereco_completo',
+
+    // IDs dos campos de coordenadas
+    coordsInputId: 'coordenadas-google-maps',
+    latitudeId: 'latitude',
+    longitudeId: 'longitude',
+
+    // Callback quando coordenadas mudam (opcional)
+    onLocationChange: function(coords) {
+        console.log('Coordenadas atualizadas:', coords);
+        // Faça algo com coords.latitude e coords.longitude
+    }
+});
+</script>
+
+<!-- ===================================================== -->
+<!-- API DO COMPONENTE                                    -->
+<!-- ===================================================== -->
+<!--
+Funções disponíveis:
+
+1. Abrir Google Maps
+   LocationPicker.openGoogleMaps()
+   // ou
+   abrirGoogleMaps()
+
+2. Verificar localização
+   LocationPicker.verifyLocation()
+   // ou
+   verificarLocalizacao()
+
+3. Obter coordenadas atuais
+   const coords = LocationPicker.getCoordinates()
+   // Retorna: { latitude: -22.906, longitude: -47.063 }
+
+4. Definir coordenadas programaticamente
+   LocationPicker.setCoordinates(-22.906, -47.063)
+
+5. Limpar coordenadas
+   LocationPicker.clearCoordinates()
+
+6. Validar coordenadas
+   const isValid = LocationPicker.validateCoordinates()
+-->

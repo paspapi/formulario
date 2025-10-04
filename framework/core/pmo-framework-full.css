@@ -2479,3 +2479,234 @@ textarea {
         width: 100%;
     }
 }
+
+/* ===== LOCATION PICKER STYLES ===== */
+.localizacao-exata {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border: 2px solid var(--primary-200);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+}
+
+.localizacao-exata h3 {
+    margin-top: 0;
+    color: var(--primary-700);
+    font-size: 1.25rem;
+    margin-bottom: 16px;
+}
+
+.btn-google-maps {
+    display: inline-block;
+    background: linear-gradient(135deg, #4285f4, #34a853);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 16px;
+}
+
+.btn-google-maps:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    color: white;
+    text-decoration: none;
+}
+
+.instrucoes-coordenadas {
+    background: white;
+    border-left: 4px solid var(--primary-500);
+    padding: 16px;
+    border-radius: 6px;
+    margin: 16px 0;
+}
+
+.instrucoes-coordenadas strong {
+    color: var(--primary-700);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.instrucoes-coordenadas ol {
+    margin: 8px 0 0 0;
+    padding-left: 20px;
+    color: var(--gray-700);
+}
+
+.instrucoes-coordenadas ol li {
+    margin-bottom: 6px;
+    line-height: 1.5;
+}
+
+.instrucoes-coordenadas ol li strong {
+    display: inline;
+    color: var(--primary-600);
+    font-weight: 600;
+}
+
+.input-coordenadas {
+    margin: 16px 0;
+}
+
+.input-coordenadas label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--gray-800);
+}
+
+.input-coordenadas input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--gray-300);
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.input-coordenadas input:focus {
+    outline: none;
+    border-color: var(--primary-500);
+    box-shadow: 0 0 0 3px var(--primary-100);
+}
+
+.input-coordenadas input::placeholder {
+    color: var(--gray-400);
+    font-size: 13px;
+}
+
+.campos-coordenadas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 16px 0;
+}
+
+.campos-coordenadas .latitude,
+.campos-coordenadas .longitude {
+    display: flex;
+    flex-direction: column;
+}
+
+.campos-coordenadas label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--gray-800);
+    font-size: 14px;
+}
+
+.campos-coordenadas input {
+    padding: 10px;
+    border: 2px solid var(--gray-300);
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: "Courier New", monospace;
+    transition: all 0.2s;
+}
+
+.campos-coordenadas input:focus {
+    outline: none;
+    border-color: var(--primary-500);
+    box-shadow: 0 0 0 3px var(--primary-100);
+}
+
+.campos-coordenadas input.valid {
+    border-color: var(--success);
+    background-color: var(--success-light);
+}
+
+.campos-coordenadas input.invalid {
+    border-color: var(--error);
+    background-color: var(--error-light);
+}
+
+.confirmacao-localizacao {
+    display: none;
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    border: 2px solid var(--success);
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 16px;
+}
+
+.confirmacao-localizacao h4 {
+    margin: 0 0 12px 0;
+    color: var(--success-dark);
+    font-size: 1rem;
+}
+
+.btn-verificar-maps {
+    display: inline-block;
+    background: white;
+    color: var(--primary-600);
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    border: 2px solid var(--primary-500);
+    transition: all 0.3s ease;
+}
+
+.btn-verificar-maps:hover {
+    background: var(--primary-500);
+    color: white;
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.coordenadas-display {
+    background: white;
+    padding: 12px;
+    border-radius: 6px;
+    margin-top: 12px;
+    font-family: "Courier New", monospace;
+    font-size: 14px;
+    color: var(--gray-700);
+    border: 1px solid var(--gray-200);
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+}
+
+@media (max-width: 640px) {
+    .localizacao-exata {
+        padding: 16px;
+    }
+
+    .campos-coordenadas {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .btn-google-maps {
+        display: block;
+        text-align: center;
+        width: 100%;
+    }
+
+    .instrucoes-coordenadas ol {
+        font-size: 14px;
+    }
+}
