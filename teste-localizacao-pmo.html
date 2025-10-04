@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste - Localização PMO (com campos de endereço)</title>
+    <link rel="stylesheet" href="./framework/core/pmo-framework-full.css">
+    <style>
+        body {
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            background: #f9fafb;
+        }
+        .test-header {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .test-header h1 {
+            margin: 0 0 8px 0;
+        }
+        .form-section {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .form-section h2 {
+            margin-top: 0;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #374151;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .help-text {
+            margin-top: 4px;
+            font-size: 13px;
+            color: #6b7280;
+        }
+        .required {
+            color: #ef4444;
+        }
+        .demo-info {
+            background: #fef3c7;
+            border: 2px solid #fbbf24;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        .demo-info h4 {
+            margin-top: 0;
+            color: #78350f;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-header">
+        <h1>📍 Teste - Localização com Campos de Endereço do PMO</h1>
+        <p>Demonstração de integração automática com campos existentes</p>
+    </div>
+
+    <div class="demo-info">
+        <h4>💡 Como testar:</h4>
+        <ol style="margin: 8px 0 0 0; padding-left: 20px; color: #92400e;">
+            <li>Preencha os campos de endereço abaixo (já tem dados de exemplo)</li>
+            <li>Clique em "Abrir Google Maps" - o mapa abrirá com o endereço já localizado</li>
+            <li>Ajuste para o ponto exato e copie as coordenadas</li>
+            <li>Cole no campo de coordenadas e veja a mágica acontecer! ✨</li>
+        </ol>
+    </div>
+
+    <!-- SEÇÃO 2: ENDEREÇO (simulando o formulário real do PMO) -->
+    <section class="form-section" id="secao-endereco">
+        <h2>📍 2. Endereço da Propriedade</h2>
+
+        <div class="form-group">
+            <label for="cep">
+                CEP <span class="required">*</span>
+            </label>
+            <input
+                type="text"
+                id="cep"
+                name="cep"
+                placeholder="00000-000"
+                value="13010-111"
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="endereco">
+                Endereço (Rua, Número, Complemento) <span class="required">*</span>
+            </label>
+            <input
+                type="text"
+                id="endereco"
+                name="endereco"
+                placeholder="Rua, número, complemento"
+                value="Av. Francisco Glicério, 935"
+            >
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="bairro">
+                    Bairro <span class="required">*</span>
+                </label>
+                <input
+                    type="text"
+                    id="bairro"
+                    name="bairro"
+                    placeholder="Nome do bairro"
+                    value="Centro"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="municipio">
+                    Município <span class="required">*</span>
+                </label>
+                <input
+                    type="text"
+                    id="municipio"
+                    name="municipio"
+                    placeholder="Nome do município"
+                    value="Campinas"
+                >
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="uf">
+                Estado (UF) <span class="required">*</span>
+            </label>
+            <select id="uf" name="uf">
+                <option value="">Selecione...</option>
+                <option value="SP" selected>São Paulo</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="MG">Minas Gerais</option>
+                <option value="RS">Rio Grande do Sul</option>
+                <option value="PR">Paraná</option>
+                <option value="SC">Santa Catarina</option>
+            </select>
+        </div>
+    </section>
+
+    <!-- SEÇÃO 3: LOCALIZAÇÃO EXATA -->
+    <section class="form-section" id="secao-localizacao">
+        <h2>📍 3. Localização Exata da Propriedade</h2>
+
+        <div class="localizacao-exata">
+            <a href="javascript:abrirGoogleMaps()" class="btn-google-maps">
+                🗺️ Abrir Google Maps com Este Endereço
+            </a>
+
+            <div class="instrucoes-coordenadas">
+                <strong>📋 Como obter as coordenadas:</strong>
+                <ol>
+                    <li>Clique no botão acima (o Google Maps abrirá com seu endereço já preenchido)</li>
+                    <li>Ajuste o mapa para encontrar o <strong>ponto exato</strong> da sua propriedade</li>
+                    <li>Clique com <strong>botão direito</strong> no ponto exato</li>
+                    <li>Selecione <strong>"Copiar coordenadas"</strong> no menu</li>
+                    <li>Cole as coordenadas no campo abaixo</li>
+                </ol>
+            </div>
+
+            <div class="input-coordenadas">
+                <label for="coordenadas-google-maps">
+                    Coordenadas do Google Maps <span class="required">*</span>
+                </label>
+                <input
+                    type="text"
+                    id="coordenadas-google-maps"
+                    name="coordenadas_google_maps"
+                    placeholder="Cole aqui as coordenadas copiadas do Google Maps (ex: -22.9068467, -47.0632881)"
+                    autocomplete="off"
+                >
+                <p class="help-text">
+                    Cole as coordenadas exatamente como copiou do Google Maps.
+                    Elas serão separadas automaticamente.
+                </p>
+            </div>
+
+            <div class="campos-coordenadas">
+                <div class="latitude">
+                    <label for="latitude">
+                        Latitude <span class="required">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        id="latitude"
+                        name="latitude"
+                        placeholder="-22.9068467"
+                        readonly
+                    >
+                </div>
+                <div class="longitude">
+                    <label for="longitude">
+                        Longitude <span class="required">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        id="longitude"
+                        name="longitude"
+                        placeholder="-47.0632881"
+                        readonly
+                    >
+                </div>
+            </div>
+
+            <div class="confirmacao-localizacao">
+                <h4>✅ Localização Confirmada</h4>
+                <p>As coordenadas foram validadas com sucesso!</p>
+                <a href="javascript:verificarLocalizacao()" class="btn-verificar-maps">
+                    🔍 Verificar Localização no Google Maps
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div style="background: #f0f9ff; border: 2px solid #bae6fd; border-radius: 8px; padding: 20px; margin-top: 20px;">
+        <h3 style="margin-top: 0; color: #0c4a6e;">✅ O que foi implementado</h3>
+        <ul style="color: #1e40af; margin: 0; padding-left: 20px;">
+            <li>✅ <strong>Auto-detecção de campos de endereço</strong> - usa os IDs padrão do PMO</li>
+            <li>✅ <strong>Montagem automática do endereço</strong> - junta todos os campos</li>
+            <li>✅ <strong>Link direto para Google Maps</strong> - abre com endereço já localizado</li>
+            <li>✅ <strong>Zero configuração</strong> - funciona automaticamente</li>
+            <li>✅ <strong>Validação automática</strong> - feedback visual quando válido</li>
+            <li>✅ <strong>Campos readonly</strong> - usuário não edita lat/lng manualmente</li>
+            <li>✅ <strong>Verificação posterior</strong> - botão para conferir no mapa</li>
+        </ul>
+
+        <div style="margin-top: 16px; padding: 12px; background: white; border-radius: 6px;">
+            <strong style="color: #78350f;">💡 Teste com estas coordenadas de Campinas:</strong>
+            <code style="display: block; margin-top: 8px; padding: 8px; background: #fef3c7; border-radius: 4px;">
+                -22.9068467, -47.0632881
+            </code>
+        </div>
+    </div>
+
+    <script src="./framework/core/pmo-framework.js"></script>
+    <script src="./framework/components/location-picker.js"></script>
+    <script>
+        // O componente auto-inicializa e detecta os campos padrão do PMO
+        // Não precisa de configuração adicional!
+
+        console.log('✅ LocationPicker pronto para uso');
+        console.log('Campos detectados:', LocationPicker.config.addressFields);
+
+        // Exemplo de uso da API
+        setTimeout(() => {
+            const endereco = LocationPicker.getFullAddress();
+            if (endereco) {
+                console.log('📍 Endereço completo montado:', endereco);
+            }
+        }, 500);
+    </script>
+</body>
+</html>

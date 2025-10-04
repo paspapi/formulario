@@ -16,7 +16,14 @@ const LocationPicker = {
      */
     init(config = {}) {
         this.config = {
-            addressFieldId: config.addressFieldId || 'endereco_completo',
+            // Campos de endereço do PMO (usa campos existentes)
+            addressFields: config.addressFields || {
+                endereco: 'endereco',
+                bairro: 'bairro',
+                municipio: 'municipio',
+                uf: 'uf',
+                cep: 'cep'
+            },
             coordsInputId: config.coordsInputId || 'coordenadas-google-maps',
             latitudeId: config.latitudeId || 'latitude',
             longitudeId: config.longitudeId || 'longitude',
@@ -181,18 +188,56 @@ const LocationPicker = {
     },
 
     /**
+     * Monta o endereço completo a partir dos campos do formulário
+     * @returns {string} Endereço completo formatado
+     */
+    getFullAddress() {
+        const fields = this.config.addressFields;
+        const parts = [];
+
+        // Endereço (rua, número, complemento)
+        const endereco = document.getElementById(fields.endereco);
+        if (endereco && endereco.value) {
+            parts.push(endereco.value);
+        }
+
+        // Bairro
+        const bairro = document.getElementById(fields.bairro);
+        if (bairro && bairro.value) {
+            parts.push(bairro.value);
+        }
+
+        // Município
+        const municipio = document.getElementById(fields.municipio);
+        if (municipio && municipio.value) {
+            parts.push(municipio.value);
+        }
+
+        // UF (Estado)
+        const uf = document.getElementById(fields.uf);
+        if (uf && uf.value) {
+            parts.push(uf.value);
+        }
+
+        // CEP
+        const cep = document.getElementById(fields.cep);
+        if (cep && cep.value) {
+            parts.push(cep.value);
+        }
+
+        return parts.join(', ');
+    },
+
+    /**
      * Abre Google Maps com o endereço ou coordenadas
-     * @param {string} query - Endereço ou coordenadas
+     * @param {string} query - Endereço ou coordenadas (opcional)
      */
     openGoogleMaps(query = null) {
         let searchQuery = query;
 
-        // Se não passou query, tenta pegar do campo de endereço
+        // Se não passou query, monta a partir dos campos de endereço
         if (!searchQuery) {
-            const addressInput = document.getElementById(this.config.addressFieldId);
-            if (addressInput && addressInput.value) {
-                searchQuery = addressInput.value;
-            }
+            searchQuery = this.getFullAddress();
         }
 
         // Se ainda não tem query, tenta usar coordenadas atuais
@@ -208,6 +253,7 @@ const LocationPicker = {
         // Se ainda não tem query, usa localização padrão (Brasil)
         if (!searchQuery) {
             searchQuery = 'Brasil';
+            this.showError('Preencha o endereço antes de abrir o Google Maps');
         }
 
         // Codificar URL
@@ -216,6 +262,11 @@ const LocationPicker = {
 
         // Abrir em nova aba
         window.open(mapsUrl, '_blank');
+
+        // Mostrar mensagem de instrução
+        if (searchQuery !== 'Brasil') {
+            this.showSuccess('Google Maps aberto! Encontre o local exato e copie as coordenadas.');
+        }
     },
 
     /**

@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste - Desenho de Croqui com Leaflet.draw</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- Leaflet.draw CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        #map {
+            flex: 1;
+            height: 100%;
+        }
+
+        .sidebar {
+            width: 350px;
+            background: #ecf0f1;
+            padding: 20px;
+            overflow-y: auto;
+            border-left: 2px solid #bdc3c7;
+        }
+
+        .control-group {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .control-group h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-size: 14px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+
+        .btn-success {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #229954;
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+
+        .btn-warning {
+            background: #f39c12;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: #d68910;
+        }
+
+        #geojsonOutput {
+            width: 100%;
+            height: 200px;
+            font-family: monospace;
+            font-size: 11px;
+            padding: 10px;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        .info-box {
+            background: #d5f4e6;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 12px;
+            border-left: 4px solid #27ae60;
+        }
+
+        .stats {
+            margin-top: 10px;
+            font-size: 13px;
+        }
+
+        .stats div {
+            padding: 5px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .stats strong {
+            color: #2c3e50;
+        }
+
+        /* Modal de Identificação */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            color: #2c3e50;
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #2c3e50;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .modal-buttons button {
+            flex: 1;
+        }
+
+        .color-categories {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .color-option {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border: 2px solid transparent;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .color-option:hover {
+            background: #f8f9fa;
+        }
+
+        .color-option.selected {
+            border-color: #2c3e50;
+            background: #e8f4f8;
+        }
+
+        .color-box {
+            width: 24px;
+            height: 24px;
+            border-radius: 3px;
+            margin-right: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        .color-option-label {
+            font-size: 13px;
+            color: #2c3e50;
+        }
+
+        .area-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .area-item {
+            background: white;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            border-left: 4px solid;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .area-item:hover {
+            background: #f8f9fa;
+            transform: translateX(3px);
+        }
+
+        .area-item-name {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 14px;
+        }
+
+        .area-item-info {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 3px;
+        }
+
+        .legend {
+            margin-top: 10px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            margin-right: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        /* Estilo para labels das áreas no mapa */
+        .area-label {
+            background: rgba(255, 255, 255, 0.9) !important;
+            border: 2px solid #2c3e50 !important;
+            border-radius: 4px !important;
+            padding: 4px 8px !important;
+            font-weight: bold !important;
+            font-size: 13px !important;
+            color: #2c3e50 !important;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .area-label::before {
+            border: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Desenho de Croqui da Propriedade</h1>
+        <p>Desenhe polígonos, linhas e marcadores no mapa. Os dados serão salvos em GeoJSON.</p>
+    </div>
+
+    <div class="container">
+        <div id="map"></div>
+
+        <div class="sidebar">
+            <div class="control-group">
+                <h3>📊 Estatísticas</h3>
+                <div class="stats">
+                    <div><strong>Polígonos:</strong> <span id="polyCount">0</span></div>
+                    <div><strong>Linhas:</strong> <span id="lineCount">0</span></div>
+                    <div><strong>Marcadores:</strong> <span id="markerCount">0</span></div>
+                    <div><strong>Área Total:</strong> <span id="totalArea">0 m²</span></div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <h3>📋 Áreas Cadastradas</h3>
+                <div class="area-list" id="areaList">
+                    <p style="color: #95a5a6; font-size: 12px; text-align: center; padding: 20px;">
+                        Nenhuma área cadastrada
+                    </p>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <h3>🎨 Legenda - Áreas</h3>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #2ecc71;"></div>
+                        <span>APP (Obrigatório)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #16a085;"></div>
+                        <span>Reserva Legal (Obrig.)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #27ae60;"></div>
+                        <span>Pastagem</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #f39c12;"></div>
+                        <span>Cultivo</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #d68910;"></div>
+                        <span>Apicultura</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #e74c3c;"></div>
+                        <span>Edificações (Obrig.)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #bdc3c7;"></div>
+                        <span>Vizinhança (Obrig.)</span>
+                    </div>
+                </div>
+                <h3 style="margin-top: 15px;">🎨 Legenda - Linhas/Água</h3>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #2c3e50;"></div>
+                        <span>Divisa (Obrigatório)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #27ae60;"></div>
+                        <span>Cerca Viva</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #7f8c8d;"></div>
+                        <span>Cerca Convencional</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #3498db;"></div>
+                        <span>Rio/Córrego (Obrig.)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #2980b9;"></div>
+                        <span>Açude/Lago</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #1abc9c;"></div>
+                        <span>Nascente</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <h3>💾 Salvar/Carregar</h3>
+                <button class="btn-success" onclick="saveGeoJSON()">
+                    💾 Salvar GeoJSON
+                </button>
+                <button class="btn-primary" onclick="copyToClipboard()">
+                    📋 Copiar GeoJSON
+                </button>
+                <button class="btn-warning" onclick="loadGeoJSON()">
+                    📂 Carregar GeoJSON
+                </button>
+                <button class="btn-danger" onclick="clearAll()">
+                    🗑️ Limpar Tudo
+                </button>
+            </div>
+
+            <div class="control-group">
+                <h3>📄 GeoJSON Output</h3>
+                <textarea id="geojsonOutput" readonly placeholder="O GeoJSON aparecerá aqui..."></textarea>
+            </div>
+
+            <div class="info-box">
+                <strong>💡 Elementos Obrigatórios do Croqui:</strong><br>
+                ✅ Divisas/Limites da propriedade<br>
+                ✅ APP (Área Preservação Permanente)<br>
+                ✅ Reserva Legal<br>
+                ✅ Fontes de água (rios, nascentes)<br>
+                ✅ Edificações/Construções<br>
+                ✅ Vizinhanças<br>
+                ✅ Áreas de produção orgânica<br>
+                <hr style="margin: 10px 0; border: none; border-top: 1px solid #27ae60;">
+                <strong>📝 Como usar:</strong><br>
+                • Desenhe no mapa e preencha as informações<br>
+                • Clique nos elementos para editar<br>
+                • Salve como GeoJSON
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Identificação -->
+    <div class="modal-overlay" id="areaModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Identificar Área</h2>
+            </div>
+
+            <form id="areaForm">
+                <div class="form-group">
+                    <label for="areaName">Nome da Área/Talhão *</label>
+                    <input type="text" id="areaName" required placeholder="Ex: Talhão A, Pasto Sul, Apiário 1">
+                </div>
+
+                <div class="form-group">
+                    <label id="categoryLabel">Tipo de Área *</label>
+                    <div class="color-categories" id="categoryOptions">
+                        <!-- Opções serão inseridas dinamicamente via JavaScript -->
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="areaCulture">Cultura/Uso</label>
+                    <input type="text" id="areaCulture" placeholder="Ex: Mel, Gado, Soja, etc">
+                </div>
+
+                <div class="form-group">
+                    <label for="areaObs">Observações</label>
+                    <textarea id="areaObs" placeholder="Informações adicionais sobre esta área"></textarea>
+                </div>
+
+                <div class="form-group" id="areaInfoDisplay" style="display: none;">
+                    <label>Informações Calculadas</label>
+                    <div style="background: #ecf0f1; padding: 10px; border-radius: 4px; font-size: 13px;">
+                        <div id="calculatedInfo"></div>
+                    </div>
+                </div>
+
+                <div class="modal-buttons">
+                    <button type="button" class="btn-danger" onclick="closeModal()">Cancelar</button>
+                    <button type="submit" class="btn-success">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Leaflet.draw JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+
+    <!-- Turf.js para cálculo de área -->
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+
+    <script>
+        // Variáveis globais
+        let currentLayer = null;
+        let currentEditingLayer = null;
+        let selectedCategory = null;
+        let selectedColor = null;
+
+        // Inicializar mapa
+        const map = L.map('map').setView([-15.7801, -47.9292], 13); // Brasília como exemplo
+
+        // Adicionar tile layer
+        L.tileLayer('https://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+            attribution: '© Google'
+        }).addTo(map);
+
+        // Layer para armazenar os desenhos
+        const drawnItems = new L.FeatureGroup();
+        map.addLayer(drawnItems);
+
+        // Sistema de cores por categoria
+        const categoryColors = {
+            // Áreas (Polígonos)
+            'pastagem': '#27ae60',
+            'cultivo': '#f39c12',
+            'app': '#2ecc71',
+            'reserva-legal': '#16a085',
+            'apicultura': '#d68910',
+            'edificacao': '#e74c3c',
+            'vizinhanca': '#bdc3c7',
+            'outros': '#95a5a6',
+
+            // Linhas
+            'cerca-viva': '#27ae60',
+            'cerca-convencional': '#7f8c8d',
+            'divisa': '#2c3e50',
+            'caminho': '#f39c12',
+
+            // Água
+            'rio': '#3498db',
+            'acude': '#2980b9',
+            'nascente': '#1abc9c'
+        };
+
+        const categoryNames = {
+            // Áreas
+            'pastagem': 'Pastagem/Pasto',
+            'cultivo': 'Cultivo/Plantio',
+            'app': 'APP (Área Preservação Permanente)',
+            'reserva-legal': 'Reserva Legal',
+            'apicultura': 'Apicultura',
+            'edificacao': 'Edificações/Construções',
+            'vizinhanca': 'Vizinhança',
+            'outros': 'Outros',
+
+            // Linhas
+            'cerca-viva': 'Cerca Viva',
+            'cerca-convencional': 'Cerca Convencional',
+            'divisa': 'Divisa/Limite Propriedade',
+            'caminho': 'Caminho/Estrada',
+
+            // Água
+            'rio': 'Rio/Córrego',
+            'acude': 'Açude/Lago',
+            'nascente': 'Nascente/Fonte'
+        };
+
+        // Configurar controles de desenho
+        const drawControl = new L.Control.Draw({
+            position: 'topright',
+            draw: {
+                polygon: {
+                    allowIntersection: false,
+                    showArea: true,
+                    shapeOptions: {
+                        color: '#3498db',
+                        weight: 3
+                    }
+                },
+                polyline: {
+                    shapeOptions: {
+                        color: '#e74c3c',
+                        weight: 3
+                    }
+                },
+                rectangle: {
+                    shapeOptions: {
+                        color: '#9b59b6',
+                        weight: 3
+                    }
+                },
+                circle: {
+                    shapeOptions: {
+                        color: '#f39c12',
+                        weight: 3
+                    }
+                },
+                marker: true,
+                circlemarker: false
+            },
+            edit: {
+                featureGroup: drawnItems,
+                remove: true
+            }
+        });
+        map.addControl(drawControl);
+
+        // Evento quando algo é desenhado
+        map.on(L.Draw.Event.CREATED, function (event) {
+            const layer = event.layer;
+            const type = event.layerType;
+
+            currentLayer = layer;
+            currentEditingLayer = null;
+
+            // Calcular informações
+            let calculatedInfo = '';
+            if (type === 'polygon' || type === 'rectangle' || type === 'circle') {
+                let area = 0;
+                if (type === 'circle') {
+                    area = Math.PI * Math.pow(layer.getRadius(), 2);
+                } else {
+                    area = L.GeometryUtil.geodesicArea(layer.getLatLngs()[0]);
+                }
+                calculatedInfo = `<strong>Área:</strong> ${(area / 10000).toFixed(4)} hectares (${area.toFixed(2)} m²)`;
+            } else if (type === 'polyline') {
+                const length = calculateLength(layer);
+                calculatedInfo = `<strong>Comprimento:</strong> ${length.toFixed(2)} m`;
+            } else if (type === 'marker') {
+                const latlng = layer.getLatLng();
+                calculatedInfo = `<strong>Coordenadas:</strong> ${latlng.lat.toFixed(6)}, ${latlng.lng.toFixed(6)}`;
+            }
+
+            // Mostrar informações calculadas
+            document.getElementById('calculatedInfo').innerHTML = calculatedInfo;
+            document.getElementById('areaInfoDisplay').style.display = calculatedInfo ? 'block' : 'none';
+
+            // Abrir modal para identificação
+            openModal();
+        });
+
+        // Evento quando algo é editado
+        map.on(L.Draw.Event.EDITED, function () {
+            updateStats();
+            updateGeoJSON();
+        });
+
+        // Evento quando algo é deletado
+        map.on(L.Draw.Event.DELETED, function () {
+            updateStats();
+            updateGeoJSON();
+        });
+
+        // Calcular comprimento de linha
+        function calculateLength(layer) {
+            const latlngs = layer.getLatLngs();
+            let totalLength = 0;
+
+            for (let i = 0; i < latlngs.length - 1; i++) {
+                totalLength += latlngs[i].distanceTo(latlngs[i + 1]);
+            }
+
+            return totalLength;
+        }
+
+        // Atualizar estatísticas
+        function updateStats() {
+            let polyCount = 0;
+            let lineCount = 0;
+            let markerCount = 0;
+            let totalArea = 0;
+
+            drawnItems.eachLayer(function (layer) {
+                if (layer instanceof L.Polygon) {
+                    polyCount++;
+                    const area = L.GeometryUtil.geodesicArea(layer.getLatLngs()[0]);
+                    totalArea += area;
+                } else if (layer instanceof L.Polyline) {
+                    lineCount++;
+                } else if (layer instanceof L.Marker) {
+                    markerCount++;
+                } else if (layer instanceof L.Circle) {
+                    polyCount++;
+                    totalArea += Math.PI * Math.pow(layer.getRadius(), 2);
+                }
+            });
+
+            document.getElementById('polyCount').textContent = polyCount;
+            document.getElementById('lineCount').textContent = lineCount;
+            document.getElementById('markerCount').textContent = markerCount;
+            document.getElementById('totalArea').textContent = `${totalArea.toFixed(2)} m² (${(totalArea / 10000).toFixed(4)} ha)`;
+        }
+
+        // Atualizar GeoJSON output
+        function updateGeoJSON() {
+            const geojson = drawnItems.toGeoJSON();
+            document.getElementById('geojsonOutput').value = JSON.stringify(geojson, null, 2);
+        }
+
+        // Salvar GeoJSON como arquivo
+        function saveGeoJSON() {
+            const geojson = drawnItems.toGeoJSON();
+
+            if (geojson.features.length === 0) {
+                alert('Nenhum desenho para salvar!');
+                return;
+            }
+
+            const dataStr = JSON.stringify(geojson, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `croqui-propriedade-${new Date().getTime()}.geojson`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+
+            alert('GeoJSON salvo com sucesso!');
+        }
+
+        // Copiar GeoJSON para clipboard
+        function copyToClipboard() {
+            const textarea = document.getElementById('geojsonOutput');
+
+            if (!textarea.value) {
+                alert('Nenhum GeoJSON para copiar!');
+                return;
+            }
+
+            textarea.select();
+            document.execCommand('copy');
+            alert('GeoJSON copiado para a área de transferência!');
+        }
+
+        // Carregar GeoJSON
+        function loadGeoJSON() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.geojson,.json';
+
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+
+                reader.onload = function(event) {
+                    try {
+                        const geojson = JSON.parse(event.target.result);
+
+                        // Limpar desenhos existentes
+                        drawnItems.clearLayers();
+
+                        // Adicionar GeoJSON ao mapa
+                        L.geoJSON(geojson, {
+                            style: function(feature) {
+                                if (feature.properties && feature.properties.color) {
+                                    return {
+                                        color: feature.properties.color,
+                                        fillColor: feature.properties.color,
+                                        fillOpacity: 0.4,
+                                        weight: 3
+                                    };
+                                }
+                            },
+                            pointToLayer: function(feature, latlng) {
+                                return L.marker(latlng);
+                            },
+                            onEachFeature: function(feature, layer) {
+                                // Restaurar propriedades
+                                if (feature.properties) {
+                                    layer.feature = feature;
+                                    layer.properties = feature.properties;
+
+                                    // Se tem propriedades customizadas, aplicar
+                                    if (feature.properties.name) {
+                                        applyPropertiesToLayer(layer, feature.properties);
+                                    }
+                                }
+
+                                drawnItems.addLayer(layer);
+                            }
+                        });
+
+                        // Ajustar zoom para mostrar todos os desenhos
+                        if (drawnItems.getLayers().length > 0) {
+                            map.fitBounds(drawnItems.getBounds());
+                        }
+
+                        updateStats();
+                        updateGeoJSON();
+                        updateAreaList();
+                        alert('GeoJSON carregado com sucesso!');
+                    } catch (error) {
+                        alert('Erro ao carregar GeoJSON: ' + error.message);
+                    }
+                };
+
+                reader.readAsText(file);
+            };
+
+            input.click();
+        }
+
+        // Definir categorias por tipo de elemento
+        const categoryGroups = {
+            polygon: [
+                { id: 'app', color: '#2ecc71', name: 'APP (Área Preservação Permanente)' },
+                { id: 'reserva-legal', color: '#16a085', name: 'Reserva Legal' },
+                { id: 'pastagem', color: '#27ae60', name: 'Pastagem/Pasto' },
+                { id: 'cultivo', color: '#f39c12', name: 'Cultivo/Plantio' },
+                { id: 'apicultura', color: '#d68910', name: 'Apicultura' },
+                { id: 'edificacao', color: '#e74c3c', name: 'Edificações/Construções' },
+                { id: 'vizinhanca', color: '#bdc3c7', name: 'Vizinhança' },
+                { id: 'outros', color: '#95a5a6', name: 'Outros' }
+            ],
+            polyline: [
+                { id: 'divisa', color: '#2c3e50', name: 'Divisa/Limite Propriedade' },
+                { id: 'cerca-viva', color: '#27ae60', name: 'Cerca Viva' },
+                { id: 'cerca-convencional', color: '#7f8c8d', name: 'Cerca Convencional' },
+                { id: 'caminho', color: '#f39c12', name: 'Caminho/Estrada' },
+                { id: 'rio', color: '#3498db', name: 'Rio/Córrego' },
+                { id: 'acude', color: '#2980b9', name: 'Açude/Lago (Perímetro)' },
+                { id: 'outros', color: '#95a5a6', name: 'Outros' }
+            ],
+            marker: [
+                { id: 'nascente', color: '#1abc9c', name: 'Nascente/Fonte' },
+                { id: 'edificacao', color: '#e74c3c', name: 'Edificação/Construção' },
+                { id: 'apiario', color: '#d68910', name: 'Apiário' },
+                { id: 'porteira', color: '#7f8c8d', name: 'Porteira/Portão' },
+                { id: 'outros', color: '#95a5a6', name: 'Outros' }
+            ]
+        };
+
+        // Funções do Modal
+        function openModal(layer = null) {
+            const modal = document.getElementById('areaModal');
+            const form = document.getElementById('areaForm');
+
+            // Resetar formulário
+            form.reset();
+
+            // Remover seleção de categoria
+            document.querySelectorAll('.color-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+
+            // Determinar tipo de elemento
+            let elementType = 'polygon';
+            let layerToAnalyze = layer || currentLayer;
+
+            if (layerToAnalyze) {
+                if (layerToAnalyze instanceof L.Marker) {
+                    elementType = 'marker';
+                } else if (layerToAnalyze instanceof L.Polyline && !(layerToAnalyze instanceof L.Polygon)) {
+                    elementType = 'polyline';
+                } else if (layerToAnalyze instanceof L.Polygon || layerToAnalyze instanceof L.Circle || layerToAnalyze instanceof L.Rectangle) {
+                    elementType = 'polygon';
+                }
+            }
+
+            // Atualizar label e opções de categoria
+            const categoryLabel = document.getElementById('categoryLabel');
+            const categoryOptions = document.getElementById('categoryOptions');
+
+            if (elementType === 'polygon') {
+                categoryLabel.textContent = 'Tipo de Área *';
+            } else if (elementType === 'polyline') {
+                categoryLabel.textContent = 'Tipo de Linha *';
+            } else if (elementType === 'marker') {
+                categoryLabel.textContent = 'Tipo de Ponto *';
+            }
+
+            // Renderizar opções de categoria
+            const categories = categoryGroups[elementType];
+            let optionsHTML = '';
+
+            categories.forEach(cat => {
+                optionsHTML += `
+                    <div class="color-option" data-category="${cat.id}" data-color="${cat.color}">
+                        <div class="color-box" style="background: ${cat.color};"></div>
+                        <span class="color-option-label">${cat.name}</span>
+                    </div>
+                `;
+            });
+
+            categoryOptions.innerHTML = optionsHTML;
+
+            // Re-adicionar event listeners
+            document.querySelectorAll('.color-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.color-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                    selectedCategory = this.getAttribute('data-category');
+                    selectedColor = this.getAttribute('data-color');
+                });
+            });
+
+            if (layer) {
+                // Modo edição
+                currentEditingLayer = layer;
+                currentLayer = null;
+                document.getElementById('modalTitle').textContent = 'Editar Elemento';
+
+                // Preencher com dados existentes
+                const props = layer.feature ? layer.feature.properties : layer.properties || {};
+                document.getElementById('areaName').value = props.name || '';
+                document.getElementById('areaCulture').value = props.culture || '';
+                document.getElementById('areaObs').value = props.observations || '';
+
+                if (props.category) {
+                    selectedCategory = props.category;
+                    selectedColor = categoryColors[props.category];
+                    const opt = document.querySelector(`.color-option[data-category="${props.category}"]`);
+                    if (opt) opt.classList.add('selected');
+                }
+
+                // Calcular informações
+                let calculatedInfo = '';
+                if (layer instanceof L.Polygon) {
+                    const area = L.GeometryUtil.geodesicArea(layer.getLatLngs()[0]);
+                    calculatedInfo = `<strong>Área:</strong> ${(area / 10000).toFixed(4)} hectares (${area.toFixed(2)} m²)`;
+                } else if (layer instanceof L.Polyline && !(layer instanceof L.Polygon)) {
+                    const length = calculateLength(layer);
+                    calculatedInfo = `<strong>Comprimento:</strong> ${length.toFixed(2)} m`;
+                } else if (layer instanceof L.Marker) {
+                    const latlng = layer.getLatLng();
+                    calculatedInfo = `<strong>Coordenadas:</strong> ${latlng.lat.toFixed(6)}, ${latlng.lng.toFixed(6)}`;
+                }
+
+                document.getElementById('calculatedInfo').innerHTML = calculatedInfo;
+                document.getElementById('areaInfoDisplay').style.display = calculatedInfo ? 'block' : 'none';
+            } else {
+                // Modo criação
+                document.getElementById('modalTitle').textContent = 'Identificar Elemento';
+            }
+
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('areaModal');
+            modal.classList.remove('active');
+
+            // Se estava criando uma nova área e cancelou, não adicionar ao mapa
+            if (currentLayer && !currentEditingLayer) {
+                currentLayer = null;
+            }
+
+            selectedCategory = null;
+            selectedColor = null;
+        }
+
+
+        // Submit do formulário
+        document.getElementById('areaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            if (!selectedCategory) {
+                alert('Por favor, selecione um tipo de área!');
+                return;
+            }
+
+            const name = document.getElementById('areaName').value;
+            const culture = document.getElementById('areaCulture').value;
+            const observations = document.getElementById('areaObs').value;
+
+            // Criar objeto de propriedades
+            const properties = {
+                name: name,
+                category: selectedCategory,
+                categoryName: categoryNames[selectedCategory],
+                color: selectedColor,
+                culture: culture,
+                observations: observations,
+                createdAt: new Date().toISOString()
+            };
+
+            if (currentEditingLayer) {
+                // Atualizar layer existente
+                updateLayerProperties(currentEditingLayer, properties);
+            } else if (currentLayer) {
+                // Adicionar novo layer
+                applyPropertiesToLayer(currentLayer, properties);
+                drawnItems.addLayer(currentLayer);
+            }
+
+            updateStats();
+            updateGeoJSON();
+            updateAreaList();
+            closeModal();
+        });
+
+        // Aplicar propriedades a um layer
+        function applyPropertiesToLayer(layer, properties) {
+            // Salvar propriedades
+            if (!layer.feature) {
+                layer.feature = { type: 'Feature', properties: {} };
+            }
+            layer.feature.properties = properties;
+            layer.properties = properties;
+
+            // Aplicar cor e estilo
+            if (layer instanceof L.Polygon) {
+                layer.setStyle({
+                    color: properties.color,
+                    fillColor: properties.color,
+                    fillOpacity: 0.4,
+                    weight: 3
+                });
+            } else if (layer instanceof L.Polyline && !(layer instanceof L.Polygon)) {
+                // Linhas (cercas, divisas, rios)
+                let weight = 3;
+                let dashArray = null;
+
+                if (properties.category === 'divisa') {
+                    weight = 4;
+                    dashArray = '10, 5';
+                } else if (properties.category === 'cerca-convencional') {
+                    weight = 2;
+                } else if (properties.category === 'cerca-viva') {
+                    weight = 3;
+                } else if (properties.category === 'rio') {
+                    weight = 4;
+                }
+
+                layer.setStyle({
+                    color: properties.color,
+                    weight: weight,
+                    dashArray: dashArray
+                });
+            } else if (layer instanceof L.Marker) {
+                // Customizar ícone do marcador baseado na categoria
+                const iconColor = properties.color;
+                const iconHtml = `
+                    <div style="
+                        background-color: ${iconColor};
+                        width: 24px;
+                        height: 24px;
+                        border-radius: 50%;
+                        border: 3px solid white;
+                        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+                    "></div>
+                `;
+
+                const customIcon = L.divIcon({
+                    className: 'custom-marker',
+                    html: iconHtml,
+                    iconSize: [24, 24],
+                    iconAnchor: [12, 12]
+                });
+
+                layer.setIcon(customIcon);
+            }
+
+            // Adicionar tooltip permanente
+            if (layer instanceof L.Polygon || layer instanceof L.Circle) {
+                const center = layer.getBounds ? layer.getBounds().getCenter() : layer.getLatLng();
+                layer.bindTooltip(properties.name, {
+                    permanent: true,
+                    direction: 'center',
+                    className: 'area-label'
+                }).openTooltip();
+            } else if (layer instanceof L.Polyline && !(layer instanceof L.Polygon)) {
+                // Tooltip para linhas (não permanente, aparece ao passar o mouse)
+                layer.bindTooltip(properties.name, {
+                    permanent: false,
+                    direction: 'center',
+                    className: 'area-label'
+                });
+            } else if (layer instanceof L.Marker) {
+                // Tooltip para marcadores
+                layer.bindTooltip(properties.name, {
+                    permanent: true,
+                    direction: 'right',
+                    offset: [12, 0],
+                    className: 'area-label'
+                }).openTooltip();
+            }
+
+            // Adicionar popup com informações
+            const popupContent = createPopupContent(layer, properties);
+            layer.bindPopup(popupContent);
+
+            // Adicionar evento de clique para editar
+            layer.off('click');
+            layer.on('click', function(e) {
+                L.DomEvent.stopPropagation(e);
+                openModal(layer);
+            });
+        }
+
+        // Atualizar propriedades de layer existente
+        function updateLayerProperties(layer, properties) {
+            applyPropertiesToLayer(layer, properties);
+        }
+
+        // Criar conteúdo do popup
+        function createPopupContent(layer, props) {
+            let info = `<div style="min-width: 200px;">
+                <h3 style="margin: 0 0 10px 0; color: ${props.color};">${props.name}</h3>
+                <p style="margin: 5px 0;"><strong>Tipo:</strong> ${props.categoryName}</p>`;
+
+            if (props.culture) {
+                info += `<p style="margin: 5px 0;"><strong>Cultura:</strong> ${props.culture}</p>`;
+            }
+
+            // Calcular área ou comprimento
+            if (layer instanceof L.Polygon) {
+                const area = L.GeometryUtil.geodesicArea(layer.getLatLngs()[0]);
+                info += `<p style="margin: 5px 0;"><strong>Área:</strong> ${(area / 10000).toFixed(4)} ha (${area.toFixed(2)} m²)</p>`;
+            } else if (layer instanceof L.Polyline && !(layer instanceof L.Polygon)) {
+                const length = calculateLength(layer);
+                info += `<p style="margin: 5px 0;"><strong>Comprimento:</strong> ${length.toFixed(2)} m</p>`;
+            } else if (layer instanceof L.Circle) {
+                const area = Math.PI * Math.pow(layer.getRadius(), 2);
+                info += `<p style="margin: 5px 0;"><strong>Área:</strong> ${(area / 10000).toFixed(4)} ha (${area.toFixed(2)} m²)</p>`;
+            }
+
+            if (props.observations) {
+                info += `<p style="margin: 5px 0;"><strong>Obs:</strong> ${props.observations}</p>`;
+            }
+
+            info += `<button onclick="openModal(findLayerByName('${props.name}'))"
+                     style="margin-top: 10px; padding: 5px 10px; background: #3498db; color: white; border: none; border-radius: 3px; cursor: pointer;">
+                     ✏️ Editar
+                     </button>
+            </div>`;
+
+            return info;
+        }
+
+        // Encontrar layer por nome
+        function findLayerByName(name) {
+            let foundLayer = null;
+            drawnItems.eachLayer(function(layer) {
+                const props = layer.feature ? layer.feature.properties : layer.properties;
+                if (props && props.name === name) {
+                    foundLayer = layer;
+                }
+            });
+            return foundLayer;
+        }
+
+        // Atualizar lista de áreas
+        function updateAreaList() {
+            const areaList = document.getElementById('areaList');
+            const areas = [];
+
+            drawnItems.eachLayer(function(layer) {
+                const props = layer.feature ? layer.feature.properties : layer.properties;
+                if (props && props.name) {
+                    let areaValue = '';
+                    if (layer instanceof L.Polygon) {
+                        const area = L.GeometryUtil.geodesicArea(layer.getLatLngs()[0]);
+                        areaValue = `${(area / 10000).toFixed(2)} ha`;
+                    } else if (layer instanceof L.Circle) {
+                        const area = Math.PI * Math.pow(layer.getRadius(), 2);
+                        areaValue = `${(area / 10000).toFixed(2)} ha`;
+                    }
+
+                    areas.push({
+                        layer: layer,
+                        props: props,
+                        areaValue: areaValue
+                    });
+                }
+            });
+
+            if (areas.length === 0) {
+                areaList.innerHTML = `<p style="color: #95a5a6; font-size: 12px; text-align: center; padding: 20px;">
+                    Nenhuma área cadastrada
+                </p>`;
+                return;
+            }
+
+            let html = '';
+            areas.forEach(item => {
+                html += `
+                    <div class="area-item" style="border-left-color: ${item.props.color};"
+                         onclick="focusOnArea('${item.props.name}')">
+                        <div class="area-item-name">${item.props.name}</div>
+                        <div class="area-item-info">
+                            ${item.props.categoryName}
+                            ${item.areaValue ? ` • ${item.areaValue}` : ''}
+                        </div>
+                    </div>
+                `;
+            });
+
+            areaList.innerHTML = html;
+        }
+
+        // Focar em uma área
+        function focusOnArea(name) {
+            const layer = findLayerByName(name);
+            if (layer) {
+                if (layer.getBounds) {
+                    map.fitBounds(layer.getBounds(), { padding: [50, 50] });
+                } else if (layer.getLatLng) {
+                    map.setView(layer.getLatLng(), 16);
+                }
+                layer.openPopup();
+            }
+        }
+
+        // Limpar todos os desenhos
+        function clearAll() {
+            if (confirm('Tem certeza que deseja limpar todos os desenhos?')) {
+                drawnItems.clearLayers();
+                updateStats();
+                updateGeoJSON();
+                updateAreaList();
+            }
+        }
+
+        // Adicionar suporte para L.GeometryUtil (cálculo de área)
+        L.GeometryUtil = L.extend(L.GeometryUtil || {}, {
+            geodesicArea: function (latLngs) {
+                let pointsCount = latLngs.length;
+                let area = 0.0;
+                let d2r = Math.PI / 180;
+                let p1, p2;
+
+                if (pointsCount > 2) {
+                    for (let i = 0; i < pointsCount; i++) {
+                        p1 = latLngs[i];
+                        p2 = latLngs[(i + 1) % pointsCount];
+                        area += ((p2.lng - p1.lng) * d2r) *
+                                (2 + Math.sin(p1.lat * d2r) + Math.sin(p2.lat * d2r));
+                    }
+                    area = area * 6378137.0 * 6378137.0 / 2.0;
+                }
+
+                return Math.abs(area);
+            }
+        });
+    </script>
+</body>
+</html>
