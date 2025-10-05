@@ -1,0 +1,471 @@
+{
+  "metadata": {
+    "versao_schema": "2.0.0",
+    "tipo_formulario": "pmo_completo",
+    "data_criacao": "2023-11-06T00:00:00.000Z",
+    "id_pmo": "pmo_2024_75813203834_sitio-manti",
+    "id_produtor": "758.132.038-34",
+    "grupo_spg": "IBIUNA",
+    "nome_produtor": "MAURO AUGUSTO FERNANDES",
+    "nome_unidade": "SÍTIO MANTÍ",
+    "ano_vigente": 2024,
+    "status": "completo",
+    "ultima_atualizacao": "2023-11-06T00:00:00.000Z"
+  },
+  "dados": {
+    "tipo_pessoa": "fisica",
+    "identificacao": {
+      "nome_completo": "MAURO AUGUSTO FERNANDES",
+      "cpf_cnpj": "758.132.038-34",
+      "inscricao_estadual": "001532559.00-14",
+      "inscricao_municipal": "",
+      "nome_fantasia": "Mantí Biô",
+      "nome_unidade_producao": "SÍTIO MANTÍ",
+      "razao_social": ""
+    },
+    "contato": {
+      "telefone": "(11) 99952-9383",
+      "email": "MAUROFERN@YAHOO.COM.BR",
+      "endereco": {
+        "endereco_completo": "ESTRADA DA CACHOEIRA KM 05",
+        "logradouro": "ESTRADA DA CACHOEIRA",
+        "numero": "KM 05",
+        "complemento": "",
+        "bairro": "D. Luciana",
+        "municipio": "Gonçalves",
+        "uf": "MG",
+        "cep": "37680-000",
+        "coordenadas": {
+          "latitude": -22.63583333,
+          "longitude": -45.88111111
+        }
+      }
+    },
+    "propriedade": {
+      "posse_terra": "PRÓPRIA",
+      "area_total_ha": 16.0,
+      "caf_numero": "",
+      "caf_nao_possui": false,
+      "roteiro_acesso": "O acesso é feito pela estrada que dá acesso a Cachoeira dos Henriques, que se inicia a 500m da Praça da Matriz em Gonçalves. Essa estrada margeia o Sítio, identificado por placa em sua entrada",
+      "data_aquisicao_posse": "2004-12-01",
+      "terra_familiar": false
+    },
+    "manejo_organico": {
+      "anos_manejo_organico": 19,
+      "situacao_manejo": "A propriedade adquirida em 2004 havia sido utilizada anteriormente como pastagem de gado durante mais de 20 anos. O manejo orgânico foi iniciado em 2005 com implantação de culturas frutíferas e adubação verde. Obteve a primeira certificação orgânica em janeiro de 2006 (IBD), vinculou-se ao Grupo Serras Altas em 2012 e ao Grupo Ibiúna em 2016.",
+      "comprovacao_manejo": []
+    },
+    "escopo": {
+      "hortalicas": true,
+      "frutas": true,
+      "graos": true,
+      "medicinais": true,
+      "cogumelos": true,
+      "pecuaria": false,
+      "apicultura": false,
+      "proc_minimo": false,
+      "processamento": false
+    },
+    "pretende_certificar": true,
+    "activities": {
+      "escopo_hortalicas": true,
+      "escopo_frutas": true,
+      "escopo_graos": true,
+      "escopo_medicinais": true,
+      "escopo_cogumelos": true,
+      "escopo_pecuaria": false,
+      "escopo_apicultura": false,
+      "escopo_proc_minimo": false,
+      "escopo_processamento": false
+    }
+  },
+  "escopos": {
+    "anexo_vegetal": {
+      "metadata": {
+        "versao_schema": "2.0.0",
+        "tipo_formulario": "anexo_vegetal",
+        "data_criacao": "2023-11-06T00:00:00.000Z",
+        "ultima_atualizacao": "2023-11-06T00:00:00.000Z",
+        "status": "completo"
+      },
+      "dados": {
+        "preparo_solo": [],
+        "praticas_conservacionistas": [
+          {
+            "tipo": "ROTAÇÃO DE CULTURAS",
+            "descricao": "ROTACIONANDO YACON E GRÃOS"
+          },
+          {
+            "tipo": "ADUBAÇÃO VERDE",
+            "descricao": "NABO FORRAGEIRO, CROTALÁRIA, AMENDOIM FORRAGEIRO, ERVILHACA, TREMOÇO"
+          },
+          {
+            "tipo": "CONSÓRCIOS",
+            "descricao": "MILHO/YACON, FEIJÃO/YACON, ERVILHA/AMORA, ADUBAÇÕES VERDES"
+          },
+          {
+            "tipo": "QUEBRA-VENTOS/ CORTINAS VEGETAIS/ FAIXAS OU ALEIAS",
+            "descricao": "PLANTIO DE ASTRAPÉIA EM CONSORCIO COM NATIVAS DE MAIOR PORTE"
+          },
+          {
+            "tipo": "COBERTURA DE SOLO COM PALHADA",
+            "descricao": "COM PALHADA DA ROÇADA E ESTERCO CURTIDO"
+          },
+          {
+            "tipo": "PROTEÇÃO CONTRA EROSÃO",
+            "descricao": "PLANTIO DE BAMBU"
+          },
+          {
+            "tipo": "MANEJO DO MATO",
+            "descricao": "CAPINA, ROÇADA MANUAL E USO DA ADUBAÇÃO VERDE"
+          },
+          {
+            "tipo": "OUTRAS PRÁTICAS",
+            "descricao": "PLANTIO DE NATIVAS"
+          }
+        ],
+        "adubacao_nutricao": {
+          "composicao_substrato": [
+            {
+              "material": "TERRA DE BARRANCO",
+              "origem": "PRÓPRIA",
+              "proporcao_percent": 50
+            },
+            {
+              "material": "COMPOSTO",
+              "origem": "PRÓPRIO",
+              "proporcao_percent": 30
+            },
+            {
+              "material": "VERMICOMPOSTO",
+              "origem": "PRÓPRIO",
+              "proporcao_percent": 20
+            }
+          ],
+          "receitas_proprias": [
+            {
+              "nome_receita": "BOKASHI",
+              "ingredientes": [
+                {"nome": "ÁGUA S/ CLORO", "quantidade_dose": "30 L"},
+                {"nome": "TORTA MAMONA", "quantidade_dose": "50KG"},
+                {"nome": "FARELO DE TRIGO", "quantidade_dose": "60 KG"},
+                {"nome": "INOCULANTE", "quantidade_dose": "1 COPO"},
+                {"nome": "MELAÇO", "quantidade_dose": "180 ML"}
+              ]
+            },
+            {
+              "nome_receita": "COMPOSTO",
+              "ingredientes": [
+                {"nome": "ESTERCO BOVINO", "quantidade_dose": "250 KG"},
+                {"nome": "CAPIM ROÇADO", "quantidade_dose": "80 KG"},
+                {"nome": "YORIN MASTER", "quantidade_dose": "20 KG"},
+                {"nome": "TORTA DE MAMONA", "quantidade_dose": "40 KILOS"},
+                {"nome": "FARINHA DE OSSO", "quantidade_dose": "40 KILOS"},
+                {"nome": "BLOCOS DE SHITAKE", "quantidade_dose": "100 KILOS"},
+                {"nome": "RESÍDUOS ORGÂNICOS", "quantidade_dose": "35 KILOS"}
+              ]
+            },
+            {
+              "nome_receita": "BIOFERTILIZANTE",
+              "ingredientes": [
+                {"nome": "VERMICOMPOSTO", "quantidade_dose": "40 KG"},
+                {"nome": "TORTA MAMONA", "quantidade_dose": "1KG"},
+                {"nome": "LEITE", "quantidade_dose": "5 L"},
+                {"nome": "FARINHA DE OSSO", "quantidade_dose": "1 KG"},
+                {"nome": "MELAÇO", "quantidade_dose": "5 KG"},
+                {"nome": "FOLHAS DIVERSAS", "quantidade_dose": "5 KG"},
+                {"nome": "YAKULT", "quantidade_dose": "3 POTE"}
+              ]
+            }
+          ]
+        },
+        "controle_pragas": {
+          "controle_formigas": {
+            "situacao": "SITUAÇÃO EXISTENTE",
+            "metodos": [
+              "FITAS ADESIVAS E PROTETORES PLÁSTICOS NOS TRONCOS",
+              "BIOISCA",
+              "CAL VIRGEM",
+              "AMPLIANDO O CONTROLE BIOLÓGICO ATRAVÉS DE PASTAGEM DE GALINHAS DE ANGOLA"
+            ]
+          },
+          "risco_deriva_agrotoxicos": false,
+          "risco_transgenicos": false
+        },
+        "produtos_insumos": [
+          {
+            "marca_nome_comercial": "BOKASHI",
+            "substancia": "NITROGENIO, FÓSFORO, POTÁSSIO, CALCIO, MICRO NUTRIENTES",
+            "fabricante": "PRÓPRIO",
+            "funcao": "FERTILIZANTE",
+            "cultura_talhao": "TODAS",
+            "uso_ou_pretende": true
+          },
+          {
+            "marca_nome_comercial": "COMPOSTO",
+            "substancia": "NITROGENIO, FÓSFORO, POTÁSSIO, CALCIO, MICRO NUTRIENTES",
+            "fabricante": "PRÓPRIO",
+            "funcao": "FERTILIZANTE",
+            "cultura_talhao": "TODAS",
+            "uso_ou_pretende": true
+          },
+          {
+            "marca_nome_comercial": "CALCARIO",
+            "substancia": "CALCIO, MAGNÉSIO",
+            "fabricante": "DIVERSOS",
+            "funcao": "CORREÇÃO DO SOLO",
+            "cultura_talhao": "TODAS",
+            "uso_ou_pretende": true
+          },
+          {
+            "marca_nome_comercial": "TERMOFOSFATO YORIN",
+            "substancia": "FÓSFORO, CALCIO, MICRONUTRIENTES",
+            "fabricante": "MINERAÇÃO CURIMBABA",
+            "funcao": "FERTILIZANTE",
+            "cultura_talhao": "TODAS",
+            "uso_ou_pretende": true
+          },
+          {
+            "marca_nome_comercial": "SULFATO DE POTÁSSIO",
+            "substancia": "POTÁSSIO",
+            "fabricante": "NITROBRÁS",
+            "funcao": "FERTILIZANTE",
+            "cultura_talhao": "TODAS",
+            "uso_ou_pretende": true
+          },
+          {
+            "marca_nome_comercial": "FARELO DE MAMONA",
+            "substancia": "NITROGÊNIO",
+            "fabricante": "NUTRISAFRA",
+            "funcao": "FERTILIZANTE",
+            "cultura_talhao": "TODAS",
+            "uso_ou_pretende": true
+          },
+          {
+            "marca_nome_comercial": "FARINHA DE OSSO",
+            "substancia": "FÓSFORO, CALCIO",
+            "fabricante": "NUTRISAFRA",
+            "funcao": "FERTILIZANTE",
+            "cultura_talhao": "TODAS",
+            "uso_ou_pretende": true
+          },
+          {
+            "marca_nome_comercial": "BORO +",
+            "substancia": "ÁCIDO BÓRICO",
+            "fabricante": "AGROBIOLÓGICA",
+            "funcao": "CORREÇÃO DO SOLO",
+            "cultura_talhao": "FRUTAS",
+            "uso_ou_pretende": true
+          },
+          {
+            "marca_nome_comercial": "SULFATO DE ZINCO",
+            "substancia": "ZINCO",
+            "fabricante": "PAULIFERTIL",
+            "funcao": "CORREÇÃO DO SOLO",
+            "cultura_talhao": "TODAS",
+            "uso_ou_pretende": true
+          },
+          {
+            "marca_nome_comercial": "SULFATO DE COBRE",
+            "substancia": "COBRE",
+            "fabricante": "MICROSAL",
+            "funcao": "CORREÇÃO DO SOLO",
+            "cultura_talhao": "TODAS",
+            "uso_ou_pretende": true
+          },
+          {
+            "marca_nome_comercial": "CAL HIDRATADA",
+            "substancia": "CALCIO, MAGNÉSIO",
+            "fabricante": "DIVERSOS",
+            "funcao": "FERTILIZANTE",
+            "cultura_talhao": "TODAS",
+            "uso_ou_pretende": true
+          },
+          {
+            "marca_nome_comercial": "MOLIBDATO DE SODIO",
+            "substancia": "MOLIBDENIO",
+            "fabricante": "NUTRIPLANT",
+            "funcao": "FERTILIZANTE",
+            "cultura_talhao": "TODAS",
+            "uso_ou_pretende": true
+          },
+          {
+            "marca_nome_comercial": "SUPERA, KOCIDE",
+            "substancia": "COBRE",
+            "fabricante": "OXIQUÍMICA, DUPONT",
+            "funcao": "FITOSSANITÁRIO",
+            "cultura_talhao": "FRAMBOESA, ATEMOIA",
+            "uso_ou_pretende": true
+          },
+          {
+            "marca_nome_comercial": "CAL VIRGEM",
+            "substancia": "CALCIO, MAGNÉSIO",
+            "fabricante": "MINERCAL",
+            "funcao": "FITOSSANITÁRIO",
+            "cultura_talhao": "TODAS",
+            "uso_ou_pretende": true
+          },
+          {
+            "marca_nome_comercial": "ÓLEO DE NEEN",
+            "substancia": "NEEN",
+            "fabricante": "DALNEEN",
+            "funcao": "FITOSSANITÁRIO",
+            "cultura_talhao": "TODAS",
+            "uso_ou_pretende": true
+          },
+          {
+            "marca_nome_comercial": "KUMULUS",
+            "substancia": "ENXOFRE",
+            "fabricante": "BASF",
+            "funcao": "FITOSSANITÁRIO",
+            "cultura_talhao": "FRAMBOESA, ATEMOIA",
+            "uso_ou_pretende": true
+          },
+          {
+            "marca_nome_comercial": "CALDA SULFOCÁLCICA",
+            "substancia": "ENXOFRE",
+            "fabricante": "PREPARAÇÃO PRÓPRIA",
+            "funcao": "FITOSSANITÁRIO",
+            "cultura_talhao": "TODAS",
+            "uso_ou_pretende": true
+          },
+          {
+            "marca_nome_comercial": "BIO ISCA",
+            "substancia": "FUNGOS",
+            "fabricante": "BIOISCA",
+            "funcao": "FITOSSANITÁRIO",
+            "cultura_talhao": "TODAS",
+            "uso_ou_pretende": true
+          },
+          {
+            "marca_nome_comercial": "BOVERIL",
+            "substancia": "BAUVERIA BASSIANA",
+            "fabricante": "KOPPERT",
+            "funcao": "FITOSSANITÁRIO",
+            "cultura_talhao": "TODAS",
+            "uso_ou_pretende": true
+          },
+          {
+            "marca_nome_comercial": "DIPEL",
+            "substancia": "BACILLUS THURINGIENSIS",
+            "fabricante": "SUMITOMO",
+            "funcao": "FITOSSANITÁRIO",
+            "cultura_talhao": "TODAS",
+            "uso_ou_pretende": true
+          },
+          {
+            "marca_nome_comercial": "METARRIL",
+            "substancia": "METARHIZIUM ANISOPLIAE",
+            "fabricante": "KOPPERT",
+            "funcao": "FITOSSANITÁRIO",
+            "cultura_talhao": "TODAS",
+            "uso_ou_pretende": true
+          },
+          {
+            "marca_nome_comercial": "SERENADE",
+            "substancia": "BACILLUS SUBTILIS",
+            "fabricante": "BAYER",
+            "funcao": "FITOSSANITÁRIO",
+            "cultura_talhao": "TODAS",
+            "uso_ou_pretende": true
+          },
+          {
+            "marca_nome_comercial": "TRACER",
+            "substancia": "ESPINOSADE",
+            "fabricante": "CTVA",
+            "funcao": "FITOSSANITÁRIO",
+            "cultura_talhao": "TODAS",
+            "uso_ou_pretende": true
+          },
+          {
+            "marca_nome_comercial": "TRICHODERMA",
+            "substancia": "BIOCONTROLE",
+            "fabricante": "",
+            "funcao": "FITOSSANITÁRIO",
+            "cultura_talhao": "TODAS",
+            "uso_ou_pretende": true
+          }
+        ]
+      }
+    },
+    "anexo_cogumelo": {
+      "metadata": {
+        "versao_schema": "2.0.0",
+        "tipo_formulario": "anexo_cogumelo",
+        "data_criacao": "2023-11-06T00:00:00.000Z",
+        "ultima_atualizacao": "2023-11-06T00:00:00.000Z",
+        "status": "completo"
+      },
+      "dados": {
+        "producao": [
+          {
+            "produto": "Shitake",
+            "origem_semente": "Comprado",
+            "origem_substrato": "Comprado",
+            "estimativa_producao_anual_kg": 2000,
+            "area_cultivada_m2": 100
+          }
+        ],
+        "substrato": {
+          "producao_propria": false,
+          "ingredientes": [
+            {
+              "material": "SERRAGEM",
+              "origem": "COMPRADO",
+              "tipo": "CONVENCIONAL",
+              "risco_transgenicos": false,
+              "proporcao_percent": 0.0
+            },
+            {
+              "material": "FARELO DE ARROZ",
+              "origem": "COMPRADO",
+              "tipo": "CONVENCIONAL",
+              "risco_transgenicos": false,
+              "proporcao_percent": 0.0
+            },
+            {
+              "material": "FARELO DE TRIGO",
+              "origem": "COMPRADO",
+              "tipo": "CONVENCIONAL",
+              "risco_transgenicos": false,
+              "proporcao_percent": 0.0
+            },
+            {
+              "material": "MILHO",
+              "origem": "COMPRADO",
+              "tipo": "ORGÂNICO",
+              "risco_transgenicos": false,
+              "proporcao_percent": 0.0
+            },
+            {
+              "material": "CALCÁRIO",
+              "origem": "COMPRADO",
+              "tipo": "CONVENCIONAL",
+              "risco_transgenicos": false,
+              "proporcao_percent": 0.0
+            }
+          ],
+          "analise_metais_pesados": true,
+          "metodos_tratamento_madeira": "Não se aplica. Utiliza serragem de primeiro corte em reflorestamento, declarada sem tratamento químico e de origem legal."
+        },
+        "inoculo": {
+          "origem": "COMPRADA",
+          "comprovacao_nao_transgenico": true,
+          "informacoes_adicionais": "ADQUIRIDOS BLOCOS AXÊNICOS JÁ INOCULADOS"
+        },
+        "controle_pragas": [
+          {
+            "praga": "FUNGUS GNATS",
+            "praticas": "PLACAS COM COLA ENTOMOLÓGICA",
+            "substancias": "POLIBUTENO E SÍLICA SINTÉTICA",
+            "origem_fabricante": "PROMIP"
+          }
+        ],
+        "residuos": {
+          "destino_substrato": "COMPOSTAGEM NO SÍTIO",
+          "destino_chorume": "NÃO GERA"
+        }
+      }
+    }
+  }
+}

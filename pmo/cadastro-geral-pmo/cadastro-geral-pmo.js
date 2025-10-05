@@ -1049,8 +1049,20 @@ const CadastroGeralPMO = {
                 keys: Object.keys(data).slice(0, 10), // Primeiras 10 keys
                 tem_metadata: 'metadata' in data,
                 tem_dados: 'dados' in data,
+                tem_activities: data.dados && 'activities' in data.dados,
+                tem_escopo: data.dados && 'escopo' in data.dados,
                 primeiros_campos: Object.keys(data).slice(0, 5)
             });
+
+            // Log específico para activities/escopo
+            if (data.dados) {
+                if (data.dados.activities) {
+                    console.log('✅ Campo activities encontrado:', Object.keys(data.dados.activities));
+                }
+                if (data.dados.escopo) {
+                    console.log('⚠️ Campo escopo encontrado (legado):', Object.keys(data.dados.escopo));
+                }
+            }
 
             // TENTAR 3 FORMATOS DIFERENTES DE DADOS
 
@@ -1352,9 +1364,32 @@ const CadastroGeralPMO = {
             this.preencherCampo(form, 'situacao_manejo', dados.manejo_organico.situacao_manejo);
         }
 
-        // 6. Escopo
-        if (dados.escopo) {
-            console.log('📝 Preenchendo escopos:', dados.escopo);
+        // 6. Escopo/Activities
+        // PRIORIDADE 1: Processar "activities" (formato correto para o formulário)
+        if (dados.activities) {
+            console.log('📝 Preenchendo activities (formato v2.0):', dados.activities);
+            Object.keys(dados.activities).forEach(activityKey => {
+                const valor = dados.activities[activityKey];
+                const checkbox = form.querySelector(`input[name="${activityKey}"]`);
+
+                if (checkbox) {
+                    // Marcar checkbox
+                    checkbox.checked = valor === true || valor === 'sim';
+
+                    // IMPORTANTE: Disparar evento change para atualizar scope manager
+                    if (checkbox.checked) {
+                        checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+                    }
+
+                    console.log(`✅ Activity marcada: ${activityKey} = ${checkbox.checked}`);
+                } else {
+                    console.warn(`⚠️ Checkbox de activity não encontrado: ${activityKey}`);
+                }
+            });
+        }
+        // PRIORIDADE 2: Fallback para "escopo" (formato antigo, compatibilidade retroativa)
+        else if (dados.escopo) {
+            console.log('📝 Preenchendo escopos (formato legado):', dados.escopo);
             Object.keys(dados.escopo).forEach(escopoKey => {
                 const valor = dados.escopo[escopoKey];
                 const nomeCheckbox = `escopo_${escopoKey}`;
@@ -1369,11 +1404,13 @@ const CadastroGeralPMO = {
                         checkbox.dispatchEvent(new Event('change', { bubbles: true }));
                     }
 
-                    console.log(`✅ Escopo marcado: ${nomeCheckbox} = ${checkbox.checked}`);
+                    console.log(`✅ Escopo marcado (legado): ${nomeCheckbox} = ${checkbox.checked}`);
                 } else {
-                    console.warn(`⚠️ Checkbox não encontrado: ${nomeCheckbox}`);
+                    console.warn(`⚠️ Checkbox de escopo não encontrado: ${nomeCheckbox}`);
                 }
             });
+        } else {
+            console.warn('⚠️ Nenhum campo de escopo ou activities encontrado no JSON');
         }
 
         // 7. Metadata (grupo SPG, etc)
