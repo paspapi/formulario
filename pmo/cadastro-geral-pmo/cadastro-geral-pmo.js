@@ -31,6 +31,9 @@ const CadastroGeralPMO = {
         const urlParams = new URLSearchParams(window.location.search);
         const modoCriar = urlParams.get('modo') === 'criar';
 
+        // Armazenar modo no state para uso posterior
+        this.state.modoCriar = modoCriar;
+
         if (modoCriar) {
             console.log('📝 Modo criação de novo PMO');
             // Limpar dados em cache do localStorage para garantir formulário em branco
@@ -62,9 +65,6 @@ const CadastroGeralPMO = {
 
         // Configurar campos condicionais
         this.setupConditionalFields();
-
-        // Restaurar estado do escopo
-        this.restoreEscopoState();
 
         console.log('✅ Cadastro Geral do PMO inicializado com sucesso!');
     },
@@ -341,30 +341,6 @@ const CadastroGeralPMO = {
         console.log('📦 LocalStorage salvo:', localStorage.getItem('pmo_scope_activities'));
     },
 
-    /**
-     * Restaurar estado do escopo ao carregar página
-     */
-    restoreEscopoState() {
-        if (!window.PMOScopeManager) {
-            console.warn('PMOScopeManager não disponível para restaurar escopo');
-            return;
-        }
-
-        // Verificar se há dados salvos
-        const activities = window.PMOScopeManager.getActivities();
-
-        // Restaurar checkboxes de atividades
-        if (activities) {
-            Object.keys(activities).forEach(activityKey => {
-                const checkbox = document.querySelector(`input[name="${activityKey}"]`);
-                if (checkbox) {
-                    checkbox.checked = activities[activityKey] === true || activities[activityKey] === 'sim';
-                }
-            });
-        }
-
-        console.log('✅ Estado do escopo restaurado:', { activities });
-    },
 
     /**
      * Toggle tipo de pessoa (CPF/CNPJ)
