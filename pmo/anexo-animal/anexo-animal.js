@@ -233,16 +233,33 @@ const AnexoAnimal = {
         if (!form) return null;
 
         const formData = new FormData(form);
-        const data = {
-            metadata: {
-                versao_schema: '2.0.0',
-                tipo_formulario: 'anexo_animal',
-                data_criacao: formData.get('data_preenchimento') || new Date().toISOString(),
-                ultima_atualizacao: new Date().toISOString(),
-                status: 'rascunho'
-            },
-            dados: {}
-        };
+
+        // Converter FormData para objeto plano
+        const formDataObj = {};
+        for (let [key, value] of formData.entries()) {
+            if (key.includes('[]')) {
+                const cleanKey = key.replace('[]', '');
+                if (!formDataObj[cleanKey]) {
+                    formDataObj[cleanKey] = [];
+                }
+                formDataObj[cleanKey].push(value);
+            } else {
+                if (formDataObj[key]) {
+                    if (Array.isArray(formDataObj[key])) {
+                        formDataObj[key].push(value);
+                    } else {
+                        formDataObj[key] = [formDataObj[key], value];
+                    }
+                } else {
+                    formDataObj[key] = value;
+                }
+            }
+        }
+
+        // Usar SchemaMapper para estruturar conforme schema
+        const data = window.SchemaMapper ?
+            window.SchemaMapper.toAnimalSchema(formDataObj) :
+            this.collectFormDataFallback(formDataObj);
 
         // Adicionar PMO info se disponível
         if (window.PMOStorageManager) {
@@ -257,20 +274,6 @@ const AnexoAnimal = {
             }
         }
 
-        // Coletar todos os dados do formulário
-        for (let [key, value] of formData.entries()) {
-            // Arrays (campos com [])
-            if (key.includes('[]')) {
-                const cleanKey = key.replace('[]', '');
-                if (!data.dados[cleanKey]) {
-                    data.dados[cleanKey] = [];
-                }
-                data.dados[cleanKey].push(value);
-            } else {
-                data.dados[key] = value;
-            }
-        }
-
         // Adicionar validação
         data.validacao = {
             percentual_completo: this.updateProgress(),
@@ -278,6 +281,20 @@ const AnexoAnimal = {
         };
 
         return data;
+    },
+
+    collectFormDataFallback(formDataObj) {
+        // Fallback se SchemaMapper não estiver disponível
+        return {
+            metadata: {
+                versao_schema: '2.0.0',
+                tipo_formulario: 'anexo_animal',
+                data_criacao: formDataObj.data_preenchimento || new Date().toISOString(),
+                ultima_atualizacao: new Date().toISOString(),
+                status: 'rascunho'
+            },
+            dados: formDataObj
+        };
     },
 
     salvar(isAutoSave = false) {

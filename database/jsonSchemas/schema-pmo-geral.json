@@ -1,0 +1,153 @@
+{
+  "metadata": {
+    "versao_schema": "2.0.0",
+    "tipo_formulario": "pmo_completo",
+    "data_criacao": "YYYY-MM-DDTHH:mm:ss.sssZ",
+    "id_pmo": "pmo_{ano}_{cpf_cnpj_numeros}_{unidade_slug}",
+    "id_produtor": "CPF ou CNPJ formatado",
+    "grupo_spg": "Nome do grupo SPG",
+    "nome_produtor": "Nome completo ou razão social",
+    "nome_unidade": "Nome da unidade de produção",
+    "ano_vigente": 2026,
+    "status": "completo",
+    "ultima_atualizacao": "YYYY-MM-DDTHH:mm:ss.sssZ"
+  },
+  "dados": {
+    "tipo_pessoa": "fisica",
+    "identificacao": {
+      "fornecedores_responsaveis": [
+        {
+          "nome_completo": "string",
+          "cpf": "string",
+          "data_nascimento": "string"
+        }
+      ],
+      "cpf_cnpj": "string",
+      "inscricao_estadual": "string",
+      "caf_numero": "string",
+      "grupo_spg": "string",
+      "data_preenchimento_pmo": "data",
+      "nome_fantasia": "string",
+      "nome_unidade_producao": "string"
+    },
+    "contato": {
+      "telefone": "string",
+      "email": "string",
+      "endereco": {
+        "logradouro": "string",
+        "bairro": "string",
+        "municipio": "string",
+        "uf": "string",
+        "cep": "string",
+        "coordenadas": {
+          "latitude": 0.0,
+          "longitude": 0.0
+        }
+      },
+      "roteiro_acesso": "string"
+    },
+    "propriedade": {
+      "posse_terra": "PRÓPRIA|ARRENDADA|PARCERIA|COMODATO",
+      "area_total_propriedade_ha": "decimal",
+      "area_total_organica_ha": "decimal",
+      "relacao_unidade_producao": "string",
+      "data_aquisicao_posse": "data",
+      "terra_familiar": "boolean"
+    },
+    "manejo_organico": {
+      "historico_propriedade": "string",
+      "topografia_e_utilizacao": "string",
+      "status_manejo_organico": "string",
+      "anos_manejo_organico": "integer",
+      "comprovacao_manejo": [
+        {"tipo": "string", "status": "boolean"}
+      ],
+      "historico_ultimos_10_anos": [
+        {
+          "cultura_animal": "string",
+          "data_ultima_aplicacao_nao_permitido": "data",
+          "insumo_utilizado": "string",
+          "estavam_sob_manejo_organico": "boolean",
+          "eram_certificados": "boolean"
+        }
+      ],
+      "relato_historico_recente": "string"
+    },
+    "activities": {
+      "escopo_vegetal": "boolean",
+      "escopo_animal": "boolean",
+      "escopo_cogumelo": "boolean",
+      "escopo_apicultura": "boolean",
+      "escopo_processamento": "boolean",
+      "escopo_processamento_minimo": "boolean"
+    },
+    "mao_de_obra": {
+      "familiar": "boolean",
+      "identifique_familiar": "string",
+      "empregados_quantos": "integer",
+      "diaristas_quantos": "integer",
+      "parceiros_quantos": "integer",
+      "meeiro_rural_quantos": "integer"
+    },
+    "croqui": {
+      "local_insercao_croqui": "string",
+      "itens_obrigatorios_localizados": ["ENTRADA DA PROPRIEDADE", "CASA / RESIDÊNCIA", "ARMAZÉM E GALPÕES", "..."]
+    },
+    "biodiversidade_e_ambiente": {
+      "preservacao_ambiental": [
+        {"area": "MATA NATIVA (RESERVA LEGAL)", "possui": "boolean", "preservada": "boolean"},
+        {"area": "NASCENTES", "possui": "boolean", "preservada": "boolean"}
+      ],
+      "tecnicas_prevencao_incendios": "string",
+      "experiencia_recuperacao_solos": "string",
+      "destino_lixo_organico": "string",
+      "destino_lixo_nao_organico": "string",
+      "destino_esgoto_domestico": "string"
+    },
+    "manejo_da_agua": {
+      "periodicidade_analise_irrigacao": "string",
+      "fontes_agua_uso": [
+        {
+          "uso": "CONSUMO DOMÉSTICO",
+          "origem": "string",
+          "risco_contaminacao": "string",
+          "garantia_qualidade": "string"
+        }
+      ]
+    },
+    "regularizacao_ambiental": {
+      "possui_car": "string",
+      "explicacao_reserva_legal": "string"
+    },
+    "producao_subsistencia_ornamental": {
+      "possui_nao_organica": "boolean",
+      "atividades": [
+        {"tipo": "HORTALIÇAS", "area_ha": "decimal"}
+      ],
+      "utiliza_insumos_nao_permitidos": "boolean",
+      "risco_contaminacao": "string",
+      "manejo_bloqueio_riscos": "string"
+    },
+    "producao_paralela": {
+      "possui_paralela": "boolean",
+      "atividades": [
+        {"tipo": "HORTALIÇAS", "area_ha": "decimal"}
+      ],
+      "utiliza_insumos_nao_permitidos": "boolean",
+      "risco_contaminacao": "string",
+      "manejo_bloqueio_riscos": "string",
+      "pretende_conversao_total": "boolean",
+      "tempo_conversao": "string"
+    },
+    "declaracoes_conformidade": {
+      "veracidade_e_comunicacao": "string",
+      "conhecimento_normas": "string",
+      "conhecimento_regras_spg": "string",
+      "concordancia_verificacao_acesso": "string",
+      "concordancia_informacao_adicional": "string",
+      "ciente_visitas_amostras": "string",
+      "aceite_condicoes_corretivas": "string",
+      "total_conhecimento_conviccao": "string"
+    }
+  }
+}

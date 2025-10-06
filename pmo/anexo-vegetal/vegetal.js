@@ -165,16 +165,25 @@ const AnexoVegetal = {
         if (!form) return null;
 
         const formData = new FormData(form);
-        const data = {
-            metadata: {
-                versao_schema: '2.0.0',
-                tipo_formulario: 'anexo_vegetal',
-                data_criacao: formData.get('data_preenchimento') || new Date().toISOString(),
-                ultima_atualizacao: new Date().toISOString(),
-                status: 'rascunho'
-            },
-            dados: {}
-        };
+
+        // Converter FormData para objeto plano
+        const formDataObj = {};
+        for (let [key, value] of formData.entries()) {
+            if (formDataObj[key]) {
+                if (Array.isArray(formDataObj[key])) {
+                    formDataObj[key].push(value);
+                } else {
+                    formDataObj[key] = [formDataObj[key], value];
+                }
+            } else {
+                formDataObj[key] = value;
+            }
+        }
+
+        // Usar SchemaMapper para estruturar conforme schema
+        const data = window.SchemaMapper ?
+            window.SchemaMapper.toVegetalSchema(formDataObj) :
+            this.collectFormDataFallback(formDataObj);
 
         // Adicionar PMO info se disponível
         if (window.PMOStorageManager) {
@@ -189,20 +198,6 @@ const AnexoVegetal = {
             }
         }
 
-        // Converter todos os campos do FormData para o objeto dados
-        for (let [key, value] of formData.entries()) {
-            if (data.dados[key]) {
-                // Se já existe, transformar em array
-                if (Array.isArray(data.dados[key])) {
-                    data.dados[key].push(value);
-                } else {
-                    data.dados[key] = [data.dados[key], value];
-                }
-            } else {
-                data.dados[key] = value;
-            }
-        }
-
         // Adicionar validação básica
         data.validacao = {
             percentual_completo: this.updateProgress(),
@@ -211,6 +206,20 @@ const AnexoVegetal = {
         };
 
         return data;
+    },
+
+    collectFormDataFallback(formDataObj) {
+        // Fallback se SchemaMapper não estiver disponível
+        return {
+            metadata: {
+                versao_schema: '2.0.0',
+                tipo_formulario: 'anexo_vegetal',
+                data_criacao: formDataObj.data_preenchimento || new Date().toISOString(),
+                ultima_atualizacao: new Date().toISOString(),
+                status: 'rascunho'
+            },
+            dados: formDataObj
+        };
     },
 
     saveForm(isAutoSave = false) {

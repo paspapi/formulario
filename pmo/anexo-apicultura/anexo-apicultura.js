@@ -715,31 +715,52 @@ const AnexoApicultura = {
      */
     exportJSON() {
         try {
-            const savedData = localStorage.getItem(this.config.storageKey);
-
-            if (!savedData) {
-                this.showNotification('Nenhum dado para exportar', 'warning');
+            const form = document.getElementById(this.config.formId);
+            if (!form) {
+                this.showNotification('Formulário não encontrado', 'error');
                 return;
             }
 
-            const data = JSON.parse(savedData);
+            const formData = new FormData(form);
 
-            // Adicionar metadata
-            const exportData = {
-                metadata: {
-                    tipo_documento: 'ANEXO_IV_APICULTURA',
-                    data_exportacao: new Date().toISOString(),
-                    versao_schema: '1.0'
-                },
-                dados: data
-            };
+            // Converter FormData para objeto plano
+            const formDataObj = {};
+            for (let [key, value] of formData.entries()) {
+                if (key.includes('[')) {
+                    // Processar arrays
+                    const match = key.match(/(.+?)\[(\d+)\]\[(.+?)\]/);
+                    if (match) {
+                        const arrayName = match[1];
+                        const index = parseInt(match[2]);
+                        const fieldName = match[3];
+
+                        if (!formDataObj[arrayName]) formDataObj[arrayName] = [];
+                        if (!formDataObj[arrayName][index]) formDataObj[arrayName][index] = {};
+                        formDataObj[arrayName][index][fieldName] = value;
+                    }
+                } else {
+                    formDataObj[key] = value;
+                }
+            }
+
+            // Usar SchemaMapper para estruturar conforme schema
+            const exportData = window.SchemaMapper ?
+                window.SchemaMapper.toApiculturaSchema(formDataObj) :
+                {
+                    metadata: {
+                        versao_schema: '2.0.0',
+                        tipo_formulario: 'anexo_apicultura',
+                        data_exportacao: new Date().toISOString()
+                    },
+                    dados: formDataObj
+                };
 
             // Criar blob e download
             const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const link = document.createElement('a');
 
-            const nomeProdutor = data.nome_fornecedor || 'produtor';
+            const nomeProdutor = formDataObj.nome_fornecedor || 'produtor';
             const dataAtual = new Date().toISOString().split('T')[0];
             const filename = `anexo-apicultura-${nomeProdutor.replace(/\s+/g, '-').toLowerCase()}-${dataAtual}.json`;
 

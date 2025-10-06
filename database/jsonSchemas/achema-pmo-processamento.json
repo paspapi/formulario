@@ -1,0 +1,182 @@
+{
+    "metadata": {
+        "versao_schema": "2.0.0",
+        "tipo_formulario": "anexo_processamento",
+        "data_criacao": "2026-01-01T10:00:00.000Z",
+        "ultima_atualizacao": "2026-01-01T10:00:00.000Z",
+        "status": "completo"
+    },
+    "dados": {
+        "identificacao": {
+            "fornecedores_responsaveis": [
+                {
+                    "nome_completo": "GERENTE DE PRODUÇÃO EXEMPLO",
+                    "cpf": "777.666.555-44",
+                    "data_nascimento": "1980-05-20T00:00:00.000Z"
+                }
+            ],
+            "dados_empresa": {
+                "razao_social": "DOCERIA SABOR NATURAL LTDA",
+                "nome_fantasia": "Sabor Orgânico",
+                "cpf_cnpj": "11.223.344/0001-90",
+                "inscricao_estadual": "00.111.222-3",
+                "inscricao_municipal": "98765",
+                "grupo_spg": "ANC-GRUPO PROCESSAMENTO RJ",
+                "data_preenchimento": "2026-01-01T00:00:00.000Z"
+            },
+            "contato": {
+                "telefone": "(21) 96543-2100",
+                "email": "contato@sabororganico.com.br"
+            }
+        },
+        "localizacao": {
+            "endereco_processamento": {
+                "logradouro": "RUA DO COMÉRCIO",
+                "numero": "123",
+                "bairro": "INDUSTRIAL",
+                "municipio": "CIDADE GRANDE",
+                "uf": "RJ",
+                "cep": "25000-000"
+            },
+            "coordenadas": {
+                "latitude": -22.90000,
+                "longitude": -43.10000
+            },
+            "tipo_local": "GALPÃO INDUSTRIAL",
+            "roteiro_acesso": "Próximo à saída da Rodovia Federal, em frente ao posto."
+        },
+        "situacao_legal": {
+            "documentos_legais": [
+                {
+                    "documento": "ALVARÁ DE FUNCIONAMENTO",
+                    "possui": true,
+                    "numero": "AF-123456/2023",
+                    "situacao": "VÁLIDO",
+                    "data_validade": "2026-12-31T00:00:00.000Z",
+                    "orgao_emissor": "PREFEITURA MUNICIPAL"
+                },
+                {
+                    "documento": "REGISTRO NO SIF/SIE/SIM",
+                    "possui": false,
+                    "numero": "",
+                    "situacao": "NÃO SE APLICA (VENDA DIRETA LOCAL)",
+                    "data_validade": "",
+                    "orgao_emissor": ""
+                }
+            ],
+            "declaracoes": {
+                "ciencia_obrigacoes": true,
+                "possui_alvara_funcionamento": true,
+                "nao_usa_transgenicos": true,
+                "conhece_legislacao_especifica": true
+            }
+        },
+        "mao_obra": {
+            "situacao_funcional": [
+                {
+                    "tipo_funcionario": "EMPREGADOS",
+                    "quantidade": 3,
+                    "funcao": "PRODUÇÃO/EMBALAGEM",
+                    "capacitacao_organicos": true
+                }
+            ],
+            "numero_total_funcionarios": 3
+        },
+        "produtos_processados": [
+            {
+                "nome_produto_final": "GELEIA DE MORANGO COM PIMENTA",
+                "conteudo_processado": "Morango, Açúcar, Pimenta",
+                "descricao_processamento": "Recebimento, Lavagem, Cozimento em tachos abertos, Envase a quente, Rotulagem.",
+                "expectativa_producao_mensal_kg": 300,
+                "origem_materia_prima": {
+                    "produto_proprio": false,
+                    "nome_agricultor_fornecedor": "FAZENDA MODELO ORGÂNICA",
+                    "cidade_origem": "MUNICÍPIO EXEMPLO",
+                    "uf_origem": "SP",
+                    "opac_certificou_parceiro": true
+                },
+                "tipo_produto": "ORGÂNICO",
+                "embalagem": "POTE DE VIDRO 200g",
+                "rotulagem_conforme": true
+            }
+        ],
+        "fornecedores_materia_prima": [
+            {
+                "nome_fornecedor": "FAZENDA MODELO ORGÂNICA",
+                "tipo_pessoa": "fisica",
+                "cpf_cnpj": "444.333.222-11",
+                "produtos_fornecidos": [
+                    "MORANGO FRESCO"
+                ],
+                "certificacao_organica": true,
+                "opac_certificadora": "ANC"
+            },
+            {
+                "nome_fornecedor": "DISTRIBUIDORA DOCE ORGÂNICO",
+                "tipo_pessoa": "juridica",
+                "cpf_cnpj": "22.334.455/0001-66",
+                "produtos_fornecidos": [
+                    "AÇÚCAR CRISTAL ORGÂNICO"
+                ],
+                "certificacao_organica": true,
+                "opac_certificadora": "OUTRO OPAC"
+            }
+        ],
+        "etapas_processamento": {
+            "recepcao_materia_prima": {
+                "procedimentos": "Verificação de qualidade e separação imediata por lote.",
+                "registro_lote": true,
+                "declaracao_separacao_materiais": true
+            },
+            "lavagem_higienizacao": {
+                "procedimentos": "Lavagem com água potável e sanitização com hipoclorito de sódio na dose permitida pela legislação [2].",
+                "produtos_utilizados": "Hipoclorito de sódio (grau alimentício).",
+                "declaracao_registro_lavagem": true
+            },
+            "embalagem": {
+                "procedimentos": "Envase a quente, fechamento hermético e resfriamento rápido.",
+                "tipo_material_embalagem": "VIDRO e TAMPA METÁLICA",
+                "declaracao_uso_embalagem_permitida": true,
+                "declaracao_nao_contaminacao": true
+            },
+            "armazenamento_estocagem": {
+                "local": "ESTOQUE SECO E REFRIGERADO (para produto final).",
+                "procedimentos_separacao": "Produtos acabados orgânicos separados fisicamente de qualquer outro material.",
+                "declaracao_separacao_riscos": true
+            }
+        },
+        "rastreabilidade": {
+            "sistema_rastreabilidade": "CONTROLE DE ENTRADA E SAÍDA DE INSUMOS E REGISTRO DE LOTE POR DATA DE FABRICAÇÃO.",
+            "mecanismos_registro": {
+                "anotacoes_entrada_insumo": true,
+                "controle_estoque_lote": true,
+                "identificacao_lotes": true
+            }
+        },
+        "controle_pragas_higiene": {
+            "higienizacao_ambientes": {
+                "procedimentos": "Limpeza diária de pisos, paredes e bancadas com água e detergente neutro biodegradável.",
+                "produtos_utilizados": "Detergente neutro, Álcool 70%."
+            },
+            "desinsetizacao": {
+                "procedimentos": "Uso de armadilhas físicas e telas nas janelas. Não utilizamos venenos químicos.",
+                "declaracao_nao_uso_venenos": true
+            },
+            "declaracao_higienizacao_conforme": true
+        },
+        "boas_praticas_fabricacao": {
+            "possui_manual_bpf": true,
+            "funcionarios_treinados": true,
+            "procedimentos_implementados": {
+                "uso_uniforme_e_epi": true,
+                "controle_saude_funcionarios": true,
+                "monitoramento_ponto_critico": true
+            }
+        },
+        "declaracoes_responsavel": {
+            "veracidade_informacoes": true,
+            "conhecimento_legislacao": true,
+            "autorizacao_acesso_integral": true
+        }
+    }
+}

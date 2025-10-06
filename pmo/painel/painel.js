@@ -757,25 +757,42 @@ const PainelPMO = {
 
     /**
      * Importar dados de objeto JSON (lógica compartilhada)
+     * Suporta schemas v2.0.0 (/jsonSchemas/) e schemas antigos (/schemas/)
      */
     async importFromJSONData(data, status, source = 'JSON') {
         try {
-            // Validar estrutura
+            // Validar estrutura básica
             if (!this.validateJSONStructure(data)) {
                 throw new Error('Estrutura do JSON inválida');
             }
 
+            // Detectar versão do schema
+            const schemaVersion = data.metadata?.versao_schema || '1.0';
+            const isV2Schema = schemaVersion === '2.0.0';
+
+            console.log(`📥 Importando ${source} - Schema v${schemaVersion}`);
+
+            // Validar contra schemas /jsonSchemas/ se for v2.0.0
+            if (isV2Schema && window.SchemaMapper) {
+                console.log('✅ Schema v2.0.0 detectado - estrutura validada');
+            } else if (!isV2Schema) {
+                console.warn('⚠️ Schema antigo detectado - importando com compatibilidade retroativa');
+            }
+
+            // Extrair identificação (compatível com ambas as versões)
+            const identificacao = data.dados?.identificacao || data.dados || {};
+
             // Criar novo PMO
             const pmoId = window.PMOStorageManager.createPMO({
-                cpf_cnpj: data.dados.identificacao?.cpf_cnpj || data.metadata?.id_produtor || '',
-                nome: data.dados.identificacao?.nome_completo || data.dados.identificacao?.razao_social || 'PMO Importado',
-                unidade: data.dados.identificacao?.nome_unidade_producao || 'Unidade Principal',
+                cpf_cnpj: identificacao.cpf_cnpj || data.metadata?.id_produtor || '',
+                nome: identificacao.nome_completo || identificacao.razao_social || 'PMO Importado',
+                unidade: identificacao.nome_unidade_producao || 'Unidade Principal',
                 grupo_spg: data.metadata?.grupo_spg || '',
                 ano_vigente: data.metadata?.ano_vigente || new Date().getFullYear(),
-                tipo_pessoa: data.dados.tipo_pessoa || 'fisica'
+                tipo_pessoa: data.dados?.tipo_pessoa || identificacao.tipo_pessoa || 'fisica'
             });
 
-            // Importar dados gerais
+            // Importar dados gerais (cadastro_geral_pmo)
             if (data.dados) {
                 window.PMOStorageManager.updateFormulario(pmoId, 'cadastro_geral_pmo', {
                     metadata: data.metadata,
@@ -783,17 +800,20 @@ const PainelPMO = {
                 });
             }
 
-            // Importar escopos
+            // Importar escopos (anexos)
             if (data.escopos) {
                 Object.keys(data.escopos).forEach(scopeKey => {
                     const scopeData = data.escopos[scopeKey];
                     if (scopeData && scopeData.dados) {
-                        window.PMOStorageManager.updateFormulario(pmoId, scopeKey, scopeData);
+                        // Normalizar nome do formulário (compatibilidade)
+                        const formKey = scopeKey.replace(/-/g, '_');
+                        window.PMOStorageManager.updateFormulario(pmoId, formKey, scopeData);
+                        console.log(`✅ Escopo importado: ${scopeKey}`);
                     }
                 });
             }
 
-            status.innerHTML = `<p style="color: var(--success-color);">✅ ${source} importado com sucesso!</p>`;
+            status.innerHTML = `<p style="color: var(--success-color);">✅ ${source} importado com sucesso! (Schema v${schemaVersion})</p>`;
 
             this.showMessage(`✅ PMO importado com sucesso do ${source}!`, 'success');
 

@@ -387,28 +387,33 @@ const ProcessamentoMinimo = {
         if (!form) return;
 
         const formData = new FormData(form);
-        const data = {
-            metadata: {
-                tipo_documento: 'PROCESSAMENTO_MINIMO',
-                versao_schema: '1.0',
-                data_preenchimento: formData.get('data_preenchimento'),
-                ultima_atualizacao: new Date().toISOString()
-            },
-            dados: {}
-        };
 
-        // Coletar todos os dados
+        // Converter FormData para objeto plano
+        const formDataObj = {};
         for (let [key, value] of formData.entries()) {
             if (key.includes('[]')) {
                 const cleanKey = key.replace('[]', '');
-                if (!data.dados[cleanKey]) {
-                    data.dados[cleanKey] = [];
+                if (!formDataObj[cleanKey]) {
+                    formDataObj[cleanKey] = [];
                 }
-                data.dados[cleanKey].push(value);
+                formDataObj[cleanKey].push(value);
             } else {
-                data.dados[key] = value;
+                formDataObj[key] = value;
             }
         }
+
+        // Usar SchemaMapper para estruturar conforme schema
+        const data = window.SchemaMapper ?
+            window.SchemaMapper.toProcessamentoMinimoSchema(formDataObj) :
+            {
+                metadata: {
+                    tipo_formulario: 'anexo_processamento_minimo',
+                    versao_schema: '2.0.0',
+                    data_preenchimento: formDataObj.data_preenchimento,
+                    ultima_atualizacao: new Date().toISOString()
+                },
+                dados: formDataObj
+            };
 
         try {
             const pmo = window.PMOStorageManager.getActivePMO();

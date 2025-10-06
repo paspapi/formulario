@@ -10,7 +10,7 @@ const AnexoCogumelo = {
         storageKey: 'anexo_cogumelo_data',
         autoSaveInterval: 30000,
         version: '2.0',
-        schemaPath: '/database/schemas/anexo-cogumelo.schema.json'
+        schemaPath: '/database/jsonSchemas/schema-pmo-cogumelo.json'
     },
 
     state: {
@@ -440,31 +440,33 @@ const AnexoCogumelo = {
     exportarJSON() {
         const form = document.getElementById('form-anexo-cogumelo');
         const formData = new FormData(form);
-        const data = {};
 
-        // Converter FormData para objeto estruturado
+        // Converter FormData para objeto plano
+        const formDataObj = {};
         for (let [key, value] of formData.entries()) {
             if (key.endsWith('[]')) {
                 const arrayKey = key.replace('[]', '');
-                if (!data[arrayKey]) {
-                    data[arrayKey] = [];
+                if (!formDataObj[arrayKey]) {
+                    formDataObj[arrayKey] = [];
                 }
-                data[arrayKey].push(value);
+                formDataObj[arrayKey].push(value);
             } else {
-                data[key] = value;
+                formDataObj[key] = value;
             }
         }
 
-        // Estruturar conforme schema
-        const exportData = {
-            metadata: {
-                tipo_documento: 'ANEXO_II_COGUMELOS',
-                versao_schema: '1.0',
-                data_extracao: new Date().toISOString(),
-                status_processamento: 'EXPORTADO'
-            },
-            ...data
-        };
+        // Usar SchemaMapper para estruturar conforme schema
+        const exportData = window.SchemaMapper ?
+            window.SchemaMapper.toCogumeloSchema(formDataObj) :
+            {
+                metadata: {
+                    tipo_formulario: 'anexo_cogumelo',
+                    versao_schema: '2.0.0',
+                    data_exportacao: new Date().toISOString(),
+                    status: 'exportado'
+                },
+                dados: formDataObj
+            };
 
         const fileName = `pmo-cogumelos-${new Date().toISOString().split('T')[0]}.json`;
 

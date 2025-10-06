@@ -1,0 +1,199 @@
+{
+    "anexo_processamentomin": {
+        "metadata": {
+            "versao_schema": "2.0.0",
+            "tipo_formulario": "anexo_processamentomin",
+            "data_criacao": "2026-01-01T10:00:00.000Z",
+            "ultima_atualizacao": "2026-01-01T10:00:00.000Z",
+            "status": "completo"
+        },
+        "dados": {
+            "identificacao": {
+                "fornecedores_responsaveis": [
+                    {
+                        "nome_completo": "RESPONSÁVEL TÉCNICO EXEMPLO",
+                        "cpf": "111.111.111-11",
+                        "data_nascimento": "1990-01-01T00:00:00.000Z"
+                    }
+                ],
+                "dados_empresa": {
+                    "razao_social": "PROCESSADORA ABC LTDA",
+                    "nome_fantasia": "Frescor Orgânico",
+                    "cpf_cnpj": "99.887.766/0001-55",
+                    "inscricao_estadual": "00.111.222-3",
+                    "inscricao_municipal": "123456",
+                    "grupo_spg": "ANC-GRUPO MINIMAMENTE PROCESSADOS",
+                    "data_preenchimento": "2026-01-01T00:00:00.000Z"
+                },
+                "contato": {
+                    "telefone": "(11) 98765-4321",
+                    "email": "contato@frescororganico.com.br"
+                }
+            },
+            "localizacao": {
+                "endereco_processamento": {
+                    "logradouro": "RUA DA INDÚSTRIA",
+                    "numero": "456",
+                    "bairro": "DISTRITO INDUSTRIAL",
+                    "municipio": "CIDADE DE PROCESSAMENTO",
+                    "uf": "SP",
+                    "cep": "01000-000"
+                },
+                "coordenadas": {
+                    "latitude": -23.50000,
+                    "longitude": -46.50000
+                },
+                "tipo_local": "GALPÃO INDUSTRIAL",
+                "roteiro_acesso": "Acesso pela Rodovia principal, virar na Rua da Indústria."
+            },
+            "situacao_legal": {
+                "documentos_legais": [
+                    {
+                        "documento": "ALVARÁ DE FUNCIONAMENTO",
+                        "possui": true,
+                        "numero": "AF-654321/2024",
+                        "situacao": "VÁLIDO",
+                        "data_validade": "2027-12-31T00:00:00.000Z",
+                        "orgao_emissor": "PREFEITURA MUNICIPAL"
+                    },
+                    {
+                        "documento": "LICENÇA SANITÁRIA",
+                        "possui": true,
+                        "numero": "LS-2024-9988",
+                        "situacao": "ATIVA",
+                        "data_validade": "2026-12-31T00:00:00.000Z",
+                        "orgao_emissor": "VIGILÂNCIA SANITÁRIA ESTADUAL"
+                    }
+                ],
+                "declaracoes": {
+                    "ciencia_obrigacoes": true,
+                    "possui_alvara_funcionamento": true,
+                    "declaracao_licenca_sanitaria": true,
+                    "declaracao_nao_usa_radiacao_ionizante": true,
+                    "declaracao_nao_usa_ingrediente_paralelo": true,
+                    "nao_usa_transgenicos": true,
+                    "conhece_legislacao_especifica": true
+                }
+            },
+            "mao_obra": {
+                "situacao_funcional": [
+                    {
+                        "tipo_funcionario": "EMPREGADOS",
+                        "quantidade": 5,
+                        "funcao": "CORTE E EMBALAGEM",
+                        "capacitacao_organicos": true
+                    }
+                ],
+                "numero_total_funcionarios": 5
+            },
+            "produtos_minimamente_processados": [
+                {
+                    "nome_produto_final": "ABÓBORA CABOTIÁ DESCASCADA E CORTADA",
+                    "conteudo_processado": "ABÓBORA CABOTIÁ DESCASCADA, PICADA, BRANQUEADA E EMBALADA",
+                    "expectativa_producao_mensal_kg": 500,
+                    "origem_materia_prima": {
+                        "produto_proprio": false,
+                        "nome_agricultor_fornecedor": "PRODUTOR EXEMPLO ORGÂNICO",
+                        "cidade_origem": "CIDADE DO INTERIOR",
+                        "uf_origem": "MG",
+                        "opac_certificou_parceiro": true
+                    },
+                    "tipo_produto": "ORGÂNICO",
+                    "embalagem": "SACO PLÁSTICO A VÁCUO (GRAU ALIMENTÍCIO)",
+                    "rotulagem_conforme": true
+                }
+            ],
+            "fornecedores_materia_prima": [
+                {
+                    "nome_fornecedor": "PRODUTOR EXEMPLO ORGÂNICO",
+                    "tipo_pessoa": "fisica",
+                    "cpf_cnpj": "444.333.222-11",
+                    "produtos_fornecidos": [
+                        "ABÓBORA CABOTIÁ"
+                    ],
+                    "certificacao_organica": true,
+                    "opac_certificadora": "ANC"
+                }
+            ],
+            "etapas_processamento_minimo": {
+                "etapa_selecao_e_lavagem": {
+                    "realiza": true,
+                    "procedimentos_recebimento": "Produtos recebidos em caixas plásticas higienizadas. Separação de lotes orgânicos e não orgânicos (se houver).",
+                    "pre_lavados_higienizados": true,
+                    "substancias_lavagem": "Hipoclorito de sódio (grau alimentício) na concentração permitida.",
+                    "destinacao_partes_retiradas": "COMPOSTAGEM EXTERNA"
+                },
+                "etapa_manipulacao": {
+                    "procedimentos_detalhados": "Descascamento, corte e fatiamento manual. Branqueamento rápido em água a 95°C por 3 minutos (para inativação enzimática)."
+                },
+                "etapa_higienizacao": {
+                    "realiza": true,
+                    "procedimentos": "Sanitização final após corte para garantir aptidão ao consumo humano.",
+                    "substancias_higienizacao": "Hipoclorito de sódio na dose permitida (0,5 ppm de cloro ativo)."
+                },
+                "etapa_embalagem": {
+                    "procedimentos": "Embalamento a vácuo imediato na área fria da unidade.",
+                    "equipamentos_utilizados": "Máquina seladora a vácuo industrial.",
+                    "embalagens_utilizadas": "Sacos plásticos a vácuo (PEBD/PEAD).",
+                    "declaracao_uso_embalagem_permitida": true,
+                    "declaracao_nao_contaminacao": true
+                },
+                "etapa_rotulagem": {
+                    "procedimentos": "Rotulagem manual na área de expedição. Conferência dos itens obrigatórios do rótulo [9].",
+                    "equipamentos_rotulagem": "NÃO, rotulagem manual.",
+                    "modelo_rotulo_anexo": true
+                },
+                "etapa_estocagem": {
+                    "procedimentos": "Armazenamento refrigerado a 4°C, separado fisicamente de outros produtos.",
+                    "declaracao_separacao_riscos": true
+                },
+                "etapa_transporte": {
+                    "procedimentos": "Transporte em veículo refrigerado próprio.",
+                    "declaracao_riscos_transporte": true
+                },
+                "etapa_comercializacao": {
+                    "procedimentos": "Venda direta para varejo. Produtos não orgânicos (se houver) são comercializados em horários e locais distintos.",
+                    "declaracao_riscos_comercializacao": true
+                }
+            },
+            "rastreabilidade": {
+                "sistema_rastreabilidade": "REGISTRO DE LOTE POR DATA DE FABRICAÇÃO, CRUZANDO COM AS NOTAS FISCAIS DOS FORNECEDORES [10].",
+                "mecanismos_registro": {
+                    "anotacoes_entrada_insumo": true,
+                    "controle_estoque_lote": true,
+                    "identificacao_lotes": true,
+                    "anotacoes_saida_comercializacao": true,
+                    "notas_fiscais_recibos_certificados": true
+                }
+            },
+            "controle_pragas_higiene": {
+                "higienizacao_ambientes": {
+                    "procedimentos": "Limpeza diária de pisos e bancadas [10].",
+                    "produtos_utilizados": "Detergente neutro, Álcool 70%."
+                },
+                "desinsetizacao": {
+                    "declaracao_desinsetizacao_conforme": true,
+                    "procedimentos": "Uso de armadilhas luminosas e telas.",
+                    "periodicidade_aplicacao": "NÃO USA PRODUTOS QUÍMICOS - APENAS FÍSICOS."
+                },
+                "declaracao_higienizacao_conforme": true
+            },
+            "producao_paralela": {
+                "processa_nao_organicos": false,
+                "declaracao_nao_processamento_paralelo_mesma_cultura": true
+            },
+            "residuos": {
+                "tipos_residuos": "Restos de cascas e aparas (orgânico); Plástico, papel e vidro (não orgânico) [11].",
+                "disponibilidade_croqui": true,
+                "destino_efluentes": "REDE DE ESGOTO PÚBLICA, após separação de sólidos.",
+                "tratamento_efluentes": false,
+                "riscos_externos": "BAIXO. Efluentes tratados por sistema municipal [11]."
+            },
+            "declaracoes_responsavel": {
+                "veracidade_informacoes": true,
+                "conhecimento_legislacao": true,
+                "autorizacao_acesso_integral": true
+            }
+        }
+    }
+}
