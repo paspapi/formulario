@@ -343,10 +343,12 @@ const CadastroGeralPMO = {
 
 
     /**
-     * Toggle tipo de pessoa (CPF/CNPJ)
+     * Toggle tipo de documento (CPF/CNPJ)
      */
-    togglePessoaTipo() {
-        const tipoPessoa = document.getElementById('tipo_pessoa');
+    toggleTipoDocumento() {
+        const tipoDocumento = document.getElementById('tipo_documento');
+        const campoTipoPessoaCnpj = document.getElementById('campo-tipo-pessoa-cnpj');
+        const tipoPessoaSelect = document.getElementById('tipo_pessoa');
         const campoCpfCnpj = document.getElementById('campo-cpf-cnpj');
         const labelCpfCnpj = document.getElementById('label-cpf-cnpj');
         const cpfCnpjInput = document.getElementById('cpf_cnpj');
@@ -354,12 +356,17 @@ const CadastroGeralPMO = {
         const campoInscricaoMunicipal = document.getElementById('campo-inscricao-municipal');
         const campoNomeFantasia = document.getElementById('campo-nome-fantasia');
 
-        if (!tipoPessoa || !campoCpfCnpj) return;
+        if (!tipoDocumento) return;
 
-        const valor = tipoPessoa.value;
+        const valor = tipoDocumento.value;
 
-        if (valor === 'fisica') {
-            // Pessoa Física - mostrar CPF, ocultar campos de empresa
+        if (valor === 'cpf') {
+            // CPF - sempre pessoa física
+            campoTipoPessoaCnpj.style.display = 'none';
+            tipoPessoaSelect.value = 'fisica';
+            tipoPessoaSelect.removeAttribute('required');
+
+            // Mostrar campo CPF
             campoCpfCnpj.style.display = 'block';
             labelCpfCnpj.innerHTML = 'CPF <span class="required">*</span>';
             cpfCnpjInput.placeholder = '000.000.000-00';
@@ -371,32 +378,72 @@ const CadastroGeralPMO = {
             if (campoInscricaoMunicipal) campoInscricaoMunicipal.style.display = 'none';
             if (campoNomeFantasia) campoNomeFantasia.style.display = 'none';
 
-            // Remover máscaras anteriores e aplicar máscara de CPF
+            // Aplicar máscara de CPF
             this.aplicarMascaraCpf(cpfCnpjInput);
 
-        } else if (valor === 'juridica') {
-            // Pessoa Jurídica - mostrar CNPJ e campos de empresa
+        } else if (valor === 'cnpj') {
+            // CNPJ - perguntar tipo de pessoa
+            campoTipoPessoaCnpj.style.display = 'block';
+            tipoPessoaSelect.value = '';
+            tipoPessoaSelect.setAttribute('required', 'required');
+
+            // Mostrar campo CNPJ
             campoCpfCnpj.style.display = 'block';
             labelCpfCnpj.innerHTML = 'CNPJ <span class="required">*</span>';
             cpfCnpjInput.placeholder = '00.000.000/0000-00';
             cpfCnpjInput.setAttribute('required', 'required');
             cpfCnpjInput.value = '';
 
-            // Mostrar campos de empresa
-            if (campoInscricaoEstadual) campoInscricaoEstadual.style.display = 'block';
-            if (campoInscricaoMunicipal) campoInscricaoMunicipal.style.display = 'block';
-            if (campoNomeFantasia) campoNomeFantasia.style.display = 'block';
+            // Ocultar campos de empresa até escolher tipo de pessoa
+            if (campoInscricaoEstadual) campoInscricaoEstadual.style.display = 'none';
+            if (campoInscricaoMunicipal) campoInscricaoMunicipal.style.display = 'none';
+            if (campoNomeFantasia) campoNomeFantasia.style.display = 'none';
 
-            // Remover máscaras anteriores e aplicar máscara de CNPJ
+            // Aplicar máscara de CNPJ
             this.aplicarMascaraCnpj(cpfCnpjInput);
 
         } else {
             // Nenhum selecionado - ocultar tudo
+            campoTipoPessoaCnpj.style.display = 'none';
             campoCpfCnpj.style.display = 'none';
             if (campoInscricaoEstadual) campoInscricaoEstadual.style.display = 'none';
             if (campoInscricaoMunicipal) campoInscricaoMunicipal.style.display = 'none';
             if (campoNomeFantasia) campoNomeFantasia.style.display = 'none';
             cpfCnpjInput.removeAttribute('required');
+            tipoPessoaSelect.removeAttribute('required');
+        }
+    },
+
+    /**
+     * Toggle tipo de pessoa (para CNPJ)
+     */
+    togglePessoaTipo() {
+        const tipoPessoa = document.getElementById('tipo_pessoa');
+        const campoInscricaoEstadual = document.getElementById('campo-inscricao-estadual');
+        const campoInscricaoMunicipal = document.getElementById('campo-inscricao-municipal');
+        const campoNomeFantasia = document.getElementById('campo-nome-fantasia');
+
+        if (!tipoPessoa) return;
+
+        const valor = tipoPessoa.value;
+
+        if (valor === 'fisica') {
+            // Pessoa Física com CNPJ (Produtor Rural) - ocultar campos de empresa
+            if (campoInscricaoEstadual) campoInscricaoEstadual.style.display = 'none';
+            if (campoInscricaoMunicipal) campoInscricaoMunicipal.style.display = 'none';
+            if (campoNomeFantasia) campoNomeFantasia.style.display = 'none';
+
+        } else if (valor === 'juridica') {
+            // Pessoa Jurídica - mostrar campos de empresa
+            if (campoInscricaoEstadual) campoInscricaoEstadual.style.display = 'block';
+            if (campoInscricaoMunicipal) campoInscricaoMunicipal.style.display = 'block';
+            if (campoNomeFantasia) campoNomeFantasia.style.display = 'block';
+
+        } else {
+            // Nenhum selecionado - ocultar campos de empresa
+            if (campoInscricaoEstadual) campoInscricaoEstadual.style.display = 'none';
+            if (campoInscricaoMunicipal) campoInscricaoMunicipal.style.display = 'none';
+            if (campoNomeFantasia) campoNomeFantasia.style.display = 'none';
         }
     },
 
@@ -1281,8 +1328,10 @@ const CadastroGeralPMO = {
         if (dados.identificacao) {
             console.log('📝 Preenchendo identificação:', dados.identificacao);
 
-            // Nome completo ou Razão Social (dependendo do tipo de pessoa)
-            const nome = dados.identificacao.razao_social || dados.identificacao.nome_completo;
+            // Nome completo ou Razão Social (buscar em múltiplas fontes)
+            const nome = dados.identificacao.razao_social ||
+                         dados.identificacao.nome_completo ||
+                         data.metadata?.nome_produtor;
             if (nome) {
                 this.preencherCampo(form, 'nome_completo', nome);
             }
@@ -1294,10 +1343,32 @@ const CadastroGeralPMO = {
             this.preencherCampo(form, 'nome_unidade_producao', dados.identificacao.nome_unidade_producao);
         }
 
-        // 2. Tipo de pessoa
+        // 2. Tipo de documento e tipo de pessoa
+        // Determinar tipo de documento baseado no CPF/CNPJ
+        if (dados.identificacao && dados.identificacao.cpf_cnpj) {
+            const cpfCnpj = dados.identificacao.cpf_cnpj.replace(/\D/g, '');
+            const tipoDocumento = cpfCnpj.length === 11 ? 'cpf' : 'cnpj';
+
+            console.log('📝 Preenchendo tipo de documento:', tipoDocumento);
+            this.preencherCampo(form, 'tipo_documento', tipoDocumento);
+
+            // Disparar evento para mostrar campos corretos
+            const tipoDocSelect = document.getElementById('tipo_documento');
+            if (tipoDocSelect) {
+                tipoDocSelect.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+        }
+
+        // Preencher tipo de pessoa (se houver)
         if (dados.tipo_pessoa) {
             console.log('📝 Preenchendo tipo de pessoa:', dados.tipo_pessoa);
             this.preencherCampo(form, 'tipo_pessoa', dados.tipo_pessoa);
+
+            // Disparar evento para ajustar campos de empresa
+            const tipoPessoaSelect = document.getElementById('tipo_pessoa');
+            if (tipoPessoaSelect) {
+                tipoPessoaSelect.dispatchEvent(new Event('change', { bubbles: true }));
+            }
         }
 
         // 3. Contato
@@ -1327,12 +1398,17 @@ const CadastroGeralPMO = {
         // 4. Propriedade
         if (dados.propriedade) {
             this.preencherCampo(form, 'posse_terra', dados.propriedade.posse_terra);
-            this.preencherCampo(form, 'area_total_ha', dados.propriedade.area_total_ha);
+            this.preencherCampo(form, 'area_total_ha', dados.propriedade.area_total_ha || dados.propriedade.area_total_propriedade_ha);
             this.preencherCampo(form, 'caf_numero', dados.propriedade.caf_numero);
             this.preencherCampo(form, 'caf_nao_possui', dados.propriedade.caf_nao_possui);
-            this.preencherCampo(form, 'roteiro_acesso', dados.propriedade.roteiro_acesso);
             this.preencherCampo(form, 'data_aquisicao', dados.propriedade.data_aquisicao_posse);
             this.preencherCampo(form, 'terra_familiar', dados.propriedade.terra_familiar);
+        }
+
+        // Roteiro de acesso pode estar em contato ou propriedade
+        const roteiroAcesso = dados.contato?.roteiro_acesso || dados.propriedade?.roteiro_acesso;
+        if (roteiroAcesso) {
+            this.preencherCampo(form, 'roteiro_acesso', roteiroAcesso);
         }
 
         // 5. Manejo Orgânico
@@ -1410,6 +1486,7 @@ const CadastroGeralPMO = {
 
         // Atualizar campos condicionais
         setTimeout(() => {
+            this.toggleTipoDocumento();
             this.togglePessoaTipo();
             this.toggleTipoCertificacao();
             // NÃO chamar updateEscopo() aqui - já foi chamado via dispatchEvent ao marcar checkboxes

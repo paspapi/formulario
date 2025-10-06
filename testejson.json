@@ -2,515 +2,419 @@
   "metadata": {
     "versao_schema": "2.0.0",
     "tipo_formulario": "pmo_completo",
-    "data_criacao": "2025-01-10T15:30:00.000Z",
-    "id_pmo": "pmo_2025_46765198000103_quinta-do-quebra-machado",
-    "id_produtor": "46.765.198/0001-03",
+    "data_criacao": "2024-10-22T00:00:00.000Z",
+    "id_pmo": "pmo_2025_44876030000130_sitio-recanto-da-paz",
+    "id_produtor": "44.876.030/0001-30",
     "grupo_spg": "Bela Vista",
-    "nome_produtor": "Sítio Quinta do Quebra Machado",
-    "nome_unidade": "Quinta do Quebra Machado",
+    "nome_produtor": "MARCELO GONÇALVES DA SILVA / RAQUEL MATOS XAVIER",
+    "nome_unidade": "SITIO RECANTO DA PAZ",
     "ano_vigente": 2025,
-    "status": "completo",
-    "ultima_atualizacao": "2025-01-10T15:30:00.000Z"
+    "status": "aprovado"
   },
   "dados": {
     "tipo_pessoa": "juridica",
     "identificacao": {
-      "nome_completo": "Sítio Quinta do Quebra Machado",
-      "cpf_cnpj": "46.765.198/0001-03",
-      "inscricao_estadual": "15.587.1.208-99",
-      "inscricao_municipal": "",
-      "nome_fantasia": "Quinta do Quebra Machado - QQM",
-      "nome_unidade_producao": "Quinta do Quebra Machado",
-      "razao_social": "Sítio Quinta do Quebra Machado"
+      "fornecedores_responsaveis": [
+        {
+          "nome_completo": "MARCELO GONÇALVES DA SILVA",
+          "cpf": "739066119-49",
+          "data_nascimento": "1969-09-23"
+        },
+        {
+          "nome_completo": "RAQUEL MATOS XAVIER",
+          "cpf": "227058268-31",
+          "data_nascimento": "1983-04-10"
+        }
+      ],
+      "cpf_cnpj": "44.876.030/0001-30",
+      "inscricao_estadual": "168.165.939.110",
+      "caf_numero": "Não possuo cadastro",
+      "grupo_spg": "Bela Vista",
+      "data_preenchimento_pmo": "2024-10-22",
+      "nome_fantasia": "N/A",
+      "nome_unidade_producao": "SITIO RECANTO DA PAZ"
     },
     "contato": {
-      "telefone": "(19) 99773-8697",
-      "email": "lualuzi1@yahoo.com.br",
+      "telefone": "(13) 991168778",
+      "email": "Bixodoparana69@gmail.com",
       "endereco": {
-        "endereco_completo": "Pantaleão, Amparo - SP, 13900-000",
-        "logradouro": "",
-        "numero": "",
-        "complemento": "",
-        "bairro": "Pantaleão",
-        "municipio": "Amparo",
+        "logradouro": "Não especificado",
+        "bairro": "SERTAOZINHO",
+        "municipio": "AMPARO",
         "uf": "SP",
-        "cep": "13900-000",
+        "cep": "13909-899",
         "coordenadas": {
-          "latitude": -22.6344166667,
-          "longitude": -46.8167777778
+          "latitude": -22.767266,
+          "longitude": -46.711834
         }
-      }
+      },
+      "roteiro_acesso": "Não informado na fonte."
     },
     "propriedade": {
       "posse_terra": "PRÓPRIA",
-      "area_total_ha": 0.0,
-      "caf_numero": "",
-      "caf_nao_possui": false,
-      "roteiro_acesso": "Partindo de Amparo (SP), seguir pela Rodovia Barros Munhoz, que liga o município à cidade de Itapira. Por volta do KM 12, pegar a saída para o bairro Pantaleão (observar que há várias placas sinalizando o acesso). No bairro, seguir a placa que indica a escola pública (e Organização Social) do Movimento de Ação Rural do Bairro Pantaleão (MARP). Há poucos metros antes da entrada da instituição, virar a primeira rua à direita, passar a ponte, e encontrará o Sítio Quinta do Quebra Machado, primeira propriedade à esquerda. Para facilitar, há placa que identifica o sítio logo na entrada.",
-      "data_aquisicao_posse": "",
-      "terra_familiar": false
+      "area_total_propriedade_ha": 6.64,
+      "area_total_organica_ha": 2.5,
+      "relacao_unidade_producao": "A propriedade foi adquirida em 2021 sendo já destinada a agricultura orgânica desde 2016 por outra certificadora, os atuais proprietários foram acolhidos e acompanhados no período de transição pelo grupo Bela Vista [10].",
+      "data_aquisicao_posse": "2021-03-10",
+      "terra_familiar": true
     },
     "manejo_organico": {
-      "anos_manejo_organico": 0,
-      "situacao_manejo": "",
-      "comprovacao_manejo": []
-    },
-    "escopo": {
-      "hortalicas": false,
-      "frutas": false,
-      "graos": false,
-      "medicinais": false,
-      "cogumelos": false,
-      "pecuaria": false,
-      "apicultura": false,
-      "proc_minimo": false,
-      "processamento": true
-    },
-    "pretende_certificar": true,
-    "activities": {
-      "escopo_hortalicas": false,
-      "escopo_frutas": false,
-      "escopo_graos": false,
-      "escopo_medicinais": false,
-      "escopo_cogumelos": false,
-      "escopo_pecuaria": false,
-      "escopo_apicultura": false,
-      "escopo_proc_minimo": false,
-      "escopo_processamento": true
-    }
-  },
-  "escopos": {
-    "anexo_processamento": {
-      "metadata": {
-        "versao_schema": "2.0.0",
-        "tipo_formulario": "anexo_processamento",
-        "data_criacao": "2025-01-10T15:30:00.000Z",
-        "ultima_atualizacao": "2025-01-10T15:30:00.000Z",
-        "status": "completo"
-      },
-      "dados": {
-        "geral": {
-          "razao_social": "Sítio Quinta do Quebra Machado",
-          "cnpj_empresa": "46.765.198/0001-03",
-          "escopo_origem_animal": false,
-          "escopo_origem_vegetal": true,
-          "endereco_processamento": "Pantaleão, Amparo - SP, 13900-000",
-          "coordenadas": {
-            "latitude": -22.6344166667,
-            "longitude": -46.8167777778
-          },
-          "numero_funcionarios": 1
+      "historico_propriedade": "Adquirida em Março de 2021, já era orgânica desde 2016. Os antigos proprietários permaneceram 1 ano ensinando o manejo [11].",
+      "topografia_e_utilizacao": "Área íngreme com angulação de até 45 graus em seu ponto mais extremo (plantadas árvores noz pecan, limão e abacate para assegurar o terreno e conter a erosão). Nas partes planas (terraplanagem) foram implantadas as estufas e demais benfeitorias [11].",
+      "status_manejo_organico": "SIM, POIS ESTOU EM PROCESSO DE AVALIAÇÃO DA CONFORMIDADE ORGÂNICA SEM INTERRUPÇÕES. MEU CERTIFICADO SE MANTEVE ATIVO",
+      "anos_manejo_organico": 3,
+      "comprovacao_manejo": [
+        {
+          "tipo": "CERTIFICADO ANTERIOR (PARTICIPAÇÃO CONSTANTE NO SPG DA ANC)",
+          "status": true
+        }
+      ],
+      "historico_ultimos_10_anos": [
+        {
+          "cultura_animal": "PRODUÇÃO PRIMÁRIA VEGETAL - HORTALIÇAS",
+          "data_ultima_aplicacao_nao_permitido": "n/a",
+          "insumo_utilizado": "n/a",
+          "estavam_sob_manejo_organico": true,
+          "eram_certificados": true
         },
-        "situacao_legal": [
-          {
-            "documento_legal": "Alvará de Funcionamento",
-            "possui_documento": true,
-            "numero_documento": "",
-            "situacao_documento": "POSSUI (DECLARAÇÃO DE MEI)"
-          },
-          {
-            "documento_legal": "Vigilância Sanitária",
-            "possui_documento": true,
-            "numero_documento": "",
-            "situacao_documento": "APROVADO / DISPENSADA CNAE"
-          }
-        ],
-        "fornecedores": [
-          {
-            "ingrediente": "Farinha de trigo branca/integral",
-            "nome_fornecedor": "Mirella (Casa do Naturalista/Supermercado Pão de Açúcar)",
-            "quantidade_mensal_kg": 35.0
-          },
-          {
-            "ingrediente": "Fermento biológico",
-            "nome_fornecedor": "Ottker ou Fleischmann",
-            "quantidade_mensal_kg": 0.08
-          },
-          {
-            "ingrediente": "Sal",
-            "nome_fornecedor": "Zane",
-            "quantidade_mensal_kg": 0.32
-          },
-          {
-            "ingrediente": "Açúcar",
-            "nome_fornecedor": "Native",
-            "quantidade_mensal_kg": 5.0
-          },
-          {
-            "ingrediente": "Ovo",
-            "nome_fornecedor": "Fazenda da Toca/Qualitá",
-            "quantidade_mensal_kg": 2.4
-          },
-          {
-            "ingrediente": "Morango",
-            "nome_fornecedor": "Sxzen/Alexandro e Márcio (SPG)",
-            "quantidade_mensal_kg": 28.0
-          },
-          {
-            "ingrediente": "Tomate",
-            "nome_fornecedor": "Marcelo/Alexandro/Ricardo (SPG)",
-            "quantidade_mensal_kg": 20.0
-          },
-          {
-            "ingrediente": "Beringela",
-            "nome_fornecedor": "Instituto Candombá/Alexandro/Ricardo (SPG) e Supermercado Pão de Açúcar",
-            "quantidade_mensal_kg": 1.5
-          },
-          {
-            "ingrediente": "Abobrinha",
-            "nome_fornecedor": "Instituto Candombá/Alexandro/Ricardo (SPG) e Supermercado Pão de Açúcar",
-            "quantidade_mensal_kg": 1.5
-          },
-          {
-            "ingrediente": "Cebola",
-            "nome_fornecedor": "Instituto Candombá/Alexandro/Ricardo (SPG) e Supermercado Pão de Açúcar",
-            "quantidade_mensal_kg": 1.5
-          },
-          {
-            "ingrediente": "Alho",
-            "nome_fornecedor": "Instituto Candombá/Alexandro/Ricardo (SPG) e Supermercado Pão de Açúcar",
-            "quantidade_mensal_kg": 0.5
-          },
-          {
-            "ingrediente": "Pimenta dedo de moça",
-            "nome_fornecedor": "Instituto Candombá/Alexandro/Ricardo (SPG) e Supermercado Pão de Açúcar",
-            "quantidade_mensal_kg": 1.0
-          },
-          {
-            "ingrediente": "Maçã",
-            "nome_fornecedor": "Instituto Candombá/Alexandro/Ricardo (SPG) e Supermercado Pão de Açúcar",
-            "quantidade_mensal_kg": 10.0
-          },
-          {
-            "ingrediente": "Pimentão",
-            "nome_fornecedor": "Instituto Candombá/Alexandro/Ricardo (SPG) e Supermercado Pão de Açúcar",
-            "quantidade_mensal_kg": 1.5
-          },
-          {
-            "ingrediente": "Uva passa",
-            "nome_fornecedor": "Supermercado Pão de Açúcar, Instituto Candombá",
-            "quantidade_mensal_kg": 0.5
-          },
-          {
-            "ingrediente": "Azeitona",
-            "nome_fornecedor": "Supermercado Pão de Açúcar, Instituto Candombá",
-            "quantidade_mensal_kg": 0.5
-          },
-          {
-            "ingrediente": "Azeite",
-            "nome_fornecedor": "Supermercado Pão de Açúcar, Instituto Candombá",
-            "quantidade_mensal_kg": 0.5
-          },
-          {
-            "ingrediente": "Chimichurri",
-            "nome_fornecedor": "Supermercado Pão de Açúcar",
-            "quantidade_mensal_kg": 0.02
-          },
-          {
-            "ingrediente": "Pimenta do reino",
-            "nome_fornecedor": "Supermercado Pão de Açúcar",
-            "quantidade_mensal_kg": 0.01
-          },
-          {
-            "ingrediente": "Molho inglês",
-            "nome_fornecedor": "Supermercado Pão de Açúcar, Instituto Candombá",
-            "quantidade_mensal_kg": 0.24
-          },
-          {
-            "ingrediente": "Canela em pó",
-            "nome_fornecedor": "Supermercado Pão de Açúcar",
-            "quantidade_mensal_kg": 0.01
-          },
-          {
-            "ingrediente": "Óleo de girassol",
-            "nome_fornecedor": "Supermercado Pão de Açúcar, Instituto Candombá",
-            "quantidade_mensal_kg": 3.6
-          },
-          {
-            "ingrediente": "Vinagre de maçã",
-            "nome_fornecedor": "Supermercado Pão de Açúcar, Instituto Candombá",
-            "quantidade_mensal_kg": 0.2
-          },
-          {
-            "ingrediente": "Shiitake",
-            "nome_fornecedor": "Vila Barrichello",
-            "quantidade_mensal_kg": 4.0
-          },
-          {
-            "ingrediente": "Laranja",
-            "nome_fornecedor": "Alexandro/Ricardo (SPG), Instituto Candombá",
-            "quantidade_mensal_kg": 2.0
-          },
-          {
-            "ingrediente": "Suco de maçã orgânico",
-            "nome_fornecedor": "Instituto Candombá",
-            "quantidade_mensal_kg": 1.0
-          }
-        ],
-        "produtos": [
-          {
-            "produto_final": "CAPONATA",
-            "ingredientes_organicos": "Abobrinha – 300gr, berinjela – 300gr, tomate – 240gr, pimentão – 200gr, cebola – 100gr, alho – 5gr, vinagre de maçã – 10gr (Total: 1155gr, 81.33% do total de 1420gr da receita)",
-            "percent_organicos": 81.33,
-            "ingredientes_nao_organicos": "Uva passa – 100gr, azeitonas – 10gr, azeite – 150gr, chimichurri – 5gr (Total: 265gr, 18.67% do total de 1420gr da receita)",
-            "percent_nao_organicos": 18.67,
-            "expectativa_producao_mensal": 5.68,
-            "tipo_produto": "COM_INGREDIENTES_ORGÂNICOS"
-          },
-          {
-            "produto_final": "BANANADA SEM AÇÚCAR",
-            "ingredientes_organicos": "banana – 1000gr, limão – 120gr (Total: 1120gr, 99.66% do total de 1125gr da receita)",
-            "percent_organicos": 99.66,
-            "ingredientes_nao_organicos": "canela em pó – 5gr (Total: 5gr, 0.44% do total de 1125gr da receita)",
-            "percent_nao_organicos": 0.44,
-            "expectativa_producao_mensal": 4.5,
-            "tipo_produto": "ORGÂNICO"
-          },
-          {
-            "produto_final": "CONSERVA DE PIMENTA",
-            "ingredientes_organicos": "pimenta dedo de moça – 1000gr, alho – 15gr (Total: 1015gr, 96.39% do total de 1053gr da receita)",
-            "percent_organicos": 96.39,
-            "ingredientes_nao_organicos": "óleo de girassol – 36gr, pimenta do reino – 2gr (Total: 38gr, 3.61% da receita)",
-            "percent_nao_organicos": 3.61,
-            "expectativa_producao_mensal": 1.0,
-            "tipo_produto": "ORGÂNICO"
-          },
-          {
-            "produto_final": "ESFIHA DE SHIMEJI",
-            "ingredientes_organicos": "farinha de trigo branca – 1000 gr, shiimeji – 1000 gr, tomate – 500gr, cebola – 150gr, alho – 50gr, açúcar – 60gr, molho shoyu – 10gr (Total: 2540gr, 93.96% do total de 2703gr da receita)",
-            "percent_organicos": 93.96,
-            "ingredientes_nao_organicos": "óleo de girassol – 108gr, fermento biológico – 5gr, azeite/azeitonas – 50gr (Total: 163gr, 6.03% do total de 2703gr da receita)",
-            "percent_nao_organicos": 6.03,
-            "expectativa_producao_mensal": 5.0,
-            "tipo_produto": "COM_INGREDIENTES_ORGÂNICOS"
-          },
-          {
-            "produto_final": "ESFIRRA DE SHIMEJI COM MAÇÃ",
-            "ingredientes_organicos": "farinha de trigo branca – 1000 gr, shiimeji – 1000 gr, tomate – 500gr, sortido de tomate – 200gr, cebola – 200gr, açúcar – 60gr, molho shoyu – 10gr (Total: 3066gr, 96.66% do total de 3172gr da receita)",
-            "percent_organicos": 96.66,
-            "ingredientes_nao_organicos": "óleo de girassol – 108gr, fermento biológico – 5gr, azeitonas/azeite – 50gr (Total: 106gr, 3.34% do total de 3172gr da receita)",
-            "percent_nao_organicos": 3.34,
-            "expectativa_producao_mensal": 5.0,
-            "tipo_produto": "ORGÂNICO"
-          },
-          {
-            "produto_final": "ESFIHA DE SHITAKE",
-            "ingredientes_organicos": "farinha de trigo branca – 1000 gr, shiitake – 1000 gr, cebola – 50gr, tomate – 120gr, limão – 200gr, açúcar – 60gr, shoyu – 10gr (Total: 2440gr, 93.60% do total de 2703gr da receita)",
-            "percent_organicos": 93.60,
-            "ingredientes_nao_organicos": "óleo de girassol – 108gr, fermento biológico – 5gr, azeitonas – 50gr (Total: 173gr, 6.40% do total de 2703gr da receita)",
-            "percent_nao_organicos": 6.40,
-            "expectativa_producao_mensal": 3.0,
-            "tipo_produto": "COM_INGREDIENTES_ORGÂNICOS"
-          },
-          {
-            "produto_final": "GELEIA DE AMORA",
-            "ingredientes_organicos": "amoras – 7000gr, açúcar – 1500gr, limão – 120gr (Total: 8620gr, 100% da receita)",
-            "percent_organicos": 100.0,
-            "ingredientes_nao_organicos": "",
-            "percent_nao_organicos": 0.0,
-            "expectativa_producao_mensal": 17.0,
-            "tipo_produto": "ORGÂNICO"
-          },
-          {
-            "produto_final": "GELEIA DE FRAMBOESA",
-            "ingredientes_organicos": "framboesa – 7000gr, açúcar – 1500gr, limão – 120gr (Total: 8620gr, 100% da receita)",
-            "percent_organicos": 100.0,
-            "ingredientes_nao_organicos": "",
-            "percent_nao_organicos": 0.0,
-            "expectativa_producao_mensal": 8.6,
-            "tipo_produto": "ORGÂNICO"
-          },
-          {
-            "produto_final": "GELEIAS DE FRUTAS VERMELHAS",
-            "ingredientes_organicos": "morangos – 5000gr, amoras – 1800gr, framboesas – 200gr, açúcar – 1500gr, limão – 120gr (Total: 8620gr, 100% da receita)",
-            "percent_organicos": 100.0,
-            "ingredientes_nao_organicos": "",
-            "percent_nao_organicos": 0.0,
-            "expectativa_producao_mensal": 34.0,
-            "tipo_produto": "ORGÂNICO"
-          },
-          {
-            "produto_final": "GELEIA DE MORANGO",
-            "ingredientes_organicos": "morangos – 7000gr, açúcar – 1500gr, limão – 120gr (Total: 8620gr, 100% da receita)",
-            "percent_organicos": 100.0,
-            "ingredientes_nao_organicos": "",
-            "percent_nao_organicos": 0.0,
-            "expectativa_producao_mensal": 17.0,
-            "tipo_produto": "ORGÂNICO"
-          },
-          {
-            "produto_final": "GELEIA DE PIMENTA",
-            "ingredientes_organicos": "maçã – 300gr, pimenta dedo de moça – 100gr, açúcar – 240gr, limão – 120gr (Total: 760gr, 100% da receita)",
-            "percent_organicos": 100.0,
-            "ingredientes_nao_organicos": "",
-            "percent_nao_organicos": 0.0,
-            "expectativa_producao_mensal": 3.0,
-            "tipo_produto": "ORGÂNICO"
-          },
-          {
-            "produto_final": "GELEIA DE TOMATE COM BANANA",
-            "ingredientes_organicos": "tomate – 2000gr, banana – 700gr, laranja – 2000gr, açúcar – 1300gr, limão – 140gr (Total: 6040gr, 100% da receita)",
-            "percent_organicos": 100.0,
-            "ingredientes_nao_organicos": "",
-            "percent_nao_organicos": 0.0,
-            "expectativa_producao_mensal": 5.0,
-            "tipo_produto": "ORGÂNICO"
-          },
-          {
-            "produto_final": "GOIABADA CREMOSA",
-            "ingredientes_organicos": "goiaba – 10000gr, açúcar – 1000gr, limão – 220gr (Total: 11120gr, 100% da receita)",
-            "percent_organicos": 100.0,
-            "ingredientes_nao_organicos": "",
-            "percent_nao_organicos": 0.0,
-            "expectativa_producao_mensal": 11.0,
-            "tipo_produto": "ORGÂNICO"
-          },
-          {
-            "produto_final": "MACARRÃO",
-            "ingredientes_organicos": "farinha de trigo branca – 480gr, ovos – 220gr (Total: 700gr, 100% da receita)",
-            "percent_organicos": 100.0,
-            "ingredientes_nao_organicos": "",
-            "percent_nao_organicos": 0.0,
-            "expectativa_producao_mensal": 1.4,
-            "tipo_produto": "ORGÂNICO"
-          },
-          {
-            "produto_final": "MACARRÃO DE ORA PRO NOBIS",
-            "ingredientes_organicos": "farinha de trigo branca – 480gr, ora pro nobis – 100gr, ovos – 220gr (Total: 800gr, 100% da receita)",
-            "percent_organicos": 100.0,
-            "ingredientes_nao_organicos": "",
-            "percent_nao_organicos": 0.0,
-            "expectativa_producao_mensal": 1.6,
-            "tipo_produto": "ORGÂNICO"
-          },
-          {
-            "produto_final": "MACARRÃO INTEGRAL",
-            "ingredientes_organicos": "farinha de trigo integral – 480gr, farinha de trigo branca – 240gr, ovos – 220gr (Total: 700gr, 100% da receita)",
-            "percent_organicos": 100.0,
-            "ingredientes_nao_organicos": "",
-            "percent_nao_organicos": 0.0,
-            "expectativa_producao_mensal": 1.4,
-            "tipo_produto": "ORGÂNICO"
-          },
-          {
-            "produto_final": "MOLHO DE TOMATE",
-            "ingredientes_organicos": "tomates – 1000gr, cebolas – 50gr, alho – 5gr (Total: 1055gr, 100% da receita)",
-            "percent_organicos": 100.0,
-            "ingredientes_nao_organicos": "",
-            "percent_nao_organicos": 0.0,
-            "expectativa_producao_mensal": 11.0,
-            "tipo_produto": "ORGÂNICO"
-          },
-          {
-            "produto_final": "PÃO DE CAMPANHA",
-            "ingredientes_organicos": "farinha de trigo branca – 1000gr, levain – 300gr (Total: 1300gr, 99.62% do total de 1305gr da receita)",
-            "percent_organicos": 99.62,
-            "ingredientes_nao_organicos": "fermento biológico – 5gr (Total: 5gr, 0.38% do total de 1305gr da receita)",
-            "percent_nao_organicos": 0.38,
-            "expectativa_producao_mensal": 15.6,
-            "tipo_produto": "ORGÂNICO"
-          },
-          {
-            "produto_final": "PÃO DE CAMPANHA INTEGRAL",
-            "ingredientes_organicos": "farinha de trigo branca – 500gr, farinha de trigo integral – 500gr, levain – 300gr (Total: 1300gr, 99.62% do total de 1305gr da receita)",
-            "percent_organicos": 99.62,
-            "ingredientes_nao_organicos": "fermento biológico – 5gr (Total: 5gr, 0.38% do total de 1305gr da receita)",
-            "percent_nao_organicos": 0.38,
-            "expectativa_producao_mensal": 15.6,
-            "tipo_produto": "ORGÂNICO"
-          },
-          {
-            "produto_final": "PÃO DOCE DE BANANA",
-            "ingredientes_organicos": "farinha de trigo – 1000gr, banana – 900gr, açúcar – 150gr, leite – 80gr (Total: 2130gr, 95.05% do total de 2241gr da receita)",
-            "percent_organicos": 95.05,
-            "ingredientes_nao_organicos": "óleo de girassol – 106 gr, fermento biológico – 5gr (Total: 111gr, 4.95% do total de 2241gr da receita)",
-            "percent_nao_organicos": 4.95,
-            "expectativa_producao_mensal": 2.2,
-            "tipo_produto": "ORGÂNICO"
-          },
-          {
-            "produto_final": "PÃO DOCE DE GOIABA",
-            "ingredientes_organicos": "farinha de trigo branca – 1000gr, goiaba – 1000gr, açúcar – 150gr, leite – 80gr (Total: 2130gr, 95.05% do total de 2241gr da receita)",
-            "percent_organicos": 95.05,
-            "ingredientes_nao_organicos": "óleo de girassol – 106 gr, fermento biológico – 5gr (Total: 111gr, 4.95% do total de 2241gr da receita)",
-            "percent_nao_organicos": 4.95,
-            "expectativa_producao_mensal": 2.2,
-            "tipo_produto": "ORGÂNICO"
-          },
-          {
-            "produto_final": "PÃO ITALIANO",
-            "ingredientes_organicos": "farinha de trigo branca – 1000gr, levain – 300gr (Total: 1300gr, 99.62% do total de 1305gr da receita)",
-            "percent_organicos": 99.62,
-            "ingredientes_nao_organicos": "fermento biológico – 5gr (Total: 5gr, 0.38% do total de 1305gr da receita)",
-            "percent_nao_organicos": 0.38,
-            "expectativa_producao_mensal": 5.2,
-            "tipo_produto": "ORGÂNICO"
-          },
-          {
-            "produto_final": "TOMATE SUCULENTO",
-            "ingredientes_organicos": "tomate – 3000gr, açúcar – 240gr (Total: 3140gr, 95.44% do total de 3395gr da receita)",
-            "percent_organicos": 95.44,
-            "ingredientes_nao_organicos": "azeite extra virgem – 150gr, chimichurri – 50gr, sal – 55gr (Total: 255gr, 4.56% do total de 3395gr da receita)",
-            "percent_nao_organicos": 4.56,
-            "expectativa_producao_mensal": 3.3,
-            "tipo_produto": "ORGÂNICO"
-          }
-        ],
-        "higienizacao": [
-          {
-            "marca_nome_comercial": "DETERGENTE",
-            "substancia_ativa": "DETERGENTE",
-            "fabricante": "YPÊ",
-            "quando_usar": "NA LIMPEZA COM ÁGUA",
-            "ja_usa_pretende": true
-          },
-          {
-            "marca_nome_comercial": "CLORO",
-            "substancia_ativa": "CLORO",
-            "fabricante": "YPÊ",
-            "quando_usar": "NA LIMPEZA COM ÁGUA",
-            "ja_usa_pretende": true
-          },
-          {
-            "marca_nome_comercial": "ÁLCOOL 70%",
-            "substancia_ativa": "ÁLCOOL 70%",
-            "fabricante": "YPÊ",
-            "quando_usar": "NA LIMPEZA À SECO",
-            "ja_usa_pretende": true
-          }
-        ],
+        {
+          "cultura_animal": "PRODUÇÃO PRIMÁRIA VEGETAL - FRUTAS",
+          "data_ultima_aplicacao_nao_permitido": "n/a",
+          "insumo_utilizado": "n/a",
+          "estavam_sob_manejo_organico": true,
+          "eram_certificados": true
+        }
+      ],
+      "relato_historico_recente": "Compramos o sítio em 2021, implantamos 2 estufas (tomate italiano, grape, uva), pitaia, banana e abacate. Recentemente implantamos uma nova estufa tecnológica e plantamos 100 mudas de noz pecan e 50 mudas de banana da terra [12]."
+    },
+    "activities": {
+      "escopo_vegetal": true,
+      "escopo_hortalicas": true,
+      "escopo_frutas": true,
+      "escopo_animal": false,
+      "escopo_cogumelo": false,
+      "escopo_apicultura": false,
+      "escopo_processamento": false,
+      "escopo_processamento_minimo": false
+    },
+    "mao_de_obra": {
+      "familiar": false,
+      "identifique_familiar": "Não aplicável",
+      "empregados_quantos": 0,
+      "diaristas_quantos": 1,
+      "parceiros_quantos": 0,
+      "meeiro_rural_quantos": 0
+    },
+    "croqui": {
+      "local_insercao_croqui": "Não inserido no texto da fonte [14]",
+      "itens_obrigatorios_localizados": [
+        "ENTRADA DA PROPRIEDADE",
+        "CASA / RESIDÊNCIA (casa principal, casa caseiro)",
+        "ARMAZÉM E GALPÕES (Galpão 1 e Galpão 2)",
+        "RIOS E OUTROS CURSOS D´ÁGUA (tanque, poço)",
+        "TALHÕES / ÁREA DE PLANTIO (Talhão 1 a 9)",
+        "BARREIRAS VEGETAIS (dombeya, bananeiras)",
+        "CULTURAS PERENES (frutíferas diversas, abacate, limão, noz pecan, banana)",
+        "COMPOSTEIRA",
+        "APONTAR CONFRONTANTES E ATIVIDADE DOS VIZINHOS CONFRONTANTES (Um não produz, o outro convencional mas com manejo orgânico)"
+      ]
+    },
+    "biodiversidade_e_ambiente": {
+      "preservacao_ambiental": [
+        {
+          "area": "MATA NATIVA (RESERVA LEGAL)",
+          "possui": true,
+          "preservada": true
+        },
+        {
+          "area": "NASCENTES",
+          "possui": false,
+          "preservada": false
+        },
+        {
+          "area": "CURSOS DE ÁGUA (RIOS, CÓRREGO, REPRESA, ETC)",
+          "possui": true,
+          "preservada": true
+        },
+        {
+          "area": "TOPO DE MORRO OU ÁREAS ÍNGREMES",
+          "possui": true,
+          "preservada": true
+        }
+      ],
+      "tecnicas_prevencao_incendios": "Barreiras vegetais (dombeya e banana), controle do mato seco, extintores de incêndio, gastank com 200m de mangueira [18].",
+      "experiencia_recuperacao_solos": "n/a",
+      "destino_lixo_organico": "COMPOSTAGEM",
+      "destino_lixo_nao_organico": "ARMAZENAMENTO EM SACOS APROPRIADOS E POSTERIOR DESCARTE EM CONTENDEDORES DO SERVIÇO PÚBLICO DE COLETA",
+      "destino_esgoto_domestico": "FOSSA SÉPTICA e BIODIGESTOR"
+    },
+    "manejo_da_agua": {
+      "periodicidade_analise_irrigacao": "A CADA 2 ANOS",
+      "fontes_agua_uso": [
+        {
+          "uso": "CONSUMO DOMÉSTICO",
+          "origem": "POÇO",
+          "risco_contaminacao": "BAIXO",
+          "garantia_qualidade": "ANÁLISE PERIÓDICA"
+        },
+        {
+          "uso": "LAVAGEM DE ALIMENTOS",
+          "origem": "POÇO",
+          "risco_contaminacao": "BAIXO",
+          "garantia_qualidade": "ANÁLISE PERIÓDICA"
+        },
+        {
+          "uso": "IRRIGAÇÃO ( FONTE 1 )",
+          "origem": "POÇO",
+          "risco_contaminacao": "BAIXO",
+          "garantia_qualidade": "ANÁLISE PERIÓDICA"
+        }
+      ]
+    },
+    "regularizacao_ambiental": {
+      "possui_car": "MEU CADASTRO ESTÁ APROVADO PELO ÓRGÃO AMBIENTAL",
+      "explicacao_reserva_legal": "Possuo mais de 45% da área da propriedade em área de mata totalmente preservada, na qual foram plantadas espécies nativas onde abunda fauna e flora, sendo combatido qualquer espécie de invasor, coletor ou caçador [20]."
+    },
+    "producao_subsistencia_ornamental": {
+      "possui_nao_organica": true,
+      "atividades": [
+        {
+          "tipo": "HORTALIÇAS",
+          "area_ha": 0.05
+        },
+        {
+          "tipo": "FRUTÍFERAS / PERENES",
+          "area_ha": 0.05
+        },
+        {
+          "tipo": "PEIXES",
+          "area_ha": 0.02
+        }
+      ],
+      "utiliza_insumos_nao_permitidos": true,
+      "risco_contaminacao": "BAIXO",
+      "manejo_bloqueio_riscos": "Bananeiras e Dombeyas cercando toda a propriedade. Tanque cercado com tela. Aconselhamento ao vizinho para utilizar produtos orgânicos [21, 22]."
+    },
+    "producao_paralela": {
+      "possui_paralela": false,
+      "atividades": [],
+      "utiliza_insumos_nao_permitidos": false,
+      "risco_contaminacao": "N/A",
+      "manejo_bloqueio_riscos": "N/A",
+      "pretende_conversao_total": false,
+      "tempo_conversao": "N/A"
+    },
+    "declaracoes_conformidade": {
+      "veracidade_e_comunicacao": "Declarado [8]",
+      "conhecimento_normas": "Declarado [8, 24-27]",
+      "conhecimento_regras_spg": "Declarado [27]",
+      "concordancia_verificacao_acesso": "Declarado [28]",
+      "concordancia_informacao_adicional": "Declarado [28]",
+      "ciente_visitas_amostras": "Declarado [28, 29]",
+      "aceite_condicoes_corretivas": "Declarado [29]",
+      "total_conhecimento_conviccao": "Declarado [9]"
+    },
+    "certificacao_detalhes": {
+      "lista_produtos_certificar": [
+        {
+          "produto_variedade": "TOMATE ITALIANO",
+          "talhao_area": "ESTUFA 3",
+          "estimativa_producao_qtd": "13.000KG",
+          "periodo_estimativa": "8 MESES",
+          "peso_kg_und": "200GR",
+          "origem_muda": "SAKATA",
+          "origem_semente": "CONVENCIONAL COM TRATAMENTO",
+          "tipo": "CONVENCIONAL C/ TRAT"
+        },
+        {
+          "produto_variedade": "TOMATE GRAPE",
+          "talhao_area": "ESTUFA 1",
+          "estimativa_producao_qtd": "20.000KG",
+          "periodo_estimativa": "8 MESES",
+          "peso_kg_und": "N/A",
+          "origem_muda": "CELEIRO VERDE",
+          "origem_semente": "CONVENCIONAL C TRATAMENTO",
+          "tipo": "CONVENCIONAL C/ TRAT"
+        },
+        {
+          "produto_variedade": "TOMATE GRAPE / ITALIANO",
+          "talhao_area": "ESTUFA 2",
+          "estimativa_producao_qtd": "ENTRE 13.000KG E 20.000KG",
+          "periodo_estimativa": "8 MESES",
+          "peso_kg_und": "N/A",
+          "origem_muda": "CELEIRO VERDE",
+          "origem_semente": "CONVENCIONAL C TRATAMENTO",
+          "tipo": "CONVENCIONAL C/ TRAT"
+        },
+        {
+          "produto_variedade": "ABACATE HASS",
+          "talhao_area": "TALHAO 5 E 6",
+          "estimativa_producao_qtd": "500KG",
+          "periodo_estimativa": "ANO",
+          "peso_kg_und": "N/A",
+          "origem_muda": "VIVEIRO AGUAI",
+          "origem_semente": "CONVENCIONAL COM TRATAMENTO",
+          "tipo": "CONVENCIONAL C/ TRAT"
+        },
+        {
+          "produto_variedade": "UVA NIÁGARA",
+          "talhao_area": "TALHÃO 1",
+          "estimativa_producao_qtd": "30KG",
+          "periodo_estimativa": "ANO",
+          "peso_kg_und": "N/A",
+          "origem_muda": "VITACEA BRASIL",
+          "origem_semente": "CONVENCIONAL COM TRATAMENTO",
+          "tipo": "CONVENCIONAL C/ TRAT"
+        },
+        {
+          "produto_variedade": "BANANA PRATA",
+          "talhao_area": "9",
+          "estimativa_producao_qtd": "100KG",
+          "periodo_estimativa": "ANO",
+          "peso_kg_und": "N/A",
+          "origem_muda": "PRÓPRIA",
+          "origem_semente": "ORGÂNICA",
+          "tipo": "ORGÂNICA"
+        }
+      ],
+      "declaracao_incremento_mudas_sementes_proprias": true
+    },
+    "comercializacao": {
+      "processo_pos_colheita": "O produto é colhido, armazenado em caixas de 20kg, até a venda direta aos feirantes do SPG ou levado em veículo próprio até centro atacadista [20, 32].",
+      "produtos_armazenados": true,
+      "explicacao_armazenamento": "Podem ser colocados em câmara fria por período curto até que os compradores venham retirar. Procedimento adotado em caso de calor extremo [32].",
+      "tipos_comercializacao": [
+        {
+          "tipo": "REVENDA - VENDO PARA OUTROS PRODUTORES DO SPG",
+          "status": true
+        },
+        {
+          "tipo": "REVENDA - MERCADO ATACADISTA",
+          "status": true
+        }
+      ],
+      "modelo_rotulo": "N/A",
+      "transporte_produtos": "VEÍCULO PRÓPRIO",
+      "rastreabilidade_produtos": "ROMANEIO E NOTA FISCAL",
+      "comercializa_nao_organicos": "N/A"
+    },
+    "controles_e_registros": [
+      {
+        "atividade": "OPERAÇÕES DE MANEJO",
         "controles": [
+          "CADERNO",
+          "COMPUTADOR"
+        ]
+      },
+      {
+        "atividade": "COMPRA DE INSUMOS",
+        "controles": [
+          "NOTAS FISCAIS/ RECIBOS"
+        ]
+      },
+      {
+        "atividade": "COMPRA DE SEMENTES",
+        "controles": [
+          "NOTAS FISCAIS/ RECIBOS"
+        ]
+      },
+      {
+        "atividade": "COMPRA/PRODUÇÃO DE MUDAS",
+        "controles": [
+          "NOTAS FISCAIS/ RECIBOS"
+        ]
+      },
+      {
+        "atividade": "PRODUÇÃO",
+        "controles": [
+          "CADERNO"
+        ]
+      },
+      {
+        "atividade": "VENDA DE PRODUTOS",
+        "controles": [
+          "COMPUTADOR",
+          "NOTAS FISCAIS/ RECIBOS"
+        ]
+      }
+    ],
+    "anexo_vegetal_detalhes": {
+      "preparo_solo": [
+        "ROÇADA",
+        "ARAÇÃO",
+        "GRADAGEM"
+      ],
+      "praticas_conservacionistas": [
+        {
+          "tipo": "ROTAÇÃO DE CULTURAS",
+          "descricao": "NAS ESTUFAS: TOMATE/GRAMÍNEAS"
+        },
+        {
+          "tipo": "ADUBAÇÃO VERDE",
+          "descricao": "PLANTIO DIRETO DE VÁRIAS SEMENTES INDICADAS PARA ADUBACAO VERDE"
+        },
+        {
+          "tipo": "QUEBRA-VENTOS",
+          "descricao": "DOMBEYA, PARTE DE MATA PRESERVADA, BANANEIRAS"
+        },
+        {
+          "tipo": "COBERTURA DE SOLO",
+          "descricao": "BRAQUIARIA"
+        },
+        {
+          "tipo": "PROTEÇÃO CONTRA EROSÃO",
+          "descricao": "BRAQUIARIA"
+        },
+        {
+          "tipo": "MANEJO DO MATO",
+          "descricao": "ROÇADA E CAPINA"
+        }
+      ],
+      "risco_contaminacao": {
+        "risco_deriva_agrotoxicos": false,
+        "risco_transgenicos": false
+      },
+      "controle_formigas": "Não existe infestação que comprometa a produção. Utilizam barreiras físicas nas frutíferas, torres de PVC e fitas adesivas nas uvas. Abacateiros sofrem ataques [38, 39].",
+      "adubacao_nutricao": {
+        "descricao_geral": "Utiliza esterco curtido de gado, Bokashi (fabricação própria) e composto Minhofertil [39].",
+        "substrato": {
+          "uso": "COMPRO SUBSTRATO PRONTO [39]",
+          "declaracao_rastreabilidade": true,
+          "ingredientes": [
+            {
+              "material_insumo": "SUBSTRATO ORGÂNICO BIOMIX",
+              "origem": "COMPRADO/BONSAI MONTE VERDE",
+              "proporcao_percentual": "N/A",
+              "caracteristicas": "CE 0,4, CRA 50%, U 45%, D 300 kg/m³, pH 6,5 [40]"
+            }
+          ]
+        },
+        "receitas_proprias": [
           {
-            "atividade_controle": "ENTRADA DE INGREDIENTES / COMPRAS",
-            "metodo_controle": "NOTA FISCAL, CADERNO, FICHAS DE CONTROLE"
+            "nome_receita": "BOKASHI",
+            "ingredientes": "TERRA DE BARRANCO PENEIRADA, TORTA DE MAMONA, FARELO DE MILHO E ARROZ, YORIN MASTER, CINZA DE MADEIRA",
+            "quantidade_dose_frequencia": "30 GRAMOS + 10 GRAMOS DE SULFATO DE POTASSIO",
+            "cultura_talhao": "TOMATE ABACATE",
+            "status_uso": "USO"
           },
           {
-            "atividade_controle": "CONTROLE DE ESTOQUE DOS INGREDIENTES/ MATÉRIAS PRIMAS",
-            "metodo_controle": "NOTA FISCAL, CADERNO, FICHAS DE CONTROLE"
-          },
-          {
-            "atividade_controle": "PROCESSAMENTO",
-            "metodo_controle": "CADERNO, FICHAS DE CONTROLE"
-          },
-          {
-            "atividade_controle": "CONTROLE DE ESTOQUE DO PRODUTO FINAL PARA VENDA",
-            "metodo_controle": "NOTA FISCAL, CADERNO, FICHAS DE CONTROLE"
-          },
-          {
-            "atividade_controle": "VENDA DE PRODUTOS",
-            "metodo_controle": "CADERNO, FICHAS DE CONTROLE"
-          },
-          {
-            "atividade_controle": "COMPRA DE INSUMOS/PRODUTOS HIGIENIZAÇÃO",
-            "metodo_controle": "NOTA FISCAL, CADERNO, FICHAS DE CONTROLE"
-          }
-        ],
-        "mao_obra": [
-          {
-            "tipo_funcionario": "FAMILIAR",
-            "quantidade_funcionarios": 1
+            "nome_receita": "COMPOSTO ORGANICO VOLUMOSO",
+            "ingredientes": "ESTERCO DE GADO CURTIDO, BRAQUIARIA, YORIN, CALCARIO",
+            "quantidade_dose_frequencia": "100GR POR METRO NO BERÇO DA MUDA",
+            "cultura_talhao": "ESTUFAS",
+            "status_uso": "USO"
           }
         ]
+      },
+      "equipamentos_e_armazenamento": {
+        "usa_equipamento_terceiro": false,
+        "empresta_equipamento": false,
+        "declaracao_nao_compartilhamento_pulverizacao": true,
+        "declaracao_higienizacao_e_produtos_permitidos": true,
+        "condicoes_organizacao_armazenamento": "BOA",
+        "declaracao_ausencia_nao_permitidos": true,
+        "declaracao_bloqueio_riscos": true,
+        "declaracao_acessibilidade_visitas": true
       }
     }
   }

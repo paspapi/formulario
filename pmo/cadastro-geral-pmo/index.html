@@ -164,14 +164,26 @@
                     </div>
 
                     <div class="field-wrapper">
-                        <label for="tipo_pessoa">
-                            Tipo de Pessoa
+                        <label for="tipo_documento">
+                            Tipo de Documento
                             <span class="required">*</span>
                         </label>
-                        <select id="tipo_pessoa" name="tipo_pessoa" required onchange="CadastroGeralPMO.togglePessoaTipo()">
+                        <select id="tipo_documento" name="tipo_documento" required onchange="CadastroGeralPMO.toggleTipoDocumento()">
                             <option value="">Selecione...</option>
-                            <option value="fisica">Pessoa Física (CPF)</option>
-                            <option value="juridica">Pessoa Jurídica (CNPJ)</option>
+                            <option value="cpf">CPF (Pessoa Física)</option>
+                            <option value="cnpj">CNPJ (Produtor Rural)</option>
+                        </select>
+                    </div>
+
+                    <div class="field-wrapper" id="campo-tipo-pessoa-cnpj" style="display:none;">
+                        <label for="tipo_pessoa">
+                            Tipo de Pessoa (CNPJ)
+                            <span class="required">*</span>
+                        </label>
+                        <select id="tipo_pessoa" name="tipo_pessoa" onchange="CadastroGeralPMO.togglePessoaTipo()">
+                            <option value="">Selecione...</option>
+                            <option value="fisica">Pessoa Física (Produtor Rural)</option>
+                            <option value="juridica">Pessoa Jurídica</option>
                         </select>
                     </div>
 
