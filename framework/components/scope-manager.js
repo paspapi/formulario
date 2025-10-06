@@ -70,11 +70,29 @@ class PMOScopeManager {
      */
     saveActivities(activities, pretendeCertificar = true) {
         try {
+            // NOVO: Salvar dentro dos dados do PMO ativo
+            if (window.PMOStorageManager) {
+                const pmo = window.PMOStorageManager.getActivePMO();
+                if (pmo) {
+                    // Salvar activities nos dados do PMO
+                    window.PMOStorageManager.updateFormulario(pmo.id, '_scope_activities', {
+                        pretende_certificar: pretendeCertificar,
+                        activities: activities,
+                        lastUpdated: new Date().toISOString()
+                    });
+                    console.log(`✅ Activities salvas no PMO ${pmo.id}`);
+                    this.onScopeChanged();
+                    return true;
+                }
+            }
+
+            // FALLBACK: Salvar no localStorage global (compatibilidade)
             localStorage.setItem(this.STORAGE_KEY, JSON.stringify({
                 pretende_certificar: pretendeCertificar,
                 activities: activities,
                 lastUpdated: new Date().toISOString()
             }));
+            console.log('⚠️ Activities salvas no localStorage global (sem PMO ativo)');
             this.onScopeChanged();
             return true;
         } catch (error) {
@@ -89,6 +107,15 @@ class PMOScopeManager {
      */
     getActivities() {
         try {
+            // NOVO: Ler activities dos dados do PMO ativo
+            if (window.PMOStorageManager) {
+                const pmo = window.PMOStorageManager.getActivePMO();
+                if (pmo && pmo.dados && pmo.dados._scope_activities) {
+                    return pmo.dados._scope_activities.activities || {};
+                }
+            }
+
+            // FALLBACK: Ler do localStorage global (compatibilidade)
             const data = localStorage.getItem(this.STORAGE_KEY);
             if (!data) return null;
 
@@ -106,6 +133,16 @@ class PMOScopeManager {
      */
     pretendeCertificar() {
         try {
+            // NOVO: Ler do PMO ativo
+            if (window.PMOStorageManager) {
+                const pmo = window.PMOStorageManager.getActivePMO();
+                if (pmo && pmo.dados && pmo.dados._scope_activities) {
+                    const pretende = pmo.dados._scope_activities.pretende_certificar;
+                    return pretende === true || pretende === 'sim';
+                }
+            }
+
+            // FALLBACK: Ler do localStorage global
             const data = localStorage.getItem(this.STORAGE_KEY);
             if (!data) return false;
 
