@@ -35,6 +35,8 @@ const CadastroGeralPMO = {
             console.log('📝 Modo criação de novo PMO');
             // Limpar dados em cache do localStorage para garantir formulário em branco
             localStorage.removeItem(this.config.storageKey);
+            // Limpar também o escopo de atividades do scope manager
+            localStorage.removeItem('pmo_scope_activities');
             // Não carregar dados, começar em branco
         } else {
             // Carregar dados salvos
