@@ -1,0 +1,78 @@
+{
+  "metadata": {
+    "versao_schema": "2.0.0",
+    "tipo_formulario": "anexo_apicultura",
+    "data_criacao": "2026-01-01T10:00:00.000Z",
+    "ultima_atualizacao": "2026-01-01T10:00:00.000Z",
+    "status": "completo"
+  },
+  "dados": {
+    "apiarios": [
+      {
+        "nome_apiario": "APIÁRIO 1 - FAZENDA SERRA",
+        "localizacao": "TALHÃO 8, ÁREA DE MATA NATIVA (conforme Croqui [8])",
+        "distancia_unidade_km": 0.5,
+        "confrontantes_risco": "Vizinhança com mata nativa e pasto orgânico. Risco BAIXO [9, 10]."
+      }
+    ],
+    "colmeias": {
+      "numero_colmeias": 30,
+      "origem_enxames": "PRÓPRIA (manejo de divisão de colmeias)",
+      "material_colmeias": "MADEIRA DE EUCALIPTO SEM TRATAMENTO QUÍMICO"
+    },
+    "floradas": [
+      {
+        "tipo_vegetacao": "MATA ATLÂNTICA (nativa)",
+        "epoca_floracao": "Primavera e verão",
+        "localizacao_florada": "Raio de 3 km do apiário (Reserva Legal e APP)"
+      },
+      {
+        "tipo_vegetacao": "EUCALIPTO ORGÂNICO",
+        "epoca_floracao": "Outono",
+        "localizacao_florada": "Propriedade vizinha orgânica"
+      }
+    ],
+    "alimentacao_artificial": {
+      "uso": true,
+      "justificativa": "Apenas em período de escassez (entressafra ou inverno), como medida emergencial.",
+      "tipo_alimento": "XAROPE DE AÇÚCAR ORGÂNICO",
+      "epoca_uso": "Junho e julho"
+    },
+    "sanidade_apicola": {
+      "praticas_preventivas": [
+        "ROTAÇÃO ANUAL DE RAINHAS",
+        "HIGIENE CONSTANTE E TROCA DE CERA",
+        "MANEJO DE EQUILÍBRIO DE ENXAMES"
+      ],
+      "tratamentos": [
+        {
+          "doenca_praga": "VARROA",
+          "tratamento_produto": "ÁCIDO FÓRMICO (permitido pela Portaria 52/2021 [12])",
+          "fabricante_origem": "PRÓPRIO",
+          "condicao_epoca_uso": "Aplicado após a safra, durante o período de alimentação artificial, seguindo prazo de carência."
+        }
+      ]
+    },
+    "producao": [
+      {
+        "produto": "MEL DE FLORADA NATIVA - GRANEL",
+        "estimativa_producao_anual_kg": 600,
+        "periodo_producao": "ANUAL",
+        "uso_proprio_porcentagem": 0
+      },
+      {
+        "produto": "PRÓPOLIS",
+        "estimativa_producao_anual_kg": 10,
+        "periodo_producao": "ANUAL",
+        "uso_proprio_porcentagem": 5
+      }
+    ],
+    "armazenamento_declaracoes": {
+      "condicoes_organizacao": "BOA",
+      "bloqueio_riscos": true,
+      "acessivel_visitacao": true,
+      "declaracao_nao_permitidos": true,
+      "declaracao_risco_acidente": true
+    }
+  }
+}

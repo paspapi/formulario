@@ -1,0 +1,17 @@
+{
+  "moduleId": "pos_colheita_cogumelo",
+  "version": "1.0.0",
+  "label": "Pós-colheita, Embalagem e Estocagem (Cogumelos)",
+  "description": "Verificação das etapas pós-colheita na produção de cogumelos.",
+  "fieldNamespace": "pos_colheita_embalagem_estocagem",
+  "dataTemplate": {
+    "pos_colheita_embalagem_estocagem": {
+      "conforme_PMO": {
+        "cumpre": "nao_informado",
+        "obs": ""
+      },
+      "produtor_atende_normas_processamento_transporte_armazenagem": "nao_informado",
+      "observacoes": ""
+    }
+  }
+}

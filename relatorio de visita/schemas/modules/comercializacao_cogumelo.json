@@ -1,0 +1,15 @@
+{
+  "moduleId": "comercializacao_cogumelo",
+  "version": "1.0.0",
+  "label": "Comercialização e Rotulagem (Cogumelos)",
+  "description": "Informações de comercialização específicas para cogumelos.",
+  "fieldNamespace": "comercializacao_rotulagem",
+  "dataTemplate": {
+    "comercializacao_rotulagem": {
+      "descricao_comercializacao": "",
+      "canais_venda": [],
+      "usa_selo_SISORG": "nao_informado",
+      "modelo_etiqueta": ""
+    }
+  }
+}

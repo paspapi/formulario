@@ -1,0 +1,287 @@
+{
+  "schemaSetId": "relatorio_visita_opac",
+  "version": "1.1.0",
+  "description": "Manifesto dos módulos e tipos de relatórios de visita de verificação do sistema OPAC.",
+  "modules": {
+    "identificacao_produtor": {
+      "label": "Identificação do Produtor",
+      "version": "1.0.0",
+      "path": "modules/identificacao_produtor.json"
+    },
+    "identificacao_processador": {
+      "label": "Identificação do Processador",
+      "version": "1.0.0",
+      "path": "modules/identificacao_processador.json"
+    },
+    "areas_instalacoes_visitadas": {
+      "label": "Áreas/Instalações Visitadas",
+      "version": "1.0.0",
+      "path": "modules/areas_instalacoes_visitadas.json"
+    },
+    "aspectos_sociais_basico": {
+      "label": "Aspectos Sociais e Ambientais",
+      "version": "1.0.0",
+      "path": "modules/aspectos_sociais_basico.json"
+    },
+    "aspectos_sociais_processamento": {
+      "label": "Aspectos Sociais e Ambientais (Processamento)",
+      "version": "1.0.0",
+      "path": "modules/aspectos_sociais_processamento.json"
+    },
+    "producao_animal": {
+      "label": "Produção Animal",
+      "version": "1.0.0",
+      "path": "modules/producao_animal.json"
+    },
+    "insumos_pecuaria": {
+      "label": "Insumos - Pecuária",
+      "version": "1.0.0",
+      "path": "modules/insumos_pecuaria.json"
+    },
+    "documentos_animal": {
+      "label": "Documentos Examinados - Pecuária",
+      "version": "1.0.0",
+      "path": "modules/documentos_animal.json"
+    },
+    "comercializacao_padrao": {
+      "label": "Comercialização e Rotulagem",
+      "version": "1.0.0",
+      "path": "modules/comercializacao_padrao.json"
+    },
+    "observacoes_recomendacoes": {
+      "label": "Observações e Recomendações",
+      "version": "1.0.0",
+      "path": "modules/observacoes_recomendacoes.json"
+    },
+    "nao_conformidades_padrao": {
+      "label": "Não Conformidades",
+      "version": "1.0.0",
+      "path": "modules/nao_conformidades_padrao.json"
+    },
+    "avaliacao_medidas_corretivas_anteriores": {
+      "label": "Avaliação das Medidas Corretivas Anteriores",
+      "version": "1.0.0",
+      "path": "modules/avaliacao_medidas_corretivas_anteriores.json"
+    },
+    "manifestacao_produtor": {
+      "label": "Manifestação do Produtor",
+      "version": "1.0.0",
+      "path": "modules/manifestacao_produtor.json"
+    },
+    "organizacao_participacao_produtor": {
+      "label": "Organização e Participação (Produtor)",
+      "version": "1.0.0",
+      "path": "modules/organizacao_participacao_produtor.json"
+    },
+    "pontos_positivos": {
+      "label": "Pontos Positivos",
+      "version": "1.0.0",
+      "path": "modules/pontos_positivos.json"
+    },
+    "decisao_conformidade": {
+      "label": "Decisão de Conformidade",
+      "version": "1.0.0",
+      "path": "modules/decisao_conformidade.json"
+    },
+    "encerramento_visita": {
+      "label": "Encerramento da Visita",
+      "version": "1.0.0",
+      "path": "modules/encerramento_visita.json"
+    },
+    "producao_vegetal": {
+      "label": "Produção Vegetal",
+      "version": "1.0.0",
+      "path": "modules/producao_vegetal.json"
+    },
+    "insumos_vegetal": {
+      "label": "Insumos - Vegetal",
+      "version": "1.0.0",
+      "path": "modules/insumos_vegetal.json"
+    },
+    "pos_colheita_vegetal": {
+      "label": "Pós-colheita, Embalagem e Estocagem (Vegetal)",
+      "version": "1.0.0",
+      "path": "modules/pos_colheita_vegetal.json"
+    },
+    "documentos_vegetal": {
+      "label": "Documentos Examinados - Vegetal",
+      "version": "1.0.0",
+      "path": "modules/documentos_vegetal.json"
+    },
+    "producao_cogumelos": {
+      "label": "Produção de Cogumelos",
+      "version": "1.0.0",
+      "path": "modules/producao_cogumelos.json"
+    },
+    "pos_colheita_cogumelo": {
+      "label": "Pós-colheita, Embalagem e Estocagem (Cogumelos)",
+      "version": "1.0.0",
+      "path": "modules/pos_colheita_cogumelo.json"
+    },
+    "documentos_cogumelo": {
+      "label": "Documentos Examinados - Cogumelos",
+      "version": "1.0.0",
+      "path": "modules/documentos_cogumelo.json"
+    },
+    "comercializacao_cogumelo": {
+      "label": "Comercialização e Rotulagem (Cogumelos)",
+      "version": "1.0.0",
+      "path": "modules/comercializacao_cogumelo.json"
+    },
+    "documentos_apicultura": {
+      "label": "Documentos Examinados - Apicultura",
+      "version": "1.0.0",
+      "path": "modules/documentos_apicultura.json"
+    },
+    "producao_apicola": {
+      "label": "Produção Apícola",
+      "version": "1.0.0",
+      "path": "modules/producao_apicola.json"
+    },
+    "produtos_processados": {
+      "label": "Produtos Processados",
+      "version": "1.0.0",
+      "path": "modules/produtos_processados.json"
+    },
+    "documentos_processamento": {
+      "label": "Documentos Examinados - Processamento",
+      "version": "1.0.0",
+      "path": "modules/documentos_processamento.json"
+    },
+    "comercializacao_processamento": {
+      "label": "Comercialização e Rotulagem (Processamento)",
+      "version": "1.0.0",
+      "path": "modules/comercializacao_processamento.json"
+    },
+    "manifestacao_processador": {
+      "label": "Manifestação do Processador",
+      "version": "1.0.0",
+      "path": "modules/manifestacao_processador.json"
+    },
+    "organizacao_participacao_processador": {
+      "label": "Organização e Participação (Processador)",
+      "version": "1.0.0",
+      "path": "modules/organizacao_participacao_processador.json"
+    }
+  },
+  "types": {
+    "visita_verificacao_animal": {
+      "label": "Visita de Verificação - Produção Animal",
+      "schemaPath": "visita_ver-schema-animal.json",
+      "schemaVersion": "1.1.0",
+      "modules": [
+        "identificacao_produtor",
+        "areas_instalacoes_visitadas",
+        "aspectos_sociais_basico",
+        "producao_animal",
+        "insumos_pecuaria",
+        "documentos_animal",
+        "comercializacao_padrao",
+        "observacoes_recomendacoes",
+        "nao_conformidades_padrao",
+        "avaliacao_medidas_corretivas_anteriores",
+        "manifestacao_produtor",
+        "organizacao_participacao_produtor",
+        "pontos_positivos",
+        "decisao_conformidade",
+        "encerramento_visita"
+      ]
+    },
+    "visita_verificacao_vegetal": {
+      "label": "Visita de Verificação - Produção Vegetal",
+      "schemaPath": "visita_ver-schema-vegetal.json",
+      "schemaVersion": "1.1.0",
+      "modules": [
+        "identificacao_produtor",
+        "areas_instalacoes_visitadas",
+        "aspectos_sociais_basico",
+        "producao_vegetal",
+        "insumos_vegetal",
+        "pos_colheita_vegetal",
+        "documentos_vegetal",
+        "comercializacao_padrao",
+        "observacoes_recomendacoes",
+        "nao_conformidades_padrao",
+        "avaliacao_medidas_corretivas_anteriores",
+        "manifestacao_produtor",
+        "organizacao_participacao_produtor",
+        "pontos_positivos",
+        "decisao_conformidade",
+        "encerramento_visita"
+      ]
+    },
+    "visita_verificacao_cogumelo": {
+      "label": "Visita de Verificação - Produção de Cogumelos",
+      "schemaPath": "visita_ver-schema-cogumelo.json",
+      "schemaVersion": "1.1.0",
+      "modules": [
+        "identificacao_produtor",
+        "areas_instalacoes_visitadas",
+        "aspectos_sociais_basico",
+        "producao_cogumelos",
+        "pos_colheita_cogumelo",
+        "documentos_cogumelo",
+        "comercializacao_cogumelo",
+        "observacoes_recomendacoes",
+        "nao_conformidades_padrao",
+        "avaliacao_medidas_corretivas_anteriores",
+        "manifestacao_produtor",
+        "organizacao_participacao_produtor",
+        "pontos_positivos",
+        "decisao_conformidade",
+        "encerramento_visita"
+      ]
+    },
+    "visita_verificacao_apicultura": {
+      "label": "Visita de Verificação - Produção Apícola e Fungícola",
+      "schemaPath": "visita_ver-schema-apicultura.json",
+      "schemaVersion": "1.1.0",
+      "modules": [
+        "identificacao_produtor",
+        "areas_instalacoes_visitadas",
+        "aspectos_sociais_basico",
+        "insumos_vegetal",
+        "documentos_apicultura",
+        "comercializacao_padrao",
+        "producao_apicola",
+        "producao_cogumelos",
+        "observacoes_recomendacoes",
+        "nao_conformidades_padrao",
+        "avaliacao_medidas_corretivas_anteriores",
+        "manifestacao_produtor",
+        "organizacao_participacao_produtor",
+        "pontos_positivos",
+        "decisao_conformidade",
+        "encerramento_visita"
+      ]
+    },
+    "visita_verificacao_processamento": {
+      "label": "Visita de Verificação - Processamento",
+      "schemaPath": "visita_ver-schema-processamento.json",
+      "schemaVersion": "1.1.0",
+      "modules": [
+        "identificacao_processador",
+        "areas_instalacoes_visitadas",
+        "aspectos_sociais_processamento",
+        "produtos_processados",
+        "documentos_processamento",
+        "comercializacao_processamento",
+        "observacoes_recomendacoes",
+        "nao_conformidades_padrao",
+        "avaliacao_medidas_corretivas_anteriores",
+        "manifestacao_processador",
+        "organizacao_participacao_processador",
+        "pontos_positivos",
+        "decisao_conformidade",
+        "encerramento_visita"
+      ]
+    }
+  },
+  "migrations": [
+    {
+      "fromVersion": "1.0.0",
+      "toVersion": "1.1.0",
+      "path": "migrations/relatorio_visita_opac-v1.0.0_to_v1.1.0.json"
+    }
+  ]
+}

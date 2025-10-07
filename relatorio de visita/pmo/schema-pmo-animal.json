@@ -1,0 +1,142 @@
+{
+  "metadata": {
+    "versao_schema": "2.0.0",
+    "tipo_formulario": "anexo_animal",
+    "data_criacao": "2026-01-01T10:00:00.000Z",
+    "ultima_atualizacao": "2026-01-01T10:00:00.000Z",
+    "status": "completo"
+  },
+  "dados": {
+    "inspecao_sanitaria": {
+      "possui_inspecao": false,
+      "qual_inspecao": ""
+    },
+    "especies_criadas": [
+      {
+        "especie": "GADO DE LEITE",
+        "area_utilizada_ha": 20,
+        "quantidade_subsistencia": 0,
+        "quantidade_estimacao": 0,
+        "quantidade_comercial": 15
+      },
+      {
+        "especie": "AVES DE POSTURA",
+        "area_utilizada_ha": 0.5,
+        "quantidade_subsistencia": 10,
+        "quantidade_estimacao": 0,
+        "quantidade_comercial": 100
+      }
+    ],
+    "alimentacao": {
+      "origem_alimentos": [
+        {
+          "tipo_alimento": "PASTO",
+          "alvos": "GADO DE LEITE",
+          "producao_propria": true,
+          "compra_fora_fabricante": "",
+          "percent_organico": 100,
+          "percent_nao_organico": 0
+        },
+        {
+          "tipo_alimento": "RAÇÃO",
+          "alvos": "AVES DE POSTURA",
+          "producao_propria": false,
+          "compra_fora_fabricante": "RAÇÃO ORGÂNICA 'SAUDÁVEL'",
+          "percent_organico": 90,
+          "percent_nao_organico": 10
+        }
+      ],
+      "ingredientes_racao": [
+        {
+          "ingrediente": "MILHO",
+          "percent_organico": 80,
+          "percent_nao_organico": 20
+        },
+        {
+          "ingrediente": "MINERAIS",
+          "percent_organico": 100,
+          "percent_nao_organico": 0
+        }
+      ],
+      "tipos_forragem": [
+        "NAPIER/CAPIM ELEFANTE",
+        "BANCO DE PROTEÍNA (LEUCENA)"
+      ],
+      "plano_anual_alimentacao": [
+        {
+          "tipo": "PASTOS",
+          "uso_mensal": "J, F, M, A, S, O, N, D"
+        },
+        {
+          "tipo": "FORRAGENS",
+          "uso_mensal": "M, A, S"
+        }
+      ]
+    },
+    "bem_estar_animal": {
+      "praticas": [
+        "ÁGUA DE QUALIDADE",
+        "ALIMENTO FARTO E DE QUALIDADE",
+        "LOTAÇÃO ADEQUADA",
+        "ÁREAS DE SOMBREAMENTO NO PASTO",
+        "ACESSO DIÁRIO A ÁREAS COM SOL E PASTAGEM"
+      ],
+      "outras_formas": "Manejo de pastoreio rotacionado intensivo (Voisin)."
+    },
+    "manejo_sanitario": {
+      "evitar_enfermidades": [
+        "ROTAÇÃO DE PASTAGENS",
+        "FITOTERÁPICOS (ALHO E HORTELÃ)"
+      ],
+      "tratamento_doencas": [
+        {
+          "especie_alvo": "GADO DE LEITE",
+          "doenca": "MASTITE",
+          "tratamento_produto_marca": "HOMEOPATIA ESPECÍFICA",
+          "fabricante_origem": "LAB. HOMEOPÁTICO",
+          "condicao_epoca_uso": "Em caso de surto ou preventivamente na seca."
+        }
+      ],
+      "vacinas_obrigatorias": "Febre aftosa (obrigatória por lei, conforme exceção na Portaria 52/2021) e brucelose."
+    },
+    "plantel": {
+      "origem_animais": "PLANTEL ORGÂNICO",
+      "metodo_reproducao": "REPRODUZ OS PRÓPRIOS ANIMAIS",
+      "evolucao_plantel": [
+        {
+          "tipo_animal": "GADO DE LEITE",
+          "atual": 15,
+          "em_1_ano": 18,
+          "em_3_anos": 25,
+          "em_5_anos": 30
+        }
+      ]
+    },
+    "manejo_esterco_residuos": [
+      "FAZ PILHA DE COMPOSTO",
+      "UTILIZA PARA PRODUZIR BIOFERTILIZANTE"
+    ],
+    "instalacoes_animais": [
+      {
+        "instalacao": "ESTÁBULO (LEITE)",
+        "tamanho_m2": 50,
+        "lotacao_m2": 3.3,
+        "permanencia_h_dia": 5,
+        "limpeza": "DIÁRIA COM ÁGUA"
+      }
+    ],
+    "animais_nao_comerciais": {
+      "manejo_detalhes": "Cães e gatos de estimação são alimentados com ração convencional, porém não têm acesso às áreas de produção orgânica. Dejetos são compostados separadamente.",
+      "destino_dejetos": "Compostagem separada."
+    },
+    "equipamentos_armazenamento": {
+      "equipamento_terceiro": false,
+      "empresta_equipamento": false,
+      "declaracao_higienizacao_conforme": true,
+      "condicoes_armazenamento": "BOA",
+      "declaracao_nao_permitidos": true,
+      "declaracao_risco_acidente": true,
+      "declaracao_acessivel_visitacao": true
+    }
+  }
+}

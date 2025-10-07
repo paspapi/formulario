@@ -1,0 +1,28 @@
+{
+  "moduleId": "encerramento_visita",
+  "version": "1.0.0",
+  "label": "Encerramento da Visita",
+  "description": "Dados de encerramento da visita e lista de presença.",
+  "fieldNamespace": "encerramento_visita",
+  "required": [
+    "encerramento_visita.hora_termino"
+  ],
+  "dataTemplate": {
+    "encerramento_visita": {
+      "hora_termino": "",
+      "opac_coordenador_nome": "",
+      "grupo_participante_nome": "",
+      "assinaturas": {
+        "opac_coordenador": "nao_informado",
+        "fornecedor_visitado": "nao_informado"
+      },
+      "lista_presenca": [
+        {
+          "nome": "",
+          "grupo_ou_atividade": "",
+          "assinatura_coletada": "nao_informado"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,266 @@
+{
+  "typeId": "visita_verificacao_processamento",
+  "label": "Visita de Verificação - Processamento",
+  "schemaVersion": "1.1.0",
+  "pmoTipo": "Processamento",
+  "moduleGraph": [
+    {
+      "moduleId": "identificacao_processador",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "areas_instalacoes_visitadas",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "aspectos_sociais_processamento",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "produtos_processados",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "documentos_processamento",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "comercializacao_processamento",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "observacoes_recomendacoes",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "nao_conformidades_padrao",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "avaliacao_medidas_corretivas_anteriores",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "manifestacao_processador",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "organizacao_participacao_processador",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "pontos_positivos",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "decisao_conformidade",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "encerramento_visita",
+      "version": "1.0.0"
+    }
+  ],
+  "requiredFields": [
+    "identificacao.fornecedor_processador_nome_certificado",
+    "identificacao.data_visita",
+    "identificacao.hora_inicio",
+    "decisao_conformidade.organico",
+    "encerramento_visita.hora_termino"
+  ],
+  "dataTemplate": {
+    "meta": {
+      "schema_version": "1.1.0",
+      "pmo_tipo": "Processamento",
+      "fonte": "ANC OPAC",
+      "arquivo_origem": "",
+      "data_extracao": "",
+      "validador": {
+        "status": "pending",
+        "erros": []
+      }
+    },
+    "identificacao": {
+      "fornecedor_processador_nome_certificado": "",
+      "nome_fantasia_ou_identidade": "",
+      "grupo": "",
+      "data_visita": "",
+      "hora_inicio": "",
+      "endereco_completo": "",
+      "cep": "",
+      "geo": {
+        "lat": null,
+        "lon": null
+      },
+      "socios_no_certificado": [],
+      "socios_participam_visita": {
+        "sim_nao": "nao_informado",
+        "motivo_ausencia": ""
+      },
+      "coordenador_verificador": "",
+      "grupo_coordenador": "",
+      "tipo_visita": "verificacao"
+    },
+    "areas_instalacoes_visitadas": [],
+    "aspectos_sociais_ambientais": {
+      "mao_de_obra": {
+        "funcionarios": {
+          "existe": "nao_informado",
+          "quantidade": 0
+        },
+        "familiar": {
+          "existe": "nao_informado",
+          "quantidade": 0
+        }
+      },
+      "destino_residuos_solidos": "",
+      "efluentes": "",
+      "riscos_contaminacao_por_residuos": "",
+      "tratamento_realizado": ""
+    },
+    "produtos_processados": {
+      "categorias_verificadas": {
+        "organicos_95_ou_mais": "nao_informado",
+        "com_ingredientes_organicos_70a95": "nao_informado"
+      },
+      "produtos_declarados_no_PMP": [],
+      "producao_paralela": {
+        "existe": "nao_informado",
+        "separacao_entre_organico_e_nao": {
+          "recepcao_armazenagem_materias_primas": "nao_informado",
+          "processamento": "nao_informado",
+          "rotulagem": "nao_informado",
+          "estoque": "nao_informado",
+          "transporte": "nao_informado",
+          "risco_de_mistura": "nao_informado",
+          "medidas_preventivas": "nao_informado"
+        }
+      },
+      "origem_materia_prima": {
+        "certificados_transacao_verificados": "nao_informado",
+        "notas_fiscais_verificadas": "nao_informado",
+        "coerencia_entre_quantidades_MP_e_produtos": "nao_informado",
+        "observacoes": ""
+      },
+      "fluxo_processamento_conforme_PMP": {
+        "cumpre": "nao_informado",
+        "obs": ""
+      },
+      "limpeza_e_produtos_permitidos": {
+        "produtos_permitidos_conforme_IN": "nao_informado",
+        "lista_produtos_utilizados": []
+      },
+      "higienizacao_local_e_equipamentos_conforme_PMP": {
+        "cumpre": "nao_informado",
+        "obs": ""
+      },
+      "proibicoes_legais": {
+        "aditivos_coadjuvantes_corantes_permitidos": "nao_informado",
+        "ausencia_transgenicos_radiacao_nanotecnologia": "nao_informado",
+        "conforme_PMP": "nao_informado",
+        "obs": ""
+      },
+      "atende_legislacoes_sanitarias": {
+        "atende": "nao_informado",
+        "licenca_vigente": "nao_informado",
+        "comprovacao_nao_obrigatoriedade": "",
+        "obs": ""
+      }
+    },
+    "documentos_examinados": {
+      "licenca_vigilancia_vigente": {
+        "apresenta": "nao_informado",
+        "comentarios": ""
+      },
+      "plano_manejo_processamento_organico": {
+        "apresenta": "nao_informado",
+        "comentarios": ""
+      },
+      "registro_entrada_ingredientes": {
+        "apresenta": "nao_informado",
+        "comentarios": ""
+      },
+      "registro_fabricacao_controle": {
+        "apresenta": "nao_informado",
+        "comentarios": ""
+      },
+      "registro_venda": {
+        "apresenta": "nao_informado",
+        "comentarios": ""
+      },
+      "controle_estoque_romaneio": {
+        "apresenta": "nao_informado",
+        "comentarios": ""
+      },
+      "registro_higienizacao_limpeza": {
+        "apresenta": "nao_informado",
+        "comentarios": ""
+      },
+      "analise_agua_utilizada": {
+        "apresenta": "nao_informado",
+        "comentarios": "",
+        "padrao_ministerio_saude_portaria_2914_2011": "nao_informado",
+        "resultado": {
+          "coliformes_termotolerantes_UFC_100ml": null,
+          "e_coli_UFC_100ml": null,
+          "metodologia": "",
+          "data_analise": ""
+        }
+      },
+      "documentacao_trabalhista": {
+        "apresenta": "nao_informado",
+        "comentarios": ""
+      }
+    },
+    "comercializacao_rotulagem": {
+      "canais_venda": [],
+      "usa_selo_SISORG": "nao_informado",
+      "rotulo_conforme_legislacao": "nao_informado",
+      "identifica_ingredientes_organicos_no_rotulo": "nao_informado",
+      "identificacao_para_produtos_com_ingredientes_organicos": "nao_informado",
+      "apresenta_todos_rotulos_das_linhas": "nao_informado",
+      "modelo_etiqueta_observado": ""
+    },
+    "observacoes_recomendacoes": "",
+    "nao_conformidades": [
+      {
+        "descricao": "",
+        "grau": "moderada",
+        "medida_corretiva": "",
+        "prazo_correcao": ""
+      }
+    ],
+    "avaliacao_medidas_corretivas_anteriores": "",
+    "manifestacao_processador_fornecedor": "",
+    "organizacao_participacao_grupo": {
+      "troca_experiencias": "",
+      "pontualidade": "",
+      "caronas_coletivas": "",
+      "qtd_tipo_participantes": "",
+      "quorum_minimo": {
+        "pares": "1/3 do grupo",
+        "verificacao": "processador(a) + verificador(a) + 1/3 do grupo"
+      }
+    },
+    "pontos_positivos": "",
+    "decisao_conformidade": {
+      "organico": "nao_informado"
+    },
+    "encerramento_visita": {
+      "hora_termino": "",
+      "opac_coordenador_nome": "",
+      "grupo_participante_nome": "",
+      "assinaturas": {
+        "opac_coordenador": "nao_informado",
+        "fornecedor_visitado": "nao_informado"
+      },
+      "lista_presenca": [
+        {
+          "nome": "",
+          "grupo_ou_atividade": "",
+          "assinatura_coletada": "nao_informado"
+        }
+      ]
+    }
+  }
+}

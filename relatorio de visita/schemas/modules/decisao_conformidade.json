@@ -1,0 +1,12 @@
+{
+  "moduleId": "decisao_conformidade",
+  "version": "1.0.0",
+  "label": "Decisão de Conformidade",
+  "description": "Resultado preliminar da visita quanto à conformidade orgânica.",
+  "fieldNamespace": "decisao_conformidade",
+  "dataTemplate": {
+    "decisao_conformidade": {
+      "organico": "nao_informado"
+    }
+  }
+}

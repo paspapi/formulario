@@ -1,0 +1,21 @@
+{
+  "moduleId": "producao_apicola",
+  "version": "1.0.0",
+  "label": "Produção Apícola",
+  "description": "Checklist para produção de mel e derivados segundo normas orgânicas.",
+  "fieldNamespace": "producao_apicola",
+  "dataTemplate": {
+    "producao_apicola": {
+      "existe": "nao_informado",
+      "abelhas_origem_organica_ou_conversao": "nao_informado",
+      "plano_manejo_e_croqui": "nao_informado",
+      "polen_proviene_culturas_organicas_ou_nativas": "nao_informado",
+      "agua_qualidade_proxima_apiario": "nao_informado",
+      "reservas_mel_suficientes": "nao_informado",
+      "alimentacao_artificial_permitida": "nao_informado",
+      "manejo_permitido": "nao_informado",
+      "atende_legislacao_sanitaria": "nao_informado",
+      "observacoes": ""
+    }
+  }
+}

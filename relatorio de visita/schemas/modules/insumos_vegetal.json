@@ -1,0 +1,14 @@
+{
+  "moduleId": "insumos_vegetal",
+  "version": "1.0.0",
+  "label": "Insumos - Vegetal",
+  "description": "Controle de insumos aplicados na produção vegetal.",
+  "fieldNamespace": "insumos",
+  "dataTemplate": {
+    "insumos": {
+      "armazenamento_conservacao": "",
+      "necessidades_uso": "",
+      "validade_itens_relevantes": ""
+    }
+  }
+}

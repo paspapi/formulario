@@ -1,0 +1,47 @@
+{
+  "schemaSetId": "pmo_opac",
+  "version": "2.0.0",
+  "description": "Manifesto dos schemas do Plano de Manejo Orgânico (PMO) geral e anexos específicos.",
+  "forms": {
+    "pmo_completo": {
+      "label": "PMO Geral",
+      "schemaPath": "schema-pmo-geral.json",
+      "schemaVersion": "2.0.0"
+    },
+    "pmo_animal": {
+      "label": "Anexo – Produção Animal",
+      "schemaPath": "schema-pmo-animal.json",
+      "schemaVersion": "2.0.0"
+    },
+    "pmo_vegetal": {
+      "label": "Anexo – Produção Vegetal",
+      "schemaPath": "schema-pmo-vegetal.json",
+      "schemaVersion": "2.0.0"
+    },
+    "pmo_apicultura": {
+      "label": "Anexo – Apicultura",
+      "schemaPath": "schema-pmo-apicultura.json",
+      "schemaVersion": "2.0.0"
+    },
+    "pmo_cogumelo": {
+      "label": "Anexo – Cogumelos",
+      "schemaPath": "schema-pmo-cogumelo.json",
+      "schemaVersion": "2.0.0"
+    },
+    "pmo_processamento": {
+      "label": "Anexo – Processamento",
+      "schemaPath": "schema-pmo-processamento.json",
+      "schemaVersion": "2.0.0"
+    },
+    "pmo_processamento_minimo": {
+      "label": "Anexo – Processamento Mínimo",
+      "schemaPath": "schema-pmo-processamentominimo.json",
+      "schemaVersion": "2.0.0"
+    }
+  },
+  "notes": [
+    "Todos os anexos seguem a estrutura padronizada { metadata, dados }.",
+    "Os schemas permanecem como modelos de referência (placeholders de string/boolean/decimal indicam tipo esperado).",
+    "Quando novos anexos forem adicionados, atualizar este manifesto para manter o carregamento dinâmico."
+  ]
+}

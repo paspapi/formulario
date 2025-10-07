@@ -1,0 +1,10 @@
+{
+  "moduleId": "areas_instalacoes_visitadas",
+  "version": "1.0.0",
+  "label": "Áreas/Instalações Visitadas",
+  "description": "Lista das áreas, instalações ou setores visitados durante a vistoria.",
+  "fieldNamespace": "areas_instalacoes_visitadas",
+  "dataTemplate": {
+    "areas_instalacoes_visitadas": []
+  }
+}

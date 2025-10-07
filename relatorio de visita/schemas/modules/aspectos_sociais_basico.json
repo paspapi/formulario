@@ -1,0 +1,14 @@
+{
+  "moduleId": "aspectos_sociais_basico",
+  "version": "1.0.0",
+  "label": "Aspectos Sociais e Ambientais",
+  "description": "Resumo dos aspectos sociais e ambientais observados na unidade visitada.",
+  "fieldNamespace": "aspectos_sociais_ambientais",
+  "dataTemplate": {
+    "aspectos_sociais_ambientais": {
+      "mao_de_obra": "",
+      "situacao_ambiental": "",
+      "destino_lixo": ""
+    }
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "moduleId": "producao_animal",
+  "version": "1.0.0",
+  "label": "Produção Animal",
+  "description": "Checklist da produção primária animal conforme regulamentos orgânicos.",
+  "fieldNamespace": "producao_animal",
+  "required": [
+    "producao_animal.plantel",
+    "producao_animal.equipamentos.conforme_PMO",
+    "producao_animal.nutricao.limite_nao_organicos.cumpre",
+    "producao_animal.sanitario.risco_presente"
+  ],
+  "dataTemplate": {
+    "producao_animal": {
+      "plantel": [
+        {
+          "especie": "",
+          "finalidade": "",
+          "n_individuos_total": 0,
+          "n_adultos": 0
+        }
+      ],
+      "aquisicao_origem": {
+        "novos_animais_desde_ultima_visita": "nao_informado",
+        "origem_organica": "nao_informado",
+        "comprovacao_origem": ""
+      },
+      "periodo_conversao": {
+        "aves_corte": {
+          "cumpre": "nao_informado",
+          "regra": ">= 3/4 da vida"
+        },
+        "aves_postura": {
+          "cumpre": "nao_informado",
+          "regra": ">= 75 dias pre-1o ovo"
+        },
+        "leite_bovinos_bubalinos_ovinos_caprinos": {
+          "cumpre": "nao_informado",
+          "regra": ">= 6 meses"
+        },
+        "corte_bovinos_bubalinos_equideos": {
+          "cumpre": "nao_informado",
+          "regra": ">= 2/3 da vida e >= 12 meses"
+        },
+        "corte_ovinos_caprinos_suinos": {
+          "cumpre": "nao_informado",
+          "regra": ">= 3/4 da vida e >= 6 meses"
+        },
+        "corte_coelhos": {
+          "cumpre": "nao_informado",
+          "regra": ">= 3 meses"
+        }
+      },
+      "reprodutores": {
+        "adquiridos": "nao_informado",
+        "n_individuos": 0,
+        "observacao_limite_10pct_ANUAL": ""
+      },
+      "producao_paralela": {
+        "existe": "nao_informado",
+        "distincao_visivel": "nao_informado",
+        "higienizacao_e_registro": "nao_informado",
+        "armazenamento_separado": "nao_informado",
+        "riscos_e_medidas_preventivas": ""
+      },
+      "equipamentos": {
+        "conforme_PMO": "",
+        "higienizacao": {
+          "usa_produtos": "nao_informado",
+          "lista_produtos": []
+        }
+      },
+      "nutricao": {
+        "limite_nao_organicos": {
+          "cumpre": "nao_informado",
+          "obs": ""
+        },
+        "pastoreio": {
+          "acesso_pastagem": "nao_informado",
+          "frequencia": ""
+        },
+        "ingredientes_permitidos": {
+          "cumpre": "nao_informado",
+          "obs": ""
+        }
+      },
+      "bem_estar": {
+        "cuidados_garantidos": {
+          "cumpre": "nao_informado",
+          "obs": ""
+        }
+      },
+      "sanitario": {
+        "risco_presente": "nao_informado",
+        "quais_riscos": "",
+        "medidas_preventivas": "",
+        "vacinacao_em_dia": {
+          "cumpre": "nao_informado",
+          "obs": ""
+        },
+        "manejo_dejetos_adequado": {
+          "cumpre": "nao_informado",
+          "obs": ""
+        },
+        "atende_legislacoes_sanitarias": {
+          "cumpre": "nao_informado",
+          "obs": ""
+        }
+      },
+      "instalacoes": {
+        "conforme_parametros": {
+          "cumpre": "nao_informado",
+          "obs": ""
+        }
+      }
+    }
+  }
+}

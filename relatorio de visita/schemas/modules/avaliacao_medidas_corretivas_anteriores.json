@@ -1,0 +1,10 @@
+{
+  "moduleId": "avaliacao_medidas_corretivas_anteriores",
+  "version": "1.0.0",
+  "label": "Avaliação das Medidas Corretivas Anteriores",
+  "description": "Verificação se as medidas corretivas de visitas anteriores foram implementadas.",
+  "fieldNamespace": "avaliacao_medidas_corretivas_anteriores",
+  "dataTemplate": {
+    "avaliacao_medidas_corretivas_anteriores": ""
+  }
+}

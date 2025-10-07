@@ -1,0 +1,85 @@
+{
+  "metadata": {
+    "versao_schema": "2.0.0",
+    "tipo_formulario": "anexo_cogumelo",
+    "data_criacao": "2026-01-01T10:00:00.000Z",
+    "ultima_atualizacao": "2026-01-01T10:00:00.000Z",
+    "status": "completo"
+  },
+  "dados": {
+    "producao": [
+      {
+        "produto": "string",
+        "origem_semente": "string",
+        "origem_substrato": "string",
+        "estimativa_producao_anual_kg": 0,
+        "area_cultivada_m2": 0,
+        "periodo_cultivo": {
+          "data_inicio": "YYYY-MM-DD",
+          "data_fim": "YYYY-MM-DD"
+        },
+        "metodo_cultivo": "TORAS|BLOCOS|SACOLAS",
+        "ambiente_cultivo": "ESTUFA|CAVERNA|AR_LIVRE|OUTRO",
+        "ambiente_descricao": "string",
+        "usa_substrato": false,
+        "origem_toras": {
+          "local": "string",
+          "especie_madeira": "string",
+          "tratamento": "string",
+          "certificacao": "string"
+        },
+        "embalagem": {
+          "tipo": "string",
+          "material": "string",
+          "capacidade": "string"
+        },
+        "armazenamento": {
+          "temperatura": "string",
+          "umidade": "string",
+          "duracao_maxima": "string"
+        }
+      }
+    ],
+    "substrato": {
+      "producao_propria": false,
+      "ingredientes": [
+        {
+          "material": "string",
+          "origem": "PRÓPRIO|COMPRADO",
+          "tipo": "ORGÂNICO|CONVENCIONAL",
+          "risco_transgenicos": false,
+          "proporcao_percent": 0
+        }
+      ],
+      "analise_metais_pesados": false,
+      "metodos_tratamento_madeira": "string"
+    },
+    "inoculo": {
+      "origem": "PRÓPRIA|COMPRADA",
+      "comprovacao_nao_transgenico": false,
+      "informacoes_adicionais": "string"
+    },
+    "controle_pragas": [
+      {
+        "praga": "string",
+        "praticas": "string",
+        "substancias": "string",
+        "origem_fabricante": "string"
+      }
+    ],
+    "residuos": {
+      "destino_substrato": "string",
+      "destino_chorume": "string"
+    },
+    "ferramentas_equipamentos": [
+      {
+        "nome": "string",
+        "tipo": "FERRAMENTA|EQUIPAMENTO",
+        "uso": "string",
+        "origem": "PRÓPRIO|ALUGADO|COMPARTILHADO",
+        "higienizacao": "string",
+        "manutencao": "string"
+      }
+    ]
+  }
+}

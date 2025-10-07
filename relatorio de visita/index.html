@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Relatórios OPAC</title>
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>Relatórios OPAC</h1>
+        <p class="subtitle">Painel de visitas e formulários dirigidos por schema</p>
+      </div>
+      <div class="topbar-actions">
+        <button id="btn-sync-schemas" type="button">Recarregar Schemas</button>
+        <label class="file-button">
+          Importar Relatório (PDF/JSON)
+          <input id="file-import" type="file" accept=".json,application/json,application/pdf" />
+        </label>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <section>
+          <h2>Unidades de Produção</h2>
+          <div id="filters" class="filters">
+            <input id="input-search" type="search" placeholder="Buscar por unidade ou verificador" />
+            <select id="filter-tipo">
+              <option value="">Tipo de visita</option>
+            </select>
+            <select id="filter-conformidade">
+              <option value="">Conformidade</option>
+              <option value="conforme">Conforme</option>
+              <option value="nc_menor">NC menor</option>
+              <option value="nc_maior">NC maior</option>
+              <option value="pendente">Pendente</option>
+              <option value="reprovado">Reprovado</option>
+            </select>
+          </div>
+          <div id="up-list" class="card-list empty-state">
+            <p>Nenhum relatório cadastrado. Crie um novo para começar.</p>
+            <button id="btn-new-report" class="primary" type="button">Novo relatório</button>
+          </div>
+        </section>
+
+        <section>
+          <h2>Timeline de Referências</h2>
+          <div id="timeline" class="timeline"></div>
+        </section>
+      </aside>
+
+      <section class="content">
+        <div id="report-header" class="report-header hidden">
+          <div>
+            <h2 id="report-title">Selecione um relatório</h2>
+            <p id="report-meta"></p>
+          </div>
+          <div class="report-actions">
+            <button id="btn-save-draft" type="button">Salvar rascunho</button>
+            <button id="btn-export-json" type="button">Exportar JSON</button>
+            <button id="btn-generate-pdf" class="primary" type="button">Gerar PDF</button>
+            <button id="btn-delete-report" class="danger" type="button">Excluir</button>
+          </div>
+        </div>
+
+        <div id="form-container" class="form-container">
+          <div class="empty-state">
+            <p>Selecione um relatório existente ou crie um novo.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <template id="template-card">
+      <article class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title"></h3>
+            <p class="card-meta"></p>
+          </div>
+          <button class="card-delete" type="button" title="Excluir relatório">×</button>
+        </div>
+        <div class="card-body">
+          <dl>
+            <div>
+              <dt>Última atualização</dt>
+              <dd class="card-updated"></dd>
+            </div>
+            <div>
+              <dt>Tipo</dt>
+              <dd class="card-type"></dd>
+            </div>
+            <div>
+              <dt>Conformidade</dt>
+              <dd class="card-conformidade"></dd>
+            </div>
+            <div>
+              <dt>Pendências abertas</dt>
+              <dd class="card-pendencias"></dd>
+            </div>
+            <div>
+              <dt>Preenchimento</dt>
+              <dd class="card-progress"></dd>
+            </div>
+          </dl>
+        </div>
+        <div class="card-actions">
+          <button class="card-edit" type="button">Editar</button>
+          <button class="card-duplicate" type="button">Duplicar</button>
+          <button class="card-export" type="button">Exportar JSON</button>
+        </div>
+      </article>
+    </template>
+
+    <script type="module" src="assets/app.js"></script>
+  </body>
+</html>
+

@@ -1,0 +1,42 @@
+{
+  "moduleId": "documentos_animal",
+  "version": "1.0.0",
+  "label": "Documentos Examinados - Pecuária",
+  "description": "Documentos verificados em unidades de produção animal.",
+  "fieldNamespace": "documentos_examinados",
+  "dataTemplate": {
+    "documentos_examinados": {
+      "producao_animal": {
+        "plano_manejo_organico": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        },
+        "registro_entrada_compras": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        }
+      },
+      "rastreabilidade": {
+        "controle_comercializacao": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        }
+      },
+      "outros_registros": {
+        "terapeutica_animais": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        },
+        "documentos_vacinacao": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        },
+        "licencas_sanitarias_vigentes": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        },
+        "outros": []
+      }
+    }
+  }
+}

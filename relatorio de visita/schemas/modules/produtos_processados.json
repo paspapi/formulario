@@ -1,0 +1,58 @@
+{
+  "moduleId": "produtos_processados",
+  "version": "1.0.0",
+  "label": "Produtos Processados",
+  "description": "Checklist das operações de processamento e uso de insumos.",
+  "fieldNamespace": "produtos_processados",
+  "dataTemplate": {
+    "produtos_processados": {
+      "categorias_verificadas": {
+        "organicos_95_ou_mais": "nao_informado",
+        "com_ingredientes_organicos_70a95": "nao_informado"
+      },
+      "produtos_declarados_no_PMP": [],
+      "producao_paralela": {
+        "existe": "nao_informado",
+        "separacao_entre_organico_e_nao": {
+          "recepcao_armazenagem_materias_primas": "nao_informado",
+          "processamento": "nao_informado",
+          "rotulagem": "nao_informado",
+          "estoque": "nao_informado",
+          "transporte": "nao_informado",
+          "risco_de_mistura": "nao_informado",
+          "medidas_preventivas": "nao_informado"
+        }
+      },
+      "origem_materia_prima": {
+        "certificados_transacao_verificados": "nao_informado",
+        "notas_fiscais_verificadas": "nao_informado",
+        "coerencia_entre_quantidades_MP_e_produtos": "nao_informado",
+        "observacoes": ""
+      },
+      "fluxo_processamento_conforme_PMP": {
+        "cumpre": "nao_informado",
+        "obs": ""
+      },
+      "limpeza_e_produtos_permitidos": {
+        "produtos_permitidos_conforme_IN": "nao_informado",
+        "lista_produtos_utilizados": []
+      },
+      "higienizacao_local_e_equipamentos_conforme_PMP": {
+        "cumpre": "nao_informado",
+        "obs": ""
+      },
+      "proibicoes_legais": {
+        "aditivos_coadjuvantes_corantes_permitidos": "nao_informado",
+        "ausencia_transgenicos_radiacao_nanotecnologia": "nao_informado",
+        "conforme_PMP": "nao_informado",
+        "obs": ""
+      },
+      "atende_legislacoes_sanitarias": {
+        "atende": "nao_informado",
+        "licenca_vigente": "nao_informado",
+        "comprovacao_nao_obrigatoriedade": "",
+        "obs": ""
+      }
+    }
+  }
+}

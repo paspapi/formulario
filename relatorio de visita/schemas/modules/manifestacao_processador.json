@@ -1,0 +1,10 @@
+{
+  "moduleId": "manifestacao_processador",
+  "version": "1.0.0",
+  "label": "Manifestação do Processador",
+  "description": "Espaço para manifestação do processador/fornecedor visitado.",
+  "fieldNamespace": "manifestacao_processador_fornecedor",
+  "dataTemplate": {
+    "manifestacao_processador_fornecedor": ""
+  }
+}

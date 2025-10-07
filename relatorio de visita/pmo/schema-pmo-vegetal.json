@@ -1,0 +1,159 @@
+{
+  "metadata": {
+    "versao_schema": "2.0.0",
+    "tipo_formulario": "anexo_vegetal",
+    "data_criacao": "2026-01-01T10:00:00.000Z",
+    "ultima_atualizacao": "2026-01-01T10:00:00.000Z",
+    "status": "completo"
+  },
+  "dados": {
+    "preparo_solo": [
+      {
+        "tipo": "ROÇADA",
+        "utiliza": false
+      },
+      {
+        "tipo": "ARAÇÃO",
+        "utiliza": false
+      },
+      {
+        "tipo": "GRADAGEM",
+        "utiliza": false
+      }
+    ],
+    "praticas_conservacionistas": [
+      {
+        "tipo": "ROTAÇÃO DE CULTURAS",
+        "descricao": "string"
+      },
+      {
+        "tipo": "ADUBAÇÃO VERDE",
+        "descricao": "string"
+      },
+      {
+        "tipo": "CONSÓRCIOS",
+        "descricao": "string"
+      },
+      {
+        "tipo": "QUEBRA-VENTOS",
+        "descricao": "string"
+      }
+    ],
+    "contaminacao_e_barreiras": {
+      "estado_conservacao_barreiras": "string",
+      "risco_deriva_agrotoxicos": false,
+      "risco_transgenicos": false
+    },
+    "controle_pragas": {
+      "controle_formigas": {
+        "situacao_problema": "string",
+        "metodos_controle": "string"
+      }
+    },
+    "adubacao_nutricao": {
+      "descricao_geral": "string",
+      "substrato": {
+        "uso": "string",
+        "declaracao_rastreabilidade": false,
+        "ingredientes": [
+          {
+            "material_insumo": "string",
+            "origem": "string",
+            "proporcao_percentual": "decimal"
+          }
+        ]
+      },
+      "receitas_proprias": [
+        {
+          "nome_receita": "string",
+          "ingredientes": "string",
+          "quantidade_dose_frequencia": "string",
+          "cultura_talhao": "string",
+          "status_uso": "string"
+        }
+      ]
+    },
+    "produtos_insumos": [
+      {
+        "marca_nome_comercial": "string",
+        "substancia_ingrediente_ativo": "string",
+        "fabricante": "string",
+        "funcao": "string",
+        "culturas": "string",
+        "status_uso": "string"
+      }
+    ],
+    "equipamentos_manejo": {
+      "usa_equipamento_terceiro": false,
+      "empresta_equipamento": false,
+      "declaracao_nao_compartilhamento_pulverizacao": false,
+      "declaracao_higienizacao_e_produtos_permitidos": false
+    },
+    "armazenamento_insumos": {
+      "condicoes_organizacao": "string",
+      "declaracao_separacao_materiais": "string",
+      "declaracao_ausencia_nao_permitidos": false,
+      "declaracao_bloqueio_riscos": false,
+      "declaracao_acessibilidade_visitas": false
+    },
+    "lista_produtos_nao_certificar": [
+      {
+        "produto_variedade": "string",
+        "talhao_area": "string",
+        "origem_muda": "PRÓPRIA ORGÂNICA|COMPRADA ORGÂNICA|COMPRADA NÃO ORGÂNICA|DOAÇÃO",
+        "origem_semente": "PRÓPRIA ORGÂNICA|COMPRADA ORGÂNICA|COMPRADA NÃO ORGÂNICA|DOAÇÃO",
+        "tipo": "ORGÂNICA|CONVENCIONAL C/ TRAT|CONVENCIONAL S/ TRAT",
+        "_comentario": "Valores recebidos do formulário devem ser convertidos para UPPERCASE."
+      }
+    ],
+    "certificacao_detalhes": {
+      "lista_produtos_certificar": [
+        {
+          "produto_variedade": "string",
+          "talhao_area": "string",
+          "estimativa_producao_qtd": "string",
+          "periodo_estimativa": "string",
+          "peso_kg_und": "string",
+          "origem_muda": "PRÓPRIA ORGÂNICA|COMPRADA ORGÂNICA|COMPRADA NÃO ORGÂNICA|DOAÇÃO",
+          "origem_semente": "PRÓPRIA ORGÂNICA|COMPRADA ORGÂNICA|COMPRADA NÃO ORGÂNICA|DOAÇÃO",
+          "tipo": "ORGÂNICA|CONVENCIONAL C/ TRAT|CONVENCIONAL S/ TRAT"
+        }
+      ],
+      "declaracao_incremento_mudas_sementes_proprias": false
+    },
+    "comercializacao": {
+      "processo_pos_colheita": "string",
+      "produtos_armazenados": false,
+      "explicacao_armazenamento": "string",
+      "tipos_comercializacao": [
+        {
+          "tipo": "VENDA DIRETA - FEIRAS",
+          "status": false
+        }
+      ],
+      "modelo_rotulo": "string",
+      "transporte_produtos": "string",
+      "rastreabilidade_produtos": "string",
+      "comercializa_nao_organicos": "string"
+    },
+    "controles_e_registros": [
+      {
+        "atividade": "OPERAÇÕES DE MANEJO",
+        "controles": [
+          "AGENDA",
+          "CADERNO",
+          "FICHAS DE CONTROLE",
+          "COMPUTADOR",
+          "OUTRO"
+        ]
+      },
+      {
+        "atividade": "COMPRA DE INSUMOS",
+        "controles": [
+          "NOTAS FISCAIS/ RECIBOS",
+          "OUTRO"
+        ]
+      }
+    ]
+  }
+}

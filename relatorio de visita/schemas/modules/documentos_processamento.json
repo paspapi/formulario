@@ -1,0 +1,54 @@
+{
+  "moduleId": "documentos_processamento",
+  "version": "1.0.0",
+  "label": "Documentos Examinados - Processamento",
+  "description": "Documentos verificados em unidades de processamento.",
+  "fieldNamespace": "documentos_examinados",
+  "dataTemplate": {
+    "documentos_examinados": {
+      "licenca_vigilancia_vigente": {
+        "apresenta": "nao_informado",
+        "comentarios": ""
+      },
+      "plano_manejo_processamento_organico": {
+        "apresenta": "nao_informado",
+        "comentarios": ""
+      },
+      "registro_entrada_ingredientes": {
+        "apresenta": "nao_informado",
+        "comentarios": ""
+      },
+      "registro_fabricacao_controle": {
+        "apresenta": "nao_informado",
+        "comentarios": ""
+      },
+      "registro_venda": {
+        "apresenta": "nao_informado",
+        "comentarios": ""
+      },
+      "controle_estoque_romaneio": {
+        "apresenta": "nao_informado",
+        "comentarios": ""
+      },
+      "registro_higienizacao_limpeza": {
+        "apresenta": "nao_informado",
+        "comentarios": ""
+      },
+      "analise_agua_utilizada": {
+        "apresenta": "nao_informado",
+        "comentarios": "",
+        "padrao_ministerio_saude_portaria_2914_2011": "nao_informado",
+        "resultado": {
+          "coliformes_termotolerantes_UFC_100ml": null,
+          "e_coli_UFC_100ml": null,
+          "metodologia": "",
+          "data_analise": ""
+        }
+      },
+      "documentacao_trabalhista": {
+        "apresenta": "nao_informado",
+        "comentarios": ""
+      }
+    }
+  }
+}

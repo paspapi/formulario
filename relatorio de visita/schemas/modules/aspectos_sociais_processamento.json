@@ -1,0 +1,25 @@
+{
+  "moduleId": "aspectos_sociais_processamento",
+  "version": "1.0.0",
+  "label": "Aspectos Sociais e Ambientais (Processamento)",
+  "description": "Avaliação das condições sociais e ambientais em unidades de processamento.",
+  "fieldNamespace": "aspectos_sociais_ambientais",
+  "dataTemplate": {
+    "aspectos_sociais_ambientais": {
+      "mao_de_obra": {
+        "funcionarios": {
+          "existe": "nao_informado",
+          "quantidade": 0
+        },
+        "familiar": {
+          "existe": "nao_informado",
+          "quantidade": 0
+        }
+      },
+      "destino_residuos_solidos": "",
+      "efluentes": "",
+      "riscos_contaminacao_por_residuos": "",
+      "tratamento_realizado": ""
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "moduleId": "pontos_positivos",
+  "version": "1.0.0",
+  "label": "Pontos Positivos",
+  "description": "Registro dos pontos fortes identificados na visita.",
+  "fieldNamespace": "pontos_positivos",
+  "dataTemplate": {
+    "pontos_positivos": ""
+  }
+}

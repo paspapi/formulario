@@ -1,0 +1,50 @@
+{
+  "moduleId": "identificacao_processador",
+  "version": "1.0.0",
+  "label": "Identificação do Processador",
+  "description": "Dados gerais do estabelecimento processador visitado.",
+  "fieldNamespace": "identificacao",
+  "required": [
+    "identificacao.fornecedor_processador_nome_certificado",
+    "identificacao.data_visita",
+    "identificacao.hora_inicio",
+    "identificacao.endereco_completo"
+  ],
+  "references": {
+    "identificacao.fornecedor_processador_nome_certificado": {
+      "pmo": "unidade.nome",
+      "lastReport": "identificacao.fornecedor_processador_nome_certificado"
+    },
+    "identificacao.nome_fantasia_ou_identidade": {
+      "pmo": "unidade.nome_fantasia",
+      "lastReport": "identificacao.nome_fantasia_ou_identidade"
+    },
+    "identificacao.coordenador_verificador": {
+      "pmo": "responsaveis.verificador",
+      "lastReport": "identificacao.coordenador_verificador"
+    }
+  },
+  "dataTemplate": {
+    "identificacao": {
+      "fornecedor_processador_nome_certificado": "",
+      "nome_fantasia_ou_identidade": "",
+      "grupo": "",
+      "data_visita": "",
+      "hora_inicio": "",
+      "endereco_completo": "",
+      "cep": "",
+      "geo": {
+        "lat": null,
+        "lon": null
+      },
+      "socios_no_certificado": [],
+      "socios_participam_visita": {
+        "sim_nao": "nao_informado",
+        "motivo_ausencia": ""
+      },
+      "coordenador_verificador": "",
+      "grupo_coordenador": "",
+      "tipo_visita": "verificacao"
+    }
+  }
+}

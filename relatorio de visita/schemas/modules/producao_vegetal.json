@@ -1,0 +1,39 @@
+{
+  "moduleId": "producao_vegetal",
+  "version": "1.0.0",
+  "label": "Produção Vegetal",
+  "description": "Checklist da produção vegetal em conformidade com o PMO.",
+  "fieldNamespace": "producao_vegetal",
+  "dataTemplate": {
+    "producao_vegetal": {
+      "culturas_encontradas": [],
+      "conferem_com_PMO": {
+        "cumpre": "nao_informado",
+        "obs": ""
+      },
+      "producao_paralela": {
+        "existe": "nao_informado",
+        "distincao_visivel": "nao_informado",
+        "higienizacao_e_registro": "nao_informado",
+        "armazenamento_separado": "nao_informado",
+        "riscos_e_medidas_preventivas": ""
+      },
+      "conformidade_plano_manejo": {
+        "manejo_mato": "",
+        "manejo_solo": "",
+        "manejo_adubacao": "",
+        "manejo_pragas_doencas": "",
+        "origem_mudas_sementes": "",
+        "riscos_contaminacao": "",
+        "barreiras_confrontantes": "",
+        "equipamentos": {
+          "conferem_com_PMO": "",
+          "higienizacao": {
+            "usa_produtos": "nao_informado",
+            "lista_produtos": []
+          }
+        }
+      }
+    }
+  }
+}

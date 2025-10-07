@@ -1,0 +1,55 @@
+{
+  "moduleId": "identificacao_produtor",
+  "version": "1.0.0",
+  "label": "Identificação do Produtor",
+  "description": "Dados gerais do produtor ou grupo visitado em produções primárias.",
+  "fieldNamespace": "identificacao",
+  "required": [
+    "identificacao.produtor_nome",
+    "identificacao.data_visita",
+    "identificacao.hora_inicio",
+    "identificacao.endereco_completo",
+    "identificacao.municipio"
+  ],
+  "references": {
+    "identificacao.produtor_nome": {
+      "pmo": "unidade.nome",
+      "lastReport": "identificacao.produtor_nome"
+    },
+    "identificacao.unidades_producao": {
+      "pmo": "unidade.areas",
+      "lastReport": "identificacao.unidades_producao"
+    },
+    "identificacao.parceiros_no_certificado": {
+      "pmo": "participantes.certificado",
+      "lastReport": "identificacao.parceiros_no_certificado"
+    },
+    "identificacao.coordenador_verificador": {
+      "pmo": "responsaveis.verificador",
+      "lastReport": "identificacao.coordenador_verificador"
+    }
+  },
+  "dataTemplate": {
+    "identificacao": {
+      "produtor_nome": "",
+      "unidades_producao": [],
+      "grupo": "",
+      "data_visita": "",
+      "hora_inicio": "",
+      "endereco_completo": "",
+      "municipio": "",
+      "cep": "",
+      "geo": {
+        "lat": null,
+        "lon": null
+      },
+      "parceiros_no_certificado": [],
+      "parceiros_presentes": {
+        "sim_nao": "nao_informado",
+        "motivo_ausencia": ""
+      },
+      "coordenador_verificador": "",
+      "grupo_coordenador": ""
+    }
+  }
+}

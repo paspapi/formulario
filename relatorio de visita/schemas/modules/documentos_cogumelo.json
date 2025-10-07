@@ -1,0 +1,43 @@
+{
+  "moduleId": "documentos_cogumelo",
+  "version": "1.0.0",
+  "label": "Documentos Examinados - Cogumelos",
+  "description": "Documentos verificados na produção de cogumelos.",
+  "fieldNamespace": "documentos_examinados",
+  "dataTemplate": {
+    "documentos_examinados": {
+      "producao": {
+        "plano_manejo_organico": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        },
+        "registro_manejo": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        },
+        "registro_entrada_insumos": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        },
+        "analise_agua": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        }
+      },
+      "rastreabilidade": {
+        "registro_plantio": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        },
+        "registro_colheita": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        },
+        "controle_comercializacao": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        }
+      }
+    }
+  }
+}

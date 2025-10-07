@@ -1,0 +1,14 @@
+{
+  "moduleId": "insumos_pecuaria",
+  "version": "1.0.0",
+  "label": "Insumos - Pecuária",
+  "description": "Controle de insumos aplicados na produção animal.",
+  "fieldNamespace": "insumos",
+  "dataTemplate": {
+    "insumos": {
+      "descricao_armazenamento_conservacao": "",
+      "necessidades_uso": "",
+      "validade_itens_relevantes": ""
+    }
+  }
+}

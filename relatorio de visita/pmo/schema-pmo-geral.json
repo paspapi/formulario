@@ -1,0 +1,210 @@
+﻿{
+  "metadata": {
+    "versao_schema": "2.0.0",
+    "tipo_formulario": "pmo_completo",
+    "data_criacao": "YYYY-MM-DDTHH:mm:ss.sssZ",
+    "id_pmo": "pmo_{ano}_{cpf_cnpj_numeros}_{unidade_slug}",
+    "id_produtor": "CPF ou CNPJ formatado",
+    "grupo_spg": "Nome do grupo SPG",
+    "nome_produtor": "Nome completo ou razﾃ｣o social",
+    "nome_unidade": "Nome da unidade de produﾃｧﾃ｣o",
+    "ano_vigente": 2026,
+    "status": "completo",
+    "ultima_atualizacao": "YYYY-MM-DDTHH:mm:ss.sssZ"
+  },
+  "dados": {
+    "tipo_pessoa": "fisica",
+    "identificacao": {
+      "fornecedores_responsaveis": [
+        {
+          "nome_completo": "string",
+          "cpf": "string",
+          "data_nascimento": "string"
+        }
+      ],
+      "cpf_cnpj": "string",
+      "inscricao_estadual": "string",
+      "caf_numero": "string",
+      "grupo_spg": "string",
+      "data_preenchimento_pmo": "data",
+      "nome_fantasia": "string",
+      "nome_unidade_producao": "string"
+    },
+    "contato": {
+      "telefone": "string",
+      "email": "string",
+      "endereco": {
+        "logradouro": "string",
+        "bairro": "string",
+        "municipio": "string",
+        "uf": "string",
+        "cep": "string",
+        "coordenadas": {
+          "latitude": 0.0,
+          "longitude": 0.0
+        }
+      },
+      "roteiro_acesso": "string"
+    },
+    "propriedade": {
+      "posse_terra": "PROPRIETﾃヽIO|ARRENDATﾃヽIO|PARCEIRO|COMODATO|POSSEIRO|ASSENTADO|OUTRO",
+      "_comentario_posse_terra": "Valores aceitos: PROPRIETﾃヽIO, ARRENDATﾃヽIO, PARCEIRO, COMODATO, POSSEIRO, ASSENTADO, OUTRO. HTML envia: proprietario, arrendatario, parceiro, comodato, posseiro, assentado, outro (prompt deve normalizar para UPPERCASE)",
+      "area_total_propriedade_ha": "decimal",
+      "area_total_organica_ha": "decimal",
+      "relacao_unidade_producao": "string",
+      "data_aquisicao_posse": "data",
+      "terra_familiar": "boolean"
+    },
+    "manejo_organico": {
+      "historico_propriedade": "string",
+      "topografia_e_utilizacao": "string",
+      "status_manejo_organico": "string",
+      "anos_manejo_organico": "integer",
+      "comprovacao_manejo": [
+        {"tipo": "string", "status": "boolean"}
+      ],
+      "historico_ultimos_10_anos": [
+        {
+          "cultura_animal": "string",
+          "data_ultima_aplicacao_nao_permitido": "data",
+          "insumo_utilizado": "string",
+          "estavam_sob_manejo_organico": "boolean",
+          "eram_certificados": "boolean"
+        }
+      ],
+      "relato_historico_recente": "string"
+    },
+    "activities": {
+      "escopo_vegetal": "boolean",
+      "escopo_animal": "boolean",
+      "escopo_cogumelo": "boolean",
+      "escopo_apicultura": "boolean",
+      "escopo_processamento": "boolean",
+      "escopo_processamento_minimo": "boolean"
+    },
+    "mao_de_obra": {
+      "permanentes": "integer (funcionﾃ｡rios permanentes/empregados fixos)",
+      "temporarios": "integer (funcionﾃ｡rios temporﾃ｡rios/diaristas)",
+      "familiares": "integer (mﾃ｣o de obra familiar)",
+      "voluntarios": "integer (voluntﾃ｡rios/mutirﾃ｣o/parceiros/meeiros)",
+      "_comentarios": {
+        "permanentes": "Mapeado para campo 'funcionarios_permanentes' no formulﾃ｡rio",
+        "temporarios": "Mapeado para campo 'funcionarios_temporarios' no formulﾃ｡rio",
+        "familiares": "Mapeado para campo 'funcionarios_familiares' no formulﾃ｡rio",
+        "voluntarios": "Mapeado para campo 'funcionarios_voluntarios' no formulﾃ｡rio",
+        "_nota": "Campos antigos (empregados_quantos, diaristas_quantos, parceiros_quantos, meeiro_rural_quantos) ainda sﾃ｣o suportados por compatibilidade"
+      }
+    },
+    "croqui": {
+      "local_insercao_croqui": "string",
+      "itens_obrigatorios_localizados": ["ENTRADA DA PROPRIEDADE", "CASA / RESIDﾃ劾CIA", "ARMAZﾃ窺 E GALPﾃ髭S", "..."]
+    },
+    "biodiversidade_e_ambiente": {
+      "preservacao_ambiental": [
+        "app",
+        "reserva_legal",
+        "nascentes",
+        "matas_nativas"
+      ],
+      "possui_car": "sim|nao|em_processo",
+      "situacao_car": "ativo|pendente|cancelado|suspenso (somente se possui_car = 'sim')",
+      "destino_lixo_organico": "compostagem|alimentacao_animal|queima|coleta_publica|outro",
+      "destino_lixo_nao_organico": "coleta_seletiva|coleta_publica|reciclagem|queima|enterro|outro",
+      "destino_esgoto": "fossa_septica|fossa_negra|rede_publica|biodigestor|outro",
+      "_comentarios": {
+        "preservacao_ambiental": "Array de strings com ﾃ｡reas que a propriedade possui. Valores: app, reserva_legal, nascentes, matas_nativas",
+        "preservacao_ambiental_formato_antigo": "Tambﾃｩm suporta array de objetos: [{area: 'app', possui: true}]",
+        "destino_esgoto": "Tambﾃｩm aceita 'destino_esgoto_domestico' como alias"
+      }
+    },
+    "manejo_da_agua": {
+      "periodicidade_analise_irrigacao": "0.5|1|2|3|0 (anos: 0.5=Semestral, 1=Anual, 2=Bianual, 3=Trienal, 0=Nﾃ｣o realiza)",
+      "fontes_agua_uso": [
+        {
+          "uso": "irrigacao|pulverizacao|consumo_animal|processamento|higienizacao",
+          "origem": "poco|nascente|rio|represa|rede_publica|cisterna",
+          "risco_contaminacao": "string (descriﾃｧﾃ｣o do risco)",
+          "nivel_risco": "baixo|medio|alto|nenhum",
+          "garantia_qualidade": "string (ex: 'Anﾃ｡lise anual', 'Filtro', 'Anﾃ｡lise periﾃｳdica')"
+        }
+      ],
+      "_comentarios": {
+        "uso": "Valores aceitos: irrigacao, pulverizacao, consumo_animal, processamento, higienizacao",
+        "origem": "Valores aceitos: poco, nascente, rio (Rio/Cﾃｳrrego), represa, rede_publica, cisterna",
+        "nivel_risco": "Valores aceitos: baixo, medio, alto, nenhum (usado para preencher select)",
+        "risco_contaminacao": "Campo texto livre para descrever o risco"
+      }
+    },
+    "regularizacao_ambiental": {
+      "possui_car": "string",
+      "explicacao_reserva_legal": "string"
+    },
+    "producao_subsistencia_ornamental": {
+      "possui_nao_organica": "boolean",
+      "atividades": [
+        {"tipo": "HORTALIﾃ②S", "area_ha": "decimal"}
+      ],
+      "utiliza_insumos_nao_permitidos": "boolean",
+      "risco_contaminacao": "string",
+      "manejo_bloqueio_riscos": "string"
+    },
+    "producao_paralela": {
+      "possui_paralela": "boolean",
+      "atividades": [
+        {"tipo": "HORTALIﾃ②S", "area_ha": "decimal"}
+      ],
+      "utiliza_insumos_nao_permitidos": "boolean",
+      "risco_contaminacao": "string",
+      "manejo_bloqueio_riscos": "string",
+      "pretende_conversao_total": "boolean",
+      "tempo_conversao": "string"
+    },
+    "comercializacao": {
+      "canal_comercializacao": [
+        "feira_livre|csa|entrega_domicilio|loja_propria|supermercado|pnae|paa|restaurantes|atacado|outro"
+      ],
+      "inicio_vendas": "data (YYYY-MM-DD)",
+      "percentual_venda_organica": "integer (0-100)",
+      "vende_nao_organicos": "boolean",
+      "como_separa_comercializacao": "string (obrigatﾃｳrio se vende_nao_organicos = true)",
+      "sistema_rotulagem": "string (obrigatﾃｳrio)",
+      "sistema_rastreabilidade_comercial": "string (obrigatﾃｳrio)",
+      "transporte": "string",
+      "_comentarios": {
+        "canal_comercializacao": "Array de strings. Valores aceitos: feira_livre, csa, entrega_domicilio, loja_propria, supermercado, pnae, paa, restaurantes, atacado, outro"
+      }
+    },
+    "controles_e_registros": {
+      "tipo_registro": [
+        "caderno_campo|planilhas|fichas_manejo|notas_fiscais|comprovantes_venda|rastreabilidade|analises|fotos"
+      ],
+      "descricao_caderno_campo": "string (obrigatﾃｳrio)",
+      "sistema_rastreabilidade_interno": "string (obrigatﾃｳrio)",
+      "controle_estoque": "string",
+      "tempo_registros": "menos_1_ano|1_a_3_anos|3_a_5_anos|mais_5_anos",
+      "_comentarios": {
+        "tipo_registro": "Array de strings com tipos de registros mantidos. Rastreabilidade ﾃｩ OBRIGATﾃ迭IA por IN 19/2011 MAPA",
+        "tempo_registros": "Recomendado: mﾃｭnimo 5 anos para auditoria"
+      }
+    },
+    "producao_subsistencia": {
+      "possui_subsistencia": "boolean",
+      "produtos_subsistencia": "string",
+      "area_subsistencia": "decimal (hectares)",
+      "separacao_subsistencia": "string (obrigatﾃｳrio se possui_subsistencia = true)",
+      "insumos_subsistencia": "string",
+      "armazenamento_subsistencia": "string"
+    },
+    "declaracoes_conformidade": {
+      "veracidade_e_comunicacao": "string",
+      "conhecimento_normas": "string",
+      "conhecimento_regras_spg": "string",
+      "concordancia_verificacao_acesso": "string",
+      "concordancia_informacao_adicional": "string",
+      "ciente_visitas_amostras": "string",
+      "aceite_condicoes_corretivas": "string",
+      "total_conhecimento_conviccao": "string"
+    }
+  }
+}
+

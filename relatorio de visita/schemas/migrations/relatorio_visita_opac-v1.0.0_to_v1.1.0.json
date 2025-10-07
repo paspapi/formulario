@@ -1,0 +1,32 @@
+{
+  "fromVersion": "1.0.0",
+  "toVersion": "1.1.0",
+  "releasedAt": "2025-10-07",
+  "summary": "Refatoração para arquitetura modular baseada em manifesto, mantendo a estrutura de dados dos relatórios.",
+  "operations": [
+    {
+      "type": "update-meta",
+      "description": "Atualiza meta.schema_version para 1.1.0 em cada relatório."
+    },
+    {
+      "type": "reindex-modules",
+      "description": "Passo lógico: carrega módulos a partir de schemas/manifest.json para construir o formulário dinamicamente."
+    },
+    {
+      "type": "noop-data",
+      "description": "Nenhuma alteração estrutural nos campos dos relatórios; apenas reorganização em torno de módulos."
+    }
+  ],
+  "fallback": {
+    "strategy": "em-memoria",
+    "notes": "Caso o manifesto não esteja disponível, carregar os arquivos schemaPath individuais continua válido."
+  },
+  "validation": [
+    "Verificar que todos os relatórios existentes são carregados com meta.schema_version = 1.1.0.",
+    "Garantir que o conjunto de campos obrigatórios (requiredFields) esteja sincronizado com a UI."
+  ],
+  "notes": [
+    "Os arquivos schemaPath agora encapsulam dataTemplate + moduleGraph.",
+    "A leitura dos anexos JSON em PDFs deve atualizar meta.schema_version para 1.1.0 durante a importação."
+  ]
+}

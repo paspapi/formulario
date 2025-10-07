@@ -1,0 +1,14 @@
+{
+  "moduleId": "comercializacao_padrao",
+  "version": "1.0.0",
+  "label": "Comercialização e Rotulagem",
+  "description": "Informações sobre canais de venda e rotulagem de produtos orgânicos.",
+  "fieldNamespace": "comercializacao_rotulagem",
+  "dataTemplate": {
+    "comercializacao_rotulagem": {
+      "canais_venda": [],
+      "usa_selo_SISORG": "nao_informado",
+      "modelo_etiqueta_observado": ""
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "moduleId": "nao_conformidades_padrao",
+  "version": "1.0.0",
+  "label": "Não Conformidades",
+  "description": "Registro de não conformidades identificadas durante a visita.",
+  "fieldNamespace": "nao_conformidades",
+  "required": [
+    "nao_conformidades"
+  ],
+  "dataTemplate": {
+    "nao_conformidades": [
+      {
+        "descricao": "",
+        "grau": "moderada",
+        "medida_corretiva": "",
+        "prazo_correcao": ""
+      }
+    ]
+  }
+}

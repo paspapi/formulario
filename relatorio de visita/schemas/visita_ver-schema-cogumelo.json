@@ -1,0 +1,239 @@
+{
+  "typeId": "visita_verificacao_cogumelo",
+  "label": "Visita de Verificação - Produção de Cogumelos",
+  "schemaVersion": "1.1.0",
+  "pmoTipo": "Producao Vegetal - Cogumelos",
+  "moduleGraph": [
+    {
+      "moduleId": "identificacao_produtor",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "areas_instalacoes_visitadas",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "aspectos_sociais_basico",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "producao_cogumelos",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "pos_colheita_cogumelo",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "documentos_cogumelo",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "comercializacao_cogumelo",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "observacoes_recomendacoes",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "nao_conformidades_padrao",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "avaliacao_medidas_corretivas_anteriores",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "manifestacao_produtor",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "organizacao_participacao_produtor",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "pontos_positivos",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "decisao_conformidade",
+      "version": "1.0.0"
+    },
+    {
+      "moduleId": "encerramento_visita",
+      "version": "1.0.0"
+    }
+  ],
+  "requiredFields": [
+    "identificacao.produtor_nome",
+    "identificacao.data_visita",
+    "identificacao.hora_inicio",
+    "decisao_conformidade.organico",
+    "encerramento_visita.hora_termino"
+  ],
+  "dataTemplate": {
+    "meta": {
+      "schema_version": "1.1.0",
+      "pmo_tipo": "Producao Vegetal - Cogumelos",
+      "fonte": "ANC OPAC",
+      "arquivo_origem": "",
+      "data_extracao": "",
+      "validador": {
+        "status": "pending",
+        "erros": []
+      }
+    },
+    "identificacao": {
+      "produtor_nome": "",
+      "unidades_producao": [],
+      "grupo": "",
+      "data_visita": "",
+      "hora_inicio": "",
+      "endereco_completo": "",
+      "municipio": "",
+      "cep": "",
+      "geo": {
+        "lat": null,
+        "lon": null
+      },
+      "parceiros_no_certificado": [],
+      "parceiros_presentes": {
+        "sim_nao": "nao_informado",
+        "motivo_ausencia": ""
+      },
+      "coordenador_verificador": "",
+      "grupo_coordenador": ""
+    },
+    "areas_instalacoes_visitadas": [],
+    "aspectos_sociais_ambientais": {
+      "mao_de_obra": "",
+      "situacao_ambiental": "",
+      "destino_lixo": ""
+    },
+    "producao_cogumelos": {
+      "produtos_verificados": [],
+      "conferem_com_PMO": {
+        "cumpre": "nao_informado",
+        "obs": ""
+      },
+      "producao_paralela": {
+        "existe": "nao_informado",
+        "distincao_visivel": "nao_informado",
+        "higienizacao_e_registro": "nao_informado",
+        "armazenamento_separado": "nao_informado",
+        "riscos_e_medidas_preventivas": ""
+      },
+      "substrato": {
+        "materiais_permitidos": "nao_informado",
+        "solo_aprovado": "nao_informado",
+        "madeira_origem_legal_sem_tratamento_proibido": "nao_informado"
+      },
+      "agua": {
+        "analise_laboratorial_realizada": "nao_informado"
+      },
+      "metais_pesados": {
+        "dentro_limites_permitidos": "nao_informado"
+      },
+      "radiacao": {
+        "uso_radiacoes_ionizantes": "nao_informado"
+      },
+      "destino_substrato_e_chorume": {
+        "conforme_regras_ambientais": "nao_informado"
+      },
+      "inoculos": {
+        "origem_regularizada": "nao_informado",
+        "documento_comprobatorio": "nao_informado"
+      },
+      "controle_pragas_doencas": {
+        "manejo_permitido": "nao_informado"
+      },
+      "atende_normas_processamento_transporte_armazenagem": "nao_informado"
+    },
+    "pos_colheita_embalagem_estocagem": {
+      "conforme_PMO": {
+        "cumpre": "nao_informado",
+        "obs": ""
+      },
+      "produtor_atende_normas_processamento_transporte_armazenagem": "nao_informado",
+      "observacoes": ""
+    },
+    "documentos_examinados": {
+      "producao": {
+        "plano_manejo_organico": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        },
+        "registro_manejo": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        },
+        "registro_entrada_insumos": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        },
+        "analise_agua": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        }
+      },
+      "rastreabilidade": {
+        "registro_plantio": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        },
+        "registro_colheita": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        },
+        "controle_comercializacao": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        }
+      }
+    },
+    "comercializacao_rotulagem": {
+      "descricao_comercializacao": "",
+      "canais_venda": [],
+      "usa_selo_SISORG": "nao_informado",
+      "modelo_etiqueta": ""
+    },
+    "observacoes_recomendacoes": "",
+    "nao_conformidades": [
+      {
+        "descricao": "",
+        "grau": "moderada",
+        "medida_corretiva": "",
+        "prazo_correcao": ""
+      }
+    ],
+    "avaliacao_medidas_corretivas_anteriores": "",
+    "manifestacao_produtor": "",
+    "organizacao_participacao_grupo": {
+      "troca_experiencias": "",
+      "pontualidade": "",
+      "caronas_coletivas": "",
+      "qtd_tipo_participantes": ""
+    },
+    "pontos_positivos": "",
+    "decisao_conformidade": {
+      "organico": "nao_informado"
+    },
+    "encerramento_visita": {
+      "hora_termino": "",
+      "opac_coordenador_nome": "",
+      "grupo_participante_nome": "",
+      "assinaturas": {
+        "opac_coordenador": "nao_informado",
+        "fornecedor_visitado": "nao_informado"
+      },
+      "lista_presenca": [
+        {
+          "nome": "",
+          "grupo_ou_atividade": "",
+          "assinatura_coletada": "nao_informado"
+        }
+      ]
+    }
+  }
+}

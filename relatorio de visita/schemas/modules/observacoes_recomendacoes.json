@@ -1,0 +1,10 @@
+{
+  "moduleId": "observacoes_recomendacoes",
+  "version": "1.0.0",
+  "label": "Observações e Recomendações",
+  "description": "Campo livre para registrar observações e recomendações gerais.",
+  "fieldNamespace": "observacoes_recomendacoes",
+  "dataTemplate": {
+    "observacoes_recomendacoes": ""
+  }
+}

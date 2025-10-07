@@ -1,0 +1,10 @@
+{
+  "moduleId": "manifestacao_produtor",
+  "version": "1.0.0",
+  "label": "Manifestação do Produtor",
+  "description": "Espaço para manifestação do produtor ou responsável visitado.",
+  "fieldNamespace": "manifestacao_produtor",
+  "dataTemplate": {
+    "manifestacao_produtor": ""
+  }
+}

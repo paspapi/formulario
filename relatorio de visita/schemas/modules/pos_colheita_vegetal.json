@@ -1,0 +1,16 @@
+{
+  "moduleId": "pos_colheita_vegetal",
+  "version": "1.0.0",
+  "label": "Pós-colheita, Embalagem e Estocagem (Vegetal)",
+  "description": "Verificação das etapas pós-colheita na produção vegetal.",
+  "fieldNamespace": "pos_colheita_embalagem_estocagem",
+  "dataTemplate": {
+    "pos_colheita_embalagem_estocagem": {
+      "conforme_PMO": {
+        "cumpre": "nao_informado",
+        "obs": ""
+      },
+      "observacoes": ""
+    }
+  }
+}

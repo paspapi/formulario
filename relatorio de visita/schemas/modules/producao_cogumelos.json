@@ -1,0 +1,48 @@
+{
+  "moduleId": "producao_cogumelos",
+  "version": "1.0.0",
+  "label": "Produção de Cogumelos",
+  "description": "Checklist específico para produção de cogumelos orgânicos.",
+  "fieldNamespace": "producao_cogumelos",
+  "dataTemplate": {
+    "producao_cogumelos": {
+      "produtos_verificados": [],
+      "conferem_com_PMO": {
+        "cumpre": "nao_informado",
+        "obs": ""
+      },
+      "producao_paralela": {
+        "existe": "nao_informado",
+        "distincao_visivel": "nao_informado",
+        "higienizacao_e_registro": "nao_informado",
+        "armazenamento_separado": "nao_informado",
+        "riscos_e_medidas_preventivas": ""
+      },
+      "substrato": {
+        "materiais_permitidos": "nao_informado",
+        "solo_aprovado": "nao_informado",
+        "madeira_origem_legal_sem_tratamento_proibido": "nao_informado"
+      },
+      "agua": {
+        "analise_laboratorial_realizada": "nao_informado"
+      },
+      "metais_pesados": {
+        "dentro_limites_permitidos": "nao_informado"
+      },
+      "radiacao": {
+        "uso_radiacoes_ionizantes": "nao_informado"
+      },
+      "destino_substrato_e_chorume": {
+        "conforme_regras_ambientais": "nao_informado"
+      },
+      "inoculos": {
+        "origem_regularizada": "nao_informado",
+        "documento_comprobatorio": "nao_informado"
+      },
+      "controle_pragas_doencas": {
+        "manejo_permitido": "nao_informado"
+      },
+      "atende_normas_processamento_transporte_armazenagem": "nao_informado"
+    }
+  }
+}

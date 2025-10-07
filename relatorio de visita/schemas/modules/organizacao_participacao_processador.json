@@ -1,0 +1,19 @@
+{
+  "moduleId": "organizacao_participacao_processador",
+  "version": "1.0.0",
+  "label": "Organização e Participação no Grupo (Processamento)",
+  "description": "Avaliação da participação do processador nas atividades coletivas.",
+  "fieldNamespace": "organizacao_participacao_grupo",
+  "dataTemplate": {
+    "organizacao_participacao_grupo": {
+      "troca_experiencias": "",
+      "pontualidade": "",
+      "caronas_coletivas": "",
+      "qtd_tipo_participantes": "",
+      "quorum_minimo": {
+        "pares": "1/3 do grupo",
+        "verificacao": "processador(a) + verificador(a) + 1/3 do grupo"
+      }
+    }
+  }
+}

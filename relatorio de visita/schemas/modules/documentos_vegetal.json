@@ -1,0 +1,64 @@
+{
+  "moduleId": "documentos_vegetal",
+  "version": "1.0.0",
+  "label": "Documentos Examinados - Vegetal",
+  "description": "Documentos verificados em unidades de produção vegetal.",
+  "fieldNamespace": "documentos_examinados",
+  "dataTemplate": {
+    "documentos_examinados": {
+      "producao": {
+        "plano_manejo_organico": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        },
+        "registro_manejo_caderno_campo": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        },
+        "registro_entrada_insumos": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        },
+        "analise_agua": {
+          "apresenta": "nao_informado",
+          "comentarios": "",
+          "limites": {
+            "coliformes_termotolerantes_UFC_100ml": 200,
+            "e_coli_UFC_100ml": 120
+          },
+          "resultado": {
+            "coliformes_termotolerantes_UFC_100ml": null,
+            "e_coli_UFC_100ml": null,
+            "metodologia": "",
+            "data_analise": ""
+          }
+        }
+      },
+      "rastreabilidade": {
+        "registro_plantio": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        },
+        "registro_colheita": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        },
+        "controle_comercializacao": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        }
+      },
+      "outros_registros": {
+        "terapeutica_animais": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        },
+        "higienizacao_em_processamento": {
+          "apresenta": "nao_informado",
+          "comentarios": ""
+        },
+        "outros": []
+      }
+    }
+  }
+}

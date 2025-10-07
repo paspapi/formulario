@@ -1,0 +1,15 @@
+{
+  "moduleId": "organizacao_participacao_produtor",
+  "version": "1.0.0",
+  "label": "Organização e Participação no Grupo",
+  "description": "Avaliação da participação do produtor nas atividades coletivas.",
+  "fieldNamespace": "organizacao_participacao_grupo",
+  "dataTemplate": {
+    "organizacao_participacao_grupo": {
+      "troca_experiencias": "",
+      "pontualidade": "",
+      "caronas_coletivas": "",
+      "qtd_tipo_participantes": ""
+    }
+  }
+}

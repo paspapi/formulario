@@ -1,0 +1,18 @@
+{
+  "moduleId": "comercializacao_processamento",
+  "version": "1.0.0",
+  "label": "Comercialização e Rotulagem (Processamento)",
+  "description": "Verificação dos requisitos de rotulagem em unidades de processamento.",
+  "fieldNamespace": "comercializacao_rotulagem",
+  "dataTemplate": {
+    "comercializacao_rotulagem": {
+      "canais_venda": [],
+      "usa_selo_SISORG": "nao_informado",
+      "rotulo_conforme_legislacao": "nao_informado",
+      "identifica_ingredientes_organicos_no_rotulo": "nao_informado",
+      "identificacao_para_produtos_com_ingredientes_organicos": "nao_informado",
+      "apresenta_todos_rotulos_das_linhas": "nao_informado",
+      "modelo_etiqueta_observado": ""
+    }
+  }
+}
