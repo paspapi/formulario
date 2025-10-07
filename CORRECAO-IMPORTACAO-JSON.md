@@ -237,3 +237,30 @@ Ao fazer upload de JSON no painel PMO:
 - **Painel PMO:** [painel.js](pmo/painel/painel.js)
 - **Storage Manager:** [pmo-storage-manager.js](framework/components/pmo-storage-manager.js)
 - **Schema v2.0:** [schema-pmo-geral.json](database/jsonSchemas/schema-pmo-geral.json)
+
+## 🔧 ATUALIZAÇÃO - Correções Adicionais (Commit 8f28f2e)
+
+**Data:** 2025-10-06 22:10
+
+### Problemas Corrigidos:
+
+1. **ReferenceError: PMOPrincipal is not defined** (linhas 695, 722, 748)
+   - ❌ Erro: Chamava PMOPrincipal.calculateProgress() em 3 funções de tabela
+   - ✅ Correção: Mudado para CadastroGeralPMO.calculateProgress()
+   - 📍 Afetava: addRow(), removeRow(), duplicateRow()
+   - 🎯 Resultado: Tabelas dinâmicas agora funcionam sem erros
+
+2. **Campos inexistentes gerando warnings** (linhas 1447-1450)
+   - ❌ Erro: Tentava preencher campos que não existem no formulário:
+     * historico_propriedade
+     * topografia_utilizacao
+     * status_manejo_organico
+     * relato_historico_recente
+   - ✅ Correção: Campos comentados
+   - 📝 Motivo: Esses campos estão em anexos específicos, não no cadastro geral
+   - 🎯 Resultado: Sem warnings no console
+
+3. **Código duplicado** (linha 1617-1623)
+   - ❌ Problema: Seção duplicada de preenchimento de manejo_organico
+   - ✅ Correção: Removida duplicação, mantida apenas comprovação e histórico
+
