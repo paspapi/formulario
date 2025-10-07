@@ -80,6 +80,17 @@
                                placeholder="Nome do grupo SPG ao qual pertence">
                     </div>
 
+                    <div class="field-wrapper">
+                        <label for="data_preenchimento_pmo">
+                            Data de Preenchimento do PMO
+                            <span class="required">*</span>
+                        </label>
+                        <input type="date"
+                               id="data_preenchimento_pmo"
+                               name="data_preenchimento_pmo"
+                               required>
+                    </div>
+
                     <div class="field-wrapper col-span-2">
                         <label for="observacoes_certificacao">Observações sobre Certificação</label>
                         <textarea id="observacoes_certificacao"
@@ -195,7 +206,8 @@
                         <input type="text"
                                id="cpf_cnpj"
                                name="cpf_cnpj"
-                               placeholder="000.000.000-00">
+                               data-mask="cpf-cnpj"
+                               placeholder="000.000.000-00 ou 00.000.000/0000-00">
                     </div>
 
                     <div class="field-wrapper" id="campo-inscricao-estadual" style="display:none;">
@@ -433,19 +445,19 @@
                         </label>
                         <select id="posse_terra" name="posse_terra" required>
                             <option value="">Selecione...</option>
-                            <option value="proprietario">Proprietário</option>
-                            <option value="arrendatario">Arrendatário</option>
-                            <option value="parceiro">Parceiro</option>
-                            <option value="comodato">Comodato</option>
-                            <option value="posseiro">Posseiro</option>
-                            <option value="assentado">Assentado</option>
-                            <option value="outro">Outro</option>
+                            <option value="PROPRIETÁRIO">Proprietário</option>
+                            <option value="ARRENDATÁRIO">Arrendatário</option>
+                            <option value="PARCEIRO">Parceiro</option>
+                            <option value="COMODATO">Comodato</option>
+                            <option value="POSSEIRO">Posseiro</option>
+                            <option value="ASSENTADO">Assentado</option>
+                            <option value="OUTRO">Outro</option>
                         </select>
                     </div>
 
                     <div class="field-wrapper">
                         <label for="area_total_ha">
-                            Área Total (hectares)
+                            Área Total da Propriedade (hectares)
                             <span class="required">*</span>
                         </label>
                         <input type="number"
@@ -455,6 +467,20 @@
                                min="0"
                                required
                                placeholder="Ex: 10.5">
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="area_total_organica_ha">
+                            Área Total Orgânica (hectares)
+                            <span class="required">*</span>
+                        </label>
+                        <input type="number"
+                               id="area_total_organica_ha"
+                               name="area_total_organica_ha"
+                               step="0.01"
+                               min="0"
+                               required
+                               placeholder="Ex: 5.0">
                     </div>
 
                     <div class="field-wrapper">
@@ -496,6 +522,16 @@
                             <span>Não possuo CAF</span>
                         </label>
                     </div>
+
+                    <div class="field-wrapper col-span-4">
+                        <label for="relacao_unidade_producao">
+                            Relação com a Unidade de Produção
+                        </label>
+                        <textarea id="relacao_unidade_producao"
+                                  name="relacao_unidade_producao"
+                                  rows="3"
+                                  placeholder="Descreva sua relação com a unidade de produção, histórico de aquisição, tempo de posse, etc."></textarea>
+                    </div>
                 </div>
             </section>
 
@@ -504,6 +540,42 @@
                 <h2>5. Histórico de Manejo Orgânico</h2>
 
                 <div class="form-grid">
+                    <div class="field-wrapper col-span-4">
+                        <label for="historico_propriedade">
+                            Histórico da Propriedade
+                            <span class="required">*</span>
+                        </label>
+                        <textarea id="historico_propriedade"
+                                  name="historico_propriedade"
+                                  rows="3"
+                                  required
+                                  placeholder="Descreva o histórico da propriedade: quando foi adquirida, como era antes, etc."></textarea>
+                    </div>
+
+                    <div class="field-wrapper col-span-4">
+                        <label for="topografia_e_utilizacao">
+                            Topografia e Utilização do Solo
+                            <span class="required">*</span>
+                        </label>
+                        <textarea id="topografia_e_utilizacao"
+                                  name="topografia_e_utilizacao"
+                                  rows="3"
+                                  required
+                                  placeholder="Descreva a topografia (plano, íngreme, etc.) e como utiliza o solo"></textarea>
+                    </div>
+
+                    <div class="field-wrapper col-span-4">
+                        <label for="status_manejo_organico">
+                            Status do Manejo Orgânico
+                            <span class="required">*</span>
+                        </label>
+                        <textarea id="status_manejo_organico"
+                                  name="status_manejo_organico"
+                                  rows="2"
+                                  required
+                                  placeholder="Explique se está em conversão, já é orgânico, mantém certificado ativo, etc."></textarea>
+                    </div>
+
                     <div class="field-wrapper">
                         <label for="anos_manejo_organico">
                             Há quantos anos pratica manejo orgânico?
@@ -553,6 +625,18 @@
                                 <span>Cadernos de campo/registros</span>
                             </label>
                         </div>
+                    </div>
+
+                    <div class="field-wrapper col-span-4">
+                        <label for="relato_historico_recente">
+                            Relato do Histórico Recente
+                            <span class="required">*</span>
+                        </label>
+                        <textarea id="relato_historico_recente"
+                                  name="relato_historico_recente"
+                                  rows="4"
+                                  required
+                                  placeholder="Descreva detalhadamente o histórico recente da propriedade: implantações, melhorias, produção atual, etc."></textarea>
                     </div>
                 </div>
             </section>
