@@ -1,0 +1,97 @@
+✅ PMO Framework inicializado
+pmo-framework.js:291 ✅ PMO Framework carregado com sucesso
+location-modal.js:521 ✅ LocationModal carregado e pronto para uso
+pmo-storage-manager.js:406 🔄 Verificando migração de dados antigos...
+pmo-storage-manager.js:422 ✅ Nenhum dado antigo encontrado
+pmo-storage-manager.js:28 ✅ PMOStorageManager inicializado
+pmo-storage-manager.js:511 ✅ PMOStorageManager carregado e disponível globalmente
+scope-manager.js:63 ✅ PMOScopeManager inicializado
+pmo-tables.js:615 PMOTable: 4 tabelas inicializadas
+cadastro-geral-pmo.js:28 ✅ Inicializando Cadastro Geral do PMO...
+cadastro-geral-pmo.js:1052 ✅ Dados carregados do PMO: pmo_2025_44876030000130_unidade-principal
+cadastro-geral-pmo.js:1071 🔍 Estrutura dos dados carregados: {tipo: 'object', keys: Array(2), tem_metadata: true, tem_dados: true, tem_activities: true, …}
+cadastro-geral-pmo.js:1084 ✅ Campo activities encontrado: (6) ['escopo_vegetal', 'escopo_animal', 'escopo_cogumelo', 'escopo_apicultura', 'escopo_processamento', 'escopo_processamento_minimo']
+cadastro-geral-pmo.js:1095 📥 Formato 1 detectado: Novo (metadata + dados)
+cadastro-geral-pmo.js:1306 📥 Iniciando importação de JSON: {metadata: {…}, dados: {…}}
+cadastro-geral-pmo.js:1307 📊 Estrutura do JSON: {tem_metadata: true, tem_dados: true, keys_data: Array(2), keys_dados: Array(16)}
+cadastro-geral-pmo.js:1325 ✅ Dados encontrados, iniciando preenchimento...
+cadastro-geral-pmo.js:1329 📝 Preenchendo identificação: {fornecedores_responsaveis: Array(2), cpf_cnpj: '44.876.030/0001-30', inscricao_estadual: '168.165.939.110', caf_numero: '', grupo_spg: 'Bela Vista', …}
+cadastro-geral-pmo.js:1535 ✅ Campo preenchido: nome_completo = MARCELO GONÇALVES DA SILVA / RAQUEL MATOS XAVIER
+cadastro-geral-pmo.js:1535 ✅ Campo preenchido: cpf_cnpj = 44.876.030/0001-30
+cadastro-geral-pmo.js:1535 ✅ Campo preenchido: inscricao_estadual = 168.165.939.110
+cadastro-geral-pmo.js:1535 ✅ Campo preenchido: nome_fantasia = N/A
+cadastro-geral-pmo.js:1535 ✅ Campo preenchido: nome_unidade_producao = SITIO RECANTO DA PAZ
+cadastro-geral-pmo.js:1352 📝 Preenchendo tipo de documento: cnpj
+cadastro-geral-pmo.js:1535 ✅ Campo preenchido: tipo_documento = cnpj
+cadastro-geral-pmo.js:1364 📝 Preenchendo tipo de pessoa: fisica
+cadastro-geral-pmo.js:1535 ✅ Campo preenchido: tipo_pessoa = fisica
+cadastro-geral-pmo.js:1376 📝 Preenchendo contato: {telefone: '(13) 991168778', email: 'Bixodoparana69@gmail.com', endereco: {…}, roteiro_acesso: ''}
+cadastro-geral-pmo.js:1521  ⚠️ Campo não encontrado: telefone
+preencherCampo @ cadastro-geral-pmo.js:1521
+preencherFormularioComJSON @ cadastro-geral-pmo.js:1377
+loadSavedData @ cadastro-geral-pmo.js:1096
+init @ cadastro-geral-pmo.js:45
+(anonymous) @ cadastro-geral-pmo.js:1697
+cadastro-geral-pmo.js:1521  ⚠️ Campo não encontrado: email
+preencherCampo @ cadastro-geral-pmo.js:1521
+preencherFormularioComJSON @ cadastro-geral-pmo.js:1378
+loadSavedData @ cadastro-geral-pmo.js:1096
+init @ cadastro-geral-pmo.js:45
+(anonymous) @ cadastro-geral-pmo.js:1697
+cadastro-geral-pmo.js:1535 ✅ Campo preenchido: bairro = SERTAOZINHO
+cadastro-geral-pmo.js:1535 ✅ Campo preenchido: municipio = AMPARO
+cadastro-geral-pmo.js:1535 ✅ Campo preenchido: uf = SP
+cadastro-geral-pmo.js:1535 ✅ Campo preenchido: cep = 13909-899
+cadastro-geral-pmo.js:1535 ✅ Campo preenchido: posse_terra = PRÓPRIA
+cadastro-geral-pmo.js:1535 ✅ Campo preenchido: area_total_ha = 6.64
+cadastro-geral-pmo.js:1535 ✅ Campo preenchido: data_aquisicao = 2021-03-10
+cadastro-geral-pmo.js:1535 ✅ Campo preenchido: terra_familiar = true
+cadastro-geral-pmo.js:1535 ✅ Campo preenchido: anos_manejo_organico = 3
+cadastro-geral-pmo.js:1423 📝 Preenchendo activities (formato v2.0): {escopo_vegetal: true, escopo_animal: false, escopo_cogumelo: false, escopo_apicultura: false, escopo_processamento: false, …}
+cadastro-geral-pmo.js:1439  ⚠️ Checkbox de activity não encontrado: escopo_vegetal
+(anonymous) @ cadastro-geral-pmo.js:1439
+preencherFormularioComJSON @ cadastro-geral-pmo.js:1424
+loadSavedData @ cadastro-geral-pmo.js:1096
+init @ cadastro-geral-pmo.js:45
+(anonymous) @ cadastro-geral-pmo.js:1697
+cadastro-geral-pmo.js:1439  ⚠️ Checkbox de activity não encontrado: escopo_animal
+(anonymous) @ cadastro-geral-pmo.js:1439
+preencherFormularioComJSON @ cadastro-geral-pmo.js:1424
+loadSavedData @ cadastro-geral-pmo.js:1096
+init @ cadastro-geral-pmo.js:45
+(anonymous) @ cadastro-geral-pmo.js:1697
+cadastro-geral-pmo.js:1439  ⚠️ Checkbox de activity não encontrado: escopo_cogumelo
+(anonymous) @ cadastro-geral-pmo.js:1439
+preencherFormularioComJSON @ cadastro-geral-pmo.js:1424
+loadSavedData @ cadastro-geral-pmo.js:1096
+init @ cadastro-geral-pmo.js:45
+(anonymous) @ cadastro-geral-pmo.js:1697
+cadastro-geral-pmo.js:1437 ✅ Activity marcada: escopo_apicultura = false
+cadastro-geral-pmo.js:1437 ✅ Activity marcada: escopo_processamento = false
+cadastro-geral-pmo.js:1439  ⚠️ Checkbox de activity não encontrado: escopo_processamento_minimo
+(anonymous) @ cadastro-geral-pmo.js:1439
+preencherFormularioComJSON @ cadastro-geral-pmo.js:1424
+loadSavedData @ cadastro-geral-pmo.js:1096
+init @ cadastro-geral-pmo.js:45
+(anonymous) @ cadastro-geral-pmo.js:1697
+cadastro-geral-pmo.js:1535 ✅ Campo preenchido: grupo_spg = Bela Vista
+cadastro-geral-pmo.js:1521  ⚠️ Campo não encontrado: ano_vigente
+preencherCampo @ cadastro-geral-pmo.js:1521
+preencherFormularioComJSON @ cadastro-geral-pmo.js:1472
+loadSavedData @ cadastro-geral-pmo.js:1096
+init @ cadastro-geral-pmo.js:45
+(anonymous) @ cadastro-geral-pmo.js:1697
+cadastro-geral-pmo.js:1485 ✅ Preenchimento concluído, atualizando campos condicionais...
+auto-save-navigation.js:42 ✅ Auto-save navigation configurado
+cadastro-geral-pmo.js:656 Tabelas dinâmicas inicializadas
+cadastro-geral-pmo.js:69 ✅ Cadastro Geral do PMO inicializado com sucesso!
+[NEW] Explain Console errors by using Copilot in Edge: click
+         
+         to explain an error. 
+        Learn more
+        Don't show again
+favicon.png:1   GET https://paspapi.github.io/formulario/assets/images/favicon.png 404 (Not Found)
+cadastro-geral-pmo.js:1494 ✅ Formulário completamente preenchido e atualizado!
+pmo-storage-manager.js:209 ✅ Formulário _scope_activities atualizado no PMO pmo_2025_44876030000130_unidade-principal
+scope-manager.js:83 ✅ Activities salvas no PMO pmo_2025_44876030000130_unidade-principal
+cadastro-geral-pmo.js:183 ✅ Atividades sincronizadas com scope manager
