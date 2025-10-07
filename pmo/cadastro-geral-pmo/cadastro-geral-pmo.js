@@ -1472,6 +1472,250 @@ const CadastroGeralPMO = {
             this.preencherCampo(form, 'ano_vigente', data.metadata.ano_vigente);
         }
 
+        // 8. Fornecedores/Responsáveis (Tabela Dinâmica)
+        if (dados.identificacao && dados.identificacao.fornecedores_responsaveis) {
+            console.log('📝 Preenchendo responsáveis:', dados.identificacao.fornecedores_responsaveis);
+            const responsaveis = dados.identificacao.fornecedores_responsaveis;
+
+            responsaveis.forEach((resp, index) => {
+                if (index > 0) {
+                    this.table.addRow('tabela-responsaveis');
+                }
+
+                setTimeout(() => {
+                    const rows = document.querySelectorAll('#tbody-responsaveis tr.dynamic-row');
+                    const row = rows[index];
+                    if (row) {
+                        const nomeInput = row.querySelector('input[name="responsavel_nome[]"]');
+                        const cpfInput = row.querySelector('input[name="responsavel_cpf_cnpj[]"]');
+                        const nascInput = row.querySelector('input[name="responsavel_nascimento[]"]');
+
+                        if (nomeInput) nomeInput.value = resp.nome_completo || '';
+                        if (cpfInput) cpfInput.value = resp.cpf || '';
+                        if (nascInput) nascInput.value = resp.data_nascimento || '';
+                    }
+                }, index * 50);
+            });
+        }
+
+        // 9. Manejo Orgânico (campos adicionais)
+        if (dados.manejo_organico) {
+            this.preencherCampo(form, 'historico_propriedade', dados.manejo_organico.historico_propriedade);
+            this.preencherCampo(form, 'topografia_utilizacao', dados.manejo_organico.topografia_e_utilizacao);
+            this.preencherCampo(form, 'status_manejo_organico', dados.manejo_organico.status_manejo_organico);
+            this.preencherCampo(form, 'relato_historico_recente', dados.manejo_organico.relato_historico_recente);
+
+            // Comprovação de Manejo (Tabela)
+            if (dados.manejo_organico.comprovacao_manejo) {
+                console.log('📝 Preenchendo comprovação de manejo');
+                dados.manejo_organico.comprovacao_manejo.forEach(comp => {
+                    const tipo = comp.tipo;
+                    const checkbox = form.querySelector(`input[name="comprovacao_manejo"][value="${tipo}"]`);
+                    if (checkbox) {
+                        checkbox.checked = comp.status === true;
+                    }
+                });
+            }
+
+            // Histórico de Aplicações (Tabela)
+            if (dados.manejo_organico.historico_ultimos_10_anos) {
+                console.log('📝 Preenchendo histórico de aplicações');
+                const historico = dados.manejo_organico.historico_ultimos_10_anos;
+
+                historico.forEach((item, index) => {
+                    if (index > 0) {
+                        this.table.addRow('tabela-historico-aplicacoes');
+                    }
+
+                    setTimeout(() => {
+                        const rows = document.querySelectorAll('#tbody-historico-aplicacoes tr.dynamic-row');
+                        const row = rows[index];
+                        if (row) {
+                            const culturaInput = row.querySelector('input[name="historico_cultura[]"]');
+                            const dataInput = row.querySelector('input[name="historico_data_aplicacao[]"]');
+                            const insumoInput = row.querySelector('input[name="historico_insumo[]"]');
+                            const organicoCheck = row.querySelector('input[name="historico_organico[]"]');
+                            const certificadoCheck = row.querySelector('input[name="historico_certificado[]"]');
+
+                            if (culturaInput) culturaInput.value = item.cultura_animal || '';
+                            if (dataInput) dataInput.value = item.data_ultima_aplicacao_nao_permitido || '';
+                            if (insumoInput) insumoInput.value = item.insumo_utilizado || '';
+                            if (organicoCheck) organicoCheck.checked = item.estavam_sob_manejo_organico === true;
+                            if (certificadoCheck) certificadoCheck.checked = item.eram_certificados === true;
+                        }
+                    }, index * 50);
+                });
+            }
+        }
+
+        // 10. Mão de Obra
+        if (dados.mao_de_obra) {
+            console.log('📝 Preenchendo mão de obra:', dados.mao_de_obra);
+            this.preencherCampo(form, 'mao_obra_familiar', dados.mao_de_obra.familiar);
+            this.preencherCampo(form, 'identifique_familiar', dados.mao_de_obra.identifique_familiar);
+            this.preencherCampo(form, 'empregados_quantos', dados.mao_de_obra.empregados_quantos);
+            this.preencherCampo(form, 'diaristas_quantos', dados.mao_de_obra.diaristas_quantos);
+            this.preencherCampo(form, 'parceiros_quantos', dados.mao_de_obra.parceiros_quantos);
+            this.preencherCampo(form, 'meeiro_rural_quantos', dados.mao_de_obra.meeiro_rural_quantos);
+        }
+
+        // 11. Croqui
+        if (dados.croqui) {
+            console.log('📝 Preenchendo croqui');
+            this.preencherCampo(form, 'local_insercao_croqui', dados.croqui.local_insercao_croqui);
+
+            if (dados.croqui.itens_obrigatorios_localizados) {
+                dados.croqui.itens_obrigatorios_localizados.forEach(item => {
+                    const checkbox = form.querySelector(`input[name="itens_croqui"][value="${item}"]`);
+                    if (checkbox) checkbox.checked = true;
+                });
+            }
+        }
+
+        // 12. Biodiversidade e Ambiente
+        if (dados.biodiversidade_e_ambiente) {
+            console.log('📝 Preenchendo biodiversidade e ambiente');
+            this.preencherCampo(form, 'tecnicas_prevencao_incendios', dados.biodiversidade_e_ambiente.tecnicas_prevencao_incendios);
+            this.preencherCampo(form, 'experiencia_recuperacao_solos', dados.biodiversidade_e_ambiente.experiencia_recuperacao_solos);
+            this.preencherCampo(form, 'destino_lixo_organico', dados.biodiversidade_e_ambiente.destino_lixo_organico);
+            this.preencherCampo(form, 'destino_lixo_nao_organico', dados.biodiversidade_e_ambiente.destino_lixo_nao_organico);
+            this.preencherCampo(form, 'destino_esgoto_domestico', dados.biodiversidade_e_ambiente.destino_esgoto_domestico);
+
+            // Preservação Ambiental (Tabela/Checkboxes)
+            if (dados.biodiversidade_e_ambiente.preservacao_ambiental) {
+                dados.biodiversidade_e_ambiente.preservacao_ambiental.forEach(area => {
+                    const areaKey = area.area;
+                    const possuiCheck = form.querySelector(`input[name="preservacao_${areaKey}_possui"]`);
+                    const preservadaCheck = form.querySelector(`input[name="preservacao_${areaKey}_preservada"]`);
+
+                    if (possuiCheck) possuiCheck.checked = area.possui === true;
+                    if (preservadaCheck) preservadaCheck.checked = area.preservada === true;
+                });
+            }
+        }
+
+        // 13. Manejo da Água
+        if (dados.manejo_da_agua) {
+            console.log('📝 Preenchendo manejo da água');
+            this.preencherCampo(form, 'periodicidade_analise_irrigacao', dados.manejo_da_agua.periodicidade_analise_irrigacao);
+
+            // Fontes de Água (Tabela)
+            if (dados.manejo_da_agua.fontes_agua_uso) {
+                const fontes = dados.manejo_da_agua.fontes_agua_uso;
+
+                fontes.forEach((fonte, index) => {
+                    if (index > 0) {
+                        this.table.addRow('tabela-fontes-agua');
+                    }
+
+                    setTimeout(() => {
+                        const rows = document.querySelectorAll('#tbody-fontes-agua tr.dynamic-row');
+                        const row = rows[index];
+                        if (row) {
+                            const usoInput = row.querySelector('input[name="fonte_uso[]"], select[name="fonte_uso[]"]');
+                            const origemInput = row.querySelector('input[name="fonte_origem[]"], select[name="fonte_origem[]"]');
+                            const riscoInput = row.querySelector('input[name="fonte_risco[]"], select[name="fonte_risco[]"]');
+                            const garantiaInput = row.querySelector('input[name="fonte_garantia[]"], textarea[name="fonte_garantia[]"]');
+
+                            if (usoInput) usoInput.value = fonte.uso || '';
+                            if (origemInput) origemInput.value = fonte.origem || '';
+                            if (riscoInput) riscoInput.value = fonte.risco_contaminacao || '';
+                            if (garantiaInput) garantiaInput.value = fonte.garantia_qualidade || '';
+                        }
+                    }, index * 50);
+                });
+            }
+        }
+
+        // 14. Regularização Ambiental
+        if (dados.regularizacao_ambiental) {
+            console.log('📝 Preenchendo regularização ambiental');
+            this.preencherCampo(form, 'possui_car', dados.regularizacao_ambiental.possui_car);
+            this.preencherCampo(form, 'explicacao_reserva_legal', dados.regularizacao_ambiental.explicacao_reserva_legal);
+        }
+
+        // 15. Comercialização
+        if (dados.comercializacao) {
+            console.log('📝 Preenchendo comercialização');
+            this.preencherCampo(form, 'processo_pos_colheita', dados.comercializacao.processo_pos_colheita);
+            this.preencherCampo(form, 'produtos_armazenados', dados.comercializacao.produtos_armazenados);
+            this.preencherCampo(form, 'explicacao_armazenamento', dados.comercializacao.explicacao_armazenamento);
+            this.preencherCampo(form, 'transporte_produtos', dados.comercializacao.transporte_produtos);
+            this.preencherCampo(form, 'rastreabilidade_produtos', dados.comercializacao.rastreabilidade_produtos);
+            this.preencherCampo(form, 'comercializa_nao_organicos', dados.comercializacao.comercializa_nao_organicos);
+
+            // Tipos de Comercialização (Checkboxes)
+            if (dados.comercializacao.tipos_comercializacao) {
+                dados.comercializacao.tipos_comercializacao.forEach(tipo => {
+                    const checkbox = form.querySelector(`input[name="tipo_comercializacao"][value="${tipo.tipo}"]`);
+                    if (checkbox) checkbox.checked = tipo.status === true;
+                });
+            }
+        }
+
+        // 16. Controles e Registros (Tabela)
+        if (dados.controles_e_registros) {
+            console.log('📝 Preenchendo controles e registros');
+            const controles = dados.controles_e_registros;
+
+            controles.forEach((ctrl, index) => {
+                if (index > 0) {
+                    this.table.addRow('tabela-controles-registros');
+                }
+
+                setTimeout(() => {
+                    const rows = document.querySelectorAll('#tbody-controles-registros tr.dynamic-row');
+                    const row = rows[index];
+                    if (row) {
+                        const atividadeInput = row.querySelector('input[name="controle_atividade[]"], select[name="controle_atividade[]"]');
+
+                        if (atividadeInput) atividadeInput.value = ctrl.atividade || '';
+
+                        // Marcar checkboxes de controles
+                        if (ctrl.controles && Array.isArray(ctrl.controles)) {
+                            ctrl.controles.forEach(controle => {
+                                const checkbox = row.querySelector(`input[value="${controle}"]`);
+                                if (checkbox) checkbox.checked = true;
+                            });
+                        }
+                    }
+                }, index * 50);
+            });
+        }
+
+        // 17. Produção de Subsistência
+        if (dados.producao_subsistencia_ornamental) {
+            console.log('📝 Preenchendo produção de subsistência');
+            this.preencherCampo(form, 'possui_producao_subsistencia', dados.producao_subsistencia_ornamental.possui_nao_organica);
+            this.preencherCampo(form, 'utiliza_insumos_subsistencia', dados.producao_subsistencia_ornamental.utiliza_insumos_nao_permitidos);
+            this.preencherCampo(form, 'risco_contaminacao_subsistencia', dados.producao_subsistencia_ornamental.risco_contaminacao);
+            this.preencherCampo(form, 'manejo_bloqueio_subsistencia', dados.producao_subsistencia_ornamental.manejo_bloqueio_riscos);
+        }
+
+        // 18. Produção Paralela
+        if (dados.producao_paralela) {
+            console.log('📝 Preenchendo produção paralela');
+            this.preencherCampo(form, 'possui_producao_paralela', dados.producao_paralela.possui_paralela);
+            this.preencherCampo(form, 'utiliza_insumos_paralela', dados.producao_paralela.utiliza_insumos_nao_permitidos);
+            this.preencherCampo(form, 'risco_contaminacao_paralela', dados.producao_paralela.risco_contaminacao);
+            this.preencherCampo(form, 'manejo_bloqueio_paralela', dados.producao_paralela.manejo_bloqueio_riscos);
+            this.preencherCampo(form, 'pretende_conversao_total', dados.producao_paralela.pretende_conversao_total);
+            this.preencherCampo(form, 'tempo_conversao', dados.producao_paralela.tempo_conversao);
+        }
+
+        // 19. Declarações de Conformidade
+        if (dados.declaracoes_conformidade) {
+            console.log('📝 Preenchendo declarações de conformidade');
+            const declaracoes = dados.declaracoes_conformidade;
+
+            Object.keys(declaracoes).forEach(key => {
+                const checkbox = form.querySelector(`input[name="${key}"]`);
+                if (checkbox && checkbox.type === 'checkbox') {
+                    checkbox.checked = declaracoes[key] === true || declaracoes[key] === 'true';
+                }
+            });
+        }
+
         // Processar escopos se existirem
         if (data.escopos && data.escopos.anexo_processamento) {
             const processoData = data.escopos.anexo_processamento.dados;
