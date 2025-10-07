@@ -7,8 +7,6 @@ const elements = {
   searchInput: document.getElementById("input-search"),
   btnNewReport: document.getElementById("btn-new-report"),
   btnSyncSchemas: document.getElementById("btn-sync-schemas"),
-  timeline: document.getElementById("timeline"),
-  reportHeader: document.getElementById("report-header"),
   reportTitle: document.getElementById("report-title"),
   reportMeta: document.getElementById("report-meta"),
   btnSaveDraft: document.getElementById("btn-save-draft"),
@@ -17,6 +15,10 @@ const elements = {
   btnDeleteReport: document.getElementById("btn-delete-report"),
   fileImport: document.getElementById("file-import"),
   formContainer: document.getElementById("form-container"),
+  btnSaveDraftInline: document.getElementById("btn-save-draft-inline"),
+  btnExportJsonInline: document.getElementById("btn-export-json-inline"),
+  topbarMenuToggle: document.getElementById("topbar-menu-toggle"),
+  topbarMenu: document.getElementById("topbar-menu"),
   modalRoot: document.getElementById("modal-root"),
   modalTitle: document.getElementById("modal-title"),
   modalBody: document.getElementById("modal-body"),
@@ -24,6 +26,8 @@ const elements = {
   modalClose: document.getElementById("modal-close"),
   toastContainer: document.getElementById("toast-container"),
 };
+
+const pageType = document.body.dataset.page ?? "dashboard";
 
 const state = {
   schemasManifest: null,
@@ -35,6 +39,7 @@ const state = {
 };
 
 const ui = createUi(elements);
+const menuController = createMenuController(elements.topbarMenuToggle, elements.topbarMenu);
 
 function createUi(elems) {
   const { modalRoot, modalTitle, modalBody, modalActions, modalClose, toastContainer } = elems;
@@ -255,6 +260,67 @@ function createUi(elems) {
   };
 }
 
+function createMenuController(toggle, panel) {
+  if (!toggle || !panel) {
+    return {
+      close() {},
+      open() {},
+    };
+  }
+
+  let isOpen = false;
+
+  const openMenu = () => {
+    if (isOpen) return;
+    panel.classList.remove("hidden");
+    toggle.setAttribute("aria-expanded", "true");
+    isOpen = true;
+  };
+
+  const closeMenu = () => {
+    if (!isOpen) return;
+    panel.classList.add("hidden");
+    toggle.setAttribute("aria-expanded", "false");
+    isOpen = false;
+  };
+
+  toggle.addEventListener("click", (event) => {
+    event.stopPropagation();
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!isOpen) return;
+    if (event.target === toggle) return;
+    if (!panel.contains(event.target)) {
+      closeMenu();
+    }
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeMenu();
+    }
+  });
+
+  panel.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
+    if (target.tagName === "BUTTON" || target.tagName === "LABEL") {
+      closeMenu();
+    }
+  });
+
+  return {
+    close: closeMenu,
+    open: openMenu,
+  };
+}
+
 // ------------------------------
 // Utilidades
 // ------------------------------
@@ -406,8 +472,10 @@ function updateReport(report, patch = {}) {
   Object.assign(report, patch);
   report.updatedAt = new Date().toISOString();
   saveReportsToStorage();
-  renderReportsList();
-  if (state.currentReportId === report.id) {
+  if (elements.upList) {
+    renderReportsList();
+  }
+  if (state.currentReportId === report.id && elements.reportTitle) {
     renderReportHeader(report);
   }
 }
@@ -417,12 +485,13 @@ function deleteReport(id) {
   saveReportsToStorage();
   if (state.currentReportId === id) {
     state.currentReportId = null;
-    elements.reportHeader.classList.add("hidden");
-    elements.formContainer.innerHTML = `
-      <div class="empty-state"><p>Selecione um relatório existente ou crie um novo.</p></div>
-    `;
+    if (elements.formContainer) {
+      elements.formContainer.innerHTML = '<div class="empty-state"><p>Selecione um relatorio existente ou crie um novo.</p></div>';
+    }
   }
-  renderReportsList();
+  if (elements.upList) {
+    renderReportsList();
+  }
 }
 
 // ------------------------------
@@ -430,6 +499,7 @@ function deleteReport(id) {
 // ------------------------------
 function populateTipoFiltro() {
   const select = elements.filterTipo;
+  if (!select) return;
   select.innerHTML = '<option value="">Tipo de visita</option>';
   const types = state.schemasManifest?.types ?? {};
   for (const [typeId, definition] of Object.entries(types)) {
@@ -441,9 +511,9 @@ function populateTipoFiltro() {
 }
 
 function matchesFilters(report, schema) {
-  const termo = elements.searchInput.value?.toLowerCase() ?? "";
-  const tipoFiltro = elements.filterTipo.value;
-  const conformidadeFiltro = elements.filterConformidade.value;
+  const termo = elements.searchInput?.value?.toLowerCase() ?? "";
+  const tipoFiltro = elements.filterTipo?.value ?? "";
+  const conformidadeFiltro = elements.filterConformidade?.value ?? "";
   if (tipoFiltro && report.tipoId !== tipoFiltro) return false;
   if (conformidadeFiltro && report.conformidade !== conformidadeFiltro) return false;
 
@@ -458,17 +528,23 @@ function matchesFilters(report, schema) {
 
 async function renderReportsList() {
   const list = elements.upList;
+  if (!list) return;
+
   list.innerHTML = "";
-  list.classList.toggle("empty-state", state.reports.length === 0);
+  list.classList.remove("empty-state");
 
   if (!state.reports.length) {
+    list.classList.add("empty-state");
     list.innerHTML = `
-      <p>Nenhum relatório cadastrado. Crie um novo para começar.</p>
-      <button id="btn-new-report-inline" class="primary" type="button">Novo relatório</button>
+      <p>Nenhum relatorio cadastrado. Crie um novo para comecar.</p>
+      <button id="btn-new-report-inline" class="primary" type="button">Novo relatorio</button>
     `;
     document.getElementById("btn-new-report-inline")?.addEventListener("click", onCreateReport);
     return;
   }
+
+  const cardTemplate = document.getElementById("template-card");
+  if (!cardTemplate) return;
 
   const types = state.schemasManifest?.types ?? {};
   let hasMatches = false;
@@ -478,11 +554,10 @@ async function renderReportsList() {
     if (!matchesFilters(report, schema)) continue;
     hasMatches = true;
 
-    const cardTemplate = document.getElementById("template-card");
     const card = cardTemplate.content.firstElementChild.cloneNode(true);
     card.dataset.id = report.id;
     card.querySelector(".card-title").textContent = getUnitName(report) || "Unidade sem nome";
-    card.querySelector(".card-meta").textContent = getVerificadores(report).join(", ") || "Verificador não informado";
+    card.querySelector(".card-meta").textContent = getVerificadores(report).join(", ") || "Verificador nao informado";
     card.querySelector(".card-updated").textContent = formatDate(report.updatedAt);
     card.querySelector(".card-type").textContent = types[report.tipoId]?.label ?? report.tipoId;
     card.querySelector(".card-conformidade").textContent = report.conformidade ?? "-";
@@ -490,24 +565,31 @@ async function renderReportsList() {
       report.pendencias?.filter((p) => p.status !== "resolvida")?.length ?? 0,
     );
     const completion = await calculateCompletion(report, schema);
-    card.querySelector(".card-progress").textContent = `${completion.toFixed(0)}%`;
+    card.querySelector(".card-progress").textContent = completion.toFixed(0) + "%";
 
-    card.querySelector(".card-edit").addEventListener("click", () => selectReport(report.id));
-    card.querySelector(".card-duplicate").addEventListener("click", async () => {
-      await duplicateReport(report.id);
-      ui.toast("Relatório duplicado.", { variant: "success" });
+    card.querySelector(".card-edit").addEventListener("click", () => {
+      window.location.href = "form.html?id=" + report.id;
     });
+
+    card.querySelector(".card-duplicate").addEventListener("click", async () => {
+      const clone = await duplicateReport(report.id);
+      if (clone && pageType === "dashboard") {
+        window.location.href = "form.html?id=" + clone.id;
+      }
+    });
+
     card.querySelector(".card-export").addEventListener("click", () => exportReportJson(report));
+
     card.querySelector(".card-delete").addEventListener("click", async () => {
-      const confirmed = await ui.confirm("Tem certeza que deseja excluir este relatório?", {
-        title: "Excluir relatório",
+      const confirmed = await ui.confirm("Tem certeza que deseja excluir este relatorio?", {
+        title: "Excluir relatorio",
         okLabel: "Excluir",
         cancelLabel: "Cancelar",
         variant: "danger",
       });
       if (confirmed) {
         deleteReport(report.id);
-        ui.toast("Relatório excluído.", { variant: "success" });
+        ui.toast("Relatorio excluido.", { variant: "success" });
       }
     });
 
@@ -515,9 +597,10 @@ async function renderReportsList() {
   }
 
   if (!hasMatches) {
+    list.classList.add("empty-state");
     list.innerHTML = `
-      <p>Nenhum relatório corresponde aos filtros atuais.</p>
-      <button id="btn-new-report-inline" class="primary" type="button">Novo relatório</button>
+      <p>Nenhum relatorio corresponde aos filtros atuais.</p>
+      <button id="btn-new-report-inline" class="primary" type="button">Novo relatorio</button>
     `;
     document.getElementById("btn-new-report-inline")?.addEventListener("click", onCreateReport);
   }
@@ -566,49 +649,21 @@ async function selectReport(id) {
   const schema = await loadTypeSchema(report.tipoId);
   ensureStructure(report.data, schema.dataTemplate);
   renderReportHeader(report);
-  renderTimeline(report);
   await renderForm(report, schema);
 }
-
 function renderReportHeader(report) {
+  if (!elements.reportTitle || !elements.reportMeta) return;
   const types = state.schemasManifest?.types ?? {};
   const label = types[report.tipoId]?.label ?? report.tipoId;
   const unidade = getUnitName(report) || "Sem identificação";
   elements.reportTitle.textContent = `${label} - ${unidade}`;
   const conformidade = report.conformidade ?? "pendente";
-  elements.reportMeta.textContent = `Atualizado em ${formatDate(report.updatedAt)} · Conformidade: ${conformidade}`;
-  elements.reportHeader.classList.remove("hidden");
-}
-
-function renderTimeline(report) {
-  const container = elements.timeline;
-  container.innerHTML = "";
-  const types = state.schemasManifest?.types ?? {};
-  const typeInfo = types[report.tipoId];
-  const entry = document.createElement("div");
-  entry.className = "timeline-entry";
-  entry.innerHTML = `
-    <h4>Rascunho atual</h4>
-    <time>${formatDate(report.updatedAt)}</time>
-    <p>${typeInfo?.label ?? report.tipoId}</p>
-  `;
-  container.append(entry);
-
-  const pmoForms = state.pmoManifest?.forms ?? {};
-  Object.entries(pmoForms).forEach(([key, form]) => {
-    const item = document.createElement("div");
-    item.className = "timeline-entry";
-    item.innerHTML = `
-      <h4>${form.label}</h4>
-      <time>Schema v${form.schemaVersion}</time>
-      <p>${form.schemaPath}</p>
-    `;
-    container.append(item);
-  });
+  elements.reportMeta.textContent = `Atualizado em ${formatDate(report.updatedAt)} - Conformidade: ${conformidade}`;
 }
 
 async function renderForm(report, schema) {
   const container = elements.formContainer;
+  if (!container) return;
   container.innerHTML = "";
 
   for (const moduleRef of schema.moduleGraph ?? []) {
@@ -818,14 +873,21 @@ async function onCreateReport() {
   const report = await createReport(typeId);
   state.reports.unshift(report);
   saveReportsToStorage();
-  await renderReportsList();
-  await selectReport(report.id);
-  ui.toast("Relatório criado.", { variant: "success" });
+  menuController.close();
+
+  if (pageType === "dashboard") {
+    await renderReportsList();
+    window.location.href = "form.html?id=" + report.id;
+  } else {
+    state.currentReportId = report.id;
+    await selectReport(report.id);
+    ui.toast("Relatorio criado.", { variant: "success" });
+  }
 }
 
 async function duplicateReport(id) {
   const report = findReport(id);
-  if (!report) return;
+  if (!report) return null;
   const clone = structuredCloneCompat(report);
   clone.id = uuid();
   clone.createdAt = new Date().toISOString();
@@ -833,8 +895,15 @@ async function duplicateReport(id) {
   clone.isDirty = true;
   state.reports.unshift(clone);
   saveReportsToStorage();
-  await renderReportsList();
-  await selectReport(clone.id);
+  if (elements.upList) {
+    await renderReportsList();
+  }
+  if (pageType === "report") {
+    state.currentReportId = clone.id;
+    await selectReport(clone.id);
+    ui.toast("Relatorio duplicado.", { variant: "success" });
+  }
+  return clone;
 }
 
 function exportReportJson(report) {
@@ -848,6 +917,7 @@ function exportReportJson(report) {
 }
 
 async function handleSaveDraft() {
+  menuController.close();
   const report = findReport(state.currentReportId);
   if (!report) return;
   report.isDirty = false;
@@ -856,39 +926,48 @@ async function handleSaveDraft() {
 }
 
 function handleExportCurrent() {
+  menuController.close();
   const report = findReport(state.currentReportId);
   if (!report) return;
   exportReportJson(report);
 }
 
 async function handleGeneratePdf() {
+  menuController.close();
   await ui.alert("Geração de PDF com JSON anexo ainda não implementada neste protótipo.", {
     title: "Em breve",
   });
 }
 
 async function handleDeleteCurrent() {
+  menuController.close();
   const report = findReport(state.currentReportId);
   if (!report) return;
-  const confirmed = await ui.confirm("Deseja realmente excluir este relatório?", {
-    title: "Excluir relatório",
+  const confirmed = await ui.confirm("Deseja realmente excluir este relatorio?", {
+    title: "Excluir relatorio",
     okLabel: "Excluir",
     cancelLabel: "Cancelar",
     variant: "danger",
   });
   if (confirmed) {
     deleteReport(report.id);
-    ui.toast("Relatório excluído.", { variant: "success" });
+    ui.toast("Relatorio excluido.", { variant: "success" });
+    if (pageType === "report") {
+      window.location.href = "index.html";
+    }
   }
 }
 
 async function handleReloadSchemas() {
+  menuController.close();
   try {
     await loadManifests();
     state.typeSchemas.clear();
     state.moduleCache.clear();
     ui.toast("Schemas recarregados com sucesso.", { variant: "success" });
-    renderReportsList();
+    if (elements.upList) {
+      await renderReportsList();
+    }
   } catch (error) {
     console.error(error);
     await ui.alert("Erro ao recarregar schemas.");
@@ -896,13 +975,14 @@ async function handleReloadSchemas() {
 }
 
 async function handleImportFile(event) {
+  menuController.close();
   const file = event.target.files?.[0];
   if (!file) return;
   try {
     const text = await file.text();
     const imported = JSON.parse(text);
     if (!imported?.data || !imported?.tipoId) {
-      await ui.alert("Arquivo inválido.", { title: "Importação" });
+      await ui.alert("Arquivo invalido.", { title: "Importacao" });
       return;
     }
     imported.id = uuid();
@@ -910,13 +990,20 @@ async function handleImportFile(event) {
     imported.updatedAt = new Date().toISOString();
     state.reports.unshift(imported);
     saveReportsToStorage();
-    await renderReportsList();
-    await selectReport(imported.id);
-    ui.toast("Relatório importado.", { variant: "success" });
+    if (elements.upList) {
+      await renderReportsList();
+    }
+    if (pageType === "dashboard") {
+      window.location.href = "form.html?id=" + imported.id;
+    } else {
+      state.currentReportId = imported.id;
+      await selectReport(imported.id);
+      ui.toast("Relatorio importado.", { variant: "success" });
+    }
   } catch (error) {
     console.error(error);
-    await ui.alert("Falha ao importar JSON. Certifique-se de selecionar um arquivo válido.", {
-      title: "Importação",
+    await ui.alert("Falha ao importar JSON. Certifique-se de selecionar um arquivo valido.", {
+      title: "Importacao",
     });
   } finally {
     event.target.value = "";
@@ -935,7 +1022,25 @@ async function init() {
     await ui.alert("Erro ao carregar manifestos. Verifique os arquivos em /schemas e /pmo.");
     return;
   }
-  renderReportsList();
+
+  if (pageType === "dashboard") {
+    await renderReportsList();
+  } else if (pageType === "report") {
+    const params = new URLSearchParams(window.location.search);
+    const reportId = params.get("id");
+    if (!reportId) {
+      await ui.alert("Relatorio nao encontrado. Retornando ao painel.");
+      window.location.href = "index.html";
+      return;
+    }
+    const report = findReport(reportId);
+    if (!report) {
+      await ui.alert("Relatorio nao encontrado. Retornando ao painel.");
+      window.location.href = "index.html";
+      return;
+    }
+    await selectReport(reportId);
+  }
 }
 
 // ------------------------------
@@ -951,5 +1056,32 @@ elements.btnExportJson?.addEventListener("click", handleExportCurrent);
 elements.btnGeneratePdf?.addEventListener("click", handleGeneratePdf);
 elements.btnDeleteReport?.addEventListener("click", handleDeleteCurrent);
 elements.fileImport?.addEventListener("change", handleImportFile);
+elements.btnSaveDraftInline?.addEventListener("click", handleSaveDraft);
+elements.btnExportJsonInline?.addEventListener("click", handleExportCurrent);
 
 init();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

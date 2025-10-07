@@ -1,11 +1,11 @@
-﻿# Relatﾃｳrios OPAC 窶・protﾃｳtipo estﾃ｡tico
+# Relatorios OPAC - prototipo estatico
 
-Interface estﾃ｡tica para gestﾃ｣o de relatﾃｳrios de visita OPAC baseada em schemas dinﾃ｢micos.
+Interface estatica para gestao de relatorios de visita OPAC baseada em schemas dinamicos.
 
-## Prﾃｩ-requisitos
+## Pre-requisitos
 
-- Navegador moderno (suporte a mﾃｳdulos ES, `fetch`, `structuredClone` ou JSON fallback).
-- Servir o diretﾃｳrio em um servidor HTTP estﾃ｡tico (recomendado: `npx serve`, `python -m http.server`, ou GitHub Pages). Abrir direto com `file://` pode bloquear requisiﾃｧﾃｵes `fetch`.
+- Navegador moderno (suporte a modulos ES, `fetch`, `structuredClone` ou JSON fallback).
+- Servir o diretorio em um servidor HTTP estatico (ex.: `npx serve`, `python -m http.server`, GitHub Pages). Abrir direto com `file://` pode bloquear requisicoes `fetch`.
 
 ## Como usar
 
@@ -16,55 +16,56 @@ Interface estﾃ｡tica para gestﾃ｣o de relatﾃｳrios de visita OPAC basea
    python -m http.server
    ```
 2. Abrir `http://localhost:3000` (ou porta equivalente) no navegador.
-3. Clique em **Novo relatório** e selecione o tipo desejado no modal.
-4. Preencha os campos gerados a partir do schema (os mﾃｳdulos sﾃ｣o renderizados dinamicamente).
-5. Use **Salvar rascunho** para persistir os dados no `localStorage`.
-6. Exportar/Importar JSON estﾃ｡ disponﾃｭvel para backup e reuso. (Importaﾃｧﾃ｣o de PDF ainda nﾃ｣o implementada.)
-7. Utilize os filtros ﾃ esquerda para buscar e filtrar relatﾃｳrios por tipo ou status de conformidade.
+3. O painel principal lista todos os relatorios como cards. Use busca e filtros compactos no topo.
+4. Clique em **Novo relatorio** e escolha o tipo no modal. Voce sera redirecionado para a pagina de formulario (`form.html?id=...`) para preencher os dados.
+5. No formulario use as acoes do topo (menu ou botoes inline) para salvar rascunho, exportar JSON, gerar PDF (quando implementado) ou excluir.
+6. Importar JSON esta disponivel no menu superior do painel. O relatorio importado abre direto no formulario para edicao.
 
 ## Estrutura
 
-- `index.html`, `assets/app.js`, `assets/style.css`: interface, renderizaﾃｧﾃ｣o e lﾃｳgica de carregamento dos schemas.
-- `schemas/manifest.json`: manifesto de relatﾃｳrios (mﾃｳdulos, templates, requiredFields).
-- `pmo/manifest.json`: manifesto dos PMOs (estrutura normalizada `{metadata, dados}`).
-- `docs/implementation-plan.md`: plano de implementaﾃｧﾃ｣o completo.
+- `index.html`: painel de cards (listagem e filtros).
+- `form.html`: pagina de edicao do relatorio.
+- `assets/app.js`: logica compartilhada (armazenamento, renderizacao, eventos).
+- `assets/style.css`: estilos globais, menu responsivo e preparo para impressao/PDF.
+- `schemas/manifest.json`: manifesto de relatorios (modulos, templates, requiredFields).
+- `pmo/manifest.json`: manifesto dos PMOs (estrutura `{metadata, dados}`).
+- `docs/implementation-plan.md`: plano de implementacao completo.
 
 ## Fluxos implementados
 
-- Carregamento dinﾃ｢mico dos manifestos (`schemas` e `pmo`).
-- Painel de cards com filtros, duplicaﾃｧﾃ｣o, exportaﾃｧﾃ｣o e exclusﾃ｣o.
-- Timeline com referﾃｪncias (pmo + rascunho atual).
-- Form builder genﾃｩrico baseado em `dataTemplate` e `moduleGraph` (suporte a objetos, listas, tipos primitivos).
-- Persistﾃｪncia local (`localStorage`) com indicadores de alteraﾃｧﾃ｣o.
+- Carregamento dinamico dos manifestos (`schemas` e `pmo`).
+- Painel de cards com filtros, duplicacao, exportacao e exclusao.
+- Form builder generico baseado em `dataTemplate` e `moduleGraph` (objetos, listas, tipos primitivos).
+- Persistencia local (`localStorage`) com indicadores de alteracao.
 
-## Limitaﾃｧﾃｵes atuais
+## Limitacoes atuais
 
-- Geraﾃｧﾃ｣o/anexaﾃｧﾃ｣o de PDF ainda nﾃ｣o implementada (botﾃ｣o apresenta alerta).
-- Importaﾃｧﾃ｣o de PDF e migraﾃｧﾃｵes automﾃ｡ticas dependerﾃ｣o de integraﾃｧﾃ｣o futura com `pdf-lib`/`pdf.js`.
-- Validaﾃｧﾃｵes avanﾃｧadas (`visibleWhen`, regras condicionais) nﾃ｣o foram incluﾃｭdas.
-- Highlight contextual com PMO/relatﾃｳrio anterior ainda estﾃ｡ em planejamento.
+- Geracao/anexacao de PDF ainda nao implementada (acao mostra alerta).
+- Importacao de PDF e migracoes automaticas dependerao de integracao futura com `pdf-lib`/`pdf.js`.
+- Validacoes avancadas (`visibleWhen`, regras condicionais) nao foram incluidas.
+- Destacando contextual com PMO/relatorio anterior ainda esta em planejamento.
 
-## Prﾃｳximos passos sugeridos
+## Proximos passos sugeridos
 
-1. Integrar `html2pdf.js` + `pdf-lib` para produﾃｧﾃ｣o de PDF com anexo `relatorio.json`.
-2. Implementar importaﾃｧﾃ｣o de PDF e execuﾃｧﾃ｣o das migraﾃｧﾃｵes registradas.
-3. Adicionar validaﾃｧﾃｵes (`requiredFields`, enums, condicionais) e highlight contextual usando mapeamentos de referﾃｪncia.
-4. Expandir timeline para comparar PMO à última visita e apresentar pendências herdadas.
-5. Automatizar testes (unitários e e2e) e definir workflow de deploy (GitHub Actions e GitHub Pages).
+1. Integrar `html2pdf.js` + `pdf-lib` para producao de PDF com anexo `relatorio.json`.
+2. Implementar importacao de PDF e execucao das migracoes registradas.
+3. Adicionar validacoes (`requiredFields`, enums, condicionais) e highlight contextual usando mapeamentos de referencia.
+4. Expandir painel para comparar PMO a ultima visita e apresentar pendencias herdadas.
+5. Automatizar testes (unitarios e e2e) e definir workflow de deploy (GitHub Actions e GitHub Pages).
 
 ## Backlog de UX (futuro)
 
-### Formulários
-- Validar se o grid em duas colunas atende módulos com muitos campos curtos; considerar terceira coluna acima de 1440px.
-- Adicionar legendas ou dicas contextuais para campos críticos a partir do feedback dos verificadores.
-- Mapear campos obrigatórios para destacar pendências e facilitar navegação longa.
+### Formularios
+- Validar se o grid em duas colunas atende modulos com muitos campos curtos; considerar terceira coluna acima de 1440px.
+- Adicionar legendas ou dicas contextuais para campos criticos a partir do feedback dos verificadores.
+- Mapear campos obrigatorios para destacar pendencias e facilitar navegacao longa.
 
 ### Modais e toasts
-- Implementar atalhos explícitos (Enter/Escape) e ciclo de foco para acessibilidade total.
-- Suportar modais encadeados (ex.: duplicar relatório e confirmar pendências).
-- Adicionar variante de toast persistente para erros bloqueantes ou ações demoradas.
+- Implementar atalhos explicitos (Enter/Escape) e ciclo de foco para acessibilidade total.
+- Suportar modais encadeados (ex.: duplicar relatorio e confirmar pendencias).
+- Adicionar variante de toast persistente para erros bloqueantes ou acoes demoradas.
 
 ### Layout para PDF
-- Gerar relatório de teste com dados reais e ajustar margens/quebras página a página.
-- Incluir cabeçalho/rodapé com metadados (unidade, verificador, data) quando em impressão.
-- Avaliar fonte alternativa para campos extensos (ex.: monoespaçada para códigos/IDs).
+- Gerar relatorio de teste com dados reais e ajustar margens/quebras pagina a pagina.
+- Incluir cabecalho/rodape com metadados (unidade, verificador, data) quando em impressao.
+- Avaliar fonte alternativa para campos extensos (ex.: monoespacada para codigos/IDs).

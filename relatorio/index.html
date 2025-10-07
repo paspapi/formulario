@@ -3,73 +3,57 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Relatórios OPAC</title>
+    <title>Painel | Relatórios OPAC</title>
     <link rel="stylesheet" href="assets/style.css" />
   </head>
-  <body>
+  <body data-page="dashboard">
     <header class="topbar">
-      <div>
-        <h1>Relatórios OPAC</h1>
-        <p class="subtitle">Painel de visitas e formulários dirigidos por schema</p>
+      <div class="brand">
+        <a class="brand-link" href="index.html">Relatórios OPAC</a>
+        <p class="subtitle">Painel de visitas por schema</p>
       </div>
       <div class="topbar-actions">
-        <button id="btn-sync-schemas" type="button">Recarregar Schemas</button>
-        <label class="file-button">
-          Importar Relatório (PDF/JSON)
-          <input id="file-import" type="file" accept=".json,application/json,application/pdf" />
-        </label>
+        <button id="btn-new-report" class="primary" type="button">Novo relatório</button>
+        <button
+          id="topbar-menu-toggle"
+          class="icon-button"
+          type="button"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="topbar-menu"
+        >
+          <span class="icon">☰</span>
+          <span class="sr-only">Abrir menu</span>
+        </button>
+        <div id="topbar-menu" class="menu-panel hidden">
+          <button id="btn-sync-schemas" type="button">Recarregar schemas</button>
+          <label class="file-button">
+            Importar relatório
+            <input id="file-import" type="file" accept=".json,application/json,application/pdf" />
+          </label>
+        </div>
       </div>
     </header>
 
-    <main class="layout">
-      <aside class="sidebar">
-        <section>
-          <h2>Unidades de Produção</h2>
-          <div id="filters" class="filters">
-            <input id="input-search" type="search" placeholder="Buscar por unidade ou verificador" />
-            <select id="filter-tipo">
-              <option value="">Tipo de visita</option>
-            </select>
-            <select id="filter-conformidade">
-              <option value="">Conformidade</option>
-              <option value="conforme">Conforme</option>
-              <option value="nc_menor">NC menor</option>
-              <option value="nc_maior">NC maior</option>
-              <option value="pendente">Pendente</option>
-              <option value="reprovado">Reprovado</option>
-            </select>
-          </div>
-          <div id="up-list" class="card-list empty-state">
-            <p>Nenhum relatório cadastrado. Crie um novo para começar.</p>
-            <button id="btn-new-report" class="primary" type="button">Novo relatório</button>
-          </div>
-        </section>
+    <main class="page">
+      <section class="filters">
+        <input id="input-search" type="search" placeholder="Buscar por unidade ou verificador" />
+        <select id="filter-tipo">
+          <option value="">Tipo de visita</option>
+        </select>
+        <select id="filter-conformidade">
+          <option value="">Conformidade</option>
+          <option value="conforme">Conforme</option>
+          <option value="nc_menor">NC menor</option>
+          <option value="nc_maior">NC maior</option>
+          <option value="pendente">Pendente</option>
+          <option value="reprovado">Reprovado</option>
+        </select>
+      </section>
 
-        <section>
-          <h2>Timeline de Referências</h2>
-          <div id="timeline" class="timeline"></div>
-        </section>
-      </aside>
-
-      <section class="content">
-        <div id="report-header" class="report-header hidden">
-          <div>
-            <h2 id="report-title">Selecione um relatório</h2>
-            <p id="report-meta"></p>
-          </div>
-          <div class="report-actions">
-            <button id="btn-save-draft" type="button">Salvar rascunho</button>
-            <button id="btn-export-json" type="button">Exportar JSON</button>
-            <button id="btn-generate-pdf" class="primary" type="button">Gerar PDF</button>
-            <button id="btn-delete-report" class="danger" type="button">Excluir</button>
-          </div>
-        </div>
-
-        <div id="form-container" class="form-container">
-          <div class="empty-state">
-            <p>Selecione um relatório existente ou crie um novo.</p>
-          </div>
-        </div>
+      <section id="up-list" class="card-grid empty-state">
+        <p>Nenhum relatório cadastrado. Crie um novo para começar.</p>
+        <button id="btn-new-report-inline" class="primary" type="button">Novo relatório</button>
       </section>
     </main>
 
@@ -80,7 +64,9 @@
             <h3 class="card-title"></h3>
             <p class="card-meta"></p>
           </div>
-          <button class="card-delete" type="button" title="Excluir relatório" aria-label="Excluir relatório">&times;</button>
+          <button class="card-delete icon-button" type="button" title="Excluir relatório" aria-label="Excluir relatório">
+            &times;
+          </button>
         </div>
         <div class="card-body">
           <dl>
