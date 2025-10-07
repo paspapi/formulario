@@ -1575,41 +1575,57 @@ const CadastroGeralPMO = {
             console.log('📝 Preenchendo responsáveis:', dados.identificacao.fornecedores_responsaveis);
             const responsaveis = dados.identificacao.fornecedores_responsaveis;
 
-            responsaveis.forEach((resp, index) => {
-                if (index > 0) {
-                    this.table.addRow('tabela-responsaveis');
-                }
+            // CORREÇÃO: Garantir que há pelo menos uma linha na tabela
+            const existingRows = document.querySelectorAll('#tbody-responsaveis tr.dynamic-row');
+            if (existingRows.length === 0) {
+                console.log('⚠️ Nenhuma linha existente, criando primeira linha...');
+                this.table.addRow('tabela-responsaveis');
+            }
 
-                setTimeout(() => {
+            // Adicionar linhas extras se necessário (já temos 1, precisamos de mais responsaveis.length - 1)
+            for (let i = 1; i < responsaveis.length; i++) {
+                this.table.addRow('tabela-responsaveis');
+                console.log(`➕ Linha ${i + 1} adicionada`);
+            }
+
+            // Preencher todas as linhas (aguardar um pouco para garantir que foram criadas)
+            setTimeout(() => {
+                responsaveis.forEach((resp, index) => {
                     const rows = document.querySelectorAll('#tbody-responsaveis tr.dynamic-row');
                     const row = rows[index];
-                    if (row) {
-                        const nomeInput = row.querySelector('input[name="responsavel_nome[]"]');
-                        const cpfInput = row.querySelector('input[name="responsavel_cpf_cnpj[]"]');
-                        const nascInput = row.querySelector('input[name="responsavel_nascimento[]"]');
-                        const telefoneInput = row.querySelector('input[name="responsavel_telefone[]"]');
-                        const emailInput = row.querySelector('input[name="responsavel_email[]"]');
 
-                        if (nomeInput && resp.nome_completo) nomeInput.value = resp.nome_completo;
-                        if (cpfInput && resp.cpf) cpfInput.value = resp.cpf;
-                        if (nascInput && resp.data_nascimento) nascInput.value = resp.data_nascimento;
-
-                        // IMPORTANTE: Preencher telefone/email da primeira linha com dados de contato
-                        if (index === 0 && dados.contato) {
-                            if (telefoneInput && dados.contato.telefone) {
-                                telefoneInput.value = dados.contato.telefone;
-                            }
-                            if (emailInput && dados.contato.email) {
-                                emailInput.value = dados.contato.email;
-                            }
-                        } else {
-                            // Outras linhas: preencher com dados do responsável se houver
-                            if (telefoneInput && resp.telefone) telefoneInput.value = resp.telefone;
-                            if (emailInput && resp.email) emailInput.value = resp.email;
-                        }
+                    if (!row) {
+                        console.error(`❌ Linha ${index + 1} não encontrada para responsável:`, resp);
+                        return;
                     }
-                }, index * 50);
-            });
+
+                    const nomeInput = row.querySelector('input[name="responsavel_nome[]"]');
+                    const cpfInput = row.querySelector('input[name="responsavel_cpf_cnpj[]"]');
+                    const nascInput = row.querySelector('input[name="responsavel_nascimento[]"]');
+                    const telefoneInput = row.querySelector('input[name="responsavel_telefone[]"]');
+                    const emailInput = row.querySelector('input[name="responsavel_email[]"]');
+
+                    if (nomeInput && resp.nome_completo) nomeInput.value = resp.nome_completo;
+                    if (cpfInput && resp.cpf) cpfInput.value = resp.cpf;
+                    if (nascInput && resp.data_nascimento) nascInput.value = resp.data_nascimento;
+
+                    // IMPORTANTE: Preencher telefone/email da primeira linha com dados de contato
+                    if (index === 0 && dados.contato) {
+                        if (telefoneInput && dados.contato.telefone) {
+                            telefoneInput.value = dados.contato.telefone;
+                        }
+                        if (emailInput && dados.contato.email) {
+                            emailInput.value = dados.contato.email;
+                        }
+                    } else {
+                        // Outras linhas: preencher com dados do responsável se houver
+                        if (telefoneInput && resp.telefone) telefoneInput.value = resp.telefone;
+                        if (emailInput && resp.email) emailInput.value = resp.email;
+                    }
+
+                    console.log(`✅ Responsável ${index + 1} preenchido:`, resp.nome_completo);
+                });
+            }, 200); // Aguardar 200ms para garantir que todas as linhas foram criadas
         } else {
             console.log('ℹ️ Nenhum responsável para preencher');
         }
