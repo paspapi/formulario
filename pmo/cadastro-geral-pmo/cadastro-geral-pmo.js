@@ -1421,22 +1421,58 @@ const CadastroGeralPMO = {
         // PRIORIDADE 1: Processar "activities" (formato correto para o formulário)
         if (dados.activities) {
             console.log('📝 Preenchendo activities (formato v2.0):', dados.activities);
+
+            // Mapeamento de activities do JSON para checkboxes do HTML
+            const activityMapping = {
+                // escopo_vegetal → marcar todos os checkboxes de produção vegetal
+                'escopo_vegetal': ['escopo_hortalicas', 'escopo_frutas', 'escopo_cogumelos', 'escopo_medicinais'],
+                // escopo_animal → marcar checkbox de pecuária
+                'escopo_animal': ['escopo_pecuaria'],
+                // escopo_processamento_minimo → escopo_proc_minimo
+                'escopo_processamento_minimo': ['escopo_proc_minimo'],
+                // Outros já têm o mesmo nome
+                'escopo_apicultura': ['escopo_apicultura'],
+                'escopo_processamento': ['escopo_processamento'],
+                'escopo_cogumelo': ['escopo_cogumelos'] // Alias
+            };
+
             Object.keys(dados.activities).forEach(activityKey => {
                 const valor = dados.activities[activityKey];
-                const checkbox = form.querySelector(`input[name="${activityKey}"]`);
 
-                if (checkbox) {
-                    // Marcar checkbox
-                    checkbox.checked = valor === true || valor === 'sim';
+                // Verificar se precisa de mapeamento
+                if (activityMapping[activityKey]) {
+                    const targetCheckboxes = activityMapping[activityKey];
 
-                    // IMPORTANTE: Disparar evento change para atualizar scope manager
-                    if (checkbox.checked) {
-                        checkbox.dispatchEvent(new Event('change', { bubbles: true }));
-                    }
+                    targetCheckboxes.forEach(targetName => {
+                        const checkbox = form.querySelector(`input[name="${targetName}"]`);
 
-                    console.log(`✅ Activity marcada: ${activityKey} = ${checkbox.checked}`);
+                        if (checkbox) {
+                            checkbox.checked = valor === true || valor === 'sim';
+
+                            if (checkbox.checked) {
+                                checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+                            }
+
+                            console.log(`✅ Activity mapeada: ${activityKey} → ${targetName} = ${checkbox.checked}`);
+                        } else {
+                            console.warn(`⚠️ Checkbox mapeado não encontrado: ${targetName}`);
+                        }
+                    });
                 } else {
-                    console.warn(`⚠️ Checkbox de activity não encontrado: ${activityKey}`);
+                    // Tentar usar o nome direto
+                    const checkbox = form.querySelector(`input[name="${activityKey}"]`);
+
+                    if (checkbox) {
+                        checkbox.checked = valor === true || valor === 'sim';
+
+                        if (checkbox.checked) {
+                            checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+                        }
+
+                        console.log(`✅ Activity marcada: ${activityKey} = ${checkbox.checked}`);
+                    } else {
+                        console.warn(`⚠️ Checkbox de activity não encontrado: ${activityKey}`);
+                    }
                 }
             });
         }
@@ -1469,7 +1505,7 @@ const CadastroGeralPMO = {
         // 7. Metadata (grupo SPG, etc)
         if (data.metadata) {
             this.preencherCampo(form, 'grupo_spg', data.metadata.grupo_spg);
-            this.preencherCampo(form, 'ano_vigente', data.metadata.ano_vigente);
+            // Nota: ano_vigente está no metadata do PMO, não no formulário
         }
 
         // 8. Fornecedores/Responsáveis (Tabela Dinâmica)
@@ -1489,10 +1525,22 @@ const CadastroGeralPMO = {
                         const nomeInput = row.querySelector('input[name="responsavel_nome[]"]');
                         const cpfInput = row.querySelector('input[name="responsavel_cpf_cnpj[]"]');
                         const nascInput = row.querySelector('input[name="responsavel_nascimento[]"]');
+                        const telefoneInput = row.querySelector('input[name="responsavel_telefone[]"]');
+                        const emailInput = row.querySelector('input[name="responsavel_email[]"]');
 
                         if (nomeInput) nomeInput.value = resp.nome_completo || '';
                         if (cpfInput) cpfInput.value = resp.cpf || '';
                         if (nascInput) nascInput.value = resp.data_nascimento || '';
+
+                        // IMPORTANTE: Preencher telefone/email da primeira linha com dados de contato
+                        if (index === 0 && dados.contato) {
+                            if (telefoneInput && dados.contato.telefone) {
+                                telefoneInput.value = dados.contato.telefone;
+                            }
+                            if (emailInput && dados.contato.email) {
+                                emailInput.value = dados.contato.email;
+                            }
+                        }
                     }
                 }, index * 50);
             });
