@@ -1785,36 +1785,96 @@ const CadastroGeralPMO = {
             }
         }
 
-        // 13. Manejo da Água
+        // 13. Recursos Hídricos (Manejo da Água)
         if (dados.manejo_da_agua) {
-            console.log('📝 Preenchendo manejo da água');
+            console.log('📝 Preenchendo recursos hídricos:', dados.manejo_da_agua);
             this.preencherCampo(form, 'periodicidade_analise_irrigacao', dados.manejo_da_agua.periodicidade_analise_irrigacao);
 
-            // Fontes de Água (Tabela)
-            if (dados.manejo_da_agua.fontes_agua_uso) {
+            // Fontes de Água (Tabela Dinâmica)
+            if (dados.manejo_da_agua.fontes_agua_uso && Array.isArray(dados.manejo_da_agua.fontes_agua_uso)) {
+                console.log('📝 Preenchendo fontes de água:', dados.manejo_da_agua.fontes_agua_uso);
                 const fontes = dados.manejo_da_agua.fontes_agua_uso;
 
-                fontes.forEach((fonte, index) => {
-                    if (index > 0) {
-                        this.table.addRow('tabela-fontes-agua');
-                    }
+                // CORREÇÃO: Garantir que há pelo menos uma linha na tabela
+                const existingRows = document.querySelectorAll('#tbody-recursos-hidricos tr.dynamic-row');
+                if (existingRows.length === 0) {
+                    console.log('⚠️ Nenhuma linha existente na tabela de recursos hídricos, criando primeira linha...');
+                    this.table.addRow('tabela-recursos-hidricos');
+                }
 
-                    setTimeout(() => {
-                        const rows = document.querySelectorAll('#tbody-fontes-agua tr.dynamic-row');
+                // Adicionar linhas extras se necessário
+                for (let i = 1; i < fontes.length; i++) {
+                    this.table.addRow('tabela-recursos-hidricos');
+                    console.log(`➕ Linha ${i + 1} adicionada na tabela de recursos hídricos`);
+                }
+
+                // Preencher todas as linhas (aguardar para garantir que foram criadas)
+                setTimeout(() => {
+                    fontes.forEach((fonte, index) => {
+                        const rows = document.querySelectorAll('#tbody-recursos-hidricos tr.dynamic-row');
                         const row = rows[index];
-                        if (row) {
-                            const usoInput = row.querySelector('input[name="fonte_uso[]"], select[name="fonte_uso[]"]');
-                            const origemInput = row.querySelector('input[name="fonte_origem[]"], select[name="fonte_origem[]"]');
-                            const riscoInput = row.querySelector('input[name="fonte_risco[]"], select[name="fonte_risco[]"]');
-                            const garantiaInput = row.querySelector('input[name="fonte_garantia[]"], textarea[name="fonte_garantia[]"]');
 
-                            if (usoInput) usoInput.value = fonte.uso || '';
-                            if (origemInput) origemInput.value = fonte.origem || '';
-                            if (riscoInput) riscoInput.value = fonte.risco_contaminacao || '';
-                            if (garantiaInput) garantiaInput.value = fonte.garantia_qualidade || '';
+                        if (!row) {
+                            console.error(`❌ Linha ${index + 1} não encontrada na tabela de recursos hídricos`);
+                            return;
                         }
-                    }, index * 50);
-                });
+
+                        // Campos da tabela: agua_uso[], agua_origem[], agua_risco[], agua_nivel_risco[], agua_garantia[]
+                        const usoSelect = row.querySelector('select[name="agua_uso[]"]');
+                        const origemSelect = row.querySelector('select[name="agua_origem[]"]');
+                        const riscoInput = row.querySelector('input[name="agua_risco[]"]');
+                        const nivelRiscoSelect = row.querySelector('select[name="agua_nivel_risco[]"]');
+                        const garantiaInput = row.querySelector('input[name="agua_garantia[]"]');
+
+                        // Preencher uso (normalizar para lowercase e remover espaços)
+                        if (usoSelect && fonte.uso) {
+                            const usoNormalizado = fonte.uso.toLowerCase()
+                                .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // remover acentos
+                                .replace(/\s+/g, '_');
+
+                            // Tentar valor exato ou normalizado
+                            usoSelect.value = fonte.uso;
+                            if (!usoSelect.value) {
+                                // Mapear valores comuns do JSON para options do select
+                                const usoMapping = {
+                                    'consumo_domestico': 'higienizacao',
+                                    'lavagem_alimentos': 'higienizacao',
+                                    'lavagem_de_alimentos': 'higienizacao',
+                                    'irrigacao_fonte_1': 'irrigacao',
+                                    'irrigacao_fonte_2': 'irrigacao'
+                                };
+                                usoSelect.value = usoMapping[usoNormalizado] || '';
+                            }
+                        }
+
+                        // Preencher origem (normalizar)
+                        if (origemSelect && fonte.origem) {
+                            const origemNormalizada = fonte.origem.toLowerCase()
+                                .normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                            origemSelect.value = origemNormalizada;
+                        }
+
+                        // Preencher risco de contaminação (campo texto)
+                        if (riscoInput && fonte.risco_contaminacao) {
+                            riscoInput.value = fonte.risco_contaminacao;
+                        }
+
+                        // Preencher nível de risco (select - baixo/médio/alto/nenhum)
+                        if (nivelRiscoSelect && fonte.risco_contaminacao) {
+                            const nivelNormalizado = fonte.risco_contaminacao.toLowerCase();
+                            if (['baixo', 'medio', 'médio', 'alto', 'nenhum'].includes(nivelNormalizado)) {
+                                nivelRiscoSelect.value = nivelNormalizado.replace('é', 'e'); // médio → medio
+                            }
+                        }
+
+                        // Preencher garantia de qualidade
+                        if (garantiaInput && fonte.garantia_qualidade) {
+                            garantiaInput.value = fonte.garantia_qualidade;
+                        }
+
+                        console.log(`✅ Fonte de água ${index + 1} preenchida: ${fonte.uso} - ${fonte.origem}`);
+                    });
+                }, 200); // Aguardar 200ms
             }
         }
 
