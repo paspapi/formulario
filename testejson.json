@@ -4,7 +4,6 @@
     "tipo_formulario": "pmo_completo",
     "data_criacao": "2024-10-22T00:00:00Z",
     "id_produtor": "44.876.030/0001-30",
-    "grupo_spg": "Bela Vista",
     "nome_produtor": "MARCELO GONÇALVES DA SILVA / RAQUEL MATOS XAVIER",
     "nome_unidade": "SITIO RECANTO DA PAZ",
     "ano_vigente": 2025,
@@ -31,7 +30,7 @@
         "caf_numero": "",
         "grupo_spg": "Bela Vista",
         "data_preenchimento_pmo": "2024-10-22",
-        "nome_fantasia": "N/A",
+        "nome_fantasia": "",
         "nome_unidade_producao": "SITIO RECANTO DA PAZ"
       },
       "contato": {
@@ -39,6 +38,7 @@
         "email": "Bixodoparana69@gmail.com",
         "endereco": {
           "logradouro": "",
+          "numero": "",
           "bairro": "SERTAOZINHO",
           "municipio": "AMPARO",
           "uf": "SP",
@@ -51,7 +51,7 @@
         "roteiro_acesso": ""
       },
       "propriedade": {
-        "posse_terra": "PRÓPRIA",
+        "posse_terra": "PROPRIETÁRIO",
         "area_total_propriedade_ha": 6.64,
         "area_total_organica_ha": 2.5,
         "relacao_unidade_producao": "A propriedade foi adquirida em 2021 sendo já destinada a agricultura orgânica desde 2016 por outra certificadora, os atuais proprietários foram acolhidos e acompanhados no período de transição pelo grupo Bela Vista",
@@ -59,9 +59,9 @@
         "terra_familiar": true
       },
       "manejo_organico": {
-        "historico_propriedade": "ADQUIRIDA EM MARÇO DE 2021, JÁ ERA ORGANICA DESDE 2016",
+        "historico_propriedade": "ADQUIRIDA EM MARÇO DE 2021, JÁ ERA ORGANICA DESDE 2016 OS ANTIGOS PROPRIETARIOS PERMANEÇERAM 1 ANO NOS ENSINANDO O MANEJO",
         "topografia_e_utilizacao": "área íngreme com angulação de até 45 graus em seu ponto mais extremo foram plantadas árvores noz pecan , limão e abacate para assegurar o terreno e conter a erosão , nas partes planas ( terraplanagem) foram implantadas as estufas e demais benfeitorias",
-        "status_manejo_organico": "SIM, POIS ESTOU EM PROCESSO DE AVALIAÇÃO DA CONFORMIDADE ORGÂNICA",
+        "status_manejo_organico": "SIM, POIS ESTOU EM PROCESSO DE AVALIAÇÃO DA CONFORMIDADE ORGÂNICA SEM INTERRUPÇÕES. MEU CERTIFICADO SE MANTEVE ATIVO",
         "anos_manejo_organico": 3,
         "comprovacao_manejo": [
           {
@@ -85,7 +85,7 @@
             "eram_certificados": true
           }
         ],
-        "relato_historico_recente": "Compramos o sitio em 2021, implantamos 2 estufas"
+        "relato_historico_recente": "Compramos o sitio em 2021, implantamos 2 estufas nas quais produzimos tomate italiano , grape, uva ,pitaia banana e abacate Buscamos sempre modernizar a produção, mantendo o respeito e cuidado com a natureza possuindo uma área de mata preservada onde foram implantadas arvores nativas e nobres como pau brasil e diversos tipos de ipê , jatobá etc., não retiramos nada da mata temos grande afluência de fauna silvestre . recentemente implantamos uma nova estufa bastante tecnológica e plantamos 100 mudas de noz pecan em um talhão íngreme da propriedade com objetivo de evitar a erosão do solo e fixação de nutrientes Implantamos também 50 mudas de banana da terra para atender a demanda dos nossos clientes e diversificar a produção e uma parte destinada a barreira vegetal ,a propriedade conta com wi-fi em sua totalidade e geração de energia solar , a agua da chuva na estufa 3 é canalizada para o tanque evitando assim consumir agua do poço e desperdício"
       },
       "activities": {
         "escopo_vegetal": true,
@@ -104,8 +104,23 @@
         "meeiro_rural_quantos": 0
       },
       "croqui": {
-        "local_insercao_croqui": "No galpão parte externa1 trator e demais implementos, freezer e câmera fria/geladeira, caixas de transporte bancada de seleção, bancada de trabalho , local para guarda de combustível e óleo de uso diário Parte interna galpão 1: ferramentas e almoxarifado com lugar específico para cada item Galpão 2 , picadeira e armazenamento de produtos para bokashi",
-        "itens_obrigatorios_localizados": []
+        "local_insercao_croqui": "No galpão parte externa1 trator e demais implementos, freezer e câmera fria/geladeira, caixas de transporte bancada de seleção, bancada de trabalho , local para guarda de combustível e óleo de uso diário Parte interna galpão 1: ferramentas e almoxarifado com lugar específico para cada item Galpão 2 , picadeira e armazenamento de produtos para bokashi VIZINHO: 2 EM TOTAL um não produz nada tem uma área de pasto onde mantem alguns cavalos O outro vizinho uma parte é pasto e uma estufa, onde plantam esporadicamente por estar longe da sede e na subida seu cultivo é convencional porem são aconselhados por um vizinho com muita experiencia no orgânico o qual recebe assistência do mesmo agrônomo que eu, acredito que isso reduza em muito a possibilidade de contaminação além da distância e barreira vegetal que consiste em bananeiras e dombeya que já tenho mas estou aumentando,",
+        "itens_obrigatorios_localizados": [
+          "ENTRADA DA PROPRIEDADE",
+          "CASA / RESIDÊNCIA",
+          "ARMAZÉM E GALPÕES",
+          "BARRACÃO / LOCAL PARA GUARDA DE INSUMOS",
+          "RIOS E OUTROS CURSOS D´ÁGUA",
+          "TALHÕES / ÁREA DE PLANTIO",
+          "BARREIRAS VEGETAIS",
+          "CULTURAS PERENES",
+          "LOCAIS DE PROCESSAMENTO",
+          "COMPOSTEIRA",
+          "ESTRADAS",
+          "ÁREAS DE MATAS",
+          "INSTALAÇÕES DE ANIMAIS (SE HOUVER)",
+          "APONTAR CONFRONTANTES E ATIVIDADE DOS VIZINHOS CONFRONTANTES"
+        ]
       },
       "biodiversidade_e_ambiente": {
         "preservacao_ambiental": [
@@ -132,35 +147,38 @@
         ],
         "tecnicas_prevencao_incendios": "BARREIRAS vegetais dombeya e banana, controle do mato seco, extintores de incêndio, gastank com 200 m de mangueira para combate (recém adquirido)",
         "experiencia_recuperacao_solos": "n/a",
-        "destino_lixo_organico": "COMPOSTAGEM",
-        "destino_lixo_nao_organico": "ARMAZENAMENTO EM SACOS APROPRIADOS E POSTERIOR DESCARTE EM CONTENDEDORES DO SERVIÇO PÚBLICO DE COLETA",
-        "destino_esgoto_domestico": "FOSSA SÉPTICA, BIODIGESTOR"
+        "destino_lixo_organico": "compostagem",
+        "destino_lixo_nao_organico": "coleta_publica",
+        "destino_esgoto_domestico": "fossa_septica"
       },
       "manejo_da_agua": {
-        "periodicidade_analise_irrigacao": "A CADA 2 ANOS",
+        "periodicidade_analise_irrigacao": "2",
         "fontes_agua_uso": [
           {
-            "uso": "CONSUMO DOMÉSTICO",
-            "origem": "POÇO",
-            "risco_contaminacao": "BAIXO",
+            "uso": "higienizacao",
+            "origem": "poco",
+            "risco_contaminacao": "",
+            "nivel_risco": "baixo",
             "garantia_qualidade": "ANÁLISE PERIÓDICA"
           },
           {
-            "uso": "LAVAGEM DE ALIMENTOS",
-            "origem": "POÇO",
-            "risco_contaminacao": "BAIXO",
+            "uso": "higienizacao",
+            "origem": "poco",
+            "risco_contaminacao": "",
+            "nivel_risco": "baixo",
             "garantia_qualidade": "ANÁLISE PERIÓDICA"
           },
           {
-            "uso": "IRRIGAÇÃO",
-            "origem": "POÇO",
-            "risco_contaminacao": "BAIXO",
+            "uso": "irrigacao",
+            "origem": "poco",
+            "risco_contaminacao": "",
+            "nivel_risco": "baixo",
             "garantia_qualidade": "ANÁLISE PERIÓDICA"
           }
         ]
       },
       "regularizacao_ambiental": {
-        "possui_car": "MEU CADASTRO ESTÁ APROVADO PELO ÓRGÃO AMBIENTAL",
+        "possui_car": "sim",
         "explicacao_reserva_legal": "possuo mais de 45% da área da propriedade em área de mata totalmente preservada na qual foram plantadas espécies nativas onde abunda fauna e flora sendo combatido qualquer espécie de invasor coletor ou caçador."
       },
       "producao_subsistencia_ornamental": {
@@ -180,22 +198,21 @@
           }
         ],
         "utiliza_insumos_nao_permitidos": true,
-        "risco_contaminacao": "BAIXO",
-        "manejo_bloqueio_riscos": "RAÇÃO PARA PEIXES POSSUI TRANSGÊNICOS NA FORMULAÇÃO, É ARMAZENADA EM LOCAL SEPARADO O TANQUE CERCADO COM TELA. TEMOS BANANEIRAS E DOMBEYAS CERCANDO TODA A PROPRIEDADE.",
-        "relato_historico_recente": "POSSUO UM TANQUE DE 11X22X1,80 FORRADO COM GEOMEMBRANA DE 8MM , NO QUAL CRIO PEIXES PARA CONSUMO PRÓPRIO E DA FAMÍLIA"
+        "risco_contaminacao": "baixo",
+        "manejo_bloqueio_riscos": "RAÇÃO PARA PEIXES POSSUI TRANSGÊNICOS NA FORMULAÇÃO, É ARMAZENADA EM LOCAL SEPARADO O TANQUE CERCADO COM TELA TEMOS BANANEIRAS E DOMBEYAS CERCANDO TODA A PROPRIEDADE , ACONSELHAMENTO AO VIZINHO PARA UTILIZAR PRODUTOS ORGÂNICOS PARA PREVENÇÃO"
       },
       "producao_paralela": {
         "possui_paralela": false,
         "utiliza_insumos_nao_permitidos": false,
-        "risco_contaminacao": "N/A",
-        "manejo_bloqueio_riscos": "N/A",
+        "risco_contaminacao": "",
+        "manejo_bloqueio_riscos": "",
         "pretende_conversao_total": false,
-        "tempo_conversao": "N/A"
+        "tempo_conversao": ""
       },
       "declaracoes_conformidade": {
         "veracidade_e_comunicacao": "DECLARO SEREM VERDADEIRAS AS INFORMAÇÕES PREENCHIDAS NESTE PLANO DE MANEJO ORGÂNICO, COMPROMETENDO-ME A COMUNICAR IMEDIATAMENTE AO OPAC - ANC POR ESCRITO, CASO HAJA NECESSIDADE DE USO DE PRÁTICAS ESSENCIAIS NÃO PREVISTAS NESTE PLANO DE MANEJO ORGÂNICO, INCLUINDO ANEXOS, SOLICITAREI A ATUALIZAÇÃO DO MESMO.",
         "conhecimento_normas": "DECLARO TER TOTAL CONHECIMENTO DA LEI 10.831 E AS DEMAIS NORMAS DE PRODUÇÃO ORGÂNICAS BRASILEIRAS E TRABALHAREI DE ACORDO COM ELAS.",
-        "conhecimento_regras_spg": "DECLARO TER PLENO CONHECIMENTO DAS REGRAS DE FUNCIONAMENTO DO SPG – OPAC DA ANC, BEM COMO ME COMPROMETO A FORNECER TODAS AS INFORMAÇÕES NECESSÁRIAS PARA A EFETIVAÇÃO DO PROCESSO DE AVALIAÇÃO PARTICIPATIVA JUNTO AO OPAC – ANC.",
+        "conhecimento_regras_spg": "DECLARO TER PLENO CONHECIMENTO DAS REGRAS DE FUNCIONAMENTO DO SPG – OPAC DA ANC, BEM COMO ME COMPROMETO A FORNECER TODAS AS INFORMAÇÕES NECESSÁRIAS PARA A EFETIVAÇÃO DO PROCESSO DE AVALIAÇÃO DA CONFORMIDADE PARTICIPATIVA JUNTO AO OPAC – ANC.",
         "concordancia_verificacao_acesso": "CONCORDO COM A VERIFICAÇÃO E O ACESSO INTEGRAL PELOS REPRESENTANTES DO OPAC - ANC AOS LOCAIS DA UNIDADE DE PRODUÇÃO, ORGÂNICA OU NÃO, SOB MINHA RESPONSABILIDADE.",
         "concordancia_informacao_adicional": "CONCORDO EM FORNECER QUALQUER INFORMAÇÃO ADICIONAL REQUERIDA PELOS MEMBROS DO OPAC – ANC SOBRE A UNIDADE DE PRODUÇÃO DA QUAL SOLICITO A AVALIAÇÃO PARTICIPATIVA DA CONFORMIDADE ORGÂNICA.",
         "ciente_visitas_amostras": "ESTOU CIENTE DE QUE MINHA UNIDADE DE PRODUÇÃO DESTE PLANO DE MANEJO PODE RECEBER VISITAS OU COLETAS DE AMOSTRAS PARA ANÁLISE DE RESÍDUOS SEM AVISO PRÉVIO A QUALQUER MOMENTO, SE ISTO FOR APROPRIADO PARA GARANTIR A CONFORMIDADE DA MESMA COM AS NORMAS MENCIONADAS ACIMA.",
@@ -205,18 +222,18 @@
       "comercializacao": {
         "processo_pos_colheita": "O PRODUTO É COLHIDO, ARMAZENADO EM CAIXAS DE 20KG, ATÉ A VENDA DIRETA AOS FEIRANTES DO SPG OU LEVADO EM VEÍCULO PROPRIO ATE CENTRO ATACADISTA.",
         "produtos_armazenados": true,
-        "explicacao_armazenamento": "CÂMARA FRIA POR PERÍODO CURTO ATÉ QUE OS COMPRADORES VENHAM RETIRAR PROCEDIMENTO ADOTADO EM CASO DE CALOR EXTREMO QUE COLOQUE EM RISCO A QUALIDADE DO PRODUTO",
+        "explicacao_armazenamento": "PODEM SER COLOCADOS EM CÂMARA FRIA POR PERÍODO CURTO ATÉ QUE OS COMPRADORES VENHAM RETIRAR PROCEDIMENTO ADOTADO EM CASO DE CALOR EXTREMO QUE COLOQUE EM RISCO A QUALIDADE DO PRODUTO",
         "tipos_comercializacao": [
           {
-            "tipo": "REVENDA - VENDO PARA OUTROS PRODUTORES DO SPG",
+            "tipo": "atacado",
             "status": true
           },
           {
-            "tipo": "REVENDA - MERCADO ATACADISTA",
+            "tipo": "outro",
             "status": true
           }
         ],
-        "modelo_rotulo": "N/A",
+        "modelo_rotulo": "",
         "transporte_produtos": "VEÍCULO PRÓPRIO",
         "rastreabilidade_produtos": "ROMANEIO E NOTA FISCAL",
         "comercializa_nao_organicos": "N/A"
@@ -267,6 +284,7 @@
         "versao_schema": "2.0.0",
         "tipo_formulario": "anexo_vegetal",
         "data_criacao": "2024-10-09T00:00:00Z",
+        "ultima_atualizacao": "2024-10-09T00:00:00Z",
         "status": "completo"
       },
       "dados": {
@@ -310,7 +328,7 @@
         "controle_pragas": {
           "controle_formigas": {
             "situacao_problema": "NÃO EXISTE INFESTAÇAO QUE COMPROMETA A PRODUÇAO",
-            "metodos_controle": "UTILIZAMOS BARREIRAS FISICAS NAS FRUTIFERAS, TORRES DE PVC NUCLEARIO QUE IMPEDEM QUE AS FORMIGAS ACESSEM A PLANTA FITAS ADESIVAS DA KAYROS NAS UVAS, OS ABACATEIROS SOFREM ALGUNS ATAQUES , AS ESTUFAS NÃO SOFREM ATAQUES DE FORMIGAS"
+            "metodos_controle": "BARREIRAS FISICAS NAS FRUTIFERAS, TORRES DE PVC NUCLEARIO QUE IMPEDEM QUE AS FORMIGAS ACESSEM A PLANTA FITAS ADESIVAS DA KAYROS NAS UVAS, OS ABACATEIROS SOFREM ALGUNS ATAQUES , AS ESTUFAS NÃO SOFREM ATAQUES DE FORMIGAS"
           }
         },
         "adubacao_nutricao": {
@@ -320,7 +338,7 @@
             "declaracao_rastreabilidade": true,
             "ingredientes": [
               {
-                "material_insumo": "Casca de pínus/eucalipto moída e compostada e fibra ou pó de coco.",
+                "material_insumo": "SUBSTRATO ORGÂNICO BIOMIX",
                 "origem": "FORNECEDOR BONSAI MONTE VERDE",
                 "proporcao_percentual": 100.0
               }
@@ -402,7 +420,7 @@
           },
           {
             "marca_nome_comercial": "BOVERIL",
-            "substancia_ingrediente_ativo": "BEAU VERIA BASSIANA",
+            "substancia_ingrediente_ativo": "BEAUVERIA BASSIANA",
             "fabricante": "KOPPERT",
             "funcao": "FITOSSANITÁRIO",
             "culturas": "TODAS AS CULTURAS",
@@ -446,7 +464,7 @@
             "fabricante": "SUMITOMO",
             "funcao": "FITOSSANITARIO",
             "culturas": "TODAS AS CULTURAS",
-            "status_uso": "CASO NECESSARIO"
+            "status_uso": "CASO NECESSÁRIO"
           },
           {
             "marca_nome_comercial": "YORIN MASTER",
@@ -490,7 +508,7 @@
           },
           {
             "marca_nome_comercial": "ACADIAN",
-            "substancia_ingrediente_ativo": "ASCOPHYLUM NODOSUM",
+            "substancia_ingrediente_ativo": "ASCOPHYLLUM NODOSUM",
             "fabricante": "KOPPERT",
             "funcao": "FERTILIZANTE",
             "culturas": "TODAS AS CULTURAS",
@@ -545,7 +563,6 @@
         },
         "armazenamento_insumos": {
           "condicoes_organizacao": "BOA",
-          "declaracao_separacao_materiais": "ÓLEO DIESEL, GASOLINA, ÓLEO 2T, EMBALAGEM, BANDEJA, CAIXA AGRÍCOLA ESTÃO DEVIDAMENTE SEPARADAS DOS INSUMOS AGRÍCOLAS QUE SÃO APLICADOS NO SOLO?",
           "declaracao_ausencia_nao_permitidos": true,
           "declaracao_bloqueio_riscos": true,
           "declaracao_acessibilidade_visitas": true
@@ -554,50 +571,50 @@
           {
             "produto_variedade": "BANANA TERRA ANA",
             "talhao_area": "TALHAO 9",
-            "origem_muda": "COMPRADO MULTIPLANTA",
-            "origem_semente": "",
+            "origem_muda": "COMPRADA NÃO ORGÂNICA",
+            "origem_semente": "COMPRADA NÃO ORGÂNICA",
             "tipo": "CONVENCIONAL C/ TRAT"
           },
           {
             "produto_variedade": "NOZ PECAN",
             "talhao_area": "",
-            "origem_muda": "COMPRADO",
-            "origem_semente": "",
+            "origem_muda": "COMPRADA NÃO ORGÂNICA",
+            "origem_semente": "COMPRADA NÃO ORGÂNICA",
             "tipo": "CONVENCIONAL C/ TRAT"
           },
           {
             "produto_variedade": "POCAN 3 UNI",
             "talhao_area": "",
-            "origem_muda": "COMPRADO VIVEIRO DA REGIAO",
-            "origem_semente": "",
+            "origem_muda": "COMPRADA NÃO ORGÂNICA",
+            "origem_semente": "COMPRADA NÃO ORGÂNICA",
             "tipo": "CONVENCIONAL C/ TRAT"
           },
           {
             "produto_variedade": "PERA 2 UNI",
             "talhao_area": "",
-            "origem_muda": "COMPRADO VIVEIRO DA REGIAO",
-            "origem_semente": "",
+            "origem_muda": "COMPRADA NÃO ORGÂNICA",
+            "origem_semente": "COMPRADA NÃO ORGÂNICA",
             "tipo": "CONVENCIONAL C/ TRAT"
           },
           {
             "produto_variedade": "MAÇA 1UNI",
             "talhao_area": "",
-            "origem_muda": "COMPRADO VIVEIRO DA REGIAO",
-            "origem_semente": "",
+            "origem_muda": "COMPRADA NÃO ORGÂNICA",
+            "origem_semente": "COMPRADA NÃO ORGÂNICA",
             "tipo": "CONVENCIONAL C/ TRAT"
           },
           {
             "produto_variedade": "GOIABA 1 UNI",
             "talhao_area": "",
-            "origem_muda": "COMPRADO VIVEIRO DA REGIAO",
-            "origem_semente": "",
+            "origem_muda": "COMPRADA NÃO ORGÂNICA",
+            "origem_semente": "COMPRADA NÃO ORGÂNICA",
             "tipo": "CONVENCIONAL C/ TRAT"
           },
           {
             "produto_variedade": "PESSEGO 2UNI",
             "talhao_area": "",
-            "origem_muda": "COMPRADO VIVEIRO DA REGIAO",
-            "origem_semente": "",
+            "origem_muda": "COMPRADA NÃO ORGÂNICA",
+            "origem_semente": "COMPRADA NÃO ORGÂNICA",
             "tipo": "CONVENCIONAL C/ TRAT"
           }
         ],
@@ -609,8 +626,8 @@
               "estimativa_producao_qtd": "13000KG",
               "periodo_estimativa": "8 MESES",
               "peso_kg_und": "200GR",
-              "origem_muda": "SAKATA",
-              "origem_semente": "CONVENCIONAL COM TRATAMENTO",
+              "origem_muda": "COMPRADA NÃO ORGÂNICA",
+              "origem_semente": "CONVENCIONAL C/ TRAT",
               "tipo": "CONVENCIONAL C/ TRAT"
             },
             {
@@ -619,8 +636,8 @@
               "estimativa_producao_qtd": "20000KG",
               "periodo_estimativa": "8 MESES",
               "peso_kg_und": "N/A",
-              "origem_muda": "CELEIRO VERDE",
-              "origem_semente": "CONVENCIONAL C TRATAMENTO",
+              "origem_muda": "COMPRADA NÃO ORGÂNICA",
+              "origem_semente": "CONVENCIONAL C/ TRAT",
               "tipo": "CONVENCIONAL C/ TRAT"
             },
             {
@@ -629,8 +646,8 @@
               "estimativa_producao_qtd": "ENTRE 13.000KG E 20.000KG DEPENDENDO A VARIEDADE",
               "periodo_estimativa": "8 MESES",
               "peso_kg_und": "N/A",
-              "origem_muda": "CELEIRO VERDE",
-              "origem_semente": "CONVENCIONAL C TRATAMENTO",
+              "origem_muda": "COMPRADA NÃO ORGÂNICA",
+              "origem_semente": "CONVENCIONAL C/ TRAT",
               "tipo": "CONVENCIONAL C/ TRAT"
             },
             {
@@ -639,8 +656,8 @@
               "estimativa_producao_qtd": "500KG",
               "periodo_estimativa": "ANO",
               "peso_kg_und": "N/A",
-              "origem_muda": "VIVEIRO AGUAI",
-              "origem_semente": "CONVENCIONAL COM TRATAMENTO",
+              "origem_muda": "COMPRADA NÃO ORGÂNICA",
+              "origem_semente": "CONVENCIONAL C/ TRAT",
               "tipo": "CONVENCIONAL C/ TRAT"
             },
             {
@@ -649,8 +666,8 @@
               "estimativa_producao_qtd": "30KG",
               "periodo_estimativa": "ANO",
               "peso_kg_und": "N/A",
-              "origem_muda": "VITACEA BRASIL",
-              "origem_semente": "CONVENCIONAL COM TRATAMENTO",
+              "origem_muda": "COMPRADA NÃO ORGÂNICA",
+              "origem_semente": "CONVENCIONAL C/ TRAT",
               "tipo": "CONVENCIONAL C/ TRAT"
             },
             {
@@ -659,8 +676,8 @@
               "estimativa_producao_qtd": "100KG",
               "periodo_estimativa": "ANO",
               "peso_kg_und": "N/A",
-              "origem_muda": "VITACEA BRASIL",
-              "origem_semente": "CONVENCIONAL COM TRATAMENTO",
+              "origem_muda": "COMPRADA NÃO ORGÂNICA",
+              "origem_semente": "CONVENCIONAL C/ TRAT",
               "tipo": "CONVENCIONAL C/ TRAT"
             },
             {
@@ -669,8 +686,8 @@
               "estimativa_producao_qtd": "200KG",
               "periodo_estimativa": "ANO",
               "peso_kg_und": "N/A",
-              "origem_muda": "VIVEIRO AGUAI",
-              "origem_semente": "CONVENCIONAL COM TRATAMENTO",
+              "origem_muda": "COMPRADA NÃO ORGÂNICA",
+              "origem_semente": "CONVENCIONAL C/ TRAT",
               "tipo": "CONVENCIONAL C/ TRAT"
             },
             {
@@ -679,8 +696,8 @@
               "estimativa_producao_qtd": "100KG",
               "periodo_estimativa": "ANO",
               "peso_kg_und": "N/A",
-              "origem_muda": "VIVEIRO AGUAI",
-              "origem_semente": "CONVENCIONAL COM TRATAMENTO",
+              "origem_muda": "COMPRADA NÃO ORGÂNICA",
+              "origem_semente": "CONVENCIONAL C/ TRAT",
               "tipo": "CONVENCIONAL C/ TRAT"
             },
             {
@@ -689,38 +706,38 @@
               "estimativa_producao_qtd": "100KG",
               "periodo_estimativa": "ANO",
               "peso_kg_und": "N/A",
-              "origem_muda": "VIVEIRO AGUAI",
-              "origem_semente": "CONVENCIONAL COM TRATAMENTO",
+              "origem_muda": "COMPRADA NÃO ORGÂNICA",
+              "origem_semente": "CONVENCIONAL C/ TRAT",
               "tipo": "CONVENCIONAL C/ TRAT"
             },
             {
-              "produto_variedade": "Limão Tahiti",
-              "talhao_area": "5",
+              "produto_variedade": "Limão Tahiti 5",
+              "talhao_area": "",
               "estimativa_producao_qtd": "100 KG",
               "periodo_estimativa": "ANO",
               "peso_kg_und": "N/A",
-              "origem_muda": "VIVEIRO SOCORRO",
-              "origem_semente": "CONVENCIONAL",
+              "origem_muda": "COMPRADA NÃO ORGÂNICA",
+              "origem_semente": "COMPRADA NÃO ORGÂNICA",
               "tipo": "CONVENCIONAL S/ TRAT"
             },
             {
-              "produto_variedade": "Limão galego",
-              "talhao_area": "5",
+              "produto_variedade": "Limão galego 5",
+              "talhao_area": "",
               "estimativa_producao_qtd": "20KG",
               "periodo_estimativa": "ANO",
               "peso_kg_und": "N/A",
-              "origem_muda": "VIVEIRO SOCORRO",
-              "origem_semente": "CONVENCIONAL",
+              "origem_muda": "COMPRADA NÃO ORGÂNICA",
+              "origem_semente": "COMPRADA NÃO ORGÂNICA",
               "tipo": "CONVENCIONAL S/ TRAT"
             },
             {
-              "produto_variedade": "Limão cravo",
-              "talhao_area": "5",
+              "produto_variedade": "Limão cravo 5",
+              "talhao_area": "",
               "estimativa_producao_qtd": "20KG",
               "periodo_estimativa": "ANO",
               "peso_kg_und": "N/A",
-              "origem_muda": "VIVEIRO SOCORRO",
-              "origem_semente": "CONVENCIONAL",
+              "origem_muda": "COMPRADA NÃO ORGÂNICA",
+              "origem_semente": "COMPRADA NÃO ORGÂNICA",
               "tipo": "CONVENCIONAL S/ TRAT"
             },
             {
@@ -729,8 +746,8 @@
               "estimativa_producao_qtd": "100KG",
               "periodo_estimativa": "ANO",
               "peso_kg_und": "N/A",
-              "origem_muda": "PRÓPRIA",
-              "origem_semente": "ORGÂNICA",
+              "origem_muda": "PRÓPRIA ORGÂNICA",
+              "origem_semente": "PRÓPRIA ORGÂNICA",
               "tipo": "ORGÂNICA"
             },
             {
@@ -739,8 +756,8 @@
               "estimativa_producao_qtd": "10KG",
               "periodo_estimativa": "ANO",
               "peso_kg_und": "N/A",
-              "origem_muda": "PRÓPRIA",
-              "origem_semente": "ORGÂNICA",
+              "origem_muda": "PRÓPRIA ORGÂNICA",
+              "origem_semente": "PRÓPRIA ORGÂNICA",
               "tipo": "ORGÂNICA"
             },
             {
@@ -749,8 +766,8 @@
               "estimativa_producao_qtd": "200KG",
               "periodo_estimativa": "ANO",
               "peso_kg_und": "N/A",
-              "origem_muda": "PRÓPRIA",
-              "origem_semente": "ORGÂNICA",
+              "origem_muda": "PRÓPRIA ORGÂNICA",
+              "origem_semente": "PRÓPRIA ORGÂNICA",
               "tipo": "ORGÂNICA"
             },
             {
@@ -759,8 +776,8 @@
               "estimativa_producao_qtd": "20KG",
               "periodo_estimativa": "ANO",
               "peso_kg_und": "N/A",
-              "origem_muda": "PRÓPRIA",
-              "origem_semente": "ORGÂNICA",
+              "origem_muda": "PRÓPRIA ORGÂNICA",
+              "origem_semente": "PRÓPRIA ORGÂNICA",
               "tipo": "ORGÂNICA"
             },
             {
@@ -769,8 +786,8 @@
               "estimativa_producao_qtd": "20KG",
               "periodo_estimativa": "ANO",
               "peso_kg_und": "N/A",
-              "origem_muda": "PRÓPRIA",
-              "origem_semente": "ORGÂNICA",
+              "origem_muda": "PRÓPRIA ORGÂNICA",
+              "origem_semente": "PRÓPRIA ORGÂNICA",
               "tipo": "ORGÂNICA"
             }
           ],
@@ -779,7 +796,7 @@
         "comercializacao": {
           "processo_pos_colheita": "O PRODUTO É COLHIDO, ARMAZENADO EM CAIXAS DE 20KG, ATÉ A VENDA DIRETA AOS FEIRANTES DO SPG OU LEVADO EM VEÍCULO PROPRIO ATE CENTRO ATACADISTA.",
           "produtos_armazenados": true,
-          "explicacao_armazenamento": "CÂMARA FRIA POR PERÍODO CURTO ATÉ QUE OS COMPRADORES VENHAM RETIRAR PROCEDIMENTO ADOTADO EM CASO DE CALOR EXTREMO QUE COLOQUE EM RISCO A QUALIDADE DO PRODUTO",
+          "explicacao_armazenamento": "PODEM SER COLOCADOS EM CÂMARA FRIA POR PERÍODO CURTO ATÉ QUE OS COMPRADORES VENHAM RETIRAR PROCEDIMENTO ADOTADO EM CASO DE CALOR EXTREMO QUE COLOQUE EM RISCO A QUALIDADE DO PRODUTO",
           "tipos_comercializacao": [
             {
               "tipo": "REVENDA - VENDO PARA OUTROS PRODUTORES DO SPG",
