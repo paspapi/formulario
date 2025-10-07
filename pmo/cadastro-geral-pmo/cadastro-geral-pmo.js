@@ -1067,7 +1067,7 @@ const CadastroGeralPMO = {
                 return;
             }
 
-            // DEBUG: Verificar estrutura dos dados recebidos
+            // DEBUG: Verificar estrutura completa dos dados recebidos
             console.log('🔍 Estrutura dos dados carregados:', {
                 tipo: typeof data,
                 keys: Object.keys(data).slice(0, 10), // Primeiras 10 keys
@@ -1075,16 +1075,25 @@ const CadastroGeralPMO = {
                 tem_dados: 'dados' in data,
                 tem_activities: data.dados && 'activities' in data.dados,
                 tem_escopo: data.dados && 'escopo' in data.dados,
+                tem_identificacao: data.dados && 'identificacao' in data.dados,
+                tem_contato: data.dados && 'contato' in data.dados,
+                tem_propriedade: data.dados && 'propriedade' in data.dados,
+                tem_tipo_pessoa: data.dados && 'tipo_pessoa' in data.dados,
                 primeiros_campos: Object.keys(data).slice(0, 5)
             });
 
-            // Log específico para activities/escopo
+            // Log específico para dados aninhados
             if (data.dados) {
+                console.log('📊 Campos em data.dados:', Object.keys(data.dados));
+
                 if (data.dados.activities) {
                     console.log('✅ Campo activities encontrado:', Object.keys(data.dados.activities));
                 }
                 if (data.dados.escopo) {
                     console.log('⚠️ Campo escopo encontrado (legado):', Object.keys(data.dados.escopo));
+                }
+                if (data.dados.identificacao) {
+                    console.log('✅ Campo identificacao encontrado:', Object.keys(data.dados.identificacao));
                 }
             }
 
@@ -1323,6 +1332,15 @@ const CadastroGeralPMO = {
         }
 
         console.log('✅ Dados encontrados, iniciando preenchimento...');
+        console.log('📋 Seções a preencher:', {
+            identificacao: !!dados.identificacao,
+            contato: !!dados.contato,
+            propriedade: !!dados.propriedade,
+            manejo_organico: !!dados.manejo_organico,
+            activities: !!dados.activities,
+            escopo: !!dados.escopo,
+            tipo_pessoa: dados.tipo_pessoa
+        });
 
         // 1. Identificação
         if (dados.identificacao) {
@@ -1374,8 +1392,9 @@ const CadastroGeralPMO = {
         // 3. Contato
         if (dados.contato) {
             console.log('📝 Preenchendo contato:', dados.contato);
-            this.preencherCampo(form, 'telefone', dados.contato.telefone);
-            this.preencherCampo(form, 'email', dados.contato.email);
+            // Telefone e email são preenchidos na tabela de responsáveis, não como campos diretos
+            // this.preencherCampo(form, 'telefone', dados.contato.telefone);
+            // this.preencherCampo(form, 'email', dados.contato.email);
 
             if (dados.contato.endereco) {
                 const end = dados.contato.endereco;
@@ -1397,12 +1416,18 @@ const CadastroGeralPMO = {
 
         // 4. Propriedade
         if (dados.propriedade) {
+            console.log('📝 Preenchendo propriedade:', dados.propriedade);
             this.preencherCampo(form, 'posse_terra', dados.propriedade.posse_terra);
             this.preencherCampo(form, 'area_total_ha', dados.propriedade.area_total_ha || dados.propriedade.area_total_propriedade_ha);
             this.preencherCampo(form, 'caf_numero', dados.propriedade.caf_numero);
             this.preencherCampo(form, 'caf_nao_possui', dados.propriedade.caf_nao_possui);
-            this.preencherCampo(form, 'data_aquisicao', dados.propriedade.data_aquisicao_posse);
+            this.preencherCampo(form, 'data_aquisicao', dados.propriedade.data_aquisicao_posse || dados.propriedade.data_aquisicao);
             this.preencherCampo(form, 'terra_familiar', dados.propriedade.terra_familiar);
+
+            // Roteiro de acesso pode estar em propriedade ou contato
+            if (dados.propriedade.roteiro_acesso) {
+                this.preencherCampo(form, 'roteiro_acesso', dados.propriedade.roteiro_acesso);
+            }
         }
 
         // Roteiro de acesso pode estar em contato ou propriedade
@@ -1413,8 +1438,13 @@ const CadastroGeralPMO = {
 
         // 5. Manejo Orgânico
         if (dados.manejo_organico) {
+            console.log('📝 Preenchendo manejo orgânico:', dados.manejo_organico);
             this.preencherCampo(form, 'anos_manejo_organico', dados.manejo_organico.anos_manejo_organico);
             this.preencherCampo(form, 'situacao_manejo', dados.manejo_organico.situacao_manejo);
+            this.preencherCampo(form, 'historico_propriedade', dados.manejo_organico.historico_propriedade);
+            this.preencherCampo(form, 'topografia_utilizacao', dados.manejo_organico.topografia_e_utilizacao || dados.manejo_organico.topografia_utilizacao);
+            this.preencherCampo(form, 'status_manejo_organico', dados.manejo_organico.status_manejo_organico);
+            this.preencherCampo(form, 'relato_historico_recente', dados.manejo_organico.relato_historico_recente);
         }
 
         // 6. Escopo/Activities
@@ -1423,17 +1453,29 @@ const CadastroGeralPMO = {
             console.log('📝 Preenchendo activities (formato v2.0):', dados.activities);
 
             // Mapeamento de activities do JSON para checkboxes do HTML
+            // Nomes dos checkboxes no HTML: escopo_hortalicas, escopo_frutas, escopo_cogumelos,
+            // escopo_medicinais, escopo_pecuaria, escopo_apicultura, escopo_proc_minimo, escopo_processamento
             const activityMapping = {
-                // escopo_vegetal → marcar todos os checkboxes de produção vegetal
-                'escopo_vegetal': ['escopo_hortalicas', 'escopo_frutas', 'escopo_cogumelos', 'escopo_medicinais'],
+                // Agrupamentos para compatibilidade (se JSON usar agrupamentos)
+                // escopo_vegetal → marcar checkboxes individuais de produção vegetal
+                'escopo_vegetal': ['escopo_hortalicas', 'escopo_frutas', 'escopo_medicinais'],
+
                 // escopo_animal → marcar checkbox de pecuária
                 'escopo_animal': ['escopo_pecuaria'],
+
                 // escopo_processamento_minimo → escopo_proc_minimo
                 'escopo_processamento_minimo': ['escopo_proc_minimo'],
-                // Outros já têm o mesmo nome
-                'escopo_apicultura': ['escopo_apicultura'],
-                'escopo_processamento': ['escopo_processamento'],
-                'escopo_cogumelo': ['escopo_cogumelos'] // Alias
+
+                // escopo_cogumelo → escopo_cogumelos (alias)
+                'escopo_cogumelo': ['escopo_cogumelos'],
+
+                // Aliases para compatibilidade
+                'escopo_graos': ['escopo_hortalicas'], // Grãos podem ser mapeados para hortaliças ou criar novo checkbox
+
+                // Mapeamentos diretos já existem e não precisam ser mapeados
+                // 'escopo_hortalicas': ['escopo_hortalicas'],
+                // 'escopo_frutas': ['escopo_frutas'],
+                // etc.
             };
 
             Object.keys(dados.activities).forEach(activityKey => {
@@ -1505,11 +1547,28 @@ const CadastroGeralPMO = {
         // 7. Metadata (grupo SPG, etc)
         if (data.metadata) {
             this.preencherCampo(form, 'grupo_spg', data.metadata.grupo_spg);
-            // Nota: ano_vigente está no metadata do PMO, não no formulário
+            // ano_vigente não está no formulário, é parte do metadata do PMO
+            // this.preencherCampo(form, 'ano_vigente', data.metadata.ano_vigente);
         }
 
+        // 7.5. Campos diretos em dados (não aninhados)
+        // Alguns campos podem estar diretamente no objeto dados
+        const camposDiretos = [
+            'tipo_pessoa',
+            'pretende_certificar',
+            'tipo_certificacao',
+            'opac_nome'
+        ];
+
+        camposDiretos.forEach(campo => {
+            if (dados[campo] !== undefined) {
+                this.preencherCampo(form, campo, dados[campo]);
+                console.log(`✅ Campo direto preenchido: ${campo} = ${dados[campo]}`);
+            }
+        });
+
         // 8. Fornecedores/Responsáveis (Tabela Dinâmica)
-        if (dados.identificacao && dados.identificacao.fornecedores_responsaveis) {
+        if (dados.identificacao && dados.identificacao.fornecedores_responsaveis && Array.isArray(dados.identificacao.fornecedores_responsaveis)) {
             console.log('📝 Preenchendo responsáveis:', dados.identificacao.fornecedores_responsaveis);
             const responsaveis = dados.identificacao.fornecedores_responsaveis;
 
@@ -1528,9 +1587,9 @@ const CadastroGeralPMO = {
                         const telefoneInput = row.querySelector('input[name="responsavel_telefone[]"]');
                         const emailInput = row.querySelector('input[name="responsavel_email[]"]');
 
-                        if (nomeInput) nomeInput.value = resp.nome_completo || '';
-                        if (cpfInput) cpfInput.value = resp.cpf || '';
-                        if (nascInput) nascInput.value = resp.data_nascimento || '';
+                        if (nomeInput && resp.nome_completo) nomeInput.value = resp.nome_completo;
+                        if (cpfInput && resp.cpf) cpfInput.value = resp.cpf;
+                        if (nascInput && resp.data_nascimento) nascInput.value = resp.data_nascimento;
 
                         // IMPORTANTE: Preencher telefone/email da primeira linha com dados de contato
                         if (index === 0 && dados.contato) {
@@ -1540,10 +1599,16 @@ const CadastroGeralPMO = {
                             if (emailInput && dados.contato.email) {
                                 emailInput.value = dados.contato.email;
                             }
+                        } else {
+                            // Outras linhas: preencher com dados do responsável se houver
+                            if (telefoneInput && resp.telefone) telefoneInput.value = resp.telefone;
+                            if (emailInput && resp.email) emailInput.value = resp.email;
                         }
                     }
                 }, index * 50);
             });
+        } else {
+            console.log('ℹ️ Nenhum responsável para preencher');
         }
 
         // 9. Manejo Orgânico (campos adicionais)
@@ -1776,15 +1841,66 @@ const CadastroGeralPMO = {
 
         console.log('✅ Preenchimento concluído, atualizando campos condicionais...');
 
-        // Atualizar campos condicionais
+        // Contar campos preenchidos
+        const camposPreenchidos = form.querySelectorAll('input:not([type="button"]):not([type="submit"]), select, textarea');
+        let countPreenchidos = 0;
+        let countTotal = camposPreenchidos.length;
+
+        camposPreenchidos.forEach(campo => {
+            if (campo.type === 'checkbox' || campo.type === 'radio') {
+                if (campo.checked) countPreenchidos++;
+            } else if (campo.value && campo.value.trim() !== '') {
+                countPreenchidos++;
+            }
+        });
+
+        console.log(`📊 Campos preenchidos: ${countPreenchidos}/${countTotal} (${Math.round(countPreenchidos/countTotal*100)}%)`);
+
+        // Atualizar campos condicionais e sincronizar
         setTimeout(() => {
+            console.log('🔄 Iniciando atualização de campos condicionais...');
+
+            // Atualizar visibilidade de campos baseados em selects
             this.toggleTipoDocumento();
             this.togglePessoaTipo();
             this.toggleTipoCertificacao();
-            // NÃO chamar updateEscopo() aqui - já foi chamado via dispatchEvent ao marcar checkboxes
+
+            // Disparar eventos de change em campos importantes para garantir sincronização
+            const camposImportantes = [
+                'tipo_documento',
+                'tipo_pessoa',
+                'tipo_certificacao',
+                'possui_subsistencia',
+                'possui_producao_paralela',
+                'vende_nao_organicos'
+            ];
+
+            camposImportantes.forEach(campoId => {
+                const elemento = document.getElementById(campoId);
+                if (elemento) {
+                    elemento.dispatchEvent(new Event('change', { bubbles: true }));
+                    console.log(`🔄 Evento change disparado em ${campoId}`);
+                }
+            });
+
+            // Sincronizar activities com scope manager (já feito via dispatchEvent nos checkboxes)
+            if (window.PMOScopeManager) {
+                this.syncActivitiesWithScopeManager();
+                console.log('✅ Activities sincronizadas com PMOScopeManager');
+            }
+
+            // Calcular progresso
             this.calculateProgress();
+
+            // Marcar como modificado para que seja salvo
+            this.state.isModified = true;
+
             console.log('✅ Formulário completamente preenchido e atualizado!');
-        }, 300);
+            console.log('📊 Status final:', {
+                isModified: this.state.isModified,
+                uploadedFiles: Object.keys(this.state.uploadedFiles).length
+            });
+        }, 500); // Aumentar timeout para garantir que todas as tabelas sejam criadas
     },
 
     /**
@@ -1803,29 +1919,50 @@ const CadastroGeralPMO = {
      * Preencher um campo específico
      */
     preencherCampo(form, name, value) {
-        if (!value || value === '' || value === 'undefined' || value === 'null') {
+        // Validar valor - aceitar 0 e false como valores válidos
+        if (value === undefined || value === null || value === '' || value === 'undefined' || value === 'null') {
+            // console.log(`ℹ️ Campo ${name} ignorado (valor vazio)`);
             return; // Não preencher valores vazios
         }
 
         const elements = form.querySelectorAll(`[name="${name}"]`);
 
         if (elements.length === 0) {
-            console.warn(`⚠️ Campo não encontrado: ${name}`);
+            console.warn(`⚠️ Campo não encontrado no formulário: ${name} (valor: ${value})`);
             return;
         }
 
+        let preenchido = false;
+
         elements.forEach(element => {
-            if (element.type === 'checkbox') {
-                element.checked = value === true || value === 'sim' || value === element.value;
-            } else if (element.type === 'radio') {
-                element.checked = value === element.value;
-            } else if (element.tagName === 'SELECT') {
-                element.value = value;
-            } else {
-                element.value = value;
+            try {
+                if (element.type === 'checkbox') {
+                    const shouldCheck = value === true || value === 'sim' || value === 'true' || value === element.value;
+                    element.checked = shouldCheck;
+                    if (shouldCheck) preenchido = true;
+                } else if (element.type === 'radio') {
+                    const shouldCheck = String(value) === String(element.value);
+                    element.checked = shouldCheck;
+                    if (shouldCheck) preenchido = true;
+                } else if (element.tagName === 'SELECT') {
+                    element.value = value;
+                    preenchido = true;
+                } else if (element.tagName === 'TEXTAREA') {
+                    element.value = value;
+                    preenchido = true;
+                } else {
+                    // Input text, number, date, etc
+                    element.value = value;
+                    preenchido = true;
+                }
+            } catch (error) {
+                console.error(`❌ Erro ao preencher campo ${name}:`, error);
             }
-            console.log(`✅ Campo preenchido: ${name} = ${value}`);
         });
+
+        if (preenchido) {
+            console.log(`✅ Campo preenchido: ${name} = ${typeof value === 'object' ? JSON.stringify(value) : value}`);
+        }
     },
 
     /**

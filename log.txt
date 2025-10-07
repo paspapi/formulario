@@ -1,3 +1,21 @@
+=================================================
+CORREÇÃO IMPORTAÇÃO JSON - 2025-10-06
+=================================================
+✅ Corrigida função loadSavedData() com logs detalhados
+✅ Corrigida função preencherFormularioComJSON() com mapeamento completo
+✅ Corrigida função preencherCampo() com validações melhoradas
+✅ Adicionado mapeamento de activities (escopo_vegetal → checkboxes individuais)
+✅ Adicionados 4 campos de manejo_organico que faltavam
+✅ Corrigido preenchimento de tabelas dinâmicas (responsáveis)
+✅ Adicionada sincronização completa após importação
+✅ Removidos warnings de campos que não existem no formulário
+✅ Contador de campos preenchidos com percentual
+
+Ver detalhes em: CORRECAO-IMPORTACAO-JSON.md
+
+=================================================
+LOG ANTERIOR:
+=================================================
 ✅ PMO Framework inicializado
 pmo-framework.js:291 ✅ PMO Framework carregado com sucesso
 location-modal.js:521 ✅ LocationModal carregado e pronto para uso
