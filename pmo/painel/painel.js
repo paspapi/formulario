@@ -792,25 +792,81 @@ const PainelPMO = {
                 tipo_pessoa: data.dados?.tipo_pessoa || identificacao.tipo_pessoa || 'fisica'
             });
 
-            // Importar dados gerais (cadastro_geral_pmo)
-            if (data.dados) {
-                window.PMOStorageManager.updateFormulario(pmoId, 'cadastro_geral_pmo', {
-                    metadata: data.metadata,
-                    dados: data.dados
-                });
-            }
+            // Verificar se é PMO completo (com múltiplos formulários aninhados)
+            const isPMOCompleto = data.metadata?.tipo_formulario === 'pmo_completo';
 
-            // Importar escopos (anexos)
-            if (data.escopos) {
-                Object.keys(data.escopos).forEach(scopeKey => {
-                    const scopeData = data.escopos[scopeKey];
-                    if (scopeData && scopeData.dados) {
-                        // Normalizar nome do formulário (compatibilidade)
-                        const formKey = scopeKey.replace(/-/g, '_');
-                        window.PMOStorageManager.updateFormulario(pmoId, formKey, scopeData);
-                        console.log(`✅ Escopo importado: ${scopeKey}`);
-                    }
-                });
+            if (isPMOCompleto) {
+                console.log('📦 PMO Completo detectado - importando formulários aninhados');
+
+                // Importar cadastro_geral_pmo
+                if (data.dados.cadastro_geral_pmo) {
+                    window.PMOStorageManager.updateFormulario(pmoId, 'cadastro_geral_pmo', {
+                        metadata: data.metadata,
+                        dados: data.dados.cadastro_geral_pmo
+                    });
+                    console.log('✅ Cadastro Geral importado');
+                }
+
+                // Importar anexo_vegetal
+                if (data.dados.anexo_vegetal) {
+                    window.PMOStorageManager.updateFormulario(pmoId, 'anexo_vegetal', data.dados.anexo_vegetal);
+                    console.log('✅ Anexo Vegetal importado');
+                }
+
+                // Importar anexo_animal
+                if (data.dados.anexo_animal) {
+                    window.PMOStorageManager.updateFormulario(pmoId, 'anexo_animal', data.dados.anexo_animal);
+                    console.log('✅ Anexo Animal importado');
+                }
+
+                // Importar anexo_cogumelo
+                if (data.dados.anexo_cogumelo) {
+                    window.PMOStorageManager.updateFormulario(pmoId, 'anexo_cogumelo', data.dados.anexo_cogumelo);
+                    console.log('✅ Anexo Cogumelo importado');
+                }
+
+                // Importar anexo_apicultura
+                if (data.dados.anexo_apicultura) {
+                    window.PMOStorageManager.updateFormulario(pmoId, 'anexo_apicultura', data.dados.anexo_apicultura);
+                    console.log('✅ Anexo Apicultura importado');
+                }
+
+                // Importar anexo_processamento
+                if (data.dados.anexo_processamento) {
+                    window.PMOStorageManager.updateFormulario(pmoId, 'anexo_processamento', data.dados.anexo_processamento);
+                    console.log('✅ Anexo Processamento importado');
+                }
+
+                // Importar anexo_processamentominimo
+                if (data.dados.anexo_processamentominimo) {
+                    window.PMOStorageManager.updateFormulario(pmoId, 'anexo_processamentominimo', data.dados.anexo_processamentominimo);
+                    console.log('✅ Anexo Processamento Mínimo importado');
+                }
+
+            } else {
+                // Formulário único (não é pmo_completo)
+                console.log('📄 Formulário único detectado');
+
+                // Importar dados gerais (cadastro_geral_pmo)
+                if (data.dados) {
+                    window.PMOStorageManager.updateFormulario(pmoId, 'cadastro_geral_pmo', {
+                        metadata: data.metadata,
+                        dados: data.dados
+                    });
+                }
+
+                // Importar escopos (anexos) - formato antigo
+                if (data.escopos) {
+                    Object.keys(data.escopos).forEach(scopeKey => {
+                        const scopeData = data.escopos[scopeKey];
+                        if (scopeData && scopeData.dados) {
+                            // Normalizar nome do formulário (compatibilidade)
+                            const formKey = scopeKey.replace(/-/g, '_');
+                            window.PMOStorageManager.updateFormulario(pmoId, formKey, scopeData);
+                            console.log(`✅ Escopo importado: ${scopeKey}`);
+                        }
+                    });
+                }
             }
 
             status.innerHTML = `<p style="color: var(--success-color);">✅ ${source} importado com sucesso! (Schema v${schemaVersion})</p>`;
