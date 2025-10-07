@@ -117,7 +117,7 @@
       }
     },
     "manejo_da_agua": {
-      "periodicidade_analise_irrigacao": "string (ex: 'Anual', 'A cada 2 anos', 'Semestral')",
+      "periodicidade_analise_irrigacao": "0.5|1|2|3|0 (anos: 0.5=Semestral, 1=Anual, 2=Bianual, 3=Trienal, 0=Não realiza)",
       "fontes_agua_uso": [
         {
           "uso": "irrigacao|pulverizacao|consumo_animal|processamento|higienizacao",
