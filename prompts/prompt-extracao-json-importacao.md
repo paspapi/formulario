@@ -1130,6 +1130,147 @@ Você deve extrair as informações deste documento/imagem e gerar um arquivo JS
 }
 ```
 
+## TABELA DE NORMALIZAÇÃO DE VALORES
+
+**CRÍTICO**: Os documentos fontes têm valores inconsistentes. Use esta tabela para normalizar TODOS os valores para o padrão do schema:
+
+### 1. `posse_terra` (Situação da Posse da Terra)
+| Variações encontradas no documento | Valor PADRÃO no JSON |
+|-------------------------------------|----------------------|
+| proprietario, proprietário, própria, dono, proprietária | `PROPRIETÁRIO` |
+| arrendatario, arrendatário, arrendamento, arrendada | `ARRENDATÁRIO` |
+| parceiro, parceria, em parceria | `PARCEIRO` |
+| comodato, em comodato | `COMODATO` |
+| posseiro, posse | `POSSEIRO` |
+| assentado, assentamento | `ASSENTADO` |
+| outro, outros, outra forma | `OUTRO` |
+
+### 2. `origem_muda` e `origem_semente` (Origem de Mudas/Sementes)
+| Variações encontradas | Valor PADRÃO |
+|-----------------------|--------------|
+| propria organica, própria orgânica, produção própria orgânica | `PRÓPRIA ORGÂNICA` |
+| comprada organica, comprada orgânica, compra orgânica | `COMPRADA ORGÂNICA` |
+| comprada não organica, convencional, comprada convencional | `COMPRADA NÃO ORGÂNICA` |
+| doacao, doação, recebida | `DOAÇÃO` |
+
+### 3. `tipo` (Tipo de Muda/Semente - Anexo Vegetal)
+| Variações encontradas | Valor PADRÃO |
+|-----------------------|--------------|
+| organica, orgânica, org | `ORGÂNICA` |
+| convencional com tratamento, c/ tratamento, tratada | `CONVENCIONAL C/ TRAT` |
+| convencional sem tratamento, s/ tratamento, não tratada | `CONVENCIONAL S/ TRAT` |
+
+### 4. `destino_lixo_organico` (Destino do Lixo Orgânico)
+| Variações encontradas | Valor PADRÃO |
+|-----------------------|--------------|
+| compostagem, compostado, faz compostagem, compostar | `compostagem` |
+| alimentacao animal, alimentação de animais, para os animais | `alimentacao_animal` |
+| queima, queimado, queimar | `queima` |
+| coleta publica, coleta pública, lixeiro | `coleta_publica` |
+| outro, outros, outra forma | `outro` |
+
+### 5. `destino_lixo_nao_organico` (Destino do Lixo Não Orgânico)
+| Variações encontradas | Valor PADRÃO |
+|-----------------------|--------------|
+| coleta seletiva, reciclagem coletiva | `coleta_seletiva` |
+| coleta publica, coleta pública, lixeiro | `coleta_publica` |
+| reciclagem, reciclagem própria, recicla | `reciclagem` |
+| queima, queimado | `queima` |
+| enterro, enterrado, enterra | `enterro` |
+| outro, outros | `outro` |
+
+### 6. `destino_esgoto` (Destino do Esgoto Doméstico)
+| Variações encontradas | Valor PADRÃO |
+|-----------------------|--------------|
+| fossa septica, fossa séptica | `fossa_septica` |
+| fossa negra, fossa rudimentar | `fossa_negra` |
+| rede publica, rede pública, esgoto público | `rede_publica` |
+| biodigestor | `biodigestor` |
+| outro, outros | `outro` |
+
+### 7. `agua_uso` (Uso da Água)
+| Variações encontradas | Valor PADRÃO |
+|-----------------------|--------------|
+| irrigacao, irrigação, para irrigar | `irrigacao` |
+| pulverizacao, pulverização, aplicação | `pulverizacao` |
+| consumo animal, para os animais, bebedouro | `consumo_animal` |
+| processamento, processar, indústria | `processamento` |
+| higienizacao, higienização, limpeza | `higienizacao` |
+
+### 8. `agua_origem` (Origem da Água)
+| Variações encontradas | Valor PADRÃO |
+|-----------------------|--------------|
+| poco, poço, poço artesiano, poço caipira | `poco` |
+| nascente, mina, olho d'água | `nascente` |
+| rio, córrego, riacho, ribeirão | `rio` |
+| represa, açude, barragem | `represa` |
+| rede publica, rede pública, SABESP, água encanada | `rede_publica` |
+| cisterna, caixa d'água | `cisterna` |
+
+### 9. `nivel_risco` (Nível de Risco de Contaminação)
+| Variações encontradas | Valor PADRÃO |
+|-----------------------|--------------|
+| baixo, baixa, pequeno, mínimo | `baixo` |
+| medio, médio, moderado | `medio` |
+| alto, alta, grande, elevado | `alto` |
+| nenhum, nenhuma, sem risco, zero | `nenhum` |
+
+### 10. `canal_comercializacao` (Canais de Comercialização)
+| Variações encontradas | Valor PADRÃO |
+|-----------------------|--------------|
+| feira livre, feira, feirante | `feira_livre` |
+| csa, comunidade que sustenta agricultura | `csa` |
+| entrega domicilio, entrega em domicílio, delivery | `entrega_domicilio` |
+| loja propria, loja própria, loja | `loja_propria` |
+| supermercado, mercado | `supermercado` |
+| pnae, alimentação escolar, merenda | `pnae` |
+| paa, programa de aquisição | `paa` |
+| restaurantes, restaurante | `restaurantes` |
+| atacado, atacadista | `atacado` |
+| outro, outros | `outro` |
+
+### 11. `tempo_registros` (Tempo de Manutenção de Registros)
+| Variações encontradas | Valor PADRÃO |
+|-----------------------|--------------|
+| menos de 1 ano, < 1 ano | `menos_1_ano` |
+| 1 a 3 anos, de 1 a 3 anos | `1_a_3_anos` |
+| 3 a 5 anos, de 3 a 5 anos | `3_a_5_anos` |
+| mais de 5 anos, > 5 anos, + de 5 anos | `mais_5_anos` |
+
+### 12. Campos Booleanos (true/false)
+**REGRA GERAL**: Converta SEMPRE para boolean true/false (sem aspas)
+
+| Variações para TRUE | Variações para FALSE |
+|---------------------|----------------------|
+| sim, s, yes, y, verdadeiro, possui, tem, x, marcado | não, n, no, nao, falso, não possui, não tem, vazio, desmarcado |
+
+**Exemplos:**
+- "terra_familiar": "sim" → `"terra_familiar": true`
+- Checkbox marcado → `true`
+- Checkbox vazio/ausente → `false`
+
+### 13. Campos de Data
+**FORMATO PADRÃO**: `YYYY-MM-DD` (ISO 8601)
+
+| Variações encontradas | Exemplo PADRÃO |
+|-----------------------|----------------|
+| 22/10/2024 | `2024-10-22` |
+| 22/10/24 | `2024-10-22` |
+| 22 de outubro de 2024 | `2024-10-22` |
+| out/2024 | `2024-10-01` (usar dia 01) |
+
+---
+
+## INSTRUÇÕES DE APLICAÇÃO DA NORMALIZAÇÃO:
+
+1. **SEMPRE consulte esta tabela** antes de preencher campos com valores predefinidos
+2. **Converta para UPPERCASE** quando o schema indicar (ex: PROPRIETÁRIO, ORGÂNICA)
+3. **Mantenha lowercase com underscore** quando o schema indicar (ex: feira_livre, poco)
+4. **Seja tolerante com variações**: se encontrar valor similar mas não exato, use a lógica da tabela
+5. **Em caso de dúvida**: escolha o valor mais próximo semanticamente da tabela
+
+---
+
 ## IMPORTANTE:
 
 - NÃO invente campos que não existem no schema

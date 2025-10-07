@@ -79,9 +79,10 @@
       {
         "produto_variedade": "string",
         "talhao_area": "string",
-        "origem_muda": "string",
-        "origem_semente": "string",
-        "tipo": "string"
+        "origem_muda": "PRÓPRIA ORGÂNICA|COMPRADA ORGÂNICA|COMPRADA NÃO ORGÂNICA|DOAÇÃO",
+        "origem_semente": "PRÓPRIA ORGÂNICA|COMPRADA ORGÂNICA|COMPRADA NÃO ORGÂNICA|DOAÇÃO",
+        "tipo": "ORGÂNICA|CONVENCIONAL C/ TRAT|CONVENCIONAL S/ TRAT",
+        "_comentario": "origem_muda/semente: valores do HTML (propria_organica, comprada_organica, comprada_nao_organica, doacao) devem ser normalizados para UPPERCASE"
       }
     ],
     "certificacao_detalhes": {
@@ -92,9 +93,9 @@
           "estimativa_producao_qtd": "string",
           "periodo_estimativa": "string",
           "peso_kg_und": "string",
-          "origem_muda": "string",
-          "origem_semente": "string",
-          "tipo": "string"
+          "origem_muda": "PRÓPRIA ORGÂNICA|COMPRADA ORGÂNICA|COMPRADA NÃO ORGÂNICA|DOAÇÃO",
+          "origem_semente": "PRÓPRIA ORGÂNICA|COMPRADA ORGÂNICA|COMPRADA NÃO ORGÂNICA|DOAÇÃO",
+          "tipo": "ORGÂNICA|CONVENCIONAL C/ TRAT|CONVENCIONAL S/ TRAT"
         }
       ],
       "declaracao_incremento_mudas_sementes_proprias": "boolean"

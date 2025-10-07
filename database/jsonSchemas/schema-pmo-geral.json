@@ -47,7 +47,8 @@
       "roteiro_acesso": "string"
     },
     "propriedade": {
-      "posse_terra": "PRÓPRIA|ARRENDADA|PARCERIA|COMODATO",
+      "posse_terra": "PROPRIETÁRIO|ARRENDATÁRIO|PARCEIRO|COMODATO|POSSEIRO|ASSENTADO|OUTRO",
+      "_comentario_posse_terra": "Valores aceitos: PROPRIETÁRIO, ARRENDATÁRIO, PARCEIRO, COMODATO, POSSEIRO, ASSENTADO, OUTRO. HTML envia: proprietario, arrendatario, parceiro, comodato, posseiro, assentado, outro (prompt deve normalizar para UPPERCASE)",
       "area_total_propriedade_ha": "decimal",
       "area_total_organica_ha": "decimal",
       "relacao_unidade_producao": "string",
@@ -157,6 +158,42 @@
       "manejo_bloqueio_riscos": "string",
       "pretende_conversao_total": "boolean",
       "tempo_conversao": "string"
+    },
+    "comercializacao": {
+      "canal_comercializacao": [
+        "feira_livre|csa|entrega_domicilio|loja_propria|supermercado|pnae|paa|restaurantes|atacado|outro"
+      ],
+      "inicio_vendas": "data (YYYY-MM-DD)",
+      "percentual_venda_organica": "integer (0-100)",
+      "vende_nao_organicos": "boolean",
+      "como_separa_comercializacao": "string (obrigatório se vende_nao_organicos = true)",
+      "sistema_rotulagem": "string (obrigatório)",
+      "sistema_rastreabilidade_comercial": "string (obrigatório)",
+      "transporte": "string",
+      "_comentarios": {
+        "canal_comercializacao": "Array de strings. Valores aceitos: feira_livre, csa, entrega_domicilio, loja_propria, supermercado, pnae, paa, restaurantes, atacado, outro"
+      }
+    },
+    "controles_e_registros": {
+      "tipo_registro": [
+        "caderno_campo|planilhas|fichas_manejo|notas_fiscais|comprovantes_venda|rastreabilidade|analises|fotos"
+      ],
+      "descricao_caderno_campo": "string (obrigatório)",
+      "sistema_rastreabilidade_interno": "string (obrigatório)",
+      "controle_estoque": "string",
+      "tempo_registros": "menos_1_ano|1_a_3_anos|3_a_5_anos|mais_5_anos",
+      "_comentarios": {
+        "tipo_registro": "Array de strings com tipos de registros mantidos. Rastreabilidade é OBRIGATÓRIA por IN 19/2011 MAPA",
+        "tempo_registros": "Recomendado: mínimo 5 anos para auditoria"
+      }
+    },
+    "producao_subsistencia": {
+      "possui_subsistencia": "boolean",
+      "produtos_subsistencia": "string",
+      "area_subsistencia": "decimal (hectares)",
+      "separacao_subsistencia": "string (obrigatório se possui_subsistencia = true)",
+      "insumos_subsistencia": "string",
+      "armazenamento_subsistencia": "string"
     },
     "declaracoes_conformidade": {
       "veracidade_e_comunicacao": "string",
