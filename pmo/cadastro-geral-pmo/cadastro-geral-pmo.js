@@ -1678,12 +1678,36 @@ const CadastroGeralPMO = {
         // 10. Mão de Obra
         if (dados.mao_de_obra) {
             console.log('📝 Preenchendo mão de obra:', dados.mao_de_obra);
-            this.preencherCampo(form, 'mao_obra_familiar', dados.mao_de_obra.familiar);
-            this.preencherCampo(form, 'identifique_familiar', dados.mao_de_obra.identifique_familiar);
-            this.preencherCampo(form, 'empregados_quantos', dados.mao_de_obra.empregados_quantos);
-            this.preencherCampo(form, 'diaristas_quantos', dados.mao_de_obra.diaristas_quantos);
-            this.preencherCampo(form, 'parceiros_quantos', dados.mao_de_obra.parceiros_quantos);
-            this.preencherCampo(form, 'meeiro_rural_quantos', dados.mao_de_obra.meeiro_rural_quantos);
+
+            // Mapeamento dos campos do JSON para os campos do HTML
+            // JSON pode ter vários formatos, HTML tem formato fixo
+            const maoDeObra = dados.mao_de_obra;
+
+            // Funcionários permanentes (empregados fixos)
+            if (maoDeObra.empregados_quantos !== undefined || maoDeObra.permanentes !== undefined) {
+                this.preencherCampo(form, 'funcionarios_permanentes',
+                    maoDeObra.empregados_quantos || maoDeObra.permanentes || 0);
+            }
+
+            // Funcionários temporários (diaristas, temporários)
+            if (maoDeObra.diaristas_quantos !== undefined || maoDeObra.temporarios !== undefined) {
+                this.preencherCampo(form, 'funcionarios_temporarios',
+                    maoDeObra.diaristas_quantos || maoDeObra.temporarios || 0);
+            }
+
+            // Familiares (mão de obra familiar)
+            if (maoDeObra.familiar !== undefined || maoDeObra.familiares !== undefined) {
+                this.preencherCampo(form, 'funcionarios_familiares',
+                    maoDeObra.familiar || maoDeObra.familiares || 0);
+            }
+
+            // Voluntários/Mutirão (parceiros, voluntários, meeiros)
+            if (maoDeObra.parceiros_quantos !== undefined || maoDeObra.voluntarios !== undefined || maoDeObra.meeiro_rural_quantos !== undefined) {
+                const voluntarios = (maoDeObra.parceiros_quantos || 0) +
+                                   (maoDeObra.voluntarios || 0) +
+                                   (maoDeObra.meeiro_rural_quantos || 0);
+                this.preencherCampo(form, 'funcionarios_voluntarios', voluntarios);
+            }
         }
 
         // 11. Croqui
