@@ -82,12 +82,17 @@
       "escopo_processamento_minimo": "boolean"
     },
     "mao_de_obra": {
-      "familiar": "boolean",
-      "identifique_familiar": "string",
-      "empregados_quantos": "integer",
-      "diaristas_quantos": "integer",
-      "parceiros_quantos": "integer",
-      "meeiro_rural_quantos": "integer"
+      "permanentes": "integer (funcionários permanentes/empregados fixos)",
+      "temporarios": "integer (funcionários temporários/diaristas)",
+      "familiares": "integer (mão de obra familiar)",
+      "voluntarios": "integer (voluntários/mutirão/parceiros/meeiros)",
+      "_comentarios": {
+        "permanentes": "Mapeado para campo 'funcionarios_permanentes' no formulário",
+        "temporarios": "Mapeado para campo 'funcionarios_temporarios' no formulário",
+        "familiares": "Mapeado para campo 'funcionarios_familiares' no formulário",
+        "voluntarios": "Mapeado para campo 'funcionarios_voluntarios' no formulário",
+        "_nota": "Campos antigos (empregados_quantos, diaristas_quantos, parceiros_quantos, meeiro_rural_quantos) ainda são suportados por compatibilidade"
+      }
     },
     "croqui": {
       "local_insercao_croqui": "string",
@@ -95,25 +100,39 @@
     },
     "biodiversidade_e_ambiente": {
       "preservacao_ambiental": [
-        {"area": "MATA NATIVA (RESERVA LEGAL)", "possui": "boolean", "preservada": "boolean"},
-        {"area": "NASCENTES", "possui": "boolean", "preservada": "boolean"}
+        "app",
+        "reserva_legal",
+        "nascentes",
+        "matas_nativas"
       ],
-      "tecnicas_prevencao_incendios": "string",
-      "experiencia_recuperacao_solos": "string",
-      "destino_lixo_organico": "string",
-      "destino_lixo_nao_organico": "string",
-      "destino_esgoto_domestico": "string"
+      "possui_car": "sim|nao|em_processo",
+      "situacao_car": "ativo|pendente|cancelado|suspenso (somente se possui_car = 'sim')",
+      "destino_lixo_organico": "compostagem|alimentacao_animal|queima|coleta_publica|outro",
+      "destino_lixo_nao_organico": "coleta_seletiva|coleta_publica|reciclagem|queima|enterro|outro",
+      "destino_esgoto": "fossa_septica|fossa_negra|rede_publica|biodigestor|outro",
+      "_comentarios": {
+        "preservacao_ambiental": "Array de strings com áreas que a propriedade possui. Valores: app, reserva_legal, nascentes, matas_nativas",
+        "preservacao_ambiental_formato_antigo": "Também suporta array de objetos: [{area: 'app', possui: true}]",
+        "destino_esgoto": "Também aceita 'destino_esgoto_domestico' como alias"
+      }
     },
     "manejo_da_agua": {
-      "periodicidade_analise_irrigacao": "string",
+      "periodicidade_analise_irrigacao": "string (ex: 'Anual', 'A cada 2 anos', 'Semestral')",
       "fontes_agua_uso": [
         {
-          "uso": "CONSUMO DOMÉSTICO",
-          "origem": "string",
-          "risco_contaminacao": "string",
-          "garantia_qualidade": "string"
+          "uso": "irrigacao|pulverizacao|consumo_animal|processamento|higienizacao",
+          "origem": "poco|nascente|rio|represa|rede_publica|cisterna",
+          "risco_contaminacao": "string (descrição do risco)",
+          "nivel_risco": "baixo|medio|alto|nenhum",
+          "garantia_qualidade": "string (ex: 'Análise anual', 'Filtro', 'Análise periódica')"
         }
-      ]
+      ],
+      "_comentarios": {
+        "uso": "Valores aceitos: irrigacao, pulverizacao, consumo_animal, processamento, higienizacao",
+        "origem": "Valores aceitos: poco, nascente, rio (Rio/Córrego), represa, rede_publica, cisterna",
+        "nivel_risco": "Valores aceitos: baixo, medio, alto, nenhum (usado para preencher select)",
+        "risco_contaminacao": "Campo texto livre para descrever o risco"
+      }
     },
     "regularizacao_ambiental": {
       "possui_car": "string",

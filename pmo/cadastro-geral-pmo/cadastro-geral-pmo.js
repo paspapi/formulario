@@ -1860,10 +1860,21 @@ const CadastroGeralPMO = {
                         }
 
                         // Preencher nível de risco (select - baixo/médio/alto/nenhum)
-                        if (nivelRiscoSelect && fonte.risco_contaminacao) {
-                            const nivelNormalizado = fonte.risco_contaminacao.toLowerCase();
-                            if (['baixo', 'medio', 'médio', 'alto', 'nenhum'].includes(nivelNormalizado)) {
-                                nivelRiscoSelect.value = nivelNormalizado.replace('é', 'e'); // médio → medio
+                        // Priorizar fonte.nivel_risco se existir, senão tentar extrair de risco_contaminacao
+                        if (nivelRiscoSelect) {
+                            let nivelValue = null;
+
+                            if (fonte.nivel_risco) {
+                                nivelValue = fonte.nivel_risco.toLowerCase().replace('é', 'e');
+                            } else if (fonte.risco_contaminacao) {
+                                const nivelNormalizado = fonte.risco_contaminacao.toLowerCase();
+                                if (['baixo', 'medio', 'médio', 'alto', 'nenhum'].includes(nivelNormalizado)) {
+                                    nivelValue = nivelNormalizado.replace('é', 'e');
+                                }
+                            }
+
+                            if (nivelValue && ['baixo', 'medio', 'alto', 'nenhum'].includes(nivelValue)) {
+                                nivelRiscoSelect.value = nivelValue;
                             }
                         }
 
