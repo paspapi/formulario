@@ -1725,22 +1725,62 @@ const CadastroGeralPMO = {
 
         // 12. Biodiversidade e Ambiente
         if (dados.biodiversidade_e_ambiente) {
-            console.log('📝 Preenchendo biodiversidade e ambiente');
-            this.preencherCampo(form, 'tecnicas_prevencao_incendios', dados.biodiversidade_e_ambiente.tecnicas_prevencao_incendios);
-            this.preencherCampo(form, 'experiencia_recuperacao_solos', dados.biodiversidade_e_ambiente.experiencia_recuperacao_solos);
+            console.log('📝 Preenchendo biodiversidade e ambiente:', dados.biodiversidade_e_ambiente);
+
+            // Campos de destino (selects)
             this.preencherCampo(form, 'destino_lixo_organico', dados.biodiversidade_e_ambiente.destino_lixo_organico);
             this.preencherCampo(form, 'destino_lixo_nao_organico', dados.biodiversidade_e_ambiente.destino_lixo_nao_organico);
-            this.preencherCampo(form, 'destino_esgoto_domestico', dados.biodiversidade_e_ambiente.destino_esgoto_domestico);
+            this.preencherCampo(form, 'destino_esgoto', dados.biodiversidade_e_ambiente.destino_esgoto_domestico || dados.biodiversidade_e_ambiente.destino_esgoto);
 
-            // Preservação Ambiental (Tabela/Checkboxes)
-            if (dados.biodiversidade_e_ambiente.preservacao_ambiental) {
+            // CAR (Cadastro Ambiental Rural)
+            if (dados.biodiversidade_e_ambiente.possui_car !== undefined) {
+                this.preencherCampo(form, 'possui_car', dados.biodiversidade_e_ambiente.possui_car);
+            }
+            if (dados.biodiversidade_e_ambiente.situacao_car) {
+                this.preencherCampo(form, 'situacao_car', dados.biodiversidade_e_ambiente.situacao_car);
+            }
+
+            // Preservação Ambiental (Checkboxes)
+            // Mapeamento: JSON pode ter vários formatos, HTML tem checkboxes simples
+            if (dados.biodiversidade_e_ambiente.preservacao_ambiental && Array.isArray(dados.biodiversidade_e_ambiente.preservacao_ambiental)) {
+                console.log('📝 Preenchendo áreas de preservação');
+
+                // Mapeamento de nomes do JSON para nomes do HTML
+                const areaMapping = {
+                    'app': 'area_preservacao_permanente',
+                    'preservacao_permanente': 'area_preservacao_permanente',
+                    'reserva_legal': 'area_reserva_legal',
+                    'nascentes': 'area_nascentes',
+                    'matas_nativas': 'area_matas_nativas',
+                    'mata_nativa': 'area_matas_nativas'
+                };
+
                 dados.biodiversidade_e_ambiente.preservacao_ambiental.forEach(area => {
-                    const areaKey = area.area;
-                    const possuiCheck = form.querySelector(`input[name="preservacao_${areaKey}_possui"]`);
-                    const preservadaCheck = form.querySelector(`input[name="preservacao_${areaKey}_preservada"]`);
+                    // area pode ser string ou objeto {area: "...", possui: true, preservada: true}
+                    let areaKey;
+                    let shouldCheck = true;
 
-                    if (possuiCheck) possuiCheck.checked = area.possui === true;
-                    if (preservadaCheck) preservadaCheck.checked = area.preservada === true;
+                    if (typeof area === 'string') {
+                        areaKey = area;
+                    } else if (area.area) {
+                        areaKey = area.area;
+                        shouldCheck = area.possui === true || area.preservada === true;
+                    }
+
+                    // Normalizar nome da área (lowercase, remover espaços/underscores duplicados)
+                    const normalizedKey = areaKey.toLowerCase().replace(/[\s-]+/g, '_');
+
+                    // Tentar mapeamento direto ou buscar no mapping
+                    const fieldName = areaMapping[normalizedKey] || `area_${normalizedKey}`;
+
+                    const checkbox = form.querySelector(`input[name="${fieldName}"]`);
+
+                    if (checkbox) {
+                        checkbox.checked = shouldCheck;
+                        console.log(`✅ Área de preservação marcada: ${fieldName}`);
+                    } else {
+                        console.warn(`⚠️ Checkbox de preservação não encontrado: ${fieldName} (original: ${areaKey})`);
+                    }
                 });
             }
         }
