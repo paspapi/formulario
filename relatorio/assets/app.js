@@ -1,4 +1,4 @@
-const STORAGE_KEY = "opac-reports-v1";
+﻿const STORAGE_KEY = "opac-reports-v1";
 
 const elements = {
   upList: document.getElementById("up-list"),
@@ -17,6 +17,12 @@ const elements = {
   btnDeleteReport: document.getElementById("btn-delete-report"),
   fileImport: document.getElementById("file-import"),
   formContainer: document.getElementById("form-container"),
+  modalRoot: document.getElementById("modal-root"),
+  modalTitle: document.getElementById("modal-title"),
+  modalBody: document.getElementById("modal-body"),
+  modalActions: document.getElementById("modal-actions"),
+  modalClose: document.getElementById("modal-close"),
+  toastContainer: document.getElementById("toast-container"),
 };
 
 const state = {
@@ -27,6 +33,227 @@ const state = {
   reports: [],
   currentReportId: null,
 };
+
+const ui = createUi(elements);
+
+function createUi(elems) {
+  const { modalRoot, modalTitle, modalBody, modalActions, modalClose, toastContainer } = elems;
+
+  const fallback = {
+    async alert(message) {
+      if (typeof window !== "undefined" && typeof window.alert === "function") {
+        window.alert(message);
+      } else {
+        console.log("[alert]", message);
+      }
+      return true;
+    },
+    async confirm(message) {
+      if (typeof window !== "undefined" && typeof window.confirm === "function") {
+        return window.confirm(message);
+      }
+      console.log("[confirm]", message);
+      return false;
+    },
+    async choice(title, options = []) {
+      if (!options.length) return null;
+      if (typeof window !== "undefined" && typeof window.prompt === "function") {
+        const text = options.map((opt, index) => `${index + 1}. ${opt.label ?? opt.value}`).join("\n");
+        const answer = window.prompt(`${title}\n${text}`);
+        const index = Number.parseInt(answer ?? "", 10) - 1;
+        return options[index]?.value ?? null;
+      }
+      console.log("[choice]", title, options);
+      return null;
+    },
+    toast(message) {
+      console.log("[toast]", message);
+    },
+  };
+
+  if (!modalRoot || !modalTitle || !modalBody || !modalActions || !modalClose || !toastContainer) {
+    return fallback;
+  }
+
+  let resolver = null;
+  let lastActive = null;
+  let escapeHandler = null;
+
+  function closeModal(result = null) {
+    if (modalRoot.classList.contains("hidden") && !resolver) {
+      return result;
+    }
+    modalRoot.classList.add("hidden");
+    modalRoot.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+    modalBody.innerHTML = "";
+    modalActions.innerHTML = "";
+    modalTitle.textContent = "";
+    if (escapeHandler) {
+      window.removeEventListener("keydown", escapeHandler);
+      escapeHandler = null;
+    }
+    const resolve = resolver;
+    resolver = null;
+    if (typeof resolve === "function") {
+      resolve(result);
+    }
+    if (lastActive && typeof lastActive.focus === "function") {
+      lastActive.focus();
+    }
+    lastActive = null;
+    return result;
+  }
+
+  function openModal({ title = "", description = "", nodes = [], actions = [] }) {
+    if (resolver) {
+      closeModal(null);
+    }
+    return new Promise((resolve) => {
+      resolver = resolve;
+      lastActive = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+
+      modalTitle.textContent = title;
+      modalBody.innerHTML = "";
+
+      if (description) {
+        const paragraph = document.createElement("p");
+        paragraph.textContent = description;
+        modalBody.append(paragraph);
+      }
+
+      nodes.forEach((node) => {
+        if (node instanceof Node) {
+          modalBody.append(node);
+        }
+      });
+
+      modalActions.innerHTML = "";
+      const normalizedActions = actions.length
+        ? actions
+        : [
+            {
+              label: "Fechar",
+              value: null,
+            },
+          ];
+
+      normalizedActions.forEach((action) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = action.label;
+        if (action.variant === "primary") button.classList.add("primary");
+        if (action.variant === "danger") button.classList.add("danger");
+        button.addEventListener("click", () => closeModal(action.value));
+        modalActions.append(button);
+      });
+
+      modalRoot.classList.remove("hidden");
+      modalRoot.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+
+      escapeHandler = (event) => {
+        if (event.key === "Escape") {
+          event.preventDefault();
+          closeModal(null);
+        }
+      };
+      window.addEventListener("keydown", escapeHandler);
+
+      requestAnimationFrame(() => {
+        const focusTarget =
+          modalBody.querySelector("[data-autofocus]") || modalActions.querySelector("button") || modalClose;
+        focusTarget?.focus();
+      });
+    });
+  }
+
+  modalClose.addEventListener("click", () => {
+    closeModal(null);
+  });
+
+  modalRoot.addEventListener("click", (event) => {
+    const target = event.target;
+    if (target instanceof HTMLElement && target.dataset.modalDismiss === "true") {
+      closeModal(null);
+    }
+  });
+
+  return {
+    async alert(message, { title = "Aviso", okLabel = "Entendi" } = {}) {
+      await openModal({
+        title,
+        description: message,
+        actions: [{ label: okLabel, value: true, variant: "primary" }],
+      });
+      return true;
+    },
+    async confirm(
+      message,
+      { title = "Confirmar ação", okLabel = "Confirmar", cancelLabel = "Cancelar", variant = "primary" } = {},
+    ) {
+      const result = await openModal({
+        title,
+        description: message,
+        actions: [
+          { label: cancelLabel, value: false },
+          { label: okLabel, value: true, variant: variant === "danger" ? "danger" : "primary" },
+        ],
+      });
+      return Boolean(result);
+    },
+    async choice(title, options = [], { description = "", cancelLabel = "Cancelar" } = {}) {
+      if (!options.length) return null;
+      const list = document.createElement("div");
+      list.className = "modal-choice-list";
+
+      options.forEach((option) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        const label = document.createElement("span");
+        label.className = "choice-label";
+        label.textContent = option.label ?? option.value;
+        button.append(label);
+        if (option.description) {
+          const details = document.createElement("span");
+          details.className = "choice-description";
+          details.textContent = option.description;
+          button.append(details);
+        }
+        button.addEventListener("click", () => closeModal(option.value));
+        list.append(button);
+      });
+
+      const result = await openModal({
+        title,
+        description,
+        nodes: [list],
+        actions: cancelLabel ? [{ label: cancelLabel, value: null }] : [],
+      });
+      return result ?? null;
+    },
+    toast(message, { variant = "default", duration = 4000 } = {}) {
+      if (!message) return;
+      const toast = document.createElement("div");
+      toast.className = `toast${variant !== "default" ? ` ${variant}` : ""}`;
+      toast.textContent = message;
+      toastContainer.append(toast);
+
+      const remove = () => {
+        toast.classList.add("fade-out");
+        setTimeout(() => {
+          toast.remove();
+        }, 300);
+      };
+
+      const timer = setTimeout(remove, duration);
+      toast.addEventListener("click", () => {
+        clearTimeout(timer);
+        remove();
+      });
+    },
+  };
+}
 
 // ------------------------------
 // Utilidades
@@ -85,9 +312,9 @@ function ensureStructure(target, template) {
 }
 
 function formatDate(dateIso) {
-  if (!dateIso) return "—";
+  if (!dateIso) return "-";
   const date = new Date(dateIso);
-  if (Number.isNaN(date.getTime())) return "—";
+  if (Number.isNaN(date.getTime())) return "-";
   return date.toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" });
 }
 
@@ -199,7 +426,7 @@ function deleteReport(id) {
 }
 
 // ------------------------------
-// Renderização – Painel
+// Renderização do Painel
 // ------------------------------
 function populateTipoFiltro() {
   const select = elements.filterTipo;
@@ -244,9 +471,12 @@ async function renderReportsList() {
   }
 
   const types = state.schemasManifest?.types ?? {};
+  let hasMatches = false;
+
   for (const report of state.reports) {
     const schema = await loadTypeSchema(report.tipoId);
     if (!matchesFilters(report, schema)) continue;
+    hasMatches = true;
 
     const cardTemplate = document.getElementById("template-card");
     const card = cardTemplate.content.firstElementChild.cloneNode(true);
@@ -255,21 +485,41 @@ async function renderReportsList() {
     card.querySelector(".card-meta").textContent = getVerificadores(report).join(", ") || "Verificador não informado";
     card.querySelector(".card-updated").textContent = formatDate(report.updatedAt);
     card.querySelector(".card-type").textContent = types[report.tipoId]?.label ?? report.tipoId;
-    card.querySelector(".card-conformidade").textContent = report.conformidade ?? "—";
-    card.querySelector(".card-pendencias").textContent = String(report.pendencias?.filter((p) => p.status !== "resolvida")?.length ?? 0);
+    card.querySelector(".card-conformidade").textContent = report.conformidade ?? "-";
+    card.querySelector(".card-pendencias").textContent = String(
+      report.pendencias?.filter((p) => p.status !== "resolvida")?.length ?? 0,
+    );
     const completion = await calculateCompletion(report, schema);
     card.querySelector(".card-progress").textContent = `${completion.toFixed(0)}%`;
 
     card.querySelector(".card-edit").addEventListener("click", () => selectReport(report.id));
-    card.querySelector(".card-duplicate").addEventListener("click", () => duplicateReport(report.id));
+    card.querySelector(".card-duplicate").addEventListener("click", async () => {
+      await duplicateReport(report.id);
+      ui.toast("Relatório duplicado.", { variant: "success" });
+    });
     card.querySelector(".card-export").addEventListener("click", () => exportReportJson(report));
-    card.querySelector(".card-delete").addEventListener("click", () => {
-      if (confirm("Tem certeza que deseja excluir este relatório?")) {
+    card.querySelector(".card-delete").addEventListener("click", async () => {
+      const confirmed = await ui.confirm("Tem certeza que deseja excluir este relatório?", {
+        title: "Excluir relatório",
+        okLabel: "Excluir",
+        cancelLabel: "Cancelar",
+        variant: "danger",
+      });
+      if (confirmed) {
         deleteReport(report.id);
+        ui.toast("Relatório excluído.", { variant: "success" });
       }
     });
 
     list.append(card);
+  }
+
+  if (!hasMatches) {
+    list.innerHTML = `
+      <p>Nenhum relatório corresponde aos filtros atuais.</p>
+      <button id="btn-new-report-inline" class="primary" type="button">Novo relatório</button>
+    `;
+    document.getElementById("btn-new-report-inline")?.addEventListener("click", onCreateReport);
   }
 }
 
@@ -277,7 +527,11 @@ function getUnitName(report) {
   const tipo = report?.tipoId ?? "";
   const data = report?.data ?? {};
   if (tipo.includes("processamento")) {
-    return getByPath(data, "identificacao.dados_empresa.nome_fantasia") || getByPath(data, "identificacao.dados_empresa.razao_social") || "";
+    return (
+      getByPath(data, "identificacao.dados_empresa.nome_fantasia") ||
+      getByPath(data, "identificacao.dados_empresa.razao_social") ||
+      ""
+    );
   }
   return getByPath(data, "identificacao.produtor_nome") || getByPath(data, "identificacao.nome_unidade_producao") || "";
 }
@@ -319,7 +573,8 @@ async function selectReport(id) {
 function renderReportHeader(report) {
   const types = state.schemasManifest?.types ?? {};
   const label = types[report.tipoId]?.label ?? report.tipoId;
-  elements.reportTitle.textContent = `${label} – ${getUnitName(report) || "Sem identificação"}`;
+  const unidade = getUnitName(report) || "Sem identificação";
+  elements.reportTitle.textContent = `${label} - ${unidade}`;
   const conformidade = report.conformidade ?? "pendente";
   elements.reportMeta.textContent = `Atualizado em ${formatDate(report.updatedAt)} · Conformidade: ${conformidade}`;
   elements.reportHeader.classList.remove("hidden");
@@ -537,36 +792,35 @@ function markReportDirty(reportId) {
 // ------------------------------
 // Ações Gerais
 // ------------------------------
-async function onCreateReport() {
+async function pickReportType() {
   const types = state.schemasManifest?.types ?? {};
   const entries = Object.entries(types);
   if (!entries.length) {
-    alert("Nenhum schema de visita disponível.");
-    return;
+    await ui.alert("Nenhum schema de visita disponível.", { title: "Sem modelos" });
+    return null;
   }
 
-  const optionsText = entries
-    .map(([id, def], index) => `${index + 1}. ${def.label ?? id}`)
-    .join("\n");
-  const answer = prompt(`Selecione o tipo do relatório:\n${optionsText}`);
-  if (!answer) return;
-  const index = Number.parseInt(answer, 10);
-  let typeId;
-  if (!Number.isNaN(index) && index >= 1 && index <= entries.length) {
-    typeId = entries[index - 1][0];
-  } else if (types[answer]) {
-    typeId = answer;
-  }
-  if (!typeId) {
-    alert("Tipo inválido.");
-    return;
-  }
+  const options = entries.map(([id, def]) => ({
+    value: id,
+    label: def.label ?? id,
+    description: def.summary ?? def.description ?? "",
+  }));
+
+  return ui.choice("Selecione o tipo do relatório", options, {
+    description: "Escolha o modelo que deseja utilizar para criar o relatório.",
+  });
+}
+
+async function onCreateReport() {
+  const typeId = await pickReportType();
+  if (!typeId) return;
 
   const report = await createReport(typeId);
   state.reports.unshift(report);
   saveReportsToStorage();
-  renderReportsList();
-  selectReport(report.id);
+  await renderReportsList();
+  await selectReport(report.id);
+  ui.toast("Relatório criado.", { variant: "success" });
 }
 
 async function duplicateReport(id) {
@@ -579,8 +833,8 @@ async function duplicateReport(id) {
   clone.isDirty = true;
   state.reports.unshift(clone);
   saveReportsToStorage();
-  renderReportsList();
-  selectReport(clone.id);
+  await renderReportsList();
+  await selectReport(clone.id);
 }
 
 function exportReportJson(report) {
@@ -593,12 +847,12 @@ function exportReportJson(report) {
   URL.revokeObjectURL(url);
 }
 
-function handleSaveDraft() {
+async function handleSaveDraft() {
   const report = findReport(state.currentReportId);
   if (!report) return;
   report.isDirty = false;
   updateReport(report);
-  alert("Rascunho salvo.");
+  ui.toast("Rascunho salvo.", { variant: "success" });
 }
 
 function handleExportCurrent() {
@@ -607,15 +861,24 @@ function handleExportCurrent() {
   exportReportJson(report);
 }
 
-function handleGeneratePdf() {
-  alert("Geração de PDF com JSON anexo ainda não implementada neste protótipo.");
+async function handleGeneratePdf() {
+  await ui.alert("Geração de PDF com JSON anexo ainda não implementada neste protótipo.", {
+    title: "Em breve",
+  });
 }
 
-function handleDeleteCurrent() {
+async function handleDeleteCurrent() {
   const report = findReport(state.currentReportId);
   if (!report) return;
-  if (confirm("Deseja realmente excluir este relatório?")) {
+  const confirmed = await ui.confirm("Deseja realmente excluir este relatório?", {
+    title: "Excluir relatório",
+    okLabel: "Excluir",
+    cancelLabel: "Cancelar",
+    variant: "danger",
+  });
+  if (confirmed) {
     deleteReport(report.id);
+    ui.toast("Relatório excluído.", { variant: "success" });
   }
 }
 
@@ -624,11 +887,11 @@ async function handleReloadSchemas() {
     await loadManifests();
     state.typeSchemas.clear();
     state.moduleCache.clear();
-    alert("Schemas recarregados com sucesso.");
+    ui.toast("Schemas recarregados com sucesso.", { variant: "success" });
     renderReportsList();
   } catch (error) {
     console.error(error);
-    alert("Erro ao recarregar schemas.");
+    await ui.alert("Erro ao recarregar schemas.");
   }
 }
 
@@ -639,7 +902,7 @@ async function handleImportFile(event) {
     const text = await file.text();
     const imported = JSON.parse(text);
     if (!imported?.data || !imported?.tipoId) {
-      alert("Arquivo inválido.");
+      await ui.alert("Arquivo inválido.", { title: "Importação" });
       return;
     }
     imported.id = uuid();
@@ -647,11 +910,14 @@ async function handleImportFile(event) {
     imported.updatedAt = new Date().toISOString();
     state.reports.unshift(imported);
     saveReportsToStorage();
-    renderReportsList();
-    selectReport(imported.id);
+    await renderReportsList();
+    await selectReport(imported.id);
+    ui.toast("Relatório importado.", { variant: "success" });
   } catch (error) {
     console.error(error);
-    alert("Falha ao importar JSON. Certifique-se de selecionar um arquivo válido.");
+    await ui.alert("Falha ao importar JSON. Certifique-se de selecionar um arquivo válido.", {
+      title: "Importação",
+    });
   } finally {
     event.target.value = "";
   }
@@ -666,7 +932,7 @@ async function init() {
     await loadManifests();
   } catch (error) {
     console.error(error);
-    alert("Erro ao carregar manifestos. Verifique os arquivos em /schemas e /pmo.");
+    await ui.alert("Erro ao carregar manifestos. Verifique os arquivos em /schemas e /pmo.");
     return;
   }
   renderReportsList();
@@ -687,4 +953,3 @@ elements.btnDeleteReport?.addEventListener("click", handleDeleteCurrent);
 elements.fileImport?.addEventListener("change", handleImportFile);
 
 init();
-

@@ -10,6 +10,7 @@
   --primary-contrast: #fff;
   --danger: #c0392b;
   --radius: 10px;
+  --topbar-height: 72px;
   font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
@@ -22,7 +23,11 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  height: 100%;
+  min-height: 100dvh;
+}
+
+body.modal-open {
+  overflow: hidden;
 }
 
 h1,
@@ -52,6 +57,11 @@ button {
 
 button:hover {
   transform: translateY(-1px);
+}
+
+button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 button.primary {
@@ -109,8 +119,9 @@ button:disabled {
 
 .layout {
   display: grid;
-  grid-template-columns: 360px minmax(0, 1fr);
-  height: calc(100vh - 72px);
+  grid-template-columns: minmax(260px, 360px) minmax(0, 1fr);
+  height: calc(100dvh - var(--topbar-height));
+  gap: 0;
 }
 
 .sidebar {
@@ -182,8 +193,8 @@ button:disabled {
 
 .card-body dl {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.5rem 1rem;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
   margin: 0;
 }
 
@@ -205,17 +216,18 @@ button:disabled {
 
 .content {
   overflow-y: auto;
-  padding: 1.5rem 2rem;
+  padding: 1.5rem 2rem 2.5rem;
 }
 
 .report-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
+  gap: 1.25rem;
   border-bottom: 1px solid var(--border);
   padding-bottom: 1rem;
   margin-bottom: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .report-actions {
@@ -253,14 +265,14 @@ button:disabled {
 
 .field-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 1rem;
+  grid-template-columns: 1fr;
+  gap: 0.9rem;
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.5rem;
 }
 
 .field label {
@@ -341,13 +353,271 @@ button:disabled {
   border: 1px dashed var(--border);
 }
 
-@media (max-width: 1120px) {
-  .layout {
-    grid-template-columns: minmax(0, 1fr);
+.modal-root {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  z-index: 1000;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 25, 45, 0.35);
+}
+
+.modal-dialog {
+  position: relative;
+  width: min(480px, 100%);
+  z-index: 1;
+}
+
+.modal-content {
+  background: var(--surface);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: 0 24px 60px rgba(15, 111, 255, 0.15);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--muted);
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.modal-body p {
+  margin: 0;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.modal-choice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.modal-choice-list button {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: var(--surface-alt);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  align-items: flex-start;
+  justify-content: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.modal-choice-list button:hover,
+.modal-choice-list button:focus-visible {
+  background: rgba(15, 111, 255, 0.12);
+  border-color: rgba(15, 111, 255, 0.35);
+}
+
+.choice-label {
+  font-weight: 600;
+}
+
+.choice-description {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.toast-container {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  z-index: 1100;
+}
+
+.toast {
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.12);
+  padding: 0.75rem 1rem;
+  min-width: 220px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.toast.success {
+  border-color: rgba(22, 163, 74, 0.25);
+  background: rgba(22, 163, 74, 0.08);
+}
+
+.toast.error {
+  border-color: rgba(192, 57, 43, 0.25);
+  background: rgba(192, 57, 43, 0.08);
+}
+
+.toast button {
+  background: transparent;
+  border: none;
+  color: inherit;
+  padding: 0;
+  cursor: pointer;
+}
+
+.toast.fade-out {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+@media (min-width: 960px) {
+  .field-grid {
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
   }
 
-  .sidebar {
-    display: none;
+  .card-body dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem 1rem;
   }
 }
 
+@media (max-width: 1120px) {
+  .layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .sidebar {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    max-height: 40vh;
+  }
+
+  .content {
+    padding: 1.25rem 1.5rem 2.5rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 1.5rem;
+  }
+
+  .topbar-actions {
+    width: 100%;
+    justify-content: stretch;
+    flex-wrap: wrap;
+  }
+
+  .topbar-actions > * {
+    flex: 1;
+  }
+
+  .report-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .report-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .toast-container {
+    bottom: auto;
+    top: 1rem;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+}
+
+@media print {
+  :root {
+    color-scheme: light;
+    --bg: #fff;
+    --surface: #fff;
+    --surface-alt: #fff;
+    --text: #000;
+    --muted: #3c3c3c;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .topbar {
+    padding: 0 0 1rem;
+    border-bottom: none;
+  }
+
+  .topbar-actions,
+  .report-actions,
+  .card-actions,
+  .card-delete,
+  .file-button,
+  #btn-new-report,
+  #btn-new-report-inline,
+  .array-item header button {
+    display: none !important;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .sidebar {
+    border: none;
+    max-height: none;
+    padding: 0 0 1.5rem;
+  }
+
+  .content {
+    padding: 0;
+    overflow: visible;
+  }
+
+  .module {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .timeline {
+    page-break-before: always;
+  }
+
+  .modal-root,
+  .toast-container {
+    display: none !important;
+  }
+}
