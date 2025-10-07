@@ -692,7 +692,7 @@ const CadastroGeralPMO = {
             // Recalcular progresso
             if (window.CadastroGeralPMO) {
                 CadastroGeralPMO.state.isModified = true;
-                PMOPrincipal.calculateProgress();
+                CadastroGeralPMO.calculateProgress();
             }
         },
 
@@ -718,7 +718,7 @@ const CadastroGeralPMO = {
             // Recalcular progresso
             if (window.CadastroGeralPMO) {
                 CadastroGeralPMO.state.isModified = true;
-                PMOPrincipal.calculateProgress();
+                CadastroGeralPMO.calculateProgress();
             }
         },
 
@@ -744,7 +744,7 @@ const CadastroGeralPMO = {
             // Recalcular progresso
             if (window.CadastroGeralPMO) {
                 CadastroGeralPMO.state.isModified = true;
-                PMOPrincipal.calculateProgress();
+                CadastroGeralPMO.calculateProgress();
             }
         },
 
@@ -1441,10 +1441,13 @@ const CadastroGeralPMO = {
             console.log('📝 Preenchendo manejo orgânico:', dados.manejo_organico);
             this.preencherCampo(form, 'anos_manejo_organico', dados.manejo_organico.anos_manejo_organico);
             this.preencherCampo(form, 'situacao_manejo', dados.manejo_organico.situacao_manejo);
-            this.preencherCampo(form, 'historico_propriedade', dados.manejo_organico.historico_propriedade);
-            this.preencherCampo(form, 'topografia_utilizacao', dados.manejo_organico.topografia_e_utilizacao || dados.manejo_organico.topografia_utilizacao);
-            this.preencherCampo(form, 'status_manejo_organico', dados.manejo_organico.status_manejo_organico);
-            this.preencherCampo(form, 'relato_historico_recente', dados.manejo_organico.relato_historico_recente);
+
+            // Campos abaixo não existem no formulário cadastro-geral-pmo
+            // Estão em anexos específicos ou foram removidos
+            // this.preencherCampo(form, 'historico_propriedade', dados.manejo_organico.historico_propriedade);
+            // this.preencherCampo(form, 'topografia_utilizacao', dados.manejo_organico.topografia_e_utilizacao || dados.manejo_organico.topografia_utilizacao);
+            // this.preencherCampo(form, 'status_manejo_organico', dados.manejo_organico.status_manejo_organico);
+            // this.preencherCampo(form, 'relato_historico_recente', dados.manejo_organico.relato_historico_recente);
         }
 
         // 6. Escopo/Activities
@@ -1611,13 +1614,8 @@ const CadastroGeralPMO = {
             console.log('ℹ️ Nenhum responsável para preencher');
         }
 
-        // 9. Manejo Orgânico (campos adicionais)
+        // 9. Manejo Orgânico (campos adicionais - comprovação e histórico)
         if (dados.manejo_organico) {
-            this.preencherCampo(form, 'historico_propriedade', dados.manejo_organico.historico_propriedade);
-            this.preencherCampo(form, 'topografia_utilizacao', dados.manejo_organico.topografia_e_utilizacao);
-            this.preencherCampo(form, 'status_manejo_organico', dados.manejo_organico.status_manejo_organico);
-            this.preencherCampo(form, 'relato_historico_recente', dados.manejo_organico.relato_historico_recente);
-
             // Comprovação de Manejo (Tabela)
             if (dados.manejo_organico.comprovacao_manejo) {
                 console.log('📝 Preenchendo comprovação de manejo');
