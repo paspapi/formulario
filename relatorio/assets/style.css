@@ -359,6 +359,10 @@ button:disabled {
   gap: 0.5rem;
 }
 
+.field.field-array {
+  grid-column: 1 / -1;
+}
+
 .field label {
   font-weight: 600;
   font-size: 0.9rem;
@@ -389,9 +393,10 @@ button:disabled {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--surface-alt);
+  width: 100%;
 }
 
-.array-item header {
+.array-item-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -666,7 +671,7 @@ button:disabled {
   .menu-panel,
   .icon-button,
   .toast-container,
-  .array-item header button {
+  .array-item-header button {
     display: none !important;
   }
 

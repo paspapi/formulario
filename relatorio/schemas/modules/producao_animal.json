@@ -114,5 +114,122 @@
         }
       }
     }
+  },
+  "fieldOptions": {
+    "producao_animal.aquisicao_origem.novos_animais_desde_ultima_visita": [
+      "nao_informado",
+      "sim",
+      "nao"
+    ],
+    "producao_animal.aquisicao_origem.origem_organica": [
+      "nao_informado",
+      "sim",
+      "nao"
+    ],
+    "producao_animal.periodo_conversao.aves_corte.cumpre": [
+      "nao_informado",
+      "sim",
+      "nao"
+    ],
+    "producao_animal.periodo_conversao.aves_postura.cumpre": [
+      "nao_informado",
+      "sim",
+      "nao"
+    ],
+    "producao_animal.periodo_conversao.leite_bovinos_bubalinos_ovinos_caprinos.cumpre": [
+      "nao_informado",
+      "sim",
+      "nao"
+    ],
+    "producao_animal.periodo_conversao.corte_bovinos_bubalinos_equideos.cumpre": [
+      "nao_informado",
+      "sim",
+      "nao"
+    ],
+    "producao_animal.periodo_conversao.corte_ovinos_caprinos_suinos.cumpre": [
+      "nao_informado",
+      "sim",
+      "nao"
+    ],
+    "producao_animal.periodo_conversao.corte_coelhos.cumpre": [
+      "nao_informado",
+      "sim",
+      "nao"
+    ],
+    "producao_animal.reprodutores.adquiridos": [
+      "nao_informado",
+      "sim",
+      "nao"
+    ],
+    "producao_animal.producao_paralela.existe": [
+      "nao_informado",
+      "sim",
+      "nao"
+    ],
+    "producao_animal.producao_paralela.distincao_visivel": [
+      "nao_informado",
+      "sim",
+      "nao"
+    ],
+    "producao_animal.producao_paralela.higienizacao_e_registro": [
+      "nao_informado",
+      "sim",
+      "nao"
+    ],
+    "producao_animal.producao_paralela.armazenamento_separado": [
+      "nao_informado",
+      "sim",
+      "nao"
+    ],
+    "producao_animal.equipamentos.higienizacao.usa_produtos": [
+      "nao_informado",
+      "sim",
+      "nao"
+    ],
+    "producao_animal.nutricao.limite_nao_organicos.cumpre": [
+      "nao_informado",
+      "sim",
+      "nao"
+    ],
+    "producao_animal.nutricao.pastoreio.acesso_pastagem": [
+      "nao_informado",
+      "sim",
+      "nao"
+    ],
+    "producao_animal.nutricao.ingredientes_permitidos.cumpre": [
+      "nao_informado",
+      "sim",
+      "nao"
+    ],
+    "producao_animal.bem_estar.cuidados_garantidos.cumpre": [
+      "nao_informado",
+      "sim",
+      "nao"
+    ],
+    "producao_animal.sanitario.risco_presente": [
+      "nao_informado",
+      "sim",
+      "nao"
+    ],
+    "producao_animal.sanitario.vacinacao_em_dia.cumpre": [
+      "nao_informado",
+      "sim",
+      "nao"
+    ],
+    "producao_animal.sanitario.manejo_dejetos_adequado.cumpre": [
+      "nao_informado",
+      "sim",
+      "nao"
+    ],
+    "producao_animal.sanitario.atende_legislacoes_sanitarias.cumpre": [
+      "nao_informado",
+      "sim",
+      "nao"
+    ],
+    "producao_animal.instalacoes.conforme_parametros.cumpre": [
+      "nao_informado",
+      "sim",
+      "nao"
+    ]
   }
 }

@@ -384,6 +384,29 @@ function formatDate(dateIso) {
   return date.toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" });
 }
 
+function formatLabel(key) {
+  if (!key) return "";
+  return key
+    .split(/[_\s]+/)
+    .filter(Boolean)
+    .map((segment) => {
+      if (segment.toUpperCase() === segment) return segment.toUpperCase();
+      const lower = segment.toLowerCase();
+      return lower.charAt(0).toUpperCase() + lower.slice(1);
+    })
+    .join(" ");
+}
+
+function normalizePath(path) {
+  return path.replace(/\.\d+(?=\.|$)/g, "");
+}
+
+function getOptionsForPath(path, optionMaps = {}) {
+  if (!path) return null;
+  const normalized = normalizePath(path);
+  return optionMaps.module?.[normalized] ?? optionMaps.schema?.[normalized] ?? null;
+}
+
 function uuid() {
   if (crypto?.randomUUID) return crypto.randomUUID();
   return `id-${Date.now()}-${Math.random().toString(16).slice(2)}`;
@@ -571,13 +594,6 @@ async function renderReportsList() {
       window.location.href = "form.html?id=" + report.id;
     });
 
-    card.querySelector(".card-duplicate").addEventListener("click", async () => {
-      const clone = await duplicateReport(report.id);
-      if (clone && pageType === "dashboard") {
-        window.location.href = "form.html?id=" + clone.id;
-      }
-    });
-
     card.querySelector(".card-export").addEventListener("click", () => exportReportJson(report));
 
     card.querySelector(".card-delete").addEventListener("click", async () => {
@@ -679,7 +695,7 @@ async function renderForm(report, schema) {
     const body = document.createElement("div");
     body.className = "field-grid";
     const namespace = moduleDef.fieldNamespace ?? null;
-    const moduleTemplate = moduleDef.dataTemplate ?? {};
+    const moduleTemplate = namespace ? moduleDef.dataTemplate?.[namespace] ?? {} : moduleDef.dataTemplate ?? {};
     const moduleData = namespace ? getByPath(report.data, namespace) : report.data;
 
     ensureStructure(moduleData, moduleTemplate);
@@ -687,50 +703,61 @@ async function renderForm(report, schema) {
       setByPath(report.data, namespace, moduleData);
     }
 
-    renderTemplate(body, moduleTemplate, report, namespace);
+    const basePath = namespace ?? "";
+    renderTemplate(body, moduleTemplate, report, basePath, {
+      module: moduleDef.fieldOptions ?? {},
+      schema: schema.fieldOptions ?? {},
+    });
     moduleSection.append(body);
     container.append(moduleSection);
   }
 }
 
-function renderTemplate(parent, template, report, basePath = "") {
+function renderTemplate(parent, template, report, basePath = "", optionMaps = {}) {
   Object.entries(template).forEach(([key, templateValue]) => {
     if (key.startsWith("_")) return;
     const path = basePath ? `${basePath}.${key}` : key;
     const currentValue = getByPath(report.data, path);
 
     if (Array.isArray(templateValue)) {
-      renderArrayField(parent, key, templateValue, currentValue, report, path);
+      renderArrayField(parent, key, templateValue, currentValue, report, path, optionMaps);
       return;
     }
 
     if (templateValue && typeof templateValue === "object") {
       const group = document.createElement("div");
       group.className = "array-item";
-      const header = document.createElement("header");
+      const header = document.createElement("div");
+      header.className = "array-item-header";
       const title = document.createElement("h4");
-      title.textContent = key;
+      title.textContent = formatLabel(key);
       header.append(title);
       group.append(header);
 
       const nested = document.createElement("div");
       nested.className = "field-grid";
-      renderTemplate(nested, templateValue, report, path);
+      renderTemplate(nested, templateValue, report, path, optionMaps);
       group.append(nested);
       parent.append(group);
       return;
     }
 
-    renderPrimitiveField(parent, key, templateValue, currentValue, report, path);
+    renderPrimitiveField(parent, key, templateValue, currentValue, report, path, optionMaps);
   });
 }
 
-function renderPrimitiveField(parent, key, templateValue, currentValue, report, path) {
+function renderPrimitiveField(parent, key, templateValue, currentValue, report, path, optionMaps = {}) {
   const wrapper = document.createElement("div");
   wrapper.className = "field";
+  wrapper.classList.add("field-array");
   const label = document.createElement("label");
-  label.textContent = key;
+  label.textContent = formatLabel(key);
   wrapper.append(label);
+
+  const existingValue = currentValue ?? templateValue ?? "";
+  const selectOptions =
+    getOptionsForPath(path, optionMaps) ||
+    (templateValue === "nao_informado" || existingValue === "nao_informado" ? ["nao_informado", "sim", "nao"] : null);
 
   let input;
   if (typeof templateValue === "boolean") {
@@ -752,15 +779,35 @@ function renderPrimitiveField(parent, key, templateValue, currentValue, report, 
       markReportDirty(report.id);
     });
     wrapper.append(input);
+  } else if (selectOptions) {
+    input = document.createElement("select");
+    selectOptions.forEach((optionValue) => {
+      const option = document.createElement("option");
+      option.value = optionValue;
+      option.textContent = formatLabel(optionValue);
+      input.append(option);
+    });
+    if (existingValue && !selectOptions.includes(existingValue)) {
+      const extra = document.createElement("option");
+      extra.value = existingValue;
+      extra.textContent = formatLabel(existingValue);
+      input.append(extra);
+    }
+    input.value = existingValue ?? "";
+    input.addEventListener("change", () => {
+      setByPath(report.data, path, input.value);
+      markReportDirty(report.id);
+    });
+    wrapper.append(input);
   } else {
     const isLongText = typeof currentValue === "string" && currentValue.length > 80;
     if (isLongText || key.includes("observacao") || key.includes("descricao")) {
       input = document.createElement("textarea");
-      input.value = currentValue ?? "";
+      input.value = existingValue ?? "";
     } else {
       input = document.createElement("input");
       input.type = "text";
-      input.value = currentValue ?? "";
+      input.value = existingValue ?? "";
     }
     input.addEventListener("input", () => {
       setByPath(report.data, path, input.value);
@@ -772,14 +819,14 @@ function renderPrimitiveField(parent, key, templateValue, currentValue, report, 
   parent.append(wrapper);
 }
 
-function renderArrayField(parent, key, templateValue, currentValue, report, path) {
+function renderArrayField(parent, key, templateValue, currentValue, report, path, optionMaps = {}) {
   const wrapper = document.createElement("div");
   wrapper.className = "field";
 
   const header = document.createElement("div");
-  header.className = "array-item header";
+  header.className = "array-item-header";
   const label = document.createElement("label");
-  label.textContent = key;
+  label.textContent = formatLabel(key);
   header.append(label);
 
   const addButton = document.createElement("button");
@@ -804,9 +851,10 @@ function renderArrayField(parent, key, templateValue, currentValue, report, path
     const itemWrapper = document.createElement("div");
     itemWrapper.className = "array-item";
 
-    const itemHeader = document.createElement("header");
+    const itemHeader = document.createElement("div");
+    itemHeader.className = "array-item-header";
     const itemTitle = document.createElement("strong");
-    itemTitle.textContent = `${key} ${index + 1}`;
+    itemTitle.textContent = `${formatLabel(key)} ${index + 1}`;
     itemHeader.append(itemTitle);
 
     const removeButton = document.createElement("button");
@@ -825,9 +873,9 @@ function renderArrayField(parent, key, templateValue, currentValue, report, path
     content.className = "field-grid";
     const templateItem = templateValue[0] ?? "";
     if (templateItem && typeof templateItem === "object" && !Array.isArray(templateItem)) {
-      renderTemplate(content, templateItem, report, `${path}.${index}`);
+      renderTemplate(content, templateItem, report, `${path}.${index}`, optionMaps);
     } else {
-      renderPrimitiveField(content, key, templateItem, item, report, `${path}.${index}`);
+      renderPrimitiveField(content, key, templateItem, item, report, `${path}.${index}`, optionMaps);
     }
     itemWrapper.append(content);
 
@@ -1060,6 +1108,9 @@ elements.btnSaveDraftInline?.addEventListener("click", handleSaveDraft);
 elements.btnExportJsonInline?.addEventListener("click", handleExportCurrent);
 
 init();
+
+
+
 
 
 
