@@ -198,14 +198,19 @@ class FlowNavigator {
     static downloadPDF() {
         try {
             // Pega o ID do PMO atual do localStorage
-            const pmoData = localStorage.getItem('cadastro-geral-pmo-form-data');
-            if (!pmoData) {
+            const cadastroGeralData = localStorage.getItem('cadastro-geral-pmo-form-data');
+            if (!cadastroGeralData) {
                 alert('⚠️ Nenhum PMO encontrado. Por favor, preencha o Cadastro Geral primeiro.');
                 return;
             }
 
-            const data = JSON.parse(pmoData);
-            const pmoId = data.id || 'current';
+            const cadastroData = JSON.parse(cadastroGeralData);
+
+            // Validar campos essenciais para criar PMO
+            if (!cadastroData.cpf_cnpj || !cadastroData.nome_completo || !cadastroData.nome_unidade_producao) {
+                alert('⚠️ Preencha pelo menos: CPF/CNPJ, Nome e Unidade de Produção no Cadastro Geral.');
+                return;
+            }
 
             // Verifica se todos os formulários estão completos
             const navigator = new FlowNavigator();
@@ -223,11 +228,20 @@ class FlowNavigator {
             if (totalProgress < 100) {
                 const confirmMsg = `⚠️ Atenção: Progresso geral em ${totalProgress}%\n\n` +
                                   'Alguns formulários não estão 100% completos.\n' +
-                                  'Deseja exportar o PDF mesmo assim?';
+                                  'O PDF será gerado como RASCUNHO.\n\n' +
+                                  'Deseja continuar?';
 
                 if (!confirm(confirmMsg)) {
                     return;
                 }
+            }
+
+            // Consolidar dados no PMOStorageManager
+            const pmoId = this.consolidateAndSavePMO(cadastroData, flowAnexos, totalProgress);
+
+            if (!pmoId) {
+                alert('❌ Erro ao consolidar dados do PMO.');
+                return;
             }
 
             // Redireciona para o painel com action de export
@@ -236,6 +250,72 @@ class FlowNavigator {
         } catch (error) {
             console.error('Erro ao preparar download do PDF:', error);
             alert('❌ Erro ao preparar download. Tente novamente.');
+        }
+    }
+
+    /**
+     * Consolidar dados dos formulários e salvar no PMOStorageManager
+     */
+    static consolidateAndSavePMO(cadastroData, flowAnexos, progressoGeral) {
+        try {
+            if (!window.PMOStorageManager) {
+                console.error('PMOStorageManager não disponível');
+                return null;
+            }
+
+            // Coletar dados de todos os anexos
+            const anexosData = {};
+            flowAnexos.forEach(anexo => {
+                const anexoDataStr = localStorage.getItem(`${anexo.key}-form-data`);
+                if (anexoDataStr) {
+                    try {
+                        anexosData[anexo.key] = JSON.parse(anexoDataStr);
+                    } catch (e) {
+                        console.warn(`Erro ao parsear dados de ${anexo.key}`);
+                    }
+                }
+            });
+
+            // Preparar dados para o PMOStorageManager
+            const pmoData = {
+                cpf_cnpj: cadastroData.cpf_cnpj,
+                nome: cadastroData.nome_completo,
+                unidade: cadastroData.nome_unidade_producao,
+                grupo_spg: cadastroData.grupo_spg || '',
+                ano_vigente: cadastroData.ano_vigente || new Date().getFullYear(),
+                cadastro_geral_pmo: cadastroData
+            };
+
+            // Criar ou atualizar PMO
+            const pmoId = window.PMOStorageManager.createPMO(pmoData);
+
+            // Atualizar com dados dos anexos
+            if (pmoId) {
+                const pmo = window.PMOStorageManager.getPMO(pmoId);
+                if (pmo) {
+                    // Adicionar dados dos anexos
+                    pmo.dados = {
+                        'cadastro-geral-pmo': cadastroData,
+                        ...anexosData
+                    };
+
+                    // Atualizar progresso
+                    pmo.progresso = { total: progressoGeral };
+                    pmo.status = progressoGeral === 100 ? 'completo' : 'rascunho';
+
+                    // Salvar de volta
+                    const dataKey = pmoId + '_data';
+                    localStorage.setItem(dataKey, JSON.stringify(pmo.dados));
+
+                    console.log(`✅ PMO consolidado: ${pmoId} (${progressoGeral}%)`);
+                }
+            }
+
+            return pmoId;
+
+        } catch (error) {
+            console.error('Erro ao consolidar PMO:', error);
+            return null;
         }
     }
 

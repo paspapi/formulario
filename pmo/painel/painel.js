@@ -510,7 +510,14 @@ const PainelPMO = {
         const helveticaFont = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
         const helveticaBold = await pdfDoc.embedFont(PDFLib.StandardFonts.HelveticaBold);
 
-        // PÁGINA 1: CAPA
+        const isRascunho = pmo.progresso.total < 100;
+
+        // Se for rascunho, adicionar página de resumo primeiro
+        if (isRascunho) {
+            await this.renderResumoPage(pdfDoc, pmo, helveticaFont, helveticaBold);
+        }
+
+        // PÁGINA 1: CAPA (ou 2 se for rascunho)
         let page = pdfDoc.addPage([595, 842]); // A4
         let y = 750;
         const margin = 50;
@@ -687,6 +694,188 @@ const PainelPMO = {
                 font: helveticaFont
             });
             y -= 15;
+        });
+
+        // Adicionar marca d'água em todas as páginas se for rascunho
+        if (isRascunho) {
+            this.addWatermarkToAllPages(pdfDoc, pmo.progresso.total, helveticaBold);
+        }
+    },
+
+    /**
+     * Renderizar página de resumo para PMO rascunho
+     */
+    async renderResumoPage(pdfDoc, pmo, helveticaFont, helveticaBold) {
+        const page = pdfDoc.addPage([595, 842]); // A4
+        const margin = 50;
+        const maxWidth = 495;
+        let y = 780;
+
+        // Título
+        page.drawText('PMO - RASCUNHO', {
+            x: margin,
+            y: y,
+            size: 24,
+            font: helveticaBold,
+            color: PDFLib.rgb(0.8, 0.2, 0.2)
+        });
+        y -= 30;
+
+        page.drawText(`Status do Plano de Manejo Orgânico`, {
+            x: margin,
+            y: y,
+            size: 14,
+            font: helveticaFont
+        });
+        y -= 50;
+
+        // Progresso Geral
+        page.drawText(`Progresso Geral: ${pmo.progresso.total}%`, {
+            x: margin,
+            y: y,
+            size: 16,
+            font: helveticaBold
+        });
+        y -= 40;
+
+        // Dados do Produtor
+        page.drawText('DADOS DO PRODUTOR', {
+            x: margin,
+            y: y,
+            size: 12,
+            font: helveticaBold
+        });
+        y -= 20;
+
+        const dadosBasicos = [
+            { label: 'Nome:', valor: pmo.nome },
+            { label: 'Unidade:', valor: pmo.unidade },
+            { label: 'CPF/CNPJ:', valor: pmo.cpf_cnpj },
+            { label: 'Grupo SPG:', valor: pmo.grupo_spg },
+            { label: 'Ano:', valor: pmo.ano_vigente.toString() }
+        ];
+
+        dadosBasicos.forEach(item => {
+            page.drawText(`${item.label} ${item.valor}`, {
+                x: margin + 10,
+                y: y,
+                size: 10,
+                font: helveticaFont
+            });
+            y -= 18;
+        });
+
+        y -= 20;
+
+        // Status dos Formulários
+        page.drawText('FORMULÁRIOS:', {
+            x: margin,
+            y: y,
+            size: 12,
+            font: helveticaBold
+        });
+        y -= 20;
+
+        const formularios = pmo.dados || {};
+        const statusFormularios = [
+            { key: 'cadastro-geral-pmo', nome: 'Cadastro Geral' },
+            { key: 'anexo-vegetal', nome: 'Anexo Vegetal' },
+            { key: 'anexo-animal', nome: 'Anexo Animal' },
+            { key: 'anexo-cogumelo', nome: 'Anexo Cogumelo' },
+            { key: 'anexo-apicultura', nome: 'Anexo Apicultura' },
+            { key: 'anexo-processamento', nome: 'Anexo Processamento' },
+            { key: 'anexo-processamentominimo', nome: 'Processamento Mínimo' }
+        ];
+
+        statusFormularios.forEach(form => {
+            const temDados = formularios[form.key] && Object.keys(formularios[form.key]).length > 0;
+            const icon = temDados ? '✅' : '❌';
+            const status = temDados ? 'Preenchido' : 'Vazio';
+
+            page.drawText(`${icon} ${form.nome}: ${status}`, {
+                x: margin + 10,
+                y: y,
+                size: 10,
+                font: helveticaFont
+            });
+            y -= 18;
+        });
+
+        y -= 30;
+
+        // Observações
+        page.drawText('OBSERVAÇÕES:', {
+            x: margin,
+            y: y,
+            size: 12,
+            font: helveticaBold
+        });
+        y -= 20;
+
+        const observacoes = [
+            `• Este é um PDF RASCUNHO (${pmo.progresso.total}% completo)`,
+            '• O PDF contém os dados atuais em formato JSON embutido',
+            '• Para continuar editando: importe o PDF no Painel PMO',
+            '• Complete os formulários pendentes antes da submissão final'
+        ];
+
+        observacoes.forEach(obs => {
+            page.drawText(obs, {
+                x: margin + 10,
+                y: y,
+                size: 9,
+                font: helveticaFont
+            });
+            y -= 18;
+        });
+
+        // Rodapé
+        page.drawText('ANC - Associação de Agricultura Natural de Campinas e Região', {
+            x: margin,
+            y: 50,
+            size: 9,
+            font: helveticaFont
+        });
+
+        page.drawText(`Gerado em: ${new Date().toLocaleString('pt-BR')}`, {
+            x: margin,
+            y: 35,
+            size: 8,
+            font: helveticaFont
+        });
+    },
+
+    /**
+     * Adicionar marca d'água em todas as páginas
+     */
+    addWatermarkToAllPages(pdfDoc, progresso, font) {
+        const pages = pdfDoc.getPages();
+
+        // Determinar cor baseada em progresso
+        let color;
+        if (progresso < 50) {
+            color = PDFLib.rgb(1, 0, 0); // Vermelho
+        } else if (progresso < 90) {
+            color = PDFLib.rgb(1, 0.65, 0); // Laranja
+        } else {
+            color = PDFLib.rgb(1, 1, 0); // Amarelo
+        }
+
+        const watermarkText = `RASCUNHO - ${progresso}% COMPLETO`;
+
+        pages.forEach(page => {
+            const { width, height } = page.getSize();
+
+            // Desenhar marca d'água diagonal
+            page.drawText(watermarkText, {
+                x: width / 2 - 150,
+                y: height / 2,
+                size: 40,
+                font: font,
+                color: color,
+                opacity: 0.1,
+                rotate: PDFLib.degrees(-45)
+            });
         });
     },
 
