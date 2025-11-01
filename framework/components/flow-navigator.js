@@ -145,16 +145,6 @@ class FlowNavigator {
             }))
             .sort((a, b) => a.order - b.order);
 
-        // Adiciona item final de download de PDF completo
-        anexosList.push({
-            key: 'download-pdf',
-            name: 'Baixar PDF de PMO Completo',
-            icon: '📥',
-            path: '#',
-            order: 999,
-            isDownload: true
-        });
-
         return anexosList;
     }
 
@@ -203,20 +193,6 @@ class FlowNavigator {
     }
 
     /**
-     * Calcula o progresso geral de todos os formulários
-     */
-    getAllProgress(flowAnexos) {
-        const formAnexos = flowAnexos.filter(a => !a.isDownload);
-        if (formAnexos.length === 0) return 0;
-
-        const totalProgress = formAnexos.reduce((sum, anexo) => {
-            return sum + this.getFormProgress(anexo.key);
-        }, 0);
-
-        return Math.round(totalProgress / formAnexos.length);
-    }
-
-    /**
      * Função para baixar PDF completo
      */
     static downloadPDF() {
@@ -234,10 +210,18 @@ class FlowNavigator {
             // Verifica se todos os formulários estão completos
             const navigator = new FlowNavigator();
             const flowAnexos = navigator.getFlowAnexos();
-            const allProgress = navigator.getAllProgress(flowAnexos);
 
-            if (allProgress < 100) {
-                const confirmMsg = `⚠️ Atenção: Progresso geral em ${allProgress}%\n\n` +
+            // Calcula progresso geral
+            let totalProgress = 0;
+            if (flowAnexos.length > 0) {
+                const progressSum = flowAnexos.reduce((sum, anexo) => {
+                    return sum + navigator.getFormProgress(anexo.key);
+                }, 0);
+                totalProgress = Math.round(progressSum / flowAnexos.length);
+            }
+
+            if (totalProgress < 100) {
+                const confirmMsg = `⚠️ Atenção: Progresso geral em ${totalProgress}%\n\n` +
                                   'Alguns formulários não estão 100% completos.\n' +
                                   'Deseja exportar o PDF mesmo assim?';
 
@@ -291,27 +275,6 @@ class FlowNavigator {
         `;
 
         flowAnexos.forEach((anexo, index) => {
-            // Item especial de download
-            if (anexo.isDownload) {
-                const allProgress = this.getAllProgress(flowAnexos);
-                const isComplete = allProgress === 100;
-                const statusClass = isComplete ? 'complete' : 'pending';
-
-                html += `
-                    <div class="flow-step download-final ${statusClass}">
-                        <button type="button" onclick="FlowNavigator.downloadPDF()" class="flow-download-btn">
-                            <span class="flow-step-icon">${anexo.icon}</span>
-                            <span class="flow-step-name">${anexo.name}</span>
-                            ${isComplete ?
-                                '<span class="flow-download-status">✅ Pronto</span>' :
-                                '<span class="flow-download-status">⚠️ Pendente</span>'
-                            }
-                        </button>
-                    </div>
-                `;
-                return;
-            }
-
             const isCurrent = anexo.key === currentAnexo;
             const progress = this.getFormProgress(anexo.key);
             const statusIcon = this.getStatusIcon(progress, isCurrent);

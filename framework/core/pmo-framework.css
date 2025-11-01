@@ -256,52 +256,6 @@
     font-size: 18px;
 }
 
-/* Download Final Button */
-.flow-step.download-final {
-    padding: 0;
-    background: transparent;
-}
-
-.flow-download-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 20px;
-    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
-    border: 2px solid #28a745;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s;
-    animation: pulse 2s infinite;
-}
-
-.flow-step.download-final.pending .flow-download-btn {
-    background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
-    border-color: #ffc107;
-}
-
-.flow-download-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-.flow-download-status {
-    font-size: 12px;
-    padding: 2px 6px;
-    border-radius: 4px;
-    background: rgba(255, 255, 255, 0.5);
-}
-
-@keyframes pulse {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.85;
-    }
-}
-
 /* ===== FORM ACTIONS STICKY ===== */
 .form-actions-sticky {
     position: sticky;
@@ -348,20 +302,6 @@
 
     .flow-progress {
         font-size: 10px;
-    }
-
-    .flow-download-btn {
-        padding: 10px 14px;
-        font-size: 12px;
-    }
-
-    .flow-download-btn .flow-step-name {
-        display: none;
-    }
-
-    .flow-download-btn::after {
-        content: 'PDF';
-        font-size: 11px;
     }
 
     .form-actions-sticky {
