@@ -25,6 +25,16 @@
 
             <!-- Navegador de Fluxo -->
             <div id="flow-navigator"></div>
+
+            <!-- Botões de Ação (Fixos) -->
+            <div class="form-actions-sticky">
+                <button type="button" onclick="AnexoApicultura.saveData()" class="btn btn-secondary">
+                    💾 <span class="text">Salvar</span>
+                </button>
+                <button type="button" onclick="validateForm()" class="btn btn-info">
+                    ✓ <span class="text">Validar</span>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -1547,18 +1557,6 @@
                 </div>
             </section>
 
-            <!-- Botões de Ação -->
-            <div class="form-actions">
-                <button type="button" class="btn btn-secondary" onclick="AnexoApicultura.saveData()">
-                    💾 Salvar Dados
-                </button>
-                <button type="button" class="btn btn-warning" onclick="AnexoApicultura.exportJSON()">
-                    📥 Exportar JSON
-                </button>
-                <button type="submit" class="btn btn-primary">
-                    ✅ Finalizar e Enviar
-                </button>
-            </div>
         </form>
     </div>
 

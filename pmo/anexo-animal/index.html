@@ -25,6 +25,16 @@
 
             <!-- Navegador de Fluxo -->
             <div id="flow-navigator"></div>
+
+            <!-- Botões de Ação (Fixos) -->
+            <div class="form-actions-sticky">
+                <button type="button" onclick="AnexoAnimal.salvar()" class="btn btn-secondary">
+                    💾 <span class="text">Salvar</span>
+                </button>
+                <button type="button" onclick="AnexoAnimal.validar()" class="btn btn-info">
+                    ✓ <span class="text">Validar</span>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -1107,21 +1117,6 @@
                 </div>
             </section>
 
-            <!-- Action Buttons -->
-            <div class="form-actions">
-                <button type="button" onclick="AnexoAnimal.salvar()" class="btn btn-secondary">
-                    💾 Salvar Rascunho
-                </button>
-                <button type="button" onclick="AnexoAnimal.validar()" class="btn btn-info">
-                    ✓ Validar Formulário
-                </button>
-                <button type="button" onclick="AnexoAnimal.exportarJSON()" class="btn btn-secondary">
-                    📥 Exportar JSON
-                </button>
-                <button type="submit" class="btn btn-primary">
-                    📄 Gerar PDF
-                </button>
-            </div>
 
         </form>
 

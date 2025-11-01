@@ -86,12 +86,6 @@ const CadastroGeralPMO = {
         // Interceptar navegação para salvar automaticamente
         this.setupNavigationAutoSave();
 
-        // Submit do formulário
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.submitForm();
-        });
-
         // Drag and drop para uploads
         this.setupDragAndDrop();
     },

@@ -22,6 +22,16 @@
 
       <!-- Navegador de Fluxo -->
       <div id="flow-navigator"></div>
+
+      <!-- Botões de Ação (Fixos) -->
+      <div class="form-actions-sticky">
+        <button type="button" onclick="saveForm()" class="btn btn-secondary">
+          💾 <span class="text">Salvar</span>
+        </button>
+        <button type="button" onclick="validateForm()" class="btn btn-info">
+          ✓ <span class="text">Validar</span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -1973,25 +1983,6 @@
       </section>
 
     </form>
-
-    <!-- BOTÕES DE AÇÃO -->
-    <div class="form-actions">
-      <button type="button" class="btn btn-secondary" onclick="AnexoCogumelo.salvar()">
-        💾 Salvar Rascunho
-      </button>
-      <button type="button" class="btn btn-warning" onclick="AnexoCogumelo.validar()">
-        ✓ Validar Formulário
-      </button>
-      <button type="button" class="btn btn-info" onclick="AnexoCogumelo.exportarJSON()">
-        📥 Exportar JSON
-      </button>
-      <button type="button" class="btn btn-info" onclick="PMOExport.toPDF(document.getElementById('form-anexo-cogumelo'))">
-        📄 Gerar PDF
-      </button>
-      <button type="button" class="btn btn-primary btn-lg" onclick="AnexoCogumelo.submitForm()">
-        📤 Enviar para Certificação
-      </button>
-    </div>
 
     <!-- Rodapé -->
     <footer class="pmo-footer">

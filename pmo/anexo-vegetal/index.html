@@ -23,6 +23,16 @@
 
             <!-- Navegador de Fluxo -->
             <div id="flow-navigator"></div>
+
+            <!-- Botões de Ação (Fixos) -->
+            <div class="form-actions-sticky">
+                <button type="button" onclick="saveForm()" class="btn btn-secondary">
+                    💾 <span class="text">Salvar</span>
+                </button>
+                <button type="button" onclick="validateForm()" class="btn btn-info">
+                    ✓ <span class="text">Validar</span>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -698,24 +708,6 @@
                 </div>
             </section>
 
-            <!-- Botões de Ação -->
-            <div class="form-actions">
-                <button type="button" onclick="validateForm()" class="btn btn-secondary">
-                    ✅ Validar Formulário
-                </button>
-                <button type="button" onclick="saveForm()" class="btn btn-primary">
-                    💾 Salvar Rascunho
-                </button>
-                <button type="button" onclick="exportJSON()" class="btn btn-secondary">
-                    📦 Exportar JSON
-                </button>
-                <button type="button" onclick="exportPDF()" class="btn btn-secondary">
-                    📄 Exportar PDF
-                </button>
-                <button type="submit" class="btn btn-success">
-                    ✔️ Finalizar e Enviar
-                </button>
-            </div>
         </form>
 
         <!-- Rodapé -->

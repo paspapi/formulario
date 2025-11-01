@@ -48,7 +48,29 @@ const PainelPMO = {
         // Configurar drag and drop
         this.setupDragAndDrop();
 
+        // Verificar se há action de exportação na URL
+        this.checkURLParams();
+
         console.log('✅ Painel PMO inicializado com sucesso!');
+    },
+
+    /**
+     * Verificar parâmetros da URL para ações automáticas
+     */
+    checkURLParams() {
+        const params = new URLSearchParams(window.location.search);
+        const action = params.get('action');
+        const pmoId = params.get('pmoId');
+
+        if (action === 'export' && pmoId) {
+            console.log(`📥 Ação de exportação detectada para PMO: ${pmoId}`);
+            // Aguardar um pequeno delay para garantir que tudo foi carregado
+            setTimeout(() => {
+                this.exportarPMOCompleto(pmoId);
+                // Limpar parâmetros da URL
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }, 500);
+        }
     },
 
     /**
