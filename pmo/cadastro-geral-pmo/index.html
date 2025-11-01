@@ -1296,15 +1296,49 @@
                         Documento obrigatório que deve mostrar: limites da propriedade, áreas de produção orgânica,
                         APP (Área de Preservação Permanente), Reserva Legal, fontes de água, construções, vizinhanças.
                     </p>
-                    <div class="upload-area" id="upload-croqui">
-                        <input type="file" id="file-croqui" accept=".pdf,.jpg,.jpeg,.png" style="display: none;" required>
-                        <label for="file-croqui" style="cursor: pointer; display: block; text-align: center;">
-                            <div style="font-size: 3rem;">📄</div>
-                            <p><strong>Clique aqui</strong> ou arraste o arquivo</p>
-                            <p class="help-text">PDF, JPG ou PNG (máx. 5MB)</p>
-                        </label>
+
+                    <!-- Campo hidden para armazenar GeoJSON do croqui interativo -->
+                    <input type="hidden" id="croqui-geojson" name="croqui_geojson">
+
+                    <!-- Botões de ação -->
+                    <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                        <button type="button"
+                                class="btn-secondary"
+                                onclick="CadastroGeralPMO.openCroquiInterativo()"
+                                style="flex: 1;">
+                            🗺️ Desenhar Croqui Interativo
+                        </button>
+                        <button type="button"
+                                class="btn-secondary"
+                                id="btn-visualizar-croqui"
+                                onclick="CadastroGeralPMO.visualizarCroqui()"
+                                style="flex: 1; display: none;">
+                            👁️ Visualizar Croqui
+                        </button>
                     </div>
-                    <div id="preview-croqui" class="file-preview"></div>
+
+                    <div id="croqui-status" style="display: none; padding: 10px; background: #d5f4e6; border-left: 4px solid #27ae60; border-radius: 4px; margin-bottom: 10px; font-size: 13px;">
+                        <strong>✅ Croqui interativo salvo</strong>
+                        <p style="margin: 5px 0 0 0; color: #666;">Você pode visualizar ou editar o croqui clicando nos botões acima.</p>
+                    </div>
+
+                    <!-- Upload alternativo -->
+                    <details style="margin-top: 15px;">
+                        <summary style="cursor: pointer; font-weight: bold; color: #2c3e50; padding: 8px; background: #f8f9fa; border-radius: 4px;">
+                            📎 Ou faça upload de arquivo (PDF/Imagem)
+                        </summary>
+                        <div style="margin-top: 10px;">
+                            <div class="upload-area" id="upload-croqui">
+                                <input type="file" id="file-croqui" accept=".pdf,.jpg,.jpeg,.png" style="display: none;">
+                                <label for="file-croqui" style="cursor: pointer; display: block; text-align: center;">
+                                    <div style="font-size: 3rem;">📄</div>
+                                    <p><strong>Clique aqui</strong> ou arraste o arquivo</p>
+                                    <p class="help-text">PDF, JPG ou PNG (máx. 5MB)</p>
+                                </label>
+                            </div>
+                            <div id="preview-croqui" class="file-preview"></div>
+                        </div>
+                    </details>
                 </div>
 
                 <!-- CAR -->
@@ -1527,6 +1561,7 @@
     <script src="../../framework/core/pmo-framework.js"></script>
     <script src="../../framework/components/pmo-tables.js"></script>
     <script src="../../framework/components/location-modal.js"></script>
+    <script src="../../framework/components/croqui-modal.js"></script>
     <script src="../../framework/components/auto-save-navigation.js"></script>
     <script src="../../framework/components/flow-navigator.js"></script>
     <script src="../../framework/components/pmo-storage-manager.js"></script>

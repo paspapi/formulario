@@ -4,7 +4,8 @@
 Crie um formulário HTML5 responsivo e interativo para digitalização do Plano de Manejo Orgânico (PMO) da ANC - Associação de Agricultura Natural de Campinas, seguindo rigorosamente a estrutura definida nos schemas JSON e utilizando o framework PMO padronizado para garantir consistência entre todos os formulários do sistema.
 
 ## 📦 Pré-requisitos e Estrutura do Projeto
-
+#### Convenções de Codificação
+- Todos os arquivos novos ou modificados devem ser gravados em UTF-8 (sem BOM).
 ### Schemas JSON Disponíveis
 Todos os formulários devem ser gerados a partir dos schemas JSON localizados em `/database/schemas/`:
 

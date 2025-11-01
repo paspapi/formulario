@@ -1,0 +1,33 @@
+.form-section + .form-section {
+    margin-top: var(--spacing-xl, 2rem);
+}
+
+.form-section .checkbox-enhanced label,
+.form-section .radio-group label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.dynamic-table th,
+.dynamic-table td {
+    vertical-align: middle;
+}
+
+.dynamic-table .action-buttons {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+#grupo-subsistencia-ornamental.hidden,
+#grupo-producao-paralela.hidden {
+    display: none;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: var(--spacing-lg, 1.5rem);
+}

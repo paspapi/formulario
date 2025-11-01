@@ -1,0 +1,86 @@
+<!-- ===================================================== -->
+<!-- SNIPPET: Localização Exata da Propriedade           -->
+<!-- VERSÃO SIMPLIFICADA - USA CAMPOS DE ENDEREÇO EXISTENTES -->
+<!-- ===================================================== -->
+
+<!-- 1. ADICIONAR NO <head> ou antes de </body> -->
+<script src="../../framework/components/location-picker.js"></script>
+
+<!-- 2. ADICIONAR APÓS A SEÇÃO DE ENDEREÇO (Seção 2) -->
+<section class="form-section" id="secao-localizacao">
+    <h2>📍 Localização Exata da Propriedade</h2>
+
+    <div class="localizacao-exata">
+        <a href="javascript:abrirGoogleMaps()" class="btn-google-maps">
+            🗺️ Abrir Google Maps com Este Endereço
+        </a>
+
+        <div class="instrucoes-coordenadas">
+            <strong>📋 Como obter as coordenadas:</strong>
+            <ol>
+                <li>Clique no botão acima (o Google Maps abrirá com seu endereço já preenchido)</li>
+                <li>Ajuste o mapa para encontrar o <strong>ponto exato</strong> da sua propriedade</li>
+                <li>Clique com <strong>botão direito</strong> no ponto exato</li>
+                <li>Selecione <strong>"Copiar coordenadas"</strong> no menu</li>
+                <li>Cole as coordenadas no campo abaixo</li>
+            </ol>
+        </div>
+
+        <div class="input-coordenadas">
+            <label for="coordenadas-google-maps">
+                Coordenadas do Google Maps <span class="required">*</span>
+            </label>
+            <input
+                type="text"
+                id="coordenadas-google-maps"
+                name="coordenadas_google_maps"
+                placeholder="Cole aqui as coordenadas copiadas do Google Maps (ex: -22.9068467, -47.0632881)"
+                autocomplete="off"
+                required
+            >
+            <p class="help-text">
+                Cole as coordenadas exatamente como copiou do Google Maps.
+                Elas serão separadas automaticamente.
+            </p>
+        </div>
+
+        <div class="campos-coordenadas">
+            <div class="latitude">
+                <label for="latitude">
+                    Latitude <span class="required">*</span>
+                </label>
+                <input
+                    type="text"
+                    id="latitude"
+                    name="latitude"
+                    placeholder="-22.9068467"
+                    readonly
+                    required
+                >
+            </div>
+            <div class="longitude">
+                <label for="longitude">
+                    Longitude <span class="required">*</span>
+                </label>
+                <input
+                    type="text"
+                    id="longitude"
+                    name="longitude"
+                    placeholder="-47.0632881"
+                    readonly
+                    required
+                >
+            </div>
+        </div>
+
+        <div class="confirmacao-localizacao">
+            <h4>✅ Localização Confirmada</h4>
+            <p>As coordenadas foram validadas com sucesso!</p>
+            <a href="javascript:verificarLocalizacao()" class="btn-verificar-maps">
+                🔍 Verificar Localização no Google Maps
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- O componente já auto-detecta os campos padrão do PMO -->

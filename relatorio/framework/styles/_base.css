@@ -1,0 +1,259 @@
+/**
+ * PMO Framework - Reset e Estilos Base
+ * Versão: 1.0.0
+ */
+
+/* ===== RESET BÁSICO ===== */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: var(--font-normal);
+    line-height: var(--line-height-normal);
+    color: var(--gray-900);
+    background: var(--gray-50);
+    min-height: 100vh;
+}
+
+/* ===== HEADINGS ===== */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: var(--font-bold);
+    line-height: var(--line-height-tight);
+    color: var(--gray-900);
+    margin-top: 0;
+}
+
+h1 {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--spacing-lg);
+}
+
+h2 {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--spacing-md);
+}
+
+h3 {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--spacing-md);
+}
+
+h4 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--spacing-sm);
+}
+
+h5 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--spacing-sm);
+}
+
+h6 {
+    font-size: var(--text-base);
+    margin-bottom: var(--spacing-sm);
+}
+
+/* ===== PARÁGRAFOS ===== */
+p {
+    margin-bottom: var(--spacing-md);
+    line-height: var(--line-height-relaxed);
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+/* ===== LINKS ===== */
+a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+a:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+/* ===== LISTAS ===== */
+ul, ol {
+    margin-left: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+}
+
+li {
+    margin-bottom: var(--spacing-xs);
+}
+
+ul ul, ol ol, ul ol, ol ul {
+    margin-bottom: 0;
+}
+
+/* ===== IMAGENS ===== */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ===== TABELAS ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: var(--spacing-md);
+}
+
+th, td {
+    text-align: left;
+    padding: var(--spacing-sm);
+}
+
+/* ===== CODE ===== */
+code, pre {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    background: var(--gray-100);
+    border-radius: var(--radius-sm);
+}
+
+code {
+    padding: 0.2em 0.4em;
+}
+
+pre {
+    padding: var(--spacing-md);
+    overflow-x: auto;
+    margin-bottom: var(--spacing-md);
+}
+
+pre code {
+    background: transparent;
+    padding: 0;
+}
+
+/* ===== FORMULÁRIOS BASE ===== */
+input,
+select,
+textarea,
+button {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+/* ===== ACESSIBILIDADE ===== */
+:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Ocultar visualmente mas manter acessível para leitores de tela */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* ===== SCROLLBAR CUSTOMIZADA (Webkit) ===== */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--gray-100);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gray-400);
+    border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gray-500);
+}
+
+/* ===== SELEÇÃO DE TEXTO ===== */
+::selection {
+    background: var(--primary-200);
+    color: var(--gray-900);
+}
+
+/* ===== PRINT ===== */
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    a {
+        text-decoration: underline;
+    }
+
+    a[href^="http"]:after {
+        content: " (" attr(href) ")";
+        font-size: var(--text-sm);
+        color: var(--gray-600);
+    }
+}
+
+/* ===== UTILITÁRIOS DE DISPLAY ===== */
+.hidden {
+    display: none !important;
+}
+
+.block {
+    display: block !important;
+}
+
+.inline-block {
+    display: inline-block !important;
+}
+
+.flex {
+    display: flex !important;
+}
+
+.inline-flex {
+    display: inline-flex !important;
+}
+
+.grid {
+    display: grid !important;
+}

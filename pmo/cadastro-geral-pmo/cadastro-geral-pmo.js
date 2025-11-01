@@ -2267,6 +2267,89 @@ const CadastroGeralPMO = {
         setTimeout(() => {
             messageDiv.remove();
         }, 5000);
+    },
+
+    /**
+     * Abre o modal de croqui interativo
+     */
+    openCroquiInterativo() {
+        console.log('🗺️ Abrindo croqui interativo...');
+
+        // Obter coordenadas da propriedade se disponíveis
+        const latInput = document.getElementById('latitude');
+        const lonInput = document.getElementById('longitude');
+        let coords = [-15.7801, -47.9292]; // Brasília como padrão
+
+        if (latInput && lonInput && latInput.value && lonInput.value) {
+            coords = [parseFloat(latInput.value), parseFloat(lonInput.value)];
+        }
+
+        // Obter dados salvos se existirem
+        const geojsonInput = document.getElementById('croqui-geojson');
+        const initialData = geojsonInput ? geojsonInput.value : null;
+
+        // Abrir modal
+        CroquiModal.open({
+            targetInput: 'croqui-geojson',
+            initialCoords: coords,
+            initialData: initialData,
+            onSave: (geojsonString, geojson) => {
+                console.log('💾 Croqui salvo:', geojson);
+                this.onCroquiSaved(geojsonString, geojson);
+            }
+        });
+    },
+
+    /**
+     * Callback quando o croqui é salvo
+     */
+    onCroquiSaved(geojsonString, geojson) {
+        // Mostrar status de sucesso
+        const statusDiv = document.getElementById('croqui-status');
+        const btnVisualizar = document.getElementById('btn-visualizar-croqui');
+
+        if (statusDiv) {
+            statusDiv.style.display = 'block';
+        }
+
+        if (btnVisualizar) {
+            btnVisualizar.style.display = 'block';
+        }
+
+        // Atualizar informações
+        const elementCount = geojson.features.length;
+        if (statusDiv) {
+            statusDiv.innerHTML = `
+                <strong>✅ Croqui interativo salvo</strong>
+                <p style="margin: 5px 0 0 0; color: #666;">
+                    ${elementCount} elemento${elementCount !== 1 ? 's' : ''} cadastrado${elementCount !== 1 ? 's' : ''}.
+                    Você pode visualizar ou editar o croqui clicando nos botões acima.
+                </p>
+            `;
+        }
+
+        // Marcar formulário como modificado
+        this.state.isModified = true;
+
+        // Salvar automaticamente
+        this.saveFormData();
+
+        console.log('✅ Croqui salvo com sucesso!');
+    },
+
+    /**
+     * Visualiza o croqui salvo
+     */
+    visualizarCroqui() {
+        const geojsonInput = document.getElementById('croqui-geojson');
+
+        if (!geojsonInput || !geojsonInput.value) {
+            alert('Nenhum croqui salvo para visualizar!');
+            return;
+        }
+
+        // Reabrir o modal com os dados salvos
+        this.openCroquiInterativo();
     }
 };
 

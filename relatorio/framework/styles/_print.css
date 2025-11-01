@@ -1,0 +1,373 @@
+/**
+ * PMO Framework - Estilos para Impressão
+ * Versão: 1.0.0
+ */
+
+@media print {
+    /* ===== RESET PARA IMPRESSÃO ===== */
+    * {
+        background: transparent !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    html {
+        font-size: 12pt;
+    }
+
+    body {
+        background: white !important;
+        color: black !important;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* ===== LAYOUT ===== */
+    .pmo-container {
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .form-section {
+        background: white !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+        margin-bottom: 1cm;
+        padding: 0.5cm;
+        border: 1px solid #ccc;
+    }
+
+    /* ===== TÍTULOS ===== */
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+        page-break-inside: avoid;
+    }
+
+    h1 {
+        font-size: 18pt;
+        border-bottom: 2px solid #000;
+        padding-bottom: 0.3cm;
+        margin-bottom: 0.5cm;
+    }
+
+    h2 {
+        font-size: 16pt;
+        border-bottom: 1px solid #666;
+        padding-bottom: 0.2cm;
+        margin-top: 0.5cm;
+        margin-bottom: 0.3cm;
+    }
+
+    h3 {
+        font-size: 14pt;
+        margin-top: 0.4cm;
+        margin-bottom: 0.2cm;
+    }
+
+    h4 {
+        font-size: 12pt;
+        margin-top: 0.3cm;
+        margin-bottom: 0.2cm;
+    }
+
+    /* ===== TABELAS ===== */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        page-break-inside: auto;
+        margin: 0.3cm 0;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+    }
+
+    th {
+        background: #f0f0f0 !important;
+        border: 1px solid #000;
+        padding: 0.2cm;
+        font-weight: bold;
+        text-align: left;
+        font-size: 10pt;
+    }
+
+    td {
+        border: 1px solid #666;
+        padding: 0.2cm;
+        font-size: 10pt;
+    }
+
+    .dynamic-table {
+        font-size: 9pt;
+    }
+
+    /* ===== LINKS ===== */
+    a {
+        text-decoration: underline;
+        color: #000 !important;
+    }
+
+    a[href^="http"]:after {
+        content: " (" attr(href) ")";
+        font-size: 8pt;
+        font-style: italic;
+    }
+
+    /* Não mostrar URL para links internos */
+    a[href^="#"]:after,
+    a[href^="/"]:after {
+        content: "";
+    }
+
+    /* ===== IMAGENS ===== */
+    img {
+        max-width: 100% !important;
+        page-break-inside: avoid;
+    }
+
+    /* ===== CAMPOS DE FORMULÁRIO ===== */
+    input,
+    select,
+    textarea {
+        border: 1px solid #000 !important;
+        background: white !important;
+        padding: 0.1cm !important;
+    }
+
+    /* Mostrar valores dos campos */
+    input[type="text"]:after,
+    input[type="email"]:after,
+    input[type="tel"]:after {
+        content: attr(value);
+    }
+
+    input[type="checkbox"] {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 0.4cm;
+        height: 0.4cm;
+        border: 1px solid #000;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    input[type="checkbox"]:checked {
+        background: #000;
+    }
+
+    input[type="checkbox"]:checked:after {
+        content: "";
+        color: white;
+        font-size: 10pt;
+        position: absolute;
+        left: 1px;
+        top: -2px;
+    }
+
+    /* ===== MENSAGENS E ALERTAS ===== */
+    .message {
+        border: 1px solid #000 !important;
+        padding: 0.2cm !important;
+        margin: 0.2cm 0 !important;
+        page-break-inside: avoid;
+    }
+
+    .message-info { border-left: 4px solid #000 !important; }
+    .message-success { border-left: 4px solid #000 !important; }
+    .message-warning { border-left: 4px solid #000 !important; }
+    .message-error { border-left: 4px solid #000 !important; }
+
+    .instruction:before { content: "9 "; }
+    .alert:before { content: "  "; }
+
+    /* ===== OCULTAR ELEMENTOS ===== */
+    .no-print,
+    .btn,
+    button,
+    .upload-area,
+    .progress-container,
+    .tabs-header,
+    .accordion-icon,
+    .help-icon,
+    .remove-file,
+    nav,
+    .btn-add,
+    .btn-remove,
+    [type="button"],
+    [type="submit"],
+    [type="reset"] {
+        display: none !important;
+    }
+
+    /* ===== MOSTRAR CONTEÚDO DE TABS E ACCORDIONS ===== */
+    .tab-content {
+        display: block !important;
+    }
+
+    .accordion-content {
+        display: block !important;
+        max-height: none !important;
+        padding: 0.2cm !important;
+    }
+
+    /* ===== GRID PARA IMPRESSÃO ===== */
+    .form-grid {
+        display: table !important;
+        width: 100%;
+    }
+
+    .form-grid > * {
+        display: table-cell !important;
+        padding: 0.1cm;
+    }
+
+    /* ===== PAGE BREAKS ===== */
+    .page-break-before {
+        page-break-before: always;
+    }
+
+    .page-break-after {
+        page-break-after: always;
+    }
+
+    .page-break-avoid {
+        page-break-inside: avoid;
+    }
+
+    /* ===== CABEÇALHO E RODAPÉ ===== */
+    @page {
+        margin: 2cm;
+    }
+
+    @page :first {
+        margin-top: 1cm;
+    }
+
+    /* Cabeçalho de página */
+    header {
+        position: running(header);
+    }
+
+    @page {
+        @top-center {
+            content: element(header);
+        }
+    }
+
+    /* Rodapé com numeração */
+    .page-footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        font-size: 9pt;
+        border-top: 1px solid #000;
+        padding-top: 0.2cm;
+    }
+
+    .page-footer:after {
+        content: "Página " counter(page) " de " counter(pages);
+    }
+
+    /* ===== ASSINATURAS ===== */
+    .assinatura {
+        page-break-inside: avoid;
+        margin-top: 1cm;
+        border-top: 1px solid #000;
+        padding-top: 0.5cm;
+    }
+
+    .assinatura-campo {
+        display: inline-block;
+        width: 45%;
+        text-align: center;
+        margin: 0.5cm 2%;
+    }
+
+    .assinatura-linha {
+        border-top: 1px solid #000;
+        margin-top: 1cm;
+        padding-top: 0.1cm;
+    }
+
+    /* ===== CROQUI E IMAGENS ===== */
+    .croqui-propriedade {
+        page-break-before: always;
+        page-break-after: always;
+    }
+
+    .croqui-propriedade img {
+        width: 100%;
+        max-height: 20cm;
+        object-fit: contain;
+    }
+
+    /* ===== LISTA DE PRODUTOS ===== */
+    .produtos-table tbody tr:nth-child(odd) {
+        background: #f9f9f9 !important;
+    }
+
+    /* ===== DECLARAÇÕES ===== */
+    .declaracao {
+        border: 1px solid #000;
+        padding: 0.3cm;
+        margin: 0.3cm 0;
+        page-break-inside: avoid;
+    }
+
+    .declaracao input[type="checkbox"] {
+        margin-right: 0.2cm;
+    }
+
+    /* ===== METADADOS DO DOCUMENTO ===== */
+    .print-metadata {
+        display: block !important;
+        border: 1px dashed #666;
+        padding: 0.2cm;
+        margin-bottom: 0.5cm;
+        font-size: 9pt;
+    }
+
+    .print-metadata:before {
+        content: "Documento gerado em: " attr(data-generated);
+        display: block;
+        margin-bottom: 0.1cm;
+    }
+
+    /* ===== QR CODE E CÓDIGOS DE BARRAS ===== */
+    .qr-code,
+    .barcode {
+        page-break-inside: avoid;
+        text-align: center;
+        margin: 0.3cm 0;
+    }
+
+    /* ===== CORES PARA GRÁFICOS (se houver) ===== */
+    .chart-primary { fill: #000 !important; }
+    .chart-secondary { fill: #666 !important; }
+    .chart-success { fill: #333 !important; }
+
+    /* ===== AJUSTES FINAIS ===== */
+    .print-hide {
+        display: none !important;
+    }
+
+    .print-show {
+        display: block !important;
+    }
+
+    .print-break-after {
+        page-break-after: always !important;
+    }
+
+    .print-break-before {
+        page-break-before: always !important;
+    }
+}

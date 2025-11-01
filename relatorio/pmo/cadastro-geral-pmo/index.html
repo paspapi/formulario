@@ -1,0 +1,962 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMO Cadastro Geral - ANC</title>
+    <link rel="stylesheet" href="../../framework/core/pmo-framework-full.css">
+    <link rel="stylesheet" href="./formulario.css">
+    <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
+</head>
+<body>
+    <header class="pmo-header">
+        <div class="pmo-container">
+            <div class="header-content">
+                <h1>搭 Cadastro Geral do PMO</h1>
+                <p class="subtitle">Plano de Manejo Orgﾃ｢nico - ANC</p>
+            </div>
+
+            <nav class="pmo-navigation">
+                <a href="../dashboard/index.html">匠 Dashboard</a>
+                <a href="../pmo-principal/index.html" data-form-type="cadastro-geral-pmo" class="active">搭 Cadastro Geral</a>
+                <a href="../anexo-vegetal/index.html" data-form-type="anexo-vegetal">験 Anexo Vegetal</a>
+                <a href="../anexo-animal/index.html" data-form-type="anexo-animal">推 Anexo Animal</a>
+                <a href="../anexo-cogumelo/index.html" data-form-type="anexo-cogumelo">剛 Anexo Cogumelo</a>
+                <a href="../anexo-apicultura/index.html" data-form-type="anexo-apicultura">雀 Anexo Apicultura</a>
+                <a href="../anexo-processamento/index.html" data-form-type="anexo-processamento">少 Anexo Processamento</a>
+                <a href="../anexo-processamentominimo/index.html" data-form-type="anexo-processamentominimo">Proc. Mínimo</a>
+                <a href="../relatorios/index.html">投 Relatﾃｳrios</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="flow-navigator" class="pmo-container"></section>
+
+    <main class="pmo-container">
+        <section class="section-info">
+            <p>Preencha as informaﾃｧﾃｵes do cadastro geral conforme o schema <code>schema-pmo-geral.json</code>. Os dados sﾃ｣o salvos automaticamente e sincronizados com o PMO ativo.</p>
+        </section>
+
+        <form id="form-cadastro-geral-pmo" class="pmo-form" autocomplete="off">
+            <!-- Tipo de Pessoa -->
+            <section class="form-section" id="sec-tipo-pessoa">
+                <h2>1. Tipo de Pessoa</h2>
+                <div class="form-grid form-grid-2">
+                    <div class="field-wrapper">
+                        <label>Tipo de pessoa <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="tipo_pessoa" value="fisica" required>
+                                Pessoa Fﾃｭsica
+                            </label>
+                            <label>
+                                <input type="radio" name="tipo_pessoa" value="juridica" required>
+                                Pessoa Jurﾃｭdica
+                            </label>
+                        </div>
+                    </div>
+                    <div class="field-wrapper">
+                        <label>Pretende certificar? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="pretende_certificar" value="sim" required>
+                                Sim
+                            </label>
+                            <label>
+                                <input type="radio" name="pretende_certificar" value="nao" required>
+                                Nﾃ｣o
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Identificaﾃｧﾃ｣o -->
+            <section class="form-section" id="sec-identificacao">
+                <h2>2. Identificaﾃｧﾃ｣o</h2>
+                <div class="form-grid form-grid-2">
+                    <div class="field-wrapper">
+                        <label for="cpf_cnpj">CPF/CNPJ <span class="required">*</span></label>
+                        <input type="text" id="cpf_cnpj" name="cpf_cnpj" data-mask="cpf" required>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="inscricao_estadual">Inscriﾃｧﾃ｣o estadual</label>
+                        <input type="text" id="inscricao_estadual" name="inscricao_estadual">
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="caf_numero">CAF / Nﾃｺmero de inscriﾃｧﾃ｣o</label>
+                        <input type="text" id="caf_numero" name="caf_numero">
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="grupo_spg">Grupo SPG <span class="required">*</span></label>
+                        <input type="text" id="grupo_spg" name="grupo_spg" required>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="data_preenchimento_pmo">Data de preenchimento do PMO</label>
+                        <input type="date" id="data_preenchimento_pmo" name="data_preenchimento_pmo">
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="nome_fantasia">Nome fantasia</label>
+                        <input type="text" id="nome_fantasia" name="nome_fantasia">
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="nome_unidade_producao">Nome da unidade de produﾃｧﾃ｣o <span class="required">*</span></label>
+                        <input type="text" id="nome_unidade_producao" name="nome_unidade_producao" required>
+                    </div>
+                </div>
+
+                <div class="section-info">
+                    <p class="instruction">Liste todas as pessoas responsﾃ｡veis pelo PMO.</p>
+                </div>
+
+                <div class="table-wrapper">
+                    <table id="tabela-fornecedores-responsaveis" class="dynamic-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nome completo</th>
+                                <th>CPF</th>
+                                <th>Data de nascimento</th>
+                                <th class="action-buttons">Aﾃｧﾃｵes</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-add" onclick="PMOTable.addRow('tabela-fornecedores-responsaveis')">Adicionar responsﾃ｡vel</button>
+                    </div>
+                </div>
+            </section>
+            <!-- Contato -->
+            <section class="form-section" id="sec-contato">
+                <h2>3. Contato e Endereﾃｧo</h2>
+                <div class="form-grid form-grid-2">
+                    <div class="field-wrapper">
+                        <label for="telefone">Telefone</label>
+                        <input type="text" id="telefone" name="telefone" data-mask="phone">
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email">
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="logradouro">Logradouro</label>
+                        <input type="text" id="logradouro" name="logradouro">
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="bairro">Bairro</label>
+                        <input type="text" id="bairro" name="bairro">
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="municipio">Municﾃｭpio</label>
+                        <input type="text" id="municipio" name="municipio">
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="uf">UF</label>
+                        <select id="uf" name="uf">
+                            <option value="">Selecione</option>
+                            <option value="AC">AC</option>
+                            <option value="AL">AL</option>
+                            <option value="AM">AM</option>
+                            <option value="AP">AP</option>
+                            <option value="BA">BA</option>
+                            <option value="CE">CE</option>
+                            <option value="DF">DF</option>
+                            <option value="ES">ES</option>
+                            <option value="GO">GO</option>
+                            <option value="MA">MA</option>
+                            <option value="MG">MG</option>
+                            <option value="MS">MS</option>
+                            <option value="MT">MT</option>
+                            <option value="PA">PA</option>
+                            <option value="PB">PB</option>
+                            <option value="PE">PE</option>
+                            <option value="PI">PI</option>
+                            <option value="PR">PR</option>
+                            <option value="RJ">RJ</option>
+                            <option value="RN">RN</option>
+                            <option value="RO">RO</option>
+                            <option value="RR">RR</option>
+                            <option value="RS">RS</option>
+                            <option value="SC">SC</option>
+                            <option value="SE">SE</option>
+                            <option value="SP">SP</option>
+                            <option value="TO">TO</option>
+                        </select>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="cep">CEP</label>
+                        <input type="text" id="cep" name="cep" data-mask="cep">
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="coordenadas-google-maps">Coordenadas (Google Maps)</label>
+                        <input type="text" id="coordenadas-google-maps" name="coordenadas_google_maps" placeholder="-22.000000, -47.000000">
+                        <small class="help-text">Cole as coordenadas decimais ou utilize o capturador de localizaﾃｧﾃ｣o.</small>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="latitude">Latitude</label>
+                        <input type="text" id="latitude" name="latitude" inputmode="decimal">
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="longitude">Longitude</label>
+                        <input type="text" id="longitude" name="longitude" inputmode="decimal">
+                    </div>
+                </div>
+                <div class="form-grid">
+                    <div class="field-wrapper col-span-2">
+                        <label for="roteiro_acesso">Roteiro de acesso</label>
+                        <textarea id="roteiro_acesso" name="roteiro_acesso" rows="3"></textarea>
+                    </div>
+                </div>
+            </section>
+            <!-- Propriedade -->
+            <section class="form-section" id="sec-propriedade">
+                <h2>4. Informaﾃｧﾃｵes da Propriedade</h2>
+                <div class="form-grid form-grid-3">
+                    <div class="field-wrapper">
+                        <label for="posse_terra">Posse da terra <span class="required">*</span></label>
+                        <select id="posse_terra" name="posse_terra" required>
+                            <option value="">Selecione</option>
+                            <option value="PROPRIETﾃヽIO">Proprietﾃ｡rio</option>
+                            <option value="ARRENDATﾃヽIO">Arrendatﾃ｡rio</option>
+                            <option value="PARCEIRO">Parceiro</option>
+                            <option value="COMODATO">Comodato</option>
+                            <option value="POSSEIRO">Posseiro</option>
+                            <option value="ASSENTADO">Assentado</option>
+                            <option value="OUTRO">Outro</option>
+                        </select>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="area_total_propriedade_ha">ﾃ〉ea total da propriedade (ha)</label>
+                        <input type="number" step="0.01" id="area_total_propriedade_ha" name="area_total_propriedade_ha">
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="area_total_organica_ha">ﾃ〉ea total orgﾃ｢nica (ha)</label>
+                        <input type="number" step="0.01" id="area_total_organica_ha" name="area_total_organica_ha">
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="data_aquisicao_posse">Data de aquisiﾃｧﾃ｣o/posse</label>
+                        <input type="date" id="data_aquisicao_posse" name="data_aquisicao_posse">
+                    </div>
+                    <div class="field-wrapper">
+                        <label>Terra familiar?</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="terra_familiar" value="sim"> Sim</label>
+                            <label><input type="radio" name="terra_familiar" value="nao"> Nﾃ｣o</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-grid">
+                    <div class="field-wrapper col-span-3">
+                        <label for="relacao_unidade_producao">Relaﾃｧﾃ｣o com a unidade de produﾃｧﾃ｣o</label>
+                        <textarea id="relacao_unidade_producao" name="relacao_unidade_producao" rows="3"></textarea>
+                    </div>
+                </div>
+            </section>
+            <!-- Manejo Orgﾃ｢nico -->
+            <section class="form-section" id="sec-manejo-organico">
+                <h2>5. Manejo Orgﾃ｢nico</h2>
+                <div class="form-grid form-grid-2">
+                    <div class="field-wrapper">
+                        <label for="historico_propriedade">Histﾃｳrico da propriedade</label>
+                        <textarea id="historico_propriedade" name="historico_propriedade" rows="3"></textarea>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="topografia_e_utilizacao">Topografia e utilizaﾃｧﾃ｣o</label>
+                        <textarea id="topografia_e_utilizacao" name="topografia_e_utilizacao" rows="3"></textarea>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="status_manejo_organico">Status do manejo orgﾃ｢nico</label>
+                        <textarea id="status_manejo_organico" name="status_manejo_organico" rows="2"></textarea>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="anos_manejo_organico">Anos de manejo orgﾃ｢nico</label>
+                        <input type="number" min="0" id="anos_manejo_organico" name="anos_manejo_organico">
+                    </div>
+                </div>
+
+                <div class="section-info">
+                    <p class="instruction">Informe documentos ou evidﾃｪncias que comprovem o manejo orgﾃ｢nico.</p>
+                </div>
+
+                <div class="table-wrapper">
+                    <table id="tabela-comprovacao-manejo" class="dynamic-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Tipo de comprovaﾃｧﾃ｣o</th>
+                                <th>Apresentado?</th>
+                                <th class="action-buttons">Aﾃｧﾃｵes</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-add" onclick="PMOTable.addRow('tabela-comprovacao-manejo')">Adicionar comprovaﾃｧﾃ｣o</button>
+                    </div>
+                </div>
+
+                <div class="section-info">
+                    <p class="instruction">Registre o histﾃｳrico da ﾃ｡rea nos ﾃｺltimos 10 anos.</p>
+                </div>
+                <div class="table-wrapper">
+                    <table id="tabela-historico-ultimos-anos" class="dynamic-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Cultura/Animal</th>
+                                <th>Data da ﾃｺltima aplicaﾃｧﾃ｣o nﾃ｣o permitida</th>
+                                <th>Insumo utilizado</th>
+                                <th>Sob manejo orgﾃ｢nico?</th>
+                                <th>Eram certificados?</th>
+                                <th class="action-buttons">Aﾃｧﾃｵes</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-add" onclick="PMOTable.addRow('tabela-historico-ultimos-anos')">Adicionar histﾃｳrico</button>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="field-wrapper">
+                        <label for="relato_historico_recente">Relato histﾃｳrico recente</label>
+                        <textarea id="relato_historico_recente" name="relato_historico_recente" rows="3"></textarea>
+                    </div>
+                </div>
+            </section>
+            <!-- Escopos -->
+            <section class="form-section" id="sec-atividades">
+                <h2>6. Escopos e Atividades Certificadas</h2>
+                <p class="section-info">Selecione as atividades desenvolvidas que habilitam os anexos correspondentes.</p>
+                <div class="form-grid form-grid-3">
+                    <div class="field-wrapper">
+                        <label>Produﾃｧﾃ｣o Vegetal</label>
+                        <div class="checkbox-enhanced">
+                            <label><input type="checkbox" name="escopo_hortalicas"> Hortaliﾃｧas / verduras</label>
+                            <label><input type="checkbox" name="escopo_frutas"> Frutas</label>
+                            <label><input type="checkbox" name="escopo_medicinais"> Plantas medicinais / ornamentais</label>
+                        </div>
+                    </div>
+                    <div class="field-wrapper">
+                        <label>Produﾃｧﾃ｣o Animal</label>
+                        <div class="checkbox-enhanced">
+                            <label><input type="checkbox" name="escopo_pecuaria"> Pecuﾃ｡ria</label>
+                            <label><input type="checkbox" name="escopo_apicultura"> Apicultura / Meliponicultura</label>
+                            <label><input type="checkbox" name="escopo_cogumelos"> Cogumelos</label>
+                        </div>
+                    </div>
+                    <div class="field-wrapper">
+                        <label>Processamento</label>
+                        <div class="checkbox-enhanced">
+                            <label><input type="checkbox" name="escopo_processamento"> Processamento completo</label>
+                            <label><input type="checkbox" name="escopo_proc_minimo"> Processamento mﾃｭnimo</label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mﾃ｣o de obra -->
+            <section class="form-section" id="sec-mao-de-obra">
+                <h2>7. Mﾃ｣o de Obra</h2>
+                <div class="form-grid form-grid-4">
+                    <div class="field-wrapper">
+                        <label for="funcionarios_permanentes">Funcionﾃ｡rios permanentes</label>
+                        <input type="number" min="0" id="funcionarios_permanentes" name="funcionarios_permanentes">
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="funcionarios_temporarios">Funcionﾃ｡rios temporﾃ｡rios / diaristas</label>
+                        <input type="number" min="0" id="funcionarios_temporarios" name="funcionarios_temporarios">
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="funcionarios_familiares">Mﾃ｣o de obra familiar</label>
+                        <input type="number" min="0" id="funcionarios_familiares" name="funcionarios_familiares">
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="funcionarios_voluntarios">Voluntﾃ｡rios / mutirﾃｵes</label>
+                        <input type="number" min="0" id="funcionarios_voluntarios" name="funcionarios_voluntarios">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Croqui -->
+            <section class="form-section" id="sec-croqui">
+                <h2>8. Croqui da Propriedade</h2>
+                <div class="form-grid form-grid-2">
+                    <div class="field-wrapper">
+                        <label for="local_insercao_croqui">Local de inserﾃｧﾃ｣o do croqui</label>
+                        <input type="text" id="local_insercao_croqui" name="local_insercao_croqui">
+                    </div>
+                </div>
+                <div class="field-wrapper">
+                    <label>Itens obrigatﾃｳrios localizados</label>
+                    <div class="checkbox-enhanced">
+                        <label><input type="checkbox" name="itens_obrigatorios_localizados[]" value="ENTRADA DA PROPRIEDADE"> Entrada da propriedade</label>
+                        <label><input type="checkbox" name="itens_obrigatorios_localizados[]" value="CASA / RESIDﾃ劾CIA"> Casa / residﾃｪncia</label>
+                        <label><input type="checkbox" name="itens_obrigatorios_localizados[]" value="ARMAZﾃ窺 E GALPﾃ髭S"> Armazﾃｩm e galpﾃｵes</label>
+                        <label><input type="checkbox" name="itens_obrigatorios_localizados[]" value="ﾃヽEAS DE PRODUﾃ・グ"> ﾃ〉eas de produﾃｧﾃ｣o</label>
+                        <label><input type="checkbox" name="itens_obrigatorios_localizados[]" value="RESERVA LEGAL / APP"> Reserva legal / APP</label>
+                        <label><input type="checkbox" name="itens_obrigatorios_localizados[]" value="OUTROS PONTOS"> Outros pontos relevantes</label>
+                    </div>
+                </div>
+            </section>
+            <!-- Biodiversidade -->
+            <section class="form-section" id="sec-biodiversidade">
+                <h2>9. Biodiversidade e Ambiente</h2>
+                <div class="field-wrapper">
+                    <label>ﾃ〉eas de preservaﾃｧﾃ｣o ambiental</label>
+                    <div class="checkbox-enhanced">
+                        <label><input type="checkbox" name="preservacao_ambiental[]" value="app"> APP</label>
+                        <label><input type="checkbox" name="preservacao_ambiental[]" value="reserva_legal"> Reserva legal</label>
+                        <label><input type="checkbox" name="preservacao_ambiental[]" value="nascentes"> Nascentes</label>
+                        <label><input type="checkbox" name="preservacao_ambiental[]" value="matas_nativas"> Matas nativas</label>
+                    </div>
+                </div>
+
+                <div class="form-grid form-grid-3">
+                    <div class="field-wrapper">
+                        <label for="possui_car">Possui CAR?</label>
+                        <select id="possui_car" name="possui_car">
+                            <option value="">Selecione</option>
+                            <option value="sim">Sim</option>
+                            <option value="nao">Nﾃ｣o</option>
+                            <option value="em_processo">Em processo</option>
+                        </select>
+                    </div>
+                    <div class="field-wrapper" data-condition-target="campo-situacao-car" data-condition-show="sim">
+                        <label for="situacao_car">Situaﾃｧﾃ｣o do CAR</label>
+                        <select id="situacao_car" name="situacao_car">
+                            <option value="">Selecione</option>
+                            <option value="ativo">Ativo</option>
+                            <option value="pendente">Pendente</option>
+                            <option value="cancelado">Cancelado</option>
+                            <option value="suspenso">Suspenso</option>
+                        </select>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="destino_lixo_organico">Destino do lixo orgﾃ｢nico</label>
+                        <select id="destino_lixo_organico" name="destino_lixo_organico">
+                            <option value="">Selecione</option>
+                            <option value="compostagem">Compostagem</option>
+                            <option value="alimentacao_animal">Alimentaﾃｧﾃ｣o animal</option>
+                            <option value="queima">Queima</option>
+                            <option value="coleta_publica">Coleta pﾃｺblica</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="destino_lixo_nao_organico">Destino do lixo nﾃ｣o orgﾃ｢nico</label>
+                        <select id="destino_lixo_nao_organico" name="destino_lixo_nao_organico">
+                            <option value="">Selecione</option>
+                            <option value="coleta_seletiva">Coleta seletiva</option>
+                            <option value="coleta_publica">Coleta pﾃｺblica</option>
+                            <option value="reciclagem">Reciclagem</option>
+                            <option value="queima">Queima</option>
+                            <option value="enterro">Enterro</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="destino_esgoto">Destino do esgoto</label>
+                        <select id="destino_esgoto" name="destino_esgoto">
+                            <option value="">Selecione</option>
+                            <option value="fossa_septica">Fossa sﾃｩptica</option>
+                            <option value="fossa_negra">Fossa negra</option>
+                            <option value="rede_publica">Rede pﾃｺblica</option>
+                            <option value="biodigestor">Biodigestor</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Manejo da ﾃ“ua -->
+            <section class="form-section" id="sec-manejo-agua">
+                <h2>10. Manejo da ﾃ“ua</h2>
+                <div class="form-grid form-grid-2">
+                    <div class="field-wrapper">
+                        <label for="periodicidade_analise_irrigacao">Periodicidade anﾃ｡lise de irrigaﾃｧﾃ｣o</label>
+                        <select id="periodicidade_analise_irrigacao" name="periodicidade_analise_irrigacao">
+                            <option value="">Selecione</option>
+                            <option value="0.5">Semestral</option>
+                            <option value="1">Anual</option>
+                            <option value="2">Bianual</option>
+                            <option value="3">Trienal</option>
+                            <option value="0">Nﾃ｣o realiza</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="table-wrapper">
+                    <table id="tabela-fontes-agua" class="dynamic-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Uso</th>
+                                <th>Origem</th>
+                                <th>Nﾃｭvel de risco</th>
+                                <th>Descriﾃｧﾃ｣o do risco</th>
+                                <th>Garantia de qualidade</th>
+                                <th class="action-buttons">Aﾃｧﾃｵes</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-add" onclick="PMOTable.addRow('tabela-fontes-agua')">Adicionar fonte</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Regularizaﾃｧﾃ｣o -->
+            <section class="form-section" id="sec-regularizacao">
+                <h2>11. Regularizaﾃｧﾃ｣o Ambiental</h2>
+                <div class="form-grid form-grid-2">
+                    <div class="field-wrapper">
+                        <label for="regularizacao_possui_car">Situaﾃｧﾃ｣o CAR/regularizaﾃｧﾃ｣o</label>
+                        <textarea id="regularizacao_possui_car" name="regularizacao_possui_car" rows="2"></textarea>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="explicacao_reserva_legal">Reserva legal (explicaﾃｧﾃ｣o)</label>
+                        <textarea id="explicacao_reserva_legal" name="explicacao_reserva_legal" rows="2"></textarea>
+                    </div>
+                </div>
+            </section>
+            <!-- Produﾃｧﾃ｣o Subsistﾃｪncia Ornamental -->
+            <section class="form-section" id="sec-subsistencia-ornamental">
+                <h2>12. Produﾃｧﾃ｣o de Subsistﾃｪncia / Ornamental</h2>
+                <div class="field-wrapper">
+                    <label>Possui produﾃｧﾃ｣o nﾃ｣o orgﾃ｢nica para subsistﾃｪncia/ornamental?</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="possui_nao_organica" value="sim"> Sim</label>
+                        <label><input type="radio" name="possui_nao_organica" value="nao"> Nﾃ｣o</label>
+                    </div>
+                </div>
+
+                <div id="grupo-subsistencia-ornamental" class="hidden">
+                    <div class="table-wrapper">
+                        <table id="tabela-atividades-subsistencia-ornamental" class="dynamic-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Atividade</th>
+                                    <th>ﾃ〉ea (ha)</th>
+                                    <th class="action-buttons">Aﾃｧﾃｵes</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-add" onclick="PMOTable.addRow('tabela-atividades-subsistencia-ornamental')">Adicionar atividade</button>
+                        </div>
+                    </div>
+
+                    <div class="form-grid form-grid-2">
+                        <div class="field-wrapper">
+                            <label>Utiliza insumos nﾃ｣o permitidos?</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="utiliza_insumos_nao_permitidos" value="sim"> Sim</label>
+                                <label><input type="radio" name="utiliza_insumos_nao_permitidos" value="nao"> Nﾃ｣o</label>
+                            </div>
+                        </div>
+                        <div class="field-wrapper">
+                            <label for="risco_contaminacao">Risco de contaminaﾃｧﾃ｣o</label>
+                            <textarea id="risco_contaminacao" name="risco_contaminacao" rows="2"></textarea>
+                        </div>
+                        <div class="field-wrapper">
+                            <label for="manejo_bloqueio_riscos">Medidas de bloqueio de riscos</label>
+                            <textarea id="manejo_bloqueio_riscos" name="manejo_bloqueio_riscos" rows="2"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Produﾃｧﾃ｣o Paralela -->
+            <section class="form-section" id="sec-producao-paralela">
+                <h2>13. Produﾃｧﾃ｣o Paralela</h2>
+                <div class="field-wrapper">
+                    <label>Possui produﾃｧﾃ｣o paralela?</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="possui_paralela" value="sim"> Sim</label>
+                        <label><input type="radio" name="possui_paralela" value="nao"> Nﾃ｣o</label>
+                    </div>
+                </div>
+
+                <div id="grupo-producao-paralela" class="hidden">
+                    <div class="table-wrapper">
+                        <table id="tabela-producao-paralela" class="dynamic-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Atividade</th>
+                                    <th>ﾃ〉ea (ha)</th>
+                                    <th class="action-buttons">Aﾃｧﾃｵes</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-add" onclick="PMOTable.addRow('tabela-producao-paralela')">Adicionar atividade</button>
+                        </div>
+                    </div>
+
+                    <div class="form-grid form-grid-2">
+                        <div class="field-wrapper">
+                            <label>Utiliza insumos nﾃ｣o permitidos?</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="paralela_insumos_nao_permitidos" value="sim"> Sim</label>
+                                <label><input type="radio" name="paralela_insumos_nao_permitidos" value="nao"> Nﾃ｣o</label>
+                            </div>
+                        </div>
+                        <div class="field-wrapper">
+                            <label for="paralela_risco_contaminacao">Risco de contaminaﾃｧﾃ｣o</label>
+                            <textarea id="paralela_risco_contaminacao" name="paralela_risco_contaminacao" rows="2"></textarea>
+                        </div>
+                        <div class="field-wrapper">
+                            <label for="paralela_manejo_bloqueio">Medidas de bloqueio</label>
+                            <textarea id="paralela_manejo_bloqueio" name="paralela_manejo_bloqueio" rows="2"></textarea>
+                        </div>
+                        <div class="field-wrapper">
+                            <label>Pretende conversﾃ｣o total?</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="pretende_conversao_total" value="sim"> Sim</label>
+                                <label><input type="radio" name="pretende_conversao_total" value="nao"> Nﾃ｣o</label>
+                            </div>
+                        </div>
+                        <div class="field-wrapper">
+                            <label for="tempo_conversao">Tempo estimado para conversﾃ｣o</label>
+                            <input type="text" id="tempo_conversao" name="tempo_conversao">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Comercializaﾃｧﾃ｣o -->
+            <section class="form-section" id="sec-comercializacao">
+                <h2>14. Comercializaﾃｧﾃ｣o</h2>
+                <div class="field-wrapper">
+                    <label>Canais de comercializaﾃｧﾃ｣o</label>
+                    <div class="checkbox-enhanced">
+                        <label><input type="checkbox" name="canal_comercializacao[]" value="feira_livre"> Feira livre</label>
+                        <label><input type="checkbox" name="canal_comercializacao[]" value="csa"> CSA</label>
+                        <label><input type="checkbox" name="canal_comercializacao[]" value="entrega_domicilio"> Entrega domiciliar</label>
+                        <label><input type="checkbox" name="canal_comercializacao[]" value="loja_propria"> Loja prﾃｳpria</label>
+                        <label><input type="checkbox" name="canal_comercializacao[]" value="supermercado"> Supermercado</label>
+                        <label><input type="checkbox" name="canal_comercializacao[]" value="pnae"> PNAE</label>
+                        <label><input type="checkbox" name="canal_comercializacao[]" value="paa"> PAA</label>
+                        <label><input type="checkbox" name="canal_comercializacao[]" value="restaurantes"> Restaurantes</label>
+                        <label><input type="checkbox" name="canal_comercializacao[]" value="atacado"> Atacado</label>
+                        <label><input type="checkbox" name="canal_comercializacao[]" value="outro"> Outro</label>
+                    </div>
+                </div>
+
+                <div class="form-grid form-grid-3">
+                    <div class="field-wrapper">
+                        <label for="inicio_vendas">Inﾃｭcio das vendas</label>
+                        <input type="date" id="inicio_vendas" name="inicio_vendas">
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="percentual_venda_organica">% de venda orgﾃ｢nica</label>
+                        <input type="number" min="0" max="100" id="percentual_venda_organica" name="percentual_venda_organica">
+                    </div>
+                    <div class="field-wrapper">
+                        <label>Vende produtos nﾃ｣o orgﾃ｢nicos?</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="vende_nao_organicos" value="sim"> Sim</label>
+                            <label><input type="radio" name="vende_nao_organicos" value="nao"> Nﾃ｣o</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-grid form-grid-2">
+                    <div class="field-wrapper" data-condition-target="campo-separacao-comercializacao" data-condition-show="sim">
+                        <label for="como_separa_comercializacao">Como separa os orgﾃ｢nicos dos nﾃ｣o orgﾃ｢nicos?</label>
+                        <textarea id="como_separa_comercializacao" name="como_separa_comercializacao" rows="2"></textarea>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="sistema_rotulagem">Sistema de rotulagem <span class="required">*</span></label>
+                        <textarea id="sistema_rotulagem" name="sistema_rotulagem" rows="2" required></textarea>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="sistema_rastreabilidade_comercial">Sistema de rastreabilidade comercial <span class="required">*</span></label>
+                        <textarea id="sistema_rastreabilidade_comercial" name="sistema_rastreabilidade_comercial" rows="2" required></textarea>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="transporte">Transporte</label>
+                        <textarea id="transporte" name="transporte" rows="2"></textarea>
+                    </div>
+                </div>
+            </section>
+            <!-- Controles e registros -->
+            <section class="form-section" id="sec-controles">
+                <h2>15. Controles e Registros</h2>
+                <div class="field-wrapper">
+                    <label>Tipos de registros mantidos</label>
+                    <div class="checkbox-enhanced">
+                        <label><input type="checkbox" name="tipo_registro[]" value="caderno_campo"> Caderno de campo</label>
+                        <label><input type="checkbox" name="tipo_registro[]" value="planilhas"> Planilhas</label>
+                        <label><input type="checkbox" name="tipo_registro[]" value="fichas_manejo"> Fichas de manejo</label>
+                        <label><input type="checkbox" name="tipo_registro[]" value="notas_fiscais"> Notas fiscais</label>
+                        <label><input type="checkbox" name="tipo_registro[]" value="comprovantes_venda"> Comprovantes de venda</label>
+                        <label><input type="checkbox" name="tipo_registro[]" value="rastreabilidade"> Rastreabilidade (obrigatﾃｳria)</label>
+                        <label><input type="checkbox" name="tipo_registro[]" value="analises"> Anﾃ｡lises laboratoriais</label>
+                        <label><input type="checkbox" name="tipo_registro[]" value="fotos"> Fotos / registros visuais</label>
+                    </div>
+                </div>
+
+                <div class="form-grid form-grid-2">
+                    <div class="field-wrapper">
+                        <label for="descricao_caderno_campo">Descriﾃｧﾃ｣o do caderno/caderno digital</label>
+                        <textarea id="descricao_caderno_campo" name="descricao_caderno_campo" rows="2" required></textarea>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="sistema_rastreabilidade_interno">Sistema de rastreabilidade interno</label>
+                        <textarea id="sistema_rastreabilidade_interno" name="sistema_rastreabilidade_interno" rows="2" required></textarea>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="controle_estoque">Controle de estoque</label>
+                        <textarea id="controle_estoque" name="controle_estoque" rows="2"></textarea>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="tempo_registros">Tempo de manutenﾃｧﾃ｣o dos registros</label>
+                        <select id="tempo_registros" name="tempo_registros">
+                            <option value="">Selecione</option>
+                            <option value="menos_1_ano">Menos de 1 ano</option>
+                            <option value="1_a_3_anos">1 a 3 anos</option>
+                            <option value="3_a_5_anos">3 a 5 anos</option>
+                            <option value="mais_5_anos">Mais de 5 anos</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Produﾃｧﾃ｣o Subsistﾃｪncia -->
+            <section class="form-section" id="sec-producao-subsistencia">
+                <h2>16. Produﾃｧﾃ｣o para Subsistﾃｪncia</h2>
+                <div class="field-wrapper">
+                    <label>Possui produﾃｧﾃ｣o para subsistﾃｪncia?</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="possui_subsistencia" value="sim"> Sim</label>
+                        <label><input type="radio" name="possui_subsistencia" value="nao"> Nﾃ｣o</label>
+                    </div>
+                </div>
+                <div class="form-grid form-grid-2">
+                    <div class="field-wrapper">
+                        <label for="produtos_subsistencia">Produtos cultivados/criados</label>
+                        <textarea id="produtos_subsistencia" name="produtos_subsistencia" rows="2"></textarea>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="area_subsistencia">ﾃ〉ea destinada (ha)</label>
+                        <input type="number" min="0" step="0.01" id="area_subsistencia" name="area_subsistencia">
+                    </div>
+                    <div class="field-wrapper" data-condition-target="campo-separacao-subsistencia" data-condition-show="sim">
+                        <label for="separacao_subsistencia">Como separa da produﾃｧﾃ｣o comercial?</label>
+                        <textarea id="separacao_subsistencia" name="separacao_subsistencia" rows="2"></textarea>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="insumos_subsistencia">Insumos utilizados</label>
+                        <textarea id="insumos_subsistencia" name="insumos_subsistencia" rows="2"></textarea>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="armazenamento_subsistencia">Armazenamento</label>
+                        <textarea id="armazenamento_subsistencia" name="armazenamento_subsistencia" rows="2"></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Declaraﾃｧﾃｵes -->
+            <section class="form-section" id="sec-declaracoes">
+                <h2>17. Declaraﾃｧﾃｵes de Conformidade</h2>
+                <div class="form-grid form-grid-2">
+                    <div class="field-wrapper">
+                        <label for="veracidade_e_comunicacao">Veracidade e comunicaﾃｧﾃ｣o</label>
+                        <textarea id="veracidade_e_comunicacao" name="veracidade_e_comunicacao" rows="2"></textarea>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="conhecimento_normas">Conhecimento das normas</label>
+                        <textarea id="conhecimento_normas" name="conhecimento_normas" rows="2"></textarea>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="conhecimento_regras_spg">Conhecimento das regras do SPG</label>
+                        <textarea id="conhecimento_regras_spg" name="conhecimento_regras_spg" rows="2"></textarea>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="concordancia_verificacao_acesso">Concorda com verificaﾃｧﾃ｣o e acesso?</label>
+                        <textarea id="concordancia_verificacao_acesso" name="concordancia_verificacao_acesso" rows="2"></textarea>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="concordancia_informacao_adicional">Concorda em informar dados adicionais?</label>
+                        <textarea id="concordancia_informacao_adicional" name="concordancia_informacao_adicional" rows="2"></textarea>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="ciente_visitas_amostras">Ciente de visitas e coletas de amostras</label>
+                        <textarea id="ciente_visitas_amostras" name="ciente_visitas_amostras" rows="2"></textarea>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="aceite_condicoes_corretivas">Aceita condiﾃｧﾃｵes corretivas</label>
+                        <textarea id="aceite_condicoes_corretivas" name="aceite_condicoes_corretivas" rows="2"></textarea>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="total_conhecimento_conviccao">Conhecimento e convicﾃｧﾃ｣o total</label>
+                        <textarea id="total_conhecimento_conviccao" name="total_conhecimento_conviccao" rows="2"></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Salvar cadastro</button>
+                <button type="button" class="btn btn-secondary" id="btn-exportar-json">Exportar JSON</button>
+            </div>
+        </form>
+    </main>
+
+    <footer class="pmo-footer">
+        <p>&copy; 2024 ANC - Associaﾃｧﾃ｣o de Agricultura Natural de Campinas e Regiﾃ｣o</p>
+        <p>Sistema PMO - Plano de Manejo Orgﾃ｢nico</p>
+    </footer>
+
+    <!-- Templates -->
+    <template id="template-tabela-fornecedores-responsaveis">
+        <tr>
+            <td class="row-number"></td>
+            <td><input type="text" name="nome_completo" required></td>
+            <td><input type="text" name="cpf" data-mask="cpf"></td>
+            <td><input type="date" name="data_nascimento"></td>
+            <td class="action-buttons">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="PMOTable.duplicateRow(this)">Duplicar</button>
+                <button type="button" class="btn btn-danger btn-sm" onclick="PMOTable.removeRow(this)">Remover</button>
+            </td>
+        </tr>
+    </template>
+
+    <template id="template-tabela-comprovacao-manejo">
+        <tr>
+            <td class="row-number"></td>
+            <td><input type="text" name="tipo" placeholder="Anﾃ｡lises, certificaﾃｧﾃｵes etc."></td>
+            <td>
+                <select name="status">
+                    <option value="">Selecione</option>
+                    <option value="true">Apresentado</option>
+                    <option value="false">Nﾃ｣o apresentado</option>
+                </select>
+            </td>
+            <td class="action-buttons">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="PMOTable.duplicateRow(this)">Duplicar</button>
+                <button type="button" class="btn btn-danger btn-sm" onclick="PMOTable.removeRow(this)">Remover</button>
+            </td>
+        </tr>
+    </template>
+
+    <template id="template-tabela-historico-ultimos-anos">
+        <tr>
+            <td class="row-number"></td>
+            <td><input type="text" name="cultura_animal"></td>
+            <td><input type="date" name="data_ultima_aplicacao_nao_permitido"></td>
+            <td><input type="text" name="insumo_utilizado"></td>
+            <td>
+                <select name="estavam_sob_manejo_organico">
+                    <option value="">Selecione</option>
+                    <option value="true">Sim</option>
+                    <option value="false">Nﾃ｣o</option>
+                </select>
+            </td>
+            <td>
+                <select name="eram_certificados">
+                    <option value="">Selecione</option>
+                    <option value="true">Sim</option>
+                    <option value="false">Nﾃ｣o</option>
+                </select>
+            </td>
+            <td class="action-buttons">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="PMOTable.duplicateRow(this)">Duplicar</button>
+                <button type="button" class="btn btn-danger btn-sm" onclick="PMOTable.removeRow(this)">Remover</button>
+            </td>
+        </tr>
+    </template>
+
+    <template id="template-tabela-fontes-agua">
+        <tr>
+            <td class="row-number"></td>
+            <td>
+                <select name="uso">
+                    <option value="">Selecione</option>
+                    <option value="irrigacao">Irrigaﾃｧﾃ｣o</option>
+                    <option value="pulverizacao">Pulverizaﾃｧﾃ｣o</option>
+                    <option value="consumo_animal">Consumo animal</option>
+                    <option value="processamento">Processamento</option>
+                    <option value="higienizacao">Higienizaﾃｧﾃ｣o</option>
+                </select>
+            </td>
+            <td>
+                <select name="origem">
+                    <option value="">Selecione</option>
+                    <option value="poco">Poﾃｧo</option>
+                    <option value="nascente">Nascente</option>
+                    <option value="rio">Rio / Cﾃｳrrego</option>
+                    <option value="represa">Represa</option>
+                    <option value="rede_publica">Rede pﾃｺblica</option>
+                    <option value="cisterna">Cisterna</option>
+                </select>
+            </td>
+            <td>
+                <select name="nivel_risco">
+                    <option value="">Selecione</option>
+                    <option value="nenhum">Nenhum</option>
+                    <option value="baixo">Baixo</option>
+                    <option value="medio">Mﾃｩdio</option>
+                    <option value="alto">Alto</option>
+                </select>
+            </td>
+            <td><input type="text" name="risco_contaminacao"></td>
+            <td><input type="text" name="garantia_qualidade"></td>
+            <td class="action-buttons">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="PMOTable.duplicateRow(this)">Duplicar</button>
+                <button type="button" class="btn btn-danger btn-sm" onclick="PMOTable.removeRow(this)">Remover</button>
+            </td>
+        </tr>
+    </template>
+
+    <template id="template-tabela-atividades-subsistencia-ornamental">
+        <tr>
+            <td class="row-number"></td>
+            <td><input type="text" name="tipo" placeholder="Ex.: Hortaliﾃｧas"></td>
+            <td><input type="number" step="0.01" name="area_ha"></td>
+            <td class="action-buttons">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="PMOTable.duplicateRow(this)">Duplicar</button>
+                <button type="button" class="btn btn-danger btn-sm" onclick="PMOTable.removeRow(this)">Remover</button>
+            </td>
+        </tr>
+    </template>
+
+    <template id="template-tabela-producao-paralela">
+        <tr>
+            <td class="row-number"></td>
+            <td><input type="text" name="tipo"></td>
+            <td><input type="number" step="0.01" name="area_ha"></td>
+            <td class="action-buttons">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="PMOTable.duplicateRow(this)">Duplicar</button>
+                <button type="button" class="btn btn-danger btn-sm" onclick="PMOTable.removeRow(this)">Remover</button>
+            </td>
+        </tr>
+    </template>
+
+    <script src="../../framework/core/pmo-framework.js"></script>
+    <script src="../../framework/components/pmo-storage-manager.js"></script>
+    <script src="../../framework/components/scope-manager.js"></script>
+    <script src="../../framework/components/progress-tracker.js"></script>
+    <script src="../../framework/components/pmo-tables.js"></script>
+    <script src="../../framework/components/dynamic-fields.js"></script>
+    <script src="../../framework/components/flow-navigator.js"></script>
+    <script src="../../framework/components/auto-save-navigation.js"></script>
+    <script src="../../framework/components/notifications.js"></script>
+    <script src="../../framework/components/export.js"></script>
+    <script src="../../framework/components/location-picker.js"></script>
+    <script src="../../framework/utils/formatters.js"></script>
+    <script src="../../framework/components/storage.js"></script>
+    <script src="./formulario.js"></script>
+</body>
+</html>
+
+
+
