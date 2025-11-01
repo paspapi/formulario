@@ -291,24 +291,23 @@ class FlowNavigator {
 
             // Atualizar com dados dos anexos
             if (pmoId) {
-                const pmo = window.PMOStorageManager.getPMO(pmoId);
-                if (pmo) {
-                    // Adicionar dados dos anexos
-                    pmo.dados = {
-                        'cadastro-geral-pmo': cadastroData,
-                        ...anexosData
-                    };
+                // Consolidar todos os dados dos formulários
+                const dadosCompletos = {
+                    'cadastro-geral-pmo': cadastroData,
+                    ...anexosData
+                };
 
-                    // Atualizar progresso
-                    pmo.progresso = { total: progressoGeral };
-                    pmo.status = progressoGeral === 100 ? 'completo' : 'rascunho';
+                // Salvar dados dos formulários no localStorage
+                const dataKey = pmoId + '_data';
+                localStorage.setItem(dataKey, JSON.stringify(dadosCompletos));
 
-                    // Salvar de volta
-                    const dataKey = pmoId + '_data';
-                    localStorage.setItem(dataKey, JSON.stringify(pmo.dados));
+                // Atualizar progresso e status no registry
+                window.PMOStorageManager.updatePMOInfo(pmoId, {
+                    progresso: { total: progressoGeral },
+                    status: progressoGeral === 100 ? 'completo' : 'rascunho'
+                });
 
-                    console.log(`✅ PMO consolidado: ${pmoId} (${progressoGeral}%)`);
-                }
+                console.log(`✅ PMO consolidado: ${pmoId} (${progressoGeral}%)`);
             }
 
             return pmoId;
