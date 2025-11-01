@@ -258,10 +258,15 @@ class FlowNavigator {
      */
     static consolidateAndSavePMO(cadastroData, flowAnexos, progressoGeral) {
         try {
+            console.log('🔧 Iniciando consolidação do PMO...');
+
             if (!window.PMOStorageManager) {
-                console.error('PMOStorageManager não disponível');
+                console.error('❌ PMOStorageManager não disponível');
+                alert('❌ Erro: Sistema de gerenciamento não carregado. Recarregue a página.');
                 return null;
             }
+
+            console.log('✅ PMOStorageManager disponível');
 
             // Coletar dados de todos os anexos
             const anexosData = {};
@@ -270,8 +275,9 @@ class FlowNavigator {
                 if (anexoDataStr) {
                     try {
                         anexosData[anexo.key] = JSON.parse(anexoDataStr);
+                        console.log(`✅ Dados carregados: ${anexo.key}`);
                     } catch (e) {
-                        console.warn(`Erro ao parsear dados de ${anexo.key}`);
+                        console.warn(`⚠️ Erro ao parsear dados de ${anexo.key}`);
                     }
                 }
             });
@@ -286,34 +292,46 @@ class FlowNavigator {
                 cadastro_geral_pmo: cadastroData
             };
 
+            console.log('📋 Dados do PMO preparados:', {
+                cpf_cnpj: pmoData.cpf_cnpj,
+                nome: pmoData.nome,
+                unidade: pmoData.unidade,
+                ano: pmoData.ano_vigente
+            });
+
             // Criar ou atualizar PMO
             const pmoId = window.PMOStorageManager.createPMO(pmoData);
+            console.log('🆔 PMO ID gerado:', pmoId);
 
-            // Atualizar com dados dos anexos
-            if (pmoId) {
-                // Consolidar todos os dados dos formulários
-                const dadosCompletos = {
-                    'cadastro-geral-pmo': cadastroData,
-                    ...anexosData
-                };
-
-                // Salvar dados dos formulários no localStorage
-                const dataKey = pmoId + '_data';
-                localStorage.setItem(dataKey, JSON.stringify(dadosCompletos));
-
-                // Atualizar progresso e status no registry
-                window.PMOStorageManager.updatePMOInfo(pmoId, {
-                    progresso: { total: progressoGeral },
-                    status: progressoGeral === 100 ? 'completo' : 'rascunho'
-                });
-
-                console.log(`✅ PMO consolidado: ${pmoId} (${progressoGeral}%)`);
+            if (!pmoId) {
+                console.error('❌ Falha ao criar PMO - ID vazio');
+                return null;
             }
 
+            // Consolidar todos os dados dos formulários
+            const dadosCompletos = {
+                'cadastro-geral-pmo': cadastroData,
+                ...anexosData
+            };
+
+            // Salvar dados dos formulários no localStorage
+            const dataKey = pmoId + '_data';
+            localStorage.setItem(dataKey, JSON.stringify(dadosCompletos));
+            console.log(`💾 Dados salvos em: ${dataKey}`);
+
+            // Atualizar progresso e status no registry
+            const updateResult = window.PMOStorageManager.updatePMOInfo(pmoId, {
+                progresso: { total: progressoGeral },
+                status: progressoGeral === 100 ? 'completo' : 'rascunho'
+            });
+            console.log(`📊 Progresso atualizado: ${progressoGeral}% (${updateResult ? 'OK' : 'FALHOU'})`);
+
+            console.log(`✅ PMO consolidado: ${pmoId} (${progressoGeral}%)`);
             return pmoId;
 
         } catch (error) {
-            console.error('Erro ao consolidar PMO:', error);
+            console.error('❌ Erro ao consolidar PMO:', error);
+            alert(`❌ Erro ao consolidar PMO: ${error.message}`);
             return null;
         }
     }
