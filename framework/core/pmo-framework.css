@@ -316,11 +316,19 @@
 }
 
 .form-actions-sticky .btn {
-    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
+    white-space: nowrap;
+}
+
+.form-actions-sticky .btn:first-child {
+    flex: 0 0 auto;
+}
+
+.form-actions-sticky .btn:last-child {
+    flex: 1;
 }
 
 /* ===== RESPONSIVE MOBILE ===== */
@@ -364,10 +372,22 @@
 
     .form-actions-sticky .btn {
         padding: 8px 10px;
-        font-size: 13px;
+        font-size: 12px;
     }
 
-    .form-actions-sticky .btn .text {
+    .form-actions-sticky .btn:first-child .text {
         display: none;
+    }
+
+    .form-actions-sticky .btn:last-child .text::after {
+        content: ' PDF';
+    }
+
+    .form-actions-sticky .btn:last-child .text {
+        font-size: 0;
+    }
+
+    .form-actions-sticky .btn:last-child .text::after {
+        font-size: 12px;
     }
 }
